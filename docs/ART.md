@@ -735,3 +735,109 @@ whole correction offline. `verify_wall_controls.py` checks all 54 runtime PNGs,
 six review enlargements, hashes, shared palette/alpha, original anchors, exact
 nearest sampling, fixed lever hinge/rim and unchanged pixels outside the stair
 repair patch. Actual turn-to-face behavior remains A/owner integration review.
+
+## Painted world items, including spent padding
+
+This batch adds **36 new runtime sprites** in `assets/art/items/`, replacing the
+M1 16x24 placeholder art and enlarged inventory icons with dedicated floor
+paintings. C's `assets/art/icons/` images supply the object identities: the same
+knife/club grips, aqua shard, grey stone, ivory bone, crusty loaf, red flask,
+teal coat, brass key/clapper and hooded warm lamp. Existing icons are unchanged.
+
+### Files, dimensions and registration
+
+Every file follows `assets/art/items/item_<kind>_d<depth>.png`:
+
+| Kind | Object / intended appearance |
+| --- | --- |
+| `knife` | Rust knife lying diagonally; pale cutting edge and brown grip |
+| `shard` | Jagged aqua glass with pale edges and a wrapped corner |
+| `club` | Wooden handle, heavy angular iron head, lying flat |
+| `stone` | Irregular round rock with asymmetric broken facets; no brim or opening |
+| `bone` | Weathered ivory ham bone with two knobbly ends |
+| `bread` | Dry squat loaf, scored golden crust and pale broken crumb |
+| `tonic` | Stable broad red flask, brown cork and cream label |
+| `coat` | Teal padded coat spread on the floor, thick quilting and ochre trim |
+| `coat_spent` | Same coat torn, flattened and showing dirty ivory stuffing |
+| `key` | Brass abbey key, open round bow and toothed bit |
+| `clapper` | Detached brass stem with one heavy ball, lying down |
+| `lamp` | Hooded brown/slate lamp standing on its base; warm window |
+
+| Depth | Canvas | Bottom-centre anchor |
+| --- | --- | --- |
+| 1 | 64x48 | (32,48) |
+| 2 | 40x30 | (20,30) |
+| 3 | 24x18 | (12,18) |
+
+Here **64/40/24 is the canvas width**, with a shallow floor-pickup aspect.
+Anchors are exclusive bottom edges, as for earlier floor fixtures. The near
+contact line has one transparent row below it. Objects have deliberate physical
+size differences inside the canvas: a shard or flask is smaller than a spread
+coat. Use the complete frame and its anchor; avoid independently centring or
+resizing the opaque bounds. All 12 are static; there is no animation timing.
+
+Weapons, food, key, clapper and coats rest on the floor; the bottle and lamp
+stand naturally on their bases. Coats share a near footprint while spent
+padding collapses vertically, so the garment does not become a smaller copy.
+The stone has a broken silhouette and broad geological facets instead of a
+smooth dome or helmet-like rim. Upper/left material-coloured pixels are
+retouched at each native distance to keep outlines useful in lamp darkness.
+The tonic uses the palette's brick-red liquid ramp rather than rust orange.
+
+### Wiring for A
+
+Load `item_<kind>_d<1|2|3>.png` using the existing depth bands (<1.5, <2.5,
+otherwise far). Draw at the supplied native canvas size and bottom-centre
+ground anchor, matching the fixture path. The current inventory fallback's
+minimum height of 22px is inappropriate for the 18px-tall far canvas; route
+these sprites through a native-size world-item branch.
+
+For a coat item, select `coat_spent` when its existing **`spent` boolean** is
+true, otherwise `coat`. Preserve that selection for dropped/recovered coats as
+the simulation already preserves the state. The art makes no gameplay changes.
+
+**No shadow is baked in.** Continue drawing a renderer contact ellipse beneath
+the object, sized from `opaque_bounds` rather than the whole transparent
+64/40/24 canvas. The manifest provides those bounds for every item/depth.
+Maintain nearest filtering, floor occlusion and normal lamp modulation. The
+room reviews show the far band at depths 2.55/2.6 with actual lamp dimming;
+fine details recede near the visibility cutoff.
+
+### Existing torch and Seal checked
+
+The existing `fixtures/reed_torch_unlit_d<depth>.png` and
+`reed_torch_lit_<0|1>_d<depth>.png` already match the reed bundle, dark binding
+and warm fire of the pack/held art. Keep their **32x48 / 20x30 / 12x18** canvases,
+bottom-centre anchors and 180ms flicker frames.
+
+The existing `fixtures/dawn_seal_pulse_<0|1>_d<depth>.png` retains the precious
+gold sun rim, teal enamel and ivory arch core of the inventory and held Seal.
+Keep its larger **64x64 / 40x40 / 24x24** pedestal canvases, bottom-centre
+anchors and 700ms pulse. `item_art.gd` already chooses the dedicated fixture
+icons for these two objects. Neither old fixture requires a repaint.
+
+### Review and reproduction
+
+All paths below are in `art_src/items/`; each has an exact 4x nearest sheet
+and a matching `_native.png`:
+
+| Review | Filename |
+| --- | --- |
+| Every object beside C's icon, then all three depths | `items_contact_4x.png` |
+| Weapon/HEAVY subset | `items_weapons_4x.png` |
+| Food, cloth, key and lamp subset | `items_supplies_4x.png` |
+| Intact and spent coats, all depths | `coat_states_4x.png` |
+| Intact and spent coats on the floor | `coat_room_comparison_4x.png` |
+| Several items at mixed near/middle/far distances, both floors | `room_items_overview_4x.png` |
+| Individual room views | `room_f<1|2>_set<1|2>_4x.png` |
+| Existing torch/Seal at all depths | `torch_seal_match_4x.png` |
+
+Room previews are offline 148x150 ray-cast mock-ups with the preserved painted
+materials and lamp falloff, not engine captures. The two sets show all twelve
+new kinds/states across three distances. The original paintings and all eleven
+built-in imagegen requests are retained in `art_src/items/`; the coat states
+were painted together. `build_items.py` recreates everything offline with the
+fixed shared palette, nearest sampling and binary alpha. `verify_items.py`
+passes for 36 runtime PNGs and eleven 4x reviews, including source/output
+hashes, anchors, native rim retouch, spent-coat silhouette and actual key-ring
+holes at each depth. No Godot run or phone playtest is claimed for this batch.

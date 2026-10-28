@@ -1,0 +1,888 @@
+{
+  "assets": [
+    {
+      "path": "assets/art/items/item_knife_d1.png",
+      "size": [
+        64,
+        48
+      ],
+      "opaque_colors": 24,
+      "sha256": "024bbfc0fb3667e101471b0c0b2010cde2f2dfe2082239b118b722998ad90e11",
+      "kind": "knife",
+      "depth": 1,
+      "anchor": [
+        32,
+        48
+      ],
+      "opaque_bounds": [
+        14,
+        23,
+        49,
+        47
+      ],
+      "shadow": "renderer; no baked shadow",
+      "state": "static"
+    },
+    {
+      "path": "assets/art/items/item_knife_d2.png",
+      "size": [
+        40,
+        30
+      ],
+      "opaque_colors": 21,
+      "sha256": "2e95f0753a7d5c8b28a32ead5f481849fc1191da598bc7f33308ff1ddb04d23e",
+      "kind": "knife",
+      "depth": 2,
+      "anchor": [
+        20,
+        30
+      ],
+      "opaque_bounds": [
+        9,
+        14,
+        31,
+        29
+      ],
+      "shadow": "renderer; no baked shadow",
+      "state": "static"
+    },
+    {
+      "path": "assets/art/items/item_knife_d3.png",
+      "size": [
+        24,
+        18
+      ],
+      "opaque_colors": 13,
+      "sha256": "398d1e55ea71abafadebcaaf7b0d8d777fa519a78e0e88ac6b33d05d0758324e",
+      "kind": "knife",
+      "depth": 3,
+      "anchor": [
+        12,
+        18
+      ],
+      "opaque_bounds": [
+        5,
+        9,
+        18,
+        18
+      ],
+      "shadow": "renderer; no baked shadow",
+      "state": "static"
+    },
+    {
+      "path": "assets/art/items/item_shard_d1.png",
+      "size": [
+        64,
+        48
+      ],
+      "opaque_colors": 25,
+      "sha256": "60fe25fa02792af9df4e727c0d718178701c49131578d9116f12fa07c8018a1b",
+      "kind": "shard",
+      "depth": 1,
+      "anchor": [
+        32,
+        48
+      ],
+      "opaque_bounds": [
+        16,
+        21,
+        47,
+        47
+      ],
+      "shadow": "renderer; no baked shadow",
+      "state": "static"
+    },
+    {
+      "path": "assets/art/items/item_shard_d2.png",
+      "size": [
+        40,
+        30
+      ],
+      "opaque_colors": 19,
+      "sha256": "659972d49943f4472068c95883bc157dd97fcb73b1eb9b0b0f84ff987bb6f27e",
+      "kind": "shard",
+      "depth": 2,
+      "anchor": [
+        20,
+        30
+      ],
+      "opaque_bounds": [
+        10,
+        13,
+        29,
+        29
+      ],
+      "shadow": "renderer; no baked shadow",
+      "state": "static"
+    },
+    {
+      "path": "assets/art/items/item_shard_d3.png",
+      "size": [
+        24,
+        18
+      ],
+      "opaque_colors": 14,
+      "sha256": "1e8f52e003c1c82d5c56b71f9d973af6f3ebd2233da5766a9865055242ab6c89",
+      "kind": "shard",
+      "depth": 3,
+      "anchor": [
+        12,
+        18
+      ],
+      "opaque_bounds": [
+        6,
+        8,
+        18,
+        17
+      ],
+      "shadow": "renderer; no baked shadow",
+      "state": "static"
+    },
+    {
+      "path": "assets/art/items/item_club_d1.png",
+      "size": [
+        64,
+        48
+      ],
+      "opaque_colors": 23,
+      "sha256": "701f376df6263be8029d3ddb59241f43b193c0be21ef2d3a09104740a4c16107",
+      "kind": "club",
+      "depth": 1,
+      "anchor": [
+        32,
+        48
+      ],
+      "opaque_bounds": [
+        15,
+        19,
+        48,
+        47
+      ],
+      "shadow": "renderer; no baked shadow",
+      "state": "static"
+    },
+    {
+      "path": "assets/art/items/item_club_d2.png",
+      "size": [
+        40,
+        30
+      ],
+      "opaque_colors": 19,
+      "sha256": "946870a053e3f8f66d9438bb949728c69ae73ef4e2ae6096fc669b4cee1f00a0",
+      "kind": "club",
+      "depth": 2,
+      "anchor": [
+        20,
+        30
+      ],
+      "opaque_bounds": [
+        9,
+        12,
+        30,
+        29
+      ],
+      "shadow": "renderer; no baked shadow",
+      "state": "static"
+    },
+    {
+      "path": "assets/art/items/item_club_d3.png",
+      "size": [
+        24,
+        18
+      ],
+      "opaque_colors": 14,
+      "sha256": "a537ea1de4bc26925f3a036707b559ce79e75da02c3d7c5be440e56dfc0acadd",
+      "kind": "club",
+      "depth": 3,
+      "anchor": [
+        12,
+        18
+      ],
+      "opaque_bounds": [
+        6,
+        7,
+        18,
+        18
+      ],
+      "shadow": "renderer; no baked shadow",
+      "state": "static"
+    },
+    {
+      "path": "assets/art/items/item_stone_d1.png",
+      "size": [
+        64,
+        48
+      ],
+      "opaque_colors": 12,
+      "sha256": "2e6ee190196d8906997a8809f05db6615bd2440f2cc39d11c50c1f92e7e08284",
+      "kind": "stone",
+      "depth": 1,
+      "anchor": [
+        32,
+        48
+      ],
+      "opaque_bounds": [
+        15,
+        22,
+        48,
+        47
+      ],
+      "shadow": "renderer; no baked shadow",
+      "state": "static"
+    },
+    {
+      "path": "assets/art/items/item_stone_d2.png",
+      "size": [
+        40,
+        30
+      ],
+      "opaque_colors": 10,
+      "sha256": "78906e24e53ea5ce0605c276af558ccb20f9adc12935dccfa8fc00e7b91a640d",
+      "kind": "stone",
+      "depth": 2,
+      "anchor": [
+        20,
+        30
+      ],
+      "opaque_bounds": [
+        9,
+        14,
+        30,
+        29
+      ],
+      "shadow": "renderer; no baked shadow",
+      "state": "static"
+    },
+    {
+      "path": "assets/art/items/item_stone_d3.png",
+      "size": [
+        24,
+        18
+      ],
+      "opaque_colors": 10,
+      "sha256": "4d40f25ff29c9e16128953854c9f24fe724dae2531b8b45323a9727792ec3990",
+      "kind": "stone",
+      "depth": 3,
+      "anchor": [
+        12,
+        18
+      ],
+      "opaque_bounds": [
+        6,
+        8,
+        18,
+        18
+      ],
+      "shadow": "renderer; no baked shadow",
+      "state": "static"
+    },
+    {
+      "path": "assets/art/items/item_bone_d1.png",
+      "size": [
+        64,
+        48
+      ],
+      "opaque_colors": 24,
+      "sha256": "85dbcb84adbdcae1f15ccb7a9c59393c29eb504f914436b6ca5599d5b982a095",
+      "kind": "bone",
+      "depth": 1,
+      "anchor": [
+        32,
+        48
+      ],
+      "opaque_bounds": [
+        17,
+        24,
+        46,
+        47
+      ],
+      "shadow": "renderer; no baked shadow",
+      "state": "static"
+    },
+    {
+      "path": "assets/art/items/item_bone_d2.png",
+      "size": [
+        40,
+        30
+      ],
+      "opaque_colors": 19,
+      "sha256": "25c6dda6b3f7efd4fb196864c734ea48eb7ba4eb7ff128f096708c50c6abf805",
+      "kind": "bone",
+      "depth": 2,
+      "anchor": [
+        20,
+        30
+      ],
+      "opaque_bounds": [
+        11,
+        15,
+        29,
+        29
+      ],
+      "shadow": "renderer; no baked shadow",
+      "state": "static"
+    },
+    {
+      "path": "assets/art/items/item_bone_d3.png",
+      "size": [
+        24,
+        18
+      ],
+      "opaque_colors": 14,
+      "sha256": "cc420cc41533fb44a2b9f9d93c3967e08c52771d32fa043ae4a694e11fe11da9",
+      "kind": "bone",
+      "depth": 3,
+      "anchor": [
+        12,
+        18
+      ],
+      "opaque_bounds": [
+        7,
+        9,
+        17,
+        18
+      ],
+      "shadow": "renderer; no baked shadow",
+      "state": "static"
+    },
+    {
+      "path": "assets/art/items/item_bread_d1.png",
+      "size": [
+        64,
+        48
+      ],
+      "opaque_colors": 17,
+      "sha256": "12eabe9af91144c5bd66909e5e667f11cc8bb63ea6b92fd8044f6d3ab449da35",
+      "kind": "bread",
+      "depth": 1,
+      "anchor": [
+        32,
+        48
+      ],
+      "opaque_bounds": [
+        13,
+        22,
+        51,
+        47
+      ],
+      "shadow": "renderer; no baked shadow",
+      "state": "static"
+    },
+    {
+      "path": "assets/art/items/item_bread_d2.png",
+      "size": [
+        40,
+        30
+      ],
+      "opaque_colors": 15,
+      "sha256": "9978ec78994d22ced78b60ae48d9ea930cd1d7728a38e843f942dece2945eef4",
+      "kind": "bread",
+      "depth": 2,
+      "anchor": [
+        20,
+        30
+      ],
+      "opaque_bounds": [
+        8,
+        14,
+        32,
+        29
+      ],
+      "shadow": "renderer; no baked shadow",
+      "state": "static"
+    },
+    {
+      "path": "assets/art/items/item_bread_d3.png",
+      "size": [
+        24,
+        18
+      ],
+      "opaque_colors": 12,
+      "sha256": "04e29545090fb26ae73515dc8e88ea508f458e760bd4c27b583c10f8c23a6efb",
+      "kind": "bread",
+      "depth": 3,
+      "anchor": [
+        12,
+        18
+      ],
+      "opaque_bounds": [
+        5,
+        8,
+        19,
+        18
+      ],
+      "shadow": "renderer; no baked shadow",
+      "state": "static"
+    },
+    {
+      "path": "assets/art/items/item_tonic_d1.png",
+      "size": [
+        64,
+        48
+      ],
+      "opaque_colors": 25,
+      "sha256": "8c1fd336dd7ca2db28dc65a742cfd47e05a0b1f2d167cbbef596c11eeae31882",
+      "kind": "tonic",
+      "depth": 1,
+      "anchor": [
+        32,
+        48
+      ],
+      "opaque_bounds": [
+        18,
+        10,
+        46,
+        47
+      ],
+      "shadow": "renderer; no baked shadow",
+      "state": "static"
+    },
+    {
+      "path": "assets/art/items/item_tonic_d2.png",
+      "size": [
+        40,
+        30
+      ],
+      "opaque_colors": 25,
+      "sha256": "321330086d6f8aaf9b962216323f83275cae7546f443d6a95c62525a72bb063c",
+      "kind": "tonic",
+      "depth": 2,
+      "anchor": [
+        20,
+        30
+      ],
+      "opaque_bounds": [
+        11,
+        6,
+        29,
+        29
+      ],
+      "shadow": "renderer; no baked shadow",
+      "state": "static"
+    },
+    {
+      "path": "assets/art/items/item_tonic_d3.png",
+      "size": [
+        24,
+        18
+      ],
+      "opaque_colors": 19,
+      "sha256": "8aafa76a630bb9a0bd823f8ef38ef9c0d3064ffff9ebefc573d8a3b0ae4d4417",
+      "kind": "tonic",
+      "depth": 3,
+      "anchor": [
+        12,
+        18
+      ],
+      "opaque_bounds": [
+        7,
+        4,
+        17,
+        18
+      ],
+      "shadow": "renderer; no baked shadow",
+      "state": "static"
+    },
+    {
+      "path": "assets/art/items/item_coat_d1.png",
+      "size": [
+        64,
+        48
+      ],
+      "opaque_colors": 29,
+      "sha256": "45e361573ec1e929a37c79427a4cb156fbf4bff63e4c1480f8b602757d76c2f6",
+      "kind": "coat",
+      "depth": 1,
+      "anchor": [
+        32,
+        48
+      ],
+      "opaque_bounds": [
+        4,
+        13,
+        60,
+        47
+      ],
+      "shadow": "renderer; no baked shadow",
+      "state": "intact"
+    },
+    {
+      "path": "assets/art/items/item_coat_d2.png",
+      "size": [
+        40,
+        30
+      ],
+      "opaque_colors": 28,
+      "sha256": "8115832194f0f1e948c5955297bac318cf9adb50b02a68e8eda6dd3024c35eec",
+      "kind": "coat",
+      "depth": 2,
+      "anchor": [
+        20,
+        30
+      ],
+      "opaque_bounds": [
+        2,
+        8,
+        37,
+        29
+      ],
+      "shadow": "renderer; no baked shadow",
+      "state": "intact"
+    },
+    {
+      "path": "assets/art/items/item_coat_d3.png",
+      "size": [
+        24,
+        18
+      ],
+      "opaque_colors": 25,
+      "sha256": "109bac842e4cf907bc9e406d01180d26b133c95c8d9a09c59b64fe4be7b9e87f",
+      "kind": "coat",
+      "depth": 3,
+      "anchor": [
+        12,
+        18
+      ],
+      "opaque_bounds": [
+        1,
+        5,
+        23,
+        18
+      ],
+      "shadow": "renderer; no baked shadow",
+      "state": "intact"
+    },
+    {
+      "path": "assets/art/items/item_coat_spent_d1.png",
+      "size": [
+        64,
+        48
+      ],
+      "opaque_colors": 26,
+      "sha256": "db4fd8505952acfbeabbb89582a8748fdfc94f6d67556d3f75034fb2e14fb2d2",
+      "kind": "coat_spent",
+      "depth": 1,
+      "anchor": [
+        32,
+        48
+      ],
+      "opaque_bounds": [
+        4,
+        22,
+        60,
+        47
+      ],
+      "shadow": "renderer; no baked shadow",
+      "state": "spent"
+    },
+    {
+      "path": "assets/art/items/item_coat_spent_d2.png",
+      "size": [
+        40,
+        30
+      ],
+      "opaque_colors": 23,
+      "sha256": "a827d0a602825aa3cf7b2d10b6cebb60df2e6fe0e488f1e36af80bf4e118b6c2",
+      "kind": "coat_spent",
+      "depth": 2,
+      "anchor": [
+        20,
+        30
+      ],
+      "opaque_bounds": [
+        2,
+        14,
+        37,
+        29
+      ],
+      "shadow": "renderer; no baked shadow",
+      "state": "spent"
+    },
+    {
+      "path": "assets/art/items/item_coat_spent_d3.png",
+      "size": [
+        24,
+        18
+      ],
+      "opaque_colors": 21,
+      "sha256": "8f28f3fe7a37242a39089fbdee6a2f20f411b8fccf78cd020d6efbd0485140e6",
+      "kind": "coat_spent",
+      "depth": 3,
+      "anchor": [
+        12,
+        18
+      ],
+      "opaque_bounds": [
+        2,
+        8,
+        22,
+        18
+      ],
+      "shadow": "renderer; no baked shadow",
+      "state": "spent"
+    },
+    {
+      "path": "assets/art/items/item_key_d1.png",
+      "size": [
+        64,
+        48
+      ],
+      "opaque_colors": 22,
+      "sha256": "f250a42ef888c493ec57e614da64626beef65c35945bc760f852643296db8740",
+      "kind": "key",
+      "depth": 1,
+      "anchor": [
+        32,
+        48
+      ],
+      "opaque_bounds": [
+        15,
+        21,
+        49,
+        47
+      ],
+      "shadow": "renderer; no baked shadow",
+      "state": "static"
+    },
+    {
+      "path": "assets/art/items/item_key_d2.png",
+      "size": [
+        40,
+        30
+      ],
+      "opaque_colors": 20,
+      "sha256": "5b7352a178dfbb73abb712aaa5d8d49e0bf993a5378ceb03de4a8ba2ee808729",
+      "kind": "key",
+      "depth": 2,
+      "anchor": [
+        20,
+        30
+      ],
+      "opaque_bounds": [
+        9,
+        13,
+        31,
+        29
+      ],
+      "shadow": "renderer; no baked shadow",
+      "state": "static"
+    },
+    {
+      "path": "assets/art/items/item_key_d3.png",
+      "size": [
+        24,
+        18
+      ],
+      "opaque_colors": 17,
+      "sha256": "75fdc389ee8f6a7354e34d6721a0244a41e9dc9a64810dd7bd98cfe14b2dd298",
+      "kind": "key",
+      "depth": 3,
+      "anchor": [
+        12,
+        18
+      ],
+      "opaque_bounds": [
+        6,
+        8,
+        18,
+        18
+      ],
+      "shadow": "renderer; no baked shadow",
+      "state": "static"
+    },
+    {
+      "path": "assets/art/items/item_clapper_d1.png",
+      "size": [
+        64,
+        48
+      ],
+      "opaque_colors": 18,
+      "sha256": "efa1df66c5d63a6bc0e13b9e0f9321350132572afba12d9cdf6c40608a687040",
+      "kind": "clapper",
+      "depth": 1,
+      "anchor": [
+        32,
+        48
+      ],
+      "opaque_bounds": [
+        16,
+        22,
+        48,
+        47
+      ],
+      "shadow": "renderer; no baked shadow",
+      "state": "static"
+    },
+    {
+      "path": "assets/art/items/item_clapper_d2.png",
+      "size": [
+        40,
+        30
+      ],
+      "opaque_colors": 17,
+      "sha256": "975a8f14120f2558ffb27e4f13f2c90098ea39038e7619dfbc5b391dbb98e38b",
+      "kind": "clapper",
+      "depth": 2,
+      "anchor": [
+        20,
+        30
+      ],
+      "opaque_bounds": [
+        10,
+        14,
+        30,
+        29
+      ],
+      "shadow": "renderer; no baked shadow",
+      "state": "static"
+    },
+    {
+      "path": "assets/art/items/item_clapper_d3.png",
+      "size": [
+        24,
+        18
+      ],
+      "opaque_colors": 13,
+      "sha256": "d16e30feb42ce73ebd2bd74f6993856dd1ad3c17b4d63cac69b90dbec0a529af",
+      "kind": "clapper",
+      "depth": 3,
+      "anchor": [
+        12,
+        18
+      ],
+      "opaque_bounds": [
+        6,
+        8,
+        18,
+        18
+      ],
+      "shadow": "renderer; no baked shadow",
+      "state": "static"
+    },
+    {
+      "path": "assets/art/items/item_lamp_d1.png",
+      "size": [
+        64,
+        48
+      ],
+      "opaque_colors": 23,
+      "sha256": "8d8cd7a0be4efd2ab364f2a7795ceb45157568f97174a856af42cf70114995c7",
+      "kind": "lamp",
+      "depth": 1,
+      "anchor": [
+        32,
+        48
+      ],
+      "opaque_bounds": [
+        19,
+        5,
+        45,
+        47
+      ],
+      "shadow": "renderer; no baked shadow",
+      "state": "static"
+    },
+    {
+      "path": "assets/art/items/item_lamp_d2.png",
+      "size": [
+        40,
+        30
+      ],
+      "opaque_colors": 22,
+      "sha256": "c8eb65aca832794b8402617da1d9bf2515b2499e008c33d954f75828d1b25794",
+      "kind": "lamp",
+      "depth": 2,
+      "anchor": [
+        20,
+        30
+      ],
+      "opaque_bounds": [
+        12,
+        3,
+        28,
+        29
+      ],
+      "shadow": "renderer; no baked shadow",
+      "state": "static"
+    },
+    {
+      "path": "assets/art/items/item_lamp_d3.png",
+      "size": [
+        24,
+        18
+      ],
+      "opaque_colors": 19,
+      "sha256": "c6a4ff5f8a2e52864f626027943f2949363fed3941fddbb95c0f0ca7c084a611",
+      "kind": "lamp",
+      "depth": 3,
+      "anchor": [
+        12,
+        18
+      ],
+      "opaque_bounds": [
+        7,
+        2,
+        17,
+        18
+      ],
+      "shadow": "renderer; no baked shadow",
+      "state": "static"
+    }
+  ],
+  "depth_sizes": [
+    [
+      64,
+      48
+    ],
+    [
+      40,
+      30
+    ],
+    [
+      24,
+      18
+    ]
+  ],
+  "sources": {
+    "art_src/fixtures/architecture/sources/painted_f1_base.png": "a21da69a48822d9445374180f4ed9afa21a752abe9eae78bde94dbf6e74f51c7",
+    "art_src/fixtures/architecture/sources/painted_f2_base.png": "f55986c528aa55ca8da5ab7b7725d7f8bf05d0d182cee5ba3eb8d59416acbcd2",
+    "art_src/items/sources/bone.png": "53e998e3c1ba9066adaf4797229e8c177c28e8b298aeb76a895fdfc8982394a2",
+    "art_src/items/sources/bread.png": "e5d6065eac10a5b4e7b917edd038e3d26b63313ef76badda076596da4418612e",
+    "art_src/items/sources/clapper.png": "cf62f24eda9a1738b12539b00d2b348aacfb9be1496034558a3fc5046f20ee30",
+    "art_src/items/sources/club.png": "1679fe7ad2762640a56f3578b259363761d0725c3aa9d91a0c15845aca61d977",
+    "art_src/items/sources/coat.png": "94f34d37b2dbdb669030b6a379e58590d2ef654d3ad3faf9c3b90850b7e19333",
+    "art_src/items/sources/key.png": "0497f3356b7e874709aeb11c6e18ef0cd2b628d463cdde5490fe940940501f0b",
+    "art_src/items/sources/knife.png": "cf352a72bad9eab8916f1152e08c11f25272a2e04f826e021d48cdf542b1cf04",
+    "art_src/items/sources/lamp.png": "ee92208de028006ce9e1e8b230572ed400de543f384bcb969285900e3efbbaa5",
+    "art_src/items/sources/shard.png": "6e9de4e91ba730a5571d1194f4b280e4dc79c8d5847ed66119f0059aee32d603",
+    "art_src/items/sources/stone.png": "850bf66e4e84282d4e1cafdebf07fc2adb3159cf312e34e9e0decf1b76de2f2c",
+    "art_src/items/sources/tonic.png": "0212499fbefa21a3b443837deb156e171c5277e2bddc3ac1009bd5d334189312",
+    "assets/art/env/f1_ceiling.png": "007d9d38e31b6f0f08ea13cea16093b91c3f20396676ff6d5e78f3b71f9fa765",
+    "assets/art/env/f1_floor.png": "3349f843ce5bf8475cb669e00544deef483473c6442b6bb2c6fab1b22e95cfdc",
+    "assets/art/env/f2_ceiling.png": "b2117157f95b349f9d919574e9628f90c756a43ed0c31143e6c7475c552b8552",
+    "assets/art/env/f2_floor.png": "d97e85f8b8416f6355fef16aa65a82319ff0a0cd062726a93d24c340a8040d9c",
+    "assets/art/fixtures/dawn_seal_pulse_0_d1.png": "b20da655c9b4d1a908286901cc49dc77c6906b28b0530b8b95442e78a09d576c",
+    "assets/art/fixtures/dawn_seal_pulse_0_d2.png": "c1bb7bb898b4fa713bea61176d0441a2c633bb013172e0d056990d5288d42228",
+    "assets/art/fixtures/dawn_seal_pulse_0_d3.png": "18bba542a571e3a0dc2647116ec962607f2a4f01f1b86b20fcc0b026a960a28e",
+    "assets/art/fixtures/reed_torch_lit_0_d1.png": "1c6b89285e88c815a582e2746e98d0992b5f14cf2a3d0e985d461cc5dac63e1f",
+    "assets/art/fixtures/reed_torch_lit_0_d2.png": "d59d6cda280db085236dc10a6edcfdac1a69693c2d2819fe8ace0472b5006110",
+    "assets/art/fixtures/reed_torch_lit_0_d3.png": "28e7c18e9cc897dd22480c823c9eee8ab213eb51a7ac291e404fbe8b0bd2aae9",
+    "assets/art/fixtures/reed_torch_unlit_d1.png": "a9d7f0cd91e77d2032ac9d2aa95f1c9918a652d5dd74052cbf984b38edba67a0",
+    "assets/art/fixtures/reed_torch_unlit_d2.png": "87149ff1f5a1a144812d3f8b6776b9887ec3cfae1d805eca58a592273fd36ce2",
+    "assets/art/fixtures/reed_torch_unlit_d3.png": "63077c474df7e93bd91427b812155126ebf53bb6c89ba6df6dd8c217679a0381",
+    "assets/art/icons/bone.png": "a8e3a12b941d3890566718751a6a45e05b99d32192f9a9f5ce5b82827f1deab4",
+    "assets/art/icons/bread.png": "fcefcea068cf75e2733feae1165a088f7d2b9d19cd9cd4abb63ed8d7f661624d",
+    "assets/art/icons/clapper.png": "3470697e64790b888e8abd2b8cf5ace65d37aa3a1bd090d51c0d192258b58f24",
+    "assets/art/icons/club.png": "47f084461b63ab5cc4a441cfcbc9b23bed81471966c29effd7382f26bf2127f3",
+    "assets/art/icons/coat.png": "c38e879f289c56a977f1b2bb8aefcf0bd0e3acec93a51766b4eb12c553e17f8c",
+    "assets/art/icons/key.png": "ca76cedf13584c7f4850cb9cce750fa85f119994d5d5da2f8249bbe1e568abe4",
+    "assets/art/icons/knife.png": "3404917e926ec67a47aac524cbb6afd9a79e1e87333d163a136ff8b7be1f5441",
+    "assets/art/icons/lamp.png": "5ffc67adb75b205d0cfb88438416d0830405618c2d804dd81d2ed5533c3f2f2d",
+    "assets/art/icons/shard.png": "6598aeaa99fdf59d013a4982c12e173638871e20c715ac4f7d54e1185dc16b62",
+    "assets/art/icons/stone.png": "7379a50d89928141a46df7408d61e3454fe6a224f848f77fded47a2ac2e6c128",
+    "assets/art/icons/tonic.png": "2f3080bea554851600adb54ead79bf51f9f2455b0e81e90ced67f071aab5feb4"
+  },
+  "shadow": "No baked shadow. Renderer contact ellipse should follow opaque_bounds.",
+  "rim": "Native upper-left material highlight retouched at each distance.",
+  "reuse": "Existing fixtures/reed_torch_* and dawn_seal_* retain current identity and palette."
+}
