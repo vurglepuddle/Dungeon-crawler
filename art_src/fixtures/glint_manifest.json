@@ -1,0 +1,311 @@
+{
+  "assets": [
+    {
+      "path": "assets/art/fixtures/glint_gold_0_9.png",
+      "size": [
+        9,
+        9
+      ],
+      "opaque_colors": 2,
+      "sha256": "04e6d1b5b55269a52e7ae6ae7152df32fa40b58e81f4ae2d989f67899f01f450",
+      "anchor": [
+        4,
+        4
+      ],
+      "frame": 0,
+      "frame_ms": 70,
+      "family": "gold",
+      "purpose": "decorative interaction cue / fixed centre in screen pixels"
+    },
+    {
+      "path": "assets/art/fixtures/glint_gold_1_9.png",
+      "size": [
+        9,
+        9
+      ],
+      "opaque_colors": 4,
+      "sha256": "b422223ceed6b9e5bb4b0f0def1329d583dbe9daca6632b1cf1892eda2da2fca",
+      "anchor": [
+        4,
+        4
+      ],
+      "frame": 1,
+      "frame_ms": 100,
+      "family": "gold",
+      "purpose": "decorative interaction cue / fixed centre in screen pixels"
+    },
+    {
+      "path": "assets/art/fixtures/glint_gold_2_9.png",
+      "size": [
+        9,
+        9
+      ],
+      "opaque_colors": 2,
+      "sha256": "9b602b378b0729d1e18c61e73d8a2b64b61a1e5187d530733ecddce7c68f3d13",
+      "anchor": [
+        4,
+        4
+      ],
+      "frame": 2,
+      "frame_ms": 90,
+      "family": "gold",
+      "purpose": "decorative interaction cue / fixed centre in screen pixels"
+    },
+    {
+      "path": "assets/art/fixtures/glint_gold_strip_9.png",
+      "size": [
+        27,
+        9
+      ],
+      "opaque_colors": 4,
+      "sha256": "560b6113cc984c13ed93f5e1b7044817bcc0f643836300ceb74e25cf48ac71e4",
+      "anchor": [
+        4,
+        4
+      ],
+      "frame_count": 3,
+      "frame_size": [
+        9,
+        9
+      ],
+      "frame_order": [
+        "0",
+        "1",
+        "2"
+      ]
+    },
+    {
+      "path": "assets/art/fixtures/glint_gold_0_7.png",
+      "size": [
+        7,
+        7
+      ],
+      "opaque_colors": 2,
+      "sha256": "9ab965ce64b22184438cc330fcc14e6aae2df0577a90d391490a07e7eaccddab",
+      "anchor": [
+        3,
+        3
+      ],
+      "frame": 0,
+      "frame_ms": 70,
+      "family": "gold",
+      "purpose": "decorative interaction cue / fixed centre in screen pixels"
+    },
+    {
+      "path": "assets/art/fixtures/glint_gold_1_7.png",
+      "size": [
+        7,
+        7
+      ],
+      "opaque_colors": 4,
+      "sha256": "44b87fb05d8224f37055dcd2afc32487a3806a4b4e96cad618cd633a4a1f927a",
+      "anchor": [
+        3,
+        3
+      ],
+      "frame": 1,
+      "frame_ms": 100,
+      "family": "gold",
+      "purpose": "decorative interaction cue / fixed centre in screen pixels"
+    },
+    {
+      "path": "assets/art/fixtures/glint_gold_2_7.png",
+      "size": [
+        7,
+        7
+      ],
+      "opaque_colors": 2,
+      "sha256": "d0d477eaeca0ecce08b05017aa436714ecaf900ef06ef1206653c8348223ea6d",
+      "anchor": [
+        3,
+        3
+      ],
+      "frame": 2,
+      "frame_ms": 90,
+      "family": "gold",
+      "purpose": "decorative interaction cue / fixed centre in screen pixels"
+    },
+    {
+      "path": "assets/art/fixtures/glint_gold_strip_7.png",
+      "size": [
+        21,
+        7
+      ],
+      "opaque_colors": 4,
+      "sha256": "993d63d48d458c3721fd8f2053d2836d4f9698dccb56017220554f6ab1e61dfa",
+      "anchor": [
+        3,
+        3
+      ],
+      "frame_count": 3,
+      "frame_size": [
+        7,
+        7
+      ],
+      "frame_order": [
+        "0",
+        "1",
+        "2"
+      ]
+    },
+    {
+      "path": "assets/art/fixtures/glint_target_0_9.png",
+      "size": [
+        9,
+        9
+      ],
+      "opaque_colors": 2,
+      "sha256": "17efb7174d7f914cc86d5967df6b6da4c82b76064ba3f9588d15e67606831cab",
+      "anchor": [
+        4,
+        4
+      ],
+      "frame": 0,
+      "frame_ms": 70,
+      "family": "target",
+      "purpose": "decorative interaction cue / fixed centre in screen pixels"
+    },
+    {
+      "path": "assets/art/fixtures/glint_target_1_9.png",
+      "size": [
+        9,
+        9
+      ],
+      "opaque_colors": 4,
+      "sha256": "dbd82303d9bfedaf54e5064f8e9bbc16b5fad52e3b7403b8e0701caf0b6c97b8",
+      "anchor": [
+        4,
+        4
+      ],
+      "frame": 1,
+      "frame_ms": 100,
+      "family": "target",
+      "purpose": "decorative interaction cue / fixed centre in screen pixels"
+    },
+    {
+      "path": "assets/art/fixtures/glint_target_2_9.png",
+      "size": [
+        9,
+        9
+      ],
+      "opaque_colors": 2,
+      "sha256": "f3189bc3f4934cc646e60fd477a4a5179540e063f7e59abd3586cc2818e7e8a6",
+      "anchor": [
+        4,
+        4
+      ],
+      "frame": 2,
+      "frame_ms": 90,
+      "family": "target",
+      "purpose": "decorative interaction cue / fixed centre in screen pixels"
+    },
+    {
+      "path": "assets/art/fixtures/glint_target_strip_9.png",
+      "size": [
+        27,
+        9
+      ],
+      "opaque_colors": 4,
+      "sha256": "49e6fa09cce270e2ee567748254da34d94cf0e7b3d636391b79eb21598ec4a7d",
+      "anchor": [
+        4,
+        4
+      ],
+      "frame_count": 3,
+      "frame_size": [
+        9,
+        9
+      ],
+      "frame_order": [
+        "0",
+        "1",
+        "2"
+      ]
+    },
+    {
+      "path": "assets/art/fixtures/glint_target_0_7.png",
+      "size": [
+        7,
+        7
+      ],
+      "opaque_colors": 2,
+      "sha256": "1f6e8bcc8904738b7131f63ab9b87322d96725c14959a66317f0d63c66ec219e",
+      "anchor": [
+        3,
+        3
+      ],
+      "frame": 0,
+      "frame_ms": 70,
+      "family": "target",
+      "purpose": "decorative interaction cue / fixed centre in screen pixels"
+    },
+    {
+      "path": "assets/art/fixtures/glint_target_1_7.png",
+      "size": [
+        7,
+        7
+      ],
+      "opaque_colors": 4,
+      "sha256": "9aa48f14be0d634ee15208298c76605ee8422df6e4bb908fddaa8ea3706a5aa3",
+      "anchor": [
+        3,
+        3
+      ],
+      "frame": 1,
+      "frame_ms": 100,
+      "family": "target",
+      "purpose": "decorative interaction cue / fixed centre in screen pixels"
+    },
+    {
+      "path": "assets/art/fixtures/glint_target_2_7.png",
+      "size": [
+        7,
+        7
+      ],
+      "opaque_colors": 2,
+      "sha256": "7b63cce21ef7cd93b8c7b2b934f0a5fc16e569306fe74b41dce36ad131ab9c36",
+      "anchor": [
+        3,
+        3
+      ],
+      "frame": 2,
+      "frame_ms": 90,
+      "family": "target",
+      "purpose": "decorative interaction cue / fixed centre in screen pixels"
+    },
+    {
+      "path": "assets/art/fixtures/glint_target_strip_7.png",
+      "size": [
+        21,
+        7
+      ],
+      "opaque_colors": 4,
+      "sha256": "2d0504e21f8708e0d30b3ba623b47047a0165d9c55f3865544289838bffa6a4c",
+      "anchor": [
+        3,
+        3
+      ],
+      "frame_count": 3,
+      "frame_size": [
+        7,
+        7
+      ],
+      "frame_order": [
+        "0",
+        "1",
+        "2"
+      ]
+    }
+  ],
+  "frame_ms": [
+    70,
+    100,
+    90
+  ],
+  "burst_ms": 260,
+  "cycle_ms": 2200,
+  "quiet_ms": 1940,
+  "blank_interval": "draw nothing; no fourth image",
+  "phase": "stable per floor/object id; presentation only; independent of gameplay RNG",
+  "suggested_phase_hash": "FNV1a32 with double 0x45d9f3b avalanche, modulo 2200"
+}

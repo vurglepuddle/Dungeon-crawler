@@ -1,0 +1,2435 @@
+{
+  "assets": [
+    {
+      "path": "assets/art/fixtures/architecture_f1_exit_64.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 26,
+      "sha256": "88236cb5efff3f28fc503298220e29dc411e357e8a9bfa5032ada7fa7a663988",
+      "floor": 1,
+      "kind": "exit",
+      "anchor": [
+        0,
+        0
+      ],
+      "wall_uv": true,
+      "threshold_anchor": [
+        32,
+        62
+      ]
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f1_exit_left_d1.png",
+      "size": [
+        32,
+        64
+      ],
+      "opaque_colors": 23,
+      "sha256": "bb3c698683bfcedc7cdf5d9c32b79ded7e7f4107cdbfee9302ecf54e9761e7aa",
+      "floor": 1,
+      "kind": "exit",
+      "anchor": [
+        16,
+        58
+      ],
+      "depth": 1,
+      "projection": "left",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f1_exit_right_d1.png",
+      "size": [
+        32,
+        64
+      ],
+      "opaque_colors": 23,
+      "sha256": "6231e160eb32af963df65adf309753e30137d65395578562849d52bb88cde013",
+      "floor": 1,
+      "kind": "exit",
+      "anchor": [
+        15,
+        58
+      ],
+      "depth": 1,
+      "projection": "right",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f1_exit_left_d2.png",
+      "size": [
+        20,
+        40
+      ],
+      "opaque_colors": 22,
+      "sha256": "4b80753808d59df4d5d6194db6c088fab65e428fbba249a5078cab15fdebe160",
+      "floor": 1,
+      "kind": "exit",
+      "anchor": [
+        10,
+        36
+      ],
+      "depth": 2,
+      "projection": "left",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f1_exit_right_d2.png",
+      "size": [
+        20,
+        40
+      ],
+      "opaque_colors": 22,
+      "sha256": "603f25576516db210578dd215f99a04fb41afd9c053602ebf405b67e95184614",
+      "floor": 1,
+      "kind": "exit",
+      "anchor": [
+        9,
+        36
+      ],
+      "depth": 2,
+      "projection": "right",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f1_exit_left_d3.png",
+      "size": [
+        12,
+        24
+      ],
+      "opaque_colors": 20,
+      "sha256": "c073ea571d6f94b5745746da6d89dce3078d8fe4b716dbac22013b50cd28a3dd",
+      "floor": 1,
+      "kind": "exit",
+      "anchor": [
+        6,
+        21
+      ],
+      "depth": 3,
+      "projection": "left",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f1_exit_right_d3.png",
+      "size": [
+        12,
+        24
+      ],
+      "opaque_colors": 20,
+      "sha256": "bb59f1b5e3b18750b9a103ad5499aa02cfdabd2c4ed15bd7bdb7e32cea776c8b",
+      "floor": 1,
+      "kind": "exit",
+      "anchor": [
+        5,
+        21
+      ],
+      "depth": 3,
+      "projection": "right",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f1_stairs_down_64.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 22,
+      "sha256": "cca079080fc7277801780136b770cbf6cfd96ffa057b7304e0bf96d3fda43e4e",
+      "floor": 1,
+      "kind": "stairs_down",
+      "anchor": [
+        0,
+        0
+      ],
+      "wall_uv": true,
+      "threshold_anchor": [
+        32,
+        62
+      ]
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f1_stairs_down_left_d1.png",
+      "size": [
+        32,
+        64
+      ],
+      "opaque_colors": 19,
+      "sha256": "b5c528f3098eec6dc683a735825ffe420d165513e5927b8fa5f9afc39df9fafa",
+      "floor": 1,
+      "kind": "stairs_down",
+      "anchor": [
+        16,
+        58
+      ],
+      "depth": 1,
+      "projection": "left",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f1_stairs_down_right_d1.png",
+      "size": [
+        32,
+        64
+      ],
+      "opaque_colors": 19,
+      "sha256": "3549d80bf21ce54ef8cc9eb19431b78ac31957bd9ec8956f501792bda3cf0c8e",
+      "floor": 1,
+      "kind": "stairs_down",
+      "anchor": [
+        15,
+        58
+      ],
+      "depth": 1,
+      "projection": "right",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f1_stairs_down_left_d2.png",
+      "size": [
+        20,
+        40
+      ],
+      "opaque_colors": 17,
+      "sha256": "539ad90d8682aa5687e30bbb8a2828932158aa3afda51179e0a4ea23c90c9519",
+      "floor": 1,
+      "kind": "stairs_down",
+      "anchor": [
+        10,
+        36
+      ],
+      "depth": 2,
+      "projection": "left",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f1_stairs_down_right_d2.png",
+      "size": [
+        20,
+        40
+      ],
+      "opaque_colors": 17,
+      "sha256": "ad3d93ed1bd0e6ada398957ff605bd50a8d04eac357166374dd0a5ba1da7014e",
+      "floor": 1,
+      "kind": "stairs_down",
+      "anchor": [
+        9,
+        36
+      ],
+      "depth": 2,
+      "projection": "right",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f1_stairs_down_left_d3.png",
+      "size": [
+        12,
+        24
+      ],
+      "opaque_colors": 18,
+      "sha256": "ab3ac5c094a0c65378fc96d3e9d3ad87f403dbebf7d4a0d5128dbff0e8f6be01",
+      "floor": 1,
+      "kind": "stairs_down",
+      "anchor": [
+        6,
+        21
+      ],
+      "depth": 3,
+      "projection": "left",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f1_stairs_down_right_d3.png",
+      "size": [
+        12,
+        24
+      ],
+      "opaque_colors": 18,
+      "sha256": "2706799d1870c003658670e668e7ae65b50da0146466c4f3f31ac40c43ec4824",
+      "floor": 1,
+      "kind": "stairs_down",
+      "anchor": [
+        5,
+        21
+      ],
+      "depth": 3,
+      "projection": "right",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f1_stairs_up_64.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 23,
+      "sha256": "3c2fb792671e7221a7fd90c90b5a1d50395b1b2c6dfb553a204598e372465feb",
+      "floor": 1,
+      "kind": "stairs_up",
+      "anchor": [
+        0,
+        0
+      ],
+      "wall_uv": true,
+      "threshold_anchor": [
+        32,
+        62
+      ]
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f1_stairs_up_left_d1.png",
+      "size": [
+        32,
+        64
+      ],
+      "opaque_colors": 22,
+      "sha256": "a9974cf235b0f4d61c88ccf110068457d6fc5591623b9031156248f70f6476d6",
+      "floor": 1,
+      "kind": "stairs_up",
+      "anchor": [
+        16,
+        58
+      ],
+      "depth": 1,
+      "projection": "left",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f1_stairs_up_right_d1.png",
+      "size": [
+        32,
+        64
+      ],
+      "opaque_colors": 22,
+      "sha256": "f80cfa5ab9128958c4270d1bb4aae8e9ae1054eacdd19d6edd575fa9a9b9398a",
+      "floor": 1,
+      "kind": "stairs_up",
+      "anchor": [
+        15,
+        58
+      ],
+      "depth": 1,
+      "projection": "right",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f1_stairs_up_left_d2.png",
+      "size": [
+        20,
+        40
+      ],
+      "opaque_colors": 18,
+      "sha256": "2c3b9c77421f0f35ee57d06b0e1f9f3aee1d02a1e6d92e33627369b5bbbf0d62",
+      "floor": 1,
+      "kind": "stairs_up",
+      "anchor": [
+        10,
+        36
+      ],
+      "depth": 2,
+      "projection": "left",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f1_stairs_up_right_d2.png",
+      "size": [
+        20,
+        40
+      ],
+      "opaque_colors": 18,
+      "sha256": "73675285f122f449432c79b8f5fa30f99eaa681a1c048521363c221a795af491",
+      "floor": 1,
+      "kind": "stairs_up",
+      "anchor": [
+        9,
+        36
+      ],
+      "depth": 2,
+      "projection": "right",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f1_stairs_up_left_d3.png",
+      "size": [
+        12,
+        24
+      ],
+      "opaque_colors": 18,
+      "sha256": "d100804814a76787f4b3277e6cca9227d17521e55bdd2768ac9f5e611b2f7d92",
+      "floor": 1,
+      "kind": "stairs_up",
+      "anchor": [
+        6,
+        21
+      ],
+      "depth": 3,
+      "projection": "left",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f1_stairs_up_right_d3.png",
+      "size": [
+        12,
+        24
+      ],
+      "opaque_colors": 18,
+      "sha256": "d9b2c6fd745da4fa7bc9e0f1999fd9ce3d9bada45935d52f0d257677ce6e5622",
+      "floor": 1,
+      "kind": "stairs_up",
+      "anchor": [
+        5,
+        21
+      ],
+      "depth": 3,
+      "projection": "right",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f1_gate_closed_64.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 22,
+      "sha256": "4e1ba0d01e389e288f60d2348bd24b1268d61b95dd573ddb9e0cb1ab8b60b038",
+      "floor": 1,
+      "kind": "gate_closed",
+      "anchor": [
+        0,
+        0
+      ],
+      "wall_uv": true,
+      "threshold_anchor": [
+        32,
+        62
+      ]
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f1_gate_closed_left_d1.png",
+      "size": [
+        32,
+        64
+      ],
+      "opaque_colors": 19,
+      "sha256": "29f127f00395224265ad5bbd4009b47beaa61120032f9d23a6ad1c1d817c5f96",
+      "floor": 1,
+      "kind": "gate_closed",
+      "anchor": [
+        16,
+        58
+      ],
+      "depth": 1,
+      "projection": "left",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f1_gate_closed_right_d1.png",
+      "size": [
+        32,
+        64
+      ],
+      "opaque_colors": 19,
+      "sha256": "164a90b8964f5a9b3ee9958ace111736e0a5a5d48fc3c3407f07b9b8e2746474",
+      "floor": 1,
+      "kind": "gate_closed",
+      "anchor": [
+        15,
+        58
+      ],
+      "depth": 1,
+      "projection": "right",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f1_gate_closed_left_d2.png",
+      "size": [
+        20,
+        40
+      ],
+      "opaque_colors": 18,
+      "sha256": "e6ec01cddbce0d8c529681a2ad76f7e3ca22c79ed58a46379889dc5fea2fb58d",
+      "floor": 1,
+      "kind": "gate_closed",
+      "anchor": [
+        10,
+        36
+      ],
+      "depth": 2,
+      "projection": "left",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f1_gate_closed_right_d2.png",
+      "size": [
+        20,
+        40
+      ],
+      "opaque_colors": 18,
+      "sha256": "2c3ae76a0a85a18a382284e9e97721109c4f9f210fc2e48efa825300ec69022e",
+      "floor": 1,
+      "kind": "gate_closed",
+      "anchor": [
+        9,
+        36
+      ],
+      "depth": 2,
+      "projection": "right",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f1_gate_closed_left_d3.png",
+      "size": [
+        12,
+        24
+      ],
+      "opaque_colors": 18,
+      "sha256": "84c440c01a195f8338c56f33c26ad7f93e25ec6f06813ee06798145f003f7083",
+      "floor": 1,
+      "kind": "gate_closed",
+      "anchor": [
+        6,
+        21
+      ],
+      "depth": 3,
+      "projection": "left",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f1_gate_closed_right_d3.png",
+      "size": [
+        12,
+        24
+      ],
+      "opaque_colors": 18,
+      "sha256": "fa86476f3d5ae9b0e2e285382907a9068969bd47eb436bfdc1fd87142a88ccd0",
+      "floor": 1,
+      "kind": "gate_closed",
+      "anchor": [
+        5,
+        21
+      ],
+      "depth": 3,
+      "projection": "right",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f1_gate_closed_overlay_64.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 22,
+      "sha256": "39bcdd1b26b45c7a29d09524bd72a8429bee06885ee2b0ac42849c981d0cfd4d",
+      "floor": 1,
+      "kind": "gate_closed",
+      "anchor": [
+        0,
+        0
+      ],
+      "wall_uv": true,
+      "purpose": "transparent aperture; draw real corridor first"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f1_gate_closed_overlay_left_d1.png",
+      "size": [
+        32,
+        64
+      ],
+      "opaque_colors": 19,
+      "sha256": "38685e3c2f73778c33e358673554730b72260c426fb22b9bea52fb09c46107b8",
+      "floor": 1,
+      "kind": "gate_closed",
+      "anchor": [
+        16,
+        58
+      ],
+      "depth": 1,
+      "projection": "left",
+      "purpose": "transparent aperture; no opaque black rectangle behind open gate"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f1_gate_closed_overlay_right_d1.png",
+      "size": [
+        32,
+        64
+      ],
+      "opaque_colors": 19,
+      "sha256": "74e523efc886d81801d228e5b82b354397a5e858d2141283085448fa47ee2e82",
+      "floor": 1,
+      "kind": "gate_closed",
+      "anchor": [
+        15,
+        58
+      ],
+      "depth": 1,
+      "projection": "right",
+      "purpose": "transparent aperture; no opaque black rectangle behind open gate"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f1_gate_closed_overlay_left_d2.png",
+      "size": [
+        20,
+        40
+      ],
+      "opaque_colors": 18,
+      "sha256": "5f97c7880b148fa4aaac54165c82bcdc0194a37ba35cc5e714fc7d13e290aaaa",
+      "floor": 1,
+      "kind": "gate_closed",
+      "anchor": [
+        10,
+        36
+      ],
+      "depth": 2,
+      "projection": "left",
+      "purpose": "transparent aperture; no opaque black rectangle behind open gate"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f1_gate_closed_overlay_right_d2.png",
+      "size": [
+        20,
+        40
+      ],
+      "opaque_colors": 18,
+      "sha256": "364bf27250227899b3c3b8bd6742ed49aed8f0cf2d32864f0a80e3fdf3423482",
+      "floor": 1,
+      "kind": "gate_closed",
+      "anchor": [
+        9,
+        36
+      ],
+      "depth": 2,
+      "projection": "right",
+      "purpose": "transparent aperture; no opaque black rectangle behind open gate"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f1_gate_closed_overlay_left_d3.png",
+      "size": [
+        12,
+        24
+      ],
+      "opaque_colors": 18,
+      "sha256": "1c166cba63dd88c050d4284f220e40b25c569c15a0c7af6dfbd5d6ef5e64f55b",
+      "floor": 1,
+      "kind": "gate_closed",
+      "anchor": [
+        6,
+        21
+      ],
+      "depth": 3,
+      "projection": "left",
+      "purpose": "transparent aperture; no opaque black rectangle behind open gate"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f1_gate_closed_overlay_right_d3.png",
+      "size": [
+        12,
+        24
+      ],
+      "opaque_colors": 18,
+      "sha256": "646f41751f0fa377f83e5eba0b171fa5131458c388bba25a7cae31909bb147bf",
+      "floor": 1,
+      "kind": "gate_closed",
+      "anchor": [
+        5,
+        21
+      ],
+      "depth": 3,
+      "projection": "right",
+      "purpose": "transparent aperture; no opaque black rectangle behind open gate"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f1_gate_open_64.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 22,
+      "sha256": "95ab64eb3f9228a4f1f66c1f5a4cba4a20e4f6f67da90cf667ae8f7808298f03",
+      "floor": 1,
+      "kind": "gate_open",
+      "anchor": [
+        0,
+        0
+      ],
+      "wall_uv": true,
+      "threshold_anchor": [
+        32,
+        62
+      ]
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f1_gate_open_left_d1.png",
+      "size": [
+        32,
+        64
+      ],
+      "opaque_colors": 19,
+      "sha256": "178094a90605021e3f0cb304ffe84bc5d3221e1617e36c6df05a03da14caa3b9",
+      "floor": 1,
+      "kind": "gate_open",
+      "anchor": [
+        16,
+        58
+      ],
+      "depth": 1,
+      "projection": "left",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f1_gate_open_right_d1.png",
+      "size": [
+        32,
+        64
+      ],
+      "opaque_colors": 19,
+      "sha256": "e4351a9b70296a327d474a054da3d4fb141a6946443ee5d6cca7246951cbb7e2",
+      "floor": 1,
+      "kind": "gate_open",
+      "anchor": [
+        15,
+        58
+      ],
+      "depth": 1,
+      "projection": "right",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f1_gate_open_left_d2.png",
+      "size": [
+        20,
+        40
+      ],
+      "opaque_colors": 17,
+      "sha256": "35be77000d1297f3cd7edf8e0a9df6c9016a7be4bdaafbbd495cb399e8c92ade",
+      "floor": 1,
+      "kind": "gate_open",
+      "anchor": [
+        10,
+        36
+      ],
+      "depth": 2,
+      "projection": "left",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f1_gate_open_right_d2.png",
+      "size": [
+        20,
+        40
+      ],
+      "opaque_colors": 17,
+      "sha256": "9e987e847a4ddb2b8d6a90b8a477bd48bfa769ebb398e24ee23dddbd4e723f05",
+      "floor": 1,
+      "kind": "gate_open",
+      "anchor": [
+        9,
+        36
+      ],
+      "depth": 2,
+      "projection": "right",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f1_gate_open_left_d3.png",
+      "size": [
+        12,
+        24
+      ],
+      "opaque_colors": 18,
+      "sha256": "20ca6c4838fd894f3bb0ed4571bff18611c27bb3db63973fd801d8c8119333a0",
+      "floor": 1,
+      "kind": "gate_open",
+      "anchor": [
+        6,
+        21
+      ],
+      "depth": 3,
+      "projection": "left",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f1_gate_open_right_d3.png",
+      "size": [
+        12,
+        24
+      ],
+      "opaque_colors": 18,
+      "sha256": "8b3011787a52ef1f41efd02179fcdab999591efd3eb4c1e45e29f705bce93581",
+      "floor": 1,
+      "kind": "gate_open",
+      "anchor": [
+        5,
+        21
+      ],
+      "depth": 3,
+      "projection": "right",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f1_gate_open_overlay_64.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 22,
+      "sha256": "c276b424933cea39d8951a5ae421aa2e27652aaac90e5eb6e763763a2d46e476",
+      "floor": 1,
+      "kind": "gate_open",
+      "anchor": [
+        0,
+        0
+      ],
+      "wall_uv": true,
+      "purpose": "transparent aperture; draw real corridor first"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f1_gate_open_overlay_left_d1.png",
+      "size": [
+        32,
+        64
+      ],
+      "opaque_colors": 19,
+      "sha256": "fa3b96bda3327e5c93e2dd3b9f99f8f3e662c1041c4ba64f0d5043be2e67e13c",
+      "floor": 1,
+      "kind": "gate_open",
+      "anchor": [
+        16,
+        58
+      ],
+      "depth": 1,
+      "projection": "left",
+      "purpose": "transparent aperture; no opaque black rectangle behind open gate"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f1_gate_open_overlay_right_d1.png",
+      "size": [
+        32,
+        64
+      ],
+      "opaque_colors": 19,
+      "sha256": "704a414cd13553cb398c3729ae9c832735272c7e90c5c0da258576a572b4161e",
+      "floor": 1,
+      "kind": "gate_open",
+      "anchor": [
+        15,
+        58
+      ],
+      "depth": 1,
+      "projection": "right",
+      "purpose": "transparent aperture; no opaque black rectangle behind open gate"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f1_gate_open_overlay_left_d2.png",
+      "size": [
+        20,
+        40
+      ],
+      "opaque_colors": 17,
+      "sha256": "cc19bc8e17808a5821a14485d8ee4f840aa006528ef0b656d5ae6364d5784556",
+      "floor": 1,
+      "kind": "gate_open",
+      "anchor": [
+        10,
+        36
+      ],
+      "depth": 2,
+      "projection": "left",
+      "purpose": "transparent aperture; no opaque black rectangle behind open gate"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f1_gate_open_overlay_right_d2.png",
+      "size": [
+        20,
+        40
+      ],
+      "opaque_colors": 17,
+      "sha256": "e4702c4531cf2c515dcbeaae3e996bb93d2a678c1f74fbbca23453b333d8ba58",
+      "floor": 1,
+      "kind": "gate_open",
+      "anchor": [
+        9,
+        36
+      ],
+      "depth": 2,
+      "projection": "right",
+      "purpose": "transparent aperture; no opaque black rectangle behind open gate"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f1_gate_open_overlay_left_d3.png",
+      "size": [
+        12,
+        24
+      ],
+      "opaque_colors": 17,
+      "sha256": "33eca0559fc166067029b28c1048691ff10ff3c35dbaef61e7c64c6cacd28ed4",
+      "floor": 1,
+      "kind": "gate_open",
+      "anchor": [
+        6,
+        21
+      ],
+      "depth": 3,
+      "projection": "left",
+      "purpose": "transparent aperture; no opaque black rectangle behind open gate"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f1_gate_open_overlay_right_d3.png",
+      "size": [
+        12,
+        24
+      ],
+      "opaque_colors": 17,
+      "sha256": "1ce562ed9c8c8193b48d34e1aa4cbf961c8ad849993f1823920bf8208b25238f",
+      "floor": 1,
+      "kind": "gate_open",
+      "anchor": [
+        5,
+        21
+      ],
+      "depth": 3,
+      "projection": "right",
+      "purpose": "transparent aperture; no opaque black rectangle behind open gate"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f1_lift_dead_64.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 22,
+      "sha256": "10e9cc0a7b63e44f244aed6a5983e4a55aac353ee27d643db3154e2f9481f645",
+      "floor": 1,
+      "kind": "lift_dead",
+      "anchor": [
+        0,
+        0
+      ],
+      "wall_uv": true,
+      "threshold_anchor": [
+        32,
+        62
+      ]
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f1_lift_dead_left_d1.png",
+      "size": [
+        32,
+        64
+      ],
+      "opaque_colors": 19,
+      "sha256": "ce0f35108b2735e1c14c50985312c9ccdb65b6d807312066bfd417020e9d7cc7",
+      "floor": 1,
+      "kind": "lift_dead",
+      "anchor": [
+        16,
+        58
+      ],
+      "depth": 1,
+      "projection": "left",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f1_lift_dead_right_d1.png",
+      "size": [
+        32,
+        64
+      ],
+      "opaque_colors": 19,
+      "sha256": "65893b5d65723e0ef3e02bd7fe75b6c41d1440362b59647d467480bf7b2d950f",
+      "floor": 1,
+      "kind": "lift_dead",
+      "anchor": [
+        15,
+        58
+      ],
+      "depth": 1,
+      "projection": "right",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f1_lift_dead_left_d2.png",
+      "size": [
+        20,
+        40
+      ],
+      "opaque_colors": 17,
+      "sha256": "2caf074649731a4636d20c3535ca500a689344ade44e561db77b7a3999b0d926",
+      "floor": 1,
+      "kind": "lift_dead",
+      "anchor": [
+        10,
+        36
+      ],
+      "depth": 2,
+      "projection": "left",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f1_lift_dead_right_d2.png",
+      "size": [
+        20,
+        40
+      ],
+      "opaque_colors": 17,
+      "sha256": "f2681904039c1d3c746700488f3eea7089ee8fe2107ac8347570fe9becc625e2",
+      "floor": 1,
+      "kind": "lift_dead",
+      "anchor": [
+        9,
+        36
+      ],
+      "depth": 2,
+      "projection": "right",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f1_lift_dead_left_d3.png",
+      "size": [
+        12,
+        24
+      ],
+      "opaque_colors": 17,
+      "sha256": "aaa019e8bc7b8c3a993c702ac8666b362d9a3f7f331d4f7081db2ea08e12d9c6",
+      "floor": 1,
+      "kind": "lift_dead",
+      "anchor": [
+        6,
+        21
+      ],
+      "depth": 3,
+      "projection": "left",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f1_lift_dead_right_d3.png",
+      "size": [
+        12,
+        24
+      ],
+      "opaque_colors": 17,
+      "sha256": "c55ccf16a5e2a3078a3ef430dcfb69847542bc61130c099f3d469936f27dce89",
+      "floor": 1,
+      "kind": "lift_dead",
+      "anchor": [
+        5,
+        21
+      ],
+      "depth": 3,
+      "projection": "right",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f1_lift_working_64.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 25,
+      "sha256": "01e2c35a44faabd8e7d567af1e3c6dc6a2ccb3e0d07f1f8ea2d395d45d11333a",
+      "floor": 1,
+      "kind": "lift_working",
+      "anchor": [
+        0,
+        0
+      ],
+      "wall_uv": true,
+      "threshold_anchor": [
+        32,
+        62
+      ]
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f1_lift_working_left_d1.png",
+      "size": [
+        32,
+        64
+      ],
+      "opaque_colors": 24,
+      "sha256": "0a58464ca9eb7f91e5763cda0d8c3c544f9e1cb93ed8d2dead1f89d776117eee",
+      "floor": 1,
+      "kind": "lift_working",
+      "anchor": [
+        16,
+        58
+      ],
+      "depth": 1,
+      "projection": "left",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f1_lift_working_right_d1.png",
+      "size": [
+        32,
+        64
+      ],
+      "opaque_colors": 24,
+      "sha256": "f77533053ed585e014e286d1548eeb118e0b1b14aa7a32756f38df14822a1f6d",
+      "floor": 1,
+      "kind": "lift_working",
+      "anchor": [
+        15,
+        58
+      ],
+      "depth": 1,
+      "projection": "right",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f1_lift_working_left_d2.png",
+      "size": [
+        20,
+        40
+      ],
+      "opaque_colors": 20,
+      "sha256": "eee3c955fe5f909471391c2f4c072e46b4aad2e3bfc32a56ddf18ec91de2569f",
+      "floor": 1,
+      "kind": "lift_working",
+      "anchor": [
+        10,
+        36
+      ],
+      "depth": 2,
+      "projection": "left",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f1_lift_working_right_d2.png",
+      "size": [
+        20,
+        40
+      ],
+      "opaque_colors": 20,
+      "sha256": "5fc43b35de09c276b1f1cb1b63e2287d0c7a6e0d614ccf1962d63d4344cc9bbf",
+      "floor": 1,
+      "kind": "lift_working",
+      "anchor": [
+        9,
+        36
+      ],
+      "depth": 2,
+      "projection": "right",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f1_lift_working_left_d3.png",
+      "size": [
+        12,
+        24
+      ],
+      "opaque_colors": 20,
+      "sha256": "d5012e6b3eee67c2928399fe5863943589d8fb42523454781f35edb51f63bed9",
+      "floor": 1,
+      "kind": "lift_working",
+      "anchor": [
+        6,
+        21
+      ],
+      "depth": 3,
+      "projection": "left",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f1_lift_working_right_d3.png",
+      "size": [
+        12,
+        24
+      ],
+      "opaque_colors": 20,
+      "sha256": "037e8e5615c2fb2ee84f51da27d9b83693bdf6dc28826f6351b0a1a660a95258",
+      "floor": 1,
+      "kind": "lift_working",
+      "anchor": [
+        5,
+        21
+      ],
+      "depth": 3,
+      "projection": "right",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f1_gate_strip_64.png",
+      "size": [
+        128,
+        64
+      ],
+      "opaque_colors": 22,
+      "sha256": "33b16fa4814165d7cfee98e046e29d4504924cb9eeb43ab30ab28bff45c460a5",
+      "floor": 1,
+      "kind": "gate",
+      "anchor": [
+        0,
+        0
+      ],
+      "frame_count": 2,
+      "frame_size": [
+        64,
+        64
+      ],
+      "frame_order": [
+        "closed",
+        "open"
+      ],
+      "wall_uv": true
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f1_lift_strip_64.png",
+      "size": [
+        128,
+        64
+      ],
+      "opaque_colors": 25,
+      "sha256": "ff5bc75aae8b05777df38c816a78171d0d5d6321c6aede72df54a888abc2876f",
+      "floor": 1,
+      "kind": "lift",
+      "anchor": [
+        0,
+        0
+      ],
+      "frame_count": 2,
+      "frame_size": [
+        64,
+        64
+      ],
+      "frame_order": [
+        "dead",
+        "working"
+      ],
+      "wall_uv": true
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f2_exit_64.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 26,
+      "sha256": "9fc3e94c5df2426da99f5661c94ffb8d940260a31ad1d8716e2e4c6cb368aa9a",
+      "floor": 2,
+      "kind": "exit",
+      "anchor": [
+        0,
+        0
+      ],
+      "wall_uv": true,
+      "threshold_anchor": [
+        32,
+        62
+      ]
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f2_exit_left_d1.png",
+      "size": [
+        32,
+        64
+      ],
+      "opaque_colors": 24,
+      "sha256": "4ce65866a277a6a6720342b9a39b65d78302f7e0b25395b7f3e3adc03476cfce",
+      "floor": 2,
+      "kind": "exit",
+      "anchor": [
+        16,
+        58
+      ],
+      "depth": 1,
+      "projection": "left",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f2_exit_right_d1.png",
+      "size": [
+        32,
+        64
+      ],
+      "opaque_colors": 24,
+      "sha256": "5092675bf8481db632c9dc82a9ebbc05ebd757ca3e63dc233786aa3378256136",
+      "floor": 2,
+      "kind": "exit",
+      "anchor": [
+        15,
+        58
+      ],
+      "depth": 1,
+      "projection": "right",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f2_exit_left_d2.png",
+      "size": [
+        20,
+        40
+      ],
+      "opaque_colors": 24,
+      "sha256": "1dae1253e7083eedea48ae474917abc1d36f55e9f78f3fa3d7b176681f91bd43",
+      "floor": 2,
+      "kind": "exit",
+      "anchor": [
+        10,
+        36
+      ],
+      "depth": 2,
+      "projection": "left",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f2_exit_right_d2.png",
+      "size": [
+        20,
+        40
+      ],
+      "opaque_colors": 24,
+      "sha256": "d69f82f84ec0221e59d4be0e8b9508230572505f82cdafefa4c2eb0686711271",
+      "floor": 2,
+      "kind": "exit",
+      "anchor": [
+        9,
+        36
+      ],
+      "depth": 2,
+      "projection": "right",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f2_exit_left_d3.png",
+      "size": [
+        12,
+        24
+      ],
+      "opaque_colors": 21,
+      "sha256": "4a659c624b73917d4a39c281851ccddb1dc41ecf29704bc283f826ad90d41e78",
+      "floor": 2,
+      "kind": "exit",
+      "anchor": [
+        6,
+        21
+      ],
+      "depth": 3,
+      "projection": "left",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f2_exit_right_d3.png",
+      "size": [
+        12,
+        24
+      ],
+      "opaque_colors": 21,
+      "sha256": "df4e62d856291cc3a07d7b8c684032d15a2f9b0e7af35d87e0af82851754f93c",
+      "floor": 2,
+      "kind": "exit",
+      "anchor": [
+        5,
+        21
+      ],
+      "depth": 3,
+      "projection": "right",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f2_stairs_down_64.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 22,
+      "sha256": "6c0cf66bbb6f3dd744e9b0fd186e2f199e559a33ec29b8f24c200e714707e8b1",
+      "floor": 2,
+      "kind": "stairs_down",
+      "anchor": [
+        0,
+        0
+      ],
+      "wall_uv": true,
+      "threshold_anchor": [
+        32,
+        62
+      ]
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f2_stairs_down_left_d1.png",
+      "size": [
+        32,
+        64
+      ],
+      "opaque_colors": 19,
+      "sha256": "81d38e7b589453d9757f445617791418582dee394c9642e41a4771c67d8ba29e",
+      "floor": 2,
+      "kind": "stairs_down",
+      "anchor": [
+        16,
+        58
+      ],
+      "depth": 1,
+      "projection": "left",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f2_stairs_down_right_d1.png",
+      "size": [
+        32,
+        64
+      ],
+      "opaque_colors": 19,
+      "sha256": "8eb7d0369f2be6517c4661c502bd88ec356a47ad9d9ffd17ec49cc88625697fb",
+      "floor": 2,
+      "kind": "stairs_down",
+      "anchor": [
+        15,
+        58
+      ],
+      "depth": 1,
+      "projection": "right",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f2_stairs_down_left_d2.png",
+      "size": [
+        20,
+        40
+      ],
+      "opaque_colors": 19,
+      "sha256": "65ad0e364758f3d565e1c639cbeb40b090d58f6e264ab7d31c2b11d04b48c86b",
+      "floor": 2,
+      "kind": "stairs_down",
+      "anchor": [
+        10,
+        36
+      ],
+      "depth": 2,
+      "projection": "left",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f2_stairs_down_right_d2.png",
+      "size": [
+        20,
+        40
+      ],
+      "opaque_colors": 19,
+      "sha256": "251e24f699089e1c8a5b0ec6a831de6f89ef24a64b1e34886612ec6f1a235291",
+      "floor": 2,
+      "kind": "stairs_down",
+      "anchor": [
+        9,
+        36
+      ],
+      "depth": 2,
+      "projection": "right",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f2_stairs_down_left_d3.png",
+      "size": [
+        12,
+        24
+      ],
+      "opaque_colors": 18,
+      "sha256": "2ec092dd0920e893442f8298ffff8e7302259317c604ae9527ff951419f70e93",
+      "floor": 2,
+      "kind": "stairs_down",
+      "anchor": [
+        6,
+        21
+      ],
+      "depth": 3,
+      "projection": "left",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f2_stairs_down_right_d3.png",
+      "size": [
+        12,
+        24
+      ],
+      "opaque_colors": 18,
+      "sha256": "c1c74a2c4a2e1829d042e75d43279067c2548c0946d76b46172eac34423286ed",
+      "floor": 2,
+      "kind": "stairs_down",
+      "anchor": [
+        5,
+        21
+      ],
+      "depth": 3,
+      "projection": "right",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f2_stairs_up_64.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 24,
+      "sha256": "fe74b69700725b4c9912f3d95037a96f4189ea2fe48310f69faaf7c8f5a9172f",
+      "floor": 2,
+      "kind": "stairs_up",
+      "anchor": [
+        0,
+        0
+      ],
+      "wall_uv": true,
+      "threshold_anchor": [
+        32,
+        62
+      ]
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f2_stairs_up_left_d1.png",
+      "size": [
+        32,
+        64
+      ],
+      "opaque_colors": 22,
+      "sha256": "00655c75727c15bd593faf24a763bb9a8ce9b4bfa50d81e83af882a069c77ed3",
+      "floor": 2,
+      "kind": "stairs_up",
+      "anchor": [
+        16,
+        58
+      ],
+      "depth": 1,
+      "projection": "left",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f2_stairs_up_right_d1.png",
+      "size": [
+        32,
+        64
+      ],
+      "opaque_colors": 22,
+      "sha256": "50bcdb0ae857e6dfeb3b3f9463f92f8eaafbb066020b195de003343c2d008421",
+      "floor": 2,
+      "kind": "stairs_up",
+      "anchor": [
+        15,
+        58
+      ],
+      "depth": 1,
+      "projection": "right",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f2_stairs_up_left_d2.png",
+      "size": [
+        20,
+        40
+      ],
+      "opaque_colors": 21,
+      "sha256": "c6d999b017cbee05d497b5d3b1475b45506a89183b69ac2209d1fe26cad89ed2",
+      "floor": 2,
+      "kind": "stairs_up",
+      "anchor": [
+        10,
+        36
+      ],
+      "depth": 2,
+      "projection": "left",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f2_stairs_up_right_d2.png",
+      "size": [
+        20,
+        40
+      ],
+      "opaque_colors": 21,
+      "sha256": "c73b2fe3e2d92ab60c4aee38b25b42b6aade70edcbaaeaeb902fd0ba4ca74b6a",
+      "floor": 2,
+      "kind": "stairs_up",
+      "anchor": [
+        9,
+        36
+      ],
+      "depth": 2,
+      "projection": "right",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f2_stairs_up_left_d3.png",
+      "size": [
+        12,
+        24
+      ],
+      "opaque_colors": 18,
+      "sha256": "dadd0ba3e628a4a06efc7f7458e23a93ab0ea60ab30cd74c6b36e7aef6be2ac3",
+      "floor": 2,
+      "kind": "stairs_up",
+      "anchor": [
+        6,
+        21
+      ],
+      "depth": 3,
+      "projection": "left",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f2_stairs_up_right_d3.png",
+      "size": [
+        12,
+        24
+      ],
+      "opaque_colors": 18,
+      "sha256": "e504d2841fc3c39fdb72cc3d967a6b0de136501aa317ab7f4e0e096569da45cb",
+      "floor": 2,
+      "kind": "stairs_up",
+      "anchor": [
+        5,
+        21
+      ],
+      "depth": 3,
+      "projection": "right",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f2_gate_closed_64.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 22,
+      "sha256": "78c34714c74e1e1f91d1f683b571211a4b59a76498c0fbe1a2585cfe6d5bea98",
+      "floor": 2,
+      "kind": "gate_closed",
+      "anchor": [
+        0,
+        0
+      ],
+      "wall_uv": true,
+      "threshold_anchor": [
+        32,
+        62
+      ]
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f2_gate_closed_left_d1.png",
+      "size": [
+        32,
+        64
+      ],
+      "opaque_colors": 19,
+      "sha256": "ba959e464f1bcfadedbcd234836eb80ddbf70b685c4dc11ad7f8ade73aeb5b8a",
+      "floor": 2,
+      "kind": "gate_closed",
+      "anchor": [
+        16,
+        58
+      ],
+      "depth": 1,
+      "projection": "left",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f2_gate_closed_right_d1.png",
+      "size": [
+        32,
+        64
+      ],
+      "opaque_colors": 19,
+      "sha256": "e6140e57d76bfe9e4a413aa142dddbedccf3b00852c8b41bca635cd68eff732c",
+      "floor": 2,
+      "kind": "gate_closed",
+      "anchor": [
+        15,
+        58
+      ],
+      "depth": 1,
+      "projection": "right",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f2_gate_closed_left_d2.png",
+      "size": [
+        20,
+        40
+      ],
+      "opaque_colors": 20,
+      "sha256": "5e955be5966aa96c8ca55f80ffa7949672d43edadf78ba58e4976970978568a6",
+      "floor": 2,
+      "kind": "gate_closed",
+      "anchor": [
+        10,
+        36
+      ],
+      "depth": 2,
+      "projection": "left",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f2_gate_closed_right_d2.png",
+      "size": [
+        20,
+        40
+      ],
+      "opaque_colors": 20,
+      "sha256": "ab6488df99a74aa3e08171083ff5d73473279f28600443e85c22af380fbe5977",
+      "floor": 2,
+      "kind": "gate_closed",
+      "anchor": [
+        9,
+        36
+      ],
+      "depth": 2,
+      "projection": "right",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f2_gate_closed_left_d3.png",
+      "size": [
+        12,
+        24
+      ],
+      "opaque_colors": 18,
+      "sha256": "2b2a10a1f5f898a04ed08412a1276d871f6e1abb9bdf61b4cd851b9fb30076c5",
+      "floor": 2,
+      "kind": "gate_closed",
+      "anchor": [
+        6,
+        21
+      ],
+      "depth": 3,
+      "projection": "left",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f2_gate_closed_right_d3.png",
+      "size": [
+        12,
+        24
+      ],
+      "opaque_colors": 18,
+      "sha256": "79e26595cacea779311f5c6754ea1cee2cc678f659e49ff228f6a70c51089e9a",
+      "floor": 2,
+      "kind": "gate_closed",
+      "anchor": [
+        5,
+        21
+      ],
+      "depth": 3,
+      "projection": "right",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f2_gate_closed_overlay_64.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 22,
+      "sha256": "88f34e2659abd5e83c3fdc4981fb99e8a39b29aa171815bfe4a5e50208959e09",
+      "floor": 2,
+      "kind": "gate_closed",
+      "anchor": [
+        0,
+        0
+      ],
+      "wall_uv": true,
+      "purpose": "transparent aperture; draw real corridor first"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f2_gate_closed_overlay_left_d1.png",
+      "size": [
+        32,
+        64
+      ],
+      "opaque_colors": 19,
+      "sha256": "559a69994c7d828e9476fbe1ff3503dd49ce5ef648334c25766c9279cbd954b1",
+      "floor": 2,
+      "kind": "gate_closed",
+      "anchor": [
+        16,
+        58
+      ],
+      "depth": 1,
+      "projection": "left",
+      "purpose": "transparent aperture; no opaque black rectangle behind open gate"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f2_gate_closed_overlay_right_d1.png",
+      "size": [
+        32,
+        64
+      ],
+      "opaque_colors": 19,
+      "sha256": "3135d18be0e7874b5b3885568e58773c9cfe0ace46160fecad6d15a9795335ea",
+      "floor": 2,
+      "kind": "gate_closed",
+      "anchor": [
+        15,
+        58
+      ],
+      "depth": 1,
+      "projection": "right",
+      "purpose": "transparent aperture; no opaque black rectangle behind open gate"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f2_gate_closed_overlay_left_d2.png",
+      "size": [
+        20,
+        40
+      ],
+      "opaque_colors": 20,
+      "sha256": "097f4d5a9d1d438eb4d5dc13062c0145019b17bf3a92c395b65f9ddeb25b9393",
+      "floor": 2,
+      "kind": "gate_closed",
+      "anchor": [
+        10,
+        36
+      ],
+      "depth": 2,
+      "projection": "left",
+      "purpose": "transparent aperture; no opaque black rectangle behind open gate"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f2_gate_closed_overlay_right_d2.png",
+      "size": [
+        20,
+        40
+      ],
+      "opaque_colors": 20,
+      "sha256": "ad84cf954a31b17a593fa4af2df4a88c9413184578633b2ad9019621bd2da3f3",
+      "floor": 2,
+      "kind": "gate_closed",
+      "anchor": [
+        9,
+        36
+      ],
+      "depth": 2,
+      "projection": "right",
+      "purpose": "transparent aperture; no opaque black rectangle behind open gate"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f2_gate_closed_overlay_left_d3.png",
+      "size": [
+        12,
+        24
+      ],
+      "opaque_colors": 18,
+      "sha256": "c4e2d001af00e345b49983403f30710b685ac7a8a84cb41563f14b4e40e27979",
+      "floor": 2,
+      "kind": "gate_closed",
+      "anchor": [
+        6,
+        21
+      ],
+      "depth": 3,
+      "projection": "left",
+      "purpose": "transparent aperture; no opaque black rectangle behind open gate"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f2_gate_closed_overlay_right_d3.png",
+      "size": [
+        12,
+        24
+      ],
+      "opaque_colors": 18,
+      "sha256": "90c43d13b65cf7bb5e0b08a82310194e53dafb0771605f0891987394a49e1c4a",
+      "floor": 2,
+      "kind": "gate_closed",
+      "anchor": [
+        5,
+        21
+      ],
+      "depth": 3,
+      "projection": "right",
+      "purpose": "transparent aperture; no opaque black rectangle behind open gate"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f2_gate_open_64.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 22,
+      "sha256": "fee70638f22626762962c89b5941913e35db32cd7e5a99d72708d7227951ed5b",
+      "floor": 2,
+      "kind": "gate_open",
+      "anchor": [
+        0,
+        0
+      ],
+      "wall_uv": true,
+      "threshold_anchor": [
+        32,
+        62
+      ]
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f2_gate_open_left_d1.png",
+      "size": [
+        32,
+        64
+      ],
+      "opaque_colors": 19,
+      "sha256": "b9e5a07c655da13f44c77b04b3a8962b534b2609a0ac00ecbf06eaeef5059ef9",
+      "floor": 2,
+      "kind": "gate_open",
+      "anchor": [
+        16,
+        58
+      ],
+      "depth": 1,
+      "projection": "left",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f2_gate_open_right_d1.png",
+      "size": [
+        32,
+        64
+      ],
+      "opaque_colors": 19,
+      "sha256": "2bff282d029748012416573421a3d66bd82c8409f1eb62f8e9395d3cb892388c",
+      "floor": 2,
+      "kind": "gate_open",
+      "anchor": [
+        15,
+        58
+      ],
+      "depth": 1,
+      "projection": "right",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f2_gate_open_left_d2.png",
+      "size": [
+        20,
+        40
+      ],
+      "opaque_colors": 19,
+      "sha256": "d498dc4ec814790fe9cfb043c8a93d931868cc9c8ded4ffa419c3c78d0a4b6a6",
+      "floor": 2,
+      "kind": "gate_open",
+      "anchor": [
+        10,
+        36
+      ],
+      "depth": 2,
+      "projection": "left",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f2_gate_open_right_d2.png",
+      "size": [
+        20,
+        40
+      ],
+      "opaque_colors": 19,
+      "sha256": "b5f51c866a58981877bc5cd16a5fe53c329d16ee1a5b49396caf32e0ca0fc739",
+      "floor": 2,
+      "kind": "gate_open",
+      "anchor": [
+        9,
+        36
+      ],
+      "depth": 2,
+      "projection": "right",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f2_gate_open_left_d3.png",
+      "size": [
+        12,
+        24
+      ],
+      "opaque_colors": 18,
+      "sha256": "790388d4bf7af498faf15a440c3a48207e9d04f14fc9e4f34aad275d40bf8f5c",
+      "floor": 2,
+      "kind": "gate_open",
+      "anchor": [
+        6,
+        21
+      ],
+      "depth": 3,
+      "projection": "left",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f2_gate_open_right_d3.png",
+      "size": [
+        12,
+        24
+      ],
+      "opaque_colors": 18,
+      "sha256": "2eeca22b1a9ad7315c83c901df31904855d0014ef0c21fc60ad86578fff82b75",
+      "floor": 2,
+      "kind": "gate_open",
+      "anchor": [
+        5,
+        21
+      ],
+      "depth": 3,
+      "projection": "right",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f2_gate_open_overlay_64.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 22,
+      "sha256": "c369523e190c37f6c2479d4bbb7d9e48d97dcaa5ddde1f0265067a53b3fd2cd5",
+      "floor": 2,
+      "kind": "gate_open",
+      "anchor": [
+        0,
+        0
+      ],
+      "wall_uv": true,
+      "purpose": "transparent aperture; draw real corridor first"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f2_gate_open_overlay_left_d1.png",
+      "size": [
+        32,
+        64
+      ],
+      "opaque_colors": 19,
+      "sha256": "cbb4edc3953e425ae26675a0d4e8eba820ad2f3f4218fc6fa27aa33c5152e4da",
+      "floor": 2,
+      "kind": "gate_open",
+      "anchor": [
+        16,
+        58
+      ],
+      "depth": 1,
+      "projection": "left",
+      "purpose": "transparent aperture; no opaque black rectangle behind open gate"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f2_gate_open_overlay_right_d1.png",
+      "size": [
+        32,
+        64
+      ],
+      "opaque_colors": 19,
+      "sha256": "214c8f3c9a6866da789c83eab4c90da81a50e1d4ff6b82e64b792b29f7f0ed86",
+      "floor": 2,
+      "kind": "gate_open",
+      "anchor": [
+        15,
+        58
+      ],
+      "depth": 1,
+      "projection": "right",
+      "purpose": "transparent aperture; no opaque black rectangle behind open gate"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f2_gate_open_overlay_left_d2.png",
+      "size": [
+        20,
+        40
+      ],
+      "opaque_colors": 19,
+      "sha256": "b9a651fa5eaeaf5f27c608bc0522053c84d7f5989395c8389fb7f013a897775d",
+      "floor": 2,
+      "kind": "gate_open",
+      "anchor": [
+        10,
+        36
+      ],
+      "depth": 2,
+      "projection": "left",
+      "purpose": "transparent aperture; no opaque black rectangle behind open gate"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f2_gate_open_overlay_right_d2.png",
+      "size": [
+        20,
+        40
+      ],
+      "opaque_colors": 19,
+      "sha256": "6c570315d884a72e9fd42d80f406774eddac13f73db456f06b302b67e7141dfc",
+      "floor": 2,
+      "kind": "gate_open",
+      "anchor": [
+        9,
+        36
+      ],
+      "depth": 2,
+      "projection": "right",
+      "purpose": "transparent aperture; no opaque black rectangle behind open gate"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f2_gate_open_overlay_left_d3.png",
+      "size": [
+        12,
+        24
+      ],
+      "opaque_colors": 17,
+      "sha256": "136919dd1214d4622a6da293bf097b78d39c69bde37b0a4763c551cac21c1588",
+      "floor": 2,
+      "kind": "gate_open",
+      "anchor": [
+        6,
+        21
+      ],
+      "depth": 3,
+      "projection": "left",
+      "purpose": "transparent aperture; no opaque black rectangle behind open gate"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f2_gate_open_overlay_right_d3.png",
+      "size": [
+        12,
+        24
+      ],
+      "opaque_colors": 17,
+      "sha256": "1556c28d3df81b6e7350f2204abf153e13a418a8daa55877c2b1573fb71a7a76",
+      "floor": 2,
+      "kind": "gate_open",
+      "anchor": [
+        5,
+        21
+      ],
+      "depth": 3,
+      "projection": "right",
+      "purpose": "transparent aperture; no opaque black rectangle behind open gate"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f2_lift_dead_64.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 22,
+      "sha256": "969ac30bd87bd1d3920977633e657615054b2d4fa28d39aa86e4515d9df9eefa",
+      "floor": 2,
+      "kind": "lift_dead",
+      "anchor": [
+        0,
+        0
+      ],
+      "wall_uv": true,
+      "threshold_anchor": [
+        32,
+        62
+      ]
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f2_lift_dead_left_d1.png",
+      "size": [
+        32,
+        64
+      ],
+      "opaque_colors": 19,
+      "sha256": "31f4757805c6ce43fed0de3237d4fb6d00edaa9c623d0a7995396c8432c51ff3",
+      "floor": 2,
+      "kind": "lift_dead",
+      "anchor": [
+        16,
+        58
+      ],
+      "depth": 1,
+      "projection": "left",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f2_lift_dead_right_d1.png",
+      "size": [
+        32,
+        64
+      ],
+      "opaque_colors": 19,
+      "sha256": "19b8ecf914f1736984aa0e59084f19244fbcf36f5efd7df8f5baebbdf25a07b7",
+      "floor": 2,
+      "kind": "lift_dead",
+      "anchor": [
+        15,
+        58
+      ],
+      "depth": 1,
+      "projection": "right",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f2_lift_dead_left_d2.png",
+      "size": [
+        20,
+        40
+      ],
+      "opaque_colors": 19,
+      "sha256": "6794939742b5b6072c4761dece0d413964de425896fa23b6f9c4e7b5bed3c12a",
+      "floor": 2,
+      "kind": "lift_dead",
+      "anchor": [
+        10,
+        36
+      ],
+      "depth": 2,
+      "projection": "left",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f2_lift_dead_right_d2.png",
+      "size": [
+        20,
+        40
+      ],
+      "opaque_colors": 19,
+      "sha256": "3aad3621b019e087fa9e73c658022df1df8570151e8d6301d9c0c128e7b25392",
+      "floor": 2,
+      "kind": "lift_dead",
+      "anchor": [
+        9,
+        36
+      ],
+      "depth": 2,
+      "projection": "right",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f2_lift_dead_left_d3.png",
+      "size": [
+        12,
+        24
+      ],
+      "opaque_colors": 17,
+      "sha256": "ade61e1a75909507a65f53c7b804b31a6de9249d21270214d9e60463b922b4cc",
+      "floor": 2,
+      "kind": "lift_dead",
+      "anchor": [
+        6,
+        21
+      ],
+      "depth": 3,
+      "projection": "left",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f2_lift_dead_right_d3.png",
+      "size": [
+        12,
+        24
+      ],
+      "opaque_colors": 17,
+      "sha256": "d31085737ea3ba8985895b2a2cf5c1cbff35387a9e018d361f8611b92819f0d7",
+      "floor": 2,
+      "kind": "lift_dead",
+      "anchor": [
+        5,
+        21
+      ],
+      "depth": 3,
+      "projection": "right",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f2_lift_working_64.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 26,
+      "sha256": "8f237ccff83dd26bc3f0ba28d9fa735e0c443752b2acd21a7cec7b96da6aa7e1",
+      "floor": 2,
+      "kind": "lift_working",
+      "anchor": [
+        0,
+        0
+      ],
+      "wall_uv": true,
+      "threshold_anchor": [
+        32,
+        62
+      ]
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f2_lift_working_left_d1.png",
+      "size": [
+        32,
+        64
+      ],
+      "opaque_colors": 24,
+      "sha256": "2748fa59bbc3db9cfa7e3e4cf56e95a791e67f47e175d75d37d3de8655ea5aaa",
+      "floor": 2,
+      "kind": "lift_working",
+      "anchor": [
+        16,
+        58
+      ],
+      "depth": 1,
+      "projection": "left",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f2_lift_working_right_d1.png",
+      "size": [
+        32,
+        64
+      ],
+      "opaque_colors": 24,
+      "sha256": "8d5e7bfbc7b202f4d101b1efd56573c001bd6796d4cb4c46642b553ffe2dd50f",
+      "floor": 2,
+      "kind": "lift_working",
+      "anchor": [
+        15,
+        58
+      ],
+      "depth": 1,
+      "projection": "right",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f2_lift_working_left_d2.png",
+      "size": [
+        20,
+        40
+      ],
+      "opaque_colors": 23,
+      "sha256": "ddae318250757d9832d1f7b8698d1b721008bb67466a31f30bc14a853d56b460",
+      "floor": 2,
+      "kind": "lift_working",
+      "anchor": [
+        10,
+        36
+      ],
+      "depth": 2,
+      "projection": "left",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f2_lift_working_right_d2.png",
+      "size": [
+        20,
+        40
+      ],
+      "opaque_colors": 23,
+      "sha256": "fc41455efc2c4116e9d3c40b038b1d47ec02fe6ec817df2167e7bbcdd76a1858",
+      "floor": 2,
+      "kind": "lift_working",
+      "anchor": [
+        9,
+        36
+      ],
+      "depth": 2,
+      "projection": "right",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f2_lift_working_left_d3.png",
+      "size": [
+        12,
+        24
+      ],
+      "opaque_colors": 20,
+      "sha256": "d43fb24084c3dd298ef766af6fd4778b0eeed7863508c3477d222b77b76d0b1c",
+      "floor": 2,
+      "kind": "lift_working",
+      "anchor": [
+        6,
+        21
+      ],
+      "depth": 3,
+      "projection": "left",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f2_lift_working_right_d3.png",
+      "size": [
+        12,
+        24
+      ],
+      "opaque_colors": 20,
+      "sha256": "779b681e1b4041934b4c3d63f0a0d3a31a4b65eb88db771a58911ab78032633a",
+      "floor": 2,
+      "kind": "lift_working",
+      "anchor": [
+        5,
+        21
+      ],
+      "depth": 3,
+      "projection": "right",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f2_gate_strip_64.png",
+      "size": [
+        128,
+        64
+      ],
+      "opaque_colors": 22,
+      "sha256": "5ab5c929f2c3bcccdda5609d53120fe6134306bab7201380b83662efba8082c7",
+      "floor": 2,
+      "kind": "gate",
+      "anchor": [
+        0,
+        0
+      ],
+      "frame_count": 2,
+      "frame_size": [
+        64,
+        64
+      ],
+      "frame_order": [
+        "closed",
+        "open"
+      ],
+      "wall_uv": true
+    },
+    {
+      "path": "assets/art/fixtures/architecture_f2_lift_strip_64.png",
+      "size": [
+        128,
+        64
+      ],
+      "opaque_colors": 26,
+      "sha256": "be83bdbe7db91645557f9b94aa6adeeb08b0db808a8fbdd3cc80a8cf1e1f53a2",
+      "floor": 2,
+      "kind": "lift",
+      "anchor": [
+        0,
+        0
+      ],
+      "frame_count": 2,
+      "frame_size": [
+        64,
+        64
+      ],
+      "frame_order": [
+        "dead",
+        "working"
+      ],
+      "wall_uv": true
+    }
+  ],
+  "sources": {
+    "art_src/fixtures/architecture/sources/c_arch_reference.png": "7278cf36e568d045e84ff1c6c1106ca4cabea759411bed028cd92faa313279b9",
+    "art_src/fixtures/architecture/sources/c_door_reference.png": "0ffb41da56b559a7098c2a2e9ed7c0038cea17cd0ed5db611b988ad8cb52cefb",
+    "art_src/fixtures/architecture/sources/exit.png": "ba974ff37c5dcb7ce61c7e85476fda117571202816f5844cf033c0a22da42889",
+    "art_src/fixtures/architecture/sources/gate_sheet.png": "4fa3ee84c4a8dbd7f3eae5ffd646bb8c4ffb68fe7c7264e12077aa25f22a76df",
+    "art_src/fixtures/architecture/sources/lift_sheet.png": "87a9e0a092dd55fbe373ade0c562b9f376b31eb1eb2c5bf54b91ac50e1bbb1f1",
+    "art_src/fixtures/architecture/sources/painted_f1_base.png": "a21da69a48822d9445374180f4ed9afa21a752abe9eae78bde94dbf6e74f51c7",
+    "art_src/fixtures/architecture/sources/painted_f2_base.png": "f55986c528aa55ca8da5ab7b7725d7f8bf05d0d182cee5ba3eb8d59416acbcd2",
+    "art_src/fixtures/architecture/sources/stairs_down.png": "5d9a919538b7752a2b33935cb82353ce56fe86349a5c72b2915134cb3b3404f7",
+    "art_src/fixtures/architecture/sources/stairs_down_rejected_upward.png": "dcd7ed38f67eb8689bd4c20144890706daa937e78272b3cff780374b193151fd",
+    "art_src/fixtures/architecture/sources/stairs_up.png": "c38636d48d538a04a39a052280acc2dc6db2ed9023667803ec1438ef2eafcfab",
+    "art_src/fixtures/architecture/sources/stone_wall_original.png": "18e9e64516e59c5f3d6c265710d3d13250fecdd62138d4f659bcc4f75253b5c5"
+  },
+  "wall_size": [
+    64,
+    64
+  ],
+  "arch_outer": [
+    9,
+    5,
+    54,
+    80
+  ],
+  "aperture": [
+    18,
+    15,
+    45,
+    80
+  ],
+  "source_masonry": "Frozen C painted_v2 floor-one and darker floor-two faces",
+  "uv_anchor": [
+    0,
+    0
+  ],
+  "threshold_anchor": [
+    32,
+    62
+  ],
+  "shared_contract": "outer 2px ring matches frozen masonry; same painted arch across every state"
+}

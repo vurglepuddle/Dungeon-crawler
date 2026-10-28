@@ -300,3 +300,192 @@ runtime PNGs and 23 exact 4x contact sheets**, including both batches. It checks
 manifest hashes, dimensions, palette tables, binary alpha and every strip
 frame. The new Seal phases also have identical alpha at every depth and differ
 only in their coloured core. A repeated rebuild reproduces all derived files.
+
+## Architecture and the interaction glint
+
+The next pack supplies **130 architectural PNGs and 16 glint PNGs**. All are
+new files under `assets/art/fixtures/`; the earlier assets and C's wall faces
+remain untouched. B supplies art and placement notes here; replacing the old
+mid-cell fixtures in the renderer belongs to A. There was no Godot/game run
+for this asset-only batch.
+
+### Architecture review and matching C
+
+| Sheet | Path |
+| --- | --- |
+| All floor-one faces at 64/40/24 px | `art_src/fixtures/architecture_f1_contact_4x.png` |
+| All darker floor-two faces at 64/40/24 px | `art_src/fixtures/architecture_f2_contact_4x.png` |
+| Left/right projections and depth variants | `art_src/fixtures/architecture_sides_contact_4x.png` |
+| Gates over a checkerboard to show true apertures | `art_src/fixtures/architecture_gate_overlay_contact_4x.png` |
+| New arch beside the exact neighbouring masonry | `art_src/fixtures/architecture_seams_contact_4x.png` |
+| Gold and selected-target glints, both sizes | `art_src/fixtures/glint_contact_4x.png` |
+
+Each has a paired `_native.png`; the review PNG is exactly 4x nearest-neighbour.
+These are asset/projection reviews, not screenshots from the integrated game.
+
+C's painted repaint was available. This pack freezes its
+`assets/art/env/painted_f1_plain_0.png` and `painted_f2_plain_0.png`, plus its
+painted arch/door references, under `art_src/fixtures/architecture/sources/`.
+The floor-one material retains the owner's original dirty painted stone;
+floor two is C's darker damp repaint of those same stones. No fallback to
+the older clean three-shade masonry is used. The frozen source hashes are
+recorded so a future material change is explicit, not picked up mid-build.
+
+The centred arch follows C's footprint: outer rounded shape x9..54, crown y5;
+inner opening x18..45, apex y15; threshold above the bottom two wall rows.
+One painted, chipped arch is shared across every kind/state within a floor.
+Outside the inset opening, the seven canonical faces are pixel-identical.
+Their complete outer two-pixel border exactly matches the frozen C material.
+C's decorative arch/door faces can remain decoration/fallback; these new names
+are for functional architecture. Select the same `painted_fN_` wall family
+around them so the room continues to look like one aged dungeon.
+
+### Canonical wall faces
+
+Pattern: `assets/art/fixtures/architecture_f{1,2}_{kind}_64.png`.
+Every canonical face is **64x64, fully opaque, wall UV origin (0,0)**.
+Its threshold reference point is **(32,62)**. There is no feet anchor for
+placing this whole texture as a loose floor object.
+
+| Kind | Intended fixture/state and visible cue |
+| --- | --- |
+| `exit` | Iron-banded oak door fitted into its arch; thin ivory daylight under the sill |
+| `stairs_down` | Recessed below-floor well; a short diagonal flight drops into black, with visible tread tops |
+| `stairs_up` | Broad front-facing risers climb toward a faint light high in the recess |
+| `gate_closed` | Portcullis bars and braces lowered to the threshold |
+| `gate_open` | Bars raised into the lintel; teeth remain high, lower opening clear |
+| `lift_dead` | Dark cage platform flush with threshold, bowed slack chains, cold lamp and corner cobwebs |
+| `lift_working` | Same platform height; chains taut, cobwebs gone, warm alcove lamp lit |
+
+All seven kinds have both floor materials. Exit is currently meaningful on
+floor one, but the second material is available if a later layout needs it.
+Keep down and up as separate textures: the dark diagonal descent is deliberately
+different from the tall lit upward flight, even at the 24 px review size.
+The lift changes state once from the authoritative restoration flag; no extra
+flicker/platform travel frames are required or supplied in this pack.
+
+For state atlases, `architecture_fN_gate_strip_64.png` is **128x64**, closed
+then open, and `architecture_fN_lift_strip_64.png` is **128x64**, dead then
+working. Use per-frame UV origin (0,0). These are static state pairs, not loops.
+
+### Wall placement, side projections and gate transparency
+
+Use the canonical texture on the actual wall or architectural portal plane,
+through the wall renderer's normal UV/perspective sampling. Select a stable
+fixture face from the layout, keyed by floor/cell/wall normal. Keep that
+orientation when the Finder turns; it must not face the camera like a billboard.
+The existing fixture's reachable cell, actions and interaction range remain
+the simulation's contract. A can derive/store its backing wall orientation
+without moving its logical target into an unreachable solid wall cell.
+
+Remove the old corresponding floor sprite once the face is active. Merely
+loading the new PNG into the old floor-object rectangle would leave the door,
+stairs and lift standing in the middle of a cell. The face projection and
+interaction cue/hit area must agree, with at least an 18x18 logical touch target
+where the interaction is available. Keep architecture behind nearer actors and
+props and clipped to its wall/opening plane.
+
+Optional baked side variants are
+`architecture_fN_{kind}_{left,right}_d{1,2,3}.png`. They have transparent
+triangular corner margins and the whole architectural face already skewed:
+
+| Depth | Canvas | Left threshold anchor | Right threshold anchor |
+| --- | --- | --- | --- |
+| d1 | 32x64 | (16,58) | (15,58) |
+| d2 | 20x40 | (10,36) | (9,36) |
+| d3 | 12x24 | (6,21) | (5,21) |
+
+The anchors mark the middle of the sloping threshold, not the bottom of the
+canvas. The right version is a horizontal reflection. These fixed-angle
+variants are for a renderer drawing preprojected wall decorations, like the
+lever/cord path. If A samples the canonical 64x64 face through DDA columns or
+a projected wall quad, use that face directly at all depths and sides; do not
+apply perspective to an already-skewed version. The 40/24 px front previews on
+the contact sheets are nearest samples of the canonical texture, not additional
+runtime files that need loading.
+
+For a gate with a real corridor behind it, use
+`architecture_fN_gate_{closed,open}_overlay_64.png`. They share the same
+64x64 UV origin and contain a **genuinely transparent aperture** between/under
+the iron. Their side alternatives are
+`architecture_fN_gate_{closed,open}_overlay_{left,right}_dN.png`, with the same
+side sizes/anchors above. Draw the real room/corridor first, then the frame
+and iron. Do not substitute the opaque `gate_open_64` black recess over the
+view beyond, or add a fictitious solid wall/depth column across its opening.
+Closed-gate collision and target reach still come from the simulation, not
+from the gaps between painted bars. Opaque gate faces are useful as previews
+or deliberately dark recesses; overlays are the passage-facing choice.
+
+Floor-two paint is already darker and wetter. Apply normal distance light
+once; avoid another floor-specific dark-blue tint. The exit crack, upper stair
+light and working lift lamp deliberately retain warm highlights in that palette.
+
+### Three-frame sparkle
+
+Files: `assets/art/fixtures/glint_{gold,target}_{0,1,2}_{9,7}.png`.
+The gold family marks an ordinary interactable. The target family uses mint/
+teal and marks a valid target for the selected item; selection validity remains
+the existing interaction logic. Both are original crisp integer pixel drawings
+with binary alpha, no painted blur or opacity gradients.
+
+| Size | Intended use | Canvas-centre anchor |
+| --- | --- | --- |
+| 9x9 | Near/middle target, or projected object height >=32 logical px | (4,4) |
+| 7x7 | Smaller/far target | (3,3) |
+
+Use at native screen-pixel size with nearest filtering; do not shrink the 9 px
+frame fractionally to invent a far size. `glint_{gold,target}_strip_{9,7}.png`
+contains the same three frames horizontally, **27x9** or **21x7**. Every frame
+shares the anchor; place it at the existing projected object cue position.
+Replace the old static gold mark, retaining any separate selection corners
+that communicate a different state. Sparkle absence never disables an object
+or shrinks/moves its hit area, and glints should not cover enemy attack tells.
+
+Suggested burst: frame 0 for **70 ms**, frame 1 for **100 ms**, frame 2 for
+**90 ms**, then draw nothing for **1940 ms**. Total period **2200 ms**.
+The blank interval needs no fourth PNG. Stagger each object with a cached
+stable phase from floor + object ID, independent of gameplay RNG. A simple
+unmixed string checksum can put sequential IDs only one millisecond apart;
+use a mixed hash so the objects do not twinkle in unison. For example:
+
+```gdscript
+func glint_phase(signature: String) -> int:
+    var value: int = 2166136261
+    for index in range(signature.length()):
+        value = ((value ^ signature.unicode_at(index)) * 16777619) & 0xffffffff
+    value = ((value ^ (value >> 16)) * 0x45d9f3b) & 0xffffffff
+    value = ((value ^ (value >> 16)) * 0x45d9f3b) & 0xffffffff
+    return (value ^ (value >> 16)) % 2200
+
+# Cache phase per "%d:%s" % [floor_number, object_id].
+# Use the same phase when switching gold/target colour.
+var local_ms: int = (presentation_ms + phase_ms) % 2200
+var frame: int = 0 if local_ms < 70 else (1 if local_ms < 170 else (2 if local_ms < 260 else -1))
+# frame == -1: draw nothing; interaction remains available.
+```
+
+Use presentation time, not committed turns. Cache textures/phase values and
+queue a redraw while a visible cue changes frame; a 20-30 Hz presentation tick
+is adequate. Do not reload textures, allocate images or advance simulation RNG
+per frame. Hide the cue on menus/end screens just like the existing world cues.
+
+### Sources, rebuilding and checks
+
+Painted sources and C's frozen reference pixels are under
+`art_src/fixtures/architecture/sources/`; exact built-in imagegen requests are
+in `art_src/fixtures/architecture_prompts.json`. The targeted down-stair
+correction and retained rejected image are documented in that folder's README.
+`build_architecture.py` recreates all faces, side projections, transparent
+overlays, strips, manifests and review sheets. `build_glint.py` recreates the
+pixel sparkle. Both run offline without starting Godot, and the game has no
+Python or authoring-service dependency.
+
+The shared palette still has exactly 31 opaque inks plus transparent index 0.
+Current validation passes for **318 B runtime PNGs and 29 exact 4x contact
+sheets across all batches**: SHA-256, sizes, palette tables, binary alpha and
+strip pixels. The architecture builder additionally checks opaque canonical
+faces, the exact common arch outside the inset, and C-matching border pixels.
+Floor-one/two gate alpha is identical for the same state, so darker paint does
+not destroy the iron silhouette. Repeated rebuilds reproduce all derived files.
+Actual wall attachment, looking through an open gate, target occlusion and
+phone readability remain A/owner integration acceptance.
