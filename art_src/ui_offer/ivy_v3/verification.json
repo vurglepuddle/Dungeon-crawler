@@ -1,0 +1,14 @@
+{
+  "runtime_pngs": 42,
+  "verb_count": 29,
+  "fit_cases": 66,
+  "earlier_runtime_pngs_preserved": 207,
+  "owner_references_preserved": 2,
+  "protected": "camera, world, text, contents, target interiors, portrait/health, all compass headings/dial, map ink",
+  "torches_ms": [
+    420,
+    580
+  ],
+  "status": "Offline pixel/layout checks; no Godot run or phone acceptance.",
+  "identical_rebuild_files": 67
+}

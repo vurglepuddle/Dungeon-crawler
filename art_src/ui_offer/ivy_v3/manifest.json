@@ -1,0 +1,773 @@
+{
+  "palette": "art_src/spike/palette.gpl",
+  "colours_union": 23,
+  "files": [
+    {
+      "path": "art_src/ui_offer/ivy_v3/contact_sheet_4x.png",
+      "size": [
+        1504,
+        1288
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        1504,
+        1288
+      ],
+      "colours": 5,
+      "sha256": "67560ff36e34e0939374fe994d490459df3c60ff0da2a193e6f5d7b16909c3a6"
+    },
+    {
+      "path": "art_src/ui_offer/ivy_v3/contact_sheet_native.png",
+      "size": [
+        376,
+        322
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        376,
+        322
+      ],
+      "colours": 5,
+      "sha256": "af328cb3528d3017b4a38d173886a0245ac1dc90215f949d541cc1cb89d151f5"
+    },
+    {
+      "path": "art_src/ui_offer/ivy_v3/fit_sheet_4x.png",
+      "size": [
+        1304,
+        1328
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        1304,
+        1328
+      ],
+      "colours": 17,
+      "sha256": "c80ea0ea715a4cc173e505dad65c8940d03e4fd7133788b5b385124613c66663"
+    },
+    {
+      "path": "art_src/ui_offer/ivy_v3/fit_sheet_native.png",
+      "size": [
+        326,
+        332
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        326,
+        332
+      ],
+      "colours": 17,
+      "sha256": "1cd02e7e68ff6a7a537cabf13b80d4f700dda952dd53baba396d8b07ede3b7c1"
+    },
+    {
+      "path": "art_src/ui_offer/ivy_v3/ornament_sheet_4x.png",
+      "size": [
+        1976,
+        1556
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        1976,
+        1556
+      ],
+      "colours": 12,
+      "sha256": "4246a1b973ea5dbf2d93d6cae8b2cef07975fa3336436002828ce3046826f371"
+    },
+    {
+      "path": "art_src/ui_offer/ivy_v3/ornament_sheet_native.png",
+      "size": [
+        494,
+        389
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        494,
+        389
+      ],
+      "colours": 12,
+      "sha256": "fe7c9da3905fe9a6ae066d9163e72bad4c558b9a0fb2e698e72948188a2f1b68"
+    },
+    {
+      "path": "assets/art/ui_offer/ivy_compass_v3.png",
+      "size": [
+        66,
+        48
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        66,
+        48
+      ],
+      "colours": 7,
+      "sha256": "115ad97f4a5e6d768e79b06a0f0d0944cdb60b5ef91ba5341a69426fb1df5c46"
+    },
+    {
+      "path": "assets/art/ui_offer/ivy_game_border_v3.png",
+      "size": [
+        154,
+        342
+      ],
+      "opaque_bounds": [
+        0,
+        18,
+        154,
+        342
+      ],
+      "colours": 7,
+      "sha256": "9dc908f480534a9d8c498cb86bdadae2dd5949e7f5b1a8014bf760418c698df1"
+    },
+    {
+      "path": "assets/art/ui_offer/ivy_map_border_v3.png",
+      "size": [
+        144,
+        324
+      ],
+      "opaque_bounds": [
+        4,
+        3,
+        142,
+        321
+      ],
+      "colours": 5,
+      "sha256": "b3430a1b187669d65db7a97e28215dc040672438ef815281945a9cc7c2de44d7"
+    },
+    {
+      "path": "assets/art/ui_offer/ivy_torches_v3_0.png",
+      "size": [
+        154,
+        342
+      ],
+      "opaque_bounds": [
+        81,
+        300,
+        154,
+        312
+      ],
+      "colours": 6,
+      "sha256": "2fdba30f9dd76610b24fc250253baeee514ddd83399468d98334c2549c0c928f"
+    },
+    {
+      "path": "assets/art/ui_offer/ivy_torches_v3_1.png",
+      "size": [
+        154,
+        342
+      ],
+      "opaque_bounds": [
+        81,
+        301,
+        154,
+        312
+      ],
+      "colours": 6,
+      "sha256": "226571e7dcdc293fdc48e99a99b53c5d6155c9c1dd49a1d382b2b9a92a30c04f"
+    },
+    {
+      "path": "assets/art/ui_offer/sleepy_skull_v3.png",
+      "size": [
+        9,
+        7
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        9,
+        7
+      ],
+      "colours": 4,
+      "sha256": "006d6efc5e38113854919becf18f116e4f234086ce16b028504234f2645aadfc"
+    },
+    {
+      "path": "assets/art/ui_offer/verb_burn.png",
+      "size": [
+        12,
+        12
+      ],
+      "opaque_bounds": [
+        1,
+        0,
+        12,
+        12
+      ],
+      "colours": 4,
+      "sha256": "7d9fdebe6c95f01ee6cdc662b17c710c4e6ffa6a7128d7910b0029f44e6a1279"
+    },
+    {
+      "path": "assets/art/ui_offer/verb_cancel.png",
+      "size": [
+        12,
+        12
+      ],
+      "opaque_bounds": [
+        2,
+        1,
+        11,
+        11
+      ],
+      "colours": 4,
+      "sha256": "f620847b0559729895770481b317c0ed408974c5ec54a55f3c2ddc3315935903"
+    },
+    {
+      "path": "assets/art/ui_offer/verb_cancel_compact6.png",
+      "size": [
+        6,
+        12
+      ],
+      "opaque_bounds": [
+        0,
+        3,
+        6,
+        9
+      ],
+      "colours": 4,
+      "sha256": "80ee943d52949eb3e46dab972926f65e120b5f0dc67f2b6a478ebc1249bee6c1"
+    },
+    {
+      "path": "assets/art/ui_offer/verb_close.png",
+      "size": [
+        12,
+        12
+      ],
+      "opaque_bounds": [
+        1,
+        0,
+        11,
+        12
+      ],
+      "colours": 5,
+      "sha256": "1e6897f72037b0982cb745cfa57373c6773a0916026f1476ad61f34c9310dd21"
+    },
+    {
+      "path": "assets/art/ui_offer/verb_close_compact6.png",
+      "size": [
+        6,
+        12
+      ],
+      "opaque_bounds": [
+        0,
+        3,
+        6,
+        9
+      ],
+      "colours": 4,
+      "sha256": "80ee943d52949eb3e46dab972926f65e120b5f0dc67f2b6a478ebc1249bee6c1"
+    },
+    {
+      "path": "assets/art/ui_offer/verb_cut.png",
+      "size": [
+        12,
+        12
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        12,
+        12
+      ],
+      "colours": 6,
+      "sha256": "eee81216abb8256ae808f9e3a172c9907f8b9c543d2e352d59b8af1f5d50cc3d"
+    },
+    {
+      "path": "assets/art/ui_offer/verb_dispel.png",
+      "size": [
+        12,
+        12
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        12,
+        12
+      ],
+      "colours": 4,
+      "sha256": "929d753e0d5d4904e7da4427742a6d681318d51ba05df1b5627347c400e9e57b"
+    },
+    {
+      "path": "assets/art/ui_offer/verb_dispel_compact6.png",
+      "size": [
+        6,
+        12
+      ],
+      "opaque_bounds": [
+        0,
+        1,
+        6,
+        11
+      ],
+      "colours": 4,
+      "sha256": "50f1487fb9f2afc74f57d6bff4566237a7bf033afd07a39096442182e2abe52d"
+    },
+    {
+      "path": "assets/art/ui_offer/verb_down.png",
+      "size": [
+        12,
+        12
+      ],
+      "opaque_bounds": [
+        1,
+        1,
+        10,
+        11
+      ],
+      "colours": 5,
+      "sha256": "232214aa67b3e1c3c25ee40f452c5487861bf69b439a24741e3d9ee904818a9c"
+    },
+    {
+      "path": "assets/art/ui_offer/verb_drop.png",
+      "size": [
+        12,
+        12
+      ],
+      "opaque_bounds": [
+        1,
+        1,
+        11,
+        12
+      ],
+      "colours": 5,
+      "sha256": "0b2e67ea7907e2f4d364bb93c82498b0d425aa4c7f31b53d10d32c11c8d1f2ce"
+    },
+    {
+      "path": "assets/art/ui_offer/verb_eat.png",
+      "size": [
+        12,
+        12
+      ],
+      "opaque_bounds": [
+        0,
+        2,
+        12,
+        12
+      ],
+      "colours": 4,
+      "sha256": "befcead00bec413eedd5c7bf3a5a482ec39e5c4875b8e06a4efee04afafb83e4"
+    },
+    {
+      "path": "assets/art/ui_offer/verb_feed.png",
+      "size": [
+        12,
+        12
+      ],
+      "opaque_bounds": [
+        1,
+        1,
+        12,
+        12
+      ],
+      "colours": 4,
+      "sha256": "4c76f7ccf7be8b53ea03f55762b6ca7a514f98ac9f7053b2b98e7e5ea88fdbd6"
+    },
+    {
+      "path": "assets/art/ui_offer/verb_guard.png",
+      "size": [
+        12,
+        12
+      ],
+      "opaque_bounds": [
+        1,
+        0,
+        11,
+        12
+      ],
+      "colours": 5,
+      "sha256": "b5a5fc1c20d7208bd3340feb95ae07581d0fd829f25afffadfa8840d65425a29"
+    },
+    {
+      "path": "assets/art/ui_offer/verb_hit.png",
+      "size": [
+        12,
+        12
+      ],
+      "opaque_bounds": [
+        1,
+        1,
+        11,
+        12
+      ],
+      "colours": 5,
+      "sha256": "84ea018e139d2bb607fbbd3650eabfbd3741e4b0477b79de15e1bf072e3d2f3d"
+    },
+    {
+      "path": "assets/art/ui_offer/verb_latch.png",
+      "size": [
+        12,
+        12
+      ],
+      "opaque_bounds": [
+        1,
+        1,
+        11,
+        12
+      ],
+      "colours": 5,
+      "sha256": "0d66398e1a50e23fb126053ce96ece5e99bd63e1c0a5c194aa19f67bfcebd26e"
+    },
+    {
+      "path": "assets/art/ui_offer/verb_leave.png",
+      "size": [
+        12,
+        12
+      ],
+      "opaque_bounds": [
+        1,
+        0,
+        12,
+        12
+      ],
+      "colours": 4,
+      "sha256": "7e92dcf39934ae3ca5e008b6b5364f4b1b67082d3aafaa92c92709f900cea1e8"
+    },
+    {
+      "path": "assets/art/ui_offer/verb_light.png",
+      "size": [
+        12,
+        12
+      ],
+      "opaque_bounds": [
+        3,
+        0,
+        10,
+        12
+      ],
+      "colours": 5,
+      "sha256": "68d792ecc45532fd8b8193ebb73cc7869f751e4a10fabee71289e7b9dcf1e115"
+    },
+    {
+      "path": "assets/art/ui_offer/verb_pack.png",
+      "size": [
+        12,
+        12
+      ],
+      "opaque_bounds": [
+        2,
+        0,
+        11,
+        12
+      ],
+      "colours": 6,
+      "sha256": "690279bedc0a0c9832f7a7a697c9c486bf61f3a07ffd66d56f424e76a6049a43"
+    },
+    {
+      "path": "assets/art/ui_offer/verb_place.png",
+      "size": [
+        12,
+        12
+      ],
+      "opaque_bounds": [
+        1,
+        0,
+        11,
+        12
+      ],
+      "colours": 5,
+      "sha256": "b986c75404b6b4611b394db9cfce85940472280cdda393887fbb21e993e032ba"
+    },
+    {
+      "path": "assets/art/ui_offer/verb_pull.png",
+      "size": [
+        12,
+        12
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        12,
+        12
+      ],
+      "colours": 5,
+      "sha256": "404fb8668e36fb88e3e89554ccbe71c0e3e0390d3438a4d530873dbcba1812d2"
+    },
+    {
+      "path": "assets/art/ui_offer/verb_return.png",
+      "size": [
+        12,
+        12
+      ],
+      "opaque_bounds": [
+        1,
+        1,
+        12,
+        12
+      ],
+      "colours": 4,
+      "sha256": "e81a6e0f7b245c077caeea608bf249652583a3fefd222c5b7feebafcdb4ff081"
+    },
+    {
+      "path": "assets/art/ui_offer/verb_return_compact6.png",
+      "size": [
+        6,
+        12
+      ],
+      "opaque_bounds": [
+        0,
+        1,
+        6,
+        11
+      ],
+      "colours": 4,
+      "sha256": "2491ef65037f1cfc43c9e96dc55ee39e57c2dcb88ea42bafcfef9b9a7df0ed73"
+    },
+    {
+      "path": "assets/art/ui_offer/verb_reveal.png",
+      "size": [
+        12,
+        12
+      ],
+      "opaque_bounds": [
+        0,
+        2,
+        12,
+        11
+      ],
+      "colours": 5,
+      "sha256": "8accb4cc8e78716eea7a321450fc5a6acf6b90ae80f965409b1d4975b960b652"
+    },
+    {
+      "path": "assets/art/ui_offer/verb_reveal_compact6.png",
+      "size": [
+        6,
+        12
+      ],
+      "opaque_bounds": [
+        0,
+        2,
+        6,
+        10
+      ],
+      "colours": 4,
+      "sha256": "f6629ab1771800e147381e090e3ae82b27b95287de0db17ce802ff4e1e7fdabc"
+    },
+    {
+      "path": "assets/art/ui_offer/verb_ride.png",
+      "size": [
+        12,
+        12
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        11,
+        11
+      ],
+      "colours": 6,
+      "sha256": "a62f85f704dab3de9c2e762808589796aac671731d5662b53cfa933fe025997f"
+    },
+    {
+      "path": "assets/art/ui_offer/verb_ring.png",
+      "size": [
+        12,
+        12
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        12,
+        12
+      ],
+      "colours": 5,
+      "sha256": "7a496a8871fca6f6962e4a3147768fbac7b0717db5bc6222c68578abe6aaa71a"
+    },
+    {
+      "path": "assets/art/ui_offer/verb_sidle.png",
+      "size": [
+        12,
+        12
+      ],
+      "opaque_bounds": [
+        1,
+        0,
+        10,
+        12
+      ],
+      "colours": 6,
+      "sha256": "4e291a14bbdee128b4183c7f89b493714df9e8730a980b7340924a8de140d74d"
+    },
+    {
+      "path": "assets/art/ui_offer/verb_take.png",
+      "size": [
+        12,
+        12
+      ],
+      "opaque_bounds": [
+        1,
+        1,
+        12,
+        12
+      ],
+      "colours": 5,
+      "sha256": "ae9ad6df88db7d4c2f0a1157443821a5f551bc402d7f97f13d01a0d686ce48bc"
+    },
+    {
+      "path": "assets/art/ui_offer/verb_toss.png",
+      "size": [
+        12,
+        12
+      ],
+      "opaque_bounds": [
+        0,
+        2,
+        12,
+        12
+      ],
+      "colours": 5,
+      "sha256": "191771957ef410f1aa92eafd9a6ed91d66b0ccf3117d35d968880c8859efc665"
+    },
+    {
+      "path": "assets/art/ui_offer/verb_unlock.png",
+      "size": [
+        12,
+        12
+      ],
+      "opaque_bounds": [
+        1,
+        0,
+        11,
+        12
+      ],
+      "colours": 5,
+      "sha256": "6e34aaa40157d99dca7c713bf9e6b09a2e7b56bf9ba8765bfa04ea7622a8667a"
+    },
+    {
+      "path": "assets/art/ui_offer/verb_unlock_compact6.png",
+      "size": [
+        6,
+        12
+      ],
+      "opaque_bounds": [
+        0,
+        1,
+        6,
+        11
+      ],
+      "colours": 5,
+      "sha256": "836ef39554ecc4fbf22ac4683d19e2006254dab1422c456dae523291e2d3d49c"
+    },
+    {
+      "path": "assets/art/ui_offer/verb_up.png",
+      "size": [
+        12,
+        12
+      ],
+      "opaque_bounds": [
+        1,
+        2,
+        10,
+        11
+      ],
+      "colours": 5,
+      "sha256": "35bddb314534b4b36a6a3e30addf9937b0e8f05d311eb41a22c85e1c2d2488e3"
+    },
+    {
+      "path": "assets/art/ui_offer/verb_wait.png",
+      "size": [
+        12,
+        12
+      ],
+      "opaque_bounds": [
+        1,
+        0,
+        11,
+        12
+      ],
+      "colours": 5,
+      "sha256": "01d8b9b0127e3cb7047a26c45cf3e29333182c674ace916b36f35cae04a1f345"
+    },
+    {
+      "path": "assets/art/ui_offer/verb_wear.png",
+      "size": [
+        12,
+        12
+      ],
+      "opaque_bounds": [
+        0,
+        1,
+        12,
+        12
+      ],
+      "colours": 5,
+      "sha256": "27528c7c628d6ae0067ba6519571608bb811021a99f0fdbcc9612a01d298ceef"
+    },
+    {
+      "path": "assets/art/ui_offer/verb_wield.png",
+      "size": [
+        12,
+        12
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        12,
+        12
+      ],
+      "colours": 6,
+      "sha256": "30e0b3ab8228d6021e04afa386c982ae0fc70456ba9ad6aae6d7870f4555d56a"
+    },
+    {
+      "path": "assets/art/ui_offer/verb_wield_compact8.png",
+      "size": [
+        8,
+        12
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        8,
+        12
+      ],
+      "colours": 6,
+      "sha256": "8edba076db8740c095793612b23edffa2ba021126c2e105f829ecf57adfccb48"
+    }
+  ],
+  "sources": [
+    {
+      "path": "art_src/ui_offer/ivy_v3/sources/m3e_entry.png",
+      "sha256": "769c5fc4c5606fa2a900b403e3873413b1a94410f70567046ba3501336b681e5"
+    },
+    {
+      "path": "art_src/ui_offer/ivy_v3/sources/torn_map.png",
+      "sha256": "051568bb3b29ad2401f0df60820467222c067690c09488ce89782f785e50aee0"
+    }
+  ],
+  "runtime_count": 42,
+  "layout": "layout.json",
+  "method": "native pixel/code drawings, no antialiasing or resampling",
+  "preview_files": [
+    {
+      "path": "art_src/ui_offer/ivy_v3/mockup_game_4x.png",
+      "sha256": "daff881668921af9e38b1e140263c330f146591d43c411b3ad47cdf04f74141e"
+    },
+    {
+      "path": "art_src/ui_offer/ivy_v3/mockup_game_native.png",
+      "sha256": "3ba3c766384ea100e1bb79acdbbfa669d25feec08a1338c1fdb4b32f7616d953"
+    },
+    {
+      "path": "art_src/ui_offer/ivy_v3/mockup_long_verbs_4x.png",
+      "sha256": "d5ebfa8d93132af1dab0e8096428f666dca329387dfabcc4b035dbaaa7ddf873"
+    },
+    {
+      "path": "art_src/ui_offer/ivy_v3/mockup_long_verbs_native.png",
+      "sha256": "bd47473687e960d0846a842064265940095998cb4f520252a8a009a84345a58b"
+    },
+    {
+      "path": "art_src/ui_offer/ivy_v3/mockup_map_4x.png",
+      "sha256": "094213686ca40c73a0448d0c0dc4b11d8873e5a6c0b1e0a059924e50e7781e16"
+    },
+    {
+      "path": "art_src/ui_offer/ivy_v3/mockup_map_native.png",
+      "sha256": "96061ec85f55f7a886f1e76b3bc1fa289b29ae7853287f75e899bcc1b8dbb3ba"
+    },
+    {
+      "path": "art_src/ui_offer/ivy_v3/mockup_screen_4x.png",
+      "sha256": "aa2caa4f3b54d75e6eda7d9f8e56fe1273119e389a81ece373349108d6b09568"
+    },
+    {
+      "path": "art_src/ui_offer/ivy_v3/mockup_screen_native.png",
+      "sha256": "75b0db574ec710ca025484c85d1568716e7b2dcb7a6dc86b81c01d01f0171507"
+    }
+  ]
+}

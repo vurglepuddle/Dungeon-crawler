@@ -1,0 +1,14 @@
+{
+  "method": "Original native pixel drawings, code-only: no generative prompt or model used for this exact-mask batch.",
+  "references": [
+    "art_src/ui_offer/vine_on_main_view.png",
+    "art_src/ui_offer/icons_on_buttons.png"
+  ],
+  "brief": "Thin dead-ivy coils on bronze rims, quiet clear stretches, sparse paired leaves. Rounded sleepy skull. No crest across the camera. Tiny gap-mounted torches. Ivory/bronze verb pictograms with a one-pixel dark outline.",
+  "preserve": "Owner reference bytes, all preceding runtime PNGs, VETKA at 16px, original hit rects and full verb words.",
+  "canonical_icons": "12x12; seven separately drawn narrow siblings handle measured long-label/card fits.",
+  "scripts": [
+    "build_ivy.py",
+    "verify_ivy.py"
+  ]
+}

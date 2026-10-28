@@ -1,0 +1,2128 @@
+{
+  "schema_version": 1,
+  "viewport": [
+    154,
+    342
+  ],
+  "coordinate_rule": "integer x,y,width,height; rect right/bottom exclusive",
+  "accent": "dead ivy: 11 shadow, 13/14 leaf, sparse 15 highlights; ivory skull; bronze torch",
+  "camera_clear_rect": [
+    53,
+    0,
+    44,
+    18
+  ],
+  "world_clear_rect": [
+    3,
+    21,
+    148,
+    150
+  ],
+  "game_allowed_bands": [
+    [
+      0,
+      18,
+      154,
+      3
+    ],
+    [
+      0,
+      21,
+      3,
+      150
+    ],
+    [
+      151,
+      21,
+      3,
+      150
+    ],
+    [
+      0,
+      171,
+      154,
+      3
+    ],
+    [
+      0,
+      174,
+      3,
+      34
+    ],
+    [
+      151,
+      174,
+      3,
+      34
+    ],
+    [
+      0,
+      207,
+      154,
+      3
+    ],
+    [
+      0,
+      211,
+      2,
+      34
+    ],
+    [
+      151,
+      211,
+      3,
+      34
+    ],
+    [
+      37,
+      210,
+      3,
+      34
+    ],
+    [
+      0,
+      244,
+      154,
+      3
+    ],
+    [
+      0,
+      267,
+      154,
+      2
+    ],
+    [
+      0,
+      292,
+      3,
+      47
+    ],
+    [
+      80,
+      292,
+      5,
+      50
+    ],
+    [
+      0,
+      339,
+      85,
+      3
+    ]
+  ],
+  "housing_rim_px": 3,
+  "assets": {
+    "ivy_game_border_v3": {
+      "rect": [
+        0,
+        0,
+        154,
+        342
+      ],
+      "visible": "normal game only; hide for map/cards/modals"
+    },
+    "ivy_compass_v3": {
+      "rect": [
+        85,
+        294,
+        66,
+        48
+      ],
+      "hit_rect_unchanged": [
+        85,
+        294,
+        66,
+        44
+      ],
+      "skull_rect": [
+        114,
+        335,
+        9,
+        7
+      ]
+    },
+    "ivy_map_border_v3": {
+      "rect": [
+        5,
+        16,
+        144,
+        324
+      ],
+      "paper": "map_parchment_torn_v2.png",
+      "content_safe_local": [
+        8,
+        12,
+        128,
+        300
+      ]
+    },
+    "ivy_torches_v3_0": {
+      "rect": [
+        0,
+        0,
+        154,
+        342
+      ],
+      "sequence": [
+        "ivy_torches_v3_0",
+        "ivy_torches_v3_1"
+      ],
+      "frame_ms": [
+        420,
+        580
+      ]
+    },
+    "ivy_torches_v3_1": {
+      "rect": [
+        0,
+        0,
+        154,
+        342
+      ]
+    },
+    "sleepy_skull_v3": {
+      "size": [
+        9,
+        7
+      ],
+      "anchor": [
+        4,
+        7
+      ],
+      "included_in": "ivy_compass_v3"
+    }
+  },
+  "nine_slice_ltrb": [
+    0,
+    0,
+    0,
+    0
+  ],
+  "resize": false,
+  "filter": "nearest",
+  "mouse_filter": "IGNORE",
+  "draw_order": "over current frame/housing, below glyphs, items, needle and dial marks; same normal state visibility as controls",
+  "buttons": [
+    {
+      "verb": "TAKE",
+      "button_size": [
+        48,
+        22
+      ],
+      "font": "VETKA 16",
+      "icon_path": "assets/art/ui_offer/verb_take.png",
+      "icon_size": [
+        12,
+        12
+      ],
+      "icon_origin": [
+        5,
+        5
+      ],
+      "text_origin_pillow": [
+        19,
+        5
+      ],
+      "text_origin_godot_top": [
+        19,
+        5
+      ],
+      "text_width": 24,
+      "group_width": 38,
+      "gap_px": 2,
+      "minimum_side_padding": 5
+    },
+    {
+      "verb": "GUARD",
+      "button_size": [
+        48,
+        22
+      ],
+      "font": "VETKA 16",
+      "icon_path": "assets/art/ui_offer/verb_guard.png",
+      "icon_size": [
+        12,
+        12
+      ],
+      "icon_origin": [
+        2,
+        5
+      ],
+      "text_origin_pillow": [
+        16,
+        5
+      ],
+      "text_origin_godot_top": [
+        16,
+        5
+      ],
+      "text_width": 30,
+      "group_width": 44,
+      "gap_px": 2,
+      "minimum_side_padding": 2
+    },
+    {
+      "verb": "WAIT",
+      "button_size": [
+        48,
+        22
+      ],
+      "font": "VETKA 16",
+      "icon_path": "assets/art/ui_offer/verb_wait.png",
+      "icon_size": [
+        12,
+        12
+      ],
+      "icon_origin": [
+        6,
+        5
+      ],
+      "text_origin_pillow": [
+        20,
+        5
+      ],
+      "text_origin_godot_top": [
+        20,
+        5
+      ],
+      "text_width": 22,
+      "group_width": 36,
+      "gap_px": 2,
+      "minimum_side_padding": 6
+    },
+    {
+      "verb": "HIT",
+      "button_size": [
+        48,
+        22
+      ],
+      "font": "VETKA 16",
+      "icon_path": "assets/art/ui_offer/verb_hit.png",
+      "icon_size": [
+        12,
+        12
+      ],
+      "icon_origin": [
+        9,
+        5
+      ],
+      "text_origin_pillow": [
+        23,
+        5
+      ],
+      "text_origin_godot_top": [
+        23,
+        5
+      ],
+      "text_width": 16,
+      "group_width": 30,
+      "gap_px": 2,
+      "minimum_side_padding": 9
+    },
+    {
+      "verb": "DROP",
+      "button_size": [
+        48,
+        22
+      ],
+      "font": "VETKA 16",
+      "icon_path": "assets/art/ui_offer/verb_drop.png",
+      "icon_size": [
+        12,
+        12
+      ],
+      "icon_origin": [
+        5,
+        5
+      ],
+      "text_origin_pillow": [
+        19,
+        5
+      ],
+      "text_origin_godot_top": [
+        19,
+        5
+      ],
+      "text_width": 24,
+      "group_width": 38,
+      "gap_px": 2,
+      "minimum_side_padding": 5
+    },
+    {
+      "verb": "PLACE",
+      "button_size": [
+        48,
+        22
+      ],
+      "font": "VETKA 16",
+      "icon_path": "assets/art/ui_offer/verb_place.png",
+      "icon_size": [
+        12,
+        12
+      ],
+      "icon_origin": [
+        2,
+        5
+      ],
+      "text_origin_pillow": [
+        16,
+        5
+      ],
+      "text_origin_godot_top": [
+        16,
+        5
+      ],
+      "text_width": 30,
+      "group_width": 44,
+      "gap_px": 2,
+      "minimum_side_padding": 2
+    },
+    {
+      "verb": "WIELD",
+      "button_size": [
+        48,
+        22
+      ],
+      "font": "VETKA 16",
+      "icon_path": "assets/art/ui_offer/verb_wield.png",
+      "icon_size": [
+        12,
+        12
+      ],
+      "icon_origin": [
+        3,
+        5
+      ],
+      "text_origin_pillow": [
+        17,
+        5
+      ],
+      "text_origin_godot_top": [
+        17,
+        5
+      ],
+      "text_width": 28,
+      "group_width": 42,
+      "gap_px": 2,
+      "minimum_side_padding": 3
+    },
+    {
+      "verb": "WEAR",
+      "button_size": [
+        48,
+        22
+      ],
+      "font": "VETKA 16",
+      "icon_path": "assets/art/ui_offer/verb_wear.png",
+      "icon_size": [
+        12,
+        12
+      ],
+      "icon_origin": [
+        5,
+        5
+      ],
+      "text_origin_pillow": [
+        19,
+        5
+      ],
+      "text_origin_godot_top": [
+        19,
+        5
+      ],
+      "text_width": 24,
+      "group_width": 38,
+      "gap_px": 2,
+      "minimum_side_padding": 5
+    },
+    {
+      "verb": "EAT",
+      "button_size": [
+        48,
+        22
+      ],
+      "font": "VETKA 16",
+      "icon_path": "assets/art/ui_offer/verb_eat.png",
+      "icon_size": [
+        12,
+        12
+      ],
+      "icon_origin": [
+        8,
+        5
+      ],
+      "text_origin_pillow": [
+        22,
+        5
+      ],
+      "text_origin_godot_top": [
+        22,
+        5
+      ],
+      "text_width": 18,
+      "group_width": 32,
+      "gap_px": 2,
+      "minimum_side_padding": 8
+    },
+    {
+      "verb": "RETURN",
+      "button_size": [
+        48,
+        22
+      ],
+      "font": "VETKA 16",
+      "icon_path": "assets/art/ui_offer/verb_return_compact6.png",
+      "icon_size": [
+        6,
+        12
+      ],
+      "icon_origin": [
+        2,
+        5
+      ],
+      "text_origin_pillow": [
+        10,
+        5
+      ],
+      "text_origin_godot_top": [
+        10,
+        5
+      ],
+      "text_width": 36,
+      "group_width": 44,
+      "gap_px": 2,
+      "minimum_side_padding": 2
+    },
+    {
+      "verb": "RING",
+      "button_size": [
+        48,
+        22
+      ],
+      "font": "VETKA 16",
+      "icon_path": "assets/art/ui_offer/verb_ring.png",
+      "icon_size": [
+        12,
+        12
+      ],
+      "icon_origin": [
+        6,
+        5
+      ],
+      "text_origin_pillow": [
+        20,
+        5
+      ],
+      "text_origin_godot_top": [
+        20,
+        5
+      ],
+      "text_width": 22,
+      "group_width": 36,
+      "gap_px": 2,
+      "minimum_side_padding": 6
+    },
+    {
+      "verb": "DOWN",
+      "button_size": [
+        48,
+        22
+      ],
+      "font": "VETKA 16",
+      "icon_path": "assets/art/ui_offer/verb_down.png",
+      "icon_size": [
+        12,
+        12
+      ],
+      "icon_origin": [
+        5,
+        5
+      ],
+      "text_origin_pillow": [
+        19,
+        5
+      ],
+      "text_origin_godot_top": [
+        19,
+        5
+      ],
+      "text_width": 24,
+      "group_width": 38,
+      "gap_px": 2,
+      "minimum_side_padding": 5
+    },
+    {
+      "verb": "UP",
+      "button_size": [
+        48,
+        22
+      ],
+      "font": "VETKA 16",
+      "icon_path": "assets/art/ui_offer/verb_up.png",
+      "icon_size": [
+        12,
+        12
+      ],
+      "icon_origin": [
+        11,
+        5
+      ],
+      "text_origin_pillow": [
+        25,
+        5
+      ],
+      "text_origin_godot_top": [
+        25,
+        5
+      ],
+      "text_width": 12,
+      "group_width": 26,
+      "gap_px": 2,
+      "minimum_side_padding": 11
+    },
+    {
+      "verb": "RIDE",
+      "button_size": [
+        48,
+        22
+      ],
+      "font": "VETKA 16",
+      "icon_path": "assets/art/ui_offer/verb_ride.png",
+      "icon_size": [
+        12,
+        12
+      ],
+      "icon_origin": [
+        6,
+        5
+      ],
+      "text_origin_pillow": [
+        20,
+        5
+      ],
+      "text_origin_godot_top": [
+        20,
+        5
+      ],
+      "text_width": 22,
+      "group_width": 36,
+      "gap_px": 2,
+      "minimum_side_padding": 6
+    },
+    {
+      "verb": "LEAVE",
+      "button_size": [
+        48,
+        22
+      ],
+      "font": "VETKA 16",
+      "icon_path": "assets/art/ui_offer/verb_leave.png",
+      "icon_size": [
+        12,
+        12
+      ],
+      "icon_origin": [
+        2,
+        5
+      ],
+      "text_origin_pillow": [
+        16,
+        5
+      ],
+      "text_origin_godot_top": [
+        16,
+        5
+      ],
+      "text_width": 30,
+      "group_width": 44,
+      "gap_px": 2,
+      "minimum_side_padding": 2
+    },
+    {
+      "verb": "PULL",
+      "button_size": [
+        48,
+        22
+      ],
+      "font": "VETKA 16",
+      "icon_path": "assets/art/ui_offer/verb_pull.png",
+      "icon_size": [
+        12,
+        12
+      ],
+      "icon_origin": [
+        5,
+        5
+      ],
+      "text_origin_pillow": [
+        19,
+        5
+      ],
+      "text_origin_godot_top": [
+        19,
+        5
+      ],
+      "text_width": 24,
+      "group_width": 38,
+      "gap_px": 2,
+      "minimum_side_padding": 5
+    },
+    {
+      "verb": "BURN",
+      "button_size": [
+        48,
+        22
+      ],
+      "font": "VETKA 16",
+      "icon_path": "assets/art/ui_offer/verb_burn.png",
+      "icon_size": [
+        12,
+        12
+      ],
+      "icon_origin": [
+        5,
+        5
+      ],
+      "text_origin_pillow": [
+        19,
+        5
+      ],
+      "text_origin_godot_top": [
+        19,
+        5
+      ],
+      "text_width": 24,
+      "group_width": 38,
+      "gap_px": 2,
+      "minimum_side_padding": 5
+    },
+    {
+      "verb": "CUT",
+      "button_size": [
+        48,
+        22
+      ],
+      "font": "VETKA 16",
+      "icon_path": "assets/art/ui_offer/verb_cut.png",
+      "icon_size": [
+        12,
+        12
+      ],
+      "icon_origin": [
+        8,
+        5
+      ],
+      "text_origin_pillow": [
+        22,
+        5
+      ],
+      "text_origin_godot_top": [
+        22,
+        5
+      ],
+      "text_width": 18,
+      "group_width": 32,
+      "gap_px": 2,
+      "minimum_side_padding": 8
+    },
+    {
+      "verb": "FEED",
+      "button_size": [
+        48,
+        22
+      ],
+      "font": "VETKA 16",
+      "icon_path": "assets/art/ui_offer/verb_feed.png",
+      "icon_size": [
+        12,
+        12
+      ],
+      "icon_origin": [
+        5,
+        5
+      ],
+      "text_origin_pillow": [
+        19,
+        5
+      ],
+      "text_origin_godot_top": [
+        19,
+        5
+      ],
+      "text_width": 24,
+      "group_width": 38,
+      "gap_px": 2,
+      "minimum_side_padding": 5
+    },
+    {
+      "verb": "TOSS",
+      "button_size": [
+        48,
+        22
+      ],
+      "font": "VETKA 16",
+      "icon_path": "assets/art/ui_offer/verb_toss.png",
+      "icon_size": [
+        12,
+        12
+      ],
+      "icon_origin": [
+        5,
+        5
+      ],
+      "text_origin_pillow": [
+        19,
+        5
+      ],
+      "text_origin_godot_top": [
+        19,
+        5
+      ],
+      "text_width": 24,
+      "group_width": 38,
+      "gap_px": 2,
+      "minimum_side_padding": 5
+    },
+    {
+      "verb": "LIGHT",
+      "button_size": [
+        48,
+        22
+      ],
+      "font": "VETKA 16",
+      "icon_path": "assets/art/ui_offer/verb_light.png",
+      "icon_size": [
+        12,
+        12
+      ],
+      "icon_origin": [
+        3,
+        5
+      ],
+      "text_origin_pillow": [
+        17,
+        5
+      ],
+      "text_origin_godot_top": [
+        17,
+        5
+      ],
+      "text_width": 28,
+      "group_width": 42,
+      "gap_px": 2,
+      "minimum_side_padding": 3
+    },
+    {
+      "verb": "CANCEL",
+      "button_size": [
+        48,
+        22
+      ],
+      "font": "VETKA 16",
+      "icon_path": "assets/art/ui_offer/verb_cancel_compact6.png",
+      "icon_size": [
+        6,
+        12
+      ],
+      "icon_origin": [
+        2,
+        5
+      ],
+      "text_origin_pillow": [
+        10,
+        5
+      ],
+      "text_origin_godot_top": [
+        10,
+        5
+      ],
+      "text_width": 36,
+      "group_width": 44,
+      "gap_px": 2,
+      "minimum_side_padding": 2
+    },
+    {
+      "verb": "PACK",
+      "button_size": [
+        48,
+        22
+      ],
+      "font": "VETKA 16",
+      "icon_path": "assets/art/ui_offer/verb_pack.png",
+      "icon_size": [
+        12,
+        12
+      ],
+      "icon_origin": [
+        5,
+        5
+      ],
+      "text_origin_pillow": [
+        19,
+        5
+      ],
+      "text_origin_godot_top": [
+        19,
+        5
+      ],
+      "text_width": 24,
+      "group_width": 38,
+      "gap_px": 2,
+      "minimum_side_padding": 5
+    },
+    {
+      "verb": "CLOSE",
+      "button_size": [
+        48,
+        22
+      ],
+      "font": "VETKA 16",
+      "icon_path": "assets/art/ui_offer/verb_close.png",
+      "icon_size": [
+        12,
+        12
+      ],
+      "icon_origin": [
+        2,
+        5
+      ],
+      "text_origin_pillow": [
+        16,
+        5
+      ],
+      "text_origin_godot_top": [
+        16,
+        5
+      ],
+      "text_width": 30,
+      "group_width": 44,
+      "gap_px": 2,
+      "minimum_side_padding": 2
+    },
+    {
+      "verb": "UNLOCK",
+      "button_size": [
+        48,
+        22
+      ],
+      "font": "VETKA 16",
+      "icon_path": "assets/art/ui_offer/verb_unlock_compact6.png",
+      "icon_size": [
+        6,
+        12
+      ],
+      "icon_origin": [
+        2,
+        5
+      ],
+      "text_origin_pillow": [
+        10,
+        5
+      ],
+      "text_origin_godot_top": [
+        10,
+        5
+      ],
+      "text_width": 36,
+      "group_width": 44,
+      "gap_px": 2,
+      "minimum_side_padding": 2
+    },
+    {
+      "verb": "LATCH",
+      "button_size": [
+        48,
+        22
+      ],
+      "font": "VETKA 16",
+      "icon_path": "assets/art/ui_offer/verb_latch.png",
+      "icon_size": [
+        12,
+        12
+      ],
+      "icon_origin": [
+        2,
+        5
+      ],
+      "text_origin_pillow": [
+        16,
+        5
+      ],
+      "text_origin_godot_top": [
+        16,
+        5
+      ],
+      "text_width": 30,
+      "group_width": 44,
+      "gap_px": 2,
+      "minimum_side_padding": 2
+    },
+    {
+      "verb": "SIDLE",
+      "button_size": [
+        48,
+        22
+      ],
+      "font": "VETKA 16",
+      "icon_path": "assets/art/ui_offer/verb_sidle.png",
+      "icon_size": [
+        12,
+        12
+      ],
+      "icon_origin": [
+        3,
+        5
+      ],
+      "text_origin_pillow": [
+        17,
+        5
+      ],
+      "text_origin_godot_top": [
+        17,
+        5
+      ],
+      "text_width": 28,
+      "group_width": 42,
+      "gap_px": 2,
+      "minimum_side_padding": 3
+    },
+    {
+      "verb": "REVEAL",
+      "button_size": [
+        48,
+        22
+      ],
+      "font": "VETKA 16",
+      "icon_path": "assets/art/ui_offer/verb_reveal_compact6.png",
+      "icon_size": [
+        6,
+        12
+      ],
+      "icon_origin": [
+        2,
+        5
+      ],
+      "text_origin_pillow": [
+        10,
+        5
+      ],
+      "text_origin_godot_top": [
+        10,
+        5
+      ],
+      "text_width": 36,
+      "group_width": 44,
+      "gap_px": 2,
+      "minimum_side_padding": 2
+    },
+    {
+      "verb": "DISPEL",
+      "button_size": [
+        48,
+        22
+      ],
+      "font": "VETKA 16",
+      "icon_path": "assets/art/ui_offer/verb_dispel_compact6.png",
+      "icon_size": [
+        6,
+        12
+      ],
+      "icon_origin": [
+        3,
+        5
+      ],
+      "text_origin_pillow": [
+        11,
+        5
+      ],
+      "text_origin_godot_top": [
+        11,
+        5
+      ],
+      "text_width": 34,
+      "group_width": 42,
+      "gap_px": 2,
+      "minimum_side_padding": 3
+    }
+  ],
+  "item_card_buttons_42x20": [
+    {
+      "verb": "WIELD",
+      "button_size": [
+        42,
+        20
+      ],
+      "font": "VETKA 16",
+      "icon_path": "assets/art/ui_offer/verb_wield_compact8.png",
+      "icon_size": [
+        8,
+        12
+      ],
+      "icon_origin": [
+        2,
+        4
+      ],
+      "text_origin_pillow": [
+        12,
+        4
+      ],
+      "text_origin_godot_top": [
+        12,
+        4
+      ],
+      "text_width": 28,
+      "group_width": 38,
+      "gap_px": 2,
+      "minimum_side_padding": 2
+    },
+    {
+      "verb": "WEAR",
+      "button_size": [
+        42,
+        20
+      ],
+      "font": "VETKA 16",
+      "icon_path": "assets/art/ui_offer/verb_wear.png",
+      "icon_size": [
+        12,
+        12
+      ],
+      "icon_origin": [
+        2,
+        4
+      ],
+      "text_origin_pillow": [
+        16,
+        4
+      ],
+      "text_origin_godot_top": [
+        16,
+        4
+      ],
+      "text_width": 24,
+      "group_width": 38,
+      "gap_px": 2,
+      "minimum_side_padding": 2
+    },
+    {
+      "verb": "EAT",
+      "button_size": [
+        42,
+        20
+      ],
+      "font": "VETKA 16",
+      "icon_path": "assets/art/ui_offer/verb_eat.png",
+      "icon_size": [
+        12,
+        12
+      ],
+      "icon_origin": [
+        5,
+        4
+      ],
+      "text_origin_pillow": [
+        19,
+        4
+      ],
+      "text_origin_godot_top": [
+        19,
+        4
+      ],
+      "text_width": 18,
+      "group_width": 32,
+      "gap_px": 2,
+      "minimum_side_padding": 5
+    },
+    {
+      "verb": "DROP",
+      "button_size": [
+        42,
+        20
+      ],
+      "font": "VETKA 16",
+      "icon_path": "assets/art/ui_offer/verb_drop.png",
+      "icon_size": [
+        12,
+        12
+      ],
+      "icon_origin": [
+        2,
+        4
+      ],
+      "text_origin_pillow": [
+        16,
+        4
+      ],
+      "text_origin_godot_top": [
+        16,
+        4
+      ],
+      "text_width": 24,
+      "group_width": 38,
+      "gap_px": 2,
+      "minimum_side_padding": 2
+    },
+    {
+      "verb": "CLOSE",
+      "button_size": [
+        42,
+        20
+      ],
+      "font": "VETKA 16",
+      "icon_path": "assets/art/ui_offer/verb_close_compact6.png",
+      "icon_size": [
+        6,
+        12
+      ],
+      "icon_origin": [
+        2,
+        4
+      ],
+      "text_origin_pillow": [
+        10,
+        4
+      ],
+      "text_origin_godot_top": [
+        10,
+        4
+      ],
+      "text_width": 30,
+      "group_width": 38,
+      "gap_px": 2,
+      "minimum_side_padding": 2
+    },
+    {
+      "verb": "PACK",
+      "button_size": [
+        42,
+        20
+      ],
+      "font": "VETKA 16",
+      "icon_path": "assets/art/ui_offer/verb_pack.png",
+      "icon_size": [
+        12,
+        12
+      ],
+      "icon_origin": [
+        2,
+        4
+      ],
+      "text_origin_pillow": [
+        16,
+        4
+      ],
+      "text_origin_godot_top": [
+        16,
+        4
+      ],
+      "text_width": 24,
+      "group_width": 38,
+      "gap_px": 2,
+      "minimum_side_padding": 2
+    },
+    {
+      "verb": "RING",
+      "button_size": [
+        42,
+        20
+      ],
+      "font": "VETKA 16",
+      "icon_path": "assets/art/ui_offer/verb_ring.png",
+      "icon_size": [
+        12,
+        12
+      ],
+      "icon_origin": [
+        3,
+        4
+      ],
+      "text_origin_pillow": [
+        17,
+        4
+      ],
+      "text_origin_godot_top": [
+        17,
+        4
+      ],
+      "text_width": 22,
+      "group_width": 36,
+      "gap_px": 2,
+      "minimum_side_padding": 3
+    },
+    {
+      "verb": "TOSS",
+      "button_size": [
+        42,
+        20
+      ],
+      "font": "VETKA 16",
+      "icon_path": "assets/art/ui_offer/verb_toss.png",
+      "icon_size": [
+        12,
+        12
+      ],
+      "icon_origin": [
+        2,
+        4
+      ],
+      "text_origin_pillow": [
+        16,
+        4
+      ],
+      "text_origin_godot_top": [
+        16,
+        4
+      ],
+      "text_width": 24,
+      "group_width": 38,
+      "gap_px": 2,
+      "minimum_side_padding": 2
+    }
+  ],
+  "button_24px_height": [
+    {
+      "verb": "TAKE",
+      "button_size": [
+        48,
+        24
+      ],
+      "font": "VETKA 16",
+      "icon_path": "assets/art/ui_offer/verb_take.png",
+      "icon_size": [
+        12,
+        12
+      ],
+      "icon_origin": [
+        5,
+        6
+      ],
+      "text_origin_pillow": [
+        19,
+        6
+      ],
+      "text_origin_godot_top": [
+        19,
+        6
+      ],
+      "text_width": 24,
+      "group_width": 38,
+      "gap_px": 2,
+      "minimum_side_padding": 5
+    },
+    {
+      "verb": "GUARD",
+      "button_size": [
+        48,
+        24
+      ],
+      "font": "VETKA 16",
+      "icon_path": "assets/art/ui_offer/verb_guard.png",
+      "icon_size": [
+        12,
+        12
+      ],
+      "icon_origin": [
+        2,
+        6
+      ],
+      "text_origin_pillow": [
+        16,
+        6
+      ],
+      "text_origin_godot_top": [
+        16,
+        6
+      ],
+      "text_width": 30,
+      "group_width": 44,
+      "gap_px": 2,
+      "minimum_side_padding": 2
+    },
+    {
+      "verb": "WAIT",
+      "button_size": [
+        48,
+        24
+      ],
+      "font": "VETKA 16",
+      "icon_path": "assets/art/ui_offer/verb_wait.png",
+      "icon_size": [
+        12,
+        12
+      ],
+      "icon_origin": [
+        6,
+        6
+      ],
+      "text_origin_pillow": [
+        20,
+        6
+      ],
+      "text_origin_godot_top": [
+        20,
+        6
+      ],
+      "text_width": 22,
+      "group_width": 36,
+      "gap_px": 2,
+      "minimum_side_padding": 6
+    },
+    {
+      "verb": "HIT",
+      "button_size": [
+        48,
+        24
+      ],
+      "font": "VETKA 16",
+      "icon_path": "assets/art/ui_offer/verb_hit.png",
+      "icon_size": [
+        12,
+        12
+      ],
+      "icon_origin": [
+        9,
+        6
+      ],
+      "text_origin_pillow": [
+        23,
+        6
+      ],
+      "text_origin_godot_top": [
+        23,
+        6
+      ],
+      "text_width": 16,
+      "group_width": 30,
+      "gap_px": 2,
+      "minimum_side_padding": 9
+    },
+    {
+      "verb": "DROP",
+      "button_size": [
+        48,
+        24
+      ],
+      "font": "VETKA 16",
+      "icon_path": "assets/art/ui_offer/verb_drop.png",
+      "icon_size": [
+        12,
+        12
+      ],
+      "icon_origin": [
+        5,
+        6
+      ],
+      "text_origin_pillow": [
+        19,
+        6
+      ],
+      "text_origin_godot_top": [
+        19,
+        6
+      ],
+      "text_width": 24,
+      "group_width": 38,
+      "gap_px": 2,
+      "minimum_side_padding": 5
+    },
+    {
+      "verb": "PLACE",
+      "button_size": [
+        48,
+        24
+      ],
+      "font": "VETKA 16",
+      "icon_path": "assets/art/ui_offer/verb_place.png",
+      "icon_size": [
+        12,
+        12
+      ],
+      "icon_origin": [
+        2,
+        6
+      ],
+      "text_origin_pillow": [
+        16,
+        6
+      ],
+      "text_origin_godot_top": [
+        16,
+        6
+      ],
+      "text_width": 30,
+      "group_width": 44,
+      "gap_px": 2,
+      "minimum_side_padding": 2
+    },
+    {
+      "verb": "WIELD",
+      "button_size": [
+        48,
+        24
+      ],
+      "font": "VETKA 16",
+      "icon_path": "assets/art/ui_offer/verb_wield.png",
+      "icon_size": [
+        12,
+        12
+      ],
+      "icon_origin": [
+        3,
+        6
+      ],
+      "text_origin_pillow": [
+        17,
+        6
+      ],
+      "text_origin_godot_top": [
+        17,
+        6
+      ],
+      "text_width": 28,
+      "group_width": 42,
+      "gap_px": 2,
+      "minimum_side_padding": 3
+    },
+    {
+      "verb": "WEAR",
+      "button_size": [
+        48,
+        24
+      ],
+      "font": "VETKA 16",
+      "icon_path": "assets/art/ui_offer/verb_wear.png",
+      "icon_size": [
+        12,
+        12
+      ],
+      "icon_origin": [
+        5,
+        6
+      ],
+      "text_origin_pillow": [
+        19,
+        6
+      ],
+      "text_origin_godot_top": [
+        19,
+        6
+      ],
+      "text_width": 24,
+      "group_width": 38,
+      "gap_px": 2,
+      "minimum_side_padding": 5
+    },
+    {
+      "verb": "EAT",
+      "button_size": [
+        48,
+        24
+      ],
+      "font": "VETKA 16",
+      "icon_path": "assets/art/ui_offer/verb_eat.png",
+      "icon_size": [
+        12,
+        12
+      ],
+      "icon_origin": [
+        8,
+        6
+      ],
+      "text_origin_pillow": [
+        22,
+        6
+      ],
+      "text_origin_godot_top": [
+        22,
+        6
+      ],
+      "text_width": 18,
+      "group_width": 32,
+      "gap_px": 2,
+      "minimum_side_padding": 8
+    },
+    {
+      "verb": "RETURN",
+      "button_size": [
+        48,
+        24
+      ],
+      "font": "VETKA 16",
+      "icon_path": "assets/art/ui_offer/verb_return_compact6.png",
+      "icon_size": [
+        6,
+        12
+      ],
+      "icon_origin": [
+        2,
+        6
+      ],
+      "text_origin_pillow": [
+        10,
+        6
+      ],
+      "text_origin_godot_top": [
+        10,
+        6
+      ],
+      "text_width": 36,
+      "group_width": 44,
+      "gap_px": 2,
+      "minimum_side_padding": 2
+    },
+    {
+      "verb": "RING",
+      "button_size": [
+        48,
+        24
+      ],
+      "font": "VETKA 16",
+      "icon_path": "assets/art/ui_offer/verb_ring.png",
+      "icon_size": [
+        12,
+        12
+      ],
+      "icon_origin": [
+        6,
+        6
+      ],
+      "text_origin_pillow": [
+        20,
+        6
+      ],
+      "text_origin_godot_top": [
+        20,
+        6
+      ],
+      "text_width": 22,
+      "group_width": 36,
+      "gap_px": 2,
+      "minimum_side_padding": 6
+    },
+    {
+      "verb": "DOWN",
+      "button_size": [
+        48,
+        24
+      ],
+      "font": "VETKA 16",
+      "icon_path": "assets/art/ui_offer/verb_down.png",
+      "icon_size": [
+        12,
+        12
+      ],
+      "icon_origin": [
+        5,
+        6
+      ],
+      "text_origin_pillow": [
+        19,
+        6
+      ],
+      "text_origin_godot_top": [
+        19,
+        6
+      ],
+      "text_width": 24,
+      "group_width": 38,
+      "gap_px": 2,
+      "minimum_side_padding": 5
+    },
+    {
+      "verb": "UP",
+      "button_size": [
+        48,
+        24
+      ],
+      "font": "VETKA 16",
+      "icon_path": "assets/art/ui_offer/verb_up.png",
+      "icon_size": [
+        12,
+        12
+      ],
+      "icon_origin": [
+        11,
+        6
+      ],
+      "text_origin_pillow": [
+        25,
+        6
+      ],
+      "text_origin_godot_top": [
+        25,
+        6
+      ],
+      "text_width": 12,
+      "group_width": 26,
+      "gap_px": 2,
+      "minimum_side_padding": 11
+    },
+    {
+      "verb": "RIDE",
+      "button_size": [
+        48,
+        24
+      ],
+      "font": "VETKA 16",
+      "icon_path": "assets/art/ui_offer/verb_ride.png",
+      "icon_size": [
+        12,
+        12
+      ],
+      "icon_origin": [
+        6,
+        6
+      ],
+      "text_origin_pillow": [
+        20,
+        6
+      ],
+      "text_origin_godot_top": [
+        20,
+        6
+      ],
+      "text_width": 22,
+      "group_width": 36,
+      "gap_px": 2,
+      "minimum_side_padding": 6
+    },
+    {
+      "verb": "LEAVE",
+      "button_size": [
+        48,
+        24
+      ],
+      "font": "VETKA 16",
+      "icon_path": "assets/art/ui_offer/verb_leave.png",
+      "icon_size": [
+        12,
+        12
+      ],
+      "icon_origin": [
+        2,
+        6
+      ],
+      "text_origin_pillow": [
+        16,
+        6
+      ],
+      "text_origin_godot_top": [
+        16,
+        6
+      ],
+      "text_width": 30,
+      "group_width": 44,
+      "gap_px": 2,
+      "minimum_side_padding": 2
+    },
+    {
+      "verb": "PULL",
+      "button_size": [
+        48,
+        24
+      ],
+      "font": "VETKA 16",
+      "icon_path": "assets/art/ui_offer/verb_pull.png",
+      "icon_size": [
+        12,
+        12
+      ],
+      "icon_origin": [
+        5,
+        6
+      ],
+      "text_origin_pillow": [
+        19,
+        6
+      ],
+      "text_origin_godot_top": [
+        19,
+        6
+      ],
+      "text_width": 24,
+      "group_width": 38,
+      "gap_px": 2,
+      "minimum_side_padding": 5
+    },
+    {
+      "verb": "BURN",
+      "button_size": [
+        48,
+        24
+      ],
+      "font": "VETKA 16",
+      "icon_path": "assets/art/ui_offer/verb_burn.png",
+      "icon_size": [
+        12,
+        12
+      ],
+      "icon_origin": [
+        5,
+        6
+      ],
+      "text_origin_pillow": [
+        19,
+        6
+      ],
+      "text_origin_godot_top": [
+        19,
+        6
+      ],
+      "text_width": 24,
+      "group_width": 38,
+      "gap_px": 2,
+      "minimum_side_padding": 5
+    },
+    {
+      "verb": "CUT",
+      "button_size": [
+        48,
+        24
+      ],
+      "font": "VETKA 16",
+      "icon_path": "assets/art/ui_offer/verb_cut.png",
+      "icon_size": [
+        12,
+        12
+      ],
+      "icon_origin": [
+        8,
+        6
+      ],
+      "text_origin_pillow": [
+        22,
+        6
+      ],
+      "text_origin_godot_top": [
+        22,
+        6
+      ],
+      "text_width": 18,
+      "group_width": 32,
+      "gap_px": 2,
+      "minimum_side_padding": 8
+    },
+    {
+      "verb": "FEED",
+      "button_size": [
+        48,
+        24
+      ],
+      "font": "VETKA 16",
+      "icon_path": "assets/art/ui_offer/verb_feed.png",
+      "icon_size": [
+        12,
+        12
+      ],
+      "icon_origin": [
+        5,
+        6
+      ],
+      "text_origin_pillow": [
+        19,
+        6
+      ],
+      "text_origin_godot_top": [
+        19,
+        6
+      ],
+      "text_width": 24,
+      "group_width": 38,
+      "gap_px": 2,
+      "minimum_side_padding": 5
+    },
+    {
+      "verb": "TOSS",
+      "button_size": [
+        48,
+        24
+      ],
+      "font": "VETKA 16",
+      "icon_path": "assets/art/ui_offer/verb_toss.png",
+      "icon_size": [
+        12,
+        12
+      ],
+      "icon_origin": [
+        5,
+        6
+      ],
+      "text_origin_pillow": [
+        19,
+        6
+      ],
+      "text_origin_godot_top": [
+        19,
+        6
+      ],
+      "text_width": 24,
+      "group_width": 38,
+      "gap_px": 2,
+      "minimum_side_padding": 5
+    },
+    {
+      "verb": "LIGHT",
+      "button_size": [
+        48,
+        24
+      ],
+      "font": "VETKA 16",
+      "icon_path": "assets/art/ui_offer/verb_light.png",
+      "icon_size": [
+        12,
+        12
+      ],
+      "icon_origin": [
+        3,
+        6
+      ],
+      "text_origin_pillow": [
+        17,
+        6
+      ],
+      "text_origin_godot_top": [
+        17,
+        6
+      ],
+      "text_width": 28,
+      "group_width": 42,
+      "gap_px": 2,
+      "minimum_side_padding": 3
+    },
+    {
+      "verb": "CANCEL",
+      "button_size": [
+        48,
+        24
+      ],
+      "font": "VETKA 16",
+      "icon_path": "assets/art/ui_offer/verb_cancel_compact6.png",
+      "icon_size": [
+        6,
+        12
+      ],
+      "icon_origin": [
+        2,
+        6
+      ],
+      "text_origin_pillow": [
+        10,
+        6
+      ],
+      "text_origin_godot_top": [
+        10,
+        6
+      ],
+      "text_width": 36,
+      "group_width": 44,
+      "gap_px": 2,
+      "minimum_side_padding": 2
+    },
+    {
+      "verb": "PACK",
+      "button_size": [
+        48,
+        24
+      ],
+      "font": "VETKA 16",
+      "icon_path": "assets/art/ui_offer/verb_pack.png",
+      "icon_size": [
+        12,
+        12
+      ],
+      "icon_origin": [
+        5,
+        6
+      ],
+      "text_origin_pillow": [
+        19,
+        6
+      ],
+      "text_origin_godot_top": [
+        19,
+        6
+      ],
+      "text_width": 24,
+      "group_width": 38,
+      "gap_px": 2,
+      "minimum_side_padding": 5
+    },
+    {
+      "verb": "CLOSE",
+      "button_size": [
+        48,
+        24
+      ],
+      "font": "VETKA 16",
+      "icon_path": "assets/art/ui_offer/verb_close.png",
+      "icon_size": [
+        12,
+        12
+      ],
+      "icon_origin": [
+        2,
+        6
+      ],
+      "text_origin_pillow": [
+        16,
+        6
+      ],
+      "text_origin_godot_top": [
+        16,
+        6
+      ],
+      "text_width": 30,
+      "group_width": 44,
+      "gap_px": 2,
+      "minimum_side_padding": 2
+    },
+    {
+      "verb": "UNLOCK",
+      "button_size": [
+        48,
+        24
+      ],
+      "font": "VETKA 16",
+      "icon_path": "assets/art/ui_offer/verb_unlock_compact6.png",
+      "icon_size": [
+        6,
+        12
+      ],
+      "icon_origin": [
+        2,
+        6
+      ],
+      "text_origin_pillow": [
+        10,
+        6
+      ],
+      "text_origin_godot_top": [
+        10,
+        6
+      ],
+      "text_width": 36,
+      "group_width": 44,
+      "gap_px": 2,
+      "minimum_side_padding": 2
+    },
+    {
+      "verb": "LATCH",
+      "button_size": [
+        48,
+        24
+      ],
+      "font": "VETKA 16",
+      "icon_path": "assets/art/ui_offer/verb_latch.png",
+      "icon_size": [
+        12,
+        12
+      ],
+      "icon_origin": [
+        2,
+        6
+      ],
+      "text_origin_pillow": [
+        16,
+        6
+      ],
+      "text_origin_godot_top": [
+        16,
+        6
+      ],
+      "text_width": 30,
+      "group_width": 44,
+      "gap_px": 2,
+      "minimum_side_padding": 2
+    },
+    {
+      "verb": "SIDLE",
+      "button_size": [
+        48,
+        24
+      ],
+      "font": "VETKA 16",
+      "icon_path": "assets/art/ui_offer/verb_sidle.png",
+      "icon_size": [
+        12,
+        12
+      ],
+      "icon_origin": [
+        3,
+        6
+      ],
+      "text_origin_pillow": [
+        17,
+        6
+      ],
+      "text_origin_godot_top": [
+        17,
+        6
+      ],
+      "text_width": 28,
+      "group_width": 42,
+      "gap_px": 2,
+      "minimum_side_padding": 3
+    },
+    {
+      "verb": "REVEAL",
+      "button_size": [
+        48,
+        24
+      ],
+      "font": "VETKA 16",
+      "icon_path": "assets/art/ui_offer/verb_reveal_compact6.png",
+      "icon_size": [
+        6,
+        12
+      ],
+      "icon_origin": [
+        2,
+        6
+      ],
+      "text_origin_pillow": [
+        10,
+        6
+      ],
+      "text_origin_godot_top": [
+        10,
+        6
+      ],
+      "text_width": 36,
+      "group_width": 44,
+      "gap_px": 2,
+      "minimum_side_padding": 2
+    },
+    {
+      "verb": "DISPEL",
+      "button_size": [
+        48,
+        24
+      ],
+      "font": "VETKA 16",
+      "icon_path": "assets/art/ui_offer/verb_dispel_compact6.png",
+      "icon_size": [
+        6,
+        12
+      ],
+      "icon_origin": [
+        3,
+        6
+      ],
+      "text_origin_pillow": [
+        11,
+        6
+      ],
+      "text_origin_godot_top": [
+        11,
+        6
+      ],
+      "text_width": 34,
+      "group_width": 42,
+      "gap_px": 2,
+      "minimum_side_padding": 3
+    }
+  ],
+  "text_baseline_rule": "Godot draw_string baseline = text_origin_godot_top + Vector2(0,FONT.get_ascent(16)); Pillow source uses font bbox y=2..9.",
+  "card_rule": "hide game/compass/torch overlays while inspecting: A docks verbs at y179 then; map uses map layer only",
+  "mockup_status": "Offline M3e game and earlier torn-map composites; current control rects, original dungeon/portrait/pack pixels, illustrative long-label row."
+}

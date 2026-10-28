@@ -20,8 +20,11 @@ materials in `assets/art/ui_offer/` are selected and wired by A.
 Decorative `assets/art/props/`, earlier alternate `room_fN_*` surface
 faces, a painted title logotype and an optional launcher set are also supplied. Placement,
 collision and launcher selection remain A/Claude's integration decisions.
-The latest addition closes the misleading decorative doorways with solid
-infill and nailed barricades. The preceding offer follows the F1 corridor:
+The latest offer adds thin dead-ivy border layers, a sleepy compass skull,
+two tiny torch frames, and 29 measured verb icons. It is entirely native
+pixel art; A still chooses and wires the offer. The preceding addition closes
+the misleading decorative doorways with solid infill and nailed barricades.
+The preceding plane offer follows the F1 corridor:
 calmer flags, a darker shared rib vault, varied puddles and a torn map leaf.
 All previous art remains intact. See
 **Small life in the story plates** below for exact playback and hold timings.
@@ -32,11 +35,14 @@ All previous art remains intact. See
 From the repository root, with Python and Pillow installed:
 
 ```powershell
-python -B art_src/env/closed_v4/build_closed.py
+python -B art_src/ui_offer/ivy_v3/build_ivy.py
+python -B art_src/ui_offer/ivy_v3/verify_ivy.py --rebuild
 python -B art_src/env/verify_polish.py
 ```
 
-This rebuilds only the four closed decorative faces and their corridor proofs.
+This rebuilds only the ivy/icon offer, its registration and all its proofs;
+the focused verifier also rebuilds once and compares hashes. The closed-face
+builder remains `python -B art_src/env/closed_v4/build_closed.py`.
 For the preceding calm-plane / torn-map offer:
 
 ```powershell
@@ -92,6 +98,10 @@ and contact sheets still use the shared indexed palette and binary alpha.
 
 | Set | Native size | 4x review sheet |
 | --- | --- | --- |
+| Current dead-ivy border pieces | Game 154 x 342; compass 66 x 48; map 144 x 324 | `art_src/ui_offer/ivy_v3/ornament_sheet_4x.png` |
+| Current verb stamps | 29 at 12 x 12; seven separate compact siblings | `art_src/ui_offer/ivy_v3/contact_sheet_4x.png` |
+| All full-word verb fits | Actual 48 x 22 buttons, VETKA 16 | `art_src/ui_offer/ivy_v3/fit_sheet_4x.png` |
+| Current game and torn-map offer | Two 154 x 342 screens | `art_src/ui_offer/ivy_v3/mockup_screen_4x.png` |
 | Primary walls, combined | 24 tiles, each 64 × 64 | `art_src/env/painted_v2/contact_sheet_4x.png` |
 | Primary abbey stone | 12 tiles, each 64 × 64 | `art_src/env/painted_v2/floor1/contact_sheet_4x.png` |
 | Primary older wet stone | 12 tiles, each 64 × 64 | `art_src/env/painted_v2/floor2/contact_sheet_4x.png` |
@@ -793,6 +803,130 @@ source history; the compact version builds the exported offer.
 python -B art_src/screens/room_batch/build_identity.py
 ```
 
+## Current UI offer: dead ivy, a sleepy keeper, and verb stamps
+
+This offer follows the owner's two saved chrome elaborations. Both reference
+PNGs remain byte-identical at `art_src/ui_offer/vine_on_main_view.png` and
+`icons_on_buttons.png`. All new runtime files are in `assets/art/ui_offer/`;
+the deterministic native drawings, masks, source captures, registration,
+art-direction record and proofs are in `art_src/ui_offer/ivy_v3/`. These tiny
+assets are code-drawn directly on the palette: no painted resize, smoothing,
+dither or model prompt is involved. Existing chrome and all earlier C art stay
+unchanged.
+
+The foliage uses the existing teal ramp: 11 for aged stem shadow, 13/14 for
+dead-ivy leaves, and sparse 15 highlights. Stems are one pixel, with small
+paired leaves/coils confined to three-pixel frame rims. Quiet gaps keep the
+world central. The compass has a round ivory skull with level, sleepy eyes
+and two tiny teeth, rather than slanted brows. Small bronze corner rosettes
+sit on the view rim. There is no crest across the camera opening.
+
+### Placement and protected areas
+
+All rects below are native `(x, y, width, height)`; right/bottom are exclusive.
+All textures have binary alpha. Use nearest filtering, integer placement,
+no tiling, and **no resizing or 9-slicing**: margins are `(0,0,0,0)`.
+
+| PNG basename | Size | Place at | Use |
+| --- | --- | --- | --- |
+| `ivy_game_border_v3` | 154 x 342 | `(0,0)` | View rim, message sides, panel dividers, pack rim and outside movement controls |
+| `ivy_compass_v3` | 66 x 48 | `(85,294)` | Three-pixel housing rim plus skull/footer; hit rect remains 66 x 44 |
+| `ivy_map_border_v3` | 144 x 324 | `(5,16)` | Follows the actual torn leaf's opaque silhouette; use with `map_parchment_torn_v2` |
+| `ivy_torches_v3_0`, `_1` | 154 x 342 each | `(0,0)` | Optional tiny gap-mounted flames beside the compass |
+| `sleepy_skull_v3` | 9 x 7 | `(114,335)` if separate | Already included in the compass layer; do not draw twice |
+
+The skull sits on the last three pixels of the housing rim and extends four
+pixels below it, ending at the screen bottom. Its standalone bottom anchor is
+`(4,7)`. The torches occupy `x81..83` and `x151..153`, `y300..311`, outside
+the compass and movement hit rects. Play frame 0 for **420 ms**, frame 1 for
+**580 ms**, loop; only four flame rows change. These are optional presentation
+frames; use a local clock, without changing turn state or simulation RNG.
+
+The overlays are empty throughout the entire camera opening
+`(53,0,44,18)`, including the owner's x54–96 requirement. The whole dungeon
+interior `(3,21,148,150)` is also untouched. Message text, item/portrait/health
+pixels, the oil gauge, and touch-target interiors are protected. Housing-rim
+decoration stays in the existing three-pixel borders; the compass inner
+`(88,297,60,38)` remains entirely clear, including every heading, needle angle,
+arc and tick. Pack decorations stay on its top/bottom rims. No control moves
+or gains a hit area. The masks are saved under `ivy_v3/masks/`, and the
+focused verifier checks every opaque pixel against them and the clear rects.
+
+The map layer is clipped to opaque paper and stays outside the local content
+safe rect `(8,12,128,300)`. The previous parchment's `8,12,8,12` margins remain
+its content contract; the new vine layer itself is fixed-size and must not be
+stretched. It does not reintroduce a rectangular outline or fill the torn alpha.
+
+**Codex A:** draw these as non-interactive decoration (`mouse_filter = IGNORE`)
+over the existing frame/housing, with text, items and compass marks above them.
+Use the game, compass and optional torch layers only during the normal game
+view. Hide them for cards/inspection, map, modals and other screens: inspection
+currently docks verbs at y179. The map uses only its own vine layer over the
+torn parchment. Keep existing touch controls, camera cutout and dial drawing.
+`layout.json` contains the exact registrations and state rules.
+
+### Verb names, full-word fit and native compact siblings
+
+`verb_<lowercase verb>.png` supplies a **12 x 12** icon for all 21 requested
+verbs: TAKE, GUARD, WAIT, HIT, DROP, PLACE, WIELD, WEAR, EAT, RETURN, RING,
+DOWN, UP, RIDE, LEAVE, PULL, BURN, CUT, FEED, TOSS and LIGHT. It also covers
+the eight additional labels found in the current UI/simulation: CANCEL,
+PACK, CLOSE, UNLOCK, LATCH, SIDLE, REVEAL and DISPEL. Motifs include a pouch,
+shield, hourglass, fist, bone, lever, torch and a little throwing arc. Colours
+are 9/10 ivory, 25 bronze-gold and 28 bronze shade, with a one-pixel index-1
+outline. Every coloured icon pixel has its complete dark silhouette boundary.
+
+The layout is **icon + 2 px gap + full VETKA word at 16 px**, centred as one
+group, with at least two pixels of side clearance. The current gameplay verb
+controls are **48 x 22**, rather than the brief's nominal 24 px height; both
+22- and 24-pixel height layouts are measured in `layout.json`. Icons centre
+vertically at y5/y6, and VETKA's seven ink rows centre beside them. For custom
+drawing, use the saved local `text_origin_godot_top`, adding the font's
+`get_ascent(16)` for the `draw_string` baseline, as the current `_text` helper
+does. Use full words and the existing typeface/size.
+
+**Fit constraint:** RETURN/UNLOCK/CANCEL/REVEAL are 36 px wide. A 12 px icon
+plus the gap would make a 50 px group before padding. Therefore separate,
+hand-drawn **6 x 12** siblings carry `_compact6` suffixes for those words and
+DISPEL. RETURN still reads in full: `6 + 2 + 36 = 44`, leaving two pixels on
+each side of a 48 px button. These are narrow native glyphs, not compressed
+canonical icons. A must select the recorded PNG; drawing its 12 px sibling
+with the long word will overflow. DISPEL's group is 42 px wide.
+
+The existing **42 x 20 item-card** controls have separate fit records:
+`verb_wield_compact8.png` and `verb_close_compact6.png` keep WIELD and CLOSE
+within 38 px. Other listed card verbs use the canonical 12 px icons. On the
+wide map CLOSE control use the canonical CLOSE icon. A should apply the
+same measured group treatment to both card and gameplay labels, retain the
+2 px icon/text gap, and avoid automatic icon expansion. The proof includes
+all 29 labels at the actual 48 x 22 pitch; 66 layout cases cover gameplay,
+24 px height and the relevant item-card controls. No runtime UI code changed.
+
+### Review files and reproducibility
+
+- `art_src/ui_offer/ivy_v3/mockup_screen_4x.png`: game and torn map together.
+- `mockup_game_4x.png`, `mockup_map_4x.png`: individual full-screen proofs.
+- `mockup_long_verbs_4x.png`: RETURN, REVEAL and DISPEL at the actual pitch.
+- `contact_sheet_4x.png`: all icon drawings, with compact siblings beside them.
+- `fit_sheet_4x.png`: all gameplay verbs on their current bronze buttons;
+  the number beside each is the total icon/gap/word width.
+- `ornament_sheet_4x.png`: transparent game/map/compass pieces on dark slate.
+
+These are offline composites, using the saved M3e entry view and the earlier
+torn-map proof. World, portrait, pack, health and dial pixels remain identical;
+the three verb labels are intentionally laid out again with icons. The long
+verb row is an illustrative fit proof, not a claim those three actions are
+offered together. The map's existing seen geometry and glyphs are preserved;
+only its CLOSE button is laid out again. Every proof has an exact nearest
+4x enlargement. The source captures are copied once, so rebuilding does not
+silently refresh them while A works.
+
+Run `python -B art_src/ui_offer/ivy_v3/build_ivy.py`, then
+`python -B art_src/ui_offer/ivy_v3/verify_ivy.py --rebuild`, then the combined
+`python -B art_src/env/verify_polish.py`. The saved preservation receipt covers
+all 207 earlier C runtime PNGs and both owner references. No Godot or network
+is needed; phone review remains part of A/Claude's integration.
+
 ## Current map offer: torn parchment with real transparency
 
 New runtime file: `assets/art/ui_offer/map_parchment_torn_v2.png`, **144 × 324**,
@@ -985,31 +1119,6 @@ the asset checks and focused FX test do not claim phone performance acceptance.
 
 
 
-## Calm-plane / torn-map revision receipt, 28 October 2026
-
-- Added **21 runtime PNGs**: eleven shared floor variants, three subdued
-  versions of the F1 vault, six compatible landmark faces and one transparent
-  144 × 324 map leaf. The C kit now verifies at **203 runtime PNGs**; shared
-  palette, binary alpha and exact 4x sheets pass. All **182 earlier C runtime
-  PNGs** remain byte-for-byte unchanged.
-- Native adjacent-texel contrast inside the dry floor border is **46.9%** of
-  the previous painted F1 floor. The plain vault's mean luminance is **69.1%**
-  of the previous F1 ceiling. These are image measurements, not phone-review
-  claims. Both levels now share the same plane assets and matching joints.
-- Weighted stable-cell selection supplies seven possible floors upstairs and
-  eleven downstairs: 3% small-puddle weight on F1, 48% mixed-puddle weight on
-  F2. Five wet footprints have distinct areas and centres; all preserve the
-  cell perimeter. Known hash/choice samples are saved for A.
-- Mock-ups include the four view/material comparisons, three successive
-  corridor positions, mixed-cell sheets and the new map inside the M3d UI.
-  The protected screenshot interface and copied map ink/button pixels match
-  their references. These are offline composites using proxy rooms.
-- Rebuilding produced identical SHA-256 hashes for **67 PNG/JSON files**;
-  `art_src/env/calm_v3/rebuild_receipt.json` records the comparison.
-- A's remaining work is the cached per-cell selector, disabling the old
-  procedural grain for this family, swapping the map material and phone
-  review. No Godot runs, game/UI changes, staging or commits by C.
-
 ## Closed-dressing revision receipt, 28 October 2026
 
 - Added **four runtime PNGs**: a solid infilled arch and permanently braced
@@ -1028,3 +1137,24 @@ the asset checks and focused FX test do not claim phone performance acceptance.
 - A's handoff distinguishes the random decorative suffix substitution from
   the actual lock override and gate overlays. No renderer/game edits, Godot
   runs, staging or commits by C.
+
+## Ivy and verb revision receipt, 28 October 2026
+
+- Added **42 runtime PNGs**: 29 canonical verb stamps, seven separately drawn
+  narrow siblings, game/compass/map border layers, two tiny torch frames and
+  the standalone sleepy skull. The C kit verifies at **249 runtime PNGs**:
+  31 opaque palette inks, binary alpha and exact nearest 4x sheets.
+- All **207 earlier C runtime PNGs** and both owner reference PNGs remain
+  byte-for-byte unchanged. Focused checks pass for camera/world clearance,
+  message/item/portrait/health pixels, control interiors, every compass
+  heading/dial position, and existing map geometry/ink.
+- **66 full-word layout cases** pass at VETKA 16: all 29 gameplay verbs at
+  both 22 and 24 px height, plus eight current item-card verbs. Narrow
+  glyphs preserve long words in the existing 48 px controls. No labels,
+  font sizes, touch rects or runtime UI code changed.
+- Game/map, long-word, ornament and icon proofs are offline composites.
+  Rebuilding produced identical hashes for **67 PNG/JSON files**; see
+  `art_src/ui_offer/ivy_v3/rebuild_receipt.json` and `verification.json`.
+- A selects the layers and per-verb source PNGs from `ivy_v3/layout.json`,
+  handles normal/card/map visibility, and performs the phone review. No
+  Godot runs, staging or commits by C.
