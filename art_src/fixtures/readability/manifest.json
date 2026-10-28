@@ -1,0 +1,1059 @@
+{
+  "owner_down_source": "art_src/fixtures/architecture/sources/fe3439be-72ab-49d3-8af7-49e3b2e58160.png",
+  "direction": "Owner final decision: supplied painting is stairs down; preserve geometry.",
+  "sources": {
+    "art_src/fixtures/architecture/sources/fe3439be-72ab-49d3-8af7-49e3b2e58160.png": "55707f2c25ed97ba633a509a6b511d4734dc7292064a75a87bac348913f83036",
+    "art_src/fixtures/architecture/sources/painted_f1_base.png": "a21da69a48822d9445374180f4ed9afa21a752abe9eae78bde94dbf6e74f51c7",
+    "art_src/fixtures/architecture/sources/painted_f2_base.png": "f55986c528aa55ca8da5ab7b7725d7f8bf05d0d182cee5ba3eb8d59416acbcd2",
+    "art_src/fixtures/readability/sources/corridor_reference.png": "681ab74d25063c75ad7c85df1e421b8fce44b61377adc37ffe3e5b2b25fc3301",
+    "art_src/fixtures/readability/sources/lift_dead_closed.png": "113a2b5149d265acff30b30cab3cfab51b39ede57ce9412a41144436d308e904",
+    "art_src/fixtures/readability/sources/stairs_up_matching_owner.png": "3334e3517b120fd4748fd5fb9d6beac43380e7e2ed73236e2050eb207225dc51",
+    "assets/art/env/f1_ceiling.png": "007d9d38e31b6f0f08ea13cea16093b91c3f20396676ff6d5e78f3b71f9fa765",
+    "assets/art/env/f1_floor.png": "3349f843ce5bf8475cb669e00544deef483473c6442b6bb2c6fab1b22e95cfdc",
+    "assets/art/env/f2_ceiling.png": "b2117157f95b349f9d919574e9628f90c756a43ed0c31143e6c7475c552b8552",
+    "assets/art/env/f2_floor.png": "d97e85f8b8416f6355fef16aa65a82319ff0a0cd062726a93d24c340a8040d9c",
+    "assets/art/fixtures/architecture_f1_lift_dead_64.png": "10e9cc0a7b63e44f244aed6a5983e4a55aac353ee27d643db3154e2f9481f645",
+    "assets/art/fixtures/architecture_f1_lift_working_64.png": "01e2c35a44faabd8e7d567af1e3c6dc6a2ccb3e0d07f1f8ea2d395d45d11333a",
+    "assets/art/fixtures/architecture_f2_lift_dead_64.png": "969ac30bd87bd1d3920977633e657615054b2d4fa28d39aa86e4515d9df9eefa",
+    "assets/art/fixtures/architecture_f2_lift_working_64.png": "8f237ccff83dd26bc3f0ba28d9fa735e0c443752b2acd21a7cec7b96da6aa7e1"
+  },
+  "assets": [
+    {
+      "path": "assets/art/fixtures/architecture_v2_f1_stairs_down_64.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 25,
+      "sha256": "d0a5113364311dafb63c855b79ee2bb36f6271c1cce6f6a32c787d033283e761",
+      "floor": 1,
+      "kind": "stairs_down",
+      "anchor": [
+        0,
+        0
+      ],
+      "wall_uv": true,
+      "depth": 1,
+      "threshold_anchor": [
+        32,
+        62
+      ]
+    },
+    {
+      "path": "assets/art/fixtures/architecture_v2_f1_stairs_down_40.png",
+      "size": [
+        40,
+        40
+      ],
+      "opaque_colors": 21,
+      "sha256": "cdc0a6a0fded8b9e0dc9678c54db8ac0fbfb58cf481427cd2c66887661b0e5a1",
+      "floor": 1,
+      "kind": "stairs_down",
+      "anchor": [
+        0,
+        0
+      ],
+      "wall_uv": true,
+      "depth": 2,
+      "threshold_anchor": [
+        20,
+        39
+      ]
+    },
+    {
+      "path": "assets/art/fixtures/architecture_v2_f1_stairs_down_24.png",
+      "size": [
+        24,
+        24
+      ],
+      "opaque_colors": 19,
+      "sha256": "73d743e15327bdcce3f70e5a0bebe9859e9cea31d69a9885019d3f0944bc73bd",
+      "floor": 1,
+      "kind": "stairs_down",
+      "anchor": [
+        0,
+        0
+      ],
+      "wall_uv": true,
+      "depth": 3,
+      "threshold_anchor": [
+        12,
+        23
+      ]
+    },
+    {
+      "path": "assets/art/fixtures/architecture_v2_f1_stairs_down_left_d1.png",
+      "size": [
+        32,
+        64
+      ],
+      "opaque_colors": 22,
+      "sha256": "673337934366ebc554538c9e5f908b6ed731f540ead3e9712cf7b7818146cf51",
+      "floor": 1,
+      "kind": "stairs_down",
+      "anchor": [
+        16,
+        58
+      ],
+      "depth": 1,
+      "projection": "left",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_v2_f1_stairs_down_right_d1.png",
+      "size": [
+        32,
+        64
+      ],
+      "opaque_colors": 22,
+      "sha256": "13e4e301d34f37bbf1eca8b19cf82aaac1dc14be9d24146fb178dce6bbaf0f6d",
+      "floor": 1,
+      "kind": "stairs_down",
+      "anchor": [
+        15,
+        58
+      ],
+      "depth": 1,
+      "projection": "right",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_v2_f1_stairs_down_left_d2.png",
+      "size": [
+        20,
+        40
+      ],
+      "opaque_colors": 18,
+      "sha256": "e423977247805c7636344d10a9e8056967e43bef172ca2c44ff64e2d03eca462",
+      "floor": 1,
+      "kind": "stairs_down",
+      "anchor": [
+        10,
+        36
+      ],
+      "depth": 2,
+      "projection": "left",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_v2_f1_stairs_down_right_d2.png",
+      "size": [
+        20,
+        40
+      ],
+      "opaque_colors": 18,
+      "sha256": "a37cbda6bc271241bceeb6b80c446949d607e9f855c21fa0d14410518bf498e4",
+      "floor": 1,
+      "kind": "stairs_down",
+      "anchor": [
+        9,
+        36
+      ],
+      "depth": 2,
+      "projection": "right",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_v2_f1_stairs_down_left_d3.png",
+      "size": [
+        12,
+        24
+      ],
+      "opaque_colors": 15,
+      "sha256": "38697f9999b2e366fdb96356fd98a5df6935aa48edec6d5cf427f2dd7b82e08e",
+      "floor": 1,
+      "kind": "stairs_down",
+      "anchor": [
+        6,
+        21
+      ],
+      "depth": 3,
+      "projection": "left",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_v2_f1_stairs_down_right_d3.png",
+      "size": [
+        12,
+        24
+      ],
+      "opaque_colors": 15,
+      "sha256": "86f48dbd8ffcb1139eb73a50b17516a61489e72ca3ceba49bd43c2a0a2da493a",
+      "floor": 1,
+      "kind": "stairs_down",
+      "anchor": [
+        5,
+        21
+      ],
+      "depth": 3,
+      "projection": "right",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_v2_f1_stairs_up_64.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 25,
+      "sha256": "dff5450366f6dd01bea8880ba041f4c391ae70a6ad93c0bc52b889c1933583d2",
+      "floor": 1,
+      "kind": "stairs_up",
+      "anchor": [
+        0,
+        0
+      ],
+      "wall_uv": true,
+      "depth": 1,
+      "threshold_anchor": [
+        32,
+        62
+      ]
+    },
+    {
+      "path": "assets/art/fixtures/architecture_v2_f1_stairs_up_40.png",
+      "size": [
+        40,
+        40
+      ],
+      "opaque_colors": 22,
+      "sha256": "7cd8ddffd3b8464ee0523bcf7240cf515276d3550d058026a3f419065e9975a5",
+      "floor": 1,
+      "kind": "stairs_up",
+      "anchor": [
+        0,
+        0
+      ],
+      "wall_uv": true,
+      "depth": 2,
+      "threshold_anchor": [
+        20,
+        39
+      ]
+    },
+    {
+      "path": "assets/art/fixtures/architecture_v2_f1_stairs_up_24.png",
+      "size": [
+        24,
+        24
+      ],
+      "opaque_colors": 20,
+      "sha256": "342d2a7a9e346f07f022d940448ebd1e8661e9f35152df8b70021326cae0ced6",
+      "floor": 1,
+      "kind": "stairs_up",
+      "anchor": [
+        0,
+        0
+      ],
+      "wall_uv": true,
+      "depth": 3,
+      "threshold_anchor": [
+        12,
+        23
+      ]
+    },
+    {
+      "path": "assets/art/fixtures/architecture_v2_f1_stairs_up_left_d1.png",
+      "size": [
+        32,
+        64
+      ],
+      "opaque_colors": 23,
+      "sha256": "abd0c89308211d78739b0ea3cd83268ce4783a43a48e7f5709847ec3df6738b3",
+      "floor": 1,
+      "kind": "stairs_up",
+      "anchor": [
+        16,
+        58
+      ],
+      "depth": 1,
+      "projection": "left",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_v2_f1_stairs_up_right_d1.png",
+      "size": [
+        32,
+        64
+      ],
+      "opaque_colors": 23,
+      "sha256": "c56d59a2696bdd20cda129f18a5df4cc246a90bde2797db8b8462732c17201d8",
+      "floor": 1,
+      "kind": "stairs_up",
+      "anchor": [
+        15,
+        58
+      ],
+      "depth": 1,
+      "projection": "right",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_v2_f1_stairs_up_left_d2.png",
+      "size": [
+        20,
+        40
+      ],
+      "opaque_colors": 20,
+      "sha256": "c8ba8c0cc0910c4cd9d290598dde338750dfdf5848598b5c6e0ab96db83f0197",
+      "floor": 1,
+      "kind": "stairs_up",
+      "anchor": [
+        10,
+        36
+      ],
+      "depth": 2,
+      "projection": "left",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_v2_f1_stairs_up_right_d2.png",
+      "size": [
+        20,
+        40
+      ],
+      "opaque_colors": 20,
+      "sha256": "e682dfe56c8211e57fb2f7855837dcaf6747c1761065afd4429c9c15c4d71e76",
+      "floor": 1,
+      "kind": "stairs_up",
+      "anchor": [
+        9,
+        36
+      ],
+      "depth": 2,
+      "projection": "right",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_v2_f1_stairs_up_left_d3.png",
+      "size": [
+        12,
+        24
+      ],
+      "opaque_colors": 16,
+      "sha256": "eeeb0ca117896f69c306bc2a56421b2b1b828818350f91448caa82d1bdaa75cb",
+      "floor": 1,
+      "kind": "stairs_up",
+      "anchor": [
+        6,
+        21
+      ],
+      "depth": 3,
+      "projection": "left",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_v2_f1_stairs_up_right_d3.png",
+      "size": [
+        12,
+        24
+      ],
+      "opaque_colors": 16,
+      "sha256": "b5124ddd0c65f6427739753cc3d3263e99d539f0055fdc5962beb1715c56d9a1",
+      "floor": 1,
+      "kind": "stairs_up",
+      "anchor": [
+        5,
+        21
+      ],
+      "depth": 3,
+      "projection": "right",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_v2_f1_lift_dead_64.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 25,
+      "sha256": "a63c2a565015fa1afecffd312407c2c229e897db70565944e3c0717d1858c93e",
+      "floor": 1,
+      "kind": "lift_dead",
+      "anchor": [
+        0,
+        0
+      ],
+      "wall_uv": true,
+      "depth": 1,
+      "threshold_anchor": [
+        32,
+        62
+      ]
+    },
+    {
+      "path": "assets/art/fixtures/architecture_v2_f1_lift_dead_40.png",
+      "size": [
+        40,
+        40
+      ],
+      "opaque_colors": 24,
+      "sha256": "bcb788a1ba7eecb5a2d180ebb1cf061b8fb9bc1bfac0b8a9a6d4b56820f998a6",
+      "floor": 1,
+      "kind": "lift_dead",
+      "anchor": [
+        0,
+        0
+      ],
+      "wall_uv": true,
+      "depth": 2,
+      "threshold_anchor": [
+        20,
+        39
+      ]
+    },
+    {
+      "path": "assets/art/fixtures/architecture_v2_f1_lift_dead_24.png",
+      "size": [
+        24,
+        24
+      ],
+      "opaque_colors": 18,
+      "sha256": "20ef45b4d7911d3cbc730287802fbf042080d19e4610f7f1f1dc8c5ec4784e8a",
+      "floor": 1,
+      "kind": "lift_dead",
+      "anchor": [
+        0,
+        0
+      ],
+      "wall_uv": true,
+      "depth": 3,
+      "threshold_anchor": [
+        12,
+        23
+      ]
+    },
+    {
+      "path": "assets/art/fixtures/architecture_v2_f1_lift_dead_left_d1.png",
+      "size": [
+        32,
+        64
+      ],
+      "opaque_colors": 23,
+      "sha256": "96699146eeaa5e7c083e3b60919b4794610f20bd5326c7f9db06e1af3fc27c00",
+      "floor": 1,
+      "kind": "lift_dead",
+      "anchor": [
+        16,
+        58
+      ],
+      "depth": 1,
+      "projection": "left",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_v2_f1_lift_dead_right_d1.png",
+      "size": [
+        32,
+        64
+      ],
+      "opaque_colors": 23,
+      "sha256": "99d8f90a86fb8a6fff9411d52e759e98ac306fba87a81371941dc2d4ca1e8a2f",
+      "floor": 1,
+      "kind": "lift_dead",
+      "anchor": [
+        15,
+        58
+      ],
+      "depth": 1,
+      "projection": "right",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_v2_f1_lift_dead_left_d2.png",
+      "size": [
+        20,
+        40
+      ],
+      "opaque_colors": 21,
+      "sha256": "56307f9a6476b47330323eb2166608c62f982bbdabb32f229b67224c7f9dbd80",
+      "floor": 1,
+      "kind": "lift_dead",
+      "anchor": [
+        10,
+        36
+      ],
+      "depth": 2,
+      "projection": "left",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_v2_f1_lift_dead_right_d2.png",
+      "size": [
+        20,
+        40
+      ],
+      "opaque_colors": 21,
+      "sha256": "a84aeb408fa05fef21fd745deb11560fe1122cf7f3adfbc0573c7d362aefd2f4",
+      "floor": 1,
+      "kind": "lift_dead",
+      "anchor": [
+        9,
+        36
+      ],
+      "depth": 2,
+      "projection": "right",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_v2_f1_lift_dead_left_d3.png",
+      "size": [
+        12,
+        24
+      ],
+      "opaque_colors": 18,
+      "sha256": "6f26871bd4a6bdc4e29e90df20790c714861fb30f7f830d42d92d258a7a777dc",
+      "floor": 1,
+      "kind": "lift_dead",
+      "anchor": [
+        6,
+        21
+      ],
+      "depth": 3,
+      "projection": "left",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_v2_f1_lift_dead_right_d3.png",
+      "size": [
+        12,
+        24
+      ],
+      "opaque_colors": 18,
+      "sha256": "14df958be6158fe703f49a041875754db3f8dde239648ab3ba306fe5c7cb74ab",
+      "floor": 1,
+      "kind": "lift_dead",
+      "anchor": [
+        5,
+        21
+      ],
+      "depth": 3,
+      "projection": "right",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_v2_f2_stairs_down_64.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 25,
+      "sha256": "2d2f2acc44c7813043f22d277a13bd057f74f1e6835f85f5d59cf931aa37db95",
+      "floor": 2,
+      "kind": "stairs_down",
+      "anchor": [
+        0,
+        0
+      ],
+      "wall_uv": true,
+      "depth": 1,
+      "threshold_anchor": [
+        32,
+        62
+      ]
+    },
+    {
+      "path": "assets/art/fixtures/architecture_v2_f2_stairs_down_40.png",
+      "size": [
+        40,
+        40
+      ],
+      "opaque_colors": 22,
+      "sha256": "f2b42399a3468f631679f30af47bb1dc73f90cff0555e678ed68d138581e854d",
+      "floor": 2,
+      "kind": "stairs_down",
+      "anchor": [
+        0,
+        0
+      ],
+      "wall_uv": true,
+      "depth": 2,
+      "threshold_anchor": [
+        20,
+        39
+      ]
+    },
+    {
+      "path": "assets/art/fixtures/architecture_v2_f2_stairs_down_24.png",
+      "size": [
+        24,
+        24
+      ],
+      "opaque_colors": 20,
+      "sha256": "fd559e585d5732e366853a7b22f87f6cef804d3a29deb40426ff17c48b5e9828",
+      "floor": 2,
+      "kind": "stairs_down",
+      "anchor": [
+        0,
+        0
+      ],
+      "wall_uv": true,
+      "depth": 3,
+      "threshold_anchor": [
+        12,
+        23
+      ]
+    },
+    {
+      "path": "assets/art/fixtures/architecture_v2_f2_stairs_down_left_d1.png",
+      "size": [
+        32,
+        64
+      ],
+      "opaque_colors": 23,
+      "sha256": "3df9e90731a985f89e84f0ce02b0f9049c5a96ad17a3fc4ff3cd0452f64a5bba",
+      "floor": 2,
+      "kind": "stairs_down",
+      "anchor": [
+        16,
+        58
+      ],
+      "depth": 1,
+      "projection": "left",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_v2_f2_stairs_down_right_d1.png",
+      "size": [
+        32,
+        64
+      ],
+      "opaque_colors": 23,
+      "sha256": "6ad440a2a80ed1edf0477d732830865f52ff645e1f9f22a9761edac829638ecd",
+      "floor": 2,
+      "kind": "stairs_down",
+      "anchor": [
+        15,
+        58
+      ],
+      "depth": 1,
+      "projection": "right",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_v2_f2_stairs_down_left_d2.png",
+      "size": [
+        20,
+        40
+      ],
+      "opaque_colors": 21,
+      "sha256": "682e00ec46d2920658abfa4a5865478695f2434f8bf524adfaef2768b6ee576c",
+      "floor": 2,
+      "kind": "stairs_down",
+      "anchor": [
+        10,
+        36
+      ],
+      "depth": 2,
+      "projection": "left",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_v2_f2_stairs_down_right_d2.png",
+      "size": [
+        20,
+        40
+      ],
+      "opaque_colors": 21,
+      "sha256": "12ec0375cf28ee087728f7e42545601a220c438635b75e8483bed9357b5f152b",
+      "floor": 2,
+      "kind": "stairs_down",
+      "anchor": [
+        9,
+        36
+      ],
+      "depth": 2,
+      "projection": "right",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_v2_f2_stairs_down_left_d3.png",
+      "size": [
+        12,
+        24
+      ],
+      "opaque_colors": 17,
+      "sha256": "4587ea578281f9808770ea66cfdf91cadfeca661a8632a2efdd1d2fe0d082305",
+      "floor": 2,
+      "kind": "stairs_down",
+      "anchor": [
+        6,
+        21
+      ],
+      "depth": 3,
+      "projection": "left",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_v2_f2_stairs_down_right_d3.png",
+      "size": [
+        12,
+        24
+      ],
+      "opaque_colors": 17,
+      "sha256": "83fb8718f7736b6408927df34aabe7eb01fe17c9dd092d91de6d1ba7cb97cd16",
+      "floor": 2,
+      "kind": "stairs_down",
+      "anchor": [
+        5,
+        21
+      ],
+      "depth": 3,
+      "projection": "right",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_v2_f2_stairs_up_64.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 25,
+      "sha256": "7e641525aec1e473e4e6ef1b1c60316bb9bcb0174bb4b3efb790fc2a6ecaac48",
+      "floor": 2,
+      "kind": "stairs_up",
+      "anchor": [
+        0,
+        0
+      ],
+      "wall_uv": true,
+      "depth": 1,
+      "threshold_anchor": [
+        32,
+        62
+      ]
+    },
+    {
+      "path": "assets/art/fixtures/architecture_v2_f2_stairs_up_40.png",
+      "size": [
+        40,
+        40
+      ],
+      "opaque_colors": 22,
+      "sha256": "e546df4d5fd5ea4f509706a969b51350ab2690e668aee3dc348ca5685d7bd6d4",
+      "floor": 2,
+      "kind": "stairs_up",
+      "anchor": [
+        0,
+        0
+      ],
+      "wall_uv": true,
+      "depth": 2,
+      "threshold_anchor": [
+        20,
+        39
+      ]
+    },
+    {
+      "path": "assets/art/fixtures/architecture_v2_f2_stairs_up_24.png",
+      "size": [
+        24,
+        24
+      ],
+      "opaque_colors": 22,
+      "sha256": "d4b8b07e7fd9589ea05c7355e13ee438bb91d20c48ff44371f3e567d31fa79c3",
+      "floor": 2,
+      "kind": "stairs_up",
+      "anchor": [
+        0,
+        0
+      ],
+      "wall_uv": true,
+      "depth": 3,
+      "threshold_anchor": [
+        12,
+        23
+      ]
+    },
+    {
+      "path": "assets/art/fixtures/architecture_v2_f2_stairs_up_left_d1.png",
+      "size": [
+        32,
+        64
+      ],
+      "opaque_colors": 25,
+      "sha256": "79531d38f734e8badfbfe3d3de2da6bf024fc4943e196b0db9349e55b968043d",
+      "floor": 2,
+      "kind": "stairs_up",
+      "anchor": [
+        16,
+        58
+      ],
+      "depth": 1,
+      "projection": "left",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_v2_f2_stairs_up_right_d1.png",
+      "size": [
+        32,
+        64
+      ],
+      "opaque_colors": 25,
+      "sha256": "b3b932d7e4accd9666b3861857c8e9c103f37962903587efb04da21e38e85c61",
+      "floor": 2,
+      "kind": "stairs_up",
+      "anchor": [
+        15,
+        58
+      ],
+      "depth": 1,
+      "projection": "right",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_v2_f2_stairs_up_left_d2.png",
+      "size": [
+        20,
+        40
+      ],
+      "opaque_colors": 23,
+      "sha256": "214de197898c0878c0d352231c2a5c9171c571b37a1a74a53f0342042d15f99b",
+      "floor": 2,
+      "kind": "stairs_up",
+      "anchor": [
+        10,
+        36
+      ],
+      "depth": 2,
+      "projection": "left",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_v2_f2_stairs_up_right_d2.png",
+      "size": [
+        20,
+        40
+      ],
+      "opaque_colors": 23,
+      "sha256": "b7ebad551ceca9dca8446341a2f3dcbed939ea2c44cd846727192cfd7437f12c",
+      "floor": 2,
+      "kind": "stairs_up",
+      "anchor": [
+        9,
+        36
+      ],
+      "depth": 2,
+      "projection": "right",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_v2_f2_stairs_up_left_d3.png",
+      "size": [
+        12,
+        24
+      ],
+      "opaque_colors": 17,
+      "sha256": "ce065dc72b938757eb6e9b9523cf40c9e11ac56869a4be3781493bc04528bbfa",
+      "floor": 2,
+      "kind": "stairs_up",
+      "anchor": [
+        6,
+        21
+      ],
+      "depth": 3,
+      "projection": "left",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_v2_f2_stairs_up_right_d3.png",
+      "size": [
+        12,
+        24
+      ],
+      "opaque_colors": 17,
+      "sha256": "4cbd3845d58f985288ab74587405195ef237f72e5faddfeffdf71268b78c45d9",
+      "floor": 2,
+      "kind": "stairs_up",
+      "anchor": [
+        5,
+        21
+      ],
+      "depth": 3,
+      "projection": "right",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_v2_f2_lift_dead_64.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 24,
+      "sha256": "059ce71ff681af1c6ec10996fd1dd14da5090abe36af5fcc6b02b21677293dc7",
+      "floor": 2,
+      "kind": "lift_dead",
+      "anchor": [
+        0,
+        0
+      ],
+      "wall_uv": true,
+      "depth": 1,
+      "threshold_anchor": [
+        32,
+        62
+      ]
+    },
+    {
+      "path": "assets/art/fixtures/architecture_v2_f2_lift_dead_40.png",
+      "size": [
+        40,
+        40
+      ],
+      "opaque_colors": 24,
+      "sha256": "69627aa3cfcc03dcf3853a4bab6a41ee402b88961cb660e16a94004c4d14ec8a",
+      "floor": 2,
+      "kind": "lift_dead",
+      "anchor": [
+        0,
+        0
+      ],
+      "wall_uv": true,
+      "depth": 2,
+      "threshold_anchor": [
+        20,
+        39
+      ]
+    },
+    {
+      "path": "assets/art/fixtures/architecture_v2_f2_lift_dead_24.png",
+      "size": [
+        24,
+        24
+      ],
+      "opaque_colors": 18,
+      "sha256": "78f4154f66a3e42ed63779a06581db388c46c9dcee45e6391dc12e6ea3280291",
+      "floor": 2,
+      "kind": "lift_dead",
+      "anchor": [
+        0,
+        0
+      ],
+      "wall_uv": true,
+      "depth": 3,
+      "threshold_anchor": [
+        12,
+        23
+      ]
+    },
+    {
+      "path": "assets/art/fixtures/architecture_v2_f2_lift_dead_left_d1.png",
+      "size": [
+        32,
+        64
+      ],
+      "opaque_colors": 23,
+      "sha256": "dac715747c1f3fc34c7c56c7bbfd11acaf5c45142654a69beebe2353b1d58bc5",
+      "floor": 2,
+      "kind": "lift_dead",
+      "anchor": [
+        16,
+        58
+      ],
+      "depth": 1,
+      "projection": "left",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_v2_f2_lift_dead_right_d1.png",
+      "size": [
+        32,
+        64
+      ],
+      "opaque_colors": 23,
+      "sha256": "e564076b45e64e7673fe1357ef86522e897560eb527e1aa3b4ab20fbbcb5598d",
+      "floor": 2,
+      "kind": "lift_dead",
+      "anchor": [
+        15,
+        58
+      ],
+      "depth": 1,
+      "projection": "right",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_v2_f2_lift_dead_left_d2.png",
+      "size": [
+        20,
+        40
+      ],
+      "opaque_colors": 23,
+      "sha256": "9e560204664c4a7a634418ac523bb9a35f6609b36554ee299fda79c1b4849e42",
+      "floor": 2,
+      "kind": "lift_dead",
+      "anchor": [
+        10,
+        36
+      ],
+      "depth": 2,
+      "projection": "left",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_v2_f2_lift_dead_right_d2.png",
+      "size": [
+        20,
+        40
+      ],
+      "opaque_colors": 23,
+      "sha256": "f673e3dd128e62dc27fe0c245ca3276190c0713d96fb1cec18b53090086da25c",
+      "floor": 2,
+      "kind": "lift_dead",
+      "anchor": [
+        9,
+        36
+      ],
+      "depth": 2,
+      "projection": "right",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_v2_f2_lift_dead_left_d3.png",
+      "size": [
+        12,
+        24
+      ],
+      "opaque_colors": 18,
+      "sha256": "1b8365a432f8f75a4b1d928dad26be89acc6eafa49d3d5dcff38ab129203abaa",
+      "floor": 2,
+      "kind": "lift_dead",
+      "anchor": [
+        6,
+        21
+      ],
+      "depth": 3,
+      "projection": "left",
+      "anchor_kind": "centre of projected wall threshold"
+    },
+    {
+      "path": "assets/art/fixtures/architecture_v2_f2_lift_dead_right_d3.png",
+      "size": [
+        12,
+        24
+      ],
+      "opaque_colors": 18,
+      "sha256": "13f69a35d72f70a01eb1a9404fdfd9e473c563e96a3cbf660fbada6d1539de3f",
+      "floor": 2,
+      "kind": "lift_dead",
+      "anchor": [
+        5,
+        21
+      ],
+      "depth": 3,
+      "projection": "right",
+      "anchor_kind": "centre of projected wall threshold"
+    }
+  ],
+  "canonical_uv_anchor": [
+    0,
+    0
+  ],
+  "canonical_threshold_anchor": [
+    32,
+    62
+  ],
+  "new_prefix": "architecture_v2_f",
+  "working_lift": "Reuse original architecture_f%d_lift_working_*",
+  "mockup": "Offline corridor projection, not a Godot integration capture; grid distances .5/1.5/2.5."
+}

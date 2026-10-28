@@ -575,3 +575,86 @@ crop and passive-frame stability, plus all 15 review enlargements and source
 hashes. `hands_manifest.json` records exact frame order, anchors and opaque
 bounds for every asset. No Godot run or phone acceptance is claimed for this
 asset-only batch; A/owner still need to judge motion and contrast in play.
+
+## Phone readability: shut lift and new stair faces
+
+The owner's supplied painting
+`art_src/fixtures/architecture/sources/fe3439be-72ab-49d3-8af7-49e3b2e58160.png`
+is **STAIRS DOWN**, following the owner's final direction. The original stays
+untouched. Its centered lit treads and receding vaults replace the impossible
+old side flight. A new matching painting supplies **STAIRS UP**, with broad
+front risers climbing toward a higher light and rising ceiling arches. Both
+use the owner's outer arch and native carved down/up keystone chevrons.
+
+The new **dead lift** is barred by a shut rusted folding grille: crossing iron
+straps, a central latch/lock, slack chain loops, cobwebs and a broken bell-pull.
+There is no lamp. Painted iron/rust edge values are strengthened for distance
+readability. The working lift keeps its existing open, warm-lit art.
+
+All **54 runtime PNGs are new files** in `assets/art/fixtures/`, with prefix
+`architecture_v2_f`. Old assets, source paintings and renderer code are kept.
+There is no animation in these faces: they are static architecture/state art.
+
+### Exact filenames and placement for A
+
+For `floor` 1 or 2 and `kind` `stairs_down`, `stairs_up` or `lift_dead`:
+
+| File pattern | Exact size | Anchor / use |
+| --- | --- | --- |
+| `architecture_v2_f<floor>_<kind>_64.png` | 64x64 | Wall UV origin (0,0); canonical threshold (32,62) |
+| `architecture_v2_f<floor>_<kind>_40.png` | 40x40 | UV origin (0,0); threshold (20,39); middle-distance face |
+| `architecture_v2_f<floor>_<kind>_24.png` | 24x24 | UV origin (0,0); threshold (12,23); far face |
+| `architecture_v2_f<floor>_<kind>_left_d1.png` | 32x64 | Projected threshold anchor (16,58) |
+| `architecture_v2_f<floor>_<kind>_right_d1.png` | 32x64 | Projected threshold anchor (15,58) |
+| `architecture_v2_f<floor>_<kind>_left_d2.png` | 20x40 | Projected threshold anchor (10,36) |
+| `architecture_v2_f<floor>_<kind>_right_d2.png` | 20x40 | Projected threshold anchor (9,36) |
+| `architecture_v2_f<floor>_<kind>_left_d3.png` | 12x24 | Projected threshold anchor (6,21) |
+| `architecture_v2_f<floor>_<kind>_right_d3.png` | 12x24 | Projected threshold anchor (5,21) |
+
+The current renderer samples canonical 64x64 faces by column and projects them
+continuously. For these three kinds, swap `architecture_f%d_%s_64.png` to
+`architecture_v2_f%d_%s_64.png`; preserve the existing path for `lift_working`,
+`exit` and gates. Use the equivalent new side path if consuming the preprojected
+variants. All previous UV, threshold, placement and occlusion rules still apply;
+these remain wall faces, never middle-of-cell sprites. The 40/24 fronts are also
+provided for review and renderers that select discrete distance art.
+
+Floor two uses C's darker wet masonry outside the arch, a colder/darker arch
+repaint, damp jamb streaks and preserved lamp-catching tread accents. Every
+pixel outside the arch matches the frozen floor-specific masonry, including
+the complete two-pixel seam ring. Both floors retain the shared 31 opaque inks
+and transparent palette index 0; front faces are opaque, side padding is binary
+transparent. Use nearest filtering.
+
+### Review, sources and verification
+
+All paths below start at `art_src/fixtures/readability/` and have paired native
+PNGs with exact 4x nearest enlargement:
+
+| Review | Filename |
+| --- | --- |
+| Floor-one fronts at 64/40/24 | `architecture_v2_f1_contact_4x.png` |
+| Floor-two fronts at 64/40/24 | `architecture_v2_f2_contact_4x.png` |
+| Both sides, all depths, both floors | `architecture_v2_sides_4x.png` |
+| Old dead / new shut / original working lift | `lift_closed_comparison_4x.png` |
+| Corridor, all three new faces plus working lift, depths 1-3 | `corridor_f1_depths_4x.png`, `corridor_f2_depths_4x.png` |
+| Owner's accepted down painting, direct reductions | `owner_down_evaluation_4x.png` |
+| Original M3d capture for comparison | `original_corridor_reference_4x.png` |
+
+Corridor sheets are offline ray-cast mock-ups at 148x150 using the renderer's
+FOCAL=74, HORIZON=71, lamp falloff and current floor/ceiling textures. Depths
+1/2/3 correspond to wall distances 0.5/1.5/2.5, with projected face heights
+148/49/30. They show actual dimming as well as the unshaded 64/40/24 contact
+review. They are illustrative previews, not completed in-game captures.
+
+I inspected the new source paintings before reducing, then reviewed fronts,
+side projections, shut/working comparisons and lamp-shaded corridor distances.
+At 24px the treads and keystone mark are the useful cues; fine cobwebs and
+brushwork recede. No blind human classification or phone playtest is claimed.
+
+Exact requests and preserved sources live in that folder. The unused initial
+stair generations are retained as history; the final down source is always the
+owner's original. `build_architecture_readability.py` rebuilds all runtime art
+and main reviews offline, without Godot. `verify_architecture_readability.py`
+checks 54 runtime PNGs, eight review sheets, input/output hashes, palette and
+alpha, exact nearest sampling, original anchors and material seams.
