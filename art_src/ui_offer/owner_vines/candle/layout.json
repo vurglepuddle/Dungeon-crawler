@@ -1,0 +1,187 @@
+{
+  "schema_version": 1,
+  "canvas": [
+    154,
+    342
+  ],
+  "strip": "res://assets/art/ui/owner_candle.png",
+  "strip_size": [
+    14,
+    17
+  ],
+  "frames": 2,
+  "frame_size": [
+    7,
+    17
+  ],
+  "offset": [
+    147,
+    155
+  ],
+  "overlay_box_ltrb_exclusive": [
+    147,
+    155,
+    154,
+    172
+  ],
+  "flame_box_ltrb_exclusive": [
+    148,
+    155,
+    154,
+    161
+  ],
+  "atlas_regions_xywh": [
+    [
+      0,
+      0,
+      7,
+      17
+    ],
+    [
+      7,
+      0,
+      7,
+      17
+    ]
+  ],
+  "suggested_duration_ms": [
+    430,
+    270
+  ],
+  "draw_order": "Draw candle-free owner_vines.png, then one candle frame at the offset, with the same existing visibility rules.",
+  "filter": "nearest",
+  "alpha": "binary",
+  "source_original_sha256": "bb3c04c9f3b91ce77c780dcebf718fb0e9a4ef3c62a7a4b52160ac3a3269c2bd",
+  "owner_ase_sha256": "24dc8a9a1391bf2a2594088ef3fca326d1488331be8b7fe70d8dc63302e8ec7f",
+  "extraction_spans_y_x_inclusive": {
+    "155": [
+      151,
+      151
+    ],
+    "156": [
+      150,
+      152
+    ],
+    "157": [
+      149,
+      153
+    ],
+    "158": [
+      149,
+      153
+    ],
+    "159": [
+      148,
+      153
+    ],
+    "160": [
+      148,
+      153
+    ],
+    "161": [
+      148,
+      153
+    ],
+    "162": [
+      147,
+      153
+    ],
+    "163": [
+      147,
+      153
+    ],
+    "164": [
+      147,
+      153
+    ],
+    "165": [
+      147,
+      153
+    ],
+    "166": [
+      148,
+      153
+    ],
+    "167": [
+      148,
+      153
+    ],
+    "168": [
+      148,
+      153
+    ],
+    "169": [
+      148,
+      153
+    ],
+    "170": [
+      148,
+      153
+    ],
+    "171": [
+      149,
+      153
+    ]
+  },
+  "flicker_rows_y_startx_indices": {
+    "155": [
+      150,
+      [
+        1
+      ]
+    ],
+    "156": [
+      149,
+      [
+        1,
+        21,
+        1
+      ]
+    ],
+    "157": [
+      148,
+      [
+        1,
+        21,
+        21,
+        19,
+        1
+      ]
+    ],
+    "158": [
+      148,
+      [
+        1,
+        21,
+        25,
+        21,
+        21,
+        1
+      ]
+    ],
+    "159": [
+      148,
+      [
+        1,
+        21,
+        25,
+        25,
+        21,
+        1
+      ]
+    ],
+    "160": [
+      148,
+      [
+        1,
+        21,
+        25,
+        25,
+        21,
+        1
+      ]
+    ]
+  },
+  "overlay_patch": "Only the original opaque candle mask. Restore 3px right rim and bottom bar beneath it; frame0 hides every changed underlay pixel.",
+  "owner_working_template": "art_src/ui_offer/owner_vines/templates/screen_154x342_no_candle.png"
+}
