@@ -2,25 +2,29 @@
 
 Where the project stands, who is doing what, and how we work. Claude keeps this
 current so that any session (or a reader catching up) can pick up the thread.
-Last updated 29 October 2026, shortly after midnight.
+Last updated 29 October 2026, about 2 a.m.
 
 ## Where we are
 
-UNDERCROFT is a playable two-floor run on the owner's Pixel 9a: down to the
+UNDERCROFT is a playable three-floor run on the owner's Pixel 9a: down to the
 Dawn Seal and home again, with the Bell Porter's lift, fire and webs, the Ash
 Hound, the Wick Ghost, throwing, the Seal's reveal and a hidden cache. The
 owner has played it many times on the phone ("this is actually awesome ...
 crunchy pixel art vibes really give King's Field") and **save, full close,
 reopen and Continue is verified on the device**.
 
-Latest verified and pushed milestone: **M3f** (`5810909`). Latest phone build:
-`build/Undercroft-M3f.apk` (the owner has played it). Later commits are art
-batches, an audit and settings, none needing a new APK on their own.
+Latest verified and pushed milestone: **M4a** (`1da39f8`): a third floor, The
+Lower Watch (harder blows: 2 HP, the Hound 3), plus the owner's brazier, web
+and travel-face fixes and B's painted floor items. Then B's painted fixtures
+v2 (`9d637ad`, not wired yet). Latest phone build:
+`build/Undercroft-M4a.apk`, **built but not yet installed or played** (the
+phone was not connected). The owner last played M3f.
 
 The owner's verdicts that steer what comes next:
 
-- **Too easy and short**: about six minutes, no food used. A third, harder
-  floor and tuning are being designed now (M4a).
+- **Too easy and short**: about six minutes, no food used. M4a answers with a
+  third floor; bots take 84-146 turns (core) and 176-225 (full tour). No more
+  depth tuning until the owner has played three floors.
 - They love the painted, aged, "dirty dungeon" look, two or three frames per
   moving thing, the glass health vial, the dark background behind the bottom
   controls, optional branches that are **easy to miss**, sneaky but fair
@@ -36,10 +40,10 @@ verifies, commits with explicit paths and pushes.
 
 | Worker | Owns | State at this update |
 | --- | --- | --- |
-| **A**: game code | `scripts/` (except dev, fx, audio/music), `scenes/`, `data/` (except music/text), tests except `tests/qa/`, DESIGN/CONTRACT/ARCHITECTURE, `M*_RESULTS.md` | **M4a delivered, awaiting Claude's review** (reply in the session scratchpad `codex_m4a_reply.md`; results in `docs/M4A_RESULTS.md`): owner fixes (the brazier lights from a tap with a torch, the web burns from a lit torch held or equipped, travel faces never say "blocked"), B's world item sprites, and `docs/proposals/M4_DEPTH.md` (third floor and difficulty) plus its safe implementation |
-| **B**: creatures, fixtures, music | `art_src/{anim,fx,creatures,fixtures,hands,items,music}`, matching `assets/art/` folders, `data/music/`, `scripts/audio/music.gd`, `docs/ART.md`, `docs/MUSIC.md` | **Running**: painted repaint of the remaining pixel-drawn fixtures (plate, side levers, web, cord grate, underfoot lift and stair ground, opened cache recess, spent-coat icon) |
-| **C**: environment, screens, UI art, manual | `art_src/{env,icons,screens,portrait,props,ui_offer}`, matching `assets/art/` folders, `scripts/fx/`, `data/text/`, `docs/MANUAL.md`, `POLISH.md`, `ENV_ART.md` | Idle. Last: painted wall dressings `dressing_v2`, ivy v4 (backup vines) |
-| **D**: QA | `tests/qa/`, `docs/QA_REPORT.md`, `docs/ART_AUDIT.md` | Idle. Last: placeholder-art audit. Re-sweep after M4a lands |
+| **A**: game code | `scripts/` (except dev, fx, audio/music), `scenes/`, `data/` (except music/text), tests except `tests/qa/`, DESIGN/CONTRACT/ARCHITECTURE, `M*_RESULTS.md` | **Running M4b**: wire C's `dressing_v2`, B's painted fixtures v2 (incl. world-cell lift/stair ground), the Hound glow and room landmarks, a required-asset guard, and a one-function floor-to-art mapping ready for floor three |
+| **B**: creatures, fixtures, music | `art_src/{anim,fx,creatures,fixtures,hands,items,music}`, matching `assets/art/` folders, `data/music/`, `scripts/audio/music.gd`, `docs/ART.md`, `docs/MUSIC.md` | **Running r9**: a floor-three music piece and painted 16 px pack icons (`assets/art/items/icon_<kind>_16.png`) |
+| **C**: environment, screens, UI art, manual | `art_src/{env,icons,screens,portrait,props,ui_offer}`, matching `assets/art/` folders, `scripts/fx/`, `data/text/`, `docs/MANUAL.md`, `POLISH.md`, `ENV_ART.md` | **Running r11**: a Lower Watch (`f3`) environment family and the manual updated for M4a |
+| **D**: QA | `tests/qa/`, `docs/QA_REPORT.md`, `docs/ART_AUDIT.md` | **Running r3** in a clean worktree (session scratchpad `qa/`, at `9d637ad`): adversarial/softlock/save coverage of the three-floor m4.1 profile and measured difficulty. Claude copies its `tests/qa/` and QA_REPORT back |
 | **Claude** | `project.godot`, `export_presets.cfg`, `assets/icon/`, `scripts/dev/` (autopilot, pointer), `docs/BRIEF.md`, `COLLAB_LOG.md`, this file, Git, builds, phone | Orchestrating |
 
 The owner also paints: a hand-made 154 x 342 **vine overlay** in progress in
@@ -47,19 +51,15 @@ The owner also paints: a hand-made 154 x 342 **vine overlay** in progress in
 repo is private). A's overlay layer is ready and empty. Rules: draw it above
 the chrome and above the compass needle, below cards, modals and the map.
 
-## Queue for Codex A's next turn (after M4a)
+## Queue after this round
 
-1. **Wire C's painted `dressing_v2`** (`docs/ENV_ART.md`): the `_v2` dressing
-   paths and sconce prewarm paths; the closed lock uses `painted_fN_door_v2`;
-   an opened lock draws `painted_fN_door_open_overlay_v2` through the portal
-   path (no more borrowed portcullis art).
-2. **Act on D's `docs/ART_AUDIT.md`**: wire painted assets that exist but
-   aren't used (head-on lever faces, the ember Hound glow layers at about 0.85
-   gain, room landmark floor/ceiling faces), then B's repainted fixtures when
-   they land. Keep the intentional code visuals: map ink, digits, glints,
-   lanes, arrows, compass.
-3. **The owner's vine overlay**, when the owner delivers it.
-4. Whatever M4a leaves as a proposal, after Claude reviews `M4_DEPTH.md`.
+1. The owner plays `Undercroft-M4a.apk` (three floors); their verdict on
+   length and difficulty steers any further depth work (see M4_DEPTH.md's
+   "what I would cut").
+2. A wires C's floor-three family, B's floor-three music and painted pack
+   icons, and fixes anything D's deep sweep finds.
+3. **The owner's vine overlay**, when the owner delivers it (copy to
+   `assets/art/ui/owner_vines.png`; A's layer is ready).
 
 Claude disabled Godot's stock boot image (`b4d6719`), so the LOST MOTH splash
 comes first.
@@ -75,7 +75,7 @@ comes first.
 ## How Claude verifies and ships
 
 - Read the worker's reply and its screenshot sheet, then rerun its scripts
-  (latest: `tests/run_m3f_checks.ps1`, `tests/run_m3f_pilots.ps1`) and D's
+  (latest: `tests/run_m4a_checks.ps1`, `tests/run_m4a_pilots.ps1`) and D's
   `tests/qa/run.ps1`. Pilots are muted unless `--with-sound`, and pilots hide
   the desktop pointer unless `--show-pointer`.
 - Commit only verified work, with explicit paths (another worker may be
