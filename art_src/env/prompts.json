@@ -1,0 +1,15 @@
+{
+  "tool": "built-in image_gen.imagegen",
+  "mode": "generate",
+  "sources": {
+    "abbey": {
+      "path": "sources/abbey.png",
+      "prompt": "Use case: stylized-concept. Asset type: original painted source for a seamless 64x64 abbey masonry wall tile in UNDERCROFT, a forgotten 1993 VGA dungeon crawler. Square orthographic elevation, face on, absolutely no perspective. Four broad courses of large squared pale warm grey limestone blocks with staggered vertical joints. Quiet broad clusters of grey blue shadow and warm grey faces, sparse worn chips, almost no fine speckles. Hand painted slightly janky early computer game art; muted blue greys and parchment highlights, deep blue mortar. Flat unlit material, no vignette, no cast shadow, no objects or symbols, no panels, no border, no lettering, no room scene. Stone courses repeat across the image boundaries; suitable to tile. Each course about one quarter image height. Restrained contrast; texture detail must survive nearest-neighbour reduction to 64 pixels. Opaque square image."
+    },
+    "deep": {
+      "path": "sources/deep.png",
+      "prompt": "Use case: stylized-concept. Asset type: original painted source for seamless 64x64 wall material, floor two of UNDERCROFT, forgotten 1993 VGA dungeon crawler. Square orthographic face-on elevation, absolutely no perspective. Four broad courses of ancient large dark blue-grey stone blocks, rounder eroded edges, staggered mortar joints, older and wetter than an abbey above. Subdued deep slate, muted petroleum teal dampness in broad patches, just occasional quiet grey highlights. Hand painted slightly janky early computer game art. Very low detail, no glitter, no busy stipples, no fine cracks, no green vegetation, no lamps, no symbols, no room or border, no lettering, no directional illumination or vignette. Quiet worn stone material for nearest reduction to 64 pixels, full bleed opaque square. Horizontal stone courses and surface colour should tile at the outer boundaries."
+    }
+  },
+  "derivation": "Saved paintings -> nearest 64px sampling -> shared palette -> quiet three-shade material and aligned mortar -> editable integer-pixel dressing. Build scripts reproduce derived files; image generation is not deterministic."
+}

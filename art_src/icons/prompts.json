@@ -1,0 +1,6 @@
+{
+  "tool": "None; original integer-pixel code drawings",
+  "source": "build_icons.py",
+  "brief": "Thirteen 16x16 centered possessions with one-pixel dark silhouette outlines. Item IDs match catalog; torch reserved for FIRE.",
+  "derivation": "Editable integer polygons and lines -> eight-neighbour one-pixel outline -> opaque-bounds centering. No generated or downloaded art."
+}

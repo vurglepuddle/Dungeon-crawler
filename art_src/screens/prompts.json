@@ -1,0 +1,23 @@
+{
+  "tool": "built-in image_gen.imagegen",
+  "mode": "generate",
+  "sources": {
+    "title": {
+      "path": "sources/title.png",
+      "prompt": "Use case: illustration-story. Asset type: title illustration for UNDERCROFT, original forgotten-1993 PC dungeon crawler, to be reduced to 154x150 logical pixels. Near-square opaque painting, hand-painted VGA box-art charm, chunky restrained details, deep blue-grey stone and aged muted teal, warm amber lamp as focal point. View from just inside a worn abbey crypt doorway looking down a broad short flight of stairs into an ancient dark undercroft; one hooded Finder seen small from behind carries a warm hooded lantern in one hand. Old stone arches and heavy ceiling beams, worn flagstones, a few distant hanging chains fading into absolute shadow. An ordinary lost key rests close to foreground at lower left, subtle storytelling rather than treasure piles. The dungeon dominates. Broad clean painted clusters readable at 154 pixels, quiet walls, mysterious and welcoming to exploration, no horror gore. Composition: central lit stairway in the middle, dark quiet upper quarter for a separate title label. No written words, no lettering, no UI, no decorative interface frame, no watermark. Full bleed art."
+    },
+    "win": {
+      "path": "sources/win.png",
+      "prompt": "Use case: illustration-story. Asset type: original small victory vignette for UNDERCROFT, to be reduced to 128x80 pixels. Landscape 8:5 composition, early 1993 VGA adventure-game painted illustration, broad chunky brushwork, limited deep blue slate and muted teal, parchment gold dawn. First-person view outside an old small stone abbey at daybreak: a brown-skinned hand with teal sleeve raises the Dawn Seal in lower right foreground, a simple palm-sized golden octagonal medallion with a muted teal centre and an embossed rising sun. Clear identifiable hand, no extra fingers. Beyond it, low abbey towers and one bell opening against the first warm streak of sunrise, dark moorland, quiet mist. The scene is hopeful, modest, earned; no crowds, dragons, treasure piles, weapons or church crosses. Keep seal silhouette large and readable at tiny size, abbey mostly left, rising sun near horizon. Full-bleed landscape art, no lettering, no UI, no frame, no watermark, opaque."
+    },
+    "death": {
+      "path": "sources/death.png",
+      "prompt": "Use case: illustration-story. Asset type: small death vignette for UNDERCROFT, forgotten 1993 VGA dungeon crawler. Landscape 8:5 opaque painting, to reduce to128x80 logical pixels. A battered small hooded brass lantern lies tipped on dark abbey flagstones, its last tiny amber flame guttering inside. A thin thread of smoke curls up. Low viewpoint close to the stone floor, lantern large in lower-middle left, a few broad flagstone seams recede towards the far darkness. One ordinary lost key nearby, no treasure. Deep blue greys, near black, restrained muted teal moisture, one faint warm amber pool of light fading at its edges. Handmade painterly pixel-game character, simple readable silhouette, broad dark shapes, no glossy 3D sheen, no fine clutter. Quiet and poignant rather than graphic. No body, no blood, no skeleton, no monsters, no words, no UI, no frame, no watermark. Full bleed art."
+    },
+    "splash": {
+      "path": "sources/splash.png",
+      "prompt": "Use case: logo-brand. Asset type: fictional 1993 computer-game publisher splash emblem for LOST MOTH, original invented publisher of UNDERCROFT. Draw ONLY the emblem, no words or numbers; typography is added later in the owner's pixel font. A single simple symmetrical moth with spread wings, its central body shaped like an old key, a small circular key bow as its head and two short teeth at the tail. Elegant odd handmade silhouette, like an old gold printer's device, not a real species. Broad parchment-gold and muted bronze wings with two small dark teal eye marks, key body warm antique brass. Restrained hand-painted VGA computer game artwork, chunky clear clusters that will still read at 64 pixels; not glossy, not photorealistic, not vector sterile. Centre emblem occupies the middle 75 percent of a plain flat nearly black deep blue square background RGB approximately 12,16,28. Wings fit fully within canvas, generous dark margin. Absolutely no border, no frame, no caption, no lettering, no watermark, opaque background, no other objects or symbols."
+    }
+  },
+  "derivation": "Aspect-preserving centre crop, nearest-only reduction to native size, shared fixed palette. Publisher lettering is native VETKA 16 added after emblem reduction. Sources are preserved; regeneration from prompts is not deterministic."
+}

@@ -1,0 +1,20 @@
+{
+  "tool": "built-in image_gen.imagegen",
+  "mode": "identity-preserve edit",
+  "reference": "../spike/sources/finder_portrait_painted.png",
+  "sources": {
+    "fine": {
+      "path": "sources/fine.png",
+      "origin": "Exact copied original painting; see art_src/spike/prompts.json for generation prompt."
+    },
+    "hurt": {
+      "path": "sources/hurt.png",
+      "prompt": "Use case: identity-preserve. Edit target: the attached original painted Finder portrait for UNDERCROFT. Create the HURT state of exactly the same adult brown-skinned Finder, teal hood, pale worn edging, short curly dark hair, dark eyes, leather shoulder strap. Preserve the face proportions, pose, camera crop, hood outer silhouette, original blue background and broad painterly early-1990s pixel-like brushwork. Change only expression and small injury marks: one eyebrow lowered, lips tightened with determination, a small dark reddish scratch on the cheek and subtle bruise under one eye. Keep both eyes clearly readable. No gore. The result will be nearest-neighbour reduced to 32x32; the changed eyebrow, mouth and cheek should read as broad clusters rather than tiny marks. Do not redesign or beautify the character, do not add headgear or UI frame, no text. Opaque square image."
+    },
+    "near_death": {
+      "path": "sources/near_death.png",
+      "prompt": "Use case: identity-preserve. Edit target: attached original painted Finder portrait from UNDERCROFT. Make the NEAR DEATH reactive portrait of exactly this same brown-skinned adult Finder with short dark curls, teal hood and pale worn edging, dark eyes and leather shoulder strap. Identity, face proportions, camera angle, crop, hood silhouette, background and early-1990s painterly clusters must stay fixed. Change only expression, fatigue and small injury marks: heavy half-lidded eyes still open, one eye slightly swollen, exhausted tightened mouth with a small lowered corner, a dark dry scratch on the cheek and broad cool bruised shadows under the eyes, forehead drawn with weariness. Keep brown skin, not white/pale skin; no gore, no skeletal face, no closed eyes, no new character. Make expression readable after nearest reduction to 32x32. No UI border, no text, opaque square."
+    }
+  },
+  "derivation": "Nearest 32px sampling, fixed palette. Fine must pixel-match the accepted assets/art/finder.png."
+}

@@ -1,0 +1,271 @@
+{
+  "palette": "art_src/spike/palette.gpl",
+  "colours_union": 23,
+  "files": [
+    {
+      "path": "art_src/icons/contact_sheet_4x.png",
+      "size": [
+        2976,
+        696
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        2976,
+        696
+      ],
+      "colours": 22,
+      "sha256": "f471ff8ed49c5e44c5a2475df04b8a76b518c150af91fcb85d15e576a24e54ea"
+    },
+    {
+      "path": "art_src/icons/contact_sheet_native.png",
+      "size": [
+        744,
+        174
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        744,
+        174
+      ],
+      "colours": 22,
+      "sha256": "31d105b5e378efed4dec90e3b3ffae22641e2cff314c6ff68f677812f2ca4050"
+    },
+    {
+      "path": "assets/art/icons/bone.png",
+      "size": [
+        16,
+        16
+      ],
+      "opaque_bounds": [
+        1,
+        1,
+        15,
+        15
+      ],
+      "colours": 5,
+      "sha256": "a8e3a12b941d3890566718751a6a45e05b99d32192f9a9f5ce5b82827f1deab4"
+    },
+    {
+      "path": "assets/art/icons/bread.png",
+      "size": [
+        16,
+        16
+      ],
+      "opaque_bounds": [
+        1,
+        2,
+        15,
+        14
+      ],
+      "colours": 5,
+      "sha256": "fcefcea068cf75e2733feae1165a088f7d2b9d19cd9cd4abb63ed8d7f661624d"
+    },
+    {
+      "path": "assets/art/icons/clapper.png",
+      "size": [
+        16,
+        16
+      ],
+      "opaque_bounds": [
+        3,
+        1,
+        13,
+        15
+      ],
+      "colours": 6,
+      "sha256": "3470697e64790b888e8abd2b8cf5ace65d37aa3a1bd090d51c0d192258b58f24"
+    },
+    {
+      "path": "assets/art/icons/club.png",
+      "size": [
+        16,
+        16
+      ],
+      "opaque_bounds": [
+        2,
+        1,
+        13,
+        15
+      ],
+      "colours": 7,
+      "sha256": "47f084461b63ab5cc4a441cfcbc9b23bed81471966c29effd7382f26bf2127f3"
+    },
+    {
+      "path": "assets/art/icons/coat.png",
+      "size": [
+        16,
+        16
+      ],
+      "opaque_bounds": [
+        0,
+        1,
+        16,
+        14
+      ],
+      "colours": 8,
+      "sha256": "c38e879f289c56a977f1b2bb8aefcf0bd0e3acec93a51766b4eb12c553e17f8c"
+    },
+    {
+      "path": "assets/art/icons/items_strip.png",
+      "size": [
+        208,
+        16
+      ],
+      "opaque_bounds": [
+        1,
+        0,
+        207,
+        15
+      ],
+      "colours": 23,
+      "sha256": "46fe85d8fbe3274a533b6d6147c897d94694d0ea39537782a8f1cff681cf5730"
+    },
+    {
+      "path": "assets/art/icons/key.png",
+      "size": [
+        16,
+        16
+      ],
+      "opaque_bounds": [
+        1,
+        0,
+        14,
+        15
+      ],
+      "colours": 6,
+      "sha256": "ca76cedf13584c7f4850cb9cce750fa85f119994d5d5da2f8249bbe1e568abe4"
+    },
+    {
+      "path": "assets/art/icons/knife.png",
+      "size": [
+        16,
+        16
+      ],
+      "opaque_bounds": [
+        1,
+        0,
+        15,
+        15
+      ],
+      "colours": 7,
+      "sha256": "3404917e926ec67a47aac524cbb6afd9a79e1e87333d163a136ff8b7be1f5441"
+    },
+    {
+      "path": "assets/art/icons/lamp.png",
+      "size": [
+        16,
+        16
+      ],
+      "opaque_bounds": [
+        3,
+        1,
+        13,
+        15
+      ],
+      "colours": 7,
+      "sha256": "5ffc67adb75b205d0cfb88438416d0830405618c2d804dd81d2ed5533c3f2f2d"
+    },
+    {
+      "path": "assets/art/icons/seal.png",
+      "size": [
+        16,
+        16
+      ],
+      "opaque_bounds": [
+        1,
+        1,
+        15,
+        15
+      ],
+      "colours": 6,
+      "sha256": "5ff3c8a4a4524273e1fd72697b91e18345659031ed263d5f3cdcf69f727d67d9"
+    },
+    {
+      "path": "assets/art/icons/shard.png",
+      "size": [
+        16,
+        16
+      ],
+      "opaque_bounds": [
+        2,
+        1,
+        14,
+        14
+      ],
+      "colours": 6,
+      "sha256": "6598aeaa99fdf59d013a4982c12e173638871e20c715ac4f7d54e1185dc16b62"
+    },
+    {
+      "path": "assets/art/icons/stone.png",
+      "size": [
+        16,
+        16
+      ],
+      "opaque_bounds": [
+        1,
+        2,
+        14,
+        14
+      ],
+      "colours": 5,
+      "sha256": "7379a50d89928141a46df7408d61e3454fe6a224f848f77fded47a2ac2e6c128"
+    },
+    {
+      "path": "assets/art/icons/tonic.png",
+      "size": [
+        16,
+        16
+      ],
+      "opaque_bounds": [
+        2,
+        1,
+        14,
+        15
+      ],
+      "colours": 9,
+      "sha256": "2f3080bea554851600adb54ead79bf51f9f2455b0e81e90ced67f071aab5feb4"
+    },
+    {
+      "path": "assets/art/icons/torch.png",
+      "size": [
+        16,
+        16
+      ],
+      "opaque_bounds": [
+        3,
+        0,
+        13,
+        15
+      ],
+      "colours": 8,
+      "sha256": "a4e23730ecbb8ab738078a178c4df1e666efaeea6a3794ff4eac656cb0820d91"
+    }
+  ],
+  "sources": [],
+  "strip_order": [
+    "knife",
+    "lamp",
+    "stone",
+    "bone",
+    "bread",
+    "torch",
+    "clapper",
+    "shard",
+    "tonic",
+    "club",
+    "coat",
+    "key",
+    "seal"
+  ],
+  "cell_size": [
+    16,
+    16
+  ],
+  "anchor": [
+    8,
+    8
+  ],
+  "torch_status": "reserved FIRE item; not in current catalog"
+}

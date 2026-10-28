@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "max_line_chars": 21,
+  "items": {
+    "knife": ["Lost by a cook, 1203."],
+    "lamp": ["Lost by a monk, 1198."],
+    "stone": ["Lost: a mason, 1211."],
+    "bone": ["Lost by a dog, 1210."],
+    "bread": ["Lost: a baker, 1211."],
+    "torch": ["Lost before matins."],
+    "clapper": ["Lost by the Porter."],
+    "shard": ["Lost from a window."],
+    "tonic": ["Lost: a nurse, 1209."],
+    "club": ["Lost: a guard, 1194."],
+    "coat": ["Lost on a cold night."],
+    "key": ["Still knows its lock."],
+    "seal": ["Lost by the dawn."]
+  },
+  "reserved_item_ids": ["torch"]
+}

@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "max_line_chars": 21,
+  "floor_names": {
+    "1": ["The Abbey Below"],
+    "2": ["The Drowned Courses"]
+  },
+  "death_epitaphs": [
+    ["Filed under: missing.", "A Finder, unfound."],
+    ["The lamp kept vigil.", "The abbey kept quiet."],
+    ["One more lost thing.", "One empty coat hook."],
+    ["No return address.", "The stone remembers."],
+    ["The way home waited.", "So did the dawn."],
+    ["Please keep the key.", "Someone may return."]
+  ],
+  "hint_notes": [
+    {"id": "plate", "when": "inspect_weight_plate", "lines": ["A stone has patience.", "Leave a weight here."]},
+    {"id": "latch", "when": "beyond_weight_gate", "lines": ["Latch it from inside.", "Then fetch the stone."]},
+    {"id": "husk", "when": "inspect_husk", "lines": ["A raised arm warns.", "Guard. Then strike."]},
+    {"id": "porter", "when": "inspect_sleeping_lift", "lines": ["The Porter lost it.", "A voice of bronze."]},
+    {"id": "ring", "when": "inspect_clapper", "lines": ["One ring, each floor.", "One beat to answer."]},
+    {"id": "home", "when": "take_seal", "lines": ["Dawn knows the way.", "Take it to the door."]},
+    {"id": "pack", "when": "full_pack", "lines": ["Eight pockets only.", "The floor keeps lost."]},
+    {"id": "coat", "when": "inspect_spent_coat", "lines": ["One blow well taken.", "No padding left now."]}
+  ]
+}

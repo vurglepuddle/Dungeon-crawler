@@ -1,0 +1,120 @@
+{
+  "palette": "art_src/spike/palette.gpl",
+  "colours_union": 31,
+  "files": [
+    {
+      "path": "art_src/screens/contact_sheet_4x.png",
+      "size": [
+        1440,
+        1656
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        1440,
+        1656
+      ],
+      "colours": 31,
+      "sha256": "c7661c01dd09bd94a4db6dafa38b8159837ebd9a2db7a3747fb6d30befedbc53"
+    },
+    {
+      "path": "art_src/screens/contact_sheet_native.png",
+      "size": [
+        360,
+        414
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        360,
+        414
+      ],
+      "colours": 31,
+      "sha256": "fffc4b889c4ee1b0948fe57abc48ffa3f05f437a52259448c6dd9d01abb9641e"
+    },
+    {
+      "path": "assets/art/screens/death.png",
+      "size": [
+        128,
+        80
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        128,
+        80
+      ],
+      "colours": 30,
+      "sha256": "6c8c1b4bd60099707d7b1e5001600d0e4c1d9426c68aa4ad51562e18dc4f0808"
+    },
+    {
+      "path": "assets/art/screens/splash.png",
+      "size": [
+        154,
+        150
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        154,
+        150
+      ],
+      "colours": 24,
+      "sha256": "c877c926d27926be53575e09b0bd732a0d15bdfa6106286b974674beff21ea44"
+    },
+    {
+      "path": "assets/art/screens/title.png",
+      "size": [
+        154,
+        150
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        154,
+        150
+      ],
+      "colours": 31,
+      "sha256": "1f6c98ac49abb79b46129a6ac3f864d703873432009b13318f8a73a26d48b501"
+    },
+    {
+      "path": "assets/art/screens/win.png",
+      "size": [
+        128,
+        80
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        128,
+        80
+      ],
+      "colours": 30,
+      "sha256": "443243a20461b1e4553e0a2e4912a7471985fcf57e9de047549ec1c4dea24fff"
+    }
+  ],
+  "sources": [
+    {
+      "path": "art_src/screens/sources/death.png",
+      "sha256": "28a311470f99fb9791bb96d6668b4c0cefb0ce3767885defa82c8145a26af84c"
+    },
+    {
+      "path": "art_src/screens/sources/splash.png",
+      "sha256": "e543c4e99ba52b85e805abf288ddb04fd7242711e8d2436d18f0582b1e89c4be"
+    },
+    {
+      "path": "art_src/screens/sources/title.png",
+      "sha256": "936aca44e8c51ee59136d44751ea430757aee09de3d6e7a6e3334a617e27f76c"
+    },
+    {
+      "path": "art_src/screens/sources/win.png",
+      "sha256": "6f3613d2933124cd9fe8fd084c3ff20244a4f1b64e18ef9d1e129d16876f5b95"
+    }
+  ],
+  "title_text": "Separate VETKA label, not baked into title art",
+  "splash_text": [
+    "LOST MOTH",
+    "1993"
+  ],
+  "crop": "Aspect-preserving centre crop before nearest reduction"
+}
