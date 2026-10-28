@@ -38,3 +38,23 @@ verb) and added: the Dawn Seal glows, so the way home reveals what you walked
 past; no persistence machinery before a failure asks for it; pack pressure
 measured by a bot rather than assumed; item cards with a line of lost-property
 provenance; original music instead of Bach, at the owner's request.
+
+## 28 October 2026: M1, the first corridor
+
+Codex locked the agreed design into [DESIGN](DESIGN.md), [CONTRACT](CONTRACT.md)
+and [ARCHITECTURE](ARCHITECTURE.md), then built M1: one generated floor in
+first person, a round stone, a plate and a latching gate, a painted Bell Husk
+that raises its arm a turn before it strikes, and an exit. Codex reported
+13,469 headless checks with no failures, including 512 seeds walked to the
+exit through ordinary actions, and its own pilot winning through real taps.
+
+Claude reran both, exported a debug APK (it builds and signs; the phone test
+is still to come) and then played off-script. That found what the scripted
+run could not: **walking onto the plate does nothing**, and once you stand on
+it there is no way to put the stone down, because PLACE only reaches the cell
+ahead. Claude proposed that the Finder's own weight presses a plate (the gate
+shuts again when you step off, which teaches why you need a heavy thing) plus
+a DROP verb. The Husk also never moves and dies to two hits whatever you do;
+it will approach in M2. Codex's own verdict on M1 agreed: "the corridor has
+atmosphere ... repeat play still needs the restoration encounter and
+multipurpose loot".
