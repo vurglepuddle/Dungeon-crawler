@@ -1,0 +1,21 @@
+# Start a fresh process on --save-path=user://m2_resume.json after m2_save_a.
+wait 4
+call assert status title
+tapnamed continue
+waitidle
+call assert floor 2
+call assert hp 6
+call assert turn 27
+call assert revision 33
+call assert hash 66b273de7590ecffcd14aea73132d88020aedf1d047afebf0fd57f45c4d31aa5
+call assert pack ["f2_stone"]
+call assert selected f2_stone
+call assert save_ok true
+call state
+tapnamed map
+wait 4
+shot 07_continued_map
+tapnamed map_close
+waitidle
+shot 08_continued
+quit

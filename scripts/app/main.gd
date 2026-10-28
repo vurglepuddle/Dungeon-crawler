@@ -1,411 +1,458 @@
 extends Control
-
 const Sim = preload("res://scripts/sim/dungeon_sim.gd")
 const Witness = preload("res://scripts/gen/witness.gd")
 const Gen = preload("res://scripts/gen/floor_gen.gd")
+const Store = preload("res://scripts/persistence/save_store.gd")
+const Art = preload("res://scripts/art/item_art.gd")
 const View = preload("res://scripts/view/dungeon_view.gd")
+const Sfx = preload("res://scripts/audio/sfx.gd")
 const FONT = preload("res://assets/font/vetka.ttf")
 const PORTRAIT = preload("res://assets/art/finder.png")
 const INK := Color("d3c8a4")
 const GOLD := Color("eeb95a")
 var sim
-var state: Dictionary = {}
-var selected := ""
-var lines: Array = ["Find the way out.", "Take the stone ahead."]
-var controls: Dictionary = {}
-var verbs: Array = []
+var state: Dictionary={}
+var selected: String=""
+var lines: Array=["Find the Dawn Seal.","Bring it home."]
+var controls: Dictionary={}
+var verbs: Array=[]
 var view
-var _busy := 0.0
-var _duration := 0.14
-var _hurt := false
-var _modal: PanelContainer
+var sfx
+var _busy: float=0
+var _hurt_time: float=0
+var _bob: bool=false
+var _mode: String="title"
+var _save_path: String=Store.DEFAULT_PATH
+var _save_ok: bool=true
+var _floor_count: int=2
+var _modal: Control
+var _card: Control
+var _dynamic_names: Array=[]
+var _card_names: Array=[]
+var _menu: Control
+var _menu_title: Label
+var _menu_note: Label
 var _seed_input: LineEdit
-var _modal_error: Label
-var _stone_icon: Texture2D
+var _seed_note: Label
+var _view_action: Dictionary={}
 
 func _ready() -> void:
-	texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	clip_contents=true
+	texture_filter=CanvasItem.TEXTURE_FILTER_NEAREST
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	view = View.new()
-	view.position = Vector2.ZERO
-	view.size = Vector2(154, 118)
-	view.clip_contents = true
-	add_child(view)
-	var icon := Image.create(16, 16, false, Image.FORMAT_RGBA8)
-	icon.fill(Color.TRANSPARENT)
-	for y in range(16):
-		for x in range(16):
-			if absf(x - 7.5) / 7.0 + absf(y - 7.5) / 6.0 < 1.1:
-				icon.set_pixel(x, y, Color("b6ae91") if x + y < 15 else Color("59616a"))
-	_stone_icon = ImageTexture.create_from_image(icon)
-	_create_controls()
-	new_run("BELL42")
+	get_tree().auto_accept_quit=false
+	var explicit_save_path: bool=false
+	for arg in OS.get_cmdline_user_args():
+		if arg.begins_with("--save-path="):
+			_save_path=arg.trim_prefix("--save-path="); explicit_save_path=true
+		if arg.begins_with("--floors="): _floor_count=clampi(arg.trim_prefix("--floors=").to_int(),1,4)
+	if Engine.has_meta("pilot") and not explicit_save_path: _save_path="user://tests/pilot.json"
+	if not _save_path.begins_with("user://") or _save_path.contains("..") or not _save_path.ends_with(".json"):
+		push_error("Invalid save path"); get_tree().quit(1); return
+	view=View.new(); view.size=Vector2(154,118); view.clip_contents=true; add_child(view)
+	sfx=Sfx.new(); add_child(sfx)
+	_build_controls()
+	_build_menu()
+	_show_menu("title")
 
-func _style(fill: Color, border: Color) -> StyleBoxFlat:
-	var box := StyleBoxFlat.new()
-	box.bg_color = fill
-	box.border_color = border
-	box.set_border_width_all(1)
-	box.content_margin_left = 1
-	box.content_margin_right = 1
-	box.content_margin_top = 0
-	box.content_margin_bottom = 0
+func _style(fill: Color=Color("171d2b"),border: Color=Color("59616a"),padding: int=1) -> StyleBoxFlat:
+	var box:=StyleBoxFlat.new()
+	box.bg_color=fill; box.border_color=border; box.set_border_width_all(1)
+	box.content_margin_left=padding; box.content_margin_right=padding
+	box.content_margin_top=padding; box.content_margin_bottom=padding
 	return box
-
-func _button(name_key: String, rect: Rect2, label: String, callback: Callable, visible_fill: bool = true) -> Button:
-	var button := Button.new()
-	button.position = rect.position
-	button.size = rect.size
-	button.text = label
-	button.focus_mode = Control.FOCUS_NONE
-	button.add_theme_font_override("font", FONT)
-	button.add_theme_font_size_override("font_size", 16)
-	button.add_theme_color_override("font_color", INK)
-	button.add_theme_color_override("font_hover_color", GOLD)
-	button.add_theme_color_override("font_pressed_color", Color("efe3ba"))
-	if visible_fill:
-		button.add_theme_stylebox_override("normal", _style(Color("171d2b"), Color("59616a")))
-		button.add_theme_stylebox_override("hover", _style(Color("263044"), GOLD))
-		button.add_theme_stylebox_override("pressed", _style(Color("3b4757"), GOLD))
-	else:
-		for style_name in ["normal", "hover", "pressed", "focus"]:
-			button.add_theme_stylebox_override(style_name, StyleBoxEmpty.new())
+func _button(key: String,rect: Rect2,text: String,callback: Callable,parent: Node=null,solid: bool=true) -> Button:
+	var button:=Button.new()
+	button.position=rect.position; button.custom_minimum_size=rect.size; button.size=rect.size
+	button.text=text; button.focus_mode=Control.FOCUS_NONE
+	button.add_theme_font_override("font",FONT); button.add_theme_font_size_override("font_size",16)
+	button.add_theme_color_override("font_color",INK)
+	button.add_theme_color_override("font_hover_color",GOLD)
+	button.add_theme_color_override("font_pressed_color",Color("efe3ba"))
+	for key_style in ["normal","hover","pressed","disabled"]:
+		button.add_theme_stylebox_override(key_style,_style() if solid else StyleBoxEmpty.new())
 	button.pressed.connect(callback)
-	add_child(button)
-	controls[name_key] = button
+	(parent if parent!=null else self).add_child(button)
+	controls[key]=button
 	return button
-
-func _create_controls() -> void:
-	_button("seed", Rect2(3, 0, 80, 18), "", _open_seed, false)
-	_button("new_seed", Rect2(114, 0, 38, 18), "NEW", _random_run, false)
-	_button("portrait", Rect2(3, 156, 32, 32), "", _portrait_help, false)
-	for i in range(4):
-		_button("pack%d" % i, Rect2(9 + i * 34, 192, 32, 22), "", _select.bind(i))
-	for i in range(3):
-		_button("verb%d" % i, Rect2(3 + i * 50, 239, 48, 22), "", _verb.bind(i))
-	var names := ["turn_l", "fwd", "turn_r", "strafe_l", "back", "strafe_r"]
+func _label(text: String,parent: Node) -> Label:
+	var label:=Label.new()
+	label.text=text; label.add_theme_font_override("font",FONT); label.add_theme_font_size_override("font_size",16)
+	label.add_theme_color_override("font_color",INK); parent.add_child(label)
+	return label
+func _build_controls() -> void:
+	_button("seed",Rect2(2,0,51,18),"",_open_seed,null,false)
+	_button("floor_label",Rect2(54,0,25,18),"",func(): pass,null,false)
+	_button("map",Rect2(80,0,35,18),"MAP",_open_map,null,false)
+	_button("new_seed",Rect2(117,0,36,18),"NEW",_open_seed,null,false)
+	_button("portrait",Rect2(3,156,32,32),"",_portrait_help,null,false)
+	_button("belt_key",Rect2(59,171,18,18),"",_belt_card.bind("key"),null,false)
+	_button("belt_seal",Rect2(81,171,18,18),"",_belt_card.bind("seal"),null,false)
+	for slot in ["hand","body"]:
+		_button("equip_"+slot,Rect2(105 if slot=="hand" else 130,157,21,31),"",_equipment_card.bind(slot))
+	for i in range(8): _button("pack%d"%i,Rect2(9+(i%4)*34,192+(i/4)*24,32,22),"",_select.bind(i))
+	for i in range(3): _button("verb%d"%i,Rect2(3+i*50,239,48,22),"",_verb.bind(i))
+	var names: Array=["turn_l","fwd","turn_r","strafe_l","back","strafe_r"]
 	for i in range(6):
-		_button(names[i], Rect2(20 + (i % 3) * 41, 266 + (i / 3) * 38, 32, 32), "", _movement.bind(names[i]), false)
-	_button("hot_front", Rect2(48, 82, 58, 25), "", _hotspot)
-	controls.hot_front.visible = false
-
-func new_run(raw: String) -> bool:
-	var seed := Gen.normalize_seed(raw)
-	if seed.is_empty():
-		return false
-	var proof: Dictionary = Witness.build(seed)
-	if not proof.ok:
-		lines = ["Floor failed its test.", "Try another seed."]
-		push_error("Generation witness failed: " + seed + " " + proof.reason)
-		queue_redraw()
-		return false
-	sim = Sim.new(seed)
-	selected = ""
-	_busy = 0
-	_hurt = false
-	lines = ["Find the way out.", "Take the stone ahead."]
-	_sync()
-	return true
-
-func _sync() -> void:
-	state = sim.snapshot()
-	controls.seed.text = state.seed
-	if not state.pack.has(selected):
-		selected = ""
-	verbs = sim.legal_verbs(selected)
-	for i in range(3):
-		var button: Button = controls["verb%d" % i]
-		button.visible = i < verbs.size() or state.status != "playing" and i < 2
-		button.text = verbs[i].label if i < verbs.size() else ""
-	if state.status != "playing":
-		controls.verb0.text = "RETRY"
-		controls.verb1.text = "NEW"
-	for i in range(4):
-		var button: Button = controls["pack%d" % i]
-		button.text = "" if i < state.pack.size() else "-"
-		button.icon = _stone_icon if i < state.pack.size() else null
-		button.add_theme_stylebox_override("normal", _style(Color("263044") if i < state.pack.size() and state.pack[i] == selected else Color("171d2b"), GOLD if i < state.pack.size() and state.pack[i] == selected else Color("59616a")))
-	var front: Dictionary = sim.inspect_front()
-	var hotspot: Button = controls.hot_front
-	hotspot.visible = false
-	hotspot.text = ""
-	if state.status == "playing":
-		if not selected.is_empty():
-			var targets: Array = sim.targets(selected)
-			if not targets.is_empty():
-				hotspot.visible = true
-				hotspot.text = targets[0].verb
-		elif front.monster != "" or front.item != "" or front.plate or front.exit:
-			hotspot.visible = true
-			hotspot.text = "LOOK" if front.monster != "" or front.plate and front.item == "" else ("LEAVE" if front.exit else "TAKE")
-		if front.monster != "":
-			hotspot.position = Vector2(45, 35)
-			hotspot.size = Vector2(64, 67)
-			hotspot.text = ""
-			for style_name in ["normal", "hover", "pressed"]:
-				hotspot.add_theme_stylebox_override(style_name, StyleBoxEmpty.new())
-		else:
-			hotspot.position = Vector2(48, 68 if not front.exit else 90)
-			hotspot.size = Vector2(58, 22)
-			for style_name in ["normal", "hover", "pressed"]:
-				hotspot.add_theme_stylebox_override(style_name, _style(Color("171d2b"), GOLD if not selected.is_empty() else Color("59616a")))
-	view.update_state(state)
+		_button(names[i],Rect2(20+(i%3)*41,266+(i/3)*38,32,32),"",_movement.bind(names[i]),null,false)
+	_button("hot_front",Rect2(3,91,72,22),"",_front_action)
+	_button("hot_item",Rect2(98,91,54,22),"TAKE",_take)
+	_button("hot_husk",Rect2(45,35,64,66),"",_look_husk,null,false)
+func _build_menu() -> void:
+	_menu=Panel.new(); _menu.size=Vector2(154,342)
+	_menu.add_theme_stylebox_override("panel",_style(Color("0c101c"),Color("80643c"),8))
+	add_child(_menu)
+	var column:=VBoxContainer.new(); column.position=Vector2(13,30); column.size=Vector2(128,284)
+	column.add_theme_constant_override("separation",12); _menu.add_child(column)
+	_label("LOST MOTH / 1993",column)
+	_menu_title=_label("UNDERCROFT",column)
+	_menu_note=_label("Lost things wait.\nBring one home.",column)
+	_button("continue",Rect2(0,0,128,28),"CONTINUE",_continue,column)
+	_button("retry",Rect2(0,0,128,28),"RETRY SEED",_retry,column)
+	_button("start",Rect2(0,0,128,28),"NEW RUN",_open_seed,column)
+	_button("sound",Rect2(0,0,128,24),"SOUND ON",_toggle_sound,column)
+func _show_menu(mode: String) -> void:
+	_close_modal(); _close_card(); _mode=mode; _busy=0
+	for key in controls:
+		if is_instance_valid(controls[key]): controls[key].visible=false
+	view.visible=false; _menu.visible=true
+	controls.start.visible=true; controls.sound.visible=true
+	controls.continue.visible=mode=="title"
+	controls.continue.disabled=not Store.can_continue(_save_path)
+	controls.retry.visible=mode=="end"
+	_menu_title.text="UNDERCROFT" if mode=="title" else ("HOME AGAIN" if state.status=="won" else "LOST PROPERTY")
+	_menu_note.text="Lost things wait.\nBring one home." if mode=="title" else ("You brought back dawn.\n%s / %d turns."%[state.seed,state.turn] if state.status=="won" else "The Husk found you.\n%s / try again."%state.seed)
+	if mode=="end" and not _save_ok: _menu_note.text="Save failed.\nKeep the app open."
 	queue_redraw()
-
-func _can_input() -> bool:
-	return _busy <= 0 and not is_instance_valid(_modal)
-
-func _command(command: Dictionary) -> void:
-	if not _can_input():
-		return
-	command = command.duplicate(true)
-	command.expected_revision = state.revision
-	var result: Dictionary = sim.apply(command)
-	if not result.accepted:
-		lines = [result.reason, ""]
+func _toggle_sound() -> void:
+	sfx.enabled=not sfx.enabled
+	controls.sound.text="SOUND ON" if sfx.enabled else "SOUND OFF"
+func _retry() -> void:
+	if _busy<=0 and not state.is_empty(): new_run(state.seed,state.floor_count)
+func new_run(raw: String,count: int=2) -> bool:
+	var seed:=Gen.normalize_seed(raw)
+	if seed.is_empty(): return false
+	var proof: Dictionary=Witness.build(seed,count)
+	if not proof.ok: push_error("Generation failed: "+proof.reason); return false
+	_close_modal(); _close_card()
+	sim=Sim.new(seed,count); selected=""; _busy=0; _hurt_time=0; _mode="game"
+	lines=["Find the Dawn Seal.","Bring it home."]
+	_save(true); _sync()
+	return true
+func _continue() -> void:
+	var saved:=Store.load_run(_save_path)
+	if saved.is_empty() or saved.payload.status!="playing": return
+	var loaded=Sim.new(saved.payload.seed,saved.payload.floor_count)
+	if not loaded.restore_state(saved.payload): return
+	sim=loaded; _mode="game"; _busy=0; _hurt_time=0
+	selected=str(saved.ui.get("selected",""))
+	lines=["Your place is kept.","The abbey is waiting."]
+	_save_ok=true; _sync()
+func _save(fresh: bool=false) -> void:
+	if sim==null: return
+	_save_ok=Store.save_run(sim,{"selected":selected},_save_path,fresh)
+	if not _save_ok:
+		lines=["Save failed.","Keep the app open."]
 		queue_redraw()
-		return
-	_hurt = false
-	lines = ["Stone waits. So do you.", ""]
-	match command.type:
-		"move": lines = ["Footsteps in the dust.", ""]
-		"turn": lines = ["You take a look.", "Looking costs no turn."]
-		"pickup": lines = ["Round stone. HEAVY.", "A mason lost it, 1211."]
-		"place": lines = ["The plate sinks.", "The gate latches open."]
-		"guard": lines = ["You brace yourself.", ""]
-		"hit": lines = ["Your fist rings bronze.", ""]
-	for event in result.events:
-		if event.type == "attack_resolved":
-			if event.blocked:
-				lines = ["You catch its blow.", "It reels. HIT now."]
-			elif event.damage > 0:
-				_hurt = true
-				lines = ["Its arm finds you.", "GUARD the raised arm."]
-			else:
-				lines = ["Its blow finds air.", "It reels. HIT now."]
-		elif event.type == "intent_announced":
-			lines = ["The Husk raises an arm.", "GUARD or step away."]
-		elif event.type == "monster_defeated":
-			lines = ["The bell falls silent.", "The way is clear."]
-		elif event.type == "run_ended":
-			lines = ["Daylight. You made it.", "The abbey waits below."] if event.status == "won" else ["Lost, like the others.", "Try the seed again."]
-	_busy = _duration if result.consumed_turn else 0.06
-	_sync()
-
-func _movement(key: String) -> void:
-	if state.status != "playing":
-		return
-	if key in ["turn_l", "turn_r"]:
-		_command({"type": "turn", "delta": -1 if key == "turn_l" else 1})
-	else:
-		_command({"type": "move", "step": key})
-
-func _select(index: int) -> void:
-	if not _can_input() or state.status != "playing":
-		return
-	if index >= state.pack.size():
-		lines = ["An empty pocket.", ""]
-	else:
-		var item: String = state.pack[index]
-		selected = "" if selected == item else item
-		lines = ["Round stone. HEAVY.", "Touch a PLACE marker."] if not selected.is_empty() else ["Your hand is clear.", ""]
-	_sync()
-
-func _verb(index: int) -> void:
-	if not _can_input():
-		return
-	if state.status != "playing":
-		if index == 0:
-			new_run(state.seed)
-		elif index == 1:
-			_random_run()
-	elif index < verbs.size():
-		_command(verbs[index].action)
-
-func _hotspot() -> void:
-	if not _can_input():
-		return
-	if not selected.is_empty():
-		var targets: Array = sim.targets(selected)
+func _notification(what: int) -> void:
+	if what==NOTIFICATION_APPLICATION_PAUSED: _save()
+	if what==NOTIFICATION_WM_CLOSE_REQUEST:
+		_save()
+		get_tree().quit()
+func _can_game() -> bool: return _mode=="game" and _busy<=0 and not is_instance_valid(_modal)
+func _sync() -> void:
+	state=sim.snapshot()
+	if not state.items.has(selected) or state.items[selected].location not in ["pack","belt","equip"]: selected=""
+	_menu.visible=false; view.visible=true
+	for key in ["seed","floor_label","map","new_seed","portrait","belt_key","belt_seal","equip_hand","equip_body","turn_l","turn_r","fwd","back","strafe_l","strafe_r"]:
+		controls[key].visible=true
+	controls.seed.text=state.seed; controls.floor_label.text="%d/%d"%[state.floor,state.floor_count]
+	for i in range(8):
+		var button: Button=controls["pack%d"%i]
+		button.visible=true; button.text="" if i<state.pack.size() else "-"
+		button.icon=Art.inventory(state.items[state.pack[i]].kind) if i<state.pack.size() else null
+		button.add_theme_stylebox_override("normal",_style(Color("263044") if i<state.pack.size() and state.pack[i]==selected else Color("171d2b"),GOLD if i<state.pack.size() and state.pack[i]==selected else Color("59616a")))
+	for slot in ["hand","body"]:
+		var id: String=state.equipment[slot]
+		controls["equip_"+slot].icon=Art.inventory(state.items[id].kind) if id!="" else null
+		controls["equip_"+slot].text="" if id!="" else "-"
+	for kind in ["key","seal"]:
+		var found:=false
+		for id in state.belt:
+			if state.items[id].kind==kind: found=true
+		controls["belt_"+kind].icon=Art.inventory(kind) if found else null
+	verbs=sim.legal_verbs(selected)
+	for i in range(3):
+		controls["verb%d"%i].visible=i<verbs.size()
+		controls["verb%d"%i].text=verbs[i].label if i<verbs.size() else ""
+	controls.hot_front.visible=false; controls.hot_item.visible=false; controls.hot_husk.visible=false
+	_view_action={}
+	if state.status=="playing":
+		var front: Dictionary=sim.inspect_front()
+		controls.hot_husk.visible=front.monster!="" and selected==""
+		controls.hot_item.visible=selected=="" and not sim.reachable_items().is_empty()
+		var targets: Array=sim.targets(selected)
 		if not targets.is_empty():
-			_command(targets[0].action)
-		return
-	var front: Dictionary = sim.inspect_front()
-	if front.monster != "":
-		lines = ["A hollow bell, awake.", "GUARD, then HIT it."]
-		queue_redraw()
-	elif sim.can_pickup():
-		_command({"type": "pickup", "item_id": "stone"})
-	elif front.exit:
-		_command({"type": "leave", "target_id": "exit"})
-	elif front.plate:
-		lines = ["A plate wants weight.", "Select a HEAVY thing."]
-		queue_redraw()
-
+			controls.hot_front.visible=true; controls.hot_front.text=targets[0].verb
+			controls.hot_front.position=Vector2(48,68)
+			_view_action=targets[0].action
+		elif selected=="":
+			var fixtures: Array=sim.fixture_actions()
+			if not fixtures.is_empty():
+				controls.hot_front.visible=true; controls.hot_front.text=fixtures[0].label
+				controls.hot_front.position=Vector2(3,91); _view_action=fixtures[0].action
+	view.update_state(sim.view_snapshot()); queue_redraw()
+func _command(command: Dictionary) -> void:
+	if not _can_game(): return
+	_close_card()
+	command=command.duplicate(true); command.expected_revision=state.revision
+	var result: Dictionary=sim.apply(command)
+	if not result.accepted:
+		lines=[result.reason,"Drop or use an item." if result.reason=="Your pack is full." else ""]
+		sfx.play("bump"); queue_redraw(); return
+	lines=["The abbey listens.",""]
+	_bob=command.type=="move"
+	match command.type:
+		"move": lines=["Footsteps in the dust.",""]; sfx.play("step")
+		"turn": lines=["Looking is free.",""]
+		"pickup":
+			var definition: Dictionary=sim.definition(command.item_id)
+			lines=[definition.name,definition.provenance]; sfx.play("pickup")
+			if definition.slot=="belt": lines=[definition.name,"Take it home." if definition.name=="Dawn Seal" else "Kept safe on the belt."]
+		"drop","place": lines=["You set it down.",""]; sfx.play("pickup")
+		"equip","unequip": lines=["Equipment changed.",""]; sfx.play("pickup")
+		"eat": lines=["A little less weary.",""]; sfx.play("pickup")
+		"hit": lines=["Bronze rings.",""]; sfx.play("hit")
+		"guard": lines=["You brace yourself.",""]
+	for event in result.events:
+		match event.type:
+			"gate_changed":
+				lines=["The gate opens." if event.open else "It shuts behind you.","Leave a HEAVY thing." if not event.open else ""]
+				sfx.play("gate")
+			"latched": lines=["Latched from this side.","The way stays open."]; sfx.play("gate")
+			"unlocked": lines=["The key remembers.","The lock gives way."]; sfx.play("gate")
+			"attack_resolved":
+				if event.damage>0:
+					lines=["Its arm finds you.","GUARD the raised arm."]; _hurt_time=0.32; sfx.play("hit")
+				elif event.blocked: lines=["You catch its blow.","It reels. HIT now."]; sfx.play("guard")
+				elif event.armour: lines=["The coat takes it.","Its padding is spent."]; _hurt_time=0.15; sfx.play("bump")
+				else: lines=["Its blow finds air.","It reels. HIT now."]
+			"intent_announced": lines=["A bell arm rises.","GUARD or step away."]; sfx.play("bell")
+			"monster_moved": lines=["Heavy footsteps.",""]
+			"monster_defeated": lines=["The bell falls silent.","The way is clear."]
+			"floor_changed": lines=["A different silence.","Floor %d."%event.to]; selected=""
+	_busy=0.13 if result.consumed_turn else 0.05
+	if _hurt_time>0: _busy=0.24
+	state=sim.snapshot()
+	if not state.pack.has(selected): selected=""
+	_save() # Commit storage before visual animation, including free rotation.
+	_sync()
+func _movement(key: String) -> void:
+	if key in ["turn_l","turn_r"]: _command({"type":"turn","delta":-1 if key=="turn_l" else 1})
+	else: _command({"type":"move","step":key})
+func _verb(index: int) -> void:
+	if not _can_game() or index>=verbs.size(): return
+	if verbs[index].action.type=="pickup": _take()
+	else: _command(verbs[index].action)
+func _front_action() -> void:
+	if not _can_game(): return
+	if not _view_action.is_empty(): _command(_view_action)
+func _look_husk() -> void:
+	if _can_game(): lines=["A hollow bell, awake.","GUARD, then HIT it."]; queue_redraw()
 func _portrait_help() -> void:
-	if _can_input():
-		lines = ["Curved arrows turn.", "Straight arrows step."]
-		queue_redraw()
-
-func _random_run() -> void:
-	if not _can_input():
-		return
-	var rng := RandomNumberGenerator.new()
-	rng.randomize() # Seed choice belongs to the app, never to deterministic rules.
-	var seed := ""
-	for _i in range(6):
-		seed += Gen.ALPHABET[rng.randi_range(0, Gen.ALPHABET.length() - 1)]
-	new_run(seed)
-
+	if _can_game():
+		selected=""; _close_card(); _save(); _sync()
+		lines=["Curves turn for free.","Straight arrows step."]; queue_redraw()
+func _select(index: int) -> void:
+	if not _can_game(): return
+	if index>=state.pack.size():
+		selected=""; _close_card(); _save(); _sync(); return
+	selected=state.pack[index]; _save(); _sync(); _open_card(selected)
+func _equipment_card(slot: String) -> void:
+	if not _can_game(): return
+	var id: String=state.equipment[slot]
+	if id!="": selected=id; _save(); _open_card(id)
+func _belt_card(kind: String) -> void:
+	if not _can_game(): return
+	for id in state.belt:
+		if state.items[id].kind==kind: selected=id; _save(); _open_card(id); return
+func _open_card(id: String) -> void:
+	_close_card()
+	var panel:=PanelContainer.new(); panel.position=Vector2(4,154); panel.size=Vector2(146,108)
+	panel.add_theme_stylebox_override("panel",_style(Color("171d2b"),GOLD,4))
+	var column:=VBoxContainer.new(); column.add_theme_constant_override("separation",0); panel.add_child(column)
+	var definition: Dictionary=sim.definition(id)
+	_label(definition.name,column)
+	var info: String=" ".join(definition.tags)
+	if definition.slot=="body": info="Padding spent." if state.items[id].spent else "Blocks 1 hit, once."
+	elif definition.slot=="hand": info+=": counter %d"%definition.damage if definition.damage>1 else ": hit 1"
+	elif definition.heal>0: info+=": heal %d"%definition.heal
+	if info.begins_with(": "): info=info.trim_prefix(": ")
+	_label(info,column); _label(definition.provenance,column)
+	var row:=HBoxContainer.new(); row.add_theme_constant_override("separation",3); column.add_child(row)
+	if state.items[id].location=="pack":
+		if definition.slot in ["hand","body"]:
+			_card_button("card_use","WIELD" if definition.slot=="hand" else "WEAR",{"type":"equip","item_id":id},row)
+			if definition.heal>0: _card_button("card_eat","EAT",{"type":"eat","item_id":id},row)
+		elif definition.heal>0:
+			_card_button("card_use","EAT",{"type":"eat","item_id":id},row)
+		_card_button("card_drop","DROP",{"type":"drop","item_id":id},row)
+	elif state.items[id].location=="equip":
+		_card_button("card_use","PACK",{"type":"unequip","slot":state.items[id].slot},row)
+	if row.get_child_count()>=3:
+		row=HBoxContainer.new(); row.add_theme_constant_override("separation",3); column.add_child(row)
+	_button("card_close",Rect2(0,0,42,22),"CLOSE",_dismiss_card,row)
+	_card_names.append("card_close")
+	add_child(panel); _card=panel
+func _card_button(key: String,label: String,action: Dictionary,parent: Node) -> void:
+	_button(key,Rect2(0,0,42,22),label,_command.bind(action),parent); _card_names.append(key)
+func _close_card() -> void:
+	if is_instance_valid(_card): _card.queue_free(); _card=null
+	for key in _card_names: controls.erase(key)
+	_card_names=[]
+func _dismiss_card() -> void:
+	_close_card(); selected=""; _save(); _sync()
+func _panel(title: String,top: int=32,height: int=276) -> VBoxContainer:
+	_close_modal(); _close_card()
+	var panel:=PanelContainer.new(); panel.position=Vector2(5,top); panel.size=Vector2(144,height)
+	panel.add_theme_stylebox_override("panel",_style(Color("171d2b"),GOLD,7))
+	var column:=VBoxContainer.new(); column.add_theme_constant_override("separation",7)
+	panel.add_child(column); _label(title,column)
+	add_child(panel); _modal=panel
+	return column
+func _modal_button(key: String,label: String,callback: Callable,parent: Node) -> void:
+	_button(key,Rect2(0,0,128,24),label,callback,parent); _dynamic_names.append(key)
+func _close_modal() -> void:
+	if is_instance_valid(_modal): _modal.queue_free(); _modal=null
+	for key in _dynamic_names: controls.erase(key)
+	_dynamic_names=[]
 func _open_seed() -> void:
-	if not _can_input():
-		return
-	_modal = PanelContainer.new()
-	_modal.position = Vector2(5, 70)
-	_modal.size = Vector2(144, 178)
-	_modal.add_theme_stylebox_override("panel", _style(Color("171d2b"), GOLD))
-	var column := VBoxContainer.new()
-	column.add_theme_constant_override("separation", 8)
-	_modal.add_child(column)
-	var title := Label.new()
-	title.text = "Choose a seed"
-	title.add_theme_font_override("font", FONT)
-	title.add_theme_font_size_override("font_size", 16)
-	column.add_child(title)
-	_seed_input = LineEdit.new()
-	_seed_input.text = state.seed
-	_seed_input.max_length = 6
-	_seed_input.custom_minimum_size = Vector2(138, 26)
-	_seed_input.add_theme_font_override("font", FONT)
-	_seed_input.add_theme_font_size_override("font_size", 16)
-	column.add_child(_seed_input)
-	controls.seed_input = _seed_input
-	_modal_error = Label.new()
-	_modal_error.text = "No I, O, 0 or 1."
-	_modal_error.add_theme_font_override("font", FONT)
-	_modal_error.add_theme_font_size_override("font_size", 16)
-	column.add_child(_modal_error)
-	for label in ["START", "CANCEL"]:
-		var button := Button.new()
-		button.text = label
-		button.custom_minimum_size = Vector2(138, 26)
-		button.add_theme_font_override("font", FONT)
-		button.add_theme_font_size_override("font_size", 16)
-		button.pressed.connect(_seed_submit if label == "START" else _close_seed)
-		column.add_child(button)
-		controls["seed_start" if label == "START" else "seed_cancel"] = button
-	add_child(_modal)
-	_seed_input.grab_focus()
-
+	if _busy>0 or is_instance_valid(_modal): return
+	var column:=_panel("Start a new run?",64,204)
+	_label("Replaces this run.",column)
+	_seed_input=LineEdit.new(); _seed_input.text=state.get("seed","BELL42"); _seed_input.max_length=6
+	_seed_input.custom_minimum_size=Vector2(128,27)
+	_seed_input.add_theme_font_override("font",FONT); _seed_input.add_theme_font_size_override("font_size",16)
+	_seed_input.add_theme_stylebox_override("normal",_style(Color("0c101c"),Color("59616a"),5))
+	column.add_child(_seed_input); controls.seed_input=_seed_input; _dynamic_names.append("seed_input")
+	_seed_note=_label("No I, O, 0 or 1.",column)
+	_modal_button("seed_start","START",_seed_submit,column)
+	_modal_button("seed_random","RANDOM",_random_submit,column)
+	_modal_button("seed_cancel","CANCEL",_close_modal,column)
 func _seed_submit() -> void:
 	if Gen.normalize_seed(_seed_input.text).is_empty():
-		_modal_error.text = "Use A-Z, 2-9."
-		return
-	var seed := _seed_input.text
-	_close_seed()
-	new_run(seed)
-
-func _close_seed() -> void:
-	if is_instance_valid(_modal):
-		_modal.queue_free()
-		_modal = null
-		for key in ["seed_input", "seed_start", "seed_cancel"]:
-			controls.erase(key)
-
+		_seed_note.text="Invalid seed symbols."; return
+	if not new_run(_seed_input.text,_floor_count): _seed_note.text="Floor failed its test."
+func _random_submit() -> void:
+	var rng:=RandomNumberGenerator.new(); rng.randomize()
+	var seed: String=""
+	for _i in range(6): seed+=Gen.ALPHABET[rng.randi_range(0,31)]
+	if not new_run(seed,_floor_count): _seed_note.text="Floor failed its test."
+func _take() -> void:
+	if not _can_game(): return
+	var loot: Array=sim.reachable_items()
+	if loot.size()==1: _command({"type":"pickup","item_id":loot[0]}); return
+	if loot.is_empty(): return
+	_loot_page(loot,0)
+func _loot_page(loot: Array,page: int) -> void:
+	var column:=_panel("Take which thing?",32,280)
+	column.add_theme_constant_override("separation",4)
+	for id in loot.slice(page*6,mini(loot.size(),page*6+6)):
+		_modal_button("loot_"+id,sim.definition(id).name,_choose_loot.bind(id),column)
+	if loot.size()>6:
+		var row:=HBoxContainer.new(); row.add_theme_constant_override("separation",6); column.add_child(row)
+		if page>0:
+			_button("loot_prev",Rect2(0,0,61,24),"PREV",_loot_page.bind(loot,page-1),row); _dynamic_names.append("loot_prev")
+		if (page+1)*6<loot.size():
+			_button("loot_next",Rect2(0,0,61,24),"NEXT",_loot_page.bind(loot,page+1),row); _dynamic_names.append("loot_next")
+	_modal_button("loot_cancel","CANCEL",_close_modal,column)
+func _choose_loot(id: String) -> void:
+	_close_modal(); _command({"type":"pickup","item_id":id})
+func _open_map() -> void:
+	if not _can_game(): return
+	var column:=_panel("Visited / floor %d"%state.floor,16,310)
+	var map=preload("res://scripts/ui/map_view.gd").new()
+	map.data=sim.view_snapshot(); map.custom_minimum_size=Vector2(128,231); column.add_child(map)
+	_modal_button("map_close","CLOSE",_close_modal,column)
 func _process(delta: float) -> void:
-	if _busy > 0:
-		_busy = maxf(0, _busy - delta)
-		view.motion = sin((_duration - _busy) / _duration * PI) * 1.5
-		view.flash = _busy / _duration if _hurt else 0.0
-		view.queue_redraw()
-		if _busy <= 0:
-			view.motion = 0
-			view.flash = 0
-
-func _text(at: Vector2, value: String, colour: Color = INK) -> void:
-	draw_string(FONT, at + Vector2(0, FONT.get_ascent(16)), value, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, colour)
-
+	if _busy>0:
+		_busy=maxf(0,_busy-delta)
+		view.motion=sin(_busy/0.13*PI)*1.4 if _bob else 0
+		if _busy<=0:
+			view.motion=0
+			if not state.is_empty() and state.status!="playing": _show_menu("end")
+	if _hurt_time>0:
+		_hurt_time=maxf(0,_hurt_time-delta)
+		view.flash=_hurt_time/0.32
+		view.position.x=roundi(sin(_hurt_time*100)*2) if _hurt_time>0 else 0
+		view.queue_redraw(); queue_redraw()
+	if _busy>0: view.queue_redraw()
+func _text(at: Vector2,value: String,colour: Color=INK) -> void:
+	draw_string(FONT,at+Vector2(0,FONT.get_ascent(16)),value,HORIZONTAL_ALIGNMENT_LEFT,-1,16,colour)
 func _draw() -> void:
-	# The view is a child, so HUD bands are drawn here below its 118px boundary.
-	draw_rect(Rect2(0, 118, 154, 224), Color("0c101c"))
-	for y in [118, 154, 190, 238, 262]:
-		draw_line(Vector2(0, y), Vector2(154, y), Color("59616a"))
-	_text(Vector2(4, 119), lines[0])
-	_text(Vector2(4, 135), lines[1])
-	if state.is_empty():
-		return
-	draw_texture_rect(PORTRAIT, Rect2(3, 156, 32, 32), false)
-	_text(Vector2(41, 155), "HP %d/%d" % [state.hp, state.max_hp], GOLD if _hurt else INK)
-	_text(Vector2(41, 171), "FACE " + ["N", "E", "S", "W"][state.facing])
-	for x in [106, 130]:
-		draw_rect(Rect2(x, 158, 20, 26), Color("263044"), false)
-		draw_line(Vector2(x + 5, 171), Vector2(x + 15, 171), Color("59616a"))
-	_text(Vector2(9, 216), "HEAVY / select to use" if not selected.is_empty() else "PACK / 4 pockets", GOLD if not selected.is_empty() else Color("777970"))
-	for i in range(6):
-		var key: String = ["turn_l", "fwd", "turn_r", "strafe_l", "back", "strafe_r"][i]
-		var button: Button = controls[key]
-		var rect := button.get_rect()
-		draw_rect(rect, Color("263044") if button.is_pressed() else Color("171d2b"))
-		draw_rect(rect, Color("80643c") if key.begins_with("turn") else Color("59616a"), false)
-		_arrow(rect.get_center(), key)
-
-func _arrow(center: Vector2, key: String) -> void:
-	var colour := GOLD if key.begins_with("turn") else Color("a8c2ad")
+	draw_rect(Rect2(0,0,154,342),Color("0c101c"))
+	if _mode!="game" or state.is_empty(): return
+	for y in [118,154,190,238,262]: draw_line(Vector2(0,y),Vector2(154,y),Color("59616a"))
+	_text(Vector2(4,119),lines[0]); _text(Vector2(4,135),lines[1])
+	draw_texture_rect(PORTRAIT,Rect2(3,156,32,32),false,Color(1,0.65,0.6) if _hurt_time>0 or state.hp<=2 else Color.WHITE)
+	if _hurt_time>0:
+		draw_rect(Rect2(3,156,32,32),Color("965c48"),false,2)
+		for points in [[Vector2(19,170),Vector2(23,172)],[Vector2(26,168),Vector2(29,170)],[Vector2(23,179),Vector2(27,178)]]:
+			draw_line(points[0],points[1],Color("312018"),1)
+	_text(Vector2(41,155),"HP %d/%d"%[state.hp,state.max_hp])
+	_text(Vector2(41,172),["N","E","S","W"][state.facing])
+	for key in ["turn_l","fwd","turn_r","strafe_l","back","strafe_r"]:
+		var button: Button=controls[key]; var rect:=button.get_rect()
+		draw_rect(rect,Color("263044") if button.is_pressed() else Color("171d2b"))
+		draw_rect(rect,Color("80643c") if key.begins_with("turn") else Color("59616a"),false)
+		_arrow(rect.get_center(),key)
+func _arrow(center: Vector2,key: String) -> void:
+	var colour:=GOLD if key.begins_with("turn") else Color("a8c2ad")
 	if key.begins_with("turn"):
-		var direction := -1 if key == "turn_l" else 1
-		var points := PackedVector2Array([center + Vector2(-direction * 7, 8), center + Vector2(-direction * 7, -6), center + Vector2(direction * 7, -6)])
-		draw_polyline(points, colour, 2)
-		draw_colored_polygon(PackedVector2Array([center + Vector2(direction * 9, -6), center + Vector2(direction * 2, -11), center + Vector2(direction * 2, -1)]), colour)
+		var d: int=-1 if key=="turn_l" else 1
+		draw_polyline(PackedVector2Array([center+Vector2(-d*7,8),center+Vector2(-d*7,-6),center+Vector2(d*7,-6)]),colour,2)
+		draw_colored_polygon(PackedVector2Array([center+Vector2(d*9,-6),center+Vector2(d*2,-11),center+Vector2(d*2,-1)]),colour)
 	else:
-		var direction := Vector2(0, -1) if key == "fwd" else (Vector2(0, 1) if key == "back" else (Vector2(-1, 0) if key == "strafe_l" else Vector2(1, 0)))
-		var side := Vector2(-direction.y, direction.x)
-		draw_line(center - direction * 8, center + direction * 6, colour, 2)
-		draw_colored_polygon(PackedVector2Array([center + direction * 11, center + direction * 3 + side * 5, center + direction * 3 - side * 5]), colour)
-		if key.begins_with("strafe"):
-			draw_line(center - direction * 10 - side * 6, center - direction * 10 + side * 6, colour, 2)
-
+		var d:=Vector2(0,-1) if key=="fwd" else (Vector2(0,1) if key=="back" else (Vector2(-1,0) if key=="strafe_l" else Vector2(1,0)))
+		var side:=Vector2(-d.y,d.x)
+		draw_line(center-d*8,center+d*6,colour,2)
+		draw_colored_polygon(PackedVector2Array([center+d*11,center+d*3+side*5,center+d*3-side*5]),colour)
+		if key.begins_with("strafe"): draw_line(center-d*10-side*6,center-d*10+side*6,colour,2)
 func _public_state() -> Dictionary:
-	return {"seed": state.seed, "floor": state.floor, "pos": state.pos.duplicate(),
-		"facing": state.facing, "hp": state.hp, "turn": state.turn,
-		"revision": state.revision, "status": state.status, "pack": state.pack.duplicate(),
-		"selected": selected, "front": sim.inspect_front(), "gate_open": state.gate.open}
-
-func pilot_call(name_key: String, args: Array) -> String:
+	if sim==null: return {"status":"title","can_continue":Store.can_continue(_save_path)}
+	var public: Dictionary={"seed":state.seed,"floor":state.floor,"floor_count":state.floor_count,
+		"pos":state.pos.duplicate(),"facing":state.facing,"hp":state.hp,"turn":state.turn,"revision":state.revision,
+		"status":state.status,"pack":state.pack.duplicate(),"belt":state.belt.duplicate(),
+		"equipment":state.equipment.duplicate(),"selected":selected,"front":sim.inspect_front(),
+		"hash":sim.state_hash(),"save_ok":_save_ok}
+	return public
+func pilot_call(name_key: String,args: Array) -> String:
 	match name_key:
-		"busy": return "1" if not _can_input() else "0"
+		"busy": return "1" if _busy>0 or is_instance_valid(_modal) else "0"
 		"state": return JSON.stringify(_public_state())
+		"save_path": return _save_path
 		"where":
 			if args.is_empty(): return ""
-			var key := str(args[0])
-			if key == "view": return "77 63"
-			if key in ["hot_item", "hot_plate", "hot_husk", "hot_exit"]:
-				var front: Dictionary = sim.inspect_front()
-				var present: bool = {"hot_item": front.item != "", "hot_plate": front.plate,
-					"hot_husk": front.monster != "", "hot_exit": front.exit}[key]
-				if not present: return ""
-				key = "hot_front"
-			if controls.has(key) and controls[key].visible:
-				var center: Vector2 = controls[key].get_global_rect().get_center()
-				return "%d %d" % [roundi(center.x), roundi(center.y)]
+			var key:=str(args[0])
+			if key=="view" and _mode=="game": return "77 63"
+			if key in ["hot_plate","hot_exit","hot_stairs","hot_latch"]: key="hot_front"
+			if controls.has(key) and is_instance_valid(controls[key]) and controls[key].is_visible_in_tree() and not (controls[key] is Button and controls[key].disabled):
+				var center: Vector2=controls[key].get_global_rect().get_center()
+				return "%d %d"%[roundi(center.x),roundi(center.y)]
 			return ""
 		"new_run":
-			if args.is_empty() or not new_run(str(args[0])): return JSON.stringify({"error": "Invalid seed or floor."})
-			_close_seed()
+			if args.is_empty() or not new_run(str(args[0]),int(args[1]) if args.size()>1 else _floor_count): return JSON.stringify({"error":"Invalid seed or floor."})
 			return JSON.stringify(_public_state())
 		"assert":
-			if args.size() < 2: return "error"
+			if args.size()<2: return "error"
 			var actual = _public_state().get(str(args[0]))
-			var expected := str(args[1])
-			if actual is String and expected.begins_with('"') and expected.ends_with('"'):
+			var expected:=str(args[1])
+			if actual is String and expected.begins_with('"'):
 				var decoded = JSON.parse_string(expected)
-				if decoded is String:
-					expected = decoded
-			var value := str(actual) if actual is String else JSON.stringify(actual)
-			if value != expected:
-				push_error("Pilot assertion: %s expected %s got %s" % [args[0], expected, value])
-				# Autopilot may execute its next `quit` in this same frame.
-				# Defer our nonzero exit so a trailing quit cannot overwrite it.
-				get_tree().quit.call_deferred(1)
-				return "failed"
+				if decoded is String: expected=decoded
+			var value: String=str(actual) if actual is String else JSON.stringify(actual)
+			if value!=expected:
+				push_error("Pilot assertion %s expected %s got %s"%[args[0],expected,value])
+				get_tree().quit.call_deferred(1); return "failed"
 			return "ok"
 	return ""

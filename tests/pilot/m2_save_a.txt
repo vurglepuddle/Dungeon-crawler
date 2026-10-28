@@ -1,0 +1,88 @@
+# Generated from the ordinary-action witness by tests/build_m2_pilots.gd.
+# Use --save-path=user://m2_full.json (resume pair: user://m2_resume.json).
+wait 4
+call new_run BELL42
+wait 3
+waitidle
+call save_path
+shot 01_m2_entry
+tapnamed hot_item
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed pack0
+wait 2
+tapnamed card_drop
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed verb1
+waitidle
+tapnamed hot_front
+waitidle
+tapnamed verb1
+waitidle
+tapnamed verb0
+waitidle
+tapnamed verb0
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_l
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed hot_item
+wait 3
+tapnamed loot_f1_key
+waitidle
+tapnamed turn_l
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_l
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed hot_front
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed hot_front
+waitidle
+call assert floor 2
+shot floor_2_turn_26
+tapnamed hot_item
+waitidle
+tapnamed pack0
+wait 3
+call assert selected f2_stone
+call assert save_ok true
+call assert hash 66b273de7590ecffcd14aea73132d88020aedf1d047afebf0fd57f45c4d31aa5
+call state
+shot 06_before_close
+close

@@ -1,38 +1,55 @@
-# M1 architecture
+# M2 architecture
 
-The sim decides a turn; the scene makes its result visible. Rules are plain
-RefCounted GDScript and do not depend on nodes, frame timing, input or files.
-See [CONTRACT](CONTRACT.md) for concrete shapes and [DESIGN](DESIGN.md) for scope.
+One deterministic simulation owns a whole run. The scene presents its committed
+results. See CONTRACT for exact data and DESIGN for what is playable.
 
-`scripts/gen/floor_gen.gd` constructs a small connected grid using a specified
-seed hash/PRNG. `scripts/sim/dungeon_sim.gd` owns items, gates, combat and turn
-resolution. `scripts/gen/witness.gd` walks the generated definition through
-that same resolver and must win without damage before the app accepts it.
-The witness is not a player hint. There is no search framework or fallback
-library in M1: construction is bounded, and failures are explicit.
+- scripts/content/catalog.gd is a small JSON-safe definition table: capabilities,
+  equipment role, damage, healing and provenance. Item IDs are instances;
+  their definitions drive rules and presentation.
+- scripts/gen/floor_gen.gd builds all floors and item instances at creation,
+  with the specified seed hash/PRNG. No timing, engine/global randomness or
+  presentation state decides geometry. Floors are stored, never regenerated
+  during descent or load.
+- scripts/sim/dungeon_sim.gd owns inventory locations, equipment, belt, active
+  floor, mechanisms, combat, stairs, exploration and terminal state. It is
+  RefCounted with no nodes, filesystem, clock or input. Snapshot/query returns
+  are detached. view_snapshot supplies current-floor drawable data.
+- scripts/gen/witness.gd expands BFS navigation and interaction macros into
+  ordinary commands through that same sim. It has no teleport, gate override,
+  loot grant or damage immunity. The app requires a successful full-return
+  witness before exposing a new run. A separate greedy policy measures pack
+  pressure; it is not a utility-optimal player model.
+- scripts/persistence/state_codec.gd validates/normalises JSON-safe state and
+  canonicalises it. save_store.gd handles staging, backup and recovery under
+  user://. Persistence is outside the rules. CONTINUE adopts a fully validated
+  snapshot, not a seed replay or freshly generated approximation.
+- scripts/app/main.gd owns title/end flows, named touch controls, cards, map/
+  seed/loot panels, feedback, selection, the short input gate and lifecycle
+  saves. It saves before starting presentation and does not buffer actions.
+- scripts/view/dungeon_view.gd uses 2D grid rays, cached nearest-sampled wall
+  columns and sprite depth occlusion. There are no 3D nodes or physics. Item/
+  fixture art is drawn locally by scripts/art/item_art.gd. M2 uses the existing
+  painted Husk/portrait/wall and a cooler wall tint on the lower floor.
+- scripts/audio/sfx.gd synthesises seven short PCM effects once, then plays
+  a small local voice pool. Its noise stream never touches gameplay RNG.
+- scripts/ui/map_view.gd displays seen cells/fixtures and facing, without
+  mutating or moving the sim.
 
-`scripts/app/main.gd` is the scene controller/UI: named Button controls become
-commands, committed results replace its snapshot and briefly gate input.
-No buffered clicks, repeat-walking or animation-driven rules. Selection is
-a reference into the pack. Shared rule queries determine marked PLACE targets
-and the verb strip. `scripts/view/dungeon_view.gd` renders a grid frustum with
-integer perspective surfaces and occlusion, plus sprite/fixture positions.
-Wall patches are nearest-sampled into cached textures at load; there is no
-3D scene or runtime Python dependency. Game PNGs are copies in assets/art;
-editable sources and the art experiment stay in art_src.
+Data flow: seed -> bounded construction -> replayed full-run witness -> live
+sim -> save -> events/snapshot -> visual/audio feedback -> touch command -> sim.
+A free query, card or map cannot secretly advance enemy time. A floor change
+freezes the departed floor and performs no arrival attack. All enemy intent
+cells are stored; animation completion never resolves an attack.
 
-Data flows: seed -> generated floor -> real-rule witness -> live sim ->
-snapshot/ordered events -> UI/view -> touch command -> sim. The controller
-owns the short animation gate, and the sim owns revision/beat ordering.
-VETKA remains 16 px at every text surface. Renderer coordinates and the
-named-control lookup are logical pixels independent of window scale.
+Save replacement is intentionally small: write/flush/validate .tmp; preserve
+a validated primary as .bak; replace the primary. Load prefers a valid primary,
+then complete staging, then backup. New-run and terminal commits mirror the
+new cohort to backup, preventing ordinary backup recovery from selecting an
+old seed or resurrecting a finished run. This does not promise recovery from
+loss of every valid copy or arbitrary hardware failure.
 
-`scripts/dev/autopilot.gd` (Claude) drives the real input path through the
-scene's pilot_call boundary. Headless tests separately exercise rules,
-generation, deterministic replay and hundreds of complete seed witnesses.
-Windowed screenshots validate actual controls and drawing; Android comfort
-and interruption behaviour require Claude/the owner's phone test.
-
-No persistence or audio in M1. M2 will add a persistence module outside the
-sim, with versioned JSON under user:// and staged/backup recovery. Later
-content tables and additional floors extend this small boundary when needed.
+The existing Claude-owned autopilot drives real Button input through pilot_call.
+M2 includes a full return pilot, a close/reopen pair and a focused equipment/
+hurt/healing/map/seed pilot. Headless checks separately cover rules, saves,
+generation cuts/loops, replay and pressure. Android lifecycle durability,
+performance and comfort still require the owner's device.

@@ -1,0 +1,94 @@
+# Equipment, real hurt feedback, healing, free map and padded seed dialog.
+wait 4
+call new_run BELL42
+wait 3
+tapnamed fwd
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed hot_item
+wait 3
+tapnamed loot_f1_club
+waitidle
+tapnamed pack0
+wait 2
+tapnamed card_use
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed hot_item
+wait 3
+tapnamed loot_f1_coat
+waitidle
+tapnamed pack1
+wait 2
+tapnamed card_use
+waitidle
+tapnamed hot_item
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed fwd
+waitidle
+tapnamed pack1
+wait 2
+tapnamed card_drop
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed verb1
+waitidle
+tapnamed hot_front
+waitidle
+tapnamed verb2
+waitidle
+tapnamed verb2
+waitidle
+tapnamed verb2
+wait 2
+shot 09_hurt_border_face
+waitidle
+call assert hp 5
+tapnamed verb0
+waitidle
+shot 10_heavy_counter
+tapnamed equip_body
+wait 3
+shot 11_spent_coat_card
+tapnamed card_close
+tapnamed back
+waitidle
+tapnamed back
+waitidle
+tapnamed back
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed fwd
+waitidle
+tapnamed hot_item
+waitidle
+tapnamed pack1
+wait 2
+tapnamed card_use
+waitidle
+call assert hp 6
+tapnamed map
+wait 3
+shot 12_map
+tapnamed map_close
+waitidle
+call assert hash 05cfea37efdc6d2b8ba091af633f2bdd6c98fbbd6723f7072a8c9dd98552b63c
+tapnamed seed
+wait 3
+shot 13_padded_seed
+tapnamed seed_cancel
+waitidle
+call assert hash 05cfea37efdc6d2b8ba091af633f2bdd6c98fbbd6723f7072a8c9dd98552b63c
+quit

@@ -1,0 +1,54 @@
+# Deliberately ignore the first Husk, then retry through the end screen.
+wait 4
+call new_run BELL42
+wait 3
+tapnamed hot_item
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed pack0
+wait 2
+tapnamed card_drop
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed verb2
+waitidle
+tapnamed verb2
+waitidle
+tapnamed verb2
+waitidle
+tapnamed verb2
+waitidle
+tapnamed verb2
+waitidle
+tapnamed verb2
+waitidle
+tapnamed verb2
+waitidle
+tapnamed verb2
+waitidle
+tapnamed verb2
+waitidle
+tapnamed verb2
+waitidle
+tapnamed verb2
+waitidle
+call assert status lost
+call assert hp 0
+shot 14_death
+tapnamed retry
+wait 3
+waitidle
+call assert hp 6
+call assert turn 0
+call assert seed BELL42
+call assert hash 9d0a2df5064084fec76548d32ad14e409a95afdb44f24f5df19eae3bf1679bab
+shot 15_retried
+quit

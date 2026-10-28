@@ -1,113 +1,127 @@
 # UNDERCROFT
 
-A Finder enters the Undercroft of Lost Things: an abbey's buried store of
-missing possessions and the people still looking for them. Find another use
-for an ordinary object. Bring something home. Occasionally, put something
-back where it belongs and watch the dungeon come alive again.
+A Finder enters the abbey's Undercroft of Lost Things. Missing possessions
+collect below; some are useful, some are still wanted. Find another use for
+something ordinary. Bring the Dawn Seal home. Eventually, put something back
+where it belongs and watch the dungeon come alive again.
 
-Agreed direction after [R1](proposals/R1_CODEX.md) and
-[R2](proposals/R2_CLAUDE.md), 28 October 2026. M1 is the first playable below;
-the rest describes the intended slice, not features already implemented.
+Current milestone: **M2, a complete small run**, following the M1 review.
+The Bell Porter and restored lift remain the intended signature of M3.
 
-## The short run
+## The playable run
 
-One Finder, two persistent generated floors, about fifteen minutes. Retrieve
-the Dawn Seal below and leave through the entrance. Two floors is a content
-parameter; a third is considered only after playtesting establishes a need.
-No party, light timer, hunger, durability or random accuracy rolls.
+Two generated, persistent floors. Find a key on each floor, pass its locked
+gate, descend, take the Dawn Seal and return to the entrance. Both sets of
+stairs work in both directions. Gates, monsters, dropped loot, equipment and
+visited cells retain their state while the Finder is elsewhere.
 
-Five capabilities explain the objects: HEAVY, EDGE, FIRE, FOOD and GLOW.
-Keys match named locks; lost property matches named owners. No recipe graph.
-Thirteen item definitions is the ceiling: knife, lamp, stone, bone, bread,
-torch, clapper, shard, tonic, club, coat, key and Seal. Belt essentials cannot
-be consumed, dropped or thrown. Ordinary loot occupies one pack slot each.
+A floor has an entry room, a weight gate, a middle area with a useful loop
+and side room, a keyed gate and an upper room. Seeded offsets, mirrors, loop
+lengths and alcoves vary the geometry. This is bounded constructive generation,
+not random tile noise. Floor count is a parameter (currently supported 1–4).
 
-The pack starts at eight slots in the full slice, subject to measurement:
-report pickups offered against free slots, especially on floor two. Six may
-produce better decisions. Slot count is a parameter, not an article of faith.
-Ordinary item details include one short provenance line in the lost-property
-voice. The four-slot M1 pack is a deliberately small interaction prototype.
+The direct BELL42 witness takes 77 committed turns. The fifteen-minute goal
+remains a human pacing target, not a claim already demonstrated by this
+milestone. Do not lengthen corridors just to reach it.
 
-## Put the place back together
+## Hands, pockets and small decisions
 
-The Bell Porter is missing its clapper. Keep it as a strong HEAVY tool, or
-return it and restore a lift linking the lower landing with the entrance.
-The ordinary route remains open. Returning changes space and the owner's
-behaviour; it does not dispense a better club that cancels the trade.
-Returning late is allowed. If that dominates, tune the lift's placement/value
-instead of inventing an expiry. One good restoration encounter is enough.
+Eight pack slots, a hand slot, a coat slot, and a separate protected belt.
+Selecting a pack item opens a readable card: name, capabilities/effect, a
+lost-property provenance line and explicit actions. WIELD/WEAR, EAT and DROP
+cost a beat. CLOSE clears the selection. Marked world targets can be touched
+while the card is open: a selected HEAVY item makes the plate say PLACE.
 
-The Dawn Seal is GLOW. On the way home it reveals marks and optional panels
-that were invisible on descent, and keeps optional ghosts at a distance.
-There are no return-trip spawns. Revealed content is a second look, with no
-mandatory scavenger hunt or key behind a secret.
+DROP puts the selected pack item on the Finder's own cell. PLACE reaches the
+plate directly ahead. Dropped objects persist; multiple nearby objects offer
+a named chooser. A full pack rejects ordinary pickup without losing anything:
+drop, equip or use something to make room. Keys and the Seal go to the belt,
+even with a full pack, and cannot be dropped or consumed.
 
-## Touch and combat
+Eleven definitions are active in M2: rust knife, round stone, iron club,
+padded coat, red tonic, dry bread, ham bone, glass shard, hooded lamp, abbey
+key and Dawn Seal. Thirteen remains the slice ceiling; torch and clapper are
+reserved for the later capability/restoration modules. HEAVY, EDGE, FOOD and
+GLOW appear on cards, but M2 implements weight, weapon, food/healing and Seal
+objective rules. Cutting, burning and ghost interactions belong to M3.
 
-Tap an item to select it. Valid adjacent view targets show a marker with a
-verb: PLACE, BURN or RETURN. Tap that marker to commit exactly that action.
-Unmarked things do nothing with a selected item. Portrait uses are explicit
-EAT/WEAR markers when implemented. Throwing eventually has its own TOSS verb
-and short lane preview; no automatic throws or combinations.
+The knife does 1 damage; HEAVY weapons do 2 during recovery. A raised/braced
+arm limits an impatient hit to 1, so gear does not erase the guard/dodge tell.
+A coat absorbs one blow, with its
+spent state stored on the item so swapping cannot refresh it. Healing items
+are consumed only when healing is needed. Equipment exchange transfers the
+old item into the vacated pack slot. There is no durability or weight tally.
 
-Turning, inspecting, selecting and rearranging the pack are free. Movement,
-pickup, placement, use, equipping, strikes, guard and wait advance one beat.
-Invalid commands change nothing. A wind-up advertises fixed threatened cells;
-the next committed beat resolves that attack without expanding or retargeting
-it. Guard blocks one adjacent physical strike; recovery is the safe opening.
-M1's Husk holds its post. Later, approach and hound lanes add movement.
+Pressure is measured, not assumed. Each floor offers ten ordinary items plus
+its essential key (and the final Seal). Across 64 greedy exploration probes,
+floor one starts with eight free slots and ends full, leaving one ordinary
+offering; floor two starts full and leaves nine. The minimal witness carries
+little. These are different policies, not a claim that every human will make
+the same choices or that all loot is balanced.
 
-The slice adds a Husk, a FOOD-bribable hound and an optional GLOW-sensitive
-ghost, introduced separately. Required fights have repeatable starter counters.
-No theft, item-eating enemies, item-swallowing pits or unannounced off-screen
-damage. Weight gates latch open so tools can be recovered without trapping
-the player. Required FIRE has a reachable renewable source before its web.
+## Weight and a way back
 
-Death ends the run. Retry seed starts over. Leaving with the Seal wins.
-Knowledge-only Ledger cards remember observed interactions, with no permanent
-power. M2 adds staged `user://run.json` plus backup; M1 has no disk persistence.
-Receipts/reconciliation wait for an evidenced need. No daily seed yet.
+The Finder's own weight presses a plate. Step off and the gate shuts again.
+There is a gap between plate and gate, so body weight alone cannot bridge it.
+DROP a HEAVY thing while standing there, or PLACE one from the cell ahead.
 
-## The phone is the design surface
+A latch on the far side opens the gate permanently. It remains reachable if
+the Finder has crossed. Recovering the weight after latching cannot trap
+anyone. A body or HEAVY object in the doorway also holds it open; gates do not
+crush or destroy items. A matching belt key opens a keyed gate permanently.
 
-154 x 342 logical pixels, nearest filtering, VETKA 16 px minimum. Text fits
-roughly 21–22 characters per line; actual font widths are checked too. Touch
-targets are at least 18 x 18 logical pixels. No required swipes or joystick.
+## Read the creature, choose a beat
 
-| Band | Purpose |
-| --- | --- |
-| y 0–117 | Illustrated first-person view; seed/new-run access within it |
-| y 118–153 | Two feedback lines |
-| y 154–189 | Finder portrait, health, facing, equipment presentation |
-| y 190–237 | Pack and selected-item detail |
-| y 238–261 | Up to three explicit verbs |
-| y 262–341 | Six movement buttons; bent turn arrows, straight strafe arrows |
+The Bell Husk now approaches down a visible straight lane. Adjacent to the
+Finder, it raises an arm and announces the cell it will strike next beat.
+Turning to look, inspecting, selecting and opening the map are free.
+Movement, striking, guarding and physical item/fixture actions advance time.
+Invalid actions spend nothing.
 
-Painted/reduced 64/40 px monsters, simplified 24 px variants, illustrated
-masonry and portrait, code-drawn UI and item symbols. Quieter masonry and
-reactive portraits are later polish. Original sparse modal bell music is M4;
-do not reuse Warren/VETKA Bach pieces. An invented publisher splash and an
-old-style manual are later personality work, not blockers for first play.
+Backstep and the strike hits the old cell. After recovery, the Husk steps in
+again. GUARD blocks the announced physical blow. Strike during recovery; a
+HEAVY weapon can finish it with that single counter. The starter knife still
+has a damage-free answer. Killing a source cancels its pending strike.
+Inactive floors do not take enemy turns, and stairs add no arrival attack.
 
-## Build order and stopping points
+A real hit adds a red view border, a small view knock and a hurt portrait
+overlay/tint, alongside health and short text. A handful of locally synthesised
+effects covers footsteps, bumps, hits, guard clangs, wind-up bells, gates and
+pickup. There are no samples, music, downloads or external services. Music is
+M4: original, not the reused Warren/VETKA Bach pieces.
 
-**M1:** generated tiny floor, first-person movement, stone pickup, selected
-PLACE marker, plate/latching gate, one Husk, exit/retry/new seed. Real existing
-spike art. No saves, title flow, equipment rules or restoration yet. A witness
-and a real-touch pilot traverse it end to end. Ask whether the minute is fun.
+## Finish, pause, return
 
-**M2:** complete two-floor Seal run, pack/equipment choices, keys, title/end,
-saves and Android interruption acceptance. Tune movement/combat before adding
-more content. **M3:** the five capabilities, hound/ghost, explicit throwing,
-Porter restoration, return reveals and hinted secret. **M4:** accepted art,
-original audio, concise Ledger, variation, manual and phone finish.
+A title screen offers NEW RUN and CONTINUE under a fictional 1993 publisher.
+New run explicitly replaces the old one. The end screens offer retry/new run.
+Death ends the run; there is no power carried into the next attempt.
+Win requires bringing the Seal back to floor one's entrance.
 
-## Open disagreements
+Every accepted command is saved before animation, including free rotation.
+Pause and close save again. Versioned JSON uses user://run.json with validated
+staging and a last-good backup. A corrupt slot never replaces a valid live
+simulation. No session receipts or Ledger framework is added in M2.
 
-No R2 disagreement blocks M1. I accept deferring fallback runs and persistence
-machinery; bounded construction plus an explicit error is sufficient now.
-For the full slice, six versus eight pack slots remains empirical: start at
-eight and reduce only when offered-loot measurements and play justify it.
-Runtime-cached wall patches are my choice for M1, so texture changes need no
-Python rebuild. The tiny layout has limited variation; do not mistake its
-seed sweep for evidence that repeated full runs will be interesting.
+The map shows seen floor cells and known fixtures with a large facing marker.
+It opens/closes freely, never issues movement, and does not reveal hidden
+unseen rooms. The 154 x 342 bands, VETKA 16 px minimum, nearest filtering and
+at least 18 x 18 logical touch targets remain fixed. Curved gold arrows turn;
+straight green arrows step. Touch is sufficient; no swipe or joystick is needed.
+
+## What gives the finished slice its identity
+
+M3 adds one owner/restoration encounter. Return the Bell Porter's clapper to
+restore a useful lift, or retain its HEAVY utility longer. The ordinary stairs
+remain viable. Returning late is permitted; if it dominates, tune the route
+value instead of inventing quest expiry.
+
+The Seal's GLOW reveals optional marks on the way home and keeps optional
+ghosts at a distance. A renewable FIRE source precedes a required web; EDGE
+opens a clearly hinted optional panel; FOOD can spare a hound encounter.
+No thieves, item-eating enemies, item-swallowing pits, compulsory hidden walls
+or return-trip spawns. One good restoration is enough.
+
+M4 polishes poses, quieter walls, portraits, original bell-motif music, concise
+knowledge-only Ledger cards, a period-style manual and phone acceptance.
+M2 proves the full loop and persistence. It does not yet establish third-run
+variety or the signature restoration payoff.
