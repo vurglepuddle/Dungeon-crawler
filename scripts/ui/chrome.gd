@@ -1,11 +1,16 @@
 extends RefCounted
 static var _texture: Texture2D
 static var _surfaces: Dictionary={}
+const Paint=preload("res://scripts/art/presentation_art.gd")
 ## Buttons retain the original painted bronze. Large surfaces never tile it.
 static func surface(kind: String="slate",padding: int=2) -> StyleBox:
 	if not _surfaces.has(kind):
 		var path: String="res://assets/art/ui/%s.png"%kind
-		_surfaces[kind]=load(path) if ResourceLoader.exists(path) else null
+		# The offer's message strip is drawn at its native 150x34 in Main.
+		# Large cards/menus have a full, quiet slate source of their own;
+		# stretching the small strip there produces metre-long scratches.
+		if kind=="card": path="res://assets/art/ui/slate.png"
+		_surfaces[kind]=Paint.texture(path)
 	var box: StyleBox
 	if _surfaces[kind]!=null:
 		var painted:=StyleBoxTexture.new(); painted.texture=_surfaces[kind]

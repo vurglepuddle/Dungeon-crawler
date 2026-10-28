@@ -58,6 +58,18 @@ static func validate(s: Dictionary) -> bool:
 			if not seen is bool: return false
 		if f.has("bell_rung") and (not f.bell_rung is bool or s.rules_version not in ["m3.2","m3.3"]): return false
 		if not _cell(f.start,f) or not _cell(f.landing,f): return false
+		if f.has("props"):
+			if not f.props is Array or f.props.size()>8: return false
+			for prop in f.props:
+				if not prop is Dictionary or not prop.get("id") is String or not prop.get("kind") is String or prop.kind not in ["rubble","bone_heap","skeleton","pots","statue","candles","crate","pillar"]: return false
+				var p=prop.get("pos")
+				if not p is Array or p.size()!=2 or not p[0] is int or not p[1] is int or p[0]<1 or p[1]<1 or p[0]>15 or p[1]>15: return false
+				if f.tiles[p[1]*17+p[0]]!=(1 if prop.kind=="pillar" else 0): return false
+				if prop.has("offset"):
+					var offset=prop.offset
+					if not offset is Array or offset.size()!=2: return false
+					for n in offset:
+						if not n is int or absi(n)>25: return false
 		if not f.fixtures is Array or f.fixtures.size()>32 or not f.actors is Array or f.actors.size()>8: return false
 		var fixture_ids: Dictionary={}
 		for fixture in f.fixtures:

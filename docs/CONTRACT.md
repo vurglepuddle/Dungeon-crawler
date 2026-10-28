@@ -1,4 +1,4 @@
-# M3e contract
+# M3f contract
 
 New runs use rules/content/generator m3.3; snapshot/envelope schema stays 2.
 Exact m2.1, m3.1 and m3.2 cohorts remain readable and playable from stored
@@ -30,8 +30,8 @@ Parallel B owns its new creature/fixture/effect/music sources and data; C owns
 env/icons/screens/portrait art, scripts/fx, data/text and its manual/polish docs.
 The primary Codex alone wires those contributions into the scene. D owns
 tests/qa and QA_REPORT; its harness is unchanged. Authored B/C inputs remain
-read-only. Props/pillars, the logotype/menu animation backlog and the next
-floor/ceiling/parchment repaint remain deferred.
+read-only. M3f wires accepted props/pilasters, the logotype/menu frames, calm planes,
+verb stamps and torn parchment. The optional owner vine overlay stays empty.
 
 ## Sim API
 
@@ -100,7 +100,7 @@ unchanged. Queries, selection, cards, map and seed cancellation are free.
 | turn | delta -1 or 1 |
 | move | step fwd/back/strafe_l/strafe_r relative to facing |
 | pickup | item_id on own/front cell; ordinary pack capacity enforced; belt essentials bypass it |
-| drop | selected pack item_id onto own cell |
+| drop | pack or equipped item_id onto own cell; no spare pocket needed |
 | place | pack item_id with HEAVY, target_id is plate directly ahead |
 | equip | pack item_id with hand/body role; old equipment enters vacated pocket |
 | unequip | slot hand/body; needs a free pocket |
@@ -419,7 +419,7 @@ The external art probe is named probe_m3d_pack.gd because it requires
 
 M3e adds a capability tour (actual FOOD toss), adjacent Hound dodge,
 lit-torch/peaceful-Hound close/reopen, and QA-01's occupied stair through SIDLE.
-The reference tour is 118 turns; the screenshot pilot takes 122, adding four
+The reference tour is now 120 turns; the screenshot pilot takes 124, adding four
 real steps into/out of the kennel to photograph its peaceful occupant.
 run_m3e_pilots.ps1 runs those five plus the twenty inherited regressions.
 Every windowed run supplies a pilot and retains the autopilot's default master
@@ -429,3 +429,58 @@ and a pure-sim/UI route comparison. D's harness remains independent and intact.
 stage_m3e.py/run_m3e_pack.ps1 include held-item resources and prove the full
 tour using an exported PCK from an empty resource directory. No APK/device
 acceptance is implied by a desktop packaged-resource test.
+
+## M3f phone corrections
+
+No schema/profile bump: snapshots store explicit floors; existing runs are
+never redecorated or regenerated. Fresh m3.3 floors add optional `props` arrays.
+Each entry has string `id`, permitted `kind`, integer `pos`, and optional
+integer hundredth-cell `offset` in [-25,25]. Ordinary props occupy floor;
+pilasters occupy existing wall cells. The codec checks these fields before
+use; canonical JSON contains no fractional coordinates. Loaded old floors
+without props render normally. These new spawn choices change fresh-run
+hashes; exact legacy fixtures keep theirs.
+
+`move {step:"fwd"}` into a wall uses an accessible attached stairs/exit/lift
+face when its normal matches facing. The landing can be underfoot, directly
+ahead, or behind the Finder at the physical wall's mouth. Other movement
+is unchanged. `scripts/sim/wall_faces.gd` is the shared attachment rule;
+`fixture_near(fixture)` and `wall_bindings()` are pure queries. Attachments
+are cached per floor and reset on restore, never stored in the snapshot.
+Normal stair/ride/leave validation, turn cost, departure freeze, no arrival
+attack, revision and transition events remain authoritative. Blocked normal
+arrivals refuse; SIDLE stays explicit. A dead lift refuses atomically with
+`The lift is dead.`; the UI adds the missing-bell hint. Exit without the Seal
+refuses with its existing objective text.
+
+`drop {item_id}` accepts pack or equipped possessions, clears the equipment
+slot if needed and puts that same identity on the player's current cell.
+It needs no free pocket. Protected belt items still refuse. UNEQUIP remains
+`unequip {slot}` and requires a free pocket. Lever action type stays `latch`;
+its public label is PULL. The fixed wall supports a head-on pose and tap from
+its own cell; spent handles remain down.
+
+Belt counts are presentation only. `belt_key` opens one card or a named list
+when multiple keys exist. `belt_ITEM_ID` chooses a key; `keys_close` closes
+the list. Key cards state the matching floor gate and its open status.
+`card_use` remains the UNEQUIP pilot control on an equipped card; `card_drop`
+works for equipment as well as pack items. All existing where aliases remain.
+
+Art selection: calm_v3 plane weights and exact world-cell hash are in
+`scripts/art/plane_materials.gd`; no simulation RNG, frame or facing enters
+the choice. UI verb stamp layouts are copied to `data/ui/verb_layout.json`;
+runtime never reads art_src. Travel glints use the arch aperture projection.
+Story frames use presentation elapsed time, reset per menu, loop only on
+splash/title and hold the last result frame. The splash remains skippable.
+
+Optional overlay path: `res://assets/art/ui_offer/owner_overlay.png`, native
+154x342 transparent PNG. Main creates one mouse-ignoring layer above chrome
+and below cards/modals; missing file means no overlay. Current vine offers
+are deliberately not loaded. No project setting or export preset is changed.
+
+`run_m3f_checks.ps1` adds phone/spawn regressions to the thirteen existing
+suites. `run_m3f_pilots.ps1` adds the B3VJ5K owner route to all twenty-five
+active pilots, retaining isolated saves and master mute. The owner route
+uses real forward taps for stairs, working lift and final exit. D's harness
+is unchanged. `run_m3f_pack.ps1` exports only accepted runtime inputs and
+probes a full tour from an empty resource directory; vines/WIP are excluded.

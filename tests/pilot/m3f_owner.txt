@@ -1,0 +1,595 @@
+# Owner's seed; real taps, no state injection. Muted by Autopilot.
+wait 4
+shot 00_splash
+tapnamed splash_skip
+wait 3
+shot 00_title
+call new_run B3VJ5K
+wait 3
+waitidle
+shot 01_upper_materials
+tapnamed equip_hand
+wait 3
+shot 02_equipped_drop_card
+tapnamed card_close
+waitidle
+tapnamed equip_hand
+wait 3
+tapnamed card_drop
+waitidle
+shot 03_equipment_dropped
+tapnamed hot_item_knife_start
+waitidle
+tapnamed pack0
+wait 2
+tapnamed card_use
+waitidle
+tapnamed equip_hand
+wait 3
+tapnamed card_use
+waitidle
+shot 04_unequipped_to_pack
+tapnamed pack0
+wait 2
+tapnamed card_use
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed fwd
+waitidle
+shot 05_dead_lift_grille
+tapnamed fwd
+waitidle
+call assert hash 4b4db041bdf80adbabf8d81f09ee90f2153ade2daf294fbfe48e8fc0b2d284d0
+shot 06_lift_explained
+tapnamed hot_lift_home
+waitidle
+shot 07_lift_tapped
+tapnamed back
+waitidle
+tapnamed turn_l
+waitidle
+tapnamed hot_item_f1_stone
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed hot_item_f1_club
+waitidle
+tapnamed turn_l
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_l
+waitidle
+tapnamed hot_item_f1_coat
+wait 3
+tapnamed loot_f1_coat
+waitidle
+tapnamed hot_item_f1_bread_3
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed hot_item_f1_tonic_4
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed fwd
+waitidle
+tapnamed hot_item_f1_torch
+waitidle
+tapnamed turn_r
+waitidle
+shot 08_filled_pack_tray
+tapnamed pack0
+wait 3
+shot 08_bright_place_brackets
+tapnamed card_close
+waitidle
+tapnamed fwd
+waitidle
+tapnamed pack0
+wait 2
+tapnamed card_drop
+waitidle
+shot 11_stone_on_plate
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed verb1
+waitidle
+tapnamed verb0
+waitidle
+tapnamed verb0
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_r
+waitidle
+shot 09_lever_head_on_up
+tapnamed hot_front
+waitidle
+shot 10_lever_head_on_down
+tapnamed turn_r
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed fwd
+waitidle
+shot 12_prop_crate
+tapnamed turn_r
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_l
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_l
+waitidle
+shot 12_prop_pillar
+tapnamed turn_l
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed hot_item_f1_key
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_l
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed hot_item_bell_clapper
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_l
+waitidle
+tapnamed fwd
+waitidle
+tapnamed hot_front
+waitidle
+shot 15_f1_owner_gate_open
+tapnamed turn_r
+waitidle
+shot 15_f1_gate_direction_0
+tapnamed turn_r
+waitidle
+shot 15_f1_gate_direction_1
+tapnamed turn_r
+waitidle
+shot 15_f1_gate_direction_2
+tapnamed turn_r
+waitidle
+shot 15_f1_gate_direction_3
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_l
+waitidle
+shot 14_porter_clear_floor
+tapnamed hot_porter
+wait 4
+shot 20_porter_offer
+tapnamed porter_close
+wait 3
+tapnamed pack5
+wait 3
+shot 21_clapper_return_target
+tapnamed hot_front
+waitidle
+shot 22_porter_restored
+tapnamed turn_l
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed pack4
+wait 3
+tapnamed verb0
+waitidle
+shot 01_brazier_torch
+tapnamed turn_r
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_l
+waitidle
+tapnamed fwd
+waitidle
+tapnamed pack4
+wait 3
+tapnamed verb0
+wait 2
+shot 02_burning_web
+waitidle
+tapnamed pack2
+wait 3
+shot 03_hound_windup
+tapnamed card_toss
+wait 3
+call assert tossing f1_bread_3
+shot 04_toss_preview
+tapnamed verb0
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_r
+waitidle
+shot 05_hound_fed
+tapnamed turn_r
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_l
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+shot 20_stairs_forward
+tapnamed fwd
+waitidle
+tapnamed hot_item_f2_stone
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed pack4
+wait 2
+tapnamed card_drop
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed verb1
+waitidle
+tapnamed hot_front
+waitidle
+tapnamed verb1
+waitidle
+tapnamed verb0
+waitidle
+tapnamed verb0
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_l
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_l
+waitidle
+tapnamed fwd
+waitidle
+tapnamed hot_item_f2_key
+wait 3
+tapnamed loot_f2_key
+waitidle
+shot 21_two_belt_keys
+tapnamed belt_key
+wait 3
+shot 21_key_list
+tapnamed belt_f1_key
+wait 3
+shot 21_key_gate_card
+tapnamed card_close
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_l
+waitidle
+tapnamed fwd
+waitidle
+tapnamed hot_front
+waitidle
+shot 15_f2_owner_gate_open
+tapnamed turn_r
+waitidle
+shot 15_f2_gate_direction_0
+tapnamed turn_r
+waitidle
+shot 15_f2_gate_direction_1
+tapnamed turn_r
+waitidle
+shot 15_f2_gate_direction_2
+tapnamed turn_r
+waitidle
+shot 15_f2_gate_direction_3
+tapnamed turn_r
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_l
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_l
+waitidle
+tapnamed equip_hand
+wait 3
+tapnamed verb0
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed pack3
+wait 3
+shot 06_ghost_before
+tapnamed verb0
+wait 2
+shot 07_ghost_dispelled
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_l
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed hot_item_f2_seal
+waitidle
+shot 12_seal_held
+tapnamed turn_r
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_l
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_l
+waitidle
+shot 22_lift_working_forward
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_l
+waitidle
+tapnamed fwd
+waitidle
+tapnamed equip_hand
+wait 3
+shot 08_seal_reveals_panel
+tapnamed verb0
+waitidle
+shot 09_secret_open
+tapnamed turn_r
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_l
+waitidle
+tapnamed hot_item_f1_secret_tonic
+waitidle
+shot 13_cache_taken
+tapnamed turn_l
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+shot 23_exit_forward
+tapnamed fwd
+waitidle
+call assert status won
+call assert hp 6
+call assert hash 474b837deacce3e15b21f37611fcc6bac80c41cd73f19786430e0f9da856f34a
+shot 24_owner_home
+close

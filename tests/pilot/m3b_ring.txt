@@ -187,7 +187,7 @@ tapnamed hot_front
 waitidle
 call assert status won
 call assert hp 6
-call assert hash 0f2733838ca30da6bb01917fac811cbd62715d7c20736af6bba96c16917eaee5
+call assert hash 5877c5494a122ca2f97c5ebc13b6876721c4d40a1105aa4b036304ed1b521610
 call state
 shot 12_ring_home
 quit

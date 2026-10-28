@@ -66,7 +66,7 @@ results. See CONTRACT for exact data and DESIGN for what is playable.
   and builder are in art_src/m3c; runtime assets are assets/art/ui.
   scripts/ui/item_button.gd draws full-bound 16px icons explicitly centred,
   with selection corners instead of per-pocket boxes. The root draws the
-  compact pad, framed portrait/HP bar, glass gauge, belt loops and half-dial
+  compact pad, framed portrait, one glass HP vial, belt loops and half-dial
   compass. Damped needle motion and hurt shudder remain presentation only.
 - During an item card, the controller docks the strip below the picture and
   preserves the hidden event text. Save failures update a persistent status
@@ -115,7 +115,7 @@ scripts/view/held_item.gd caches one native 48x56 right-hand frame at view-local
 Seal; action poses and pulses stay entirely in presentation. The world view
 also keeps short web/ghost transition ghosts after the corresponding sim
 state is committed. Panels use B's transparent sigil on current painted stone,
-with a wall-UV inset after opening. No floor/ceiling material is swapped.
+with a wall-UV inset after opening. M3f selects the supplied calm_v3 floor/ceiling material per world cell.
 
 Data flow: seed -> bounded construction -> replayed full-run witness -> live
 sim -> save -> events/snapshot -> visual/audio feedback -> touch command -> sim.
@@ -148,3 +148,19 @@ DirAccess handles with relative replacement. Font import/project filtering,
 launcher art and export settings remain owner-managed. Art authoring and the
 contact-sheet builder use offline Python only; the game has no Python/runtime
 image-tool dependency. The new painted source/prompt/pipeline are in art_src/m3b.
+
+M3f shares physical fixture attachments through scripts/sim/wall_faces.gd.
+Forward collision and view projection consult the same wall/normal; the sim
+caches immutable attachments per floor. The last generator pass reserves
+fixture/actor/landing cells before moving conflicting loot to nearest empty
+floor. scripts/gen/room_dressing.gd records sparse prop placements without
+changing terrain; pilasters sit on solid wall recesses. The codec validates
+optional prop metadata. Presentation suppresses decoration under dropped
+possessions or visiting creatures. Old explicit floor snapshots are unchanged.
+
+scripts/art/plane_materials.gd implements the supplied stable cell hash and
+weights; the surface cache includes seed and material revision. Paint caches
+accepted full-size wall controls, native UI surfaces, tiny verb stamps and
+story frames. ItemButton draws measured stamps beside full VETKA words.
+Main owns the optional owner_overlay.png layer, below modals and transparent
+to input. Neither vines nor unreviewed authoring proposals enter staged export.

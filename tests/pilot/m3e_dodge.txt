@@ -111,6 +111,8 @@ waitidle
 tapnamed turn_r
 waitidle
 tapnamed hot_item_f1_bread_3
+wait 3
+tapnamed loot_f1_bread_3
 waitidle
 tapnamed turn_l
 waitidle
@@ -156,5 +158,5 @@ tapnamed strafe_r
 waitidle
 shot 11_hound_dodged
 call assert hp 6
-call assert hash 3a6de829e7ac7b8d390fcc5314f78a53e19054c1a6448f0d3e50993fcb15d4d0
+call assert hash f3b4b6adf7cd33d1128c9815a7165e92cf5d5fd85237f896b6857dfdecc447ca
 close

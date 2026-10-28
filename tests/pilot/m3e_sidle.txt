@@ -113,7 +113,7 @@ tapnamed fwd
 waitidle
 tapnamed fwd
 waitidle
-tapnamed verb1
+tapnamed verb2
 waitidle
 tapnamed turn_r
 waitidle
@@ -132,6 +132,6 @@ tapnamed hot_front
 waitidle
 call assert floor 1
 call assert hp 6
-call assert hash 3e67121f8c13a369a3409dda3c776722f6fc0068f1dc47dc713ad83ae6fa41db
+call assert hash bc7c8e972d160e9bc19733ebc5777cba445864051fe278b71646f76fe3ac035d
 shot 18_safe_arrival
 close

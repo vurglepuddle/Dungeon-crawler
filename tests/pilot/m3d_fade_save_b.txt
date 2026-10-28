@@ -2,6 +2,6 @@ wait 4
 tapnamed continue
 waitidle
 call assert travel_pending false
-call assert hash b96c527e646df1b1050d4309e335d4d56e1c26e14585a23eda75addc300f9f09
+call assert hash 9e820695daa062105c222acb3e571a5ee489343fbddd3d42a03388a6ccbbc87e
 call assert survey_hash 25726d8524d15574807e7ba292a0e03ab16dd906c3e1b3a426f95c76a0783f06
 close

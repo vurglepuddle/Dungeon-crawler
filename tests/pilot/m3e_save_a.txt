@@ -112,6 +112,8 @@ waitidle
 tapnamed turn_r
 waitidle
 tapnamed hot_item_f1_bread_3
+wait 3
+tapnamed loot_f1_bread_3
 waitidle
 tapnamed turn_l
 waitidle
@@ -175,6 +177,6 @@ waitidle
 tapnamed turn_r
 waitidle
 call assert save_ok true
-call assert hash fcb875f0daeed49655436c77dedbb17f6103a7628eeae3bae23e55edb6f8a370
+call assert hash e626dd44f1bd5c384bb7727683a30e6812124f5b57fdf57f9f416c954d418f0f
 shot 15_lit_fed_before_close
 close

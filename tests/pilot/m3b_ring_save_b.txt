@@ -5,7 +5,7 @@ tapnamed continue
 waitidle
 call assert ring_ready false
 call assert hp 6
-call assert hash 86cc303ad150cb01cd994e5994b0c0c2bb095d41a9109fc1f2ae74e7fb26e60a
+call assert hash e58bb321e240e87324c848fa3fb385db49ba540fc400e733fefb641a13c0d342
 tapnamed equip_hand
 wait 4
 shot 10_ring_continued

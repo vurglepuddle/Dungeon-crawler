@@ -5,12 +5,11 @@ collect below; some are useful, some are still wanted. Find another use for
 something ordinary. Bring the Dawn Seal home. Eventually, put something back
 where it belongs and watch the dungeon come alive again.
 
-Current milestone: **M3e, choose another use**. A lit reed torch clears a web;
-food can spare an Ash Hound; light dispels a Wick Ghost. The Seal wakes a
-scored panel on the walk home. Painted hands show what the Finder is using.
-Doors, stairs and lift still belong to the masonry, and the ink map preserves
-the distinction between walking and glimpsing. The accepted floor, ceiling
-and parchment materials stay in place pending the owner's next art review.
+Current milestone: **M3f, the owner's phone pass**. Forward movement into a
+stair, exit or lift face now uses it. Equipment can be put down directly;
+keys count on the belt. The painted upper panels, quieter varied stone,
+shut lift and marked stairs make the dungeon's affordances easier to read.
+The M3e encounter choices remain intact. No new combat or quest mechanics.
 
 ## The playable run
 
@@ -39,8 +38,8 @@ or 66 if returned and the lift used. These are reproducible bot routes, not
 optimal-path or fifteen-minute human pacing claims.
 
 The two-floor capability tour includes the fire/kennel, cord/ghost and return
-secret. BELL42 takes 118 turns without damage; 300 replayed tour seeds take
-114-144. The greedy BELL42 collector takes 190. These are different choices
+secret. BELL42 takes 120 turns without damage after clearing loot from fixture cells;
+300 M3f tour seeds take 114-146. The greedy BELL42 collector takes 194. These are different choices
 about detours and possessions, not extra mandatory corridor length.
 
 ## Hands, pockets and small decisions
@@ -51,7 +50,10 @@ lost-property provenance line and explicit actions. WIELD/WEAR, EAT and DROP
 cost a beat. CLOSE clears the selection. Marked world targets can be touched
 while the card is open: a selected HEAVY item makes the plate say PLACE.
 
-DROP puts the selected pack item on the Finder's own cell. PLACE reaches the
+DROP puts a selected pack **or equipped** item on the Finder's own cell.
+An equipped card offers UNEQUIP into a free pocket, or DROP directly even
+when all eight pockets are full. The belt shows x2/x3 for multiple keys;
+its key list and each key card identify the floor gate and whether it is open. PLACE reaches the
 plate directly ahead. Dropped objects persist; multiple nearby objects offer
 a named chooser. A full pack rejects ordinary pickup without losing anything:
 drop, equip or use something to make room. Keys and the Seal go to the belt,
@@ -214,10 +216,10 @@ portrait/equipment/belt 38, pack 22, verbs 24, controls/compass 48 and footer 2.
 
 The original painted bronze remains on buttons and the compass. Large panels
 use continuous, nonrepeating dark slate or teal enamel with thin bevels and
-corner studs. The map uses worn parchment; cards use a dark verdigris
+corner studs. The map uses worn parchment; cards use a quiet dark slate
 inset. A leather fold holds eight boxless icons at 19px pitch. Belt loops sit
-behind the protected possessions, and a slim glass oil gauge repeats health
-beside the portrait's bar. Icons retain their native centred 16 x 16 canvas.
+behind the protected possessions, and a slim glass vial shows health
+beside the portrait. It is the only health bar; HP text gives exact numbers. Icons retain their native centred 16 x 16 canvas.
 The compass needle kicks and settles when turning; its letter remains precise.
 The top strip has carved rail ends, a painted MAP button and a clear camera
 gap. C's centred sixteen-pixel icons replace possession placeholders. Finder
@@ -232,7 +234,8 @@ use. The restored Porter raises its palms and lights its chest in a new pose.
 There are no labels or boxes on the dungeon picture. A small gold glint marks
 a usable object; its painted body is the tap target. B's three-frame sparkle
 has a long quiet interval and a stable per-object phase. Selected-item targets
-have small corner cues in the item's colour. The strip spells out PLACE,
+have four bright two-pixel corners, six-pixel arms and a dark outline in
+the item's tint. They breathe gently; selected sparkles repeat more often. The strip spells out PLACE,
 RETURN, RING or UNLOCK. A pile chooser names only the objects on that cell.
 The world cue and hit area share the actual sprite projection and occlusion.
 
@@ -297,7 +300,40 @@ or return-trip spawns. One good restoration is enough.
 
 M4 continues quieter walls, portraits, concise
 knowledge-only Ledger cards, a period-style manual and phone acceptance.
-M3e adds the encounter choices and return reveal. Room props/pillars,
-the painted logotype and extra life in menu paintings remain unwired. The
-floor/ceiling/parchment repaint is intentionally awaiting its next handoff.
+M3e adds the encounter choices and return reveal. M3f wires the supplied
+room dressing, painted logotype, brief story-plate motion, calm per-cell
+planes and the torn parchment. The owner's vines remain an optional hook.
 Third-run appeal, branch discovery and combat comfort need human review.
+
+## Phone affordances and material pass (M3f)
+
+Entering a landing is still an ordinary step. A further **forward** step into
+its painted wall face descends, ascends, rides or leaves in one committed
+beat. Backsteps and strafes remain steps. Directly faced and underfoot stairs
+keep their verb, including at the actual wall beyond the logical landing.
+A blocked arrival still offers SIDLE; forwarding into it refuses safely.
+An exit without the Seal says to find it, without a beat or a second dialog.
+A shut lift explains its missing bell; touching it points to the Bell Porter.
+A small persistent keystone glint ties travel verbs to their actual arch.
+
+Every module finishes before loot is placed clear of fixtures, creature start
+cells, landings and the Seal site. The Seal itself occupies its pedestal.
+Hidden cache rewards also reserve an empty floor cell. Creatures may later
+walk over loot; decoration yields to both moving bodies and dropped items.
+Small props sit by walls on reserved empty cells. Pillars are architectural
+pilasters on existing solid masonry recesses, so collision and sight agree
+without cutting new routes or blocking a previously valid seed.
+
+Decorative arches are bricked/rubble-filled; decorative doors are barricaded.
+Neither appears beside or diagonal from a functional threshold or painted
+architecture face. Open-looking fake dressing has been retired.
+
+C's native slate, leather tray, belt loops and glass vial restore the mock-up's
+upper material detail. Empty pockets have no dashes or boxes. The lower
+verb/pad/compass area stays dark, with the existing painted buttons and dial.
+The vial occupies x36-41; equipment stays at x43/71 so touch targets remain
+24x32. UNEQUIP is widened to 86px so the full word and its stamp stay readable.
+The optional transparent owner overlay sits above chrome and below modals;
+no vines are enabled yet. Floor materials use stable world-cell choices,
+with wet patches rare on floor one and more common below. Menu paintings
+move through only two or three supplied frames; they never delay input.

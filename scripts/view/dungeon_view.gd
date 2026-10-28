@@ -4,6 +4,8 @@ const Sim=preload("res://scripts/sim/dungeon_sim.gd")
 const Art=preload("res://scripts/art/item_art.gd")
 const Paint=preload("res://scripts/art/presentation_art.gd")
 const Held=preload("res://scripts/view/held_item.gd")
+const Faces=preload("res://scripts/sim/wall_faces.gd")
+const Planes=preload("res://scripts/art/plane_materials.gd")
 const WIDTH:=148
 const HEIGHT:=150
 const FOCAL:=74.0
@@ -63,6 +65,8 @@ func _ready() -> void:
 			for side in ["left","right"]:
 				name="lever_%s_%s_d%d"%[side,pressed,d]
 				_fixture_textures[name]=load("res://assets/art/fx/%s.png"%name)
+			name="lever_front_%s_d%d"%[pressed,d]
+			_fixture_textures[name]=Paint.texture("res://assets/art/fixtures/%s.png"%name)
 	for family in ["gold","target"]:
 		for pixels in [7,9]:
 			var key: String="%s_%d"%[family,pixels]
@@ -135,6 +139,7 @@ func _face_key(cell: Array,normal: Vector2i) -> String:
 
 func _architecture() -> void:
 	_faces={}; _portals=[]
+	var bindings: Dictionary=Faces.all(state)
 	for fixture in state.fixtures:
 		var kind: String=fixture.type
 		if kind=="panel":
@@ -150,20 +155,28 @@ func _architecture() -> void:
 			_portals.append({"id":fixture.id,"kind":kind,"pos":fixture.pos,"normal":Vector2(0,1) if across_x else Vector2(1,0),"texture_path":path})
 			continue
 		if kind not in ["exit","stairs_up","stairs_down","lift"]: continue
-		var preferred: Array=[Vector2i.UP,Vector2i.LEFT,Vector2i.RIGHT,Vector2i.DOWN] if kind=="stairs_down" else [Vector2i.DOWN,Vector2i.RIGHT,Vector2i.LEFT,Vector2i.UP]
-		if kind=="lift": preferred=[Vector2i.RIGHT,Vector2i.DOWN,Vector2i.UP,Vector2i.LEFT]
-		var placed:=false
-		for direction in preferred:
-			for distance in range(1,4):
-				var cell: Vector2i=Vector2i(fixture.pos[0],fixture.pos[1])+direction*distance
-				if cell.x<0 or cell.y<0 or cell.x>=state.width or cell.y>=state.height: break
-				if state.tiles[cell.y*state.width+cell.x]!=1: continue
-				var key:=_face_key([cell.x,cell.y],-direction)
-				if _faces.has(key): break
-				var art_kind: String=("lift_working" if fixture.active else "lift_dead") if kind=="lift" else kind
-				_faces[key]={"id":fixture.id,"kind":kind,"texture_path":"res://assets/art/fixtures/architecture_f%d_%s_64.png"%[mini(state.floor,2),art_kind]}
-				placed=true; break
-			if placed: break
+		if not bindings.has(fixture.id): continue
+		var binding: Dictionary=bindings[fixture.id]
+		var art_kind: String=("lift_working" if fixture.active else "lift_dead") if kind=="lift" else kind
+		var family: String="architecture_v3" if kind in ["stairs_up","stairs_down"] else ("architecture_v2" if art_kind=="lift_dead" else "architecture")
+		_faces[Faces.key(binding.wall,binding.normal)]={"id":fixture.id,"kind":kind,"texture_path":"res://assets/art/fixtures/%s_f%d_%s_64.png"%[family,mini(state.floor,2),art_kind]}
+
+func dressing_allowed(cell: Array) -> bool:
+	# Both logical landings and their painted wall faces reserve a full ring.
+	for fixture in state.fixtures:
+		if fixture.type not in ["gate","lock","stairs_up","stairs_down","exit","lift"]: continue
+		if maxi(absi(cell[0]-fixture.pos[0]),absi(cell[1]-fixture.pos[1]))<=1: return false
+	for key in _faces:
+		var parts: PackedStringArray=key.split(":")
+		if maxi(absi(cell[0]-int(parts[0])),absi(cell[1]-int(parts[1])))<=1: return false
+	# Openings between wall ends must not acquire a plausible false continuation.
+	for d in Sim.DIRS:
+		var p: Array=[cell[0]+d[0],cell[1]+d[1]]
+		if p[0]<=0 or p[1]<=0 or p[0]>=16 or p[1]>=16: continue
+		if state.tiles[p[1]*17+p[0]]==0:
+			var across: Array=[-d[1],d[0]]
+			if state.tiles[(p[1]+across[1])*17+p[0]+across[0]]==0 and state.tiles[(p[1]-across[1])*17+p[0]-across[0]]==0: return false
+	return true
 
 func _wall_path(cell: Array,normal: Vector2i) -> String:
 	var key: String="%s/%d/%s"%[state.get("seed",""),state.floor,_face_key(cell,normal)]
@@ -177,7 +190,7 @@ func _wall_path(cell: Array,normal: Vector2i) -> String:
 		elif roll==3: suffix="damp"
 		elif roll==4: suffix="crack"
 		elif roll==5: suffix="drain"
-		elif roll==6: suffix="arch"
+		elif roll==6 and dressing_allowed(cell): suffix="arch_blocked" if value%2==0 else "door_barricaded"
 		_face_choices[key]=suffix
 	var suffix: String=_face_choices[key]
 	if suffix=="sconce":
@@ -219,7 +232,7 @@ func _build_camera() -> void:
 	var forward:=Vector2(Sim.DIRS[state.facing][0],Sim.DIRS[state.facing][1])
 	var right:=Vector2(-forward.y,forward.x)
 	var origin:=Vector2(state.pos[0]+0.5,state.pos[1]+0.5)
-	var key: String="%s/%s/%s"%[state.floor,state.pos,state.facing]
+	var key: String="calm_v3/%s/%s/%s/%s"%[state.seed,state.floor,state.pos,state.facing]
 	if key!=_surface_key:
 		_surface_key=key
 		_build_surfaces(origin,forward,right)
@@ -253,7 +266,11 @@ func _build_camera() -> void:
 		_walls.append({"depth":depth,"height":maxi(1,roundi(FOCAL/depth)),"u":clampi(int(u*64),0,63),"light":lamp(depth)*(0.78 if side else 1.0),"path":path,"cell":[cell.x,cell.y],"id":face.get("id",""),"panel_state":face.get("panel_state","")})
 		if face.has("id"):
 			var h: float=FOCAL/depth
-			_project_column(face.id,column,HORIZON-h/2,h,depth)
+			if face.get("kind","") in ["stairs_up","stairs_down","lift","exit"]:
+				# The doorway is inset in a complete masonry face. Attach cues
+				# and touch to its actual arch, not the surrounding wall tile.
+				if u>=0.18 and u<=0.82: _project_column(face.id,column,HORIZON-h*0.40,h*0.88,depth)
+			else: _project_column(face.id,column,HORIZON-h/2,h,depth)
 	_visible_cells=_visible_set.values()
 	for portal in _portals:
 		var columns: Dictionary={}
@@ -274,6 +291,11 @@ func _build_camera() -> void:
 		portal.columns=columns
 		portal.strips=Paint.strips(portal.texture_path)
 	var sprites: Array=state.objects.duplicate(true)
+	for prop in state.get("props",[]):
+		# Dropped possessions and visiting actors always take precedence.
+		if state.objects.any(func(o): return o.pos==prop.pos) or state.actors.any(func(a): return a.hp>0 and a.pos==prop.pos): continue
+		var decoration: Dictionary=prop.duplicate(true); decoration.prop_kind=prop.kind; decoration.kind="decor"
+		sprites.append(decoration)
 	for fixture in state.fixtures:
 		if fixture.type not in ["gate","lock","stairs_up","stairs_down","exit","lift","web","cord","panel"]:
 			var sprite: Dictionary=fixture.duplicate(true)
@@ -283,6 +305,11 @@ func _build_camera() -> void:
 		if actor.hp>0: sprites.append(actor.duplicate(true))
 	for sprite in sprites:
 		var relative:=Vector2(sprite.pos[0]+0.5,sprite.pos[1]+0.5)-origin
+		if sprite.kind=="decor":
+			if sprite.prop_kind=="pillar":
+				# Flush with the near side of the already solid masonry recess.
+				relative-=forward*0.515
+			else: relative+=Vector2(sprite.offset[0],sprite.offset[1])/100.0
 		var depth: float=relative.dot(forward)
 		var lateral: float=relative.dot(right)
 		var wall_normal:=Vector2.ZERO
@@ -298,21 +325,29 @@ func _build_camera() -> void:
 			relative=hinge-origin; depth=relative.dot(forward); lateral=relative.dot(right)
 		# A possession at someone's feet must remain visible beside the body.
 		# This is sprite placement only; pickup still targets the same sim cell.
-		if not sprite.has("type") and not sprite.has("hp"):
+		if sprite.kind!="decor" and not sprite.has("type") and not sprite.has("hp"):
+			for resident in state.actors:
+				if resident.hp>0 and resident.state=="peaceful" and resident.pos==sprite.pos:
+					lateral+=0.35; break
 			for fixture in state.fixtures:
 				if fixture.pos==sprite.pos and fixture.type=="panel": lateral-=0.3; break
 				if fixture.pos==sprite.pos and fixture.type in ["porter","lift"]:
 					lateral+=0.3; break
 		# Own-cell contents are shown at the bottom edge, where hands can reach.
 		var underfoot: bool=sprite.pos==state.pos and sprite.kind!="latch"
+		if underfoot and sprite.kind=="decor": continue
 		if underfoot and sprite.kind=="exit": continue # The entrance is behind us.
 		if underfoot: depth=0.72; lateral=0.0
-		if depth<(0.3 if sprite.kind=="latch" else 0.5) or depth>=FAR: continue
+		var near_limit: float=0.3 if sprite.kind=="latch" or sprite.kind=="decor" and sprite.prop_kind=="pillar" else 0.5
+		if depth<near_limit or depth>=FAR: continue
 		var texture: Texture2D
 		var tall: int
 		var kind: String=sprite.kind
 		var variant: int=0 if depth<1.5 else (1 if depth<2.5 else 2)
-		if kind=="husk":
+		if kind=="decor":
+			texture=Paint.texture("res://assets/art/props/f%d_%s_d%d.png"%[mini(state.floor,2),sprite.prop_kind,variant+1])
+			tall=roundi(FOCAL/depth) if sprite.prop_kind=="pillar" else [64,40,24][variant]
+		elif kind=="husk":
 			var pose: String="recoil" if sprite.get("state","")=="recovery" else str(sprite.get("state","idle"))
 			texture=_poses.get(pose,_poses.idle)[variant]; tall=[64,40,24][variant]
 		elif kind in ["hound","ghost"]:
@@ -326,7 +361,9 @@ func _build_camera() -> void:
 			texture=_fixture_textures["plate_%s_d%d"%["down" if _pressed(sprite) else "up",variant+1]]
 			tall=texture.get_height()
 		elif kind=="latch":
-			texture=_fixture_textures["lever_%s_%s_d%d"%["left" if lateral<0 else "right","down" if _latch_down(sprite) else "up",variant+1]]
+			var head_on: bool=absf(wall_normal.dot(forward))>0.9
+			var lever: String="lever_front_%s_d%d"%["down" if _latch_down(sprite) else "up",variant+1] if head_on else "lever_%s_%s_d%d"%["left" if lateral<0 else "right","down" if _latch_down(sprite) else "up",variant+1]
+			texture=_fixture_textures[lever]
 			tall=texture.get_height()
 		else:
 			texture=Art.inventory(kind) if not sprite.has("type") else Art.texture(kind)
@@ -360,7 +397,7 @@ func _build_camera() -> void:
 		var ratio:=rect.size/Vector2(texture.get_width(),texture.get_height())
 		var clipped:=Rect2(rect.position+opaque.position*ratio,opaque.size*ratio).intersection(Rect2(0,0,WIDTH,HEIGHT))
 		if not clipped.has_area(): continue
-		_projections[sprite.id]={"rect":clipped,"anchor":clipped.get_center(),"depth":depth}
+		if kind!="decor": _projections[sprite.id]={"rect":clipped,"anchor":clipped.get_center(),"depth":depth}
 	_sprites.sort_custom(func(a,b):
 		if a.depth!=b.depth: return a.depth>b.depth
 		if (a.kind=="plate")!=(b.kind=="plate"): return a.kind=="plate"
@@ -418,8 +455,7 @@ func _draw_sprite(sprite: Dictionary,shift: int,force_recoil: bool=false,only_co
 func _build_surfaces(origin: Vector2,forward: Vector2,right: Vector2) -> void:
 	var image:=Image.create(WIDTH,HEIGHT,false,Image.FORMAT_RGBA8)
 	image.fill(Color("050609"))
-	var floor_image: Image=Paint.image("res://assets/art/env/f%d_floor.png"%mini(state.floor,2))
-	var ceiling_image: Image=Paint.image("res://assets/art/env/f%d_ceiling.png"%mini(state.floor,2))
+	var images: Dictionary={}
 	for y in range(HEIGHT):
 		var floor_side: bool=y>HORIZON
 		var offset: float=absf(y-HORIZON)+0.5
@@ -430,14 +466,9 @@ func _build_surfaces(origin: Vector2,forward: Vector2,right: Vector2) -> void:
 			var point:=origin+(forward+right*((x+0.5-WIDTH*0.5)/FOCAL))*depth
 			var u:=posmod(floori(point.x*64),64)
 			var v:=posmod(floori(point.y*64),64)
-			var colour: Color=floor_image.get_pixel(u,v) if floor_side else ceiling_image.get_pixel(u,v)
-			# The supplied surface establishes mortar and ribs. Sparse wear in
-			# world coordinates keeps its broad stone fills from becoming flat
-			# polygons, while leaving those painted seams intact.
-			if u>4 and v>4:
-				var grain: int=posmod((floori(point.x*64)*73856093)^(floori(point.y*64)*19349663),61)
-				if grain<3: colour=colour.lightened(0.10)
-				elif grain<6: colour=colour.darkened(0.18)
+			var path: String=Planes.path(state.seed,state.floor,"floor" if floor_side else "ceiling",floori(point.x),floori(point.y))
+			if not images.has(path): images[path]=Paint.image(path)
+			var colour: Color=images[path].get_pixel(u,v)
 			image.set_pixel(x,y,Color(colour.r*light,colour.g*light,colour.b*light,1))
 	_surfaces=ImageTexture.create_from_image(image)
 
@@ -494,7 +525,7 @@ func _draw() -> void:
 		var colour: Color=cue.colour
 		var signature: String="%d:%s"%[state.floor,cue.id]
 		if not _glint_phases.has(signature): _glint_phases[signature]=Paint.mix_hash(signature)%2200
-		var local_ms: int=(int(_presentation_ms)+_glint_phases[signature])%2200
+		var local_ms: int=(int(_presentation_ms)+_glint_phases[signature])%(900 if cue.selected else 2200)
 		var sparkle_frame: int=0 if local_ms<70 else (1 if local_ms<170 else (2 if local_ms<260 else -1))
 		if sparkle_frame>=0:
 			var pixels: int=9 if rect.size.y>=32 else 7
@@ -502,11 +533,20 @@ func _draw() -> void:
 			# Gold frames modulate to the exact item's accent on selected targets.
 			var tint:=Color(colour.r/0.45,colour.g/0.64,colour.b/0.60) if cue.selected else Color.WHITE
 			draw_texture(_sparkles["%s_%d"%["target" if cue.selected else "gold",pixels]][sparkle_frame],point-Vector2.ONE*(pixels/2),tint)
+		if cue.get("threshold",false) and not cue.selected:
+			# A little brass/lamplight point on the keystone ties the travel
+			# verb to its arch even between the larger sparkle's brief pulses.
+			var keystone: Vector2=Vector2(rect.get_center().x,rect.position.y+3).round()
+			draw_texture(_sparkles.gold_7[0],keystone-Vector2(3,3),Color(1,1,1,0.8))
 		if cue.selected:
-			for corner in [rect.position,rect.end-Vector2.ONE]:
+			var bright: Color=colour.lightened(0.35+0.15*(sin(_pulse*3.0)+1)/2)
+			rect=rect.grow(2).intersection(Rect2(2,2,WIDTH-4,HEIGHT-4))
+			for corner in [rect.position,Vector2(rect.end.x,rect.position.y),Vector2(rect.position.x,rect.end.y),rect.end]:
 				var inward: Vector2=(rect.get_center()-corner).sign()
-				draw_line(corner,corner+Vector2(inward.x*3,0),colour,1)
-				draw_line(corner,corner+Vector2(0,inward.y*3),colour,1)
+				draw_line(corner,corner+Vector2(inward.x*6,0),Color("080b11"),4)
+				draw_line(corner,corner+Vector2(0,inward.y*6),Color("080b11"),4)
+				draw_line(corner,corner+Vector2(inward.x*6,0),bright,2)
+				draw_line(corner,corner+Vector2(0,inward.y*6),bright,2)
 	_draw_lane()
 	draw_texture(held.texture(),Vector2(100,94))
 	if flash>0: draw_rect(Rect2(1,1,WIDTH-2,HEIGHT-2),Color(0.9,0.15,0.1,flash),false,2)

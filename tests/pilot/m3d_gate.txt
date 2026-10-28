@@ -26,5 +26,5 @@ shot 13_closed_gate_map
 tapnamed map_close
 waitidle
 call assert hp 6
-call assert hash 7263776bcaffa2301931bd874e0fdf41312105732be6a8708fa8bd1157b97c83
+call assert hash eb7374d3ef8363482601927e22e77bb18dc4bcbcb7d2080fafde522e9a1fe628
 close

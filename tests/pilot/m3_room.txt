@@ -24,5 +24,5 @@ wait 4
 shot 17_seen_map
 tapnamed map_close
 waitidle
-call assert hash a9ddc35c0a876212d1093f0a0f3d6174c8d0f876f8872add3f9c460e11eedcbb
+call assert hash d69de22e538ee463ddf7f04142b784f0d5f12014de81cb6ca30ebb45dd3f9687
 quit

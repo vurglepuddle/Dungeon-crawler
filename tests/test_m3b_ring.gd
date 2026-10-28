@@ -9,6 +9,7 @@ func _initialize() -> void:
 func _arena():
 	var sim=Sim.new("BELL42")
 	var s: Dictionary=sim.snapshot()
+	s.floors[0].erase("props") # The authored arena replaces the generated masonry.
 	s.pos=[8,9]; s.facing=0
 	# An authored open room gives independent sight/occlusion cases.
 	for y in range(4,13):

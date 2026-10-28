@@ -5,7 +5,7 @@ tapnamed continue
 waitidle
 call assert porter {"present":true,"restored":true}
 call assert turn 29
-call assert hash 7ea4bc8538459d39a14a5e100b31ba6f6a7d410966aca39ea7f411b20942e073
+call assert hash 7654b2e6c7cafe3e27dcb7c091232e29acceb02b70c40fc4c310bca49e7f75ce
 call assert save_ok true
 call state
 shot 28_restored_continued

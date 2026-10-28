@@ -15,7 +15,7 @@ func _run() -> void:
 	check(app.controls.splash_skip.visible,"Publisher is immediately skippable")
 	check(app.controls.start.get_global_rect().end.y<=342 and app.controls.continue.get_global_rect().end.y<=342,"Run controls available under splash")
 	app._skip_splash()
-	check(app._menu_art.texture==Paint.texture("res://assets/art/screens/title.png"),"Skip reveals the painted title")
+	check(app._menu_art.texture==Paint.texture("res://assets/art/screens/title_flicker_0.png"),"Skip reveals the first painted title frame")
 	check(app.new_run("BELL42"),"Visual run starts")
 	var initial_hash: String=app.sim.state_hash()
 	var entry: Dictionary=app._survey.floor_data(1)

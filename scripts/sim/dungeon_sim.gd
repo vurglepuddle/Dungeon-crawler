@@ -4,10 +4,15 @@ const Gen = preload("res://scripts/gen/floor_gen.gd")
 const Catalog = preload("res://scripts/content/catalog.gd")
 const Codec = preload("res://scripts/persistence/state_codec.gd")
 const Cap=preload("res://scripts/sim/capabilities.gd")
+const Faces=preload("res://scripts/sim/wall_faces.gd")
 const DIRS := [[0,-1],[1,0],[0,1],[-1,0]]
 const PACK_SIZE := 8
 var _s: Dictionary = {}
 var _events: Array = []
+var _face_cache: Dictionary={}
+func wall_bindings() -> Dictionary:
+	if not _face_cache.has(_s.floor): _face_cache[_s.floor]=Faces.all(_floor())
+	return _face_cache[_s.floor]
 
 func _init(seed: String = "BELL42", floor_count: int = 2) -> void:
 	var generated: Dictionary = Gen.new().generate(seed, floor_count)
@@ -28,6 +33,7 @@ func restore_state(raw: Dictionary) -> bool:
 	var normalized = Codec.normalize(raw)
 	if not normalized is Dictionary or not Codec.validate(normalized): return false
 	_s = normalized.duplicate(true)
+	_face_cache={}
 	return true
 func state_hash() -> String: return Codec.canonical(_s).sha256_text()
 func floor_data() -> Dictionary: return _s.floors[_s.floor-1].duplicate(true)
@@ -88,8 +94,15 @@ func reachable_items() -> Array:
 func local_fixtures() -> Array:
 	var result: Array=[]
 	for fixture in _floor().fixtures:
-		if _near(fixture.pos): result.append(fixture.duplicate(true))
+		if fixture_near(fixture): result.append(fixture.duplicate(true))
 	return result
+func fixture_near(fixture: Dictionary) -> bool:
+	if _near(fixture.pos): return true
+	if fixture.type not in ["exit","stairs_up","stairs_down","lift"]: return false
+	var face: Dictionary=wall_bindings().get(fixture.id,{})
+	if face.is_empty() or face.wall!=front_pos(): return false
+	var d: Array=DIRS[_s.facing]
+	return face.normal==[-d[0],-d[1]] and _clear_sight(fixture.pos)
 func has_seal() -> bool:
 	for id in _s.belt:
 		if _s.items[id].kind == "seal": return true
@@ -102,7 +115,7 @@ func fixture_actions() -> Array:
 		var label: String=""
 		match fixture.type:
 			"latch":
-				if not _fixture(fixture.gate_id).latched: kind="latch"; label="LATCH"
+				if not _fixture(fixture.gate_id).latched: kind="latch"; label="PULL"
 			"lock":
 				if not fixture.open and _s.belt.has(fixture.key_id): kind="unlock"; label="UNLOCK"
 			"stairs_up","stairs_down":
@@ -208,17 +221,17 @@ func legal_verbs(selected: String = "") -> Array:
 	if _s.status!="playing": return []
 	var front := inspect_front()
 	var matches: Array=Cap.targets(self,selected)
-	if not matches.is_empty(): return [{"label":matches[0].verb,"action":matches[0].action},{"label":"GUARD","action":{"type":"guard"}},{"label":"WAIT","action":{"type":"wait"}}]
+	if not matches.is_empty(): return _travel_verb([{"label":matches[0].verb,"action":matches[0].action},{"label":"GUARD","action":{"type":"guard"}},{"label":"WAIT","action":{"type":"wait"}}])
 	if not ring_targets(selected).is_empty():
 		var ringing: Array=[{"label":"RING","action":{"type":"ring","item_id":selected}}, {"label":"GUARD","action":{"type":"guard"}}]
 		ringing.append({"label":"HIT","action":{"type":"hit","target_id":front.monster}} if front.monster!="" else {"label":"WAIT","action":{"type":"wait"}})
-		return ringing
+		return _travel_verb(ringing)
 	if not front.monster.is_empty():
 		var third: Dictionary={"label":"WAIT","action":{"type":"wait"}}
 		for entry in fixture_actions():
 			if entry.action.type in ["stairs","squeeze"]: third=entry; break
-		return [{"label":"HIT","action":{"type":"hit","target_id":front.monster}},
-			{"label":"GUARD","action":{"type":"guard"}},third]
+		return _travel_verb([{"label":"HIT","action":{"type":"hit","target_id":front.monster}},
+			{"label":"GUARD","action":{"type":"guard"}},third])
 	var result: Array=[]
 	var valid := targets(selected)
 	if not valid.is_empty(): result.append({"label":valid[0].verb,"action":valid[0].action})
@@ -231,7 +244,14 @@ func legal_verbs(selected: String = "") -> Array:
 			if not loot.is_empty(): result.append({"label":"TAKE","action":{"type":"pickup","item_id":loot[0]}})
 	result.append({"label":"GUARD","action":{"type":"guard"}})
 	result.append({"label":"WAIT","action":{"type":"wait"}})
-	return result.slice(0,3)
+	return _travel_verb(result.slice(0,3))
+func _travel_verb(entries: Array) -> Array:
+	for entry in fixture_actions():
+		if entry.action.type not in ["stairs","squeeze","ride","leave"]: continue
+		if not entries.any(func(v): return v.action==entry.action):
+			entries[entries.size()-1]=entry
+		break
+	return entries
 func _visit() -> void:
 	var f := _floor()
 	# Reveal only the player's cell and directly visible cardinal rays.
@@ -337,6 +357,18 @@ func apply(action: Dictionary) -> Dictionary:
 		if action.has(field) and not action[field] is String: return _reject("Malformed action.")
 	if action.has("expected_revision") and not action.expected_revision is int: return _reject("Malformed revision.")
 	if action.has("expected_revision") and action.expected_revision!=_s.revision: return _reject("Stale action.")
+	# A second forward step meets the architectural face, rather than bumping
+	# uselessly against its masonry. Entering the landing itself stays a step;
+	# strafes/backsteps never accidentally travel between floors.
+	if action.get("type","")=="move" and action.get("step","")=="fwd" and terrain(front_pos())!=0:
+		var faces: Dictionary=wall_bindings()
+		for travel in local_fixtures():
+			if travel.type not in ["exit","stairs_up","stairs_down","lift"] or not faces.has(travel.id): continue
+			var face: Dictionary=faces[travel.id]
+			var d: Array=DIRS[_s.facing]
+			if face.normal!=[-d[0],-d[1]]: continue
+			var forward: Dictionary={"type":"ride" if travel.type=="lift" else ("leave" if travel.type=="exit" else "stairs"),"target_id":travel.id}
+			return apply(forward)
 	var kind: String=action.get("type","")
 	var id: String=action.get("item_id","")
 	var target: String=action.get("target_id","")
@@ -359,7 +391,9 @@ func apply(action: Dictionary) -> Dictionary:
 		"pickup":
 			if not reachable_items().has(id): return _reject("Nothing to take.")
 			if definition(id).slot!="belt" and _s.pack.size()>=PACK_SIZE: return _reject("Your pack is full.")
-		"drop","place","equip","eat":
+		"drop":
+			if not _s.items.has(id) or _s.items[id].location not in ["pack","equip"]: return _reject("Select a carried item.")
+		"place","equip","eat":
 			if not _s.pack.has(id): return _reject("Select a pack item.")
 			if kind=="place" and (fixture.get("type","")!="plate" or fixture.pos!=front_pos() or not definition(id).tags.has("HEAVY")): return _reject("No place for that.")
 			if kind=="equip" and definition(id).slot not in ["hand","body"]: return _reject("Cannot wear that.")
@@ -368,7 +402,7 @@ func apply(action: Dictionary) -> Dictionary:
 			var slot: String=action.get("slot","")
 			if slot not in ["hand","body"] or _s.equipment[slot].is_empty() or _s.pack.size()>=PACK_SIZE: return _reject("No room in the pack.")
 		"latch","unlock","stairs","squeeze","leave":
-			if fixture.is_empty() or not _near(fixture.pos): return _reject("Get closer first.")
+			if fixture.is_empty() or not fixture_near(fixture): return _reject("Get closer first.")
 			if kind=="latch" and (fixture.type!="latch" or _fixture(fixture.gate_id).latched): return _reject("Already latched.")
 			if kind=="unlock" and (fixture.type!="lock" or fixture.open or not _s.belt.has(fixture.key_id)): return _reject("Find the matching key.")
 			if kind in ["stairs","squeeze"] and fixture.type not in ["stairs_up","stairs_down"]: return _reject("No stair here.")
@@ -386,7 +420,7 @@ func apply(action: Dictionary) -> Dictionary:
 			if fixture.get("type","")!="porter" or not _near(fixture.pos) or fixture.restored or fixture.item_id!=id: return _reject("That is not its owner.")
 			if not _s.items.has(id) or _s.items[id].location not in ["pack","equip"]: return _reject("Bring its clapper.")
 		"ride":
-			if fixture.get("type","")!="lift" or not _near(fixture.pos) or not fixture.active: return _reject("The lift is sleeping.")
+			if fixture.get("type","")!="lift" or not fixture_near(fixture) or not fixture.active: return _reject("The lift is dead.")
 			if not _arrival_clear(fixture.destination_floor,fixture.destination): return _reject("The landing is blocked.")
 		"ring":
 			if ring_targets(id).is_empty(): return _reject("No Husk in sight." if ring_ready() else "The bell rests here.")
@@ -419,6 +453,7 @@ func apply(action: Dictionary) -> Dictionary:
 			_event("item_moved","player",{"item_id":id,"to":item.location})
 		"drop","place":
 			var item: Dictionary=_s.items[id]
+			if item.location=="equip": _s.equipment[item.slot]=""
 			_s.pack.erase(id); item.location="floor"; item.floor=_s.floor; item.slot=""
 			item.pos=fixture.pos.duplicate() if kind=="place" else _s.pos.duplicate()
 			_event("item_moved","player",{"item_id":id,"to":"floor","pos":item.pos.duplicate()})

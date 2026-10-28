@@ -20,9 +20,11 @@ materials in `assets/art/ui_offer/` are selected and wired by A.
 Decorative `assets/art/props/`, earlier alternate `room_fN_*` surface
 faces, a painted title logotype and an optional launcher set are also supplied. Placement,
 collision and launcher selection remain A/Claude's integration decisions.
-The latest offer adds thin dead-ivy border layers, a sleepy compass skull,
-two tiny torch frames, and 29 measured verb icons. It is entirely native
-pixel art; A still chooses and wires the offer. The preceding addition closes
+The latest ivy offer is **v4**: visibly leafy sage/ivory vines that weave
+across the bronze, with larger exterior compass curls. Use the new three
+`ivy_*_v4` layers in place of the thinner v3 border layers; retain the
+accepted v3 sleepy skull, torch frames and 29 measured verb icons. It is all
+native pixel art; A still chooses and wires the offer. The preceding addition closes
 the misleading decorative doorways with solid infill and nailed barricades.
 The preceding plane offer follows the F1 corridor:
 calmer flags, a darker shared rib vault, varied puddles and a torn map leaf.
@@ -35,13 +37,15 @@ All previous art remains intact. See
 From the repository root, with Python and Pillow installed:
 
 ```powershell
-python -B art_src/ui_offer/ivy_v3/build_ivy.py
-python -B art_src/ui_offer/ivy_v3/verify_ivy.py --rebuild
+python -B art_src/ui_offer/ivy_v4/build_leafy.py
+python -B art_src/ui_offer/ivy_v4/verify_leafy.py --rebuild
 python -B art_src/env/verify_polish.py
 ```
 
-This rebuilds only the ivy/icon offer, its registration and all its proofs;
-the focused verifier also rebuilds once and compares hashes. The closed-face
+This rebuilds only the leafy v4 layers, registration and proofs; the focused
+verifier also rebuilds once and compares hashes. It never rebuilds or writes
+v3. The previous icon pack's builder remains
+`python -B art_src/ui_offer/ivy_v3/build_ivy.py`. The closed-face
 builder remains `python -B art_src/env/closed_v4/build_closed.py`.
 For the preceding calm-plane / torn-map offer:
 
@@ -98,10 +102,13 @@ and contact sheets still use the shared indexed palette and binary alpha.
 
 | Set | Native size | 4x review sheet |
 | --- | --- | --- |
-| Current dead-ivy border pieces | Game 154 x 342; compass 66 x 48; map 144 x 324 | `art_src/ui_offer/ivy_v3/ornament_sheet_4x.png` |
+| Current leafy ivy, v4 | Game 154 x 342; compass 74 x 51; map 144 x 324 | `art_src/ui_offer/ivy_v4/contact_sheet_4x.png` |
+| Current game and leafy torn-map offer | Two 154 x 342 screens | `art_src/ui_offer/ivy_v4/mockup_screen_4x.png` |
+| V3 versus v4, same camera | Two 154 x 342 game screens | `art_src/ui_offer/ivy_v4/comparison_4x.png` |
+| Earlier thin dead-ivy pieces, v3 | Game 154 x 342; compass 66 x 48; map 144 x 324 | `art_src/ui_offer/ivy_v3/ornament_sheet_4x.png` |
 | Current verb stamps | 29 at 12 x 12; seven separate compact siblings | `art_src/ui_offer/ivy_v3/contact_sheet_4x.png` |
 | All full-word verb fits | Actual 48 x 22 buttons, VETKA 16 | `art_src/ui_offer/ivy_v3/fit_sheet_4x.png` |
-| Current game and torn-map offer | Two 154 x 342 screens | `art_src/ui_offer/ivy_v3/mockup_screen_4x.png` |
+| Earlier thin-ivy game/map proof | Two 154 x 342 screens | `art_src/ui_offer/ivy_v3/mockup_screen_4x.png` |
 | Primary walls, combined | 24 tiles, each 64 × 64 | `art_src/env/painted_v2/contact_sheet_4x.png` |
 | Primary abbey stone | 12 tiles, each 64 × 64 | `art_src/env/painted_v2/floor1/contact_sheet_4x.png` |
 | Primary older wet stone | 12 tiles, each 64 × 64 | `art_src/env/painted_v2/floor2/contact_sheet_4x.png` |
@@ -803,7 +810,92 @@ source history; the compact version builds the exported offer.
 python -B art_src/screens/room_batch/build_identity.py
 ```
 
-## Current UI offer: dead ivy, a sleepy keeper, and verb stamps
+## Current UI offer: visibly leafy ivy, v4
+
+V4 follows the owner's request for actual visible leaves rather than teal
+border dashes. It replaces only the three v3 vine layers. **All v3 assets,
+source files, verb icons, layout proofs and the two owner references remain
+byte-for-byte intact.** No game/UI source or original PNG is changed.
+
+Leaves are individually drawn **3 x 5 or 5 x 5 native pixels**, with pointed
+tips, asymmetrical shoulders and short lit veins. The sage/olive body uses
+palette 6 and 16, 17 lights the edges, and a tiny 8 ivory highlight catches
+the lamp. Palette 11/13 supplies foliage shade; warm 27 and sage/grey form
+the **1–2 px stem**, with a dark silhouette for contrast. Uneven clusters
+gather at view corners, the lower view rim and the compass. Clear little
+coils and six transparent underpasses let the original bronze show above
+the stem where it winds behind the frame.
+
+The old three-pixel clipping bands made wider leaves impossible. V4 gives
+foliage a few pixels of space at the outside of the world view and in unused
+gaps around controls. It retains the same three-pixel housing-rim rule;
+**all touch-target interiors remain empty**. World overhang is confined to
+the outer five pixels of the view at most: the core `(8,26,138,140)` is clear,
+and the M3e near-right hand/blade rect `(108,130,43,41)` is separately protected.
+The entire camera opening `(53,0,44,18)` stays clear. Text, icons, portrait,
+health bars and oil gauge are protected, including the existing verb labels
+and compass heading, needle, arcs and ticks.
+
+### V4 files and A's placement
+
+New runtime files live in `assets/art/ui_offer/`. Rects are native
+`(x,y,width,height)`, exclusive at right/bottom:
+
+| PNG basename | Canvas | Place at | Change from v3 |
+| --- | --- | --- | --- |
+| `ivy_game_border_v4` | 154 x 342 | `(0,0)` | Visible leafy coils on view/panel rims and outside control contents |
+| `ivy_compass_v4` | 74 x 51 | **`(80,291)`** | Expanded canvas includes external curls; actual compass remains `(85,294,66,44)` |
+| `ivy_map_border_v4` | 144 x 324 | `(5,16)` | Leaf clusters on the blank ragged margins, clipped to real paper alpha |
+
+**A must use the new compass origin.** Its entire inner `(88,297,60,38)` is
+still clear. Five-pixel leaves straddle the housing rim and empty space
+outside it. The owner-approved `sleepy_skull_v3.png` is copied exactly at
+`(114,335)` inside this layer; do not draw the skull again. Existing optional
+`ivy_torches_v3_0/1.png` remain at `(0,0)`, with 420/580 ms timing, and the new
+vines leave their small flame/body rectangles clear.
+
+Use nearest filtering, integer placement, `mouse_filter = IGNORE`, no tiling
+or resizing, and **zero 9-slice margins**. Draw vines over existing bronze,
+below text/items/dial marks. Swap the layers rather than stacking v3 and v4.
+Normal game uses game + compass + optional old torches; map uses only the new
+map vine layer. Hide them during cards/inspection, modals and other screens,
+as for v3. Existing 29 verb icons, compact glyph choices and full-word VETKA
+16 layout are unchanged: keep `ivy_v3/layout.json` for those. The new
+`art_src/ui_offer/ivy_v4/layout.json` records all overlay positions, protected
+rects, leaf placements, underpasses and reuse/state rules.
+
+The map leaves may enter up to 14 pixels of its empty side margins rather
+than being cut into fragments by the old eight-pixel strip. Three local
+clear rectangles protect its header `(12,11,120,15)`, body `(16,28,112,240)`
+and complete CLOSE target `(8,272,128,25)`. Existing map ink and glyphs are
+unchanged. Every vine pixel lies on opaque torn paper, keeping the irregular
+silhouette. The old paper itself and its content/9-slice contract do not
+change; the fixed-size overlay is a separate decoration layer.
+
+### V4 proofs and build
+
+- `art_src/ui_offer/ivy_v4/mockup_screen_4x.png`: full game and map together.
+- `mockup_game_4x.png` and `mockup_map_4x.png`: individual screen proofs.
+- `comparison_4x.png`: v3 and v4 at the same camera, size and icon layout.
+- `contact_sheet_4x.png`: all three layers, enlarged compass placement and
+  the native leaf stamps. All these files have exact native counterparts.
+
+These are offline composites of the same saved M3e view and torn-map proof
+used for v3. V4 does not imply changed game state or an integrated capture.
+The builder uses native pixel drawing only; its code and
+`art_direction.json` are the reproducible source, with no image model prompt.
+The two original owner references stay where they were supplied.
+
+Run the v4 commands above. Focused checks verify palette/alpha registrations,
+39 complete game leaf stamps, clear protected content and controls, the exact
+old skull and verb/button pixels, actual bronze underpasses, map alpha and
+unchanged map/header/CLOSE, preservation of all 249 earlier C runtime PNGs
+and the entire v3 source pack, and an identical rebuild. The v4 game/compass
+layers each contain roughly **2.9 times** v3's opaque pixels; that measures
+the broader silhouettes, not device acceptance. Phone review remains with
+A/Claude. No Godot runs or commits by C.
+
+## Previous UI offer: thin dead ivy v3, sleepy keeper and verb stamps
 
 This offer follows the owner's two saved chrome elaborations. Both reference
 PNGs remain byte-identical at `art_src/ui_offer/vine_on_main_view.png` and
@@ -1119,25 +1211,6 @@ the asset checks and focused FX test do not claim phone performance acceptance.
 
 
 
-## Closed-dressing revision receipt, 28 October 2026
-
-- Added **four runtime PNGs**: a solid infilled arch and permanently braced
-  broken door for each floor. The C kit now verifies at **207 runtime PNGs**,
-  using the shared palette and binary alpha. All **203 earlier C runtime
-  PNGs**, including the original arch and functional lock door, are unchanged.
-- Pixels outside the arched edit patch match the accepted plain wall exactly.
-  Full two-pixel border rings and opposite outer rows/columns match; mixed
-  tile proofs and exact 4x sheets pass. The old broad dark doorway silhouette
-  is absent in the focused regression check and visual review.
-- Four contact-sheet tiles, two mixed-repeat pairs and ten corridor mock-up
-  pairs show the art head-on and on a side wall beside B's genuine open gate.
-  These are offline proxy views, not new Godot captures or phone acceptance.
-- Rebuilding produced identical SHA-256 hashes for **37 PNG/JSON files**;
-  `art_src/env/closed_v4/rebuild_receipt.json` records the comparison.
-- A's handoff distinguishes the random decorative suffix substitution from
-  the actual lock override and gate overlays. No renderer/game edits, Godot
-  runs, staging or commits by C.
-
 ## Ivy and verb revision receipt, 28 October 2026
 
 - Added **42 runtime PNGs**: 29 canonical verb stamps, seven separately drawn
@@ -1158,3 +1231,19 @@ the asset checks and focused FX test do not claim phone performance acceptance.
 - A selects the layers and per-verb source PNGs from `ivy_v3/layout.json`,
   handles normal/card/map visibility, and performs the phone review. No
   Godot runs, staging or commits by C.
+
+## Leafy ivy v4 revision receipt, 28 October 2026
+
+- Added **three runtime PNGs**: broader leafy game, compass and map layers.
+  The combined C kit verifies at **252 runtime PNGs**, with the shared 31
+  opaque inks, binary alpha and exact nearest 4x proofs.
+- All **249 earlier C runtime PNGs**, both owner references and the entire
+  v3 source pack remain byte-for-byte unchanged. The accepted skull, verb
+  icons, full words and button contents are preserved.
+- Focused checks pass for 39 intact native leaf stamps, six bronze
+  underpasses, camera/content/control clearance, compass dial/heading, map
+  ink/alpha/header/CLOSE, and an identical **22-file** PNG/JSON rebuild.
+- A swaps the three vine layers, places the expanded compass canvas at
+  **`(80,291)`**, and retains old icons/torches. Full-screen/map, side-by-side
+  and contact proofs are under `art_src/ui_offer/ivy_v4/`; `layout.json`
+  supplies the exact registrations. No Godot runs, staging or commits by C.

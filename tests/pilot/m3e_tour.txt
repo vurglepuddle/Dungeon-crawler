@@ -112,6 +112,8 @@ waitidle
 tapnamed turn_r
 waitidle
 tapnamed hot_item_f1_bread_3
+wait 3
+tapnamed loot_f1_bread_3
 waitidle
 tapnamed turn_l
 waitidle
@@ -360,6 +362,12 @@ shot 08_seal_reveals_panel
 tapnamed verb0
 waitidle
 shot 09_secret_open
+tapnamed turn_r
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_l
+waitidle
 tapnamed hot_item_f1_secret_tonic
 wait 3
 tapnamed loot_f1_secret_tonic
@@ -369,12 +377,14 @@ tapnamed turn_l
 waitidle
 tapnamed fwd
 waitidle
+tapnamed fwd
+waitidle
 tapnamed hot_front
 waitidle
 call assert status won
 call assert hp 6
 call assert secrets_found 1
-call assert hash 1a09a20f6f87712576a120a85b54fe750ee90631b80f1dbe49713d1de4687ed8
+call assert hash e04bebc3cb064692ff0a2be2871119a6aed0b328a40517703087c714124e771a
 call state
 shot 14_tour_won
 close

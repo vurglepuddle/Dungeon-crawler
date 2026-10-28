@@ -57,6 +57,10 @@ var _menu_art: TextureRect
 var _menu_receipt: Label
 var _splash_time: float=0
 var _tossing: String=""
+var _menu_clock: float=0
+var _logo: TextureRect
+var _optional_overlay: TextureRect
+const OPTIONAL_OVERLAY="res://assets/art/ui_offer/owner_overlay.png"
 
 func _ready() -> void:
 	clip_contents=true
@@ -81,6 +85,12 @@ func _ready() -> void:
 	_music=get_node_or_null("/root/Music")
 	_load_settings()
 	_build_controls()
+	# The owner's cleaned PNG can be dropped here later. No backup vine art is
+	# enabled implicitly. This single layer stays below cards and modals.
+	_optional_overlay=TextureRect.new(); _optional_overlay.mouse_filter=Control.MOUSE_FILTER_IGNORE
+	_optional_overlay.size=Vector2(154,342); _optional_overlay.texture_filter=CanvasItem.TEXTURE_FILTER_NEAREST
+	if ResourceLoader.exists(OPTIONAL_OVERLAY) or FileAccess.file_exists(OPTIONAL_OVERLAY): _optional_overlay.texture=Paint.texture(OPTIONAL_OVERLAY)
+	add_child(_optional_overlay)
 	_build_menu()
 	_show_menu("title")
 
@@ -94,6 +104,9 @@ func _button(key: String,rect: Rect2,text: String,callback: Callable,parent: Nod
 	button.add_theme_color_override("font_color",INK)
 	button.add_theme_color_override("font_hover_color",GOLD)
 	button.add_theme_color_override("font_pressed_color",Color("efe3ba"))
+	if key.begins_with("verb") or key.begins_with("card_"):
+		button.verb_icons=true
+		for theme_key in ["font_color","font_hover_color","font_pressed_color","font_disabled_color","font_focus_color"]: button.add_theme_color_override(theme_key,Color.TRANSPARENT)
 	for key_style in ["normal","hover","pressed","disabled"]:
 		button.add_theme_stylebox_override(key_style,_style() if solid else StyleBoxEmpty.new())
 	button.pressed.connect(callback)
@@ -130,6 +143,9 @@ func _build_menu() -> void:
 	_menu_art=TextureRect.new(); _menu_art.position=Vector2(0,20); _menu_art.size=Vector2(154,150)
 	_menu_art.expand_mode=TextureRect.EXPAND_IGNORE_SIZE; _menu_art.mouse_filter=Control.MOUSE_FILTER_IGNORE
 	_menu.add_child(_menu_art)
+	_logo=TextureRect.new(); _logo.position=Vector2(7,26); _logo.size=Vector2(140,40)
+	_logo.texture=Paint.texture("res://assets/art/screens/logotype_140.png"); _logo.mouse_filter=Control.MOUSE_FILTER_IGNORE
+	_menu.add_child(_logo)
 	_menu_title=_label("UNDERCROFT",_menu); _menu_title.position=Vector2(3,179); _menu_title.size=Vector2(148,18); _menu_title.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
 	_menu_note=_label("Lost things wait.\nBring one home.",_menu); _menu_note.position=Vector2(4,202); _menu_note.size=Vector2(146,34); _menu_note.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
 	_menu_receipt=_label("",_menu); _menu_receipt.position=Vector2(3,156); _menu_receipt.size=Vector2(148,18); _menu_receipt.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
@@ -141,14 +157,27 @@ func _build_menu() -> void:
 	_button("splash_skip",Rect2(0,20,154,150),"",_skip_splash,_menu,false)
 func _skip_splash() -> void:
 	_splash_time=0; controls.splash_skip.visible=false
-	_menu_art.texture=Paint.texture("res://assets/art/screens/title.png")
+	_menu_clock=0; _logo.visible=true
+	_update_menu_art()
+func _update_menu_art() -> void:
+	var ms: int=int(_menu_clock*1000)
+	var family: String; var frame: int
+	if _mode=="title":
+		if _splash_time>0: family="splash_flutter"; frame=0 if ms%1200<900 else 1
+		else: family="title_flicker"; frame=0 if ms%1080<680 else (1 if ms%1080<840 else 2)
+	else:
+		family="win_dawn" if state.status=="won" else "death_gutter"
+		frame=(0 if ms<500 else (1 if ms<1150 else 2)) if state.status=="won" else (0 if ms<400 else (1 if ms<1100 else 2))
+	_menu_art.texture=Paint.texture("res://assets/art/screens/%s_%d.png"%[family,frame])
 func _show_menu(mode: String) -> void:
 	_close_modal(); _close_card(); _mode=mode; _busy=0
+	_menu_clock=0; _logo.visible=false
 	_transition_token+=1; _transitioning=false
 	_ambience.fade_in(0); _ambience.visible=false; _ambience.set_process(false)
 	for key in controls:
 		if is_instance_valid(controls[key]): controls[key].visible=false
 	view.visible=false; _menu.visible=true
+	_optional_overlay.visible=false
 	controls.start.visible=true; controls.sound.visible=true; controls.music.visible=true
 	controls.continue.visible=mode=="title"
 	controls.continue.disabled=not Store.can_continue(_save_path)
@@ -170,6 +199,7 @@ func _show_menu(mode: String) -> void:
 		elif state.status=="won": _music.play("win")
 		else: _music.play("death")
 	_refresh_save_indicator()
+	_update_menu_art()
 	queue_redraw()
 func _toggle_sound() -> void:
 	sfx.enabled=not sfx.enabled
@@ -281,6 +311,7 @@ func _sync() -> void:
 	state=sim.snapshot()
 	if not state.items.has(selected) or state.items[selected].location not in ["pack","belt","equip"]: selected=""
 	_menu.visible=false; view.visible=true
+	_optional_overlay.visible=true
 	for key in ["seed","floor_label","map","portrait","belt_key","belt_seal","equip_hand","equip_body","turn_l","turn_r","fwd","back","strafe_l","strafe_r","compass"]:
 		controls[key].visible=true
 	controls.seed.text=state.seed; _refresh_save_indicator()
@@ -293,10 +324,11 @@ func _sync() -> void:
 		controls["equip_"+slot].set_item(_item_icon(id) if id!="" else null,id!="" and id==selected,_selection_colour())
 		controls["equip_"+slot].text=""
 	for kind in ["key","seal"]:
-		var found:=false
+		var count:=0
 		for id in state.belt:
-			if state.items[id].kind==kind: found=true
-		controls["belt_"+kind].set_item(Art.inventory(kind) if found else null)
+			if state.items[id].kind==kind: count+=1
+		controls["belt_"+kind].set_item(Art.inventory(kind) if count>0 else null)
+		controls["belt_"+kind].badge="x%d"%count if count>1 else ""
 	verbs=sim.legal_verbs(selected)
 	view.toss_lane=[]
 	if _tossing!="":
@@ -354,6 +386,13 @@ func _sync_markers() -> void:
 		for actor in state.floors[state.floor-1].actors:
 			if actor.kind in ["hound","ghost"] and actor.hp>0 and absi(actor.pos[0]-state.pos[0])+absi(actor.pos[1]-state.pos[1])<=3:
 				markers.append({"key":"hot_"+actor.id,"id":actor.id,"label":"LOOK","callback":_inspect_creature.bind(actor.id)})
+	if selected!="":
+		for entry in sim.fixture_actions():
+			if entry.action.type in ["stairs","squeeze","ride","leave"] and not markers.any(func(m): return m.id==entry.action.target_id):
+				markers.append({"key":"hot_"+entry.action.target_id,"id":entry.action.target_id,"label":entry.label,"callback":_command.bind(entry.action)})
+		for fixture in sim.local_fixtures():
+			if fixture.type=="lift" and not fixture.active:
+				markers.append({"key":"hot_"+fixture.id,"id":fixture.id,"label":"ASLEEP","callback":_sleeping_lift})
 	# Large bodies first; a small possession at their feet wins overlapping taps.
 	markers.sort_custom(func(a,b):
 		var ra: Rect2=view.projection(a.id).get("rect",Rect2())
@@ -376,7 +415,8 @@ func _sync_markers() -> void:
 		else:
 			button=_button(marker.key,hit_rect,"",marker.callback,null,false); _marker_names.append(marker.key)
 		button.text=""; button.visible=true; button.move_to_front()
-		view.interaction_cues.append({"id":marker.id,"rect":local_rect,"selected":selected!="","colour":_selection_colour() if selected!="" else GOLD})
+		var item_target: bool=selected!="" and targets.any(func(t): return t.target_id==marker.id)
+		view.interaction_cues.append({"id":marker.id,"rect":local_rect,"selected":item_target,"threshold":marker.label in ["DOWN","UP","RIDE","ASLEEP","LEAVE","SIDLE"],"colour":_selection_colour() if item_target else GOLD})
 	view.queue_redraw()
 
 func _selection_colour() -> Color:
@@ -428,6 +468,7 @@ func _command(command: Dictionary) -> void:
 	var result: Dictionary=sim.apply(command)
 	if not result.accepted:
 		lines=[result.reason,"Drop or use an item." if result.reason=="Your pack is full." else ""]
+		if result.reason=="The lift is dead.": lines[1]="Its bell has no voice."
 		sfx.play("bump"); queue_redraw(); return
 	if command.type in ["hit","ring","light","burn","cut","toss","dispel","place"]: view.held.animate(hand_kind,command.type)
 	_bob=command.type=="move"
@@ -523,7 +564,9 @@ func _front_action() -> void:
 	if not _can_game(): return
 	if not _view_action.is_empty(): _command(_view_action)
 func _sleeping_lift() -> void:
-	if _can_game(): lines=["Its chains are still.","The Porter may know."]; queue_redraw()
+	if _can_game():
+		_close_card(); selected=""; _sync(); _save()
+		lines=["The lift is dead.","Ask the Bell Porter."]; queue_redraw()
 func _porter_card(fixture: Dictionary) -> void:
 	if not _can_game(): return
 	var column:=_panel("The Bell Porter",65,240)
@@ -560,8 +603,20 @@ func _equipment_card(slot: String) -> void:
 	if id!="": selected=id; _save(); _sync(); _open_card(id)
 func _belt_card(kind: String) -> void:
 	if not _can_game(): return
-	for id in state.belt:
-		if state.items[id].kind==kind: selected=id; _save(); _sync(); _open_card(id); return
+	var ids: Array=state.belt.filter(func(id): return state.items[id].kind==kind)
+	if ids.size()==1:
+		selected=ids[0]; _save(); _sync(); _open_card(selected)
+	elif ids.size()>1:
+		var column:=_panel("Keys / %d"%ids.size(),80,230)
+		for id in ids: _modal_button("belt_"+id,_key_gate(id),_choose_belt.bind(id),column)
+		_modal_button("keys_close","CLOSE",_close_modal,column)
+func _choose_belt(id: String) -> void:
+	_close_modal(); selected=id; _save(); _sync(); _open_card(id)
+func _key_gate(id: String) -> String:
+	for i in range(state.floors.size()):
+		for fixture in state.floors[i].fixtures:
+			if fixture.type=="lock" and fixture.key_id==id: return "Floor %d gate%s"%[i+1," / open" if fixture.open else ""]
+	return "An old gate key"
 func _open_card(id: String) -> void:
 	_close_card()
 	var panel:=PanelContainer.new(); panel.position=Vector2(4,208); panel.size=Vector2(146,132)
@@ -576,6 +631,7 @@ func _open_card(id: String) -> void:
 	if info.begins_with(": "): info=info.trim_prefix(": ")
 	_label(info,column); _label(Flavour.provenance(state.items[id].kind,definition.provenance),column)
 	if definition.has("purpose"): _label(definition.purpose,column)
+	if state.items[id].kind=="key": _label(_key_gate(id),column)
 	if state.items[id].kind=="clapper": _label("RING: once per floor." if sim.ring_ready() else "RING: spent here.",column)
 	var row:=HBoxContainer.new(); row.add_theme_constant_override("separation",3); column.add_child(row)
 	if state.items[id].location=="pack":
@@ -586,7 +642,10 @@ func _open_card(id: String) -> void:
 			_card_button("card_use","EAT",{"type":"eat","item_id":id},row)
 		_card_button("card_drop","DROP",{"type":"drop","item_id":id},row)
 	elif state.items[id].location=="equip":
-		_card_button("card_use","PACK",{"type":"unequip","slot":state.items[id].slot},row)
+		_button("card_use",Rect2(0,0,86,20),"UNEQUIP",_command.bind({"type":"unequip","slot":state.items[id].slot}),row); _card_names.append("card_use")
+		controls.card_use.disabled=state.pack.size()>=8
+		_card_button("card_drop","DROP",{"type":"drop","item_id":id},row)
+		row=HBoxContainer.new(); row.add_theme_constant_override("separation",3); column.add_child(row)
 	if state.items[id].kind=="clapper" and state.items[id].location in ["pack","equip"]:
 		if row.get_child_count()>=3:
 			row=HBoxContainer.new(); row.add_theme_constant_override("separation",3); column.add_child(row)
@@ -620,7 +679,7 @@ func _panel(title: String,top: int=32,height: int=276) -> VBoxContainer:
 	var is_map: bool=title.begins_with("Visited")
 	var background: StyleBox=Chrome.surface("slate",7)
 	if is_map:
-		var parchment:=StyleBoxTexture.new(); parchment.texture=Paint.texture("res://assets/art/ui_offer/map_parchment.png")
+		var parchment:=StyleBoxTexture.new(); parchment.texture=Paint.texture("res://assets/art/ui_offer/map_parchment_torn_v2.png")
 		for side in [SIDE_LEFT,SIDE_RIGHT]: parchment.set_texture_margin(side,8)
 		for side in [SIDE_TOP,SIDE_BOTTOM]: parchment.set_texture_margin(side,12)
 		parchment.content_margin_left=8; parchment.content_margin_right=8
@@ -695,6 +754,8 @@ func _open_map() -> void:
 	map.custom_minimum_size=Vector2(128,231); column.add_child(map)
 	_modal_button("map_close","CLOSE",_close_modal,column)
 func _process(delta: float) -> void:
+	if _mode in ["title","end"]:
+		_menu_clock+=delta; _update_menu_art()
 	if _mode=="title" and _splash_time>0:
 		_splash_time=maxf(0,_splash_time-delta)
 		if _splash_time<=0: _skip_splash()
@@ -720,39 +781,27 @@ func _text(at: Vector2,value: String,colour: Color=INK) -> void:
 func _draw() -> void:
 	draw_style_box(Chrome.surface("leather"),Rect2(Vector2.ZERO,size))
 	if _mode!="game" or state.is_empty(): return
-	# Two carved rail ends leave the physical camera's centre untouched.
+	# C's native upper materials; the pad/verb area keeps its dark ground.
+	draw_rect(Rect2(0,0,154,268),Color("312018"))
 	draw_rect(Rect2(53,0,44,18),Color("0c101c"))
-	for rect in [Rect2(0,0,53,18),Rect2(97,0,57,18)]: draw_style_box(Chrome.surface("frame"),rect)
-	draw_style_box(Chrome.surface("frame"),Rect2(0,18,154,156))
-	draw_style_box(Chrome.surface("slate"),Rect2(0,174,154,34))
+	for rect in [Rect2(0,0,53,18),Rect2(97,0,57,18)]: draw_style_box(Chrome.style(),rect)
+	draw_style_box(Chrome.style(),Rect2(0,18,154,156))
+	draw_texture(Paint.texture("res://assets/art/ui_offer/message_slate.png"),Vector2(2,174))
 	if not is_instance_valid(_card):
 		_text(Vector2(4,175),lines[0]); _text(Vector2(4,191),lines[1])
-	draw_style_box(Chrome.surface("frame"),Rect2(1,208,36,38))
+	draw_style_box(Chrome.style(),Rect2(1,208,36,38))
 	var shudder:=Vector2(roundi(sin(_hurt_time*100)*2) if _hurt_time>0 else 0,0)
 	draw_texture_rect(Paint.texture(portrait_path()),Rect2(Vector2(3,210)+shudder,Vector2(32,32)),false)
-	draw_rect(Rect2(3,242,32,3),Color("312018"))
-	draw_rect(Rect2(3,242,roundi(32.0*state.hp/state.max_hp),3),Color("73a29a") if state.hp>2 else Color("965c48"))
-	if _hurt_time>0:
-		draw_rect(Rect2(3,210,32,32),Color("965c48"),false,2)
-	# Belt loops sit behind the possessions; a narrow glass oil gauge makes
-	# health read as a physical instrument without stealing an icon pitch.
-	for x in [101,127]:
-		draw_rect(Rect2(x,209,22,25),Color("312018"))
-		for edge in [x,x+20]:
-			draw_line(Vector2(edge,211),Vector2(edge,232),Color("80643c"),1)
-			draw_rect(Rect2(edge,210,2,2),Color("a18750"))
-	draw_rect(Rect2(96,211,5,31),Color("80643c"))
-	draw_rect(Rect2(97,213,3,27),Color("0c101c"))
-	var oil: int=roundi(25.0*state.hp/state.max_hp)
-	draw_rect(Rect2(97,240-oil,3,oil),Color("4c8585") if state.hp>2 else Color("965c48"))
-	draw_line(Vector2(97,214),Vector2(97,238),Color("73a29a"),1)
+	if _hurt_time>0: draw_rect(Rect2(3,210,32,32),Color("965c48"),false,2)
+	draw_texture(Paint.texture("res://assets/art/ui_offer/belt_loops.png"),Vector2(99,210))
+	# One glass vial, with only its liquid cropped from the bottom upward.
+	var vial_origin:=Vector2(36,212)
+	draw_texture(Paint.texture("res://assets/art/ui_offer/hp_vial_empty.png"),vial_origin)
+	var liquid: int=roundi(18.0*state.hp/state.max_hp)
+	if liquid>0: draw_texture_rect_region(Paint.texture("res://assets/art/ui_offer/hp_vial_full.png"),Rect2(vial_origin+Vector2(0,24-liquid),Vector2(6,liquid)),Rect2(0,24-liquid,6,liquid))
 	_text(Vector2(101,232),"HP %d/%d"%[state.hp,state.max_hp])
-	# One continuous recessed surface, eight invisible 19px touch pitches.
-	draw_style_box(Chrome.surface("leather"),Rect2(0,246,154,22))
-	draw_line(Vector2(3,247),Vector2(150,247),Color("5d4b30"),1)
-	for x in [4,149]: draw_rect(Rect2(x,249,1,1),Color("a18750"))
-	for i in range(8):
-		if i>=state.pack.size(): draw_line(Vector2(8+i*19,264),Vector2(11+i*19,264),Color("5d4b30"),1)
+	# A folded painted leather tray, without empty-slot dashes or boxes.
+	draw_texture(Paint.texture("res://assets/art/ui_offer/pack_leather.png"),Vector2(1,246))
 	for key in ["turn_l","fwd","turn_r","strafe_l","back","strafe_r"]:
 		var button: Button=controls[key]
 		draw_style_box(Chrome.style(1,button.is_pressed()),button.get_rect())
