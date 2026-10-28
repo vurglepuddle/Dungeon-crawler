@@ -11,7 +11,7 @@ func animate(value: String,action: String) -> void:
 	if not FRAMES.has(value): return
 	action_kind=value
 	action_frame="ring" if value=="clapper" and action=="ring" else FRAMES[value][1]
-	remaining=0.22 if action=="ring" else 0.14
+	remaining=0.45 if action=="ring" else 0.34 # long enough for a human to see the blow land
 func advance(delta: float) -> void:
 	time=fmod(time+delta,1400.0); remaining=maxf(0,remaining-delta)
 func texture() -> Texture2D:
