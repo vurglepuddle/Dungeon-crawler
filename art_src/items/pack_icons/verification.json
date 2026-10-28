@@ -1,0 +1,112 @@
+{
+  "runtime_icons": 15,
+  "review_pairs": 5,
+  "passed": [
+    "exact 16x16 canvas and centre anchor",
+    "fixed palette / binary alpha",
+    "all states unique",
+    "source and output hashes",
+    "true closed key bow",
+    "continuous registered reed grip",
+    "lit flame above cold head",
+    "collapsed spent coat",
+    "exact 4x nearest reviews"
+  ],
+  "contrast_metrics_are_not_a_readability_verdict": true,
+  "background_measurements": [
+    {
+      "kind": "knife",
+      "opaque_pixels": 41,
+      "mean_luminance_difference_pack": 0.3622,
+      "mean_luminance_difference_slate": 0.3731
+    },
+    {
+      "kind": "shard",
+      "opaque_pixels": 54,
+      "mean_luminance_difference_pack": 0.3328,
+      "mean_luminance_difference_slate": 0.3442
+    },
+    {
+      "kind": "club",
+      "opaque_pixels": 64,
+      "mean_luminance_difference_pack": 0.2478,
+      "mean_luminance_difference_slate": 0.2602
+    },
+    {
+      "kind": "stone",
+      "opaque_pixels": 89,
+      "mean_luminance_difference_pack": 0.3216,
+      "mean_luminance_difference_slate": 0.348
+    },
+    {
+      "kind": "bone",
+      "opaque_pixels": 54,
+      "mean_luminance_difference_pack": 0.4652,
+      "mean_luminance_difference_slate": 0.4903
+    },
+    {
+      "kind": "bread",
+      "opaque_pixels": 92,
+      "mean_luminance_difference_pack": 0.3965,
+      "mean_luminance_difference_slate": 0.4212
+    },
+    {
+      "kind": "tonic",
+      "opaque_pixels": 107,
+      "mean_luminance_difference_pack": 0.3095,
+      "mean_luminance_difference_slate": 0.3337
+    },
+    {
+      "kind": "coat",
+      "opaque_pixels": 104,
+      "mean_luminance_difference_pack": 0.2453,
+      "mean_luminance_difference_slate": 0.259
+    },
+    {
+      "kind": "coat_spent",
+      "opaque_pixels": 80,
+      "mean_luminance_difference_pack": 0.2892,
+      "mean_luminance_difference_slate": 0.3051
+    },
+    {
+      "kind": "key",
+      "opaque_pixels": 48,
+      "mean_luminance_difference_pack": 0.4009,
+      "mean_luminance_difference_slate": 0.4139
+    },
+    {
+      "kind": "clapper",
+      "opaque_pixels": 52,
+      "mean_luminance_difference_pack": 0.3536,
+      "mean_luminance_difference_slate": 0.3747
+    },
+    {
+      "kind": "lamp",
+      "opaque_pixels": 81,
+      "mean_luminance_difference_pack": 0.2867,
+      "mean_luminance_difference_slate": 0.2964
+    },
+    {
+      "kind": "torch_unlit",
+      "opaque_pixels": 41,
+      "mean_luminance_difference_pack": 0.3508,
+      "mean_luminance_difference_slate": 0.3575
+    },
+    {
+      "kind": "torch_lit",
+      "opaque_pixels": 63,
+      "mean_luminance_difference_pack": 0.3963,
+      "mean_luminance_difference_slate": 0.4098
+    },
+    {
+      "kind": "seal",
+      "opaque_pixels": 149,
+      "mean_luminance_difference_pack": 0.3766,
+      "mean_luminance_difference_slate": 0.3973
+    }
+  ],
+  "windowed_godot_run": false,
+  "phone_playtest": false,
+  "deterministic_rebuild": true,
+  "read_only_dependencies_unchanged": true
+}

@@ -1,6 +1,6 @@
 # UNDERCROFT original score
 
-28 October 2026. Five original short compositions by Codex B, written for this
+28–29 October 2026. Six original compositions by Codex B, written for this
 game as explicit note lists. No Bach, MIDI transcription, public-domain
 arrangement, downloaded composition, sample pack, external service or gameplay
 RNG is involved. Claude registered the autoload; B supplies music and the
@@ -14,6 +14,7 @@ player, while scene calls, settings persistence and the MUSIC UI belong to A.
 | `floor` | A Bell Below the Stone | `data/music/floor.json` | 29.09 s, 66 BPM | Loop |
 | `win` | Something Returned | `data/music/win.json` | 5.71 s, 84 BPM | Once |
 | `floor2` | Under the Last Landing | `data/music/floor2.json` | 34.29 s, 56 BPM | Loop |
+| `floor3` | The Watch Beneath the Bell | `data/music/floor3.json` | 73.85 s, 52 BPM | Loop |
 | `death` | The Last Wick | `data/music/death.json` | 4.00 s, 60 BPM | Once |
 
 The original three use D Dorian and the bell motif **D5 - A5 - E5 - F5**
@@ -30,8 +31,18 @@ below the abbey. The six-event death cue lets the bell fall through D4, A3,
 E3, F3 and D3, decreasing in strength like a lamp sputtering out. It ends in
 silence; there is no triumphant cadence. The first three scores are unchanged.
 
+**The Lower Watch** adds a longer, quieter two-part phrase rather than another
+short repeating cell. Its bell call moves down to **D3–A3–E3–F3** (MIDI
+50,57,52,53), one octave below floor two. A soft E-flat answer casts a semitone
+shadow over the E-natural call; slow D/A/E-flat/C support keeps it unresolved.
+The second half changes the answer and adds one faint D4 bell, giving a small
+midrange cue for phone speakers. Tension comes from the notes and rests,
+without louder gain, busy percussion or sustained high dissonance. The 27
+events span 64 beats at 52 BPM, with a full beat of silence before the loop
+returns. The original five scores and their preview WAVs are unchanged.
+
 Review WAVs are offline authoring previews under `art_src/music/previews/`:
-`title.wav`, `floor.wav`, `win.wav`, `floor2.wav`, `death.wav`. They include the default gentle gain.
+`title.wav`, `floor.wav`, `win.wav`, `floor2.wav`, `floor3.wav`, `death.wav`. They include the default gentle gain.
 The game never loads them. Actual speaker balance, appeal and Pixel 9a CPU/
 background behaviour still need a human/device pass.
 
@@ -44,7 +55,8 @@ independent node/control; the music script never changes the Master bus volume.
 ```gdscript
 Music.play("title")       # title / menu
 Music.play("floor")       # run / continue; repeated calls do not restart
-Music.play_floor(floor)   # preferred run/continue/stair hook: floor1 or floor2
+Music.play_floor(floor)   # preferred run/continue/stair hook: floor, floor2, floor3
+Music.play("floor3")      # direct Lower Watch selection also works
 Music.play("win")         # committed win; one short cue, then silence
 Music.play("death")       # committed death; lamp-out cue, once
 Music.set_enabled(false)  # MUSIC toggle, independent of SFX
@@ -59,8 +71,11 @@ without producing audio. Enabling restarts that phrase from its beginning.
 music. A naturally completed win also clears its selection after draining the
 last buffered audio. No calls write files or alter saved game state.
 
-`play_floor(floor_number)` selects `floor` for the first floor and `floor2`
-for deeper floors, returning the same success boolean as `play`. Call it after
+`play_floor(floor_number)` selects `floor` for the first floor, `floor2` for
+floor two and **`floor3` for floor three or deeper**, returning the same success
+boolean as `play`. This selection is implemented in `music.gd`; A can retain
+the existing `Music.play_floor(state.floor)` hook. No new autoload, bus or
+sample is required. Call it after
 new run, continue and committed stairs/lift arrivals, so returning upstairs
 restores the first theme. Direct `play("floor2")` also works. Call `play("death")`
 after committed death instead of immediately stopping music; do not restart
@@ -99,7 +114,16 @@ python art_src/music/build_score.py
 
 Python's standard library recreates all five note JSONs, preview WAVs and
 `art_src/music/manifest.json` deterministically. This is an offline authoring
-tool, never a runtime requirement. Preserve JSON files in the Android package:
+tool, never a runtime requirement. The additional floor-three score has its
+own editable authoring file and does not rewrite those accepted five:
+
+```powershell
+python -B art_src/music/build_floor3.py
+```
+
+It writes `data/music/floor3.json`, `art_src/music/previews/floor3.wav` and
+`art_src/music/floor3_manifest.json`. The manifest records note count, length,
+peak and score/preview hashes. Preserve JSON files in the Android package:
 ensure the export include filter covers `data/music/*.json` as well as the
 other game data. Exclude `art_src/*` from the export to avoid shipping source
 paintings and review WAVs. B has not edited export settings or project.godot.
@@ -121,3 +145,19 @@ to finish asynchronous cleanup before quitting. The sandboxed executable logs
 a root-certificate-store startup error, unrelated to these local audio checks;
 the final run has no leaked-playback warning. No game scene, save or full-suite
 run was needed. Listening and phone acceptance remain outstanding.
+
+The floor-three addition also passes **23 focused checks, zero failures**:
+
+```powershell
+E:/SD/GODOT/Godot.exe --headless --audio-driver Dummy --path . -s res://art_src/music/check_floor3.gd
+```
+
+This short audio-only headless run validates the new data, direct selection,
+floor 1/2/3/4 mapping, returning upstairs, silent disabled selection, stop,
+buffer-partition independence, and a complete real runtime loop rendered in
+bounded 4096-frame chunks. `art_src/music/floor3_runtime_check.json` records
+73.84617 seconds, at most **three** active voices, a **zero** waveform jump at
+the loop boundary and a peak of **0.015175** after the unchanged -18 dB player
+volume (0.12054 before it). No windowed game run, device listening or speaker
+acceptance is claimed. The WAV is an authoring preview; runtime still uses
+only JSON note data and the existing offline oscillator player.

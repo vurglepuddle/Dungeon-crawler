@@ -8,6 +8,7 @@ const TRACK_PATHS: Dictionary = {
 	"title": "res://data/music/title.json",
 	"floor": "res://data/music/floor.json",
 	"floor2": "res://data/music/floor2.json",
+	"floor3": "res://data/music/floor3.json",
 	"win": "res://data/music/win.json",
 	"death": "res://data/music/death.json",
 }
@@ -106,8 +107,10 @@ func stop() -> void:
 
 
 func play_floor(floor_number: int) -> bool:
-	## First landing keeps its theme; deeper floors use the lower, slower answer.
-	return play("floor2" if floor_number >= 2 else "floor")
+	## Each authored landing has a theme; later depths retain the Lower Watch.
+	if floor_number >= 3:
+		return play("floor3")
+	return play("floor2" if floor_number == 2 else "floor")
 
 
 func set_enabled(value: bool) -> void:

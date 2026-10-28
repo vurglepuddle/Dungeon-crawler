@@ -985,3 +985,110 @@ anchors, palette/alpha, source/output hashes, transparent openings, stable
 unburning silk, cache patch boundaries, floor borders and fixed orientations.
 No Godot run or phone playtest is claimed for this batch. See the local README
 and saved prompt/result JSON files for the complete source provenance.
+
+## Painted pack icons at 16px
+
+The inventory now has a dedicated **15-state painted set**, derived directly
+from the accepted original item paintings. New runtime files live entirely in
+`assets/art/items/`; C's `assets/art/icons/`, the earlier spent icon, all world
+sprites and source paintings remain unchanged. These replace HUD pictures,
+not the world-item or held-item paths.
+
+### A's lookup and state swaps
+
+Every new file is **16x16**, binary alpha with the shared palette, centred at
+**(8,8)**, static with **no frame timing**. Use the whole canvas and the existing
+ItemButton centring. Do not crop/recentre its opaque bounds, add a contact
+shadow or apply dungeon lamp falloff to HUD icons.
+
+| Inventory kind / state | New path under `assets/art/items/` |
+| --- | --- |
+| `bone` | `icon_bone_16.png` |
+| `bread` | `icon_bread_16.png` |
+| `clapper` | `icon_clapper_16.png` |
+| `club` | `icon_club_16.png` |
+| `coat`, padding intact | `icon_coat_16.png` |
+| `coat`, existing `spent` is true | `icon_coat_spent_16.png` |
+| `key` | `icon_key_16.png` |
+| `knife` | `icon_knife_16.png` |
+| `lamp` | `icon_lamp_16.png` |
+| `shard` | `icon_shard_16.png` |
+| `stone` | `icon_stone_16.png` |
+| `tonic` | `icon_tonic_16.png` |
+| `torch`, existing `lit` is false | `icon_torch_unlit_16.png` |
+| `torch`, existing `lit` is true | `icon_torch_lit_16.png` |
+| `seal` | `icon_seal_16.png` |
+
+For the eleven ordinary kinds, replace the `Art.inventory(kind)` path
+`assets/art/icons/<kind>.png` with `assets/art/items/icon_<kind>_16.png`.
+For an instance, resolve the two stateful cases **before** the generic lookup:
+
+```gdscript
+var icon_kind: String = item.kind
+if item.kind == "torch":
+    icon_kind = "torch_lit" if item.lit else "torch_unlit"
+elif item.kind == "coat" and item.get("spent", false):
+    icon_kind = "coat_spent"
+var path: String = "res://assets/art/items/icon_%s_16.png" % icon_kind
+```
+
+Replace the existing direct `reed_torch_icon_*_16.png` shortcut in
+`Main._item_icon()` too; otherwise torches will retain the old HUD art. A
+kind-only `Art.inventory("torch")` lookup should default to `torch_unlit`.
+Belt key/Seal and hand/body slots use these same 16px illustrations; keep key
+counts and selection corners drawn dynamically. If a card gains an item
+picture, use the same native icon rather than scaling up a floor sprite.
+There is no new card layout in this batch.
+
+### Readability and source treatment
+
+Knife steel/rust, aqua shard, angular iron club, irregular faceted stone,
+ivory bone, scored loaf, red flask, teal quilting, torn stuffing, open key bow,
+solid clapper ball and hooded lamp retain their accepted painted identities.
+The stone has an asymmetric chipped outline and geological faces, without a
+helmet-like level brim. Key and clapper remain distinct through a **true
+transparent closed bow** versus a solid ball. The spent coat collapses and
+exposes pale stuffing, consistent with the earlier spent icon and world art.
+
+Reduction starts with the original source paintings rather than downscaling
+the already-reduced world PNGs. Material-coloured rim pixels, knife edge/grip,
+key bow, tonic hue, coat tears and a stone chip receive small native edits
+where 16px sampling loses a useful cue. The reed fan and grip are sampled
+separately and proportioned for icon readability; the leaning grip is
+continuous and exactly shared below the flame between states. Lit reeds add
+painted flame material from the accepted burning-web source. Both reed icons
+are static; leave flicker in the held/world presentation.
+
+The Seal icon takes the actual gold/teal sun disc from its accepted pedestal
+painting, masking out the stone stand. Its bright core and ornament match
+the objective, pack/held states and world painting. Torch/Seal replacements
+are supplied alongside the complete ordinary set for review; their existing
+world animations and canvas sizes remain unchanged.
+
+### Review and rebuilding
+
+All review paths below are in `art_src/items/pack_icons/`; each has a paired
+native image and exact 4x nearest enlargement:
+
+| Review | Filename |
+| --- | --- |
+| All fifteen: old/new on leather, then old/new on slate | `icons_context_4x.png` |
+| Actual 152x22 pack tray, eight 19x22 slots, old/new sets | `icons_pack_strip_4x.png` |
+| Old/new on the actual slate card material, VETKA 16 names | `icons_card_4x.png` |
+| Accepted world pictures beside old/new pack illustrations | `icons_world_match_4x.png` |
+| Reed cold/lit and Seal detail comparison | `icons_torch_seal_4x.png` |
+
+The card reviews group several items per slate panel for comparison; the
+current game card is text-first. These are offline composites using real UI
+materials and slot geometry, not engine screenshots or a card redesign.
+
+`art_src/items/build_pack_icons.py` rebuilds the set from the preserved
+paintings; no new generation or external service is required.
+`verify_pack_icons.py` checks all fifteen unique native canvases, palette/
+alpha, anchors, source/output hashes, closed key bow, registered continuous
+reeds, larger lit silhouette, collapsed spent coat and five exact 4x pairs.
+`pack_icons/manifest.json` records every dependency and runtime path.
+Background contrast measurements in `verification.json` are authoring aids,
+not claims of human recognition. No windowed Godot run or phone acceptance
+is claimed for this icon set. The new floor-three score is documented in
+`docs/MUSIC.md`.

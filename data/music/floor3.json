@@ -1,0 +1,200 @@
+{
+  "schema": 1,
+  "id": "floor3",
+  "title": "The Watch Beneath the Bell",
+  "mode": "D modal; Phrygian shadow against the E-natural bell call",
+  "bpm": 52,
+  "beats": 64,
+  "loop": true,
+  "notes": [
+    {
+      "beat": 0,
+      "pitch": 38,
+      "beats": 7.5,
+      "voice": "drone",
+      "velocity": 0.22
+    },
+    {
+      "beat": 2,
+      "pitch": 50,
+      "beats": 3,
+      "voice": "bell",
+      "velocity": 0.32
+    },
+    {
+      "beat": 4.5,
+      "pitch": 57,
+      "beats": 2,
+      "voice": "reed",
+      "velocity": 0.1
+    },
+    {
+      "beat": 6.5,
+      "pitch": 57,
+      "beats": 2.5,
+      "voice": "bell",
+      "velocity": 0.26
+    },
+    {
+      "beat": 8,
+      "pitch": 45,
+      "beats": 7,
+      "voice": "drone",
+      "velocity": 0.16
+    },
+    {
+      "beat": 11,
+      "pitch": 52,
+      "beats": 3,
+      "voice": "bell",
+      "velocity": 0.29
+    },
+    {
+      "beat": 15,
+      "pitch": 53,
+      "beats": 3,
+      "voice": "bell",
+      "velocity": 0.28
+    },
+    {
+      "beat": 16,
+      "pitch": 39,
+      "beats": 6.5,
+      "voice": "drone",
+      "velocity": 0.12
+    },
+    {
+      "beat": 19.5,
+      "pitch": 51,
+      "beats": 1.25,
+      "voice": "reed",
+      "velocity": 0.08
+    },
+    {
+      "beat": 22,
+      "pitch": 50,
+      "beats": 2.5,
+      "voice": "bell",
+      "velocity": 0.27
+    },
+    {
+      "beat": 24,
+      "pitch": 38,
+      "beats": 7,
+      "voice": "drone",
+      "velocity": 0.2
+    },
+    {
+      "beat": 24.5,
+      "pitch": 51,
+      "beats": 2,
+      "voice": "bell",
+      "velocity": 0.2
+    },
+    {
+      "beat": 29,
+      "pitch": 50,
+      "beats": 2.5,
+      "voice": "bell",
+      "velocity": 0.25
+    },
+    {
+      "beat": 32,
+      "pitch": 38,
+      "beats": 7.5,
+      "voice": "drone",
+      "velocity": 0.21
+    },
+    {
+      "beat": 33,
+      "pitch": 62,
+      "beats": 2,
+      "voice": "bell",
+      "velocity": 0.16
+    },
+    {
+      "beat": 34.5,
+      "pitch": 50,
+      "beats": 3,
+      "voice": "bell",
+      "velocity": 0.29
+    },
+    {
+      "beat": 36.5,
+      "pitch": 57,
+      "beats": 2,
+      "voice": "reed",
+      "velocity": 0.09
+    },
+    {
+      "beat": 39,
+      "pitch": 57,
+      "beats": 2.5,
+      "voice": "bell",
+      "velocity": 0.24
+    },
+    {
+      "beat": 40,
+      "pitch": 34,
+      "beats": 7,
+      "voice": "drone",
+      "velocity": 0.14
+    },
+    {
+      "beat": 43,
+      "pitch": 52,
+      "beats": 3,
+      "voice": "bell",
+      "velocity": 0.27
+    },
+    {
+      "beat": 47,
+      "pitch": 53,
+      "beats": 3,
+      "voice": "bell",
+      "velocity": 0.26
+    },
+    {
+      "beat": 48,
+      "pitch": 36,
+      "beats": 6.5,
+      "voice": "drone",
+      "velocity": 0.14
+    },
+    {
+      "beat": 51,
+      "pitch": 55,
+      "beats": 1.5,
+      "voice": "reed",
+      "velocity": 0.09
+    },
+    {
+      "beat": 54,
+      "pitch": 51,
+      "beats": 2.5,
+      "voice": "bell",
+      "velocity": 0.21
+    },
+    {
+      "beat": 56,
+      "pitch": 38,
+      "beats": 7,
+      "voice": "drone",
+      "velocity": 0.19
+    },
+    {
+      "beat": 58,
+      "pitch": 48,
+      "beats": 2,
+      "voice": "bell",
+      "velocity": 0.22
+    },
+    {
+      "beat": 61,
+      "pitch": 50,
+      "beats": 1.5,
+      "voice": "bell",
+      "velocity": 0.25
+    }
+  ]
+}

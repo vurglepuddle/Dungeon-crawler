@@ -1,0 +1,22 @@
+{
+  "authorship": "Original UNDERCROFT composition by Codex B, 2026-10-29",
+  "motif_midi": [
+    50,
+    57,
+    52,
+    53
+  ],
+  "track": {
+    "id": "floor3",
+    "seconds": 73.84617,
+    "notes": 27,
+    "peak": 0.015175,
+    "preview": "art_src/music/previews/floor3.wav",
+    "bpm": 52,
+    "beats": 64,
+    "score_sha256": "34ed4382bc1b30a4d3303a090e3594fe9a3fc616ae1081ae5acf2aea7d681423",
+    "preview_sha256": "a92fc279b31f8d5c8abbd8b282bd3a75e1df659b8b98dad5b31b2d325a2c83f6"
+  },
+  "runtime": "Music.play_floor(3) or Music.play(\"floor3\")",
+  "preserved": "The existing five scores and preview WAVs are not written."
+}
