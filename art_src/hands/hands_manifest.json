@@ -1,0 +1,854 @@
+{
+  "frame_size": [
+    48,
+    56
+  ],
+  "anchor": [
+    48,
+    56
+  ],
+  "view_size": [
+    148,
+    150
+  ],
+  "view_position": [
+    100,
+    94
+  ],
+  "sources": {
+    "art_src/hands/sources/bone_sheet.png": "2cb7c85faf6806d9e3b290ea07f24cb168622f33405b8d853902456e640e6eba",
+    "art_src/hands/sources/clapper_sheet.png": "5f087ccc1b593cf863a9c0e6a5abde7995884979fab3d97806c182f1371e7d6b",
+    "art_src/hands/sources/club_sheet.png": "f363b29e385aa15f907682a9cefed4c8270018f19390f78d97acd019815bfdc1",
+    "art_src/hands/sources/corridor_reference.png": "c3f618646b14a181fa1f37192559508dd91848e142a5a16eabbbf076b64ba7f0",
+    "art_src/hands/sources/fist_sheet.png": "d40fbf6c276966ce63f3635582fbbc4c434f2ddf839b5b1d79741fa0085f5f67",
+    "art_src/hands/sources/item_references.png": "5939506e05f4572ce6fb6754ea696e768366c6e016809dd5aab6e83cb13a60cf",
+    "art_src/hands/sources/knife_sheet.png": "79c8a1d264a295a017bdbf3041a6e4a114a5e158630f8619d5636f9540e2e053",
+    "art_src/hands/sources/lamp_sheet.png": "d14be29d96be54b7e9e2c1103e63b36c67bf51c894ab1232c1c9a637359c7351",
+    "art_src/hands/sources/seal_sheet.png": "217b8eaae5d5e0eec3678d45e897ecabab49e87ed34f2d15305115e85da282f4",
+    "art_src/hands/sources/shard_sheet.png": "d389e78031e668366aa9cb9c34646151f4a8ddd8c87895d8b14f0c4a1a98f652",
+    "art_src/hands/sources/stone_sheet.png": "dd730916516026c03a3de54ea15a276cd7bd3663a1d7c75ed0661eb3c8061ce7",
+    "art_src/hands/sources/torch_sheet.png": "8c8cec0b7b3c1aecc02ee50d02d1732f6972313bd0095026f2c9536721357f5b",
+    "art_src/hands/sources/torch_sheet_draft.png": "c4c9166c7d673f6209399ff95e54ca390570dfd453d2f2540b7cee1d85d96af1"
+  },
+  "assets": [
+    {
+      "path": "assets/art/hands/hand_fist_rest_56.png",
+      "size": [
+        48,
+        56
+      ],
+      "opaque_colors": 24,
+      "sha256": "bd7998a344f3c9d69e7db60de0eb1d2c911b32ce160e404b733b21031a64db3e",
+      "kind": "fist",
+      "state": "rest",
+      "anchor": [
+        48,
+        56
+      ],
+      "opaque_bounds": [
+        7,
+        15,
+        48,
+        56
+      ],
+      "view_position": [
+        100,
+        94
+      ]
+    },
+    {
+      "path": "assets/art/hands/hand_fist_punch_56.png",
+      "size": [
+        48,
+        56
+      ],
+      "opaque_colors": 26,
+      "sha256": "6fc73e036b9f232826441e4a1dbf599620a37e79f5d3baa2bbc26b35748a02c1",
+      "kind": "fist",
+      "state": "punch",
+      "anchor": [
+        48,
+        56
+      ],
+      "opaque_bounds": [
+        0,
+        14,
+        48,
+        56
+      ],
+      "view_position": [
+        100,
+        94
+      ]
+    },
+    {
+      "path": "assets/art/hands/hand_fist_strip_56.png",
+      "size": [
+        96,
+        56
+      ],
+      "opaque_colors": 26,
+      "sha256": "451b58dd38e2c9158f1b7e9bb52ab090581822a88cb378a964be8eeb8bea4af2",
+      "kind": "fist",
+      "anchor": [
+        48,
+        56
+      ],
+      "frame_size": [
+        48,
+        56
+      ],
+      "frame_order": [
+        "rest",
+        "punch"
+      ]
+    },
+    {
+      "path": "assets/art/hands/hand_knife_rest_56.png",
+      "size": [
+        48,
+        56
+      ],
+      "opaque_colors": 26,
+      "sha256": "b4fb87c5934c67820d6b1e8e02185bc4910f276ed57aeabe34cd0d411f61ffbb",
+      "kind": "knife",
+      "state": "rest",
+      "anchor": [
+        48,
+        56
+      ],
+      "opaque_bounds": [
+        9,
+        14,
+        48,
+        56
+      ],
+      "view_position": [
+        100,
+        94
+      ]
+    },
+    {
+      "path": "assets/art/hands/hand_knife_slash_56.png",
+      "size": [
+        48,
+        56
+      ],
+      "opaque_colors": 27,
+      "sha256": "03df3cd44699d87bc178be7b43c6d04aaf858ef879f62ccb24b74a39470f1c7a",
+      "kind": "knife",
+      "state": "slash",
+      "anchor": [
+        48,
+        56
+      ],
+      "opaque_bounds": [
+        0,
+        22,
+        48,
+        56
+      ],
+      "view_position": [
+        100,
+        94
+      ]
+    },
+    {
+      "path": "assets/art/hands/hand_knife_strip_56.png",
+      "size": [
+        96,
+        56
+      ],
+      "opaque_colors": 28,
+      "sha256": "fddbf6d19dcf1ddd6aa5baa61864a76cafb16bfe482cfb466bcd44560c50bdeb",
+      "kind": "knife",
+      "anchor": [
+        48,
+        56
+      ],
+      "frame_size": [
+        48,
+        56
+      ],
+      "frame_order": [
+        "rest",
+        "slash"
+      ]
+    },
+    {
+      "path": "assets/art/hands/hand_shard_rest_56.png",
+      "size": [
+        48,
+        56
+      ],
+      "opaque_colors": 29,
+      "sha256": "b6e03c8f848861d073b3a1339112d389964eda270e426042a307fe5b1bb40116",
+      "kind": "shard",
+      "state": "rest",
+      "anchor": [
+        48,
+        56
+      ],
+      "opaque_bounds": [
+        12,
+        13,
+        48,
+        56
+      ],
+      "view_position": [
+        100,
+        94
+      ]
+    },
+    {
+      "path": "assets/art/hands/hand_shard_slash_56.png",
+      "size": [
+        48,
+        56
+      ],
+      "opaque_colors": 30,
+      "sha256": "e457cdd4d8562bc688a1d0ac87122a9922a641ae3d0fae1c6800b204b33fd3b9",
+      "kind": "shard",
+      "state": "slash",
+      "anchor": [
+        48,
+        56
+      ],
+      "opaque_bounds": [
+        0,
+        19,
+        48,
+        56
+      ],
+      "view_position": [
+        100,
+        94
+      ]
+    },
+    {
+      "path": "assets/art/hands/hand_shard_strip_56.png",
+      "size": [
+        96,
+        56
+      ],
+      "opaque_colors": 30,
+      "sha256": "4f95745e12ee21c5424efb831dcf6c523214ec57e98e0492e865fac0aa53e7d6",
+      "kind": "shard",
+      "anchor": [
+        48,
+        56
+      ],
+      "frame_size": [
+        48,
+        56
+      ],
+      "frame_order": [
+        "rest",
+        "slash"
+      ]
+    },
+    {
+      "path": "assets/art/hands/hand_club_rest_56.png",
+      "size": [
+        48,
+        56
+      ],
+      "opaque_colors": 30,
+      "sha256": "fcc542cfbaaebb60ecda4b2156adfab95d78f3876cc43df88c344b5daf77dbdb",
+      "kind": "club",
+      "state": "rest",
+      "anchor": [
+        48,
+        56
+      ],
+      "opaque_bounds": [
+        9,
+        5,
+        48,
+        56
+      ],
+      "view_position": [
+        100,
+        94
+      ]
+    },
+    {
+      "path": "assets/art/hands/hand_club_blow_56.png",
+      "size": [
+        48,
+        56
+      ],
+      "opaque_colors": 29,
+      "sha256": "51ec4ddc68f8ebdb862c2b54cb09d043524eb5fe4a8b8691c34c4ec54896a494",
+      "kind": "club",
+      "state": "blow",
+      "anchor": [
+        48,
+        56
+      ],
+      "opaque_bounds": [
+        0,
+        8,
+        48,
+        56
+      ],
+      "view_position": [
+        100,
+        94
+      ]
+    },
+    {
+      "path": "assets/art/hands/hand_club_strip_56.png",
+      "size": [
+        96,
+        56
+      ],
+      "opaque_colors": 30,
+      "sha256": "3680db41dfa7b4b056e95c615472c7f8c19043db3b5f0be2b152578b89d8cd48",
+      "kind": "club",
+      "anchor": [
+        48,
+        56
+      ],
+      "frame_size": [
+        48,
+        56
+      ],
+      "frame_order": [
+        "rest",
+        "blow"
+      ]
+    },
+    {
+      "path": "assets/art/hands/hand_stone_rest_56.png",
+      "size": [
+        48,
+        56
+      ],
+      "opaque_colors": 28,
+      "sha256": "5fe27adfd63ed3c8259d893564620bea3f02dce8c773f15944daa68d96a5343f",
+      "kind": "stone",
+      "state": "rest",
+      "anchor": [
+        48,
+        56
+      ],
+      "opaque_bounds": [
+        6,
+        16,
+        48,
+        56
+      ],
+      "view_position": [
+        100,
+        94
+      ]
+    },
+    {
+      "path": "assets/art/hands/hand_stone_blow_56.png",
+      "size": [
+        48,
+        56
+      ],
+      "opaque_colors": 29,
+      "sha256": "e9975b8f3b71495b8014887111e8083827989e19d9445ebdf4d7da23b06121a9",
+      "kind": "stone",
+      "state": "blow",
+      "anchor": [
+        48,
+        56
+      ],
+      "opaque_bounds": [
+        0,
+        8,
+        48,
+        56
+      ],
+      "view_position": [
+        100,
+        94
+      ]
+    },
+    {
+      "path": "assets/art/hands/hand_stone_strip_56.png",
+      "size": [
+        96,
+        56
+      ],
+      "opaque_colors": 29,
+      "sha256": "f6c8bc3d98a58a246201cbee9bc31b18909b8c4984911f3e357dd59657e348fc",
+      "kind": "stone",
+      "anchor": [
+        48,
+        56
+      ],
+      "frame_size": [
+        48,
+        56
+      ],
+      "frame_order": [
+        "rest",
+        "blow"
+      ]
+    },
+    {
+      "path": "assets/art/hands/hand_bone_rest_56.png",
+      "size": [
+        48,
+        56
+      ],
+      "opaque_colors": 27,
+      "sha256": "6d53d2a1475b2d070b86cc3cf451900fb8507770886d9755185893331f0e93d0",
+      "kind": "bone",
+      "state": "rest",
+      "anchor": [
+        48,
+        56
+      ],
+      "opaque_bounds": [
+        3,
+        12,
+        48,
+        56
+      ],
+      "view_position": [
+        100,
+        94
+      ]
+    },
+    {
+      "path": "assets/art/hands/hand_bone_blow_56.png",
+      "size": [
+        48,
+        56
+      ],
+      "opaque_colors": 27,
+      "sha256": "ef2f1d38855f2f9076dd1d9152153e1e4e5a2acbe69373936f5cf45be396d9e0",
+      "kind": "bone",
+      "state": "blow",
+      "anchor": [
+        48,
+        56
+      ],
+      "opaque_bounds": [
+        0,
+        18,
+        48,
+        56
+      ],
+      "view_position": [
+        100,
+        94
+      ]
+    },
+    {
+      "path": "assets/art/hands/hand_bone_strip_56.png",
+      "size": [
+        96,
+        56
+      ],
+      "opaque_colors": 27,
+      "sha256": "a92c394ebe0ac9420a260b2848c9d7dc878a20bf1c334b7b97932387e496b906",
+      "kind": "bone",
+      "anchor": [
+        48,
+        56
+      ],
+      "frame_size": [
+        48,
+        56
+      ],
+      "frame_order": [
+        "rest",
+        "blow"
+      ]
+    },
+    {
+      "path": "assets/art/hands/hand_clapper_rest_56.png",
+      "size": [
+        48,
+        56
+      ],
+      "opaque_colors": 25,
+      "sha256": "b34ca0ad613eea78fae011faec91a2f12c3b9eb2fbb09f611967e694f2182643",
+      "kind": "clapper",
+      "state": "rest",
+      "anchor": [
+        48,
+        56
+      ],
+      "opaque_bounds": [
+        6,
+        10,
+        48,
+        56
+      ],
+      "view_position": [
+        100,
+        94
+      ]
+    },
+    {
+      "path": "assets/art/hands/hand_clapper_blow_56.png",
+      "size": [
+        48,
+        56
+      ],
+      "opaque_colors": 26,
+      "sha256": "289f50eb911233b7a0cf6d4acbb9a400e538efa166cab85f2991541874983e7c",
+      "kind": "clapper",
+      "state": "blow",
+      "anchor": [
+        48,
+        56
+      ],
+      "opaque_bounds": [
+        0,
+        18,
+        48,
+        56
+      ],
+      "view_position": [
+        100,
+        94
+      ]
+    },
+    {
+      "path": "assets/art/hands/hand_clapper_ring_56.png",
+      "size": [
+        48,
+        56
+      ],
+      "opaque_colors": 25,
+      "sha256": "e619d176e4eb860d7719a75716d07444895e03491acd3111f0099509ec567318",
+      "kind": "clapper",
+      "state": "ring",
+      "anchor": [
+        48,
+        56
+      ],
+      "opaque_bounds": [
+        1,
+        9,
+        48,
+        56
+      ],
+      "view_position": [
+        100,
+        94
+      ]
+    },
+    {
+      "path": "assets/art/hands/hand_clapper_strip_56.png",
+      "size": [
+        144,
+        56
+      ],
+      "opaque_colors": 27,
+      "sha256": "e3022263eece26903516f69ab616d7889e967cb572b63e944b738fba1c9a4af6",
+      "kind": "clapper",
+      "anchor": [
+        48,
+        56
+      ],
+      "frame_size": [
+        48,
+        56
+      ],
+      "frame_order": [
+        "rest",
+        "blow",
+        "ring"
+      ]
+    },
+    {
+      "path": "assets/art/hands/hand_lamp_rest_56.png",
+      "size": [
+        48,
+        56
+      ],
+      "opaque_colors": 27,
+      "sha256": "09e2ac9448a4dde9109e757aa09d55dd6b4ae87cad5458569328f5fc282883bd",
+      "kind": "lamp",
+      "state": "rest",
+      "anchor": [
+        48,
+        56
+      ],
+      "opaque_bounds": [
+        8,
+        17,
+        48,
+        56
+      ],
+      "view_position": [
+        100,
+        94
+      ]
+    },
+    {
+      "path": "assets/art/hands/hand_lamp_sway_56.png",
+      "size": [
+        48,
+        56
+      ],
+      "opaque_colors": 26,
+      "sha256": "14000cfb69122fd7991f9656a2eb737ff777b637cd9ba343a8806ccdaf32bc6a",
+      "kind": "lamp",
+      "state": "sway",
+      "anchor": [
+        48,
+        56
+      ],
+      "opaque_bounds": [
+        0,
+        18,
+        48,
+        56
+      ],
+      "view_position": [
+        100,
+        94
+      ]
+    },
+    {
+      "path": "assets/art/hands/hand_lamp_strip_56.png",
+      "size": [
+        96,
+        56
+      ],
+      "opaque_colors": 27,
+      "sha256": "c40a0216333c7f13b9e2819441ae6ec1a9617aa1574efc80d9cf09eaff4822a9",
+      "kind": "lamp",
+      "anchor": [
+        48,
+        56
+      ],
+      "frame_size": [
+        48,
+        56
+      ],
+      "frame_order": [
+        "rest",
+        "sway"
+      ]
+    },
+    {
+      "path": "assets/art/hands/hand_torch_unlit_rest_56.png",
+      "size": [
+        48,
+        56
+      ],
+      "opaque_colors": 28,
+      "sha256": "dd388b3795a1f779cda920309b35b6c40cf10874ee225aa0bf99b07b3ac16c3c",
+      "kind": "torch_unlit",
+      "state": "rest",
+      "anchor": [
+        48,
+        56
+      ],
+      "opaque_bounds": [
+        15,
+        10,
+        48,
+        56
+      ],
+      "view_position": [
+        100,
+        94
+      ]
+    },
+    {
+      "path": "assets/art/hands/hand_torch_unlit_use_56.png",
+      "size": [
+        48,
+        56
+      ],
+      "opaque_colors": 26,
+      "sha256": "69632046539823153f63ef1709d7557e496c1ec8424f57a10273cfd16a8dd330",
+      "kind": "torch_unlit",
+      "state": "use",
+      "anchor": [
+        48,
+        56
+      ],
+      "opaque_bounds": [
+        3,
+        11,
+        48,
+        56
+      ],
+      "view_position": [
+        100,
+        94
+      ]
+    },
+    {
+      "path": "assets/art/hands/hand_torch_unlit_strip_56.png",
+      "size": [
+        96,
+        56
+      ],
+      "opaque_colors": 29,
+      "sha256": "16845d191570d66ed90d17619c808971c28bdebf44f6b91f76aeadba4c3cb6cc",
+      "kind": "torch_unlit",
+      "anchor": [
+        48,
+        56
+      ],
+      "frame_size": [
+        48,
+        56
+      ],
+      "frame_order": [
+        "rest",
+        "use"
+      ]
+    },
+    {
+      "path": "assets/art/hands/hand_torch_lit_a_56.png",
+      "size": [
+        48,
+        56
+      ],
+      "opaque_colors": 27,
+      "sha256": "4543c6734e6f1ee66bd603df4a84cf7b7ee5fb959eba2686df0fb1aece7de694",
+      "kind": "torch_lit",
+      "state": "a",
+      "anchor": [
+        48,
+        56
+      ],
+      "opaque_bounds": [
+        15,
+        0,
+        48,
+        56
+      ],
+      "view_position": [
+        100,
+        94
+      ]
+    },
+    {
+      "path": "assets/art/hands/hand_torch_lit_b_56.png",
+      "size": [
+        48,
+        56
+      ],
+      "opaque_colors": 27,
+      "sha256": "244d8b6a3b29e9b30d63eba33f48716844d494807ed3ff981cff541368a455b6",
+      "kind": "torch_lit",
+      "state": "b",
+      "anchor": [
+        48,
+        56
+      ],
+      "opaque_bounds": [
+        15,
+        1,
+        48,
+        56
+      ],
+      "view_position": [
+        100,
+        94
+      ]
+    },
+    {
+      "path": "assets/art/hands/hand_torch_lit_strip_56.png",
+      "size": [
+        96,
+        56
+      ],
+      "opaque_colors": 27,
+      "sha256": "2d15f7c039b0e66da4bb25ee748c2612b48ef960a379a51d830b92c4de02dd65",
+      "kind": "torch_lit",
+      "anchor": [
+        48,
+        56
+      ],
+      "frame_size": [
+        48,
+        56
+      ],
+      "frame_order": [
+        "a",
+        "b"
+      ]
+    },
+    {
+      "path": "assets/art/hands/hand_seal_a_56.png",
+      "size": [
+        48,
+        56
+      ],
+      "opaque_colors": 28,
+      "sha256": "c9ca69dd2c39673eeaf1be18057a9790654914211a87a1eb4e79363a2cda4960",
+      "kind": "seal",
+      "state": "a",
+      "anchor": [
+        48,
+        56
+      ],
+      "opaque_bounds": [
+        2,
+        0,
+        48,
+        56
+      ],
+      "view_position": [
+        100,
+        94
+      ]
+    },
+    {
+      "path": "assets/art/hands/hand_seal_b_56.png",
+      "size": [
+        48,
+        56
+      ],
+      "opaque_colors": 28,
+      "sha256": "259b6382cd3c7c8ed79c3d251be9998c6a287d0aee1724d591a9a2e7d3c7738d",
+      "kind": "seal",
+      "state": "b",
+      "anchor": [
+        48,
+        56
+      ],
+      "opaque_bounds": [
+        2,
+        0,
+        48,
+        56
+      ],
+      "view_position": [
+        100,
+        94
+      ]
+    },
+    {
+      "path": "assets/art/hands/hand_seal_strip_56.png",
+      "size": [
+        96,
+        56
+      ],
+      "opaque_colors": 28,
+      "sha256": "121d6754d199ae5f7a95db9823a1ba39acb98ce7e721703e03208298fa47a50d",
+      "kind": "seal",
+      "anchor": [
+        48,
+        56
+      ],
+      "frame_size": [
+        48,
+        56
+      ],
+      "frame_order": [
+        "a",
+        "b"
+      ]
+    }
+  ],
+  "note": "Review mockups composite frozen screenshot pixels; no engine capture implied."
+}

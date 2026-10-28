@@ -489,3 +489,89 @@ Floor-one/two gate alpha is identical for the same state, so darker paint does
 not destroy the iron silhouette. Repeated rebuilds reproduce all derived files.
 Actual wall attachment, looking through an open gate, target occlusion and
 phone readability remain A/owner integration acceptance.
+
+## Finder's held items: bottom-right overlay
+
+The held-item batch adds **23 poses and 11 horizontal strips (34 PNGs)** under
+`assets/art/hands/`. The Finder has one worn brown full-finger leather glove,
+ochre seams and a teal-wrapped sleeve, matched to the accepted portrait.
+Every pose is a transparent **48x56** canvas, including fist and short items;
+the visible silhouettes are approximately 40-56px tall. These are foreground
+overlays at a fixed size, with **no distance/depth scaling**.
+
+The anchor is **bottom-right (48,56)**, an exclusive edge coordinate. For the
+148x150 view, draw the complete frame at **view-local (100,94)**. With the current
+`VIEW_RECT` origin (3,21), this is root-logical (103,115). The sleeve meets the
+bottom crop and is cut by the right/bottom view frame. Every pose, including
+blows and ring lines, stays inside the rightmost 48 pixels: view x=0..99 remains
+untouched. Keep this registration across items; do not center each opaque bbox.
+
+Runtime filename pattern:
+`assets/art/hands/hand_<kind>_<state>_56.png`.
+Matching strip: `hand_<kind>_strip_56.png`. Strip cells are 48x56, left to right
+in the table's order; two-state strips are 96x56, the clapper strip is 144x56.
+
+| Kind / intended item | Frames in strip order | Suggested presentation timing |
+| --- | --- | --- |
+| `fist` / bare hands | `rest`, `punch` | Hold rest; punch 110ms, then rest |
+| `knife` / rust knife | `rest`, `slash` | Slash 100ms, then rest |
+| `shard` / glass shard | `rest`, `slash` | Slash 100ms, then rest |
+| `club` / iron club | `rest`, `blow` | Overhead blow 140ms, then rest |
+| `stone` / round stone | `rest`, `blow` | Overhead blow 140ms, then rest |
+| `bone` / ham bone | `rest`, `blow` | Overhead blow 140ms, then rest |
+| `clapper` / brass clapper | `rest`, `blow`, `ring` | Blow 140ms; ring/use 220ms; then rest |
+| `lamp` / hooded lamp | `rest`, `sway` | Hold up at rest; sway 160ms after step/use |
+| `torch_unlit` / unlit reed torch | `rest`, `use` | Use 120ms, then rest; switch kind when lit |
+| `torch_lit` / lit reed torch | `a`, `b` | Loop 130ms + 170ms; same hand pixels in both |
+| `seal` / held Dawn Seal | `a`, `b` | Loop 700ms + 700ms; same pose/alpha, core-only pulse |
+
+These are compact action endpoints, so use the existing target effects to sell
+contact. The heavy pose turns the weight down toward the target; it should
+return directly to rest without moving the overlay across the corridor.
+The clapper's extra ring pose includes native gold sound lines. The two lit
+torch frames keep the painted hand/reeds fixed and change only the crisp native
+flame. The Seal retains its sun rim, teal enamel and ivory arch core; its pulse
+changes only the face's brightest inks, leaving the glove and sleeve fixed.
+
+### Wiring for A
+
+Select the held kind from the equipped weapon or the item explicitly being used;
+`fist` is the unarmed fallback. The Seal can be selected for the walk home.
+This is one visible right hand: lamp/torch/Seal art replaces the weapon overlay
+while held up rather than adding a second copy of the sleeve. The assets do not
+change equipment, lamp state or simulation timing themselves.
+
+Cache textures or atlas regions; draw a single frame at native scale with
+nearest filtering. Clip to the view. Draw after the world, creatures and world
+glints, before the surrounding UI. Keep the authored warm window/flame/Seal
+highlights visible when applying scene darkness; depth shading is inappropriate
+for this foreground layer. Hide the overlay when the first-person view is hidden.
+Use presentation milliseconds for pose resets/flicker/pulse, not committed turns
+or simulation RNG. Starting an action selects its pose immediately, then resets
+after the suggested duration; it does not delay the actual simulation action.
+
+### Review and reproduction
+
+| Review | Path |
+| --- | --- |
+| Every item and pose | `art_src/hands/hands_contact_4x.png` |
+| Fist, EDGE and HEAVY poses | `art_src/hands/hands_weapons_4x.png` |
+| Lamp, torches and Seal | `art_src/hands/hands_utility_4x.png` |
+| Every rest pose over the corridor | `art_src/hands/hands_corridor_overview_4x.png` |
+| Every pose of each item over the corridor | `art_src/hands/<kind>_mockup_4x.png` (all 11 table kinds) |
+
+All 15 final review sheets have a paired `_native.png` and exact 4x nearest
+enlargement. Mock-ups use a preserved copy of
+`build/m3c_shots/03_corridor.png`: 462x1026 to 154x342 nearest, view crop
+(3,21,148,150). They are offline composites for placement review, not captures
+of completed engine integration. The builder asserts the entire x=0..99 strip
+is byte-identical before/after every overlay.
+
+Painted sources, exact built-in imagegen prompts, the shorter-torch correction,
+frozen references and an initial reduction preview are kept in `art_src/hands/`.
+`build_hands.py` rebuilds this batch offline; `verify_hands.py` verifies all 34
+runtime PNG hashes, sizes, unchanged palette, binary alpha, strip pixels, bottom
+crop and passive-frame stability, plus all 15 review enlargements and source
+hashes. `hands_manifest.json` records exact frame order, anchors and opaque
+bounds for every asset. No Godot run or phone acceptance is claimed for this
+asset-only batch; A/owner still need to judge motion and contrast in play.
