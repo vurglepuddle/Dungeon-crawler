@@ -1,0 +1,253 @@
+{
+	"actions": [
+		{
+			"item_id": "f1_stone",
+			"type": "pickup"
+		},
+		{
+			"step": "fwd",
+			"type": "move"
+		},
+		{
+			"step": "fwd",
+			"type": "move"
+		},
+		{
+			"item_id": "f1_stone",
+			"type": "drop"
+		},
+		{
+			"step": "fwd",
+			"type": "move"
+		},
+		{
+			"step": "fwd",
+			"type": "move"
+		},
+		{
+			"step": "fwd",
+			"type": "move"
+		},
+		{
+			"delta": 1,
+			"type": "turn"
+		},
+		{
+			"delta": 1,
+			"type": "turn"
+		},
+		{
+			"step": "fwd",
+			"type": "move"
+		},
+		{
+			"step": "fwd",
+			"type": "move"
+		},
+		{
+			"step": "fwd",
+			"type": "move"
+		},
+		{
+			"step": "fwd",
+			"type": "move"
+		},
+		{
+			"type": "wait"
+		},
+		{
+			"delta": 1,
+			"type": "turn"
+		},
+		{
+			"step": "fwd",
+			"type": "move"
+		},
+		{
+			"delta": 1,
+			"type": "turn"
+		},
+		{
+			"step": "fwd",
+			"type": "move"
+		},
+		{
+			"step": "fwd",
+			"type": "move"
+		},
+		{
+			"delta": 1,
+			"type": "turn"
+		},
+		{
+			"step": "fwd",
+			"type": "move"
+		},
+		{
+			"delta": -1,
+			"type": "turn"
+		},
+		{
+			"step": "fwd",
+			"type": "move"
+		},
+		{
+			"step": "fwd",
+			"type": "move"
+		},
+		{
+			"step": "fwd",
+			"type": "move"
+		},
+		{
+			"delta": 1,
+			"type": "turn"
+		},
+		{
+			"step": "fwd",
+			"type": "move"
+		},
+		{
+			"step": "fwd",
+			"type": "move"
+		},
+		{
+			"step": "fwd",
+			"type": "move"
+		},
+		{
+			"step": "fwd",
+			"type": "move"
+		},
+		{
+			"step": "fwd",
+			"type": "move"
+		},
+		{
+			"delta": -1,
+			"type": "turn"
+		},
+		{
+			"step": "fwd",
+			"type": "move"
+		},
+		{
+			"delta": 1,
+			"type": "turn"
+		},
+		{
+			"step": "fwd",
+			"type": "move"
+		},
+		{
+			"item_id": "f1_key",
+			"type": "pickup"
+		},
+		{
+			"delta": -1,
+			"type": "turn"
+		},
+		{
+			"step": "fwd",
+			"type": "move"
+		},
+		{
+			"delta": -1,
+			"type": "turn"
+		},
+		{
+			"step": "fwd",
+			"type": "move"
+		},
+		{
+			"step": "fwd",
+			"type": "move"
+		},
+		{
+			"step": "fwd",
+			"type": "move"
+		},
+		{
+			"step": "fwd",
+			"type": "move"
+		},
+		{
+			"step": "fwd",
+			"type": "move"
+		},
+		{
+			"step": "fwd",
+			"type": "move"
+		},
+		{
+			"delta": 1,
+			"type": "turn"
+		},
+		{
+			"step": "fwd",
+			"type": "move"
+		},
+		{
+			"target_id": "f1_lock",
+			"type": "unlock"
+		},
+		{
+			"step": "fwd",
+			"type": "move"
+		},
+		{
+			"step": "fwd",
+			"type": "move"
+		},
+		{
+			"step": "fwd",
+			"type": "move"
+		},
+		{
+			"step": "fwd",
+			"type": "move"
+		},
+		{
+			"step": "fwd",
+			"type": "move"
+		},
+		{
+			"type": "wait"
+		},
+		{
+			"delta": 1,
+			"type": "turn"
+		},
+		{
+			"step": "fwd",
+			"type": "move"
+		},
+		{
+			"delta": 1,
+			"type": "turn"
+		},
+		{
+			"step": "fwd",
+			"type": "move"
+		},
+		{
+			"delta": 1,
+			"type": "turn"
+		},
+		{
+			"target_id": "f1_down",
+			"type": "stairs"
+		},
+		{
+			"target_id": "f2_up",
+			"type": "stairs"
+		}
+	],
+	"count": 2,
+	"ending_hp": 6,
+	"ending_pos": [
+		7,
+		2
+	],
+	"seed": "AAAAAA"
+}
