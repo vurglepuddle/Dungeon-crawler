@@ -1,0 +1,220 @@
+{
+  "schema_version": 1,
+  "hash": "PresentationArt.mix_hash",
+  "key": "{seed}/{floor}/{plane}/{cell_x}/{cell_y}",
+  "roll": "hash % 100",
+  "floor_weights": {
+    "1": [
+      [
+        "dry_a",
+        28
+      ],
+      [
+        "dry_b",
+        24
+      ],
+      [
+        "dry_c",
+        21
+      ],
+      [
+        "stain",
+        10
+      ],
+      [
+        "chip",
+        8
+      ],
+      [
+        "crack",
+        6
+      ],
+      [
+        "wet_small",
+        3
+      ]
+    ],
+    "2": [
+      [
+        "dry_a",
+        14
+      ],
+      [
+        "dry_b",
+        12
+      ],
+      [
+        "dry_c",
+        10
+      ],
+      [
+        "stain",
+        6
+      ],
+      [
+        "chip",
+        5
+      ],
+      [
+        "crack",
+        5
+      ],
+      [
+        "wet_small",
+        10
+      ],
+      [
+        "wet_hook",
+        10
+      ],
+      [
+        "wet_corner",
+        10
+      ],
+      [
+        "wet_split",
+        9
+      ],
+      [
+        "wet_wide",
+        9
+      ]
+    ]
+  },
+  "ceiling_weights": {
+    "1": [
+      [
+        "plain",
+        98
+      ],
+      [
+        "drip",
+        2
+      ]
+    ],
+    "2": [
+      [
+        "plain",
+        82
+      ],
+      [
+        "root",
+        10
+      ],
+      [
+        "drip",
+        8
+      ]
+    ]
+  },
+  "reference_samples": [
+    {
+      "seed": "BELL42",
+      "floor": 1,
+      "plane": "floor",
+      "x": 10,
+      "y": 10,
+      "hash": 290925443,
+      "kind": "dry_b"
+    },
+    {
+      "seed": "BELL42",
+      "floor": 1,
+      "plane": "floor",
+      "x": 10,
+      "y": 9,
+      "hash": 568439317,
+      "kind": "dry_a"
+    },
+    {
+      "seed": "BELL42",
+      "floor": 1,
+      "plane": "floor",
+      "x": -1,
+      "y": 5,
+      "hash": 888007056,
+      "kind": "dry_c"
+    },
+    {
+      "seed": "BELL42",
+      "floor": 1,
+      "plane": "ceiling",
+      "x": 10,
+      "y": 10,
+      "hash": 1525842642,
+      "kind": "plain"
+    },
+    {
+      "seed": "BELL42",
+      "floor": 1,
+      "plane": "ceiling",
+      "x": 10,
+      "y": 9,
+      "hash": 1986071489,
+      "kind": "plain"
+    },
+    {
+      "seed": "BELL42",
+      "floor": 1,
+      "plane": "ceiling",
+      "x": -1,
+      "y": 5,
+      "hash": 2080650671,
+      "kind": "plain"
+    },
+    {
+      "seed": "BELL42",
+      "floor": 2,
+      "plane": "floor",
+      "x": 10,
+      "y": 10,
+      "hash": 1055594710,
+      "kind": "dry_a"
+    },
+    {
+      "seed": "BELL42",
+      "floor": 2,
+      "plane": "floor",
+      "x": 10,
+      "y": 9,
+      "hash": 452911963,
+      "kind": "wet_hook"
+    },
+    {
+      "seed": "BELL42",
+      "floor": 2,
+      "plane": "floor",
+      "x": -1,
+      "y": 5,
+      "hash": 966423304,
+      "kind": "dry_a"
+    },
+    {
+      "seed": "BELL42",
+      "floor": 2,
+      "plane": "ceiling",
+      "x": 10,
+      "y": 10,
+      "hash": 711512068,
+      "kind": "plain"
+    },
+    {
+      "seed": "BELL42",
+      "floor": 2,
+      "plane": "ceiling",
+      "x": 10,
+      "y": 9,
+      "hash": 882905181,
+      "kind": "plain"
+    },
+    {
+      "seed": "BELL42",
+      "floor": 2,
+      "plane": "ceiling",
+      "x": -1,
+      "y": 5,
+      "hash": 404592128,
+      "kind": "plain"
+    }
+  ]
+}

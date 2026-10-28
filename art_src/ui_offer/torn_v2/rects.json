@@ -1,0 +1,38 @@
+{
+  "asset": "assets/art/ui_offer/map_parchment_torn_v2.png",
+  "size": [
+    144,
+    324
+  ],
+  "rect": [
+    5,
+    16,
+    144,
+    324
+  ],
+  "anchor": [
+    0,
+    0
+  ],
+  "nine_slice_ltrb": [
+    8,
+    12,
+    8,
+    12
+  ],
+  "content_padding_ltrb": [
+    8,
+    12,
+    8,
+    12
+  ],
+  "opaque_safe_rect": [
+    8,
+    12,
+    128,
+    300
+  ],
+  "alpha": "binary; transparent outside torn leaf",
+  "draw": "STRETCH at native size; no TILE, flat backing, outline or rectangular shadow",
+  "preferred": "Native 144x324; existing StyleBoxTexture margins fit. Preserve edge alpha."
+}

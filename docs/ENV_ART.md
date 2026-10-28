@@ -6,18 +6,20 @@ PNGs, exact built-in imagegen prompts, code drawings, deterministic reduction,
 and contact sheets live in the corresponding `art_src/` folders.
 
 **Primary revision:** use `painted_f1_*.png` / `painted_f2_*.png` for walls;
-`painted_fN_floor.png` / `painted_fN_ceiling.png` for plane bases;
-`painted_room_fN_*` for the matching twelve room-face variants;
+the latest plane offer is the shared `calm_v3_floor_*` / `calm_v3_ceiling_*`
+family, with `calm_v3_room_*` for matching landmark faces. The earlier
+`painted_fN_floor/ceiling` and `painted_room_fN_*` set remains an alternate.
+Use `map_parchment_torn_v2.png` for the new transparent map-leaf offer;
 `finder_hurt_v2.png` / `finder_near_death_v2.png` for injured portraits, and the
 existing unchanged `finder_fine.png` for fine. The first `f1_` / `f2_` wall
 sets and original reactive portraits remain intact as alternates. The UI
-materials in `assets/art/ui_offer/` are an offer for A, not an implemented skin.
+materials in `assets/art/ui_offer/` are selected and wired by A.
 Decorative `assets/art/props/`, earlier alternate `room_fN_*` surface
 faces, a painted title logotype and an optional launcher set are also supplied. Placement,
 collision and launcher selection remain A/Claude's integration decisions.
-The latest addition is four painted floor/ceiling bases and twelve rebased
-room-face variants, with wall/floor/ceiling mock-ups. The previous addition
-is eleven registered screen-animation frames. See
+The latest addition follows the owner's preference for the F1 corridor:
+calmer flags, a darker shared rib vault, varied per-cell puddles and a torn
+transparent map leaf. All previous art remains intact. See
 **Small life in the story plates** below for exact playback and hold timings.
 `POLISH.md` records the A/B/C features now visible in A's current source.
 
@@ -26,11 +28,20 @@ is eleven registered screen-animation frames. See
 From the repository root, with Python and Pillow installed:
 
 ```powershell
+python -B art_src/env/calm_v3/build_revision.py
+python -B art_src/env/verify_polish.py
+```
+
+This rebuilds the calm shared plane family, torn map leaf and all new mock-ups.
+It runs focused checks, including the pre-batch hashes of 182 earlier C PNGs.
+For the preceding painted-plane proposal:
+
+```powershell
 python -B art_src/env/painted_surfaces/build_surfaces.py
 python -B art_src/env/verify_polish.py
 ```
 
-These rebuild only the new painted plane materials and mock-ups, then verify
+These rebuild only the earlier painted plane materials and mock-ups, then verify
 the combined C kit. For the preceding screen-animation batch:
 
 ```powershell
@@ -75,9 +86,18 @@ and contact sheets still use the shared indexed palette and binary alpha.
 | Primary mixed tile repeats | 256 × 192 | `art_src/env/painted_v2/floor1/repeat_4x.png`, `floor2/repeat_4x.png` |
 | Original / primary / wet comparison | Three 64 × 64 samples | `art_src/env/painted_v2/comparison/contact_sheet_4x.png` |
 | First wall set, alternates + surfaces | 28 tiles, each 64 × 64 | `art_src/env/contact_sheet_4x.png` |
-| Primary painted floors/ceilings + variants | Sixteen 64 × 64 tiles | `art_src/env/painted_surfaces/contact_sheet_4x.png` |
-| Primary planes, by floor | Eight 64 × 64 tiles each | `art_src/env/painted_surfaces/floor{1,2}/contact_sheet_4x.png` |
-| Primary mixed plane repeats | 3 × 3 cells per plane/floor | `art_src/env/painted_surfaces/floor{1,2}/{floor,ceiling}_repeat_4x.png` |
+| Current calm shared planes + landmarks | Twenty 64 × 64 tiles | `art_src/env/calm_v3/contact_sheet_4x.png` |
+| Shared calm floor family | Eleven 64 × 64 variants | `art_src/env/calm_v3/floors/contact_sheet_4x.png` |
+| Shared darker vault | Three 64 × 64 variants | `art_src/env/calm_v3/ceilings/contact_sheet_4x.png` |
+| Mixed calm floor repeats | 5 × 4 actual hashed cells per level | `art_src/env/calm_v3/floor{1,2}_mixed_4x.png` |
+| Current whole-screen comparison + map | Five 154 × 342 screens | `art_src/env/calm_v3/mockup_all_4x.png` |
+| Current world view comparison | Four 148 × 150 views | `art_src/env/calm_v3/mockup_view_4x.png` |
+| Movement comparison | Three cell-centred corridor positions | `art_src/env/calm_v3/mockup_steps_4x.png` |
+| Torn map material + silhouette | 144 × 324, real binary alpha | `art_src/ui_offer/torn_v2/contact_sheet_4x.png` |
+| Torn leaf with A's existing ink map | 154 × 342 | `art_src/ui_offer/torn_v2/mockup_map_4x.png` |
+| Earlier painted planes, alternates | Sixteen 64 × 64 tiles | `art_src/env/painted_surfaces/contact_sheet_4x.png` |
+| Earlier planes, by floor | Eight 64 × 64 tiles each | `art_src/env/painted_surfaces/floor{1,2}/contact_sheet_4x.png` |
+| Earlier mixed plane repeats | 3 × 3 cells per plane/floor | `art_src/env/painted_surfaces/floor{1,2}/{floor,ceiling}_repeat_4x.png` |
 | Walls + planes, view mock-ups | Four 148 × 150 views | `art_src/env/painted_surfaces/mockup_view_4x.png` |
 | Walls + planes, screen mock-ups | Four 154 × 342 screens | `art_src/env/painted_surfaces/mockup_screen_4x.png` |
 | Possessions | 13 icons, each 16 × 16 | `art_src/icons/contact_sheet_4x.png` |
@@ -234,11 +254,131 @@ source crop and SHA-256. Rebuild just this set with:
 python -B art_src/props/build_props.py
 ```
 
-## Primary painted floor and ceiling planes
+## Current offer: calm shared flags and a darker rib vault
 
-These supersede the original cleaner `fN_floor.png` / `fN_ceiling.png` bases
-and their `room_fN_*` derivatives. Every older PNG remains intact as an
-alternate; do not mix an old room face into the new painted plane family.
+This follows the owner's review of the first painted-plane proposal. The F1
+corridor is the material reference for both floors. The new ceiling uses that
+same abbey X-rib vault everywhere; floor two adds sparse roots/drip stains,
+not the earlier rough-rock ceiling. Painted stone faces are quieter, joints
+remain readable, and floor two gets water more often through selection rather
+than a different repeating base texture. All older files remain unchanged.
+
+Runtime root: `assets/art/env/`. Every plane below is **64 × 64, opaque**,
+top-left anchor `(0,0)`, using the same shared palette. One texture repeat is
+one movement cell. All eleven floors share the **same full two-pixel border
+ring**, including across floor numbers. All ceiling variants share a second
+common border ring. Any floor/floor or ceiling/ceiling combination tiles.
+
+### Floor names and selection weights
+
+Use `calm_v3_floor_{name}.png`. Weights are percentages, in table order:
+
+| Name | Material / landmark within the cell | Floor 1 | Floor 2 |
+| --- | --- | ---: | ---: |
+| `dry_a` | Quiet painted flags, worn joints | 28 | 14 |
+| `dry_b` | Different stone arrangement / wear | 24 | 12 |
+| `dry_c` | Third stone arrangement / wear | 21 | 10 |
+| `stain` | One small old brown stain | 10 | 6 |
+| `chip` | A shallow chipped flag edge | 8 | 5 |
+| `crack` | Short, fine branched fracture | 6 | 5 |
+| `wet_small` | Small irregular pool low on the left | 3 | 10 |
+| `wet_hook` | Two-lobed hooked basin on the left | 0 | 10 |
+| `wet_corner` | Larger angular pool in the lower right | 0 | 10 |
+| `wet_split` | Two separate pools at different positions | 0 | 9 |
+| `wet_wide` | Broad uneven basin across the middle | 0 | 9 |
+| **Total** | Same assets and border colours on both levels | **100** | **100** |
+
+Floor one uses seven variants, with a small puddle on 3% of cells. Floor two
+uses all eleven, with wet variants weighted at 48% and several larger shapes.
+These are distribution weights, not a promise about every short corridor.
+The five pools have different footprints, centroids and reflection positions;
+none touches the outer cell joint. Water follows the stone's existing colour
+clusters beneath it. These are static shallow damp patches, not pits, hazards,
+items, animated liquid or interaction cues.
+
+### Ceiling names and selection weights
+
+Use `calm_v3_ceiling_{name}.png`:
+
+| Name | Floor 1 | Floor 2 | Appearance |
+| --- | ---: | ---: | --- |
+| `plain` | 98 | 82 | The darker, quieter F1 rib vault |
+| `root` | 0 | 10 | Same vault plus one small root at a corner |
+| `drip` | 2 | 8 | Same vault plus one short damp stain |
+
+The new plain vault has about **69% of the previous F1 ceiling's mean
+luminance**, before the unchanged renderer lighting. Its original corner-to-
+centre rib layout remains. The calm dry floor's adjacent-texel contrast is
+about **47% of the previous painted F1 floor**, measured inside the border.
+These are offline image metrics, not a claim about phone perception or speed.
+`art_src/env/calm_v3/verification.json` stores the measurements.
+
+### Stable per-cell choice: exact rule for A
+
+Use the existing `PresentationArt.mix_hash`, with the exact UTF-8 key:
+
+```text
+{seed}/{floor}/{plane}/{cell_x}/{cell_y}
+example: BELL42/2/floor/10/9
+roll = PresentationArt.mix_hash(key) % 100
+```
+
+Clamp floor to 1–2 for material selection. `plane` is literally `floor` or
+`ceiling`; cell coordinates are signed integers from `floor(point.x)` and
+`floor(point.y)`. Walk the applicable table in order, subtracting each weight
+until `roll < weight`; that row names the image. Skip zero-weight rows.
+Cache the resulting image per seed/floor/plane/cell; never choose by screen
+column, UV texel, camera facing, frame, turn or simulation RNG. A turn away
+and back must show the same puddle, and walking one cell must reveal the next
+cell's already-fixed choice. Keep world north and the existing UV projection.
+
+`art_src/env/calm_v3/selection.py` is a small authoring reference with an exact
+port of the current hash, and `selection.json` records ordered weights and
+known input/hash/choice samples for A's integration checks. Do not load Python
+or `art_src/` at runtime; copy these constants/rule into A's presentation code.
+
+**A's integration:** replace the single `f%d_floor.png` and `f%d_ceiling.png`
+choice in `_build_surfaces()` with the cached world-cell choice above. Keep
+the current 64-texel UV scale, horizon, lamp function and floor/ceiling gains.
+Disable the existing procedural `grain` lightened/darkened branch **for this
+material family**: its added speckles would undo the quieter painting. Keep
+the surface cache keyed by material revision as well as the current view.
+
+Six matching landmark alternatives are also supplied as
+`calm_v3_room_floor_{drain,cracked,compass}.png` and
+`calm_v3_room_ceiling_{roots,chain,boss}.png`. They use the same border rings.
+The cracked/root faces match the restrained ordinary crack/root; the other
+landmarks are rebased and subdued. They are **outside the ordinary weight
+tables**: A may retain deliberate room landmarks. The compass still points
+toward negative world Y; do not rotate that face.
+
+### Current mock-ups
+
+- `art_src/env/calm_v3/mockup_all_4x.png`: corridor and room on both floors,
+  plus the torn map, using the supplied M3d framing/UI.
+- `mockup_view_4x.png`: those four views without the surrounding interface.
+- `mockup_steps_4x.png`: three static floor-two corridor views one cell apart;
+  the actual stable selector changes the visible wet patches along the route.
+- `floor1_mixed_4x.png` / `floor2_mixed_4x.png`: twenty hashed world cells per
+  floor, showing shared joints and the different dry/wet distribution.
+
+All have native and exact nearest 4x partners. These are offline material
+mock-ups using the same camera/UV/light equations and simple proxy spaces,
+with the added procedural grain intentionally disabled. They are not new
+Godot captures or reconstructed BELL42 gameplay. The M3d interface outside
+the view is preserved; floor-two material captions identify the level while
+the copied source interface retains its original state text.
+
+Recipe and preserved sources: `art_src/env/calm_v3/`. Rebuild the complete
+revision, including the torn map and focused checks, with
+`python -B art_src/env/calm_v3/build_revision.py`. No Godot runs are needed.
+
+## Previous painted floor and ceiling planes: alternates
+
+This earlier painted proposal superseded the original cleaner `fN_floor.png`
+and `fN_ceiling.png` bases. It remains intact as an alternate after the owner's
+latest calm/shared-family direction above. Match its `painted_room_fN_*`
+derivatives if choosing this older family; its borders differ from calm v3.
 
 | New runtime base under `assets/art/env/` | Material |
 | --- | --- |
@@ -308,7 +448,7 @@ ceiling plane; they do not extend as hanging billboards into the view.
 Use the existing floor-two ambience for any moving drops; these plane
 textures stay static.
 
-**Codex A:** replace the two base image paths in `_build_surfaces()` from
+**Earlier painted family only:** replace the two base image paths in `_build_surfaces()` from
 `f%d_floor.png` / `f%d_ceiling.png` to `painted_f%d_floor.png` /
 `painted_f%d_ceiling.png`, keeping the existing one-based floor clamp and
 current sampling. For cell variants, change `room_f%d_...` to
@@ -579,7 +719,46 @@ source history; the compact version builds the exported offer.
 python -B art_src/screens/room_batch/build_identity.py
 ```
 
-## UI material offer: non-tiling surfaces and small props
+## Current map offer: torn parchment with real transparency
+
+New runtime file: `assets/art/ui_offer/map_parchment_torn_v2.png`, **144 × 324**,
+the current map panel's exact native size. Draw it at `(5,16)` on the 154 × 342
+screen, anchor `(0,0)`. The original `map_parchment.png` remains unchanged.
+
+This is one painted leaf with a singed, torn, asymmetric outer silhouette and
+binary transparent pixels beyond it. Broad grime blends inward into a quiet
+pale writing field; no rectangular inner paper fill or ruled folds are baked
+in. The source's irregular outer alpha is preserved at native reduction,
+detached flecks are removed, and unusually deep side bites are compressed
+within the existing eight-pixel side margins. There is no rectangular backing
+under the leaf in the offer.
+
+**A's swap:** change the existing map `StyleBoxTexture` texture path to the
+new file. Retain texture margins **left/top/right/bottom = 8/12/8/12** and
+STRETCH, with nearest filtering and no mipmaps/lossy compression. Native size
+is preferred. Use content padding **8/12/8/12**; the fully opaque safe writing
+rectangle is `(8,12,128,300)` within the texture. The current 128px map minimum,
+heading and CLOSE button fit. Keep A's ink map transparent over the paper;
+draw the leaf directly over the game, with its alpha revealing the view at
+the ragged edge. Do not add a flat panel fill, rectangular outline/shadow,
+second old parchment, or per-widget beige backing beneath it. These would
+bring back the rectangle the owner asked to hide.
+
+Source, exact imagegen edit prompt, build script and margin JSON are in
+`art_src/ui_offer/torn_v2/`. Its `contact_sheet_4x.png` shows the material and
+opaque silhouette side by side; `rects.json` records the size/rect/margins.
+`mockup_map_4x.png` puts the leaf over a saved M3d world view, with the saved
+map's existing heading, ink positions, Finder pin, top rail and CLOSE button.
+The old background/fold lines are omitted. This is an offline art composite;
+it introduces no new explored cells, glyphs, map rules or actual UI changes.
+
+Rebuild just the leaf and map mock-up with
+`python -B art_src/ui_offer/torn_v2/build_torn.py`; the calm revision builder
+also runs it and assembles the five-screen comparison. Preserve the original
+saved source paintings; all runtime art is indexed to the shared palette,
+with alpha strictly 0/255. No Godot run is needed.
+
+## Earlier UI material offer: non-tiling surfaces and small props
 
 Runtime root: `assets/art/ui_offer/`. Source paintings, exact built-in imagegen
 prompts, native cleanup, `rects.json`, contact sheet and mockups are in
@@ -730,25 +909,6 @@ the asset checks and focused FX test do not claim phone performance acceptance.
 
 
 
-## Screen-animation batch receipt, 28 October 2026
-
-- Added **11 runtime PNGs**: two moth poses and three frames each for title,
-  win and death. Combined C verification passes at **166 runtime PNGs**,
-  shared 31 opaque inks, binary alpha and exact 4x sheets.
-- Five sheet pairs and four animated GIF previews accompany the saved edit
-  paintings, prompts, deterministic builder and machine-readable timings.
-  Rebuilding produced identical SHA-256 hashes for **33 PNG/JSON/GIF files**;
-  `art_src/screens/life/rebuild_receipt.json` records the comparison.
-- Focused checks verify frame counts, distinct states, fixed publisher/key
-  pixels and title area, dim/bright lamp order, a Seal pulse over growing dawn,
-  fading death light, preview durations, loop boundaries and indefinite end
-  holds. All **155 earlier C runtime PNGs** remain byte-for-byte unchanged.
-- Claude's launcher PNGs changed concurrently; their historical hashes were
-  retained and their files left alone. Checks now respect that ownership.
-- `POLISH.md` distinguishes A/B work already wired, animation art ready for
-  A, remaining original picks and five small new suggestions with costs.
-- No Godot runs, game/UI edits, staging or commits. The new animation playback
-  still needs A's integration and phone review.
 
 ## Painted-plane batch receipt, 28 October 2026
 
@@ -768,3 +928,28 @@ the asset checks and focused FX test do not claim phone performance acceptance.
   `art_src/env/painted_surfaces/rebuild_receipt.json` records the comparison.
 - No Godot runs, renderer/UI/game edits, staging or commits. A still needs
   the documented texture path swaps and phone review.
+
+## Calm-plane / torn-map revision receipt, 28 October 2026
+
+- Added **21 runtime PNGs**: eleven shared floor variants, three subdued
+  versions of the F1 vault, six compatible landmark faces and one transparent
+  144 × 324 map leaf. The C kit now verifies at **203 runtime PNGs**; shared
+  palette, binary alpha and exact 4x sheets pass. All **182 earlier C runtime
+  PNGs** remain byte-for-byte unchanged.
+- Native adjacent-texel contrast inside the dry floor border is **46.9%** of
+  the previous painted F1 floor. The plain vault's mean luminance is **69.1%**
+  of the previous F1 ceiling. These are image measurements, not phone-review
+  claims. Both levels now share the same plane assets and matching joints.
+- Weighted stable-cell selection supplies seven possible floors upstairs and
+  eleven downstairs: 3% small-puddle weight on F1, 48% mixed-puddle weight on
+  F2. Five wet footprints have distinct areas and centres; all preserve the
+  cell perimeter. Known hash/choice samples are saved for A.
+- Mock-ups include the four view/material comparisons, three successive
+  corridor positions, mixed-cell sheets and the new map inside the M3d UI.
+  The protected screenshot interface and copied map ink/button pixels match
+  their references. These are offline composites using proxy rooms.
+- Rebuilding produced identical SHA-256 hashes for **67 PNG/JSON files**;
+  `art_src/env/calm_v3/rebuild_receipt.json` records the comparison.
+- A's remaining work is the cached per-cell selector, disabling the old
+  procedural grain for this family, swapping the map material and phone
+  review. No Godot runs, game/UI changes, staging or commits by C.

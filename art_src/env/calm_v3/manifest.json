@@ -1,0 +1,562 @@
+{
+  "palette": "art_src/spike/palette.gpl",
+  "colours_union": 20,
+  "files": [
+    {
+      "path": "art_src/env/calm_v3/ceilings/contact_sheet_4x.png",
+      "size": [
+        1600,
+        560
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        1600,
+        560
+      ],
+      "colours": 16,
+      "sha256": "ea379e3eb934ce65c350716d6353374aa92d189a7d230c15289e2f04287fae81"
+    },
+    {
+      "path": "art_src/env/calm_v3/ceilings/contact_sheet_native.png",
+      "size": [
+        400,
+        140
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        400,
+        140
+      ],
+      "colours": 16,
+      "sha256": "4d55f662d4f3c4a331936dd058a935be515bc98a3a08b77783326562cc71165e"
+    },
+    {
+      "path": "art_src/env/calm_v3/contact_sheet_4x.png",
+      "size": [
+        2688,
+        2168
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        2688,
+        2168
+      ],
+      "colours": 20,
+      "sha256": "30c22d31425974baf8c61ee926f78acd2e2ee659e9670910160b0d855e1ccc99"
+    },
+    {
+      "path": "art_src/env/calm_v3/contact_sheet_native.png",
+      "size": [
+        672,
+        542
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        672,
+        542
+      ],
+      "colours": 20,
+      "sha256": "555283d8f6c12f409b6b924a49c489e32c910b371970b9f65d952950ecddcd15"
+    },
+    {
+      "path": "art_src/env/calm_v3/floor1_mixed_4x.png",
+      "size": [
+        1280,
+        1024
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        1280,
+        1024
+      ],
+      "colours": 15,
+      "sha256": "4a9c3c9491e43b4dd1fb003b636c36e606a88b75f51c742a34d0ea45308fea6d"
+    },
+    {
+      "path": "art_src/env/calm_v3/floor1_mixed_native.png",
+      "size": [
+        320,
+        256
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        320,
+        256
+      ],
+      "colours": 15,
+      "sha256": "918216fe3d8354e8114b7a06741cb4424c611d86c3f1062f0c389926eeef8bf6"
+    },
+    {
+      "path": "art_src/env/calm_v3/floor2_mixed_4x.png",
+      "size": [
+        1280,
+        1024
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        1280,
+        1024
+      ],
+      "colours": 16,
+      "sha256": "ffc1d8b066801220d504e72853a07d719de5a2e369201806a704bda5a4758f48"
+    },
+    {
+      "path": "art_src/env/calm_v3/floor2_mixed_native.png",
+      "size": [
+        320,
+        256
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        320,
+        256
+      ],
+      "colours": 16,
+      "sha256": "027d80169263dabc916934614704328f9320fb9bfc17ede9155af6ea85da8ddd"
+    },
+    {
+      "path": "art_src/env/calm_v3/floors/contact_sheet_4x.png",
+      "size": [
+        2112,
+        1344
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        2112,
+        1344
+      ],
+      "colours": 18,
+      "sha256": "65303a1b0acf98855f389091196b52b1f22e7b5e42d3e4ba438e52b12be02a23"
+    },
+    {
+      "path": "art_src/env/calm_v3/floors/contact_sheet_native.png",
+      "size": [
+        528,
+        336
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        528,
+        336
+      ],
+      "colours": 18,
+      "sha256": "c702876b095cd5cdef7e73dfc0fdfb321986022c1beb8adf80c4e9baf67d7e3f"
+    },
+    {
+      "path": "assets/art/env/calm_v3_ceiling_drip.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 14,
+      "sha256": "9035f49d7f1f5dd0c80c1cdb90b6c5b50c5b718ad5b7e6b98e9b67230330dd04"
+    },
+    {
+      "path": "assets/art/env/calm_v3_ceiling_plain.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 12,
+      "sha256": "720981aa54514888300a1dadd5c48373908afdb9d8ae65cd347e80e14e71855d"
+    },
+    {
+      "path": "assets/art/env/calm_v3_ceiling_root.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 12,
+      "sha256": "b2ea2ecc426370a01b1c1f8ae6636f587e674d64ef283826441d3d082b047da8"
+    },
+    {
+      "path": "assets/art/env/calm_v3_floor_chip.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 13,
+      "sha256": "71a9ff9b3cd44778c42efc9246b78074f9a9e3f26d9782933ba65cd7f70ade65"
+    },
+    {
+      "path": "assets/art/env/calm_v3_floor_crack.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 13,
+      "sha256": "a80e4b29337a17234ea300da696ba51f1d7e255017252dd74579fb27e8f419eb"
+    },
+    {
+      "path": "assets/art/env/calm_v3_floor_dry_a.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 12,
+      "sha256": "1fdafa055f7a6feefa3c55676533f6222b5cb8f950af35673b78c927eb1ef696"
+    },
+    {
+      "path": "assets/art/env/calm_v3_floor_dry_b.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 12,
+      "sha256": "bcdd2cbf066c13363b3d64f6c2f00d865b8a25e3b03411a393d362a2af390d1e"
+    },
+    {
+      "path": "assets/art/env/calm_v3_floor_dry_c.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 12,
+      "sha256": "d4ff74d95c9c5f143ea0739dc7ad74cb7fef635dfd43fb9ba8fad41cfb518dec"
+    },
+    {
+      "path": "assets/art/env/calm_v3_floor_stain.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 12,
+      "sha256": "7f17e6364f43730b98fb024f0cd2fffeb47bd7b01586f1e49a714da18bad7664"
+    },
+    {
+      "path": "assets/art/env/calm_v3_floor_wet_corner.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 15,
+      "sha256": "b7c85bf0e79d4f89752b57e98f7615816fbd1c7dae532c55e804996bbcef5734"
+    },
+    {
+      "path": "assets/art/env/calm_v3_floor_wet_hook.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 15,
+      "sha256": "a06ef520ef91b3e769ddbbf126f975b0e7ff19f54ee4aa75adbcbe0ea4d2c8bf"
+    },
+    {
+      "path": "assets/art/env/calm_v3_floor_wet_small.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 14,
+      "sha256": "f29b5f41b272284f63d9b5d30aefcf786314d5caeaa54a29f2449add8fd4e8a3"
+    },
+    {
+      "path": "assets/art/env/calm_v3_floor_wet_split.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 15,
+      "sha256": "8cd5cd6ea46e40aadde19cf7944a16a94ce0f0df9847c6c41dfbe72e80be4147"
+    },
+    {
+      "path": "assets/art/env/calm_v3_floor_wet_wide.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 15,
+      "sha256": "cb69f949d119f236daa040c6e3f29fdf12bde6dee6900a3fba4987e9d366c818"
+    },
+    {
+      "path": "assets/art/env/calm_v3_room_ceiling_boss.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 12,
+      "sha256": "2b7a99b9e473d99388a37f461c8eef3ab317a230efd705e1cc5b0657554f900d"
+    },
+    {
+      "path": "assets/art/env/calm_v3_room_ceiling_chain.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 11,
+      "sha256": "5f2317b9d2c494d7d7d49674d2bb3d1f1362281c4f8e274dfe7f43df2c4731e8"
+    },
+    {
+      "path": "assets/art/env/calm_v3_room_ceiling_roots.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 12,
+      "sha256": "b2ea2ecc426370a01b1c1f8ae6636f587e674d64ef283826441d3d082b047da8"
+    },
+    {
+      "path": "assets/art/env/calm_v3_room_floor_compass.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 15,
+      "sha256": "191f05d3e10d822f93dac1c3c40110b22f64976a778c241a81ca738a6ebc13cb"
+    },
+    {
+      "path": "assets/art/env/calm_v3_room_floor_cracked.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 13,
+      "sha256": "a80e4b29337a17234ea300da696ba51f1d7e255017252dd74579fb27e8f419eb"
+    },
+    {
+      "path": "assets/art/env/calm_v3_room_floor_drain.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 13,
+      "sha256": "1ef6f7dc643ba4a77a84c0c18f312cba9849fe0f8862071890f18651891d8255"
+    }
+  ],
+  "sources": [
+    {
+      "path": "art_src/env/calm_v3/sources/ceiling.png",
+      "sha256": "dfe792890a0990e67b6a437d22cdf8401103c5e16e0e3cf6aacc9241ef5e71be"
+    },
+    {
+      "path": "art_src/env/calm_v3/sources/floor.png",
+      "sha256": "0b42d199dd7503aafd8f11a8f20b5c1d4bb064f6015fdc4bf1d44c48d7415641"
+    },
+    {
+      "path": "art_src/env/calm_v3/sources/m3d_corridor.png",
+      "sha256": "3a1dc20cddc7b7958686af8e559f786d38bca3fd037b00ef8aa6054dd88a5e9e"
+    },
+    {
+      "path": "art_src/env/calm_v3/sources/m3d_room.png",
+      "sha256": "b5299cbde813e20406749422a436fd027dd3a6375b9a057de80895b902af1bd2"
+    }
+  ],
+  "shared_between_floors": true,
+  "floor_names": [
+    "dry_a",
+    "dry_b",
+    "dry_c",
+    "stain",
+    "chip",
+    "crack",
+    "wet_small",
+    "wet_hook",
+    "wet_corner",
+    "wet_split",
+    "wet_wide"
+  ],
+  "ceiling_names": [
+    "plain",
+    "root",
+    "drip"
+  ],
+  "selection": "art_src/env/calm_v3/selection.json",
+  "cell_world_size": 1,
+  "originals": "art_src/env/calm_v3/preserved_hashes.json",
+  "preview_files": [
+    {
+      "path": "art_src/env/calm_v3/mockup_f1_corridor_native.png",
+      "sha256": "e0d58dc2cf54a231c4f84b290c5e445245e76b48decdb0168b1d66d7052905dc"
+    },
+    {
+      "path": "art_src/env/calm_v3/mockup_f1_corridor_4x.png",
+      "sha256": "66ac3af54a289315f1b4fd9761dd3b05f2ee3dde5096bc40bb1b50c9c44ea79c"
+    },
+    {
+      "path": "art_src/env/calm_v3/mockup_f1_room_native.png",
+      "sha256": "df82d5b8664c792c37f7ef434be92f7900bbbad3e3d5df507a590aa93ceddcf3"
+    },
+    {
+      "path": "art_src/env/calm_v3/mockup_f1_room_4x.png",
+      "sha256": "cdc427f27367b8ac19fc5b9f79740cdd6c6c1978ee09e243f52776a8cff2a9cc"
+    },
+    {
+      "path": "art_src/env/calm_v3/mockup_f2_corridor_native.png",
+      "sha256": "757db3544c45c88e38141584ed817d78e157372724faa3a2c16b265e7ca26b37"
+    },
+    {
+      "path": "art_src/env/calm_v3/mockup_f2_corridor_4x.png",
+      "sha256": "73d896c96957fac2f16267d546e9dd28734b29ff55d96821edd29e5ec6535491"
+    },
+    {
+      "path": "art_src/env/calm_v3/mockup_f2_room_native.png",
+      "sha256": "522a6fb610ba25cae579a43dd28f2d15cab4e316eddd0493b89bc8f08b462dce"
+    },
+    {
+      "path": "art_src/env/calm_v3/mockup_f2_room_4x.png",
+      "sha256": "5a1f96fac80be84673344054e2c8069f431d57b25936cffd6ce7bcac59c005d1"
+    },
+    {
+      "path": "art_src/env/calm_v3/mockup_screen_native.png",
+      "sha256": "131367f5e428840730de1b8e17f3cddcd4939da212d57240e629c0acef6d82f8"
+    },
+    {
+      "path": "art_src/env/calm_v3/mockup_screen_4x.png",
+      "sha256": "58bfe431acb6f6cae4b8d37014c9b01c0c51df3c725ee4f0de774c3cafffdd9b"
+    },
+    {
+      "path": "art_src/env/calm_v3/mockup_view_native.png",
+      "sha256": "a5cc758d0d306bad7dd4a62b8523663254275583d4e786dd2c7251fcb55250b9"
+    },
+    {
+      "path": "art_src/env/calm_v3/mockup_view_4x.png",
+      "sha256": "e3406a75e7ddb208bd407e75b0e14e0daa57363fbec39425c19d5b0f69aaed9b"
+    },
+    {
+      "path": "art_src/env/calm_v3/mockup_steps_native.png",
+      "sha256": "157c31b0e4b55c2ddf8accd32129cd0d6e30bf524c5e6f607aa3681b81375e04"
+    },
+    {
+      "path": "art_src/env/calm_v3/mockup_steps_4x.png",
+      "sha256": "19b8662aadd36c008332c938085fa4bc8d4d08bb5b876827c4fe4b89556bfbbd"
+    },
+    {
+      "path": "art_src/env/calm_v3/mockup_all_native.png",
+      "sha256": "352372d43cf42c417d8fce44b465c1c31b29b28efd761b736f769c6c4d1e1de4"
+    },
+    {
+      "path": "art_src/env/calm_v3/mockup_all_4x.png",
+      "sha256": "e7d0c6caecce893319adb0d634292a76f804cc2b7c0f1d988a18df9b0cce0cab"
+    }
+  ]
+}

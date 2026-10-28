@@ -1,0 +1,13 @@
+{
+  "tool": "built-in image_gen.imagegen",
+  "mode": "edit",
+  "sources": {
+    "parchment": {
+      "reference": "E:/SD/GODOT/Dungeon-crawler/assets/art/ui_offer/map_parchment.png",
+      "prompt": "Use case: precise-object-edit. Asset: tall game automap parchment material, reduced to 144x324 pixels. Repaint this page as ONE SINGLE aged parchment leaf with a genuinely irregular torn and partly burnt OUTER silhouette, on REAL TRANSPARENCY. Remove the straight inner rectangular filled area, remove the ruled fold/grid lines. The quiet central writing area should merge gradually into irregular grime, never stop at a crisp rectangular border. Keep roughly the same cream/parchment-gold colors and dirty old-paper feel; hand-painted early 1990s game art. Uneven thin dark singed rims, broken light fibres, asymmetrical corners, a few small torn bites at different heights along all four edges; broad patches of irregular brown grime growing inward, not a decorative frame. The center must be calm, pale and readable for overlaid dark map ink, no marks or text. This is still a tall whole sheet nearly filling the image. The opaque central 85 percent must stay intact; tears no deeper than about 5 percent of page width or 3 percent of height. No black/solid background, no shadow outside silhouette, no floating detached scraps, no words, symbols, furniture or surroundings. Transparent background.",
+      "transparent_background": true,
+      "saved_source": "sources/parchment.png"
+    }
+  },
+  "derivation": "Saved source paintings are reduced nearest into the shared palette. Native editable wear/puddle/silhouette masks and palette steps are deterministic; previous assets stay intact."
+}

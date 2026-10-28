@@ -1,0 +1,19 @@
+{
+  "tool": "built-in image_gen.imagegen",
+  "mode": "edit",
+  "sources": {
+    "floor": {
+      "reference": "E:/SD/GODOT/Dungeon-crawler/art_src/env/painted_surfaces/sources/f1_floor.png",
+      "prompt": "Use case: precise-object-edit. Asset: seamless top-down 64x64 game FLOOR texture, painting source. Edit this exact abbey flagstone painting into a CALMER, MORE READABLE version. Keep the same three broad uneven flag silhouettes, irregular joint layout, dark outer cell perimeter, worn old grey limestone identity and tiny muted teal damp accent. Remove about 80 percent of the fine speckled grain and busy chip highlights. Paint broad low-contrast matte grey stone faces with gentle cloudy brush variation, one faint small stain and just a few edge chips. Narrow quiet internal joins; unmistakable outer cell joint. This is aged stone, not clean flat vector squares, not mottled photographic noise. Keep midtones readable. No new puddles, objects, grid lines, perspective, frame or text. Flat orthographic full-bleed square that tiles; no dramatic directional lighting.",
+      "transparent_background": false,
+      "saved_source": "sources/floor.png"
+    },
+    "ceiling": {
+      "reference": "E:/SD/GODOT/Dungeon-crawler/art_src/env/painted_surfaces/sources/f1_ceiling.png",
+      "prompt": "Use case: lighting-weather. Asset: seamless underside game ceiling texture. Edit this exact abbey stone X-rib vault painting. Preserve its exact corner-to-centre crossing rib layout and stone relief, not rough oppressive cavern rock. Make the WHOLE ceiling one or two value steps darker: subdued charcoal blue-grey limestone, lower contrast, remove about 65 percent of fine grain and tiny bright gold speckles. Broad quiet infill stones, worn ribs still legible against them; muted soot at centre, only a little damp. The warm pale rib highlights should be subdued, no bright gold lattice. Same flat orthographic square material texture, matching opposite edges and continuing corner ribs. No large roots, medallion, additional object, perspective room, border, UI or lettering. Keep hand-painted 1993 dungeon charm and recognizable material.",
+      "transparent_background": false,
+      "saved_source": "sources/ceiling.png"
+    }
+  },
+  "derivation": "Saved source paintings are reduced nearest into the shared palette. Native editable wear/puddle/silhouette masks and palette steps are deterministic; previous assets stay intact."
+}

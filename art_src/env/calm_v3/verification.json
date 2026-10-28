@@ -1,0 +1,16 @@
+{
+  "floor_adjacent_contrast_ratio": 0.46853185291046007,
+  "ceiling_luminance_ratio": 0.6914422440747324,
+  "puddle_changed_pixels": {
+    "wet_small": 76,
+    "wet_hook": 314,
+    "wet_corner": 408,
+    "wet_split": 294,
+    "wet_wide": 710
+  },
+  "wet_frequency_sample": {
+    "1": 0.0302734375,
+    "2": 0.45166015625
+  },
+  "old_c_pngs_unchanged": 182
+}
