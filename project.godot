@@ -19,6 +19,7 @@ config/icon="res://assets/icon/icon_192.png"
 
 Autopilot="*res://scripts/dev/autopilot.gd"
 Music="*res://scripts/audio/music.gd"
+Pointer="*res://scripts/dev/pointer.gd"
 
 [display]
 
