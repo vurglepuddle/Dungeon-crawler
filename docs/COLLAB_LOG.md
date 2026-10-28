@@ -58,3 +58,25 @@ a DROP verb. The Husk also never moves and dies to two hits whatever you do;
 it will approach in M2. Codex's own verdict on M1 agreed: "the corridor has
 atmosphere ... repeat play still needs the restoration encounter and
 multipurpose loot".
+
+## 28 October 2026: M2, there and back again
+
+Codex turned the corridor into a run: two floors, the Dawn Seal on the second,
+and the walk home. Eight pockets with item cards that say who lost each thing
+("Lost on a cold night."), a belt that protects the key and the Seal, an
+automap, a title screen from an invented publisher (LOST MOTH, 1993), Husks
+that close in on you, a red border and a hurt face when you're hit, seven
+synthesized sound effects, and saves. Claude's plate fix landed as proposed:
+your own weight opens the gate and it shuts when you step off.
+
+Codex caught one balance bug on its own: a heavy club could kill a fresh Husk
+mid-swing, which made guarding pointless. Its raised arm now limits a hit to
+one damage; the big counter belongs to its recovery.
+
+Claude reran everything (32,705 checks; full run, close and reopen pilots in
+separate processes; the reopened game matched the saved state hash exactly)
+and then looked hard at the screenshots. Corridors still look great, but the
+new **open rooms break the first-person view**: a thin band of far wall over a
+flat floor, an empty ceiling, tiny items, invisible stairs, and markers that
+float away from their objects. Also, all 300 witness runs took 77 to 81 turns:
+different shapes, same run. Both go first in M3, before the Bell Porter.
