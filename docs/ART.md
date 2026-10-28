@@ -841,3 +841,147 @@ fixed shared palette, nearest sampling and binary alpha. `verify_items.py`
 passes for 36 runtime PNGs and eleven 4x reviews, including source/output
 hashes, anchors, native rim retouch, spent-coat silhouette and actual key-ring
 holes at each depth. No Godot run or phone playtest is claimed for this batch.
+
+## Painted fixture replacements v2
+
+This batch replaces the remaining flat fixture stand-ins identified in
+`docs/ART_AUDIT.md`: pressure plates, side levers, silk/fire, EDGE cord grates,
+lift/stair ground, the opened secret cache and a spent-padding pack icon.
+There are **65 new runtime PNGs**, with old files and original sources retained.
+All use the shared palette, nearest sampling and binary alpha. Paintings and
+offline build/review files live in `art_src/fixtures/painted_v2/`.
+
+### Exact swaps and dimensions
+
+In this table, `F` is floor 1 or 2, `D` is depth 1/2/3, `S` is `up|down`,
+`LR` is `left|right`, `W` is `intact|burning_0|burning_1|burnt`, and `C` is
+`intact|cut`. All new fixture names are relative to `assets/art/fixtures/`.
+
+| Current path / drawing | New filename | Canvas at D1 / D2 / D3 |
+| --- | --- | --- |
+| `assets/art/fx/plate_S_dD.png` | `fixture_v2_fF_plate_S_dD.png` | 64x20 / 40x12 / 24x8 |
+| `assets/art/fx/lever_LR_S_dD.png` | `fixture_v2_lever_LR_S_dD.png` | 32x40 / 20x26 / 12x16 |
+| `assets/art/fixtures/web_W_dD.png` | `fixture_v2_web_W_dD.png` | 64x64 / 40x40 / 24x24 |
+| `assets/art/fixtures/cord_grate_C_dD.png` | `fixture_v2_cord_grate_C_dD.png` | 64x64 / 40x40 / 24x24 |
+| `assets/art/fixtures/cord_grate_LR_C_dD.png` | `fixture_v2_cord_grate_LR_C_dD.png` | 32x48 / 20x30 / 12x18 |
+| Ordinary floor in the lift's cell | `fixture_v2_fF_floor_lift_dead_64.png` or `fixture_v2_fF_floor_lift_working_64.png` | 64x64 world UV |
+| Ordinary floor in the stairs-down cell | `fixture_v2_fF_floor_stairs_down_64.png` | 64x64 world UV |
+| Open panel's runtime rectangles | `fixture_v2_fF_cache_open_64.png` or `fixture_v2_fF_cache_open_overlay_64.png` | 64x64 wall UV |
+| Ordinary coat icon for a spent item | `assets/art/icons/coat_spent.png` | 16x16 |
+
+Plate, web and **front** cord sprite anchors remain exclusive bottom-centre:
+plate `(32,20)/(20,12)/(12,8)`; web/cord `(32,64)/(20,40)/(12,24)`.
+Side lever hinge anchors are left `(16,22)/(10,14)/(6,8)`, right
+`(15,22)/(9,14)/(5,8)`. Side cord anchors are wall centres: left
+`(16,24)/(10,15)/(6,9)`, right `(15,24)/(9,15)/(5,9)`.
+Floor and cache textures have top-left UV origin `(0,0)`; the icon is centred
+at `(8,8)`. `manifest.json` enumerates every literal old/new path, exact size,
+anchor, state, timing, opaque bounds and hash.
+
+### States and scene lighting
+
+The pressure slab is shallow and set into its flagstone rim. Pressing lowers
+the inset inside the same unmoving frame, darkening its recessed seam. `down`
+means **pressed**, as in the old files; change state immediately, with no
+additional animation. The seam supplies its contact darkness: do not add a
+floating object shadow ellipse beneath the whole plate. F2 is cooler/darker.
+
+Side lever art derives from the accepted **painted front hardware source**,
+projected onto the old side canvases. Retain the existing head-on
+`lever_front_*`/`lever_wall_fF_*` assets; choose one representation from the
+fixed wall normal. Up/down flip instantly around the same physical hinge.
+Neutral metal/cord/web assets serve both floors with normal scene lighting.
+
+Web silk sags around dusty knots and trapped leaf fragments. Burning frames
+last **120ms each**, matching the existing two-frame burn presentation; then
+hold `burnt`. No opacity fade is needed. Non-burning perimeter silk is stable
+between fire frames. Holes are actually transparent; burnt art leaves only
+charred edge remnants. The grate has a thick rope X and central knot while
+intact; cut raises the bars into the top third and leaves severed cord ends.
+The lower passage is transparent, not an opaque dark fill. Both are sampled
+as portal planes in the current renderer: swap the canonical **d1** path in
+portal/state/burn branches; d2/d3 and side files preserve the earlier fallback
+contracts. Do not also draw a billboard on top of a portal. There are no baked
+cast shadows in these wall/portal assets.
+
+### Underfoot floor sampling for A
+
+These are **opaque horizontal floor tiles**, not standing sprites. One 64x64
+repeat covers one movement cell, U points world east, V points world south.
+All six have the exact complete **two-pixel border ring** from
+`assets/art/env/calm_v3_floor_dry_a.png`, matching C's active floor family.
+Inside the rim, the lift has worn iron deck slats, rivets and chain sockets;
+dead is dusty/cobwebbed, working catches the warm lamp. The stairs tile has a
+safe landing in its south half and the first treads dropping into black north.
+
+Before ordinary `PlaneMaterials.path()` selection, override the **fixture's
+world cell** for `lift` and `stairs_down`, using the floor number clamped to
+1..2. Choose lift state from `fixture.active`. Other floor/ceiling cells retain
+C's selection. Never choose this tile only because the player currently stands
+there: it should be visible while approaching and stay fixed when turning.
+Keep floor gain/lamp falloff and disable added procedural grain as for calm_v3.
+Invalidate the surface/material cache when lift activity changes, including
+when the player has not moved. Stairs-up landings retain ordinary floor.
+
+Canonical travel is **north**, toward the bound architectural wall. Derive
+travel from **negative binding.normal**, not camera facing. For world texels
+`u,v` in 0..63, sample the interior as follows:
+
+| Fixed physical travel | Source coordinates |
+| --- | --- |
+| North | `(u,v)` |
+| East | `(v,63-u)` |
+| South | `(63-u,63-v)` |
+| West | `(63-v,u)` |
+
+**Keep the outer ring unrotated:** if `u<2 || u>=62 || v<2 || v>=62`, sample
+`(u,v)` regardless of travel. This preserves C's world-aligned joint seam in
+every orientation. `build.py:sample_uv()` is the offline reference; the
+orientation sheet checks all four directions. At the normal standing eye
+height only a narrow part of the player's own floor cell appears at the
+bottom; the approach/underfoot mock-up deliberately shows both situations.
+
+### Open cache and spent icon for A
+
+For an opened panel, select the opaque full cache face **or** draw the overlay
+once on the existing floor-specific plain wall. The overlay occupies exactly
+the previous rectangle's UV patch **x14..50, y22..51**, inclusive; all other
+texels are transparent. The full face is byte-identical to C's
+`painted_fF_plain_0.png` outside that patch. The complete painted chipped lip,
+dark interior and dusty shelf are registered inside it. Use this instead of
+the old runtime rectangles and revealed sigil in the **open** branch. Plain
+and GLOW-revealed panel states retain their existing art. The cache is an
+opaque wall recess, not a see-through portal, and contains no permanent loot.
+
+Select `assets/art/icons/coat_spent.png` whenever a coat's existing `spent`
+boolean is true, including dropped/recovered pack items. The icon retains
+C's teal/ochre garment silhouette, with broad tears, pale stuffing and a
+ragged hem; cloth material comes from the accepted painted spent world coat.
+It is static and needs no animation. The ordinary coat icon is unchanged.
+
+### Review and reproduction
+
+Every sheet below is in `art_src/fixtures/painted_v2/`, with a matching
+`_native.png` and an exact nearest-neighbour `_4x.png`:
+
+| Review | Filename |
+| --- | --- |
+| Plates, both floors/states, all three depths | `plates_contact_4x.png` |
+| Painted front lever beside new left/right sides, all depths | `levers_contact_4x.png` |
+| Dusty silk, two fire frames and burnt edges, all depths | `web_contact_4x.png` |
+| Intact/cut grate, front and both sides, all depths | `cord_contact_4x.png` |
+| Underfoot planes, both floors/states | `ground_contact_4x.png` |
+| World-fixed ground rotations with shared seam | `ground_orientations_4x.png` |
+| Full cache faces and patch overlays, both floors | `cache_contact_4x.png` |
+| Ordinary/spent pack icons beside accepted world coats | `coat_spent_contact_4x.png` |
+| Plates at mixed depths, lever, grate, web and cache | `corridor_fixtures_4x.png` |
+| Approach and standing inside lift / top of stairs, both floors | `underfoot_corridor_4x.png` |
+
+The room panels use offline 148x150 ray casts, accepted painted wall and
+calm_v3 plane textures, and lamp falloff. They are not Godot captures.
+`build.py` rebuilds from preserved paintings without network access;
+`verify.py` checks all 65 runtime PNGs, ten review pairs, old canvas sizes,
+anchors, palette/alpha, source/output hashes, transparent openings, stable
+unburning silk, cache patch boundaries, floor borders and fixed orientations.
+No Godot run or phone playtest is claimed for this batch. See the local README
+and saved prompt/result JSON files for the complete source provenance.

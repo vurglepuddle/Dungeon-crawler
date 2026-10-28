@@ -1,0 +1,30 @@
+{
+  "runtime_pngs": 65,
+  "review_pairs": 10,
+  "kinds": {
+    "plate": 12,
+    "lever": 12,
+    "web": 12,
+    "cord_grate": 18,
+    "underfoot_floor": 6,
+    "cache": 4,
+    "inventory_icon": 1
+  },
+  "passed": [
+    "palette and binary alpha",
+    "old canvas dimensions",
+    "source/output hashes",
+    "shared two-pixel floor border",
+    "opaque floor planes",
+    "cache outside patch unchanged",
+    "mirrored side projections",
+    "transparent web/grate passages",
+    "static web outside fire",
+    "world-fixed four floor orientations",
+    "exact 4x nearest reviews"
+  ],
+  "engine_run": false,
+  "phone_playtest": false,
+  "deterministic_rebuild": true,
+  "read_only_dependencies_unchanged": true
+}

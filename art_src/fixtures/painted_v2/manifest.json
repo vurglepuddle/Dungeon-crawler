@@ -1,0 +1,1865 @@
+{
+  "assets": [
+    {
+      "path": "assets/art/fixtures/fixture_v2_f1_plate_up_d1.png",
+      "size": [
+        64,
+        20
+      ],
+      "opaque_colors": 22,
+      "sha256": "21bdd03ea6fa4a0f725861d31218365efa45a6a991e52ca2642eb1c06ffefb7e",
+      "anchor": [
+        32,
+        20
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        20
+      ],
+      "kind": "plate",
+      "floor": 1,
+      "depth": 1,
+      "state": "up",
+      "frame_ms": 0,
+      "shadow": "none; sunk slab seam is painted, no floating ellipse",
+      "replaces": "assets/art/fx/plate_up_d1.png"
+    },
+    {
+      "path": "assets/art/fixtures/fixture_v2_f1_plate_up_d2.png",
+      "size": [
+        40,
+        12
+      ],
+      "opaque_colors": 20,
+      "sha256": "b5f9226ee27d52e3e21351cc96148d11b1fe774f6f16d54e53454bc2e0a8b0cb",
+      "anchor": [
+        20,
+        12
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        40,
+        12
+      ],
+      "kind": "plate",
+      "floor": 1,
+      "depth": 2,
+      "state": "up",
+      "frame_ms": 0,
+      "shadow": "none; sunk slab seam is painted, no floating ellipse",
+      "replaces": "assets/art/fx/plate_up_d2.png"
+    },
+    {
+      "path": "assets/art/fixtures/fixture_v2_f1_plate_up_d3.png",
+      "size": [
+        24,
+        8
+      ],
+      "opaque_colors": 17,
+      "sha256": "1a8de52a38b42afff5882a28d879591f800ad9f2a2cebb2142c436f20cbbb41a",
+      "anchor": [
+        12,
+        8
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        24,
+        8
+      ],
+      "kind": "plate",
+      "floor": 1,
+      "depth": 3,
+      "state": "up",
+      "frame_ms": 0,
+      "shadow": "none; sunk slab seam is painted, no floating ellipse",
+      "replaces": "assets/art/fx/plate_up_d3.png"
+    },
+    {
+      "path": "assets/art/fixtures/fixture_v2_f1_plate_down_d1.png",
+      "size": [
+        64,
+        20
+      ],
+      "opaque_colors": 20,
+      "sha256": "6a6d12f91def92e5bfe8d4de2c51b663016b0adfb0fbb29543f8e9d3fede1759",
+      "anchor": [
+        32,
+        20
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        20
+      ],
+      "kind": "plate",
+      "floor": 1,
+      "depth": 1,
+      "state": "down",
+      "frame_ms": 0,
+      "shadow": "none; sunk slab seam is painted, no floating ellipse",
+      "replaces": "assets/art/fx/plate_down_d1.png"
+    },
+    {
+      "path": "assets/art/fixtures/fixture_v2_f1_plate_down_d2.png",
+      "size": [
+        40,
+        12
+      ],
+      "opaque_colors": 18,
+      "sha256": "b3093d9c37c1c5e4f934d8f067c02f2ea57fdc926ed464fab938a67232f6b6ba",
+      "anchor": [
+        20,
+        12
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        40,
+        12
+      ],
+      "kind": "plate",
+      "floor": 1,
+      "depth": 2,
+      "state": "down",
+      "frame_ms": 0,
+      "shadow": "none; sunk slab seam is painted, no floating ellipse",
+      "replaces": "assets/art/fx/plate_down_d2.png"
+    },
+    {
+      "path": "assets/art/fixtures/fixture_v2_f1_plate_down_d3.png",
+      "size": [
+        24,
+        8
+      ],
+      "opaque_colors": 16,
+      "sha256": "3a982f0790e00cf9ee62d1352846553148398f98ac02398456e2a559ea710ffc",
+      "anchor": [
+        12,
+        8
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        24,
+        8
+      ],
+      "kind": "plate",
+      "floor": 1,
+      "depth": 3,
+      "state": "down",
+      "frame_ms": 0,
+      "shadow": "none; sunk slab seam is painted, no floating ellipse",
+      "replaces": "assets/art/fx/plate_down_d3.png"
+    },
+    {
+      "path": "assets/art/fixtures/fixture_v2_f2_plate_up_d1.png",
+      "size": [
+        64,
+        20
+      ],
+      "opaque_colors": 19,
+      "sha256": "404d8c69064cc6ecc41dce8d50bc61237348445b405d0fbbc0d315f11a5a71c0",
+      "anchor": [
+        32,
+        20
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        20
+      ],
+      "kind": "plate",
+      "floor": 2,
+      "depth": 1,
+      "state": "up",
+      "frame_ms": 0,
+      "shadow": "none; sunk slab seam is painted, no floating ellipse",
+      "replaces": "assets/art/fx/plate_up_d1.png"
+    },
+    {
+      "path": "assets/art/fixtures/fixture_v2_f2_plate_up_d2.png",
+      "size": [
+        40,
+        12
+      ],
+      "opaque_colors": 18,
+      "sha256": "27ef8e1877e09d9c2b1649a0c270021f64525cca8723be2a5a3a291d42442f79",
+      "anchor": [
+        20,
+        12
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        40,
+        12
+      ],
+      "kind": "plate",
+      "floor": 2,
+      "depth": 2,
+      "state": "up",
+      "frame_ms": 0,
+      "shadow": "none; sunk slab seam is painted, no floating ellipse",
+      "replaces": "assets/art/fx/plate_up_d2.png"
+    },
+    {
+      "path": "assets/art/fixtures/fixture_v2_f2_plate_up_d3.png",
+      "size": [
+        24,
+        8
+      ],
+      "opaque_colors": 14,
+      "sha256": "4305683d573466193e75eb3b921a7a37b149cb395ed7f32c9f40dff73c4beee5",
+      "anchor": [
+        12,
+        8
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        24,
+        8
+      ],
+      "kind": "plate",
+      "floor": 2,
+      "depth": 3,
+      "state": "up",
+      "frame_ms": 0,
+      "shadow": "none; sunk slab seam is painted, no floating ellipse",
+      "replaces": "assets/art/fx/plate_up_d3.png"
+    },
+    {
+      "path": "assets/art/fixtures/fixture_v2_f2_plate_down_d1.png",
+      "size": [
+        64,
+        20
+      ],
+      "opaque_colors": 17,
+      "sha256": "697dd71bd8f8c6a3241f133bc8715fa22d936a71413b8ff0fcf78e677628d87f",
+      "anchor": [
+        32,
+        20
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        20
+      ],
+      "kind": "plate",
+      "floor": 2,
+      "depth": 1,
+      "state": "down",
+      "frame_ms": 0,
+      "shadow": "none; sunk slab seam is painted, no floating ellipse",
+      "replaces": "assets/art/fx/plate_down_d1.png"
+    },
+    {
+      "path": "assets/art/fixtures/fixture_v2_f2_plate_down_d2.png",
+      "size": [
+        40,
+        12
+      ],
+      "opaque_colors": 16,
+      "sha256": "ee980f189c78173d819ab39638e4dd4caaac5fb693fa2908327fc00d74e40428",
+      "anchor": [
+        20,
+        12
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        40,
+        12
+      ],
+      "kind": "plate",
+      "floor": 2,
+      "depth": 2,
+      "state": "down",
+      "frame_ms": 0,
+      "shadow": "none; sunk slab seam is painted, no floating ellipse",
+      "replaces": "assets/art/fx/plate_down_d2.png"
+    },
+    {
+      "path": "assets/art/fixtures/fixture_v2_f2_plate_down_d3.png",
+      "size": [
+        24,
+        8
+      ],
+      "opaque_colors": 13,
+      "sha256": "fa7d10aeda5fa72587a9ecae36aecee580ca7c00383e2eaacb5e7d8d8fe48f5a",
+      "anchor": [
+        12,
+        8
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        24,
+        8
+      ],
+      "kind": "plate",
+      "floor": 2,
+      "depth": 3,
+      "state": "down",
+      "frame_ms": 0,
+      "shadow": "none; sunk slab seam is painted, no floating ellipse",
+      "replaces": "assets/art/fx/plate_down_d3.png"
+    },
+    {
+      "path": "assets/art/fixtures/fixture_v2_lever_left_up_d1.png",
+      "size": [
+        32,
+        40
+      ],
+      "opaque_colors": 23,
+      "sha256": "dae553f4393df00ea978ec085b4ddb8597cc3b77c4a8f0d72365a90dc1f033da",
+      "anchor": [
+        16,
+        22
+      ],
+      "opaque_bounds": [
+        4,
+        6,
+        28,
+        32
+      ],
+      "kind": "lever",
+      "floor": "both; normal scene lighting",
+      "depth": 1,
+      "state": "up",
+      "projection": "left",
+      "anchor_kind": "wall hinge",
+      "frame_ms": 0,
+      "replaces": "assets/art/fx/lever_left_up_d1.png"
+    },
+    {
+      "path": "assets/art/fixtures/fixture_v2_lever_right_up_d1.png",
+      "size": [
+        32,
+        40
+      ],
+      "opaque_colors": 23,
+      "sha256": "b05c62248c6dad567d897e6f4437aa29a85c55e6a8b58d1b5e18db174fd84b15",
+      "anchor": [
+        15,
+        22
+      ],
+      "opaque_bounds": [
+        4,
+        6,
+        28,
+        32
+      ],
+      "kind": "lever",
+      "floor": "both; normal scene lighting",
+      "depth": 1,
+      "state": "up",
+      "projection": "right",
+      "anchor_kind": "wall hinge",
+      "frame_ms": 0,
+      "replaces": "assets/art/fx/lever_right_up_d1.png"
+    },
+    {
+      "path": "assets/art/fixtures/fixture_v2_lever_left_up_d2.png",
+      "size": [
+        20,
+        26
+      ],
+      "opaque_colors": 19,
+      "sha256": "2ca6a426709d19db8079a9ae4e020aace7f49d5ac0e1432f7e2e6c20e79a0b69",
+      "anchor": [
+        10,
+        14
+      ],
+      "opaque_bounds": [
+        3,
+        4,
+        17,
+        21
+      ],
+      "kind": "lever",
+      "floor": "both; normal scene lighting",
+      "depth": 2,
+      "state": "up",
+      "projection": "left",
+      "anchor_kind": "wall hinge",
+      "frame_ms": 0,
+      "replaces": "assets/art/fx/lever_left_up_d2.png"
+    },
+    {
+      "path": "assets/art/fixtures/fixture_v2_lever_right_up_d2.png",
+      "size": [
+        20,
+        26
+      ],
+      "opaque_colors": 19,
+      "sha256": "6f1f5cecab8fa06952fefb5a5079337677780c980176963e083550913f1c5f72",
+      "anchor": [
+        9,
+        14
+      ],
+      "opaque_bounds": [
+        3,
+        4,
+        17,
+        21
+      ],
+      "kind": "lever",
+      "floor": "both; normal scene lighting",
+      "depth": 2,
+      "state": "up",
+      "projection": "right",
+      "anchor_kind": "wall hinge",
+      "frame_ms": 0,
+      "replaces": "assets/art/fx/lever_right_up_d2.png"
+    },
+    {
+      "path": "assets/art/fixtures/fixture_v2_lever_left_up_d3.png",
+      "size": [
+        12,
+        16
+      ],
+      "opaque_colors": 13,
+      "sha256": "7f57aa6f2da8df6319d5af11bf3e75bd81c30af7979b563395856d8ea8975146",
+      "anchor": [
+        6,
+        8
+      ],
+      "opaque_bounds": [
+        2,
+        2,
+        10,
+        13
+      ],
+      "kind": "lever",
+      "floor": "both; normal scene lighting",
+      "depth": 3,
+      "state": "up",
+      "projection": "left",
+      "anchor_kind": "wall hinge",
+      "frame_ms": 0,
+      "replaces": "assets/art/fx/lever_left_up_d3.png"
+    },
+    {
+      "path": "assets/art/fixtures/fixture_v2_lever_right_up_d3.png",
+      "size": [
+        12,
+        16
+      ],
+      "opaque_colors": 13,
+      "sha256": "d23c79d3df0b580d37b7687c5bd61c54c984f44d1da09ec7f0ce27658d27bb98",
+      "anchor": [
+        5,
+        8
+      ],
+      "opaque_bounds": [
+        2,
+        2,
+        10,
+        13
+      ],
+      "kind": "lever",
+      "floor": "both; normal scene lighting",
+      "depth": 3,
+      "state": "up",
+      "projection": "right",
+      "anchor_kind": "wall hinge",
+      "frame_ms": 0,
+      "replaces": "assets/art/fx/lever_right_up_d3.png"
+    },
+    {
+      "path": "assets/art/fixtures/fixture_v2_lever_left_down_d1.png",
+      "size": [
+        32,
+        40
+      ],
+      "opaque_colors": 22,
+      "sha256": "bd0b42dede6d179f9d27cec6722f0f8c8fe82d9be71a7e897334039a60ab008a",
+      "anchor": [
+        16,
+        22
+      ],
+      "opaque_bounds": [
+        4,
+        9,
+        28,
+        36
+      ],
+      "kind": "lever",
+      "floor": "both; normal scene lighting",
+      "depth": 1,
+      "state": "down",
+      "projection": "left",
+      "anchor_kind": "wall hinge",
+      "frame_ms": 0,
+      "replaces": "assets/art/fx/lever_left_down_d1.png"
+    },
+    {
+      "path": "assets/art/fixtures/fixture_v2_lever_right_down_d1.png",
+      "size": [
+        32,
+        40
+      ],
+      "opaque_colors": 22,
+      "sha256": "ebbc3dedddad6b8465ee9c435b5d828245fdfac7bccc8a78429bcb54695b5031",
+      "anchor": [
+        15,
+        22
+      ],
+      "opaque_bounds": [
+        4,
+        9,
+        28,
+        36
+      ],
+      "kind": "lever",
+      "floor": "both; normal scene lighting",
+      "depth": 1,
+      "state": "down",
+      "projection": "right",
+      "anchor_kind": "wall hinge",
+      "frame_ms": 0,
+      "replaces": "assets/art/fx/lever_right_down_d1.png"
+    },
+    {
+      "path": "assets/art/fixtures/fixture_v2_lever_left_down_d2.png",
+      "size": [
+        20,
+        26
+      ],
+      "opaque_colors": 18,
+      "sha256": "dcaebbad995e8081d6c687038dc69c1654bf0e708f43698e11ad06e833314201",
+      "anchor": [
+        10,
+        14
+      ],
+      "opaque_bounds": [
+        3,
+        6,
+        17,
+        23
+      ],
+      "kind": "lever",
+      "floor": "both; normal scene lighting",
+      "depth": 2,
+      "state": "down",
+      "projection": "left",
+      "anchor_kind": "wall hinge",
+      "frame_ms": 0,
+      "replaces": "assets/art/fx/lever_left_down_d2.png"
+    },
+    {
+      "path": "assets/art/fixtures/fixture_v2_lever_right_down_d2.png",
+      "size": [
+        20,
+        26
+      ],
+      "opaque_colors": 18,
+      "sha256": "e5b3d8eb40bb24506078614746158580b29dc3ec98a5157fac0ce69828f14f27",
+      "anchor": [
+        9,
+        14
+      ],
+      "opaque_bounds": [
+        3,
+        6,
+        17,
+        23
+      ],
+      "kind": "lever",
+      "floor": "both; normal scene lighting",
+      "depth": 2,
+      "state": "down",
+      "projection": "right",
+      "anchor_kind": "wall hinge",
+      "frame_ms": 0,
+      "replaces": "assets/art/fx/lever_right_down_d2.png"
+    },
+    {
+      "path": "assets/art/fixtures/fixture_v2_lever_left_down_d3.png",
+      "size": [
+        12,
+        16
+      ],
+      "opaque_colors": 12,
+      "sha256": "e261f53aace2939dd71c74814826ac6fc17d24af5a539d1a387beee688f3fa6e",
+      "anchor": [
+        6,
+        8
+      ],
+      "opaque_bounds": [
+        2,
+        4,
+        10,
+        14
+      ],
+      "kind": "lever",
+      "floor": "both; normal scene lighting",
+      "depth": 3,
+      "state": "down",
+      "projection": "left",
+      "anchor_kind": "wall hinge",
+      "frame_ms": 0,
+      "replaces": "assets/art/fx/lever_left_down_d3.png"
+    },
+    {
+      "path": "assets/art/fixtures/fixture_v2_lever_right_down_d3.png",
+      "size": [
+        12,
+        16
+      ],
+      "opaque_colors": 12,
+      "sha256": "3f38e4ecac5d7c41cc641aefc955883be6c06229693b48179080498efe5995f5",
+      "anchor": [
+        5,
+        8
+      ],
+      "opaque_bounds": [
+        2,
+        4,
+        10,
+        14
+      ],
+      "kind": "lever",
+      "floor": "both; normal scene lighting",
+      "depth": 3,
+      "state": "down",
+      "projection": "right",
+      "anchor_kind": "wall hinge",
+      "frame_ms": 0,
+      "replaces": "assets/art/fx/lever_right_down_d3.png"
+    },
+    {
+      "path": "assets/art/fixtures/fixture_v2_web_intact_d1.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 16,
+      "sha256": "54379cfb3139fc163779562820caf1cf87cf78565bc8b8f2e65cd22be257b761",
+      "anchor": [
+        32,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "kind": "web",
+      "floor": "both; normal scene lighting",
+      "depth": 1,
+      "state": "intact",
+      "wall_uv": true,
+      "wall_uv_origin": [
+        0,
+        0
+      ],
+      "frame_ms": 0,
+      "replaces": "assets/art/fixtures/web_intact_d1.png",
+      "alpha": "true gaps; no opaque backdrop"
+    },
+    {
+      "path": "assets/art/fixtures/fixture_v2_web_intact_d2.png",
+      "size": [
+        40,
+        40
+      ],
+      "opaque_colors": 16,
+      "sha256": "48f1c23f81d3854970cdfc859002615672d50fe477a2b2ce392e414203ba73cd",
+      "anchor": [
+        20,
+        40
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        40,
+        40
+      ],
+      "kind": "web",
+      "floor": "both; normal scene lighting",
+      "depth": 2,
+      "state": "intact",
+      "wall_uv": true,
+      "wall_uv_origin": [
+        0,
+        0
+      ],
+      "frame_ms": 0,
+      "replaces": "assets/art/fixtures/web_intact_d2.png",
+      "alpha": "true gaps; no opaque backdrop"
+    },
+    {
+      "path": "assets/art/fixtures/fixture_v2_web_intact_d3.png",
+      "size": [
+        24,
+        24
+      ],
+      "opaque_colors": 13,
+      "sha256": "7f29b33811fc8db964d222f69299186f321a7cbfbabc5f93e23563bd2ef21f16",
+      "anchor": [
+        12,
+        24
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        24,
+        24
+      ],
+      "kind": "web",
+      "floor": "both; normal scene lighting",
+      "depth": 3,
+      "state": "intact",
+      "wall_uv": true,
+      "wall_uv_origin": [
+        0,
+        0
+      ],
+      "frame_ms": 0,
+      "replaces": "assets/art/fixtures/web_intact_d3.png",
+      "alpha": "true gaps; no opaque backdrop"
+    },
+    {
+      "path": "assets/art/fixtures/fixture_v2_web_burning_0_d1.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 23,
+      "sha256": "2bd785c3ebb26f44a7cb82c213db4b91ed9655e22d42d9885a0ab2f31bb6b1fd",
+      "anchor": [
+        32,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "kind": "web",
+      "floor": "both; normal scene lighting",
+      "depth": 1,
+      "state": "burning_0",
+      "wall_uv": true,
+      "wall_uv_origin": [
+        0,
+        0
+      ],
+      "frame_ms": 120,
+      "replaces": "assets/art/fixtures/web_burning_0_d1.png",
+      "alpha": "true gaps; no opaque backdrop"
+    },
+    {
+      "path": "assets/art/fixtures/fixture_v2_web_burning_0_d2.png",
+      "size": [
+        40,
+        40
+      ],
+      "opaque_colors": 23,
+      "sha256": "7f922df496ea371cfa2284d853f6ef19b5ceca8272ba276d6ccaaa8eb06f7ed4",
+      "anchor": [
+        20,
+        40
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        40,
+        40
+      ],
+      "kind": "web",
+      "floor": "both; normal scene lighting",
+      "depth": 2,
+      "state": "burning_0",
+      "wall_uv": true,
+      "wall_uv_origin": [
+        0,
+        0
+      ],
+      "frame_ms": 120,
+      "replaces": "assets/art/fixtures/web_burning_0_d2.png",
+      "alpha": "true gaps; no opaque backdrop"
+    },
+    {
+      "path": "assets/art/fixtures/fixture_v2_web_burning_0_d3.png",
+      "size": [
+        24,
+        24
+      ],
+      "opaque_colors": 21,
+      "sha256": "629cc8ec4d2767ae25646f6ce75ea5c25c0afcaab7e642bbde1fcc7d9e6f786d",
+      "anchor": [
+        12,
+        24
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        24,
+        24
+      ],
+      "kind": "web",
+      "floor": "both; normal scene lighting",
+      "depth": 3,
+      "state": "burning_0",
+      "wall_uv": true,
+      "wall_uv_origin": [
+        0,
+        0
+      ],
+      "frame_ms": 120,
+      "replaces": "assets/art/fixtures/web_burning_0_d3.png",
+      "alpha": "true gaps; no opaque backdrop"
+    },
+    {
+      "path": "assets/art/fixtures/fixture_v2_web_burning_1_d1.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 23,
+      "sha256": "f95e9a20cebb692f0a4901ae7ab44f9f8b6b787c97e5a34c0f2bd5141a67af4b",
+      "anchor": [
+        32,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "kind": "web",
+      "floor": "both; normal scene lighting",
+      "depth": 1,
+      "state": "burning_1",
+      "wall_uv": true,
+      "wall_uv_origin": [
+        0,
+        0
+      ],
+      "frame_ms": 120,
+      "replaces": "assets/art/fixtures/web_burning_1_d1.png",
+      "alpha": "true gaps; no opaque backdrop"
+    },
+    {
+      "path": "assets/art/fixtures/fixture_v2_web_burning_1_d2.png",
+      "size": [
+        40,
+        40
+      ],
+      "opaque_colors": 23,
+      "sha256": "eec866fdd72b7a8ce122b10edeb1d5e54d779de8334c5d643736dbfe6de6ce10",
+      "anchor": [
+        20,
+        40
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        40,
+        40
+      ],
+      "kind": "web",
+      "floor": "both; normal scene lighting",
+      "depth": 2,
+      "state": "burning_1",
+      "wall_uv": true,
+      "wall_uv_origin": [
+        0,
+        0
+      ],
+      "frame_ms": 120,
+      "replaces": "assets/art/fixtures/web_burning_1_d2.png",
+      "alpha": "true gaps; no opaque backdrop"
+    },
+    {
+      "path": "assets/art/fixtures/fixture_v2_web_burning_1_d3.png",
+      "size": [
+        24,
+        24
+      ],
+      "opaque_colors": 21,
+      "sha256": "eb389a92803588e7e22e312748b752497a1987905b77fb94361644a09300561f",
+      "anchor": [
+        12,
+        24
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        24,
+        24
+      ],
+      "kind": "web",
+      "floor": "both; normal scene lighting",
+      "depth": 3,
+      "state": "burning_1",
+      "wall_uv": true,
+      "wall_uv_origin": [
+        0,
+        0
+      ],
+      "frame_ms": 120,
+      "replaces": "assets/art/fixtures/web_burning_1_d3.png",
+      "alpha": "true gaps; no opaque backdrop"
+    },
+    {
+      "path": "assets/art/fixtures/fixture_v2_web_burnt_d1.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 17,
+      "sha256": "fcee2f82b02b320e9432bc352dd0b25b21ce3280ce384120e8a4f05c72005a64",
+      "anchor": [
+        32,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        63
+      ],
+      "kind": "web",
+      "floor": "both; normal scene lighting",
+      "depth": 1,
+      "state": "burnt",
+      "wall_uv": true,
+      "wall_uv_origin": [
+        0,
+        0
+      ],
+      "frame_ms": 0,
+      "replaces": "assets/art/fixtures/web_burnt_d1.png",
+      "alpha": "true gaps; no opaque backdrop"
+    },
+    {
+      "path": "assets/art/fixtures/fixture_v2_web_burnt_d2.png",
+      "size": [
+        40,
+        40
+      ],
+      "opaque_colors": 14,
+      "sha256": "6a1bf376000584b863b234d2e75c0a9195da654285cf965844b109c02a9787c4",
+      "anchor": [
+        20,
+        40
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        40,
+        39
+      ],
+      "kind": "web",
+      "floor": "both; normal scene lighting",
+      "depth": 2,
+      "state": "burnt",
+      "wall_uv": true,
+      "wall_uv_origin": [
+        0,
+        0
+      ],
+      "frame_ms": 0,
+      "replaces": "assets/art/fixtures/web_burnt_d2.png",
+      "alpha": "true gaps; no opaque backdrop"
+    },
+    {
+      "path": "assets/art/fixtures/fixture_v2_web_burnt_d3.png",
+      "size": [
+        24,
+        24
+      ],
+      "opaque_colors": 12,
+      "sha256": "1993d73734922486df8d65824cc9c85f4cb90c3c1ef81f852373f1a5ee48160c",
+      "anchor": [
+        12,
+        24
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        24,
+        23
+      ],
+      "kind": "web",
+      "floor": "both; normal scene lighting",
+      "depth": 3,
+      "state": "burnt",
+      "wall_uv": true,
+      "wall_uv_origin": [
+        0,
+        0
+      ],
+      "frame_ms": 0,
+      "replaces": "assets/art/fixtures/web_burnt_d3.png",
+      "alpha": "true gaps; no opaque backdrop"
+    },
+    {
+      "path": "assets/art/fixtures/fixture_v2_cord_grate_intact_d1.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 25,
+      "sha256": "e58fcbd0cc0800d764a64220895211a4e58d6f7e41bfa8ec357f9bcec23d7afd",
+      "anchor": [
+        32,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "kind": "cord_grate",
+      "floor": "both; normal scene lighting",
+      "depth": 1,
+      "state": "intact",
+      "frame_ms": 0,
+      "wall_uv": true,
+      "wall_uv_origin": [
+        0,
+        0
+      ],
+      "replaces": "assets/art/fixtures/cord_grate_intact_d1.png"
+    },
+    {
+      "path": "assets/art/fixtures/fixture_v2_cord_grate_left_intact_d1.png",
+      "size": [
+        32,
+        48
+      ],
+      "opaque_colors": 25,
+      "sha256": "01736c6980cb7ca2e080d2b34acd9edadb0c77e8cf170fe586a6bbba15522284",
+      "anchor": [
+        16,
+        24
+      ],
+      "opaque_bounds": [
+        0,
+        1,
+        32,
+        47
+      ],
+      "kind": "cord_grate",
+      "floor": "both; normal scene lighting",
+      "depth": 1,
+      "state": "intact",
+      "projection": "left",
+      "frame_ms": 0,
+      "anchor_kind": "wall centre",
+      "replaces": "assets/art/fixtures/cord_grate_left_intact_d1.png"
+    },
+    {
+      "path": "assets/art/fixtures/fixture_v2_cord_grate_right_intact_d1.png",
+      "size": [
+        32,
+        48
+      ],
+      "opaque_colors": 25,
+      "sha256": "2138200b4ab711f7f06efd414e01d1c1be868e897207c8c309a68bc3eec7ef35",
+      "anchor": [
+        15,
+        24
+      ],
+      "opaque_bounds": [
+        0,
+        1,
+        32,
+        47
+      ],
+      "kind": "cord_grate",
+      "floor": "both; normal scene lighting",
+      "depth": 1,
+      "state": "intact",
+      "projection": "right",
+      "frame_ms": 0,
+      "anchor_kind": "wall centre",
+      "replaces": "assets/art/fixtures/cord_grate_right_intact_d1.png"
+    },
+    {
+      "path": "assets/art/fixtures/fixture_v2_cord_grate_intact_d2.png",
+      "size": [
+        40,
+        40
+      ],
+      "opaque_colors": 25,
+      "sha256": "d9ec7b7aaf3af7ec254aae3a16be3b2f21cb3e7496244c02f40bb08c87d18663",
+      "anchor": [
+        20,
+        40
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        40,
+        40
+      ],
+      "kind": "cord_grate",
+      "floor": "both; normal scene lighting",
+      "depth": 2,
+      "state": "intact",
+      "frame_ms": 0,
+      "wall_uv": true,
+      "wall_uv_origin": [
+        0,
+        0
+      ],
+      "replaces": "assets/art/fixtures/cord_grate_intact_d2.png"
+    },
+    {
+      "path": "assets/art/fixtures/fixture_v2_cord_grate_left_intact_d2.png",
+      "size": [
+        20,
+        30
+      ],
+      "opaque_colors": 21,
+      "sha256": "2bf269c915148f1dbe77cb7e5419198dabc2c1cc15e358cbdb6ad6572b5246d2",
+      "anchor": [
+        10,
+        15
+      ],
+      "opaque_bounds": [
+        0,
+        1,
+        20,
+        29
+      ],
+      "kind": "cord_grate",
+      "floor": "both; normal scene lighting",
+      "depth": 2,
+      "state": "intact",
+      "projection": "left",
+      "frame_ms": 0,
+      "anchor_kind": "wall centre",
+      "replaces": "assets/art/fixtures/cord_grate_left_intact_d2.png"
+    },
+    {
+      "path": "assets/art/fixtures/fixture_v2_cord_grate_right_intact_d2.png",
+      "size": [
+        20,
+        30
+      ],
+      "opaque_colors": 21,
+      "sha256": "0256a84fa5f2499a0dc936fdfa27d475ebfa2498c62360cc7fa7a95b76b8cbc1",
+      "anchor": [
+        9,
+        15
+      ],
+      "opaque_bounds": [
+        0,
+        1,
+        20,
+        29
+      ],
+      "kind": "cord_grate",
+      "floor": "both; normal scene lighting",
+      "depth": 2,
+      "state": "intact",
+      "projection": "right",
+      "frame_ms": 0,
+      "anchor_kind": "wall centre",
+      "replaces": "assets/art/fixtures/cord_grate_right_intact_d2.png"
+    },
+    {
+      "path": "assets/art/fixtures/fixture_v2_cord_grate_intact_d3.png",
+      "size": [
+        24,
+        24
+      ],
+      "opaque_colors": 22,
+      "sha256": "78c447c5643b11ef2558ec6f4803cce3202d1d700d31f18d2821af1a1b13afbd",
+      "anchor": [
+        12,
+        24
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        24,
+        24
+      ],
+      "kind": "cord_grate",
+      "floor": "both; normal scene lighting",
+      "depth": 3,
+      "state": "intact",
+      "frame_ms": 0,
+      "wall_uv": true,
+      "wall_uv_origin": [
+        0,
+        0
+      ],
+      "replaces": "assets/art/fixtures/cord_grate_intact_d3.png"
+    },
+    {
+      "path": "assets/art/fixtures/fixture_v2_cord_grate_left_intact_d3.png",
+      "size": [
+        12,
+        18
+      ],
+      "opaque_colors": 18,
+      "sha256": "48c44e9c034dc6ac8b65efad70c31e434efa9fac3a447bf14550b86b2b7a2483",
+      "anchor": [
+        6,
+        9
+      ],
+      "opaque_bounds": [
+        0,
+        1,
+        12,
+        17
+      ],
+      "kind": "cord_grate",
+      "floor": "both; normal scene lighting",
+      "depth": 3,
+      "state": "intact",
+      "projection": "left",
+      "frame_ms": 0,
+      "anchor_kind": "wall centre",
+      "replaces": "assets/art/fixtures/cord_grate_left_intact_d3.png"
+    },
+    {
+      "path": "assets/art/fixtures/fixture_v2_cord_grate_right_intact_d3.png",
+      "size": [
+        12,
+        18
+      ],
+      "opaque_colors": 18,
+      "sha256": "5e3cd9e8b7a9cd54acdcfdf09b557b054a1cd3a8a771a254f46be04b4eb9f94c",
+      "anchor": [
+        5,
+        9
+      ],
+      "opaque_bounds": [
+        0,
+        1,
+        12,
+        17
+      ],
+      "kind": "cord_grate",
+      "floor": "both; normal scene lighting",
+      "depth": 3,
+      "state": "intact",
+      "projection": "right",
+      "frame_ms": 0,
+      "anchor_kind": "wall centre",
+      "replaces": "assets/art/fixtures/cord_grate_right_intact_d3.png"
+    },
+    {
+      "path": "assets/art/fixtures/fixture_v2_cord_grate_cut_d1.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 24,
+      "sha256": "5e04ad5e519c327b53aa390d985cdf254a4154634d6169f9bc529b4ec2197a4b",
+      "anchor": [
+        32,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "kind": "cord_grate",
+      "floor": "both; normal scene lighting",
+      "depth": 1,
+      "state": "cut",
+      "frame_ms": 0,
+      "wall_uv": true,
+      "wall_uv_origin": [
+        0,
+        0
+      ],
+      "replaces": "assets/art/fixtures/cord_grate_cut_d1.png"
+    },
+    {
+      "path": "assets/art/fixtures/fixture_v2_cord_grate_left_cut_d1.png",
+      "size": [
+        32,
+        48
+      ],
+      "opaque_colors": 24,
+      "sha256": "414975e56a936435d7f1bb49db7d256152f26ea5e35a4ae8dfd36272e559b17b",
+      "anchor": [
+        16,
+        24
+      ],
+      "opaque_bounds": [
+        0,
+        1,
+        32,
+        47
+      ],
+      "kind": "cord_grate",
+      "floor": "both; normal scene lighting",
+      "depth": 1,
+      "state": "cut",
+      "projection": "left",
+      "frame_ms": 0,
+      "anchor_kind": "wall centre",
+      "replaces": "assets/art/fixtures/cord_grate_left_cut_d1.png"
+    },
+    {
+      "path": "assets/art/fixtures/fixture_v2_cord_grate_right_cut_d1.png",
+      "size": [
+        32,
+        48
+      ],
+      "opaque_colors": 24,
+      "sha256": "3faf58d88ee620855be66cb00c033913312b0088ac9cf38413da7a1575299c1e",
+      "anchor": [
+        15,
+        24
+      ],
+      "opaque_bounds": [
+        0,
+        1,
+        32,
+        47
+      ],
+      "kind": "cord_grate",
+      "floor": "both; normal scene lighting",
+      "depth": 1,
+      "state": "cut",
+      "projection": "right",
+      "frame_ms": 0,
+      "anchor_kind": "wall centre",
+      "replaces": "assets/art/fixtures/cord_grate_right_cut_d1.png"
+    },
+    {
+      "path": "assets/art/fixtures/fixture_v2_cord_grate_cut_d2.png",
+      "size": [
+        40,
+        40
+      ],
+      "opaque_colors": 24,
+      "sha256": "b2f12765d0c81a9a1a61e9a62d10f2e19b0e4b0a1425c0345837ea4ca145054d",
+      "anchor": [
+        20,
+        40
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        40,
+        40
+      ],
+      "kind": "cord_grate",
+      "floor": "both; normal scene lighting",
+      "depth": 2,
+      "state": "cut",
+      "frame_ms": 0,
+      "wall_uv": true,
+      "wall_uv_origin": [
+        0,
+        0
+      ],
+      "replaces": "assets/art/fixtures/cord_grate_cut_d2.png"
+    },
+    {
+      "path": "assets/art/fixtures/fixture_v2_cord_grate_left_cut_d2.png",
+      "size": [
+        20,
+        30
+      ],
+      "opaque_colors": 21,
+      "sha256": "699b6cce8d7d3b935523831b57e5148f00f9ce6c0ccb69d284703ad688bbdef9",
+      "anchor": [
+        10,
+        15
+      ],
+      "opaque_bounds": [
+        0,
+        1,
+        20,
+        29
+      ],
+      "kind": "cord_grate",
+      "floor": "both; normal scene lighting",
+      "depth": 2,
+      "state": "cut",
+      "projection": "left",
+      "frame_ms": 0,
+      "anchor_kind": "wall centre",
+      "replaces": "assets/art/fixtures/cord_grate_left_cut_d2.png"
+    },
+    {
+      "path": "assets/art/fixtures/fixture_v2_cord_grate_right_cut_d2.png",
+      "size": [
+        20,
+        30
+      ],
+      "opaque_colors": 21,
+      "sha256": "34edf6c857b0b7955ad49ffdf6a02e3243b7eb1d437dc0d7bb8609881d972364",
+      "anchor": [
+        9,
+        15
+      ],
+      "opaque_bounds": [
+        0,
+        1,
+        20,
+        29
+      ],
+      "kind": "cord_grate",
+      "floor": "both; normal scene lighting",
+      "depth": 2,
+      "state": "cut",
+      "projection": "right",
+      "frame_ms": 0,
+      "anchor_kind": "wall centre",
+      "replaces": "assets/art/fixtures/cord_grate_right_cut_d2.png"
+    },
+    {
+      "path": "assets/art/fixtures/fixture_v2_cord_grate_cut_d3.png",
+      "size": [
+        24,
+        24
+      ],
+      "opaque_colors": 24,
+      "sha256": "d6a337c7f681480aa8ad9fc74f177d56340773b1aa449f83dbe35604bb399be9",
+      "anchor": [
+        12,
+        24
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        24,
+        24
+      ],
+      "kind": "cord_grate",
+      "floor": "both; normal scene lighting",
+      "depth": 3,
+      "state": "cut",
+      "frame_ms": 0,
+      "wall_uv": true,
+      "wall_uv_origin": [
+        0,
+        0
+      ],
+      "replaces": "assets/art/fixtures/cord_grate_cut_d3.png"
+    },
+    {
+      "path": "assets/art/fixtures/fixture_v2_cord_grate_left_cut_d3.png",
+      "size": [
+        12,
+        18
+      ],
+      "opaque_colors": 16,
+      "sha256": "0502c71629da56a3354ab846fb232e69a7bc75a0ea743bb3bc5e6dddb51980ab",
+      "anchor": [
+        6,
+        9
+      ],
+      "opaque_bounds": [
+        0,
+        1,
+        12,
+        17
+      ],
+      "kind": "cord_grate",
+      "floor": "both; normal scene lighting",
+      "depth": 3,
+      "state": "cut",
+      "projection": "left",
+      "frame_ms": 0,
+      "anchor_kind": "wall centre",
+      "replaces": "assets/art/fixtures/cord_grate_left_cut_d3.png"
+    },
+    {
+      "path": "assets/art/fixtures/fixture_v2_cord_grate_right_cut_d3.png",
+      "size": [
+        12,
+        18
+      ],
+      "opaque_colors": 16,
+      "sha256": "08148d2efe89559920ef8c264bdc336a763870440bafd3eaace20c74626c3309",
+      "anchor": [
+        5,
+        9
+      ],
+      "opaque_bounds": [
+        0,
+        1,
+        12,
+        17
+      ],
+      "kind": "cord_grate",
+      "floor": "both; normal scene lighting",
+      "depth": 3,
+      "state": "cut",
+      "projection": "right",
+      "frame_ms": 0,
+      "anchor_kind": "wall centre",
+      "replaces": "assets/art/fixtures/cord_grate_right_cut_d3.png"
+    },
+    {
+      "path": "assets/art/fixtures/fixture_v2_f1_floor_lift_dead_64.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 15,
+      "sha256": "be2dedc2cd6ddd21435992f9f2492ffa68de5e8e9bd1c95f31ad76aef8746cc9",
+      "anchor": [
+        0,
+        0
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "kind": "underfoot_floor",
+      "fixture": "lift_dead",
+      "floor": 1,
+      "frame_ms": 0,
+      "wall_uv": false,
+      "projection": "horizontal world floor UV; one tile per movement cell",
+      "canonical_direction": "north / negative world V",
+      "border_ring_px": 2,
+      "replaces": "fixture-cell floor override before PlaneMaterials.path(); no sprite"
+    },
+    {
+      "path": "assets/art/fixtures/fixture_v2_f2_floor_lift_dead_64.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 11,
+      "sha256": "6494c6f15caaa200d72400f9b95a50b8f419aad001e1f6ba640bd82f238b4d5d",
+      "anchor": [
+        0,
+        0
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "kind": "underfoot_floor",
+      "fixture": "lift_dead",
+      "floor": 2,
+      "frame_ms": 0,
+      "wall_uv": false,
+      "projection": "horizontal world floor UV; one tile per movement cell",
+      "canonical_direction": "north / negative world V",
+      "border_ring_px": 2,
+      "replaces": "fixture-cell floor override before PlaneMaterials.path(); no sprite"
+    },
+    {
+      "path": "assets/art/fixtures/fixture_v2_f1_floor_lift_working_64.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 23,
+      "sha256": "35309015bcec5a7cd7ec8aca1cd7ac3265c15f761c1b981044a03cdec0ce7645",
+      "anchor": [
+        0,
+        0
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "kind": "underfoot_floor",
+      "fixture": "lift_working",
+      "floor": 1,
+      "frame_ms": 0,
+      "wall_uv": false,
+      "projection": "horizontal world floor UV; one tile per movement cell",
+      "canonical_direction": "north / negative world V",
+      "border_ring_px": 2,
+      "replaces": "fixture-cell floor override before PlaneMaterials.path(); no sprite"
+    },
+    {
+      "path": "assets/art/fixtures/fixture_v2_f2_floor_lift_working_64.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 19,
+      "sha256": "7fb5cded8d9cfc2d26e1833bd53e67b5f9bf579de4620f7a207aae352fe0dec5",
+      "anchor": [
+        0,
+        0
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "kind": "underfoot_floor",
+      "fixture": "lift_working",
+      "floor": 2,
+      "frame_ms": 0,
+      "wall_uv": false,
+      "projection": "horizontal world floor UV; one tile per movement cell",
+      "canonical_direction": "north / negative world V",
+      "border_ring_px": 2,
+      "replaces": "fixture-cell floor override before PlaneMaterials.path(); no sprite"
+    },
+    {
+      "path": "assets/art/fixtures/fixture_v2_f1_floor_stairs_down_64.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 22,
+      "sha256": "848ab8954ea244a26295b133164dc2909c64c030bb2ec89c6fc5deb489199f27",
+      "anchor": [
+        0,
+        0
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "kind": "underfoot_floor",
+      "fixture": "stairs_down",
+      "floor": 1,
+      "frame_ms": 0,
+      "wall_uv": false,
+      "projection": "horizontal world floor UV; one tile per movement cell",
+      "canonical_direction": "north / negative world V",
+      "border_ring_px": 2,
+      "replaces": "fixture-cell floor override before PlaneMaterials.path(); no sprite"
+    },
+    {
+      "path": "assets/art/fixtures/fixture_v2_f2_floor_stairs_down_64.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 18,
+      "sha256": "25291bbbf2589620bf9fc42f905bb16a2980b0b01751ae15ab905cdb1edb9d9d",
+      "anchor": [
+        0,
+        0
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "kind": "underfoot_floor",
+      "fixture": "stairs_down",
+      "floor": 2,
+      "frame_ms": 0,
+      "wall_uv": false,
+      "projection": "horizontal world floor UV; one tile per movement cell",
+      "canonical_direction": "north / negative world V",
+      "border_ring_px": 2,
+      "replaces": "fixture-cell floor override before PlaneMaterials.path(); no sprite"
+    },
+    {
+      "path": "assets/art/fixtures/fixture_v2_f1_cache_open_64.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 24,
+      "sha256": "5bb18ce10bab3d90e6f9f410f4a9bea6d6c48074aef7f55084e49c1968b5ad9b",
+      "anchor": [
+        0,
+        0
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "kind": "cache",
+      "floor": 1,
+      "state": "open",
+      "frame_ms": 0,
+      "wall_uv": true,
+      "patch": [
+        14,
+        22,
+        51,
+        52
+      ],
+      "replaces": "open panel runtime rectangle; use full face OR overlay, once"
+    },
+    {
+      "path": "assets/art/fixtures/fixture_v2_f1_cache_open_overlay_64.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 22,
+      "sha256": "58fd00d3148142bb918e9e90810ccfcd5d29c86c8ca195d24dc36449e309b94c",
+      "anchor": [
+        0,
+        0
+      ],
+      "opaque_bounds": [
+        14,
+        22,
+        51,
+        52
+      ],
+      "kind": "cache",
+      "floor": 1,
+      "state": "open",
+      "frame_ms": 0,
+      "wall_uv": true,
+      "patch": [
+        14,
+        22,
+        51,
+        52
+      ],
+      "replaces": "open panel runtime rectangle; use full face OR overlay, once"
+    },
+    {
+      "path": "assets/art/fixtures/fixture_v2_f2_cache_open_64.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 24,
+      "sha256": "a1c676c420c023f645fd28b853f3ad517b9158af8c2c1707ca943cca5b102751",
+      "anchor": [
+        0,
+        0
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "kind": "cache",
+      "floor": 2,
+      "state": "open",
+      "frame_ms": 0,
+      "wall_uv": true,
+      "patch": [
+        14,
+        22,
+        51,
+        52
+      ],
+      "replaces": "open panel runtime rectangle; use full face OR overlay, once"
+    },
+    {
+      "path": "assets/art/fixtures/fixture_v2_f2_cache_open_overlay_64.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 18,
+      "sha256": "242fef449d37c2484edd8102df9913ca48b83c8b4c4d0d15bb41593abfb51d6b",
+      "anchor": [
+        0,
+        0
+      ],
+      "opaque_bounds": [
+        14,
+        22,
+        51,
+        52
+      ],
+      "kind": "cache",
+      "floor": 2,
+      "state": "open",
+      "frame_ms": 0,
+      "wall_uv": true,
+      "patch": [
+        14,
+        22,
+        51,
+        52
+      ],
+      "replaces": "open panel runtime rectangle; use full face OR overlay, once"
+    },
+    {
+      "path": "assets/art/icons/coat_spent.png",
+      "size": [
+        16,
+        16
+      ],
+      "opaque_colors": 7,
+      "sha256": "076a6085bcdfe3e5caffdfaf99c71d62fef2e8bf43abce41fb6189ca5b22087f",
+      "kind": "inventory_icon",
+      "state": "spent",
+      "anchor": [
+        8,
+        8
+      ],
+      "frame_ms": 0,
+      "replaces": "coat inventory lookup when item.spent is true; keep ordinary coat icon"
+    }
+  ],
+  "sources": {
+    "art_src/fixtures/painted_v2/sources/cache.png": "39b6eadddefd047f180f3fece685a95a125c35a4f58e641cf42b802e118cbfb3",
+    "art_src/fixtures/painted_v2/sources/cord.png": "ff9be3b3ec9a5b7deec3d81e8eec48419f3b81da5f4c954a7a67f513d1b6460d",
+    "art_src/fixtures/painted_v2/sources/lift_floor.png": "a4af881ba4651dc28a51d62a5ba97302bdd88e9abff0ad66df69bfed797b0d8e",
+    "art_src/fixtures/painted_v2/sources/plate.png": "67aa6646f7b37ce1e9cff1dad40985385a53e4c0aa6977c78ba3f4d55cd1ecc5",
+    "art_src/fixtures/painted_v2/sources/stairs_floor.png": "3cafaab0779c674e4412d1c2b2abe241b8ba5113d7bb4172e7b5e629194fcbe9",
+    "art_src/fixtures/painted_v2/sources/web.png": "0e3197b85be0d919767a9de344b2a1b2c807ff4c9e900d2ba61e7999e0226cf3",
+    "art_src/fixtures/painted_v2/sources/web_burning.png": "31c2b5395cbae30d78fb34e6a4ca33de32c0c46737d86232ea4034af25696edd",
+    "art_src/fixtures/painted_v2/sources/web_burnt.png": "27ff67a7383b6ab8aee697cf606b64ad7433977b5241ba268fc092dac8298869",
+    "art_src/items/sources/coat.png": "94f34d37b2dbdb669030b6a379e58590d2ef654d3ad3faf9c3b90850b7e19333",
+    "assets/art/env/calm_v3_ceiling_plain.png": "720981aa54514888300a1dadd5c48373908afdb9d8ae65cd347e80e14e71855d",
+    "assets/art/env/calm_v3_floor_dry_a.png": "1fdafa055f7a6feefa3c55676533f6222b5cb8f950af35673b78c927eb1ef696",
+    "assets/art/env/painted_f1_plain_0.png": "a21da69a48822d9445374180f4ed9afa21a752abe9eae78bde94dbf6e74f51c7",
+    "assets/art/env/painted_f2_plain_0.png": "f55986c528aa55ca8da5ab7b7725d7f8bf05d0d182cee5ba3eb8d59416acbcd2",
+    "assets/art/fixtures/architecture_f1_lift_working_64.png": "01e2c35a44faabd8e7d567af1e3c6dc6a2ccb3e0d07f1f8ea2d395d45d11333a",
+    "assets/art/fixtures/architecture_f2_lift_working_64.png": "8f237ccff83dd26bc3f0ba28d9fa735e0c443752b2acd21a7cec7b96da6aa7e1",
+    "assets/art/fixtures/architecture_v2_f1_lift_dead_64.png": "a63c2a565015fa1afecffd312407c2c229e897db70565944e3c0717d1858c93e",
+    "assets/art/fixtures/architecture_v2_f2_lift_dead_64.png": "059ce71ff681af1c6ec10996fd1dd14da5090abe36af5fcc6b02b21677293dc7",
+    "assets/art/fixtures/architecture_v3_f1_stairs_down_64.png": "7f6bcf48563e655ea92eef554436a06bec1cc482b1715f2271d3084941ef85fb",
+    "assets/art/fixtures/architecture_v3_f2_stairs_down_64.png": "03ea18ad2c7d05e07bde6bbc6d126505f2e1e78de9d957530a57d648cd5fa906",
+    "assets/art/fixtures/lever_front_down_d1.png": "56a7a72cd2f55c6fa2844f7e79c163fdfa0e146de45fb520c64d7480d11ab723",
+    "assets/art/fixtures/lever_front_down_d2.png": "fcc65e0efe4ab0903ec97bd3699f51c80022d9629f42422eda9f1f9b442032de",
+    "assets/art/fixtures/lever_front_down_d3.png": "b2f392b2f4684c85f640b6198e11e10c7d2f6f1d2ba9539f138681dd8a6bd553",
+    "assets/art/fixtures/lever_front_up_d1.png": "3f43aedd3c03331c8350de1eb99653fc60db4a648f331a76cc5b594cfb821d3c",
+    "assets/art/fixtures/lever_front_up_d2.png": "e8866959311776aa0d80a4fd5039a83bdce4df729cd8f3f38ea1a64fdf95e11f",
+    "assets/art/fixtures/lever_front_up_d3.png": "a457c595a60110e4df445a0df9a11f7e2e9e99b2a3cb3968e2a13c3be6bb44b1",
+    "assets/art/icons/coat.png": "c38e879f289c56a977f1b2bb8aefcf0bd0e3acec93a51766b4eb12c553e17f8c",
+    "assets/art/items/item_coat_d1.png": "45e361573ec1e929a37c79427a4cb156fbf4bff63e4c1480f8b602757d76c2f6",
+    "assets/art/items/item_coat_spent_d1.png": "db4fd8505952acfbeabbb89582a8748fdfc94f6d67556d3f75034fb2e14fb2d2"
+  },
+  "palette": "art_src/spike/palette.gpl",
+  "alpha": "index0 transparent, indices1..31 opaque",
+  "cache_patch": [
+    14,
+    22,
+    51,
+    52
+  ],
+  "floor_uv": "64px/cell; U=east,V=south; physical travel north in source",
+  "notes": "No Godot or gameplay files changed. Existing sources/assets kept. See ART.md for exact swaps."
+}

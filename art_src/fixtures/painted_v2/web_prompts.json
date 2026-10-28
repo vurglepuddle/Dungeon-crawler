@@ -1,0 +1,16 @@
+{
+  "web_burning": {
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Revive/.codex/generated_images/01a18302-4d2f-7f32-81a9-c7c1afcbced9/exec-e0e898af-57dc-43d0-909a-ea2ee7eb72ae.png"
+    ],
+    "prompt": "Edit this exact dusty sagging dungeon web into TWO BURNING animation frames, side by side equal square cells on TRUE transparent background. Maintain exact same web registration, corners and leaf positions in both frames. The central knot and middle strands are catching fire: a large ragged transparent opening is beginning in the centre, surrounded by THREE broad orange-gold painted flame tongues and glowing ember rim. Frame1 flames lean slightly left and frame2 lean slightly right, flames clearly change shape but the unburning web remains still. Keep all holes transparent, NO black smoke backdrop, no stone walls, no text or labels. Flame core pale warm cream, ochre/orange body, rusty red ember tips; original dusty grey silk at upper corners and sides remains. Bold simple flame silhouettes survive64/24pixel reduction. Painted grungy low-fantasy dungeon asset, not flat vector. Square web in each frame fills its square cell, no blank margins."
+  },
+  "web_burnt": {
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/Revive/.codex/generated_images/01a18302-4d2f-7f32-81a9-c7c1afcbced9/exec-e0e898af-57dc-43d0-909a-ea2ee7eb72ae.png"
+    ],
+    "prompt": "Edit the exact web to its completely BURNT AWAY final state as a square game overlay on TRUE transparent background. Almost the WHOLE central and lower opening is entirely empty transparent space. Only a few very short charred silk threads cling to the upper left and upper right corners, left and right edges, with one burnt leaf scrap, ash grey frayed edges and tiny dark ember spots. No intact strands spanning the corridor, no flames, no smoke backdrop, no walls, no text. Preserve source attachment positions and square canvas. Painted dusty medieval dungeon style, grey/brown ash; strong sparse corner silhouettes visible at64/24pixels. Keep no more than about15percent of the whole image occupied by edge fragments."
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "plate": {
+    "output_hint": "Generated images are saved to C:\\Users\\Revive\\.codex\\generated_images\\01a18302-4d2f-7f32-81a9-c7c1afcbced9 as C:\\Users\\Revive\\.codex\\generated_images\\01a18302-4d2f-7f32-81a9-c7c1afcbced9\\exec-64646761-0b94-469f-b9d1-d0eb73daedad.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link."
+  },
+  "web": {
+    "output_hint": "Generated images are saved to C:\\Users\\Revive\\.codex\\generated_images\\01a18302-4d2f-7f32-81a9-c7c1afcbced9 as C:\\Users\\Revive\\.codex\\generated_images\\01a18302-4d2f-7f32-81a9-c7c1afcbced9\\exec-e0e898af-57dc-43d0-909a-ea2ee7eb72ae.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link."
+  },
+  "cord": {
+    "output_hint": "Generated images are saved to C:\\Users\\Revive\\.codex\\generated_images\\01a18302-4d2f-7f32-81a9-c7c1afcbced9 as C:\\Users\\Revive\\.codex\\generated_images\\01a18302-4d2f-7f32-81a9-c7c1afcbced9\\exec-4c059cae-dfee-4869-835c-3dba42316826.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link."
+  },
+  "lift_floor": {
+    "output_hint": "Generated images are saved to C:\\Users\\Revive\\.codex\\generated_images\\01a18302-4d2f-7f32-81a9-c7c1afcbced9 as C:\\Users\\Revive\\.codex\\generated_images\\01a18302-4d2f-7f32-81a9-c7c1afcbced9\\exec-239d839b-2e7a-4238-b13e-6c08815fdcc9.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link."
+  },
+  "stairs_floor": {
+    "output_hint": "Generated images are saved to C:\\Users\\Revive\\.codex\\generated_images\\01a18302-4d2f-7f32-81a9-c7c1afcbced9 as C:\\Users\\Revive\\.codex\\generated_images\\01a18302-4d2f-7f32-81a9-c7c1afcbced9\\exec-97809cbb-1303-41b2-bb24-398333750614.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link."
+  },
+  "cache": {
+    "output_hint": "Generated images are saved to C:\\Users\\Revive\\.codex\\generated_images\\01a18302-4d2f-7f32-81a9-c7c1afcbced9 as C:\\Users\\Revive\\.codex\\generated_images\\01a18302-4d2f-7f32-81a9-c7c1afcbced9\\exec-bd0240c9-a7b0-47c8-9927-e2a00ec27149.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link."
+  }
+}

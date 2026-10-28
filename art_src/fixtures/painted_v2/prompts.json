@@ -1,0 +1,39 @@
+{
+  "plate": {
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "E:/SD/GODOT/Dungeon-crawler/assets/art/env/calm_v3_floor_dry_a.png",
+      "E:/SD/GODOT/Dungeon-crawler/art_src/fixtures/architecture/sources/fe3439be-72ab-49d3-8af7-49e3b2e58160.png"
+    ],
+    "prompt": "UNDERCROFT original game asset painting. TWO states of the SAME shallow ancient stone pressure plate, side by side in equal square cells on a transparent background, no labels. Left UP, right PRESSED. Match reference dirty painted masonry, worn grey stone with dusty ochre lamp highlights, cool slate shadows, restrained moss and grime. Seen from standing height looking obliquely down at the floor, symmetric frontal trapezoid: far edge shorter, near edge wider. A FLAT square slab sunken inside an extremely thin flagstone rim, black grime seam all around. It is a floor inset, never a table or pedestal: absolutely no legs or tall exposed vertical face. The pressed state is just a little lower and its seam closes/darkens; identical outline, camera and material. Thick simple bevels which will read at a final width of 64 pixels and height 20 pixels. Paint surface wear rather than geometric pixel shapes. Isolate just this shallow plate and tiny perimeter stones, leave background genuinely transparent, NO cast shadow, no surrounding room, no text."
+  },
+  "web": {
+    "transparent_background": true,
+    "prompt": "Paint an original dusty medieval dungeon WEB as an isolated game asset on TRUE TRANSPARENT background. Square doorway-filling composition, thick irregular sagging silk, bone-grey cream lamp highlights, cold grey shadow threads, dirt caught at knots, a few dead leaves and small rag fragments trapped near edges. Strands are thick enough to survive reduction to 64 and 24 pixels: bold broad draped strands attached at the four corners, radial irregular large open holes, NOT an intricate mathematical spider web. Strongest strands form ragged garlands at upper corners with some diagonals across the centre. No spider, no door frame or stones, no floor, no labels, no black backdrop. Every hole between silk strands must be fully transparent. Painted rough old fantasy dungeon look, gouache-like highlights and weathering, restrained desaturated palette, not flat vector pixel art. Fill nearly the entire square canvas; asset is used across a whole corridor opening."
+  },
+  "cord": {
+    "transparent_background": true,
+    "prompt": "TWO registered states side by side, equal square cells, of ONE original painted medieval dungeon rope-bound iron grate, TRUE TRANSPARENT background through the bars and around the object. Same worn rusty iron rectangular frame and camera in both cells. Front view perfectly straight, symmetric. LEFT intact: four broad vertical iron bars and two cross braces, heavy frayed tan cord crosses diagonally in a large X tied with one very readable central knot. RIGHT cut/open: same iron outer frame, inner barred grate lifted into the TOP THIRD, two severed frayed rope ends hanging from the upper corners and lower sides, centre and lower opening completely CLEAR TRANSPARENCY. Broad low-detail forms and heavy lamp-lit chipped edges to survive final 64 pixel /24pixel use. Old dirty painted stone dungeon style, iron slate grey and brown rust, cord ochre cream. This is a grate without a stone wall, no surrounding architecture, NO black backing, no text, no floor, no shadows on background. Both outer frame silhouettes must have identical registration and proportions."
+  },
+  "lift_floor": {
+    "transparent_background": false,
+    "referenced_image_paths": [
+      "E:/SD/GODOT/Dungeon-crawler/assets/art/env/calm_v3_floor_dry_a.png"
+    ],
+    "prompt": "Two square floor texture paintings side by side in equal cells, SAME lift platform DEAD on left and WORKING on right. Strict orthographic bird's-eye view looking vertically DOWN at the horizontal FLOOR, no perspective, no room walls, no horizon. A worn iron cage elevator platform deck inset within old stone flagstones. Deck made of heavy dark iron slats and riveted border with tiny chain anchor loops at the two north corners. Slat gaps are very dark, NOT large black holes. Left: cold rust, dust, a little cobweb dirt in corners, no illumination. Right: exact same deck geometry and registration, swept wear, taut chain anchor details, a subtle warm golden lamp reflection across one side, but no actual lamp painted on floor. Reference is accepted floor palette/aged quiet texture. Fine painterly scuffs and dirt, dark slate grey stone and iron, desaturated ochre edges. Keep outermost 5 percent as plain quiet grey flagstone that can tile with the reference floor. Assets will become 64x64 tile, so large readable shapes, calm texture, not noisy gravel. No lettering, no symbols, no stairs, no cage walls projecting upward, no characters."
+  },
+  "stairs_floor": {
+    "transparent_background": false,
+    "referenced_image_paths": [
+      "E:/SD/GODOT/Dungeon-crawler/assets/art/env/calm_v3_floor_dry_a.png"
+    ],
+    "prompt": "Paint a square TOP-DOWN floor texture of the threshold at the TOP OF A DUNGEON STAIRCASE descending NORTH (toward the TOP of this image). Strict vertical bird's-eye orthographic view. SOUTH/BOTTOM HALF is a safe flat worn flagstone landing. At the image horizontal centre a broad first stone tread drops away from that landing, followed by 3 progressively darker broad horizontal stone treads toward the NORTH/TOP. The stairwell is inset in the floor, edges lined by thin old stone, black depth beyond last tread. Simple exact symmetric geometry: horizontal treads like rectangular bands, never lateral stairs or diagonal ramps. Matching dirty aged masonry of reference, dusty stone lit edge on first tread, cool dark slate and old ochre flecks. Outer 5 percent all around should be calm grey stone border so the tile can join ordinary floor. This is horizontal floor surface only: NO arches, doorways, upright walls, text or arrows. A painted tile reduced later to 64x64 pixels; make the drop and treads large and legible. No transparency."
+  },
+  "cache": {
+    "transparent_background": false,
+    "referenced_image_paths": [
+      "E:/SD/GODOT/Dungeon-crawler/assets/art/env/painted_f1_plain_0.png"
+    ],
+    "prompt": "Create a painted SECRET CACHE RECESS in this exact aged dungeon stone wall, straight front view, square wall face. Preserve the reference wall stone style: dirty chipped grey blocks, dark mortar, ochre lamp scuffs, damp blue slate shadows. Recess is a low wide rectangular empty niche, from about x22% to78%, y34% to80% of the full image. It was exposed by removing a scored stone panel: a chipped battered stone lip around a dark recessed cavity, depth visible on left and bottom shelf; thin rusty old panel hinge remnants at a corner, grime and a few cobweb wisps inside. No door standing open, no treasure or items, no glowing sigil or magical effects, no text. The interior has real painted stone depth and dusty bottom ledge rather than a flat black rectangle. Keep same original outer wall around the niche; quiet full tile borders. Large bold bevels readable when whole square is reduced to64 pixels. Restrained painted retro dungeon art, not vectors or flat rectangles."
+  }
+}
