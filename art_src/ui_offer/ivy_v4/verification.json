@@ -1,0 +1,20 @@
+{
+  "runtime_pngs": 3,
+  "earlier_runtime_pngs_preserved": 249,
+  "owner_reference_pngs_preserved": 2,
+  "entire_v3_source_pack_preserved": true,
+  "intact_game_leaf_stamps": 39,
+  "opaque_pixels_v4": {
+    "ivy_game_border_v4": 2844,
+    "ivy_compass_v4": 604,
+    "ivy_map_border_v4": 1465
+  },
+  "opaque_pixels_v3": {
+    "ivy_game_border_v4": 995,
+    "ivy_compass_v4": 211,
+    "ivy_map_border_v4": 580
+  },
+  "protected": "camera, view core and held weapon, text/icons/health, touch interiors, entire compass dial/heading, map ink/header/CLOSE",
+  "status": "Offline pixel checks and composites; no Godot run or phone acceptance.",
+  "identical_rebuild_files": 22
+}

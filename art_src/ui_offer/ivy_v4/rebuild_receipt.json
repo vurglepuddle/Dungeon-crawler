@@ -1,0 +1,28 @@
+{
+  "files_compared": 22,
+  "identical": true,
+  "hashes": {
+    "art_src/ui_offer/ivy_v4/art_direction.json": "390b2af556e77b9cafb3f798b37f684b78888424d3613a5b84a8997797e358c6",
+    "art_src/ui_offer/ivy_v4/comparison_4x.png": "c13a567d390ce36f6144e8f2fae89738d7cfc475b2db742125fb7e68ea843996",
+    "art_src/ui_offer/ivy_v4/comparison_native.png": "77bda1939843041e288f6d0f55f150ca562be00821e3dc7473e2dd6201203bf9",
+    "art_src/ui_offer/ivy_v4/contact_sheet_4x.png": "cae1f249e5f09b17337f7ecf13af78a9669353370393826c879b6e9b895b283c",
+    "art_src/ui_offer/ivy_v4/contact_sheet_native.png": "9129c8758e0cea63e8edda5047c6e4b2077f908635db91516b919993b9858364",
+    "art_src/ui_offer/ivy_v4/layout.json": "19977b3fd2d4f52eccf704cfc25dfbd6433bc0f313f8d4aab6530ba9cf7456d3",
+    "art_src/ui_offer/ivy_v4/manifest.json": "df95e764677c79b6391aac453e40adb5ed7f0400ab0be0e5057485349f87126d",
+    "art_src/ui_offer/ivy_v4/masks/ivy_compass_v4.png": "24ae3055d55382816baec2471b8250a674aa4b2bd7e4fec9bcca29b5aac3af15",
+    "art_src/ui_offer/ivy_v4/masks/ivy_game_border_v4.png": "2283ea7279c94bc0101e1c3d474650c88c657cf948d121ba10a19455094daeab",
+    "art_src/ui_offer/ivy_v4/masks/ivy_map_border_v4.png": "0c9992b139b6cebd61f9067f8ee5de1045f4b4820c8f09d472f85df5bb3deea5",
+    "art_src/ui_offer/ivy_v4/mockup_game_4x.png": "f1aa43ceb328282468f4b7844ce772b9a18f839f7ed51033c38cca903e778fa1",
+    "art_src/ui_offer/ivy_v4/mockup_game_native.png": "bf1a8f7cba169eff1980a7bbbddc26a11b4896e14b480e0fa965c734230e937a",
+    "art_src/ui_offer/ivy_v4/mockup_map_4x.png": "bdef152b9b5071ab08837e5fbb41b76303de12044b88fe55750036010b0178b1",
+    "art_src/ui_offer/ivy_v4/mockup_map_native.png": "0d36d3467f300f52dbeecc0a8d1f15faf71a1698741985b6b6827d1550100685",
+    "art_src/ui_offer/ivy_v4/mockup_screen_4x.png": "1c17b9ef6dc64e78dd18bdc8ce65b1ae0c58ec27904d0115fad37285d647223c",
+    "art_src/ui_offer/ivy_v4/mockup_screen_native.png": "f7120172a7a13ea6a3ca47758c15b12ad64a7a9504fc6f2856f584c36905a87a",
+    "art_src/ui_offer/ivy_v4/preserved_hashes.json": "0887ea232b4b9e0a3353c547be893bec021867223fc9dc9a72028c1bf9f2554e",
+    "art_src/ui_offer/ivy_v4/sources/entry.png": "769c5fc4c5606fa2a900b403e3873413b1a94410f70567046ba3501336b681e5",
+    "art_src/ui_offer/ivy_v4/sources/map.png": "051568bb3b29ad2401f0df60820467222c067690c09488ce89782f785e50aee0",
+    "assets/art/ui_offer/ivy_compass_v4.png": "253ad7e021c346ba24dfd7f74681293d31da8b583afe94b0aba953bda8e66648",
+    "assets/art/ui_offer/ivy_game_border_v4.png": "c77d075bd106645c9c57d43c40dfcf6ea3e86b08f0e714b687968a96c5bd618d",
+    "assets/art/ui_offer/ivy_map_border_v4.png": "447daf3f281207a3b119be574f1536e6f0429a3899cb0d1456de115b17cb61e7"
+  }
+}

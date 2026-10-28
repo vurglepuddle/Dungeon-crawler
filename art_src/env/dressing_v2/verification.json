@@ -1,0 +1,29 @@
+{
+  "runtime_pngs": 20,
+  "saved_paintings": 18,
+  "old_runtime_pngs_unchanged": 253,
+  "common_edge_ring_px": 2,
+  "floor2_to_floor1_luminance": {
+    "door": 0.721,
+    "door_open": 0.687,
+    "drain": 0.639,
+    "sconce_0": 0.594,
+    "sconce_1": 0.596,
+    "chains": 0.63,
+    "tapestry": 0.69,
+    "crack": 0.594,
+    "damp": 0.719
+  },
+  "passed": [
+    "palette and binary alpha",
+    "all old PNG hashes",
+    "common mixed-wall seams",
+    "pixel-identical arch around door states",
+    "real unobstructed portal alpha",
+    "stationary torch hardware/soot/stone outside flame mask",
+    "d1-d3 proof placement",
+    "exact nearest 4x"
+  ],
+  "status": "Offline art validation; no Godot runs, integration, gameplay test or phone acceptance.",
+  "identical_rebuild_files": 74
+}

@@ -1,0 +1,129 @@
+{
+  "camera": {
+    "size": [
+      148,
+      150
+    ],
+    "focal": 74.0,
+    "horizon": 71,
+    "far": 3.6
+  },
+  "status": "Offline orthographic-column material proofs in a proxy corridor; no Godot captures or live map placement.",
+  "planes": "Existing calm_v3 textures and stable BELL42 cell selector; unchanged accepted plain stone between dressings.",
+  "wall_segments": {
+    "d1": "left drain, right chains",
+    "d2": "left tapestry, right torch",
+    "d3": "left fissure, right damp"
+  },
+  "observed_ray_depth_ranges": {
+    "mockup_corridor_f1_door": {
+      "left/drain": [
+        0.5034013605442177,
+        1.450980392156863
+      ],
+      "left/tapestry": [
+        1.510204081632653,
+        2.3870967741935485
+      ],
+      "left/crack": [
+        2.5517241379310347,
+        3.217391304347826
+      ],
+      "right/damp": [
+        2.5517241379310347,
+        3.217391304347826
+      ],
+      "right/sconce_0": [
+        1.510204081632653,
+        2.3870967741935485
+      ],
+      "right/chains": [
+        0.5034013605442177,
+        1.450980392156863
+      ]
+    },
+    "mockup_corridor_f1_door_open": {
+      "left/drain": [
+        0.5034013605442177,
+        1.450980392156863
+      ],
+      "left/tapestry": [
+        1.510204081632653,
+        2.3870967741935485
+      ],
+      "left/crack": [
+        2.5517241379310347,
+        3.217391304347826
+      ],
+      "right/damp": [
+        2.5517241379310347,
+        3.217391304347826
+      ],
+      "right/sconce_0": [
+        1.510204081632653,
+        2.3870967741935485
+      ],
+      "right/chains": [
+        0.5034013605442177,
+        1.450980392156863
+      ]
+    },
+    "mockup_corridor_f2_door": {
+      "left/drain": [
+        0.5034013605442177,
+        1.450980392156863
+      ],
+      "left/tapestry": [
+        1.510204081632653,
+        2.3870967741935485
+      ],
+      "left/crack": [
+        2.5517241379310347,
+        3.217391304347826
+      ],
+      "right/damp": [
+        2.5517241379310347,
+        3.217391304347826
+      ],
+      "right/sconce_0": [
+        1.510204081632653,
+        2.3870967741935485
+      ],
+      "right/chains": [
+        0.5034013605442177,
+        1.450980392156863
+      ]
+    },
+    "mockup_corridor_f2_door_open": {
+      "left/drain": [
+        0.5034013605442177,
+        1.450980392156863
+      ],
+      "left/tapestry": [
+        1.510204081632653,
+        2.3870967741935485
+      ],
+      "left/crack": [
+        2.5517241379310347,
+        3.217391304347826
+      ],
+      "right/damp": [
+        2.5517241379310347,
+        3.217391304347826
+      ],
+      "right/sconce_0": [
+        1.510204081632653,
+        2.3870967741935485
+      ],
+      "right/chains": [
+        0.5034013605442177,
+        1.450980392156863
+      ]
+    }
+  },
+  "depths": [
+    1.0,
+    2.0,
+    3.0
+  ]
+}

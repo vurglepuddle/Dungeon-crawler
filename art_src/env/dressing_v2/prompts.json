@@ -1,0 +1,141 @@
+{
+  "tool": "built-in image_gen.imagegen",
+  "mode": "18 individual paintings/edits; two full floors and two registered torch frames each",
+  "paintings": {
+    "f1_door": {
+      "prompt": "Use case: precise-object-edit. Asset: one square opaque 64x64 wall-face texture for UNDERCROFT, an original forgotten-1993 first-person dungeon crawler. Image 1 is the exact painted abbey masonry material/reference: keep its LARGE FOUR COURSES of irregular chipped grey blocks, broad dark mortar joints, crunchy handmade painted clusters and square orthographic wall-face registration. Repaint the central subject so it belongs physically IN this stone: surrounding chisel chips, dirt, recessed occlusion and contact shadows, lower-front warm lamp bounce, cooler upper crevices. This is painted texture art, not a vector icon, flat code shape, clean cartoon or tiny-brick wall. Keep the outer 8 percent border uninterrupted same masonry. Full-bleed square, front-on flat wall plane with no camera perspective (only object depth), no floor visible along bottom edge, no room render, no UI or text. Broad chunky forms survive nearest reduction to 64x64. Restricted grey/ochre/umber/rust/ivory; restrained desaturated teal moss, no blue saturation or modern metal shine. No labels or watermark. Subject: A CLOSED, genuinely usable iron-banded oak door in its own WORN STONE ARCH, spanning roughly x18-82%, y8-95% of the square. Irregular carved voussoirs follow the arch, a chipped threshold. Four broad weathered vertical wooden planks in dark umber with split end-grain and subtle ochre lamp-lit ridges, three thick BLACKENED RUSTED IRON straps with blunt rivets. At the viewer's RIGHT at x66%,y55%, a clearly legible oversized iron LOCK PLATE with a simple DARK KEYHOLE cutout and a small ring pull below. No glowing symbols, no portcullis, no crisscross barricade, no decorative fake passage. Occlusion under arch and straps; dirt at threshold; this must read as a painted heavy real door, not a flat brown rectangle.",
+      "references": [
+        "art_src/spike/sources/stone_wall_painted.png"
+      ],
+      "saved_source": "sources/f1_door.png"
+    },
+    "f1_door_open": {
+      "prompt": "Use case: precise-object-edit. Edit ONLY the wooden door leaf inside this exact painted stone arch into its OPENED state. Keep EVERY surrounding stone, arch voussoir, threshold and canvas registration unchanged. The door is hinged on the LEFT jamb and has swung INWARD about 75 degrees: the same battered oak, three rusted iron straps, rivets and ring/lock plate are seen foreshortened as a narrow dark wooden slab along the LEFT reveal, from about x23% to x39%, receding into the corridor. The remainder of the inner opening is a broad DARK EMPTY PASSAGE, x40-77%, under the same arch, with faint grey stone depth and a very faint floor threshold beyond, no portcullis, bars or second door. This must clearly read as the same usable keyed door now open, not a decorative sealed doorway. Keep the lower-front warm lamp bounce and the original chunky painted material, readable at 64x64. Square orthographic wall-face texture, no text/UI/watermark.",
+      "references": [
+        "sources/f1_door.png"
+      ],
+      "saved_source": "sources/f1_door_open.png"
+    },
+    "f1_drain": {
+      "prompt": "Use case: precise-object-edit. Asset: one square opaque 64x64 wall-face texture for UNDERCROFT, an original forgotten-1993 first-person dungeon crawler. Image 1 is the exact painted abbey masonry material/reference: keep its LARGE FOUR COURSES of irregular chipped grey blocks, broad dark mortar joints, crunchy handmade painted clusters and square orthographic wall-face registration. Repaint the central subject so it belongs physically IN this stone: surrounding chisel chips, dirt, recessed occlusion and contact shadows, lower-front warm lamp bounce, cooler upper crevices. This is painted texture art, not a vector icon, flat code shape, clean cartoon or tiny-brick wall. Keep the outer 8 percent border uninterrupted same masonry. Full-bleed square, front-on flat wall plane with no camera perspective (only object depth), no floor visible along bottom edge, no room render, no UI or text. Broad chunky forms survive nearest reduction to 64x64. Restricted grey/ochre/umber/rust/ivory; restrained desaturated teal moss, no blue saturation or modern metal shine. No labels or watermark. Subject: A small wide rectangular RUSTED IRON DRAIN GRATE sunk into a chipped recess at the LOWER CENTRE of the masonry, x25-76%, y43-76%. Six or seven thick vertical rough iron bars and one uneven horizontal brace, with a few BIG irregular rust flakes catching warm light. Stone lip and iron rim have actual thickness: deep dark gaps behind bars, bevel lit along the LOWER FRONT edge, a rough chisel scar around the recess. Crooked dirty brown and mineral streaks run downward beneath it into the mortar, a few tiny moss flecks, stains feather into stone grain. No perfectly even clean silver grid, no painted frame slapped on wall, no giant black hole.",
+      "references": [
+        "art_src/spike/sources/stone_wall_painted.png"
+      ],
+      "saved_source": "sources/f1_drain.png"
+    },
+    "f1_sconce_0": {
+      "prompt": "Use case: precise-object-edit. Asset: one square opaque 64x64 wall-face texture for UNDERCROFT, an original forgotten-1993 first-person dungeon crawler. Image 1 is the exact painted abbey masonry material/reference: keep its LARGE FOUR COURSES of irregular chipped grey blocks, broad dark mortar joints, crunchy handmade painted clusters and square orthographic wall-face registration. Repaint the central subject so it belongs physically IN this stone: surrounding chisel chips, dirt, recessed occlusion and contact shadows, lower-front warm lamp bounce, cooler upper crevices. This is painted texture art, not a vector icon, flat code shape, clean cartoon or tiny-brick wall. Keep the outer 8 percent border uninterrupted same masonry. Full-bleed square, front-on flat wall plane with no camera perspective (only object depth), no floor visible along bottom edge, no room render, no UI or text. Broad chunky forms survive nearest reduction to 64x64. Restricted grey/ochre/umber/rust/ivory; restrained desaturated teal moss, no blue saturation or modern metal shine. No labels or watermark. Subject: A lit forged-iron TORCH SCONCE mounted at the centre of the wall, x40-64%, y23-79%. A rough blackened iron plate fixed with two uneven pegs, a thick hooked triangular bracket projecting outward, a short wooden torch held in an iron basket. Tallow-soaked cloth, a small broad readable amber/ivory FLAME leaning slightly LEFT; soot-black smoky stain rises through the joint ABOVE the torch to y12%. Warm orange glow gently catches a few nearby chipped stones, cast contact shadow behind the projecting bracket. Materials are battered, hand-wrought, textured and ancient. Do not make an oversized modern lantern, floating flame or simple black geometric bracket.",
+      "references": [
+        "art_src/spike/sources/stone_wall_painted.png"
+      ],
+      "saved_source": "sources/f1_sconce_0.png"
+    },
+    "f1_sconce_1": {
+      "prompt": "Use case: precise-object-edit. Make the SECOND and final flicker frame of this painted wall torch. Change ONLY the flame and its tiny immediate light halo: the flame now leans a little RIGHT, a little shorter, a warmer amber shoulder with an ivory heart. Keep the exact iron basket, wooden torch, bracket, wall plate, soot, stone positions, masonry and camera entirely unchanged, pixel-registered. No smoke animation, new torches, extra objects or resized flame fixture. Same original crunchy 1993 painted texture meant to reduce to64x64. Two-frame flicker only, not a redesign. Opaque square image, no text or watermark.",
+      "references": [
+        "sources/f1_sconce_0.png"
+      ],
+      "saved_source": "sources/f1_sconce_1.png"
+    },
+    "f1_chains": {
+      "prompt": "Use case: precise-object-edit. Asset: one square opaque 64x64 wall-face texture for UNDERCROFT, an original forgotten-1993 first-person dungeon crawler. Image 1 is the exact painted abbey masonry material/reference: keep its LARGE FOUR COURSES of irregular chipped grey blocks, broad dark mortar joints, crunchy handmade painted clusters and square orthographic wall-face registration. Repaint the central subject so it belongs physically IN this stone: surrounding chisel chips, dirt, recessed occlusion and contact shadows, lower-front warm lamp bounce, cooler upper crevices. This is painted texture art, not a vector icon, flat code shape, clean cartoon or tiny-brick wall. Keep the outer 8 percent border uninterrupted same masonry. Full-bleed square, front-on flat wall plane with no camera perspective (only object depth), no floor visible along bottom edge, no room render, no UI or text. Broad chunky forms survive nearest reduction to 64x64. Restricted grey/ochre/umber/rust/ivory; restrained desaturated teal moss, no blue saturation or modern metal shine. No labels or watermark. Subject: Two heavy rusted iron CHAINS of visibly three-dimensional oval links hang from separate hand-forged wall RINGS set into the masonry at x31% and x63%,y22%. The left chain hangs almost straight to a closed cuff SHACKLE at y82%; the right sags in a crooked loop and ends in a broken open cuff near y72%. Only about five or six BIG linked loops per chain, broad silhouettes. Links have mottled rust-orange crests on dark iron, tiny warm lower-front highlights, real dark holes and rough hammered facets. Each link casts a small angled contact shadow on the stone behind. Abraded wall scars, brown leaching under the rings; a little dirt in lower joints. No thin wire, perfect repeated clean circles or flat black zigzags.",
+      "references": [
+        "art_src/spike/sources/stone_wall_painted.png"
+      ],
+      "saved_source": "sources/f1_chains.png"
+    },
+    "f1_tapestry": {
+      "prompt": "Use case: precise-object-edit. Asset: one square opaque 64x64 wall-face texture for UNDERCROFT, an original forgotten-1993 first-person dungeon crawler. Image 1 is the exact painted abbey masonry material/reference: keep its LARGE FOUR COURSES of irregular chipped grey blocks, broad dark mortar joints, crunchy handmade painted clusters and square orthographic wall-face registration. Repaint the central subject so it belongs physically IN this stone: surrounding chisel chips, dirt, recessed occlusion and contact shadows, lower-front warm lamp bounce, cooler upper crevices. This is painted texture art, not a vector icon, flat code shape, clean cartoon or tiny-brick wall. Keep the outer 8 percent border uninterrupted same masonry. Full-bleed square, front-on flat wall plane with no camera perspective (only object depth), no floor visible along bottom edge, no room render, no UI or text. Broad chunky forms survive nearest reduction to 64x64. Restricted grey/ochre/umber/rust/ivory; restrained desaturated teal moss, no blue saturation or modern metal shine. No labels or watermark. Subject: A faded moth-eaten abbey TAPESTRY hung from a rough dark horizontal rod at x24-78%,y23%, draping to y88%. Thick dirty fabric, mostly desaturated green-black and old ochre, with deep sagging folds, worn hems, irregular missing corners and a few broad moth holes. ONE large readable simple faded BRONZE BELL MOTIF woven into the centre (no words), it bends with folds and is partly abraded away. Frayed fibres along ragged bottom edge, a little soot, dirty stone behind the hanging, soft cast shadow under the rod and down one side, warm low-front lamp catches fold edges. It must read as a battered hand-painted medieval hanging, not a clean rectangular sign or flat green banner.",
+      "references": [
+        "art_src/spike/sources/stone_wall_painted.png"
+      ],
+      "saved_source": "sources/f1_tapestry.png"
+    },
+    "f1_crack": {
+      "prompt": "Use case: precise-object-edit. Asset: one square opaque 64x64 wall-face texture for UNDERCROFT, an original forgotten-1993 first-person dungeon crawler. Image 1 is the exact painted abbey masonry material/reference: keep its LARGE FOUR COURSES of irregular chipped grey blocks, broad dark mortar joints, crunchy handmade painted clusters and square orthographic wall-face registration. Repaint the central subject so it belongs physically IN this stone: surrounding chisel chips, dirt, recessed occlusion and contact shadows, lower-front warm lamp bounce, cooler upper crevices. This is painted texture art, not a vector icon, flat code shape, clean cartoon or tiny-brick wall. Keep the outer 8 percent border uninterrupted same masonry. Full-bleed square, front-on flat wall plane with no camera perspective (only object depth), no floor visible along bottom edge, no room render, no UI or text. Broad chunky forms survive nearest reduction to 64x64. Restricted grey/ochre/umber/rust/ivory; restrained desaturated teal moss, no blue saturation or modern metal shine. No labels or watermark. Subject: A single structural FISSURE cuts diagonally down two broad stone faces from about x65%,y17% to x40%,y87%, bending through the existing mortar joint. A dark narrow core with visible depth, small fallen chips along it, one jagged flake overhanging. On the lower-front-facing lip the grey stone catches warm ivory light; the opposite lip has a cool occlusion shadow. Fine side fractures stay restrained. Show the stone's original painted grain continuing right up to the broken edges. Uneven width roughly 1-3 pixels at final 64px, widest at the middle joint. No decorative lightning bolt, neat outlined Y shape, giant cave opening or flat black line.",
+      "references": [
+        "art_src/spike/sources/stone_wall_painted.png"
+      ],
+      "saved_source": "sources/f1_crack.png"
+    },
+    "f1_damp": {
+      "prompt": "Use case: precise-object-edit. Asset: one square opaque 64x64 wall-face texture for UNDERCROFT, an original forgotten-1993 first-person dungeon crawler. Image 1 is the exact painted abbey masonry material/reference: keep its LARGE FOUR COURSES of irregular chipped grey blocks, broad dark mortar joints, crunchy handmade painted clusters and square orthographic wall-face registration. Repaint the central subject so it belongs physically IN this stone: surrounding chisel chips, dirt, recessed occlusion and contact shadows, lower-front warm lamp bounce, cooler upper crevices. This is painted texture art, not a vector icon, flat code shape, clean cartoon or tiny-brick wall. Keep the outer 8 percent border uninterrupted same masonry. Full-bleed square, front-on flat wall plane with no camera perspective (only object depth), no floor visible along bottom edge, no room render, no UI or text. Broad chunky forms survive nearest reduction to 64x64. Restricted grey/ochre/umber/rust/ivory; restrained desaturated teal moss, no blue saturation or modern metal shine. No labels or watermark. Subject: Subtle but clearly readable WATER STAINING and MOSS grow organically out of the middle horizontal mortar joint and creep downward in several different thin irregular mineral trails. Keep the stone texture visible THROUGH every stain. Mottled dark olive, grey-green and desaturated blue-green patches follow the joint and rough stone pores, a few thick textured moss tufts at x58%,y51%, smaller flecks at x34%,y56%, bead-like moisture glints low on the stone. Brown rust/mineral edges and pale salt bloom, varied density; lots of untouched stone remains between trails. Absolutely no solid flat teal blob, painted leaf shape, big green silhouette, smooth pool or uniform fill. Damp belongs in the masonry grain.",
+      "references": [
+        "art_src/spike/sources/stone_wall_painted.png"
+      ],
+      "saved_source": "sources/f1_damp.png"
+    },
+    "f2_door": {
+      "prompt": "Use case: lighting-weather. Image1 is the finished painted FLOOR ONE door wall face; image2 is the approved darker wetter FLOOR TWO stone material reference. Make the FLOOR TWO weathered repaint of image1. Preserve the exact subject, geometry, broad stone courses, object positions, silhouette, arch/hardware/motif, orthographic registration and canvas. Make the same masonry older, darker slate-grey and damp with restrained desaturated grey-green wet grain in the joints. Add irregular thin water/mineral trails and patchy moss naturally embedded in existing stone pores, slightly more corroded iron or dirtier rotted wood/fabric as appropriate, without covering the readable silhouette. Lighting remains from a low warm lamp in front, so LOWER FRONT chipped edges and hardware retain small readable warm highlights, upper crevices cooler and darker. Preserve physical depth, chunky painted clusters, original four-course large-block masonry. Do not turn the whole surface solid teal, smooth, flat, glossy, black or monochrome. Not a new object, no new chain counts, no extra fabric emblems, no perspective room, no text, labels or watermark. Keep the outside stone border matching image2 in darkness. Square opaque image, intended nearest reduction to64x64.",
+      "references": [
+        "sources/f1_door.png",
+        "assets/art/env/painted_f2_plain_0.png"
+      ],
+      "saved_source": "sources/f2_door.png"
+    },
+    "f2_door_open": {
+      "prompt": "Use case: lighting-weather. Edit image1, the finished FLOOR ONE door_open wall face, into FLOOR TWO: older, darker and wetter, matching the approved stone material in image2. Keep exact subject geometry, silhouette, wall courses, arch/door leaf/bracket positions, camera, source resolution and square registration. Preserve the LEFT inward-swung wooden leaf and the broad open DARK passage, same worn stone arch, no bars or portcullis. Repaint stone faces in subdued darker slate-grey with damp dark olive/grey-green pore texture, moss in irregular existing joints, a few narrow water/mineral streaks and patchy wet highlights; preserve grain visibly through stains. Low warm front lamp bounce still picks out chipped lower edges and iron/wood details. Hand-painted coarse clusters, not flat vector geometry or realistic photo. Do not cover the surface in solid teal, do not add objects or change stone geometry. Opaque square wall-face texture, not a whole room; no text or watermark.",
+      "references": [
+        "sources/f1_door_open.png",
+        "assets/art/env/painted_f2_plain_0.png"
+      ],
+      "saved_source": "sources/f2_door_open.png"
+    },
+    "f2_drain": {
+      "prompt": "Use case: lighting-weather. Image1 is the finished painted FLOOR ONE drain wall face; image2 is the approved darker wetter FLOOR TWO stone material reference. Make the FLOOR TWO weathered repaint of image1. Preserve the exact subject, geometry, broad stone courses, object positions, silhouette, arch/hardware/motif, orthographic registration and canvas. Make the same masonry older, darker slate-grey and damp with restrained desaturated grey-green wet grain in the joints. Add irregular thin water/mineral trails and patchy moss naturally embedded in existing stone pores, slightly more corroded iron or dirtier rotted wood/fabric as appropriate, without covering the readable silhouette. Lighting remains from a low warm lamp in front, so LOWER FRONT chipped edges and hardware retain small readable warm highlights, upper crevices cooler and darker. Preserve physical depth, chunky painted clusters, original four-course large-block masonry. Do not turn the whole surface solid teal, smooth, flat, glossy, black or monochrome. Not a new object, no new chain counts, no extra fabric emblems, no perspective room, no text, labels or watermark. Keep the outside stone border matching image2 in darkness. Square opaque image, intended nearest reduction to64x64.",
+      "references": [
+        "sources/f1_drain.png",
+        "assets/art/env/painted_f2_plain_0.png"
+      ],
+      "saved_source": "sources/f2_drain.png"
+    },
+    "f2_sconce_0": {
+      "prompt": "Use case: lighting-weather. Edit image1, the finished FLOOR ONE sconce_0 wall face, into FLOOR TWO: older, darker and wetter, matching the approved stone material in image2. Keep exact subject geometry, silhouette, wall courses, arch/door leaf/bracket positions, camera, source resolution and square registration. Preserve the exact torch shape, iron bracket, left-leaning flame and ivory heart; flame stays bright and warm while surrounding stone grows cooler and damp. Repaint stone faces in subdued darker slate-grey with damp dark olive/grey-green pore texture, moss in irregular existing joints, a few narrow water/mineral streaks and patchy wet highlights; preserve grain visibly through stains. Low warm front lamp bounce still picks out chipped lower edges and iron/wood details. Hand-painted coarse clusters, not flat vector geometry or realistic photo. Do not cover the surface in solid teal, do not add objects or change stone geometry. Opaque square wall-face texture, not a whole room; no text or watermark.",
+      "references": [
+        "sources/f1_sconce_0.png",
+        "assets/art/env/painted_f2_plain_0.png"
+      ],
+      "saved_source": "sources/f2_sconce_0.png"
+    },
+    "f2_sconce_1": {
+      "prompt": "Use case: precise-object-edit. Make the SECOND and final flicker frame of this EXACT painted FLOOR TWO damp-wall torch. Change ONLY the flame and its very immediate halo: lean the flame slightly RIGHT, a little shorter, amber shoulder with a bright ivory heart. Preserve absolutely all existing stone geometry, damp/moss grain, soot stain, wooden torch, cloth, iron basket, bracket, wall plate and canvas registration. Nothing else moves, no new details. Two-frame animation intended for nearest64x64 palette reduction; original chunky painterly material, darker wetter lower floor. Opaque square wall face, no text or watermark.",
+      "references": [
+        "sources/f2_sconce_0.png"
+      ],
+      "saved_source": "sources/f2_sconce_1.png"
+    },
+    "f2_chains": {
+      "prompt": "Use case: lighting-weather. Image1 is the finished painted FLOOR ONE chains wall face; image2 is the approved darker wetter FLOOR TWO stone material reference. Make the FLOOR TWO weathered repaint of image1. Preserve the exact subject, geometry, broad stone courses, object positions, silhouette, arch/hardware/motif, orthographic registration and canvas. Make the same masonry older, darker slate-grey and damp with restrained desaturated grey-green wet grain in the joints. Add irregular thin water/mineral trails and patchy moss naturally embedded in existing stone pores, slightly more corroded iron or dirtier rotted wood/fabric as appropriate, without covering the readable silhouette. Lighting remains from a low warm lamp in front, so LOWER FRONT chipped edges and hardware retain small readable warm highlights, upper crevices cooler and darker. Preserve physical depth, chunky painted clusters, original four-course large-block masonry. Do not turn the whole surface solid teal, smooth, flat, glossy, black or monochrome. Not a new object, no new chain counts, no extra fabric emblems, no perspective room, no text, labels or watermark. Keep the outside stone border matching image2 in darkness. Square opaque image, intended nearest reduction to64x64.",
+      "references": [
+        "sources/f1_chains.png",
+        "assets/art/env/painted_f2_plain_0.png"
+      ],
+      "saved_source": "sources/f2_chains.png"
+    },
+    "f2_tapestry": {
+      "prompt": "Use case: lighting-weather. Image1 is the finished painted FLOOR ONE tapestry wall face; image2 is the approved darker wetter FLOOR TWO stone material reference. Make the FLOOR TWO weathered repaint of image1. Preserve the exact subject, geometry, broad stone courses, object positions, silhouette, arch/hardware/motif, orthographic registration and canvas. Make the same masonry older, darker slate-grey and damp with restrained desaturated grey-green wet grain in the joints. Add irregular thin water/mineral trails and patchy moss naturally embedded in existing stone pores, slightly more corroded iron or dirtier rotted wood/fabric as appropriate, without covering the readable silhouette. Lighting remains from a low warm lamp in front, so LOWER FRONT chipped edges and hardware retain small readable warm highlights, upper crevices cooler and darker. Preserve physical depth, chunky painted clusters, original four-course large-block masonry. Do not turn the whole surface solid teal, smooth, flat, glossy, black or monochrome. Not a new object, no new chain counts, no extra fabric emblems, no perspective room, no text, labels or watermark. Keep the outside stone border matching image2 in darkness. Square opaque image, intended nearest reduction to64x64.",
+      "references": [
+        "sources/f1_tapestry.png",
+        "assets/art/env/painted_f2_plain_0.png"
+      ],
+      "saved_source": "sources/f2_tapestry.png"
+    },
+    "f2_crack": {
+      "prompt": "Use case: lighting-weather. Edit image1, the finished FLOOR ONE crack wall face, into FLOOR TWO: older, darker and wetter, matching the approved stone material in image2. Keep exact subject geometry, silhouette, wall courses, arch/door leaf/bracket positions, camera, source resolution and square registration. Preserve the exact fissure with its dark deep core, broken chips and lower-front lit stone lip. Repaint stone faces in subdued darker slate-grey with damp dark olive/grey-green pore texture, moss in irregular existing joints, a few narrow water/mineral streaks and patchy wet highlights; preserve grain visibly through stains. Low warm front lamp bounce still picks out chipped lower edges and iron/wood details. Hand-painted coarse clusters, not flat vector geometry or realistic photo. Do not cover the surface in solid teal, do not add objects or change stone geometry. Opaque square wall-face texture, not a whole room; no text or watermark.",
+      "references": [
+        "sources/f1_crack.png",
+        "assets/art/env/painted_f2_plain_0.png"
+      ],
+      "saved_source": "sources/f2_crack.png"
+    },
+    "f2_damp": {
+      "prompt": "Use case: lighting-weather. Image1 is the finished painted abbey wall with textured damp stains; image2 is the lower-floor material reference. Repaint image1 for the older wetter FLOOR TWO while preserving exact stone positions, four large-block courses and camera/canvas. Darker cool slate-grey stone faces; soft irregular water/mineral streaks spread from the TWO middle horizontal mortar joints, branching through pores, with grey-olive moss cushions tucked beneath rough stone lips, a few tiny pale moisture glints in low crevices. Keep every stain porous and mottled so the original chipped stone grain remains visible, with clear untouched patches between different trails. A little pale salt bloom and brown mineral leaching, no uniform repeating spots. Stronger and wetter than upstairs, but restrained desaturated colour, absolutely NO flat teal shape/blob or smooth green fill. Warm low-front lamp bounce barely catches protruding wet chips; crevices dark. Original crunchy hand-painted 1993 texture, square orthographic wall-face, no room, text or watermark.",
+      "references": [
+        "sources/f1_damp.png",
+        "assets/art/env/painted_f2_plain_0.png"
+      ],
+      "saved_source": "sources/f2_damp.png"
+    }
+  },
+  "derivation": "Nearest resize and weighted nearest palette projection with no dithering; shared 2px ring; torch fire and door inner registration masks only. All old PNGs preserved."
+}

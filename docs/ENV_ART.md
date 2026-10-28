@@ -6,7 +6,11 @@ PNGs, exact built-in imagegen prompts, code drawings, deterministic reduction,
 and contact sheets live in the corresponding `art_src/` folders.
 
 **Primary revision:** use `painted_f1_*.png` / `painted_f2_*.png` for walls;
-the new decorative blockages are `painted_fN_arch_blocked.png` and
+the latest **painted dressing** faces are `painted_fN_<kind>_v2.png` for
+door/open door, drain, two sconce frames, chains, tapestry, crack and damp.
+Use the matching `door_open_overlay_v2` for an opened live lock portal.
+The large-block plain walls remain unchanged. See **Painted dressing v2**.
+The decorative blockages are `painted_fN_arch_blocked.png` and
 `painted_fN_door_barricaded.png` (both floors). Retire the old open-looking
 `painted_fN_arch.png` from random dressing. Keep actual lock/gate art distinct.
 the latest plane offer is the shared `calm_v3_floor_*` / `calm_v3_ceiling_*`
@@ -37,12 +41,20 @@ All previous art remains intact. See
 From the repository root, with Python and Pillow installed:
 
 ```powershell
-python -B art_src/ui_offer/ivy_v4/build_leafy.py
-python -B art_src/ui_offer/ivy_v4/verify_leafy.py --rebuild
+python -B art_src/env/dressing_v2/build_dressings.py
+python -B art_src/env/dressing_v2/verify_dressings.py --rebuild
 python -B art_src/env/verify_polish.py
 ```
 
-This rebuilds only the leafy v4 layers, registration and proofs; the focused
+This rebuilds only the painted dressing v2 faces, two open portal layers,
+registration and proofs, from the 18 saved source paintings. For leafy ivy:
+
+```powershell
+python -B art_src/ui_offer/ivy_v4/build_leafy.py
+python -B art_src/ui_offer/ivy_v4/verify_leafy.py --rebuild
+```
+
+These rebuild only the leafy v4 layers, registration and proofs; the focused
 verifier also rebuilds once and compares hashes. It never rebuilds or writes
 v3. The previous icon pack's builder remains
 `python -B art_src/ui_offer/ivy_v3/build_ivy.py`. The closed-face
@@ -102,6 +114,12 @@ and contact sheets still use the shared indexed palette and binary alpha.
 
 | Set | Native size | 4x review sheet |
 | --- | --- | --- |
+| Current painted wall dressings v2 | Twenty 64 x 64 faces/portal layers | `art_src/env/dressing_v2/contact_sheet_4x.png` |
+| Painted dressing per floor | Ten 64 x 64 faces each | `art_src/env/dressing_v2/floor{1,2}/contact_sheet_4x.png` |
+| Old shapes / painted F1 / painted F2 | Seven rows of comparison | `art_src/env/dressing_v2/comparison/contact_sheet_4x.png` |
+| Painted dressing corridor | Four 148 x 150 views, d1-d3 side segments | `art_src/env/dressing_v2/mockup_corridor_4x.png` |
+| Actual wooden lock door states | Closed / opaque open / transparent live route, both floors | `art_src/env/dressing_v2/mockup_doors_4x.png` |
+| Painted dressing distance proof | Seven faces at depths 1, 2 and 3 | `art_src/env/dressing_v2/mockup_depths_4x.png` |
 | Current leafy ivy, v4 | Game 154 x 342; compass 74 x 51; map 144 x 324 | `art_src/ui_offer/ivy_v4/contact_sheet_4x.png` |
 | Current game and leafy torn-map offer | Two 154 x 342 screens | `art_src/ui_offer/ivy_v4/mockup_screen_4x.png` |
 | V3 versus v4, same camera | Two 154 x 342 game screens | `art_src/ui_offer/ivy_v4/comparison_4x.png` |
@@ -217,6 +235,119 @@ Keep the surface cache and include the selected floor material in its key.
 These are orthographic materials, **not** perspective pictures. Map one tile
 to one world cell, with the same orientation on every cell. The ceiling has
 restrained stone ribs; floor two has pooled teal water, with no gameplay hazard.
+
+## Painted dressing v2: no flat shapes on the stone
+
+These replace the first painted-wall set's code-drawn subjects with **18
+individual built-in imagegen paintings**: nine faces/states on each floor.
+Every subject is painted into the original favourite large-block masonry,
+then reduced by nearest-neighbour to 64 x 64 and the shared 31 opaque inks.
+There are no new code-drawn grate bars, chains, banners or damp silhouettes.
+The only subsequent pixel operations register states, restore the accepted
+two-pixel edge ring and cut the live doorway aperture. All old art remains.
+
+Saved high-resolution paintings and the exact prompt/reference for every
+one are in `art_src/env/dressing_v2/sources/` and `prompts.json`. Floor 2 is
+an individually painted darker/wetter edit of each finished floor-1 subject,
+using the existing deep stone as material reference. Its chipped joints,
+porous moss and water/mineral trails retain the same physical objects.
+Iron carries rust flakes and contact shadows; low-front warm lamp catches
+protruding edges, with cooler dark crevices. No new UI, collision, fixture or
+simulation behaviour is included.
+
+### Files, size and registration
+
+All files below are under **`assets/art/env/`**, replacing `N` with `1` or
+`2`. All are **64 x 64**, top-left anchor `(0,0)`, and use the existing
+wall-column UVs and nearest sampling. There are no d1/d2/d3 sprite copies:
+one face is sampled at every distance. Scale and colour are already baked
+into the texture; retain the renderer's normal distance/side lamp factor.
+
+| New basename, `.png` | Intended use and painted details |
+| --- | --- |
+| `painted_fN_door_v2` | Functional locked door: carved worn stone arch, split oak grain, blackened iron straps/rivets, lock plate/keyhole and ring pull |
+| `painted_fN_door_open_v2` | Same arch and threshold, left-hinged leaf swung inward, dark passage beyond; full opaque face/reference |
+| `painted_fN_door_open_overlay_v2` | Same opened painting with real binary-alpha passage, for the live walk-through lock portal |
+| `painted_fN_drain_v2` | Rusted iron grate recessed in chipped stone; deep gaps, lit stone lip and irregular dirt/mineral streaks below |
+| `painted_fN_sconce_0_v2`, `_sconce_1_v2` | Two torch flames over the same forged basket/bracket, mounting plate, soot-stained wall and warm bounced light |
+| `painted_fN_chains_v2` | Heavy uneven rusted links, wall rings, one closed and one broken cuff, iron depth and cast shadows |
+| `painted_fN_tapestry_v2` | Folded, torn, moth-eaten cloth; faded bell woven into the sagging fabric, frayed hems and rod shadow |
+| `painted_fN_crack_v2` | Fissure breaking stone through the joint, dark core, broken chips and a lit projecting lip |
+| `painted_fN_damp_v2` | Porous olive/grey-green moss and mineral trails following mortar and stone grain; untouched stone between trails |
+
+The opaque open face is useful for flat previews, but **the live opened lock
+must use the transparent overlay**. An opaque black painting would hide the
+world behind the door. The overlay's alpha aperture has no bars; its left
+wooden leaf remains opaque. No portcullis art is reused for this door.
+
+The arch, jambs and threshold outside the saved `door_interior` mask are
+pixel-identical between closed and open states. The hole and inward leaf
+remain registered when the lock opens. Both torches run **250 ms per frame**,
+two frames, looping as before. Only the saved `sconce_flame` polygon changes;
+the bracket, mounting hardware, remaining wall and soot remain fixed.
+Mask PNGs and their native polygons are in `dressing_v2/masks/` and
+`layout.json`. There is no extra full-wall flicker or moving masonry.
+
+Every face, including the alpha overlay, preserves the exact two-pixel
+border of its accepted `painted_fN_plain_0.png`. Opposite edge rows/columns
+match, so the new faces join any existing plain variant or sealed dressing.
+Mixed tile proofs are `floor1_repeat_4x.png` and `floor2_repeat_4x.png`.
+The original wall, all three plain variants and the accepted sealed arch /
+permanently barricaded decorative door are unchanged.
+
+### Exact swaps for Codex A
+
+1. In `dungeon_view.gd::_wall_path`, preserve the current stable hash and
+   placement exclusions. Only `drain`, `chains`, `tapestry`, `crack`, `damp`
+   and the fully expanded `sconce_0` / `sconce_1` choose the new `_v2` suffix.
+   Keep `plain_0/1/2`, `arch_blocked` and `door_barricaded` paths as they are.
+   The two animated sconce paths also need swapping in the prewarm loop.
+2. In `_build_camera`'s **closed lock solid-cell override**, change
+   `painted_fN_door.png` to `painted_fN_door_v2.png`. This is the actual key
+   door, distinct from the randomly placed decorative barricades.
+3. In `_architecture`, choose
+   `painted_fN_door_open_overlay_v2.png` for **`kind == "lock"` with
+   `fixture.open`**. Keep the existing portal-plane projection and binary
+   alpha drawing, so the true deeper floor/walls/actors show through.
+   Leave the gate, web and cord paths alone. Keep opened locks passable and
+   preserve their current fixture IDs/hit handling; do not insert a solid
+   wall face at an opened lock's cell.
+4. Keep native sampling, lamp/side shading and the existing two-frame cadence.
+   No new item, cue, blocker, atlas or turn-state change is required.
+
+`dressing_v2/layout.json` is the machine-readable handoff, with file roles,
+registration, masks, timing and the same path rules. This pack does not edit
+the renderer or implement those swaps.
+
+### Painting and in-view review
+
+- `art_src/env/dressing_v2/contact_sheet_4x.png`: both complete floor sets.
+- `floor1/contact_sheet_4x.png`, `floor2/contact_sheet_4x.png`: each set alone,
+  including the optional opaque-open reference and production alpha overlay.
+- `comparison/contact_sheet_4x.png`: old flat dressing / painted F1 / painted
+  F2 for all seven original subjects.
+- `mockup_corridor_4x.png`: both floors, showing a drain and chains at d1,
+  tapestry and torch at d2, fissure and damp at d3. The far door is naturally
+  almost black at the current renderer's 3.5-cell lamp limit.
+- `mockup_doors_4x.png`: each actual door closed, open as an opaque face,
+  and open as a portal showing the deeper corridor, at a readable near depth.
+- `mockup_depths_4x.png`: seven faces viewed head-on at depths 1, 2 and 3,
+  with the actual distance lamp factor, to judge what survives at phone scale.
+
+All proofs have exact native counterparts. The material views are offline
+proxy corridors at the same **148 x 150, focal 74, horizon 71** column
+camera, using the accepted calm plane family and normal lamp/side factors.
+They are illustrative material proofs, not live captures, proposed fixture
+placements or a claim the runtime paths have changed. No text or monsters
+were added to the views.
+
+Rebuild with `build_dressings.py` and run `verify_dressings.py --rebuild`,
+then the combined `verify_polish.py`, as shown above. The focused check
+guards the old PNG hashes, all shared edges, exact arch/fixture registration,
+unobstructed portal alpha, two-frame fire mask, darker floor-2 luminance,
+real d1-d3 proof placement and exact 4x enlargement. Rerunning from the saved
+paintings is deterministic; rerunning imagegen from the prompts may differ.
+No Godot runs or commits by C. A/Claude still perform integration/phone review.
 
 ## Closed decorative arches and broken doors
 
@@ -1211,27 +1342,6 @@ the asset checks and focused FX test do not claim phone performance acceptance.
 
 
 
-## Ivy and verb revision receipt, 28 October 2026
-
-- Added **42 runtime PNGs**: 29 canonical verb stamps, seven separately drawn
-  narrow siblings, game/compass/map border layers, two tiny torch frames and
-  the standalone sleepy skull. The C kit verifies at **249 runtime PNGs**:
-  31 opaque palette inks, binary alpha and exact nearest 4x sheets.
-- All **207 earlier C runtime PNGs** and both owner reference PNGs remain
-  byte-for-byte unchanged. Focused checks pass for camera/world clearance,
-  message/item/portrait/health pixels, control interiors, every compass
-  heading/dial position, and existing map geometry/ink.
-- **66 full-word layout cases** pass at VETKA 16: all 29 gameplay verbs at
-  both 22 and 24 px height, plus eight current item-card verbs. Narrow
-  glyphs preserve long words in the existing 48 px controls. No labels,
-  font sizes, touch rects or runtime UI code changed.
-- Game/map, long-word, ornament and icon proofs are offline composites.
-  Rebuilding produced identical hashes for **67 PNG/JSON files**; see
-  `art_src/ui_offer/ivy_v3/rebuild_receipt.json` and `verification.json`.
-- A selects the layers and per-verb source PNGs from `ivy_v3/layout.json`,
-  handles normal/card/map visibility, and performs the phone review. No
-  Godot runs, staging or commits by C.
-
 ## Leafy ivy v4 revision receipt, 28 October 2026
 
 - Added **three runtime PNGs**: broader leafy game, compass and map layers.
@@ -1247,3 +1357,25 @@ the asset checks and focused FX test do not claim phone performance acceptance.
   **`(80,291)`**, and retains old icons/torches. Full-screen/map, side-by-side
   and contact proofs are under `art_src/ui_offer/ivy_v4/`; `layout.json`
   supplies the exact registrations. No Godot runs, staging or commits by C.
+
+## Painted dressing v2 receipt, 29 October 2026
+
+- Added **20 runtime PNGs** from **18 saved individual imagegen paintings**:
+  nine opaque faces/states per floor and two live open-door alpha overlays.
+  The combined C kit verifies at **272 runtime PNGs** with the shared 31
+  opaque inks, binary alpha, common wall edges and exact nearest 4x proofs.
+- All **252 preceding C runtime PNGs** plus the original favourite
+  `assets/art/stone_wall.png` remain byte-for-byte unchanged. No renderer,
+  gameplay, UI, fixture data or interaction code was edited.
+- Focused checks pass for every two-pixel seam ring, opposite edges,
+  stationary arch/threshold between door states, actual unobstructed portal
+  alpha, and fixed torch hardware/soot/masonry outside the two-frame fire
+  mask. F2 mean interior luminance is 59–72% of its corresponding F1 face.
+- The corridor proof places six dressings across actual d1/d2/d3 wall
+  segments; separate near-door and distance sheets show the opened live
+  route and what survives the existing lamp falloff. These are offline
+  proxy views, not engine or phone acceptance.
+- Rebuilding produced identical hashes for **74 PNG/JSON files**; see
+  `art_src/env/dressing_v2/rebuild_receipt.json` and `verification.json`.
+  A swaps the six dressing families, the closed lock override, and only
+  the opened lock's portal path. No Godot runs, staging or commits by C.

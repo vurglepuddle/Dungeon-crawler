@@ -1,0 +1,472 @@
+{
+  "schema_version": 1,
+  "registrations": [
+    {
+      "path": "assets/art/env/painted_f1_door_v2.png",
+      "floor": 1,
+      "kind": "door",
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "frame_ms": null,
+      "role": "opaque wall-face texture",
+      "interactive": true,
+      "art_supplies_collision": false
+    },
+    {
+      "path": "assets/art/env/painted_f1_door_open_v2.png",
+      "floor": 1,
+      "kind": "door_open",
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "frame_ms": null,
+      "role": "opaque wall-face texture",
+      "interactive": true,
+      "art_supplies_collision": false
+    },
+    {
+      "path": "assets/art/env/painted_f1_drain_v2.png",
+      "floor": 1,
+      "kind": "drain",
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "frame_ms": null,
+      "role": "opaque wall-face texture",
+      "interactive": false,
+      "art_supplies_collision": false
+    },
+    {
+      "path": "assets/art/env/painted_f1_sconce_0_v2.png",
+      "floor": 1,
+      "kind": "sconce_0",
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "frame_ms": 250,
+      "role": "opaque wall-face texture",
+      "interactive": false,
+      "art_supplies_collision": false
+    },
+    {
+      "path": "assets/art/env/painted_f1_sconce_1_v2.png",
+      "floor": 1,
+      "kind": "sconce_1",
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "frame_ms": 250,
+      "role": "opaque wall-face texture",
+      "interactive": false,
+      "art_supplies_collision": false
+    },
+    {
+      "path": "assets/art/env/painted_f1_chains_v2.png",
+      "floor": 1,
+      "kind": "chains",
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "frame_ms": null,
+      "role": "opaque wall-face texture",
+      "interactive": false,
+      "art_supplies_collision": false
+    },
+    {
+      "path": "assets/art/env/painted_f1_tapestry_v2.png",
+      "floor": 1,
+      "kind": "tapestry",
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "frame_ms": null,
+      "role": "opaque wall-face texture",
+      "interactive": false,
+      "art_supplies_collision": false
+    },
+    {
+      "path": "assets/art/env/painted_f1_crack_v2.png",
+      "floor": 1,
+      "kind": "crack",
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "frame_ms": null,
+      "role": "opaque wall-face texture",
+      "interactive": false,
+      "art_supplies_collision": false
+    },
+    {
+      "path": "assets/art/env/painted_f1_damp_v2.png",
+      "floor": 1,
+      "kind": "damp",
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "frame_ms": null,
+      "role": "opaque wall-face texture",
+      "interactive": false,
+      "art_supplies_collision": false
+    },
+    {
+      "path": "assets/art/env/painted_f1_door_open_overlay_v2.png",
+      "floor": 1,
+      "kind": "door_open_overlay",
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "frame_ms": null,
+      "role": "transparent portal plane for opened functional lock",
+      "interactive": true,
+      "art_supplies_collision": false
+    },
+    {
+      "path": "assets/art/env/painted_f2_door_v2.png",
+      "floor": 2,
+      "kind": "door",
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "frame_ms": null,
+      "role": "opaque wall-face texture",
+      "interactive": true,
+      "art_supplies_collision": false
+    },
+    {
+      "path": "assets/art/env/painted_f2_door_open_v2.png",
+      "floor": 2,
+      "kind": "door_open",
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "frame_ms": null,
+      "role": "opaque wall-face texture",
+      "interactive": true,
+      "art_supplies_collision": false
+    },
+    {
+      "path": "assets/art/env/painted_f2_drain_v2.png",
+      "floor": 2,
+      "kind": "drain",
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "frame_ms": null,
+      "role": "opaque wall-face texture",
+      "interactive": false,
+      "art_supplies_collision": false
+    },
+    {
+      "path": "assets/art/env/painted_f2_sconce_0_v2.png",
+      "floor": 2,
+      "kind": "sconce_0",
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "frame_ms": 250,
+      "role": "opaque wall-face texture",
+      "interactive": false,
+      "art_supplies_collision": false
+    },
+    {
+      "path": "assets/art/env/painted_f2_sconce_1_v2.png",
+      "floor": 2,
+      "kind": "sconce_1",
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "frame_ms": 250,
+      "role": "opaque wall-face texture",
+      "interactive": false,
+      "art_supplies_collision": false
+    },
+    {
+      "path": "assets/art/env/painted_f2_chains_v2.png",
+      "floor": 2,
+      "kind": "chains",
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "frame_ms": null,
+      "role": "opaque wall-face texture",
+      "interactive": false,
+      "art_supplies_collision": false
+    },
+    {
+      "path": "assets/art/env/painted_f2_tapestry_v2.png",
+      "floor": 2,
+      "kind": "tapestry",
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "frame_ms": null,
+      "role": "opaque wall-face texture",
+      "interactive": false,
+      "art_supplies_collision": false
+    },
+    {
+      "path": "assets/art/env/painted_f2_crack_v2.png",
+      "floor": 2,
+      "kind": "crack",
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "frame_ms": null,
+      "role": "opaque wall-face texture",
+      "interactive": false,
+      "art_supplies_collision": false
+    },
+    {
+      "path": "assets/art/env/painted_f2_damp_v2.png",
+      "floor": 2,
+      "kind": "damp",
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "frame_ms": null,
+      "role": "opaque wall-face texture",
+      "interactive": false,
+      "art_supplies_collision": false
+    },
+    {
+      "path": "assets/art/env/painted_f2_door_open_overlay_v2.png",
+      "floor": 2,
+      "kind": "door_open_overlay",
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "frame_ms": null,
+      "role": "transparent portal plane for opened functional lock",
+      "interactive": true,
+      "art_supplies_collision": false
+    }
+  ],
+  "sampling": "Existing 64px wall-column UVs; no depth-specific copies, nearest filtering.",
+  "plain_walls": "Keep accepted painted_fN_plain_0/1/2. Sealed arch_blocked/door_barricaded are also unchanged.",
+  "random_dressing_rule": "Preserve current hash/placement; for sconce,drain,chains,tapestry,crack,damp append _v2 after the complete old stem, including sconce frame number.",
+  "lock_closed": "In closed lock solid-cell override use painted_fN_door_v2.png, not decorative barricaded art.",
+  "lock_open": "In _architecture() route only kind==lock && fixture.open to painted_fN_door_open_overlay_v2.png. Leave actual gate/web/cord portal paths intact. Open locks remain passable.",
+  "opaque_open": "painted_fN_door_open_v2.png is a full opaque reference/flat face; use alpha overlay in a live walk-through corridor so world/actors remain visible.",
+  "sconce_sequence": [
+    "sconce_0_v2",
+    "sconce_1_v2"
+  ],
+  "frame_ms": [
+    250,
+    250
+  ],
+  "shared_ring_px": 2,
+  "door_inner_polygon": [
+    [
+      14,
+      57
+    ],
+    [
+      14,
+      21
+    ],
+    [
+      16,
+      16
+    ],
+    [
+      20,
+      12
+    ],
+    [
+      25,
+      10
+    ],
+    [
+      31,
+      9
+    ],
+    [
+      37,
+      10
+    ],
+    [
+      43,
+      13
+    ],
+    [
+      47,
+      18
+    ],
+    [
+      49,
+      24
+    ],
+    [
+      49,
+      57
+    ]
+  ],
+  "open_portal_aperture_polygon": [
+    [
+      27,
+      56
+    ],
+    [
+      27,
+      15
+    ],
+    [
+      31,
+      11
+    ],
+    [
+      36,
+      12
+    ],
+    [
+      42,
+      15
+    ],
+    [
+      46,
+      20
+    ],
+    [
+      47,
+      25
+    ],
+    [
+      47,
+      56
+    ]
+  ],
+  "flicker_polygon": [
+    [
+      22,
+      5
+    ],
+    [
+      40,
+      5
+    ],
+    [
+      40,
+      19
+    ],
+    [
+      37,
+      20
+    ],
+    [
+      28,
+      20
+    ],
+    [
+      28,
+      24
+    ],
+    [
+      22,
+      24
+    ]
+  ],
+  "method": "18 saved individual imagegen paintings -> nearest resize -> shared 31 opaque inks + transparent index0 -> registration and seam repair only.",
+  "integration_status": "Asset offer only; no code, interaction or simulation changes."
+}

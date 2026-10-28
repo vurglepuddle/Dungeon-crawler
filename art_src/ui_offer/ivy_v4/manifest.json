@@ -1,0 +1,127 @@
+{
+  "palette": "art_src/spike/palette.gpl",
+  "colours_union": 15,
+  "files": [
+    {
+      "path": "art_src/ui_offer/ivy_v4/contact_sheet_4x.png",
+      "size": [
+        1976,
+        1580
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        1976,
+        1580
+      ],
+      "colours": 14,
+      "sha256": "cae1f249e5f09b17337f7ecf13af78a9669353370393826c879b6e9b895b283c"
+    },
+    {
+      "path": "art_src/ui_offer/ivy_v4/contact_sheet_native.png",
+      "size": [
+        494,
+        395
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        494,
+        395
+      ],
+      "colours": 14,
+      "sha256": "9129c8758e0cea63e8edda5047c6e4b2077f908635db91516b919993b9858364"
+    },
+    {
+      "path": "assets/art/ui_offer/ivy_compass_v4.png",
+      "size": [
+        74,
+        51
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        74,
+        51
+      ],
+      "colours": 9,
+      "sha256": "253ad7e021c346ba24dfd7f74681293d31da8b583afe94b0aba953bda8e66648"
+    },
+    {
+      "path": "assets/art/ui_offer/ivy_game_border_v4.png",
+      "size": [
+        154,
+        342
+      ],
+      "opaque_bounds": [
+        0,
+        18,
+        154,
+        342
+      ],
+      "colours": 10,
+      "sha256": "c77d075bd106645c9c57d43c40dfcf6ea3e86b08f0e714b687968a96c5bd618d"
+    },
+    {
+      "path": "assets/art/ui_offer/ivy_map_border_v4.png",
+      "size": [
+        144,
+        324
+      ],
+      "opaque_bounds": [
+        4,
+        3,
+        141,
+        321
+      ],
+      "colours": 8,
+      "sha256": "447daf3f281207a3b119be574f1536e6f0429a3899cb0d1456de115b17cb61e7"
+    }
+  ],
+  "sources": [
+    {
+      "path": "art_src/ui_offer/ivy_v4/sources/entry.png",
+      "sha256": "769c5fc4c5606fa2a900b403e3873413b1a94410f70567046ba3501336b681e5"
+    },
+    {
+      "path": "art_src/ui_offer/ivy_v4/sources/map.png",
+      "sha256": "051568bb3b29ad2401f0df60820467222c067690c09488ce89782f785e50aee0"
+    }
+  ],
+  "runtime_count": 3,
+  "layout": "layout.json",
+  "preview_files": [
+    {
+      "path": "art_src/ui_offer/ivy_v4/comparison_4x.png",
+      "sha256": "c13a567d390ce36f6144e8f2fae89738d7cfc475b2db742125fb7e68ea843996"
+    },
+    {
+      "path": "art_src/ui_offer/ivy_v4/comparison_native.png",
+      "sha256": "77bda1939843041e288f6d0f55f150ca562be00821e3dc7473e2dd6201203bf9"
+    },
+    {
+      "path": "art_src/ui_offer/ivy_v4/mockup_game_4x.png",
+      "sha256": "f1aa43ceb328282468f4b7844ce772b9a18f839f7ed51033c38cca903e778fa1"
+    },
+    {
+      "path": "art_src/ui_offer/ivy_v4/mockup_game_native.png",
+      "sha256": "bf1a8f7cba169eff1980a7bbbddc26a11b4896e14b480e0fa965c734230e937a"
+    },
+    {
+      "path": "art_src/ui_offer/ivy_v4/mockup_map_4x.png",
+      "sha256": "bdef152b9b5071ab08837e5fbb41b76303de12044b88fe55750036010b0178b1"
+    },
+    {
+      "path": "art_src/ui_offer/ivy_v4/mockup_map_native.png",
+      "sha256": "0d36d3467f300f52dbeecc0a8d1f15faf71a1698741985b6b6827d1550100685"
+    },
+    {
+      "path": "art_src/ui_offer/ivy_v4/mockup_screen_4x.png",
+      "sha256": "1c17b9ef6dc64e78dd18bdc8ce65b1ae0c58ec27904d0115fad37285d647223c"
+    },
+    {
+      "path": "art_src/ui_offer/ivy_v4/mockup_screen_native.png",
+      "sha256": "f7120172a7a13ea6a3ca47758c15b12ad64a7a9504fc6f2856f584c36905a87a"
+    }
+  ]
+}
