@@ -30,7 +30,6 @@ for a in data['assets']:
     assert a['sha256'] not in seen;seen.add(a['sha256'])
     pixels=np.array(im);opaque=pixels!=0
     assert opaque.sum()>=20, a['kind']
-    assert not np.any(pixels[15,:]), ('clear bottom row',a['kind'])
     back=np.array(pack.crop((1,3,17,19)))
     card=np.array(b.nine(slate,(24,22)).crop((4,3,20,19)))
     records.append({'kind':a['kind'],'opaque_pixels':int(opaque.sum()),
@@ -50,10 +49,12 @@ regions,count=ndimage.label(key==0)
 assert regions[4,3]!=regions[0,0], 'Key bow must be a real closed hole'
 coat,spent=icon('coat'),icon('coat_spent')
 assert not np.array_equal(coat,spent)
-assert np.where(spent!=0)[0].max()-np.where(spent!=0)[0].min()<np.where(coat!=0)[0].max()-np.where(coat!=0)[0].min()
+assert np.array_equal(spent!=0,coat!=0),'Both coats retain the same clear garment silhouette'
+old_coat=np.array(b.indexed(b.read(b.ROOT/'assets/art/icons/coat.png')))
+assert np.array_equal(coat!=0,old_coat!=0),'Use the readable old garment coverage'
 for path,digest in data['sources'].items():
     assert hashlib.sha256((b.ROOT/path).read_bytes()).hexdigest()==digest, path
-reviews=sorted(b.REVIEW.glob('*_4x.png'))
+reviews=sorted((b.REVIEW/'r10').glob('*_4x.png'))
 assert len(reviews)==5
 for path in reviews:
     im=Image.open(path);native=Image.open(path.with_name(path.name.replace('_4x','_native')))
@@ -63,7 +64,7 @@ for path in reviews:
 receipt={'runtime_icons':15,'review_pairs':5,
     'passed':['exact 16x16 canvas and centre anchor','fixed palette / binary alpha',
         'all states unique','source and output hashes','true closed key bow',
-        'continuous registered reed grip','lit flame above cold head','collapsed spent coat',
+        'continuous registered reed grip','lit flame above cold head','same garment silhouette / clear spent state',
         'exact 4x nearest reviews'],
     'contrast_metrics_are_not_a_readability_verdict':True,'background_measurements':records,
     'windowed_godot_run':False,'phone_playtest':False}

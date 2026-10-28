@@ -248,14 +248,10 @@ def reviews(icons):
 
 
 def main():
-    icons=build();reviews(icons)
-    manifest(REVIEW/'manifest.json',{'assets':ASSETS,
-        'sources':{p.relative_to(ROOT).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(INPUTS)},
-        'reduction':'Source alpha principal component, NEAREST, fixed shared palette, binary alpha.',
-        'native_cleanup':'Material rim; knife edge/grip; key bow; tonic red; coat stuffing/tears; chipped stone; widened continuous reed and painted-flame connection.',
-        'icon_size':[16,16],'anchor':[8,8],'animation':'static; select cold/lit and intact/spent states',
-        'reviews':'Offline composites on actual pack/slate materials; not engine captures or proposed card redesign.'})
-    print(f'Pack illustrations: {len(ASSETS)} icons, five native / 4x review pairs')
+    # Default rebuild follows the owner's current r10 direction. The original
+    # r9 code/PNGs/receipt are preserved under pack_icons/r9 for comparison.
+    import runpy
+    runpy.run_path(str(REVIEW/'r10/build.py'),run_name='__main__')
 
 
 if __name__=='__main__':main()

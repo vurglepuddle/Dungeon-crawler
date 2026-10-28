@@ -9,22 +9,22 @@
     "true closed key bow",
     "continuous registered reed grip",
     "lit flame above cold head",
-    "collapsed spent coat",
+    "same garment silhouette / clear spent state",
     "exact 4x nearest reviews"
   ],
   "contrast_metrics_are_not_a_readability_verdict": true,
   "background_measurements": [
     {
       "kind": "knife",
-      "opaque_pixels": 41,
-      "mean_luminance_difference_pack": 0.3622,
-      "mean_luminance_difference_slate": 0.3731
+      "opaque_pixels": 93,
+      "mean_luminance_difference_pack": 0.2574,
+      "mean_luminance_difference_slate": 0.2762
     },
     {
       "kind": "shard",
-      "opaque_pixels": 54,
-      "mean_luminance_difference_pack": 0.3328,
-      "mean_luminance_difference_slate": 0.3442
+      "opaque_pixels": 119,
+      "mean_luminance_difference_pack": 0.2815,
+      "mean_luminance_difference_slate": 0.2985
     },
     {
       "kind": "club",
@@ -58,15 +58,15 @@
     },
     {
       "kind": "coat",
-      "opaque_pixels": 104,
-      "mean_luminance_difference_pack": 0.2453,
-      "mean_luminance_difference_slate": 0.259
+      "opaque_pixels": 161,
+      "mean_luminance_difference_pack": 0.1902,
+      "mean_luminance_difference_slate": 0.2085
     },
     {
       "kind": "coat_spent",
-      "opaque_pixels": 80,
-      "mean_luminance_difference_pack": 0.2892,
-      "mean_luminance_difference_slate": 0.3051
+      "opaque_pixels": 161,
+      "mean_luminance_difference_pack": 0.1997,
+      "mean_luminance_difference_slate": 0.2161
     },
     {
       "kind": "key",
@@ -88,25 +88,23 @@
     },
     {
       "kind": "torch_unlit",
-      "opaque_pixels": 41,
-      "mean_luminance_difference_pack": 0.3508,
-      "mean_luminance_difference_slate": 0.3575
+      "opaque_pixels": 97,
+      "mean_luminance_difference_pack": 0.2583,
+      "mean_luminance_difference_slate": 0.2694
     },
     {
       "kind": "torch_lit",
-      "opaque_pixels": 63,
-      "mean_luminance_difference_pack": 0.3963,
-      "mean_luminance_difference_slate": 0.4098
+      "opaque_pixels": 107,
+      "mean_luminance_difference_pack": 0.225,
+      "mean_luminance_difference_slate": 0.2383
     },
     {
       "kind": "seal",
-      "opaque_pixels": 149,
-      "mean_luminance_difference_pack": 0.3766,
-      "mean_luminance_difference_slate": 0.3973
+      "opaque_pixels": 194,
+      "mean_luminance_difference_pack": 0.3714,
+      "mean_luminance_difference_slate": 0.3955
     }
   ],
   "windowed_godot_run": false,
-  "phone_playtest": false,
-  "deterministic_rebuild": true,
-  "read_only_dependencies_unchanged": true
+  "phone_playtest": false
 }

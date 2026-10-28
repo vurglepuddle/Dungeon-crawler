@@ -1,0 +1,73 @@
+{
+  "revision": "r10",
+  "revised_states": 7,
+  "optional_club": 1,
+  "accepted_unchanged": 8,
+  "archived_r9_states": 15,
+  "review_pairs": 5,
+  "passed": [
+    "r9 archive byte hashes",
+    "accepted runtime files unchanged",
+    "16px palette and binary alpha",
+    "one continuous silhouette per icon",
+    "same upright coat silhouette",
+    "registered reed body",
+    "larger rejected-item silhouettes",
+    "four-ink glass",
+    "five-ink launcher Seal",
+    "exact 4x nearest"
+  ],
+  "measurements": [
+    {
+      "kind": "knife",
+      "r9_opaque_pixels": 41,
+      "r10_opaque_pixels": 93,
+      "r9_opaque_inks": 18,
+      "r10_opaque_inks": 8
+    },
+    {
+      "kind": "shard",
+      "r9_opaque_pixels": 54,
+      "r10_opaque_pixels": 119,
+      "r9_opaque_inks": 13,
+      "r10_opaque_inks": 4
+    },
+    {
+      "kind": "coat",
+      "r9_opaque_pixels": 104,
+      "r10_opaque_pixels": 161,
+      "r9_opaque_inks": 23,
+      "r10_opaque_inks": 5
+    },
+    {
+      "kind": "coat_spent",
+      "r9_opaque_pixels": 80,
+      "r10_opaque_pixels": 161,
+      "r9_opaque_inks": 17,
+      "r10_opaque_inks": 8
+    },
+    {
+      "kind": "torch_unlit",
+      "r9_opaque_pixels": 41,
+      "r10_opaque_pixels": 97,
+      "r9_opaque_inks": 14,
+      "r10_opaque_inks": 8
+    },
+    {
+      "kind": "torch_lit",
+      "r9_opaque_pixels": 63,
+      "r10_opaque_pixels": 107,
+      "r9_opaque_inks": 15,
+      "r10_opaque_inks": 9
+    },
+    {
+      "kind": "seal",
+      "r9_opaque_pixels": 149,
+      "r10_opaque_pixels": 194,
+      "r9_opaque_inks": 24,
+      "r10_opaque_inks": 5
+    }
+  ],
+  "godot_run": false,
+  "human_acceptance": "awaiting owner art review"
+}

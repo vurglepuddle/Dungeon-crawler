@@ -1047,28 +1047,29 @@ ivory bone, scored loaf, red flask, teal quilting, torn stuffing, open key bow,
 solid clapper ball and hooded lamp retain their accepted painted identities.
 The stone has an asymmetric chipped outline and geological faces, without a
 helmet-like level brim. Key and clapper remain distinct through a **true
-transparent closed bow** versus a solid ball. The spent coat collapses and
-exposes pale stuffing, consistent with the earlier spent icon and world art.
+transparent closed bow** versus a solid ball. The current r10 spent coat keeps
+the intact coat's upright silhouette, with two clear tears and pale stuffing.
+Its world sprite still uses the earlier flattened painting; this change is
+specific to the pack.
 
-Reduction starts with the original source paintings rather than downscaling
-the already-reduced world PNGs. Material-coloured rim pixels, knife edge/grip,
-key bow, tonic hue, coat tears and a stone chip receive small native edits
-where 16px sampling loses a useful cue. The reed fan and grip are sampled
-separately and proportioned for icon readability; the leaning grip is
-continuous and exactly shared below the flame between states. Lit reeds add
-painted flame material from the accepted burning-web source. Both reed icons
-are static; leave flicker in the held/world presentation.
+The r9 set started with the original paintings and native cue cleanup. The
+owner accepted stone, bone, bread, clapper, lamp, key and tonic, plus the regular
+club. Their r9 PNGs remain byte-identical. The r10 revisions below use editable
+native silhouettes and broad clusters from the painted material's palette:
+stronger shape and less interior texture. Reed bodies stay identical below
+the compact flame. Both icons are static; leave flicker in held/world art.
 
-The Seal icon takes the actual gold/teal sun disc from its accepted pedestal
-painting, masking out the stone stand. Its bright core and ornament match
-the objective, pack/held states and world painting. Torch/Seal replacements
-are supplied alongside the complete ordinary set for review; their existing
-world animations and canvas sizes remain unchanged.
+The r10 Seal uses **`art_src/icon/dawn_seal_disc_46.png`**, the same approved
+disc used for the launcher. Material-group area reduction retains its bronze
+ring, gold rays, teal gaps and bright core, with the small arch restored inside
+the core. Five opaque inks replace r9's 24. The source itself is unchanged.
+World and held animation canvases remain unchanged.
 
 ### Review and rebuilding
 
-All review paths below are in `art_src/items/pack_icons/`; each has a paired
-native image and exact 4x nearest enlargement:
+The following original **r9** reviews remain in `art_src/items/pack_icons/`
+for history. Current comparisons are in `pack_icons/r10/`, listed below.
+Every review has a native image and exact 4x nearest enlargement:
 
 | Review | Filename |
 | --- | --- |
@@ -1086,9 +1087,65 @@ materials and slot geometry, not engine screenshots or a card redesign.
 paintings; no new generation or external service is required.
 `verify_pack_icons.py` checks all fifteen unique native canvases, palette/
 alpha, anchors, source/output hashes, closed key bow, registered continuous
-reeds, larger lit silhouette, collapsed spent coat and five exact 4x pairs.
+reeds, larger lit silhouette, shared coat silhouette and five current 4x pairs.
 `pack_icons/manifest.json` records every dependency and runtime path.
 Background contrast measurements in `verification.json` are authoring aids,
 not claims of human recognition. No windowed Godot run or phone acceptance
 is claimed for this icon set. The new floor-three score is documented in
 `docs/MUSIC.md`.
+
+### R10: owner silhouette review
+
+Seven state PNGs overwrite B's own r9 files at the **same runtime paths**:
+`icon_knife_16.png`, `icon_shard_16.png`, `icon_coat_16.png`,
+`icon_coat_spent_16.png`, `icon_torch_unlit_16.png`, `icon_torch_lit_16.png`
+and `icon_seal_16.png`, all in `assets/art/items/`.
+They remain 16x16 with centre anchor `(8,8)`, binary alpha and no animation.
+Existing `spent`/`lit` selection continues to choose the matching file.
+
+The optional **`assets/art/items/icon_club_16_alt.png`** has a heavier iron head.
+The normal `icon_club_16.png` is unchanged. The alternate is offered for owner
+review and is never selected automatically by a builder or runtime lookup.
+
+| Revised item | Native treatment |
+| --- | --- |
+| Knife | Broad diagonal steel blade, continuous lit edge, distinct brass guard and leather grip; one small rust cluster |
+| Shard | Chunky angular outline with a broken side, one large pale facet and one darker plane; four opaque inks including outline |
+| Both coats | Exact shoulder/sleeve/hem coverage of the readable old code icon, three teal cloth tones and quiet quilt seams; spent keeps the coverage with two grouped tears |
+| Both reeds | Wide three-strand fan, visible cord binding/knot and substantial grip; lit adds a compact orange/gold flame with a cream core |
+| Seal | The approved launcher disc, reduced by material areas to five inks with its ring, rays, teal and bright arch core retained |
+| Optional club | Larger angular metal head, broad metal planes and a thick wood grip |
+
+All **fifteen original r9 runtime PNGs** are preserved in
+`art_src/items/pack_icons/r9/`, with the original manifest, verification and
+builder snapshot. The snapshot is archival code, not the current rebuild
+entry point. Eight accepted runtime icons, including the regular club, are
+unchanged byte for byte. No C-owned icon, world sprite or launcher source is
+edited.
+
+Current sheets are under `art_src/items/pack_icons/r10/`, with native partners:
+
+| Review | Filename |
+| --- | --- |
+| Every revision, r9/r10 on real pack slots and slate | `icons_r9_r10_context_4x.png` |
+| Whole eight-slot pack strips, beside the accepted family | `icons_r9_r10_pack_4x.png` |
+| r9/r10 beside accepted icons on slate card material | `icons_r9_r10_card_4x.png` |
+| Revised shapes alone, including optional club | `icons_r10_silhouettes_4x.png` |
+| Exact launcher disc source beside r9/r10 Seal | `seal_launcher_match_4x.png` |
+
+These are offline composites at actual native icon/slot sizes. The slate
+panels group items for review and do not change the game's card layout.
+The standard rebuild command now dispatches to the current r10 builder:
+
+```powershell
+python -B art_src/items/build_pack_icons.py
+python -B art_src/items/verify_pack_icons.py
+python -B art_src/items/pack_icons/r10/verify.py
+```
+
+`pack_icons/r10/build.py` is the editable pixel/Seal reduction record.
+Receipts check all r9 archive hashes, eight accepted assets unchanged, native
+canvas/palette/alpha/anchors, one continuous shape per revision, matching coat
+coverage, registered reeds, simpler colour groups and five exact 4x pairs.
+Shape/ink measurements document the change without replacing the owner's
+visual judgement. No Godot run was needed.

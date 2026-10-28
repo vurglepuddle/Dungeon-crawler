@@ -1,52 +1,53 @@
-# Painted 16px pack illustrations
+# Painted pack icons: r10 silhouette revision
 
-Fifteen new static PNGs in `assets/art/items/icon_<kind>_16.png`.
-No C-owned icons, existing world sprites or source paintings are changed.
-
-Rebuild offline from the repository root:
+Current set: eight accepted r9 icons, seven revised state PNGs and one optional
+club alternate. All are static 16x16, shared palette/binary alpha, centre (8,8).
+No C-owned icon, world sprite, launcher asset or UI source is written.
 
 ```powershell
 python -B art_src/items/build_pack_icons.py
 python -B art_src/items/verify_pack_icons.py
+python -B art_src/items/pack_icons/r10/verify.py
 ```
 
-Pillow, numpy and scipy are the same local authoring dependencies used by the
-earlier world-item pipeline. Runtime has no Python dependency.
+The default builder dispatches to `r10/build.py`, which writes only the seven
+requested revisions and `assets/art/items/icon_club_16_alt.png`. Accepted
+stone, bone, bread, clapper, lamp, key, tonic and the normal club are untouched.
+Pillow/numpy/scipy are authoring dependencies only; there is no runtime Python.
 
-The builder reads accepted original paintings under `art_src/items/sources/`.
-Coat states share their original two-state painting. Cold reeds use the
-accepted fixture painting; the lit state adds painted flame material from the
-accepted burning-web painting. The Seal takes only the original painted disc,
-masking off its pedestal. There was no new image generation in this batch.
-Existing source prompts remain beside those paintings. The new builder is
-the complete reproducible crop/reduction/edit record.
+The original fifteen r9 runtime PNGs, original manifest/verification and the
+original builder snapshot are frozen in `r9/`. Its snapshot is an archival
+record, not a current executable entry point. The old comparison PNGs in this
+directory remain r9 history. Current comparison pairs are in `r10/`:
 
-At 16px a few cues need deliberate cleanup: a material-coloured upper/left
-rim, the knife edge/grip, the key's closed bow, brick-red tonic, coat tears and
-stuffing, a stone chip, and a larger reed fan with a continuous leaning grip.
-The reed fan/grip are reduced separately from the painting to preserve their
-readability. Torch bodies below the fire stay exactly registered. The original
-paintings remain untouched. All sampling/enlargement is nearest-neighbour;
-the fixed palette and binary alpha are unchanged.
+- `icons_r9_r10_context_4x.png`: each revision on real leather and slate,
+  r9/r10 side by side; includes the optional club.
+- `icons_r9_r10_pack_4x.png`: whole native eight-slot strips plus the accepted
+  neighbours. Regular club remains the accepted version in this set.
+- `icons_r9_r10_card_4x.png`: the same family on actual slate card material.
+- `icons_r10_silhouettes_4x.png`: shape coverage beside the coloured revisions.
+- `seal_launcher_match_4x.png`: approved 46px launcher disc beside r9/r10 Seal.
 
-Review pairs (native and exact 4x):
+Every 4x sheet has a native partner and uses exact nearest enlargement. Slate
+panels group icons for review; they do not propose a new game-card layout.
+There was no Godot run or new image generation.
 
-- `icons_context`: for each kind, old/new on leather, then old/new on slate.
-- `icons_pack_strip`: all fifteen states across two eight-slot strips,
-  preserving the actual 152x22 leather and 19x22 slot geometry.
-- `icons_card`: old/new on the actual slate material with Chrome's four-pixel
-  fixed corners; several items are grouped per review card for comparison.
-- `icons_world_match`: accepted world sprite beside old/new pack icons.
-- `icons_torch_seal`: the optional reed and Seal replacements in isolation.
+R10 follows the owner's pixel-art review: larger continuous silhouettes,
+clean dark edges and a few material colour clusters. Knife steel, aqua glass,
+teal quilting, leather/brass and straw retain their painted-material ramps.
+Both coats use exactly the old readable garment coverage, with two grouped
+tears in the spent state. Reeds share their body below the compact bright
+flame. The Seal uses **the actual launcher source**,
+`art_src/icon/dawn_seal_disc_46.png`, area-reduced by material with a quiet gold
+ring/rays, teal gaps and bright arch core; the source is read-only.
 
-These are offline material/scale checks, not engine screenshots or a proposed
-card redesign. The current card is text-first. No UI files are edited.
-`manifest.json` records every source dependency and output hash; verification
-checks fifteen unique icons, true key-hole alpha, continuous registered reed
-grips, flame height, spent silhouette and all five exact 4x pairs. Contrast
-measurements are reported for the real backgrounds, without treating a numeric
-contrast result as human recognition or phone acceptance.
+`manifest.json` describes the current base set. `r10/manifest.json` records
+the eight writes, optional status and accepted-file hashes. Verification
+checks the r9 archive byte hashes, accepted files unchanged, source/output
+hashes, palette/alpha/anchors, continuous silhouettes, shared coat coverage,
+registered torch body and exact review enlargement. Colour/coverage counts
+are review evidence, not a substitute for the owner's visual judgement.
 
-`docs/ART.md`, section **Painted pack icons at 16px**, has the complete A-facing
-lookup/state mapping. Keep the HUD icons at native 16x16, centred at (8,8),
-without dungeon lamp modulation or a world-object contact shadow.
+See `docs/ART.md`, **R10: owner silhouette review**, for the unchanged runtime
+paths/state lookup and optional club path. Leave the normal club selected
+unless the alternate is explicitly chosen.

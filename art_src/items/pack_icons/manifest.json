@@ -6,22 +6,23 @@
         16,
         16
       ],
-      "opaque_colors": 18,
-      "sha256": "ae03b111dd8a86bb875670a98e239a3217fd1dd452da92a16fae7316f4adc2d3",
+      "opaque_colors": 8,
+      "sha256": "3ac494e458a57d681eb3fd6d6dfc4ab33dc4d7f55699d2d52cdd5e5bca72cfd9",
       "kind": "knife",
+      "revision": "r10",
       "anchor": [
         8,
         8
       ],
+      "frame_ms": 0,
       "opaque_bounds": [
         1,
-        3,
+        1,
         15,
-        12
+        15
       ],
-      "frame_ms": 0,
-      "material": "accepted painting reduced and native cue cleanup",
-      "shadow": "none; HUD illustration, no dungeon lamp modulation"
+      "optional": false,
+      "r9_reference": "art_src/items/pack_icons/r9/icon_knife_16.png"
     },
     {
       "path": "assets/art/items/icon_shard_16.png",
@@ -29,22 +30,23 @@
         16,
         16
       ],
-      "opaque_colors": 13,
-      "sha256": "844fa6c0eea72f1e473871549ce308057c13159773b63e411c280baf70b114a1",
+      "opaque_colors": 4,
+      "sha256": "43846b46eb633e198fff96c27828b802a0571d8e57ef4ad0e04b56b85d288130",
       "kind": "shard",
+      "revision": "r10",
       "anchor": [
         8,
         8
       ],
+      "frame_ms": 0,
       "opaque_bounds": [
         2,
-        3,
-        14,
-        13
+        1,
+        15,
+        15
       ],
-      "frame_ms": 0,
-      "material": "accepted painting reduced and native cue cleanup",
-      "shadow": "none; HUD illustration, no dungeon lamp modulation"
+      "optional": false,
+      "r9_reference": "art_src/items/pack_icons/r9/icon_shard_16.png"
     },
     {
       "path": "assets/art/items/icon_club_16.png",
@@ -167,22 +169,23 @@
         16,
         16
       ],
-      "opaque_colors": 23,
-      "sha256": "73c97cc7597b5cbe104982e8593e842acd768681742afa6b349dd1cecc6f6747",
+      "opaque_colors": 5,
+      "sha256": "f43d4844cc50dfd9b0611d0cff6906d196bc436aba6e0fc47ede17dae4c0288c",
       "kind": "coat",
+      "revision": "r10",
       "anchor": [
         8,
         8
       ],
-      "opaque_bounds": [
-        1,
-        2,
-        15,
-        13
-      ],
       "frame_ms": 0,
-      "material": "accepted painting reduced and native cue cleanup",
-      "shadow": "none; HUD illustration, no dungeon lamp modulation"
+      "opaque_bounds": [
+        0,
+        1,
+        16,
+        14
+      ],
+      "optional": false,
+      "r9_reference": "art_src/items/pack_icons/r9/icon_coat_16.png"
     },
     {
       "path": "assets/art/items/icon_coat_spent_16.png",
@@ -190,22 +193,23 @@
         16,
         16
       ],
-      "opaque_colors": 17,
-      "sha256": "7d5f6ec83651f576e7e3f0db496fa57ca43ed1bb15bc52c96b793041bc7ad28b",
+      "opaque_colors": 8,
+      "sha256": "63133fa0a572a8e26e2b4d7559e4969acb93ebff4ae67fd86deb1d28d849bde7",
       "kind": "coat_spent",
+      "revision": "r10",
       "anchor": [
         8,
         8
       ],
-      "opaque_bounds": [
-        1,
-        3,
-        15,
-        12
-      ],
       "frame_ms": 0,
-      "material": "accepted painting reduced and native cue cleanup",
-      "shadow": "none; HUD illustration, no dungeon lamp modulation"
+      "opaque_bounds": [
+        0,
+        1,
+        16,
+        14
+      ],
+      "optional": false,
+      "r9_reference": "art_src/items/pack_icons/r9/icon_coat_spent_16.png"
     },
     {
       "path": "assets/art/items/icon_key_16.png",
@@ -282,22 +286,23 @@
         16,
         16
       ],
-      "opaque_colors": 14,
-      "sha256": "b05021065c2561fc12f51160d62795b4961de70d9ba03fb8bb8abc46414fe84b",
+      "opaque_colors": 8,
+      "sha256": "0b23cda8be41834261022c6cfb3ab1061858e80b3f42a47e472c7060bc207bf2",
       "kind": "torch_unlit",
+      "revision": "r10",
       "anchor": [
         8,
         8
       ],
+      "frame_ms": 0,
       "opaque_bounds": [
-        5,
-        4,
+        3,
+        2,
         13,
         15
       ],
-      "frame_ms": 0,
-      "material": "accepted painting reduced and native cue cleanup",
-      "shadow": "none; HUD illustration, no dungeon lamp modulation"
+      "optional": false,
+      "r9_reference": "art_src/items/pack_icons/r9/icon_torch_unlit_16.png"
     },
     {
       "path": "assets/art/items/icon_torch_lit_16.png",
@@ -305,22 +310,23 @@
         16,
         16
       ],
-      "opaque_colors": 15,
-      "sha256": "b5a190e7c50f0400d5164c03edda75795fa8dc2058f5f628849f63c6133dca00",
+      "opaque_colors": 9,
+      "sha256": "5239fdc519e5d0c5ce86e28c677d73702ada34d317f3df0c96d811d535b0731c",
       "kind": "torch_lit",
+      "revision": "r10",
       "anchor": [
         8,
         8
       ],
+      "frame_ms": 0,
       "opaque_bounds": [
-        5,
+        3,
         0,
         13,
         15
       ],
-      "frame_ms": 0,
-      "material": "accepted painting reduced and native cue cleanup",
-      "shadow": "none; HUD illustration, no dungeon lamp modulation"
+      "optional": false,
+      "r9_reference": "art_src/items/pack_icons/r9/icon_torch_lit_16.png"
     },
     {
       "path": "assets/art/items/icon_seal_16.png",
@@ -328,22 +334,23 @@
         16,
         16
       ],
-      "opaque_colors": 24,
-      "sha256": "d1dbb0d82eeb6d2fac233dab79d473733f90779abd5f90e9f36250bc3a609caf",
+      "opaque_colors": 5,
+      "sha256": "c24d2c087c246a8883f2e4792ceba762bb2990ea4fe9522cf632404688ea681e",
       "kind": "seal",
+      "revision": "r10",
       "anchor": [
         8,
         8
       ],
-      "opaque_bounds": [
-        1,
-        1,
-        15,
-        15
-      ],
       "frame_ms": 0,
-      "material": "accepted painting reduced and native cue cleanup",
-      "shadow": "none; HUD illustration, no dungeon lamp modulation"
+      "opaque_bounds": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "optional": false,
+      "r9_reference": "art_src/items/pack_icons/r9/icon_seal_16.png"
     }
   ],
   "sources": {
@@ -389,7 +396,23 @@
     "assets/art/items/item_stone_d1.png": "2e6ee190196d8906997a8809f05db6615bd2440f2cc39d11c50c1f92e7e08284",
     "assets/art/items/item_tonic_d1.png": "8c1fd336dd7ca2db28dc65a742cfd47e05a0b1f2d167cbbef596c11eeae31882",
     "assets/art/ui/slate.png": "437ad1919ac79570e17855f6bfb2f66639fdaa23af8cfc22c0d9da8bd85959e1",
-    "assets/art/ui_offer/pack_leather.png": "d206f4e41692d8ff25948e04b7914eb9a3c0bf3f0217ae8e1950cc02f144b41f"
+    "assets/art/ui_offer/pack_leather.png": "d206f4e41692d8ff25948e04b7914eb9a3c0bf3f0217ae8e1950cc02f144b41f",
+    "art_src/icon/dawn_seal_disc_46.png": "001db25e76cc39456c27d2e624fb3f6df3880f741956026a7e89908de55f46e0",
+    "art_src/items/pack_icons/r9/icon_bone_16.png": "6fa4facbabe885f92f42f4957730253b030bdae82709547b169dbda19b8e2035",
+    "art_src/items/pack_icons/r9/icon_bread_16.png": "fec65fb00e28414bfcf4dad84968d0288b7d1c400510f7e6ae42d6d2f56dce81",
+    "art_src/items/pack_icons/r9/icon_clapper_16.png": "ac15b02c9f93041cce7f7c0e991be5de89a771bc99efa44482f42d5cc8e68281",
+    "art_src/items/pack_icons/r9/icon_club_16.png": "6c4d777183de77b0e30970fe21982076bf1ca2e691ca18437e1fce80d0ad76bd",
+    "art_src/items/pack_icons/r9/icon_coat_16.png": "73c97cc7597b5cbe104982e8593e842acd768681742afa6b349dd1cecc6f6747",
+    "art_src/items/pack_icons/r9/icon_coat_spent_16.png": "7d5f6ec83651f576e7e3f0db496fa57ca43ed1bb15bc52c96b793041bc7ad28b",
+    "art_src/items/pack_icons/r9/icon_key_16.png": "92cdcd7314611eda8018b2db9e1b080de2a4cc7644382482b6632cbe786a21ce",
+    "art_src/items/pack_icons/r9/icon_knife_16.png": "ae03b111dd8a86bb875670a98e239a3217fd1dd452da92a16fae7316f4adc2d3",
+    "art_src/items/pack_icons/r9/icon_lamp_16.png": "e9e24a0916591e9d6d7f9b1cc8a87d818bf1f359d848a46f418a3d416c682720",
+    "art_src/items/pack_icons/r9/icon_seal_16.png": "d1dbb0d82eeb6d2fac233dab79d473733f90779abd5f90e9f36250bc3a609caf",
+    "art_src/items/pack_icons/r9/icon_shard_16.png": "844fa6c0eea72f1e473871549ce308057c13159773b63e411c280baf70b114a1",
+    "art_src/items/pack_icons/r9/icon_stone_16.png": "013861d94ece7ec56d82d63c23c4eee200894541c4508f8a5420ea54ab9c3b0e",
+    "art_src/items/pack_icons/r9/icon_tonic_16.png": "700a6fd191f44b506879dce9c8ba958f5203e041c155889a3637d8580930b3e6",
+    "art_src/items/pack_icons/r9/icon_torch_lit_16.png": "b5a190e7c50f0400d5164c03edda75795fa8dc2058f5f628849f63c6133dca00",
+    "art_src/items/pack_icons/r9/icon_torch_unlit_16.png": "b05021065c2561fc12f51160d62795b4961de70d9ba03fb8bb8abc46414fe84b"
   },
   "reduction": "Source alpha principal component, NEAREST, fixed shared palette, binary alpha.",
   "native_cleanup": "Material rim; knife edge/grip; key bow; tonic red; coat stuffing/tears; chipped stone; widened continuous reed and painted-flame connection.",
@@ -402,5 +425,37 @@
     8
   ],
   "animation": "static; select cold/lit and intact/spent states",
-  "reviews": "Offline composites on actual pack/slate materials; not engine captures or proposed card redesign."
+  "reviews": "Offline composites on actual pack/slate materials; not engine captures or proposed card redesign.",
+  "revision": "r10",
+  "r9_archive": "art_src/items/pack_icons/r9/",
+  "optional_assets": [
+    {
+      "path": "assets/art/items/icon_club_16_alt.png",
+      "size": [
+        16,
+        16
+      ],
+      "opaque_colors": 6,
+      "sha256": "6de40f8fa94d9c6f412fa9a092a4e91df2e3f82a3e8fe4c695bd81589e5a58d5",
+      "kind": "club",
+      "revision": "r10",
+      "anchor": [
+        8,
+        8
+      ],
+      "frame_ms": 0,
+      "opaque_bounds": [
+        1,
+        1,
+        15,
+        15
+      ],
+      "optional": true,
+      "r9_reference": "art_src/items/pack_icons/r9/icon_club_16.png"
+    }
+  ],
+  "revision_manifest": "art_src/items/pack_icons/r10/manifest.json",
+  "current_reviews": "art_src/items/pack_icons/r10/*_4x.png",
+  "method": "r9 accepted paintings plus r10 silhouette/cluster revisions; launcher disc source for Seal",
+  "state_contract": "Coats share the old garment silhouette; reed body registered below flame; static 16px."
 }
