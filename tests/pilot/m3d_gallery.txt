@@ -1,0 +1,301 @@
+# Real taps; only new_run resets the fixture.
+wait 4
+shot 00_splash
+tapnamed splash_skip
+wait 3
+shot 01_title
+call new_run BELL42
+waitidle
+wait 3
+shot 02_room
+tapnamed turn_r
+waitidle
+tapnamed turn_r
+waitidle
+shot 04_exit_arch
+tapnamed turn_r
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed fwd
+waitidle
+shot 05_lift_dead
+tapnamed back
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed hot_item_f1_stone
+waitidle
+tapnamed fwd
+waitidle
+tapnamed pack0
+wait 3
+shot 08_item_card
+wait 6
+shot sparkle_00
+wait 6
+shot sparkle_01
+wait 6
+shot sparkle_02
+wait 6
+shot sparkle_03
+wait 6
+shot sparkle_04
+wait 6
+shot sparkle_05
+wait 6
+shot sparkle_06
+wait 6
+shot sparkle_07
+wait 6
+shot sparkle_08
+wait 6
+shot sparkle_09
+wait 6
+shot sparkle_10
+wait 6
+shot sparkle_11
+wait 6
+shot sparkle_12
+wait 6
+shot sparkle_13
+wait 6
+shot sparkle_14
+wait 6
+shot sparkle_15
+wait 6
+shot sparkle_16
+wait 6
+shot sparkle_17
+wait 6
+shot sparkle_18
+wait 6
+shot sparkle_19
+wait 6
+shot sparkle_20
+wait 6
+shot sparkle_21
+tapnamed card_close
+waitidle
+tapnamed fwd
+waitidle
+tapnamed pack0
+wait 2
+tapnamed card_drop
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+shot 06_corridor_gate_open
+tapnamed fwd
+waitidle
+tapnamed verb1
+waitidle
+tapnamed hot_front
+waitidle
+tapnamed verb1
+waitidle
+tapnamed verb0
+waitidle
+tapnamed verb0
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_l
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed fwd
+waitidle
+tapnamed hot_item_f1_key
+wait 3
+tapnamed loot_f1_key
+waitidle
+tapnamed hot_item_bell_clapper
+waitidle
+tapnamed turn_l
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_l
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed hot_front
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_l
+waitidle
+tapnamed hot_porter
+wait 4
+shot 20_porter_offer
+tapnamed porter_close
+wait 3
+tapnamed pack0
+wait 3
+shot 21_clapper_return_target
+tapnamed hot_front
+waitidle
+shot 22_porter_restored
+tapnamed turn_r
+waitidle
+tapnamed fwd
+waitidle
+shot 07_stairs_down
+tapnamed back
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed hot_front
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed turn_r
+waitidle
+shot 19_stairs_up
+tapnamed turn_r
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed hot_item_f2_stone
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed pack0
+wait 2
+tapnamed card_drop
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed verb1
+waitidle
+tapnamed hot_front
+waitidle
+tapnamed verb1
+waitidle
+tapnamed verb0
+waitidle
+tapnamed verb0
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed hot_item_f2_seal
+waitidle
+tapnamed map
+wait 4
+shot 09_ink_map
+tapnamed map_close
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_l
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed turn_r
+waitidle
+shot 10_lift_working
+tapnamed turn_r
+waitidle
+tapnamed back
+waitidle
+shot 25_lift_before_ride
+tapnamed hot_front
+waitidle
+shot 26_lift_home
+tapnamed turn_l
+waitidle
+tapnamed hot_front
+waitidle
+call assert status won
+call assert hp 6
+call assert hash dd94dc11bf64cd24297b8ee1db1d6c89cf19d31ec5fd01aa2de50b61800d5e59
+shot 11_win_plate
+call state
+close

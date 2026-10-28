@@ -1,0 +1,100 @@
+# Real taps; only new_run resets the fixture.
+wait 4
+shot 00_splash
+tapnamed splash_skip
+wait 3
+shot 01_title
+call new_run BELL42
+waitidle
+wait 3
+tapnamed hot_item_f1_stone
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed pack0
+wait 2
+tapnamed card_drop
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed verb1
+waitidle
+tapnamed hot_front
+waitidle
+tapnamed verb1
+waitidle
+tapnamed verb0
+waitidle
+tapnamed verb0
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_l
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed fwd
+waitidle
+tapnamed hot_item_f1_key
+wait 3
+tapnamed loot_f1_key
+waitidle
+tapnamed hot_item_bell_clapper
+waitidle
+tapnamed turn_l
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_l
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed hot_front
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_l
+waitidle
+tapnamed hot_porter
+wait 4
+shot 20_porter_offer
+tapnamed porter_close
+wait 3
+tapnamed pack0
+wait 3
+shot 21_clapper_return_target
+tapnamed hot_front
+waitidle
+shot 22_porter_restored
+tapnamed hot_front
+waitidle
+call assert hash 58b12f56d82365c9b972f51179b1ddae8c8ade2770154d4f9915dd944acef37f
+call assert survey_hash a44b99f62f9f91b428cf6e8ce49f98f2ea9836c152283a7c1059761a4a564106
+shot 17_survey_before_close
+close

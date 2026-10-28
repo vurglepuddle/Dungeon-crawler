@@ -442,7 +442,7 @@ func apply(action: Dictionary) -> Dictionary:
 
 func view_snapshot() -> Dictionary:
 	var f:=floor_data()
-	f.merge({"pos":_s.pos.duplicate(),"facing":_s.facing,"floor":_s.floor,
+	f.merge({"pos":_s.pos.duplicate(),"facing":_s.facing,"floor":_s.floor,"seed":_s.seed,
 		"hp":_s.hp,"max_hp":_s.max_hp,"status":_s.status,"objects":[],
 		"seal_site":f.landing.duplicate() if _s.floor==_s.floor_count else []})
 	for id in _s.items:

@@ -11,6 +11,10 @@ const VIEW_RECT:=Rect2(3,21,148,150)
 const Sfx = preload("res://scripts/audio/sfx.gd")
 const FONT = preload("res://assets/font/vetka.ttf")
 const PORTRAIT = preload("res://assets/art/finder.png")
+const Paint=preload("res://scripts/art/presentation_art.gd")
+const Flavour=preload("res://scripts/art/flavour.gd")
+const Survey=preload("res://scripts/ui/survey.gd")
+const Ambience=preload("res://scripts/fx/ambience.gd")
 const INK := Color("d3c8a4")
 const GOLD := Color("eeb95a")
 var sim
@@ -45,6 +49,13 @@ var _compass_velocity: float=0
 var _music
 var _settings_path: String="user://settings.cfg"
 var _closing: bool=false
+var _survey=Survey.new()
+var _ambience
+var _transitioning: bool=false
+var _transition_token: int=0
+var _menu_art: TextureRect
+var _menu_receipt: Label
+var _splash_time: float=0
 
 func _ready() -> void:
 	clip_contents=true
@@ -64,6 +75,7 @@ func _ready() -> void:
 	if not _save_path.begins_with("user://") or _save_path.contains("..") or not _save_path.ends_with(".json"):
 		push_error("Invalid save path"); get_tree().quit(1); return
 	view=View.new(); view.position=VIEW_RECT.position; view.size=VIEW_RECT.size; view.clip_contents=true; add_child(view)
+	_ambience=Ambience.new(); _ambience.set_view_rect(VIEW_RECT); add_child(_ambience)
 	sfx=Sfx.new(); add_child(sfx)
 	_music=get_node_or_null("/root/Music")
 	_load_settings()
@@ -96,7 +108,7 @@ func _label(text: String,parent: Node) -> Label:
 func _build_controls() -> void:
 	_button("seed",Rect2(1,0,51,18),"",_open_seed,null,false)
 	_button("floor_label",Rect2(98,0,22,18),"",_open_save_status,null,false)
-	_button("map",Rect2(121,0,32,18),"MAP",_open_map,null,false)
+	_button("map",Rect2(121,0,32,18),"MAP",_open_map)
 	_button("portrait",Rect2(3,210,32,32),"",_portrait_help,null,false)
 	_button("belt_key",Rect2(101,211,22,22),"",_belt_card.bind("key"),null,false)
 	_button("belt_seal",Rect2(127,211,22,22),"",_belt_card.bind("seal"),null,false)
@@ -114,18 +126,25 @@ func _build_menu() -> void:
 	_menu=Panel.new(); _menu.size=Vector2(154,342)
 	_menu.add_theme_stylebox_override("panel",Chrome.surface("slate",8))
 	add_child(_menu)
-	var column:=VBoxContainer.new(); column.position=Vector2(13,30); column.size=Vector2(128,284)
-	column.add_theme_constant_override("separation",12); _menu.add_child(column)
-	_label("LOST MOTH / 1993",column)
-	_menu_title=_label("UNDERCROFT",column)
-	_menu_note=_label("Lost things wait.\nBring one home.",column)
-	_button("continue",Rect2(0,0,128,28),"CONTINUE",_continue,column)
-	_button("retry",Rect2(0,0,128,28),"RETRY SEED",_retry,column)
-	_button("start",Rect2(0,0,128,28),"NEW RUN",_open_seed,column)
-	_button("sound",Rect2(0,0,128,24),"SFX ON" if sfx.enabled else "SFX OFF",_toggle_sound,column)
-	_button("music",Rect2(0,0,128,24),"MUSIC ON" if _music!=null and _music.enabled else "MUSIC OFF",_toggle_music,column)
+	_menu_art=TextureRect.new(); _menu_art.position=Vector2(0,20); _menu_art.size=Vector2(154,150)
+	_menu_art.expand_mode=TextureRect.EXPAND_IGNORE_SIZE; _menu_art.mouse_filter=Control.MOUSE_FILTER_IGNORE
+	_menu.add_child(_menu_art)
+	_menu_title=_label("UNDERCROFT",_menu); _menu_title.position=Vector2(3,179); _menu_title.size=Vector2(148,18); _menu_title.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
+	_menu_note=_label("Lost things wait.\nBring one home.",_menu); _menu_note.position=Vector2(4,202); _menu_note.size=Vector2(146,34); _menu_note.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
+	_menu_receipt=_label("",_menu); _menu_receipt.position=Vector2(3,156); _menu_receipt.size=Vector2(148,18); _menu_receipt.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
+	_button("continue",Rect2(13,244,128,26),"CONTINUE",_continue,_menu)
+	_button("retry",Rect2(13,244,128,26),"RETRY SEED",_retry,_menu)
+	_button("start",Rect2(13,276,128,26),"NEW RUN",_open_seed,_menu)
+	_button("sound",Rect2(3,312,72,24),"SFX ON" if sfx.enabled else "SFX OFF",_toggle_sound,_menu)
+	_button("music",Rect2(79,312,72,24),"MUSIC ON" if _music!=null and _music.enabled else "MUSIC OFF",_toggle_music,_menu)
+	_button("splash_skip",Rect2(0,20,154,150),"",_skip_splash,_menu,false)
+func _skip_splash() -> void:
+	_splash_time=0; controls.splash_skip.visible=false
+	_menu_art.texture=Paint.texture("res://assets/art/screens/title.png")
 func _show_menu(mode: String) -> void:
 	_close_modal(); _close_card(); _mode=mode; _busy=0
+	_transition_token+=1; _transitioning=false
+	_ambience.fade_in(0); _ambience.visible=false; _ambience.set_process(false)
 	for key in controls:
 		if is_instance_valid(controls[key]): controls[key].visible=false
 	view.visible=false; _menu.visible=true
@@ -133,12 +152,22 @@ func _show_menu(mode: String) -> void:
 	controls.continue.visible=mode=="title"
 	controls.continue.disabled=not Store.can_continue(_save_path)
 	controls.retry.visible=mode=="end"
+	_menu_receipt.visible=mode=="end"
+	if mode=="title":
+		_menu_art.position=Vector2(0,20); _menu_art.size=Vector2(154,150)
+		_menu_art.texture=Paint.texture("res://assets/art/screens/splash.png"); _splash_time=1.4; controls.splash_skip.visible=true
+	else:
+		_menu_art.position=Vector2(13,62); _menu_art.size=Vector2(128,80)
+		_menu_art.texture=Paint.texture("res://assets/art/screens/%s.png"%("win" if state.status=="won" else "death"))
+		_menu_receipt.text="%s / %d turns"%[state.seed,state.turn]
 	_menu_title.text="UNDERCROFT" if mode=="title" else ("HOME AGAIN" if state.status=="won" else "LOST PROPERTY")
 	_menu_note.text="Lost things wait.\nBring one home." if mode=="title" else ("You brought back dawn.\n%s / %d turns."%[state.seed,state.turn] if state.status=="won" else "The Husk found you.\n%s / try again."%state.seed)
+	if mode=="end" and state.status=="lost": _menu_note.text=Flavour.epitaph(state.seed,state.turn)
+	if mode=="end" and state.status=="won": _menu_note.text="You brought back dawn.\nSomething returned."
 	if _music!=null:
 		if mode=="title": _music.play("title")
 		elif state.status=="won": _music.play("win")
-		else: _music.stop()
+		else: _music.play("death")
 	_refresh_save_indicator()
 	queue_redraw()
 func _toggle_sound() -> void:
@@ -175,11 +204,12 @@ func new_run(raw: String,count: int=2) -> bool:
 	if not proof.ok: push_error("Generation failed: "+proof.reason); return false
 	_close_modal(); _close_card()
 	sim=Sim.new(seed,count); selected=""; _busy=0; _hurt_time=0; _mode="game"
+	_survey.reset(count); _reset_presentation()
 	_compass_swing=0; _compass_velocity=0
 	view.clear_strike()
 	if _music!=null: _music.play("floor")
-	lines=["Find the Dawn Seal.","Bring it home."]
-	_save(true); _sync()
+	lines=[Flavour.floor_name(1),"Find the Dawn Seal."]
+	_sync(); _save(true)
 	return true
 func _continue() -> void:
 	var saved:=Store.load_run(_save_path)
@@ -187,14 +217,15 @@ func _continue() -> void:
 	var loaded=Sim.new(saved.payload.seed,saved.payload.floor_count)
 	if not loaded.restore_state(saved.payload): return
 	sim=loaded; _mode="game"; _busy=0; _hurt_time=0
+	_survey.restore(saved.ui.get("survey",{}),saved.payload); _reset_presentation()
 	view.clear_strike()
-	if _music!=null: _music.play("floor")
+	if _music!=null: _music.play("floor2" if saved.payload.floor>1 else "floor")
 	selected=str(saved.ui.get("selected",""))
 	lines=["Your place is kept.","The abbey is waiting."]
 	_save_ok=true; _sync()
 func _save(fresh: bool=false) -> void:
 	if sim==null: return
-	_save_ok=Store.save_run(sim,{"selected":selected},_save_path,fresh)
+	_save_ok=Store.save_run(sim,{"selected":selected,"survey":_survey.save()},_save_path,fresh)
 	_refresh_save_indicator()
 func _refresh_save_indicator() -> void:
 	if not controls.has("floor_label"): return
@@ -216,6 +247,8 @@ func _notification(what: int) -> void:
 	if what==NOTIFICATION_WM_CLOSE_REQUEST:
 		if _closing: return
 		_closing=true
+		_transition_token+=1; _transitioning=false
+		if is_instance_valid(_ambience): _ambience.fade_in(0)
 		_save()
 		_retire_audio()
 		get_tree().quit()
@@ -234,7 +267,14 @@ func _retire_audio() -> void:
 				had_playback=true
 		source.stop()
 	if had_playback: OS.delay_msec(50)
-func _can_game() -> bool: return _mode=="game" and _busy<=0 and not is_instance_valid(_modal)
+func _can_game() -> bool: return _mode=="game" and _busy<=0 and not _transitioning and not is_instance_valid(_modal)
+func _reset_presentation() -> void:
+	_transition_token+=1; _transitioning=false
+	_ambience.fade_in(0); _ambience.visible=true; _ambience.set_process(true)
+func _capture_survey() -> void:
+	var picture: Dictionary=sim.view_snapshot()
+	view.update_state(picture)
+	_survey.observe(state.floor,view.visible_cells(),state.pos,view.visible_landmarks())
 func _sync() -> void:
 	state=sim.snapshot()
 	if not state.items.has(selected) or state.items[selected].location not in ["pack","belt","equip"]: selected=""
@@ -259,7 +299,8 @@ func _sync() -> void:
 	for i in range(3):
 		controls["verb%d"%i].visible=i<verbs.size()
 		controls["verb%d"%i].text=verbs[i].label if i<verbs.size() else ""
-	view.update_state(sim.view_snapshot())
+	_capture_survey()
+	_ambience.set_floor(state.floor)
 	_sync_markers()
 	queue_redraw()
 
@@ -331,6 +372,7 @@ func _selection_colour() -> Color:
 func _command(command: Dictionary) -> void:
 	if not _can_game(): return
 	_close_card()
+	var old_picture: Dictionary=view.state.duplicate(true)
 	command=command.duplicate(true); command.expected_revision=state.revision
 	# Capture the old pose/projection before a fatal hit removes the actor.
 	var strike_target: Dictionary={}
@@ -351,7 +393,7 @@ func _command(command: Dictionary) -> void:
 		"turn": _compass_velocity+=float(command.delta)*5.5
 		"pickup":
 			var definition: Dictionary=sim.definition(command.item_id)
-			lines=[definition.name,definition.provenance]; sfx.play("pickup")
+			lines=[definition.name,Flavour.provenance(state.items[command.item_id].kind,definition.provenance)]; sfx.play("pickup")
 			if definition.slot=="belt": lines=[definition.name,"Take it home." if definition.name=="Dawn Seal" else "Kept safe on the belt."]
 		"drop","place": lines=["You set it down.",""]; sfx.play("pickup")
 		"equip","unequip": lines=["Equipment changed.",""]; sfx.play("pickup")
@@ -378,13 +420,31 @@ func _command(command: Dictionary) -> void:
 			"bell_rung": lines=["The hollow ones reel.","One clear beat. HIT."]; sfx.play("ring")
 			"restored": lines=["A bell finds its voice.","The lift wakes below."]; sfx.play("restore")
 			"lift_ride": lines=["Chains sing in the dark.","Floor %d / landing."%event.to]; sfx.play("gate"); selected=""
-			"floor_changed": lines=["A different silence.","Floor %d."%event.to]; selected=""
+			"floor_changed": lines=[Flavour.floor_name(event.to),"Floor %d."%event.to]; selected=""
 	_busy=0.13 if result.consumed_turn else 0.05
 	if _hurt_time>0: _busy=0.24
 	state=sim.snapshot()
 	if not state.pack.has(selected): selected=""
-	_save() # Commit storage before visual animation, including free rotation.
+	var travel: bool=result.events.any(func(e): return e.type in ["floor_changed","lift_ride"])
+	if travel:
+		_capture_survey(); _save()
+		view.update_state(old_picture)
+		_start_transition()
+	else:
+		_sync(); _save() # Geometry/knowledge capture is synchronous; save still precedes animation.
+func _start_transition() -> void:
+	_transitioning=true; _busy=1.0
+	_transition_token+=1
+	var token: int=_transition_token
+	_ambience.fade_out(0.12)
+	await _ambience.fade_finished
+	if token!=_transition_token or not is_inside_tree(): return
 	_sync()
+	if _music!=null: _music.play("floor2" if state.floor>1 else "floor")
+	_ambience.fade_in(0.18)
+	await _ambience.fade_finished
+	if token!=_transition_token or not is_inside_tree(): return
+	_transitioning=false; _busy=0
 func _movement(key: String) -> void:
 	if key in ["turn_l","turn_r"]: _command({"type":"turn","delta":-1 if key=="turn_l" else 1})
 	else: _command({"type":"move","step":key})
@@ -440,7 +500,7 @@ func _open_card(id: String) -> void:
 	elif definition.slot=="hand": info+=": counter %d"%definition.damage if definition.damage>1 else ": hit 1"
 	elif definition.heal>0: info+=": heal %d"%definition.heal
 	if info.begins_with(": "): info=info.trim_prefix(": ")
-	_label(info,column); _label(definition.provenance,column)
+	_label(info,column); _label(Flavour.provenance(state.items[id].kind,definition.provenance),column)
 	if definition.has("purpose"): _label(definition.purpose,column)
 	if state.items[id].kind=="clapper": _label("RING: once per floor." if sim.ring_ready() else "RING: spent here.",column)
 	var row:=HBoxContainer.new(); row.add_theme_constant_override("separation",3); column.add_child(row)
@@ -479,9 +539,22 @@ func _dismiss_card() -> void:
 func _panel(title: String,top: int=32,height: int=276) -> VBoxContainer:
 	_close_modal(); _close_card()
 	var panel:=PanelContainer.new(); panel.position=Vector2(5,top); panel.size=Vector2(144,height)
-	panel.add_theme_stylebox_override("panel",Chrome.surface("map" if title.begins_with("Visited") else "slate",7))
+	var is_map: bool=title.begins_with("Visited")
+	var background: StyleBox=Chrome.surface("slate",7)
+	if is_map:
+		var parchment:=StyleBoxTexture.new(); parchment.texture=Paint.texture("res://assets/art/ui_offer/map_parchment.png")
+		for side in [SIDE_LEFT,SIDE_RIGHT]: parchment.set_texture_margin(side,8)
+		for side in [SIDE_TOP,SIDE_BOTTOM]: parchment.set_texture_margin(side,12)
+		parchment.content_margin_left=8; parchment.content_margin_right=8
+		parchment.content_margin_top=12; parchment.content_margin_bottom=8
+		background=parchment
+	panel.add_theme_stylebox_override("panel",background)
 	var column:=VBoxContainer.new(); column.add_theme_constant_override("separation",7)
-	panel.add_child(column); _label(title,column)
+	panel.add_child(column)
+	var heading:=_label("MAP / %d"%state.floor if is_map else title,column)
+	if is_map:
+		heading.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
+		heading.add_theme_color_override("font_color",Color("4d2b1d"))
 	add_child(panel); _modal=panel
 	return column
 func _modal_button(key: String,label: String,callback: Callable,parent: Node) -> void:
@@ -540,15 +613,19 @@ func _open_map() -> void:
 	if not _can_game(): return
 	var column:=_panel("Visited / floor %d"%state.floor,16,324)
 	var map=preload("res://scripts/ui/map_view.gd").new()
-	map.data=sim.view_snapshot(); map.custom_minimum_size=Vector2(128,231); column.add_child(map)
+	map.data=sim.view_snapshot(); map.data.survey=_survey.floor_data(state.floor)
+	map.custom_minimum_size=Vector2(128,231); column.add_child(map)
 	_modal_button("map_close","CLOSE",_close_modal,column)
 func _process(delta: float) -> void:
+	if _mode=="title" and _splash_time>0:
+		_splash_time=maxf(0,_splash_time-delta)
+		if _splash_time<=0: _skip_splash()
 	# A damped instrument movement; never part of the simulation or input gate.
 	var step: float=minf(delta,0.04)
 	_compass_velocity+=(-_compass_swing*100.0-_compass_velocity*12.0)*step
 	_compass_swing+=_compass_velocity*step
 	if absf(_compass_swing)>0.001 or absf(_compass_velocity)>0.01: queue_redraw()
-	if _busy>0:
+	if _busy>0 and not _transitioning:
 		_busy=maxf(0,_busy-delta)
 		view.motion=sin(_busy/0.13*PI)*1.4 if _bob else 0
 		if _busy<=0:
@@ -565,19 +642,20 @@ func _text(at: Vector2,value: String,colour: Color=INK) -> void:
 func _draw() -> void:
 	draw_style_box(Chrome.surface("leather"),Rect2(Vector2.ZERO,size))
 	if _mode!="game" or state.is_empty(): return
-	draw_rect(Rect2(0,0,154,18),Color("0c101c"))
+	# Two carved rail ends leave the physical camera's centre untouched.
+	draw_rect(Rect2(53,0,44,18),Color("0c101c"))
+	for rect in [Rect2(0,0,53,18),Rect2(97,0,57,18)]: draw_style_box(Chrome.surface("frame"),rect)
 	draw_style_box(Chrome.surface("frame"),Rect2(0,18,154,156))
 	draw_style_box(Chrome.surface("slate"),Rect2(0,174,154,34))
 	if not is_instance_valid(_card):
 		_text(Vector2(4,175),lines[0]); _text(Vector2(4,191),lines[1])
 	draw_style_box(Chrome.surface("frame"),Rect2(1,208,36,38))
 	var shudder:=Vector2(roundi(sin(_hurt_time*100)*2) if _hurt_time>0 else 0,0)
-	draw_texture_rect(PORTRAIT,Rect2(Vector2(3,210)+shudder,Vector2(32,32)),false,Color(1,0.65,0.6) if _hurt_time>0 or state.hp<=2 else Color.WHITE)
+	draw_texture_rect(Paint.texture(portrait_path()),Rect2(Vector2(3,210)+shudder,Vector2(32,32)),false)
 	draw_rect(Rect2(3,242,32,3),Color("312018"))
 	draw_rect(Rect2(3,242,roundi(32.0*state.hp/state.max_hp),3),Color("73a29a") if state.hp>2 else Color("965c48"))
 	if _hurt_time>0:
 		draw_rect(Rect2(3,210,32,32),Color("965c48"),false,2)
-		for points in [[Vector2(19,224),Vector2(23,226)],[Vector2(26,222),Vector2(29,224)],[Vector2(23,233),Vector2(27,232)]]: draw_line(points[0]+shudder,points[1]+shudder,Color("312018"),1)
 	# Belt loops sit behind the possessions; a narrow glass oil gauge makes
 	# health read as a physical instrument without stealing an icon pitch.
 	for x in [101,127]:
@@ -602,6 +680,9 @@ func _draw() -> void:
 		draw_style_box(Chrome.style(1,button.is_pressed()),button.get_rect())
 		_arrow(button.get_rect().get_center().floor(),key)
 	_draw_compass()
+func portrait_path() -> String:
+	var kind: String="finder_near_death_v2" if state.hp<=1 else ("finder_hurt_v2" if state.hp<=3 or _hurt_time>0 else "finder_fine")
+	return "res://assets/art/portrait/%s.png"%kind
 
 func _draw_compass() -> void:
 	var rect:=Rect2(85,294,66,44)
@@ -643,10 +724,12 @@ func _public_state() -> Dictionary:
 		"equipment":state.equipment.duplicate(),"selected":selected,"porter":sim.porter_state(),"ring_ready":sim.ring_ready(),"front":sim.inspect_front(),
 		"hash":sim.state_hash(),"save_ok":_save_ok}
 	public.merge(audio)
+	public.survey_hash=_survey.hash_value()
+	public.travel_pending=_transitioning
 	return public
 func pilot_call(name_key: String,args: Array) -> String:
 	match name_key:
-		"busy": return "1" if _busy>0 or is_instance_valid(_modal) else "0"
+		"busy": return "1" if _busy>0 or _transitioning or is_instance_valid(_modal) else "0"
 		"state": return JSON.stringify(_public_state())
 		"save_path": return _save_path
 		"where":
@@ -660,6 +743,11 @@ func pilot_call(name_key: String,args: Array) -> String:
 			if key.begins_with("hot_item_"):
 				key=_item_markers.get(key.trim_prefix("hot_item_"),key)
 			if key in ["hot_plate","hot_exit","hot_stairs","hot_latch"]: key="hot_front"
+			# Architectural backing walls may be behind us on arrival. The
+			# existing own-cell action is still available on its actual verb.
+			if key=="hot_front" and not controls.hot_front.visible and not _view_action.is_empty():
+				for i in range(verbs.size()):
+					if verbs[i].action==_view_action: key="verb%d"%i; break
 			if controls.has(key) and is_instance_valid(controls[key]) and controls[key].is_visible_in_tree() and not (controls[key] is Button and controls[key].disabled):
 				var center: Vector2=controls[key].get_global_rect().get_center()
 				return "%d %d"%[roundi(center.x),roundi(center.y)]

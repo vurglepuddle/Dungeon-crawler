@@ -1,0 +1,30 @@
+# Real taps; only new_run resets the fixture.
+wait 4
+shot 00_splash
+tapnamed splash_skip
+wait 3
+shot 01_title
+call new_run BELL42
+waitidle
+wait 3
+tapnamed hot_item_f1_stone
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed strafe_l
+waitidle
+tapnamed fwd
+waitidle
+tapnamed strafe_r
+waitidle
+shot 12_gate_closed
+tapnamed map
+wait 4
+shot 13_closed_gate_map
+tapnamed map_close
+waitidle
+call assert hp 6
+call assert hash c182584d47fecc847aef4ab25285cea7bc15abdb930d63c369eadc8d6609472e
+close

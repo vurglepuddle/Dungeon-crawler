@@ -14,7 +14,7 @@ def lines(value):
 def main():
     union=set();count=0
     runtime_paths=set();declared_runtime=set()
-    for group in ('env','icons','portrait','screens','ui_offer'):
+    for group in ('env','icons','portrait','screens','ui_offer','props'):
         base=ROOT/'art_src'/group
         if not base.exists():continue
         for manifest_path in base.rglob('manifest.json'):
@@ -43,7 +43,17 @@ def main():
                 if group=='env':expected=(64,64)
                 elif group=='icons':expected=(208,16) if p.stem=='items_strip' else (16,16)
                 elif group=='portrait':expected=(96,32) if 'strip' in p.stem else (32,32)
-                elif group=='screens':expected=(154,150) if p.stem in ('title','splash') else (128,80)
+                elif group=='screens':
+                    screen_sizes={'title':(154,150),'splash':(154,150),'win':(128,80),'death':(128,80),
+                        'logotype_140':(140,40),'subtitle_plate_140':(140,20),'icon_offer_192':(192,192),
+                        'icon_offer_foreground_432':(432,432),'icon_offer_background_432':(432,432)}
+                    for family,suffix,frames in [('splash','flutter',2),('title','flicker',3),('win','dawn',3),('death','gutter',3)]:
+                        for frame in range(frames):
+                            screen_sizes[f'{family}_{suffix}_{frame}']=screen_sizes[family]
+                    expected=screen_sizes[p.stem]
+                elif group=='props':
+                    depth=int(p.stem[-1])
+                    expected={1:(64,20),2:(40,12),3:(24,8)}[depth] if 'puddle' in p.stem else {1:(64,64),2:(40,40),3:(24,24)}[depth]
                 else:expected=im.size # Exact UI rects are checked below.
                 assert im.size==expected,(p,im.size,expected)
             count+=1
@@ -66,6 +76,37 @@ def main():
     if receipt.exists():
         for p,digest in json.loads(receipt.read_text()).items():
             assert hashlib.sha256((ROOT/p).read_bytes()).hexdigest()==digest,('Changed preserved PNG',p)
+    room_receipt=ROOT/'art_src/props/preserved_hashes.json'
+    if room_receipt.exists():
+        for p,digest in json.loads(room_receipt.read_text()).items():
+            # Launcher art belongs to Claude; its accepted replacement is not
+            # part of C's promise to preserve old C assets. Keep the receipt.
+            if p.startswith('assets/icon/'):continue
+            assert hashlib.sha256((ROOT/p).read_bytes()).hexdigest()==digest,('Changed pre-room PNG',p)
+    for floor in (1,2):
+        for plane in ('floor','ceiling'):
+            base=Image.open(ROOT/f'assets/art/env/f{floor}_{plane}.png')
+            for p in (ROOT/'assets/art/env').glob(f'room_f{floor}_{plane}_*.png'):
+                im=Image.open(p)
+                for box in ((0,0,64,2),(0,62,64,64),(0,0,2,64),(62,0,64,64)):
+                    assert im.crop(box).tobytes()==base.crop(box).tobytes(),p
+    prop_manifest=ROOT/'art_src/props/manifest.json'
+    if prop_manifest.exists():
+        for entry in json.loads(prop_manifest.read_text())['registrations']:
+            p=ROOT/entry['path'];w,h=entry['canvas']
+            assert entry['anchor']==[w//2,h] and entry['interactive'] is False,entry
+            im=Image.open(p)
+            base=Image.open(p.with_name(p.name[:-5]+'1.png'))
+            assert im.tobytes()==base.resize(im.size,NEAREST).tobytes(),p
+            if entry['floor']==2 and entry['kind']!='puddle':
+                dry=Image.open(p.with_name('f1_'+p.name[3:]))
+                assert im.convert('RGBA').getchannel('A').tobytes()==dry.convert('RGBA').getchannel('A').tobytes(),p
+    foreground=ROOT/'assets/art/screens/icon_offer_foreground_432.png'
+    if foreground.exists():
+        im=Image.open(foreground)
+        assert all((x+0.5-216)**2+(y+0.5-216)**2<=132**2 for y in range(432) for x in range(432) if im.getpixel((x,y))!=0)
+        bg=Image.open(ROOT/'assets/art/screens/icon_offer_background_432.png')
+        assert 0 not in set(bg.getdata())
     assert Image.open(ROOT/'assets/art/finder.png').convert('RGBA').tobytes()==Image.open(ROOT/'assets/art/portrait/finder_fine.png').convert('RGBA').tobytes()
     ui_layout=ROOT/'art_src/ui_offer/rects.json'
     if ui_layout.exists():

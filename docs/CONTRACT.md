@@ -1,4 +1,4 @@
-# M3c contract
+# M3d contract
 
 New runs use rules/content m3.2 with generator m3.1; snapshot/envelope schema
 stays 2. Exact m2.1 and m3.1 cohorts remain readable and playable from stored
@@ -6,6 +6,10 @@ floors. Loading never regenerates or changes a hash. The first RING in a legacy
 M3a run upgrades rules/content to m3.2 while retaining its generator and floors.
 Unsupported profile combinations fail closed. Captured M2 and M3a fixtures
 prove their original ending hashes still match when no new action is used.
+
+M3d adds seed to detached view_snapshot output and optional checked survey
+metadata under ui. No rule, generation, coordinate, fixture/action or payload
+version changes. Existing witness turn counts and legacy ending hashes remain.
 
 ## Coordinates, identity and ownership
 
@@ -22,8 +26,9 @@ and results. Claude owns project/export settings, autopilot, collaborator
 pilots, BRIEF/COLLAB_LOG, exports/device tests and Git. No commits this turn.
 Parallel B owns its new creature/fixture/effect/music sources and data; C owns
 env/icons/screens/portrait art, scripts/fx, data/text and its manual/polish docs.
-The primary Codex alone wires those contributions into the scene. This round
-does not change their authored files or C's presentation integration.
+The primary Codex alone wires those contributions into the scene. M3d changes
+that integration but leaves their authored files intact. Late room props,
+room-face variants, the title logotype and icon option wait for M3e.
 
 ## Sim API
 
@@ -187,7 +192,7 @@ recorded before any move, so imports and re-pickups are not extra offerings.
 Belt essentials are excluded; the clapper counts as an ordinary offering.
 Counts describe this greedy policy, not human utility or optimum routes.
 Later floors offer a healing/FOOD item, an EDGE/GLOW item and distinct extras;
-capability interactions beyond existing healing/combat remain M3b.
+capability interactions beyond existing healing/combat remain M3e.
 
 ## Disk persistence
 
@@ -224,7 +229,7 @@ The current scene root implements pilot_call(name,args)->String:
 - state: compact public JSON. In-game fields: seed, floor/floor_count, pos,
   facing, hp, turn, revision, status, pack/belt IDs, equipment, selected,
   front contents, porter:{present,restored}, ring_ready, opaque complete-state
-  hash, save_ok, music and sfx booleans. At initial title:
+  hash, survey_hash, travel_pending, save_ok, music and sfx booleans. At initial title:
   {status:"title",can_continue:bool,music:bool,sfx:bool}.
 - where NAME: logical global centre "x y"; absent/hidden/disabled controls
   return empty. No physical-window assumptions.
@@ -245,6 +250,38 @@ win overlapping hits over larger bodies. Gold glints identify default targets;
 selected valid targets get item-colour corner cues. The view exposes projection
 records and interaction_cues; neither is authoritative state.
 
+M3d architecture uses projected wall/portal bounds instead of floor sprites.
+Facing-independent backing walls retain the original logical target cells.
+When an own-cell face is behind the camera, its strip verb remains usable.
+where hot_front (and existing aliases) resolves to that real verb button if
+there is no visible world button for the same action. This creates no hidden
+screen target and does not bypass the action validator.
+
+The view exposes visible_cells() and visible_landmarks(), using its camera,
+FOV, range and wall layout. Closed gates/doors stop survey knowledge even
+where painted iron has apertures. The old sim visited mask stays unchanged
+for rule/hash compatibility; the live map never reads that coarse mask.
+
+ui.survey is optional: {version:1,floors:[{seen:String,walked:String,
+landmarks:Array[String]}],sha256:String}. Bit strings contain exactly 289
+binary characters. Walked is a subset of seen and cannot mark masonry.
+Landmarks are unique fixture IDs on that floor. sha256 covers the canonical
+floors array. Absent/invalid metadata starts a blank survey without discarding
+a validated run; the current viewpoint/position are then observed. No old
+visited bits are imported. survey_hash describes this separate knowledge;
+hash continues to describe the deterministic rules payload only.
+
+Main observes the committed viewpoint before saving, including free turns.
+Travel records arrival knowledge and saves before fading the old picture.
+At black it syncs arrival, then fades in. Tokens cancel stale fades on reset
+and close. The input gate covers this sequence; there is no arrival attack.
+WM_CLOSE_REQUEST during a fade still saves the committed destination.
+
+The map uses solid ink for walked ground, dashed ink for seen ground and
+hatching for seen masonry. '?' consults known-edge membership without reading
+hidden neighbour terrain. A functional glyph requires a visible projection
+before discovery. Map animation and queries cannot mutate the simulation.
+
 hot_item opens one object's/pile's pickup. hot_item_ITEM_ID remains a stable
 where alias to its pile control. The strip TAKE offers all nearby loot.
 hot_front is the first selected target or usable fixture; hot_FIXTURE_ID names
@@ -258,7 +295,8 @@ card_ring for an owned clapper. A spent RING is disabled. Item cards leave the
 full picture visible and dock verbs at y179 while open; ordinary verb y is269.
 The log contents survive inspection, free rotation and failed saves.
 A failed save sets ! on floor_label; save_retry/save_close belong to its free
-status panel. Title/end: continue, retry, start, sound (also where sfx), music.
+status panel. Title/end: continue, retry, start, sound (also where sfx), music,
+splash_skip. The splash leaves the run controls immediately available.
 The independent switches read SFX ON/OFF and MUSIC ON/OFF.
 
 Audio preferences use user://settings.cfg, ConfigFile section audio, bool keys
@@ -266,8 +304,11 @@ music/sfx; absent settings default enabled. They are outside snapshot/hash and
 new-run replacement. Pilots and isolated tests derive *_settings.cfg beside
 their own save path, so they cannot change a player's preferences. The existing
 Android run-save implementation is untouched. Music requests title at title,
-floor on new/continue, win once on committed victory, and silence on death.
-B's player handles pause/resume; main stops it on WM_CLOSE_REQUEST.
+floor/floor2 on new/continue, win once on committed victory, and the death cue
+on loss.
+B's player handles pause/resume; main stops it on WM_CLOSE_REQUEST. M3d uses
+floor2 on deeper floors and the short death cue on committed loss. Portrait
+thresholds are fine 4-6, hurt 2-3 and near-death 1; near-death wins over flash.
 
 Husk state maps idle->idle, windup->windup, recovery->recoil. Canvas anchors
 stay fixed across states. Hit presentation keeps a target/pose briefly through
@@ -304,3 +345,11 @@ capturing HEAVY and bare-hand impacts, and an independent audio preference
 close/reopen pair. tests/run_m3c_pilots.ps1 runs 13 windowed pilots, including
 the retained-clapper and restoration reopen regressions. Hound/Ghost cells in
 the contact sheet are explicitly labelled asset previews, not playable scenes.
+
+M3d adds gallery/gate/death, survey A/B and mid-fade A/B pilots, all using
+ordinary taps. Mid-fade A asserts travel_pending true and saves the committed
+destination; fresh-process B asserts false and both exact hashes.
+tests/run_m3d_pilots.ps1 runs these seven plus thirteen M3c regressions, using
+new isolated slots and separate screenshot folders. The autopilot is unchanged.
+The external art probe is named probe_m3d_pack.gd because it requires
+--main-pack instead of a source-tree test run.

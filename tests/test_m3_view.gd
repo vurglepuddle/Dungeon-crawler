@@ -47,7 +47,14 @@ func _run() -> void:
 			app._close_modal()
 		if action.type=="stairs":
 			var up: Dictionary=app.sim.floor_data().fixtures.filter(func(f): return f.type=="stairs_up")[0]
-			check(not app.view.projection(up.id).is_empty(),"Underfoot up-stair remains visible on arrival")
+			check(app.view._faces.values().any(func(f): return f.id==up.id) and not app.view._sprites.any(func(s): return s.id==up.id),"Arrival stair belongs to a fixed backing wall")
+			var visible: bool=false
+			for facing in range(4):
+				var picture: Dictionary=app.sim.view_snapshot(); picture.facing=facing
+				app.view.update_state(picture)
+				visible=visible or not app.view.projection(up.id).is_empty()
+			check(visible,"Turning finds the arrival stair arch")
+			app._sync()
 	var hash_before: String=app.sim.state_hash()
 	app._open_map(); await process_frame
 	check(app.sim.state_hash()==hash_before,"Map remains free")

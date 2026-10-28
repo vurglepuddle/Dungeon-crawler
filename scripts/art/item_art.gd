@@ -63,6 +63,9 @@ static func texture(kind: String) -> Texture2D:
 	return result
 
 static func inventory(kind: String) -> Texture2D:
+	var painted: String="res://assets/art/icons/%s.png"%kind
+	if FileAccess.file_exists(painted) or ResourceLoader.exists(painted):
+		return preload("res://scripts/art/presentation_art.gd").texture(painted)
 	var key:=kind+"_inventory"
 	if _cache.has(key): return _cache[key]
 	var source:=texture(kind).get_image()

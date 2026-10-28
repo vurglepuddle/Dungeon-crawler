@@ -38,6 +38,7 @@ func _run() -> void:
 	var proof: Dictionary=W.build("BELL42",2,false,"return")
 	var saw_plate:=false; var saw_lever:=false; var saw_hit:=false; var saw_porter:=false
 	for action in proof.actions:
+		while app._transitioning: await process_frame
 		app._busy=0
 		if action.type=="hit" and not saw_hit:
 			var target: Dictionary=app.view.projection(action.target_id)

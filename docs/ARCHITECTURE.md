@@ -1,4 +1,4 @@
-# M3c architecture
+# M3d architecture
 
 One deterministic simulation owns a whole run. The scene presents its committed
 results. See CONTRACT for exact data and DESIGN for what is playable.
@@ -13,7 +13,8 @@ results. See CONTRACT for exact data and DESIGN for what is playable.
 - scripts/sim/dungeon_sim.gd owns inventory locations, equipment, belt, active
   floor, mechanisms, combat, stairs/lifts, restoration, exploration and terminal state. It is
   RefCounted with no nodes, filesystem, clock or input. Snapshot/query returns
-  are detached. view_snapshot supplies current-floor drawable data.
+  are detached. view_snapshot supplies current-floor drawable data and seed;
+  the latter is a read-only presentation addition, not a rule/state change.
 - scripts/gen/witness.gd expands BFS navigation and interaction macros into
   ordinary commands through that same sim. It has no teleport, gate override,
   loot grant or damage immunity. The app requires a successful full-return
@@ -34,6 +35,15 @@ results. See CONTRACT for exact data and DESIGN for what is playable.
   walls and objects, reaching black at 3.6 cells. It rebuilds the surface image
   only when floor/position/facing changes, not on animation frames or card sync.
   There are no 3D nodes, physics or runtime image-processing dependencies.
+- Architectural fixtures derive fixed backing wall normals from layout cells.
+  The DDA wall face receives the canonical painting. Gates are real projected
+  portal planes; their transparent overlays join per-column depth-sorted
+  sprite layers. Actors on a threshold paint in front of its arch. Floor
+  sprites for exit/stairs/lift are removed; logical fixture reach is unchanged.
+- scripts/art/presentation_art.gd caches whole textures, images and 64-column
+  AtlasTexture arrays. Stable mixed hashes choose painted wall variants by
+  seed/floor/cell/normal. Sconce frame changes at 4fps, sparkle at a modest
+  presentation tick. No image allocation/loading occurs on animation ticks.
 - That view exposes projection(id) records using opaque sprite bounds and
   wall depth. It draws only tiny default glints or selected-item corner cues.
   The controller creates transparent object hit areas from these same records;
@@ -50,15 +60,16 @@ results. See CONTRACT for exact data and DESIGN for what is playable.
 - During an item card, the controller docks the strip below the picture and
   preserves the hidden event text. Save failures update a persistent status
   control, never the event array. Looking also preserves the event array.
-- scripts/art/fixture_art.gd draws larger stairs, plates and lift landings;
-  item_art.gd retains small native item/inventory art. The painted Porter uses
+- item_art.gd routes known possessions to C's native icons, retaining code art
+  for unknown kinds. fixture_art.gd remains an unused historical fallback for
+  the architectural fixtures. The painted Porter uses
   the same fixed palette as the R1 wall/Husk/portrait. Source, prompt, reduction
   script and 4x contact are in art_src/m3 (excluded from runtime import).
 - scripts/audio/sfx.gd synthesises local PCM once for a small voice pool. A
   new warm restoration chord differs from the hostile wind-up bell. Close
   stops voices before quitting; its noise stream never touches gameplay RNG.
 - The B-owned Music autoload streams its original note-data scores. Main
-  selects title/floor/win, stops on death/close and independently persists
+  selects title/floor/floor2/win/death, stops on close and independently persists
   MUSIC/SFX preferences outside the run. B owns synthesis and pause/resume.
 - The view loads registered state poses and three-frame strike effects from
   B's assets/art/anim and fx. It retains a killed target visually for 240ms,
@@ -67,6 +78,21 @@ results. See CONTRACT for exact data and DESIGN for what is playable.
 - scripts/ui/map_view.gd fits seen bounds and distinguishes known stairs,
   gates, owner, lift landings and Seal site. Its scale/marks cannot reveal
   unseen extents or mutate the simulation.
+- scripts/ui/survey.gd owns checked UI knowledge: seen/walked bit strings and
+  discovered fixture IDs per floor. The view supplies same-camera ray cells
+  and visible landmark projections, capped by walls and closed gates. Main
+  captures this synchronously before saving a command. The old sim visited
+  mask is retained for legacy hashes but is no longer the live map source.
+- C's ambience Node2D sits between view and controls. Travel commits and saves
+  the arrival survey before an out/black-sync/in sequence; tokens cancel old
+  fades on reset/close. No callback advances combat. Portraits, menu plates
+  and validated flavour are selected from committed state in main.
+
+For packaged-resource acceptance, tests/stage_m3d.py copies only finalized
+inputs into build/m3d_export_stage. Import/export there leaves source project
+settings and C's new props/room faces untouched. An external SceneTree probe
+loads the resulting PCK from an empty resource directory and checks runtime
+art/alpha/JSON availability. It is not an APK/device performance test.
 
 Data flow: seed -> bounded construction -> replayed full-run witness -> live
 sim -> save -> events/snapshot -> visual/audio feedback -> touch command -> sim.

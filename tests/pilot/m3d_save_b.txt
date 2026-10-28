@@ -1,0 +1,13 @@
+# Fresh process after A with the same isolated slot.
+wait 4
+tapnamed continue
+waitidle
+call assert hash 58b12f56d82365c9b972f51179b1ddae8c8ade2770154d4f9915dd944acef37f
+call assert survey_hash a44b99f62f9f91b428cf6e8ce49f98f2ea9836c152283a7c1059761a4a564106
+call assert floor 2
+tapnamed map
+wait 4
+shot 18_survey_continued
+tapnamed map_close
+waitidle
+close

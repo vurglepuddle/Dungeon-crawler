@@ -5,11 +5,11 @@ collect below; some are useful, some are still wanted. Find another use for
 something ordinary. Bring the Dawn Seal home. Eventually, put something back
 where it belongs and watch the dungeon come alive again.
 
-Current milestone: **M3c, tactile panels and readable combat**. The dungeon has
-centre stage, with dark slate, verdigris insets, compact bronze controls and
-quiet object glints. The owner's phone feedback takes precedence over the old
-screen bands. This checkpoint completes chrome and the first art/audio wiring;
-capability encounters remain the next content round.
+Current milestone: **M3d, the painted undercroft**. Doors, stairs and lift
+landings belong to the masonry. The floors have painted dressing, cast stone
+surfaces, restrained ambience and reactive Finder portraits. The parchment map
+distinguishes walked ground from forward glimpses. The owner's phone feedback
+takes precedence over the old bands. Capability encounters remain M3e.
 
 ## The playable run
 
@@ -122,17 +122,35 @@ simulation. M2 saves continue as their exact stored run, without regeneration; t
 retain M2 geometry and contain no retroactively inserted Porter. No session
 receipts or Ledger framework is added here.
 
-The map fits the seen bounds, with cells of at least eight pixels when space
-permits and a large facing marker. Seen stairs, gates, lift landings and the
-Seal site have distinct marks. The Seal site remains marked after pickup.
-No unseen rooms are revealed. Looking and opening/closing the map are free.
+The map is a cartographer's parchment with sepia rules and hatched masonry.
+Walked ground has solid ink; glimpsed ground has dashed edges. A small ? marks
+an unsurveyed edge without consulting the hidden terrain beyond it. Known
+stairs, gates, lift, Porter and Seal room use ink glyphs. An architectural
+glyph is discovered by seeing its face, not merely standing on its logical
+cell while looking away. A dark pin shows the Finder's heading. The map fits
+known bounds, using eight-pixel cells or larger when space permits. Looking
+and opening/closing the map remain free.
+
+Surveying uses the view's 148 camera rays and lamp range, blocked by masonry
+and closed gates/doors. It ignores the old coarse cardinal visited mask.
+Walked/seen bits and discovered landmarks persist in checked UI metadata,
+independent of rule hashes. Older saves without a survey keep their run intact
+and begin a fresh survey at the loaded viewpoint.
 
 The view uses the Finder's lamp: surfaces fade to black by about 3.5 cells.
 Flagstones and ceiling ribs share world-aligned perspective seams. Small
-objects have shadows and a minimum sprite size. Down stairs are a black well
-with descending treads; up stairs rise inside a stone frame. Own-cell items
-and stairs remain visible at the bottom edge. These are readable sprite
-conventions at 154 pixels, not an attempt at physically exact perspective.
+objects have shadows and a minimum sprite size. Primary painted plain walls
+dominate, with sparse stable cracks, damp, chains, tapestries, drains and
+four-fps sconces. Cast floor/ceiling materials share world-cell seams. Deeper
+stone is already painted darker; no extra blue floor tint is applied.
+
+Exit, stairs and lift are fixed wall faces, with arches and thresholds sampled
+through the wall camera. Dead lift chains hang slack with cobwebs; restoration
+lights the lamp and tightens them. Gates have transparent apertures with the
+real passage behind their iron. No corresponding mid-cell floor sprite remains.
+The fixture's original logical cell and reach stay unchanged. A return stair
+may be behind you on arrival: turn to see it, or use its existing UP verb.
+Loose own-cell possessions still appear at the bottom edge for reachability.
 
 The dungeon picture is 148 x 150 inside a three-pixel bronze frame. The top
 strip is separate: seed left, floor/MAP right, logical x54-96 empty for the
@@ -142,12 +160,15 @@ portrait/equipment/belt 38, pack 22, verbs 24, controls/compass 48 and footer 2.
 
 The original painted bronze remains on buttons and the compass. Large panels
 use continuous, nonrepeating dark slate or teal enamel with thin bevels and
-corner studs. The map is a quieter green slate; cards use a dark verdigris
+corner studs. The map uses worn parchment; cards use a dark verdigris
 inset. A leather fold holds eight boxless icons at 19px pitch. Belt loops sit
 behind the protected possessions, and a slim glass oil gauge repeats health
 beside the portrait's bar. Icons retain their native centred 16 x 16 canvas.
 The compass needle kicks and settles when turning; its letter remains precise.
-These presentation motions never consume time.
+The top strip has carved rail ends, a painted MAP button and a clear camera
+gap. C's centred sixteen-pixel icons replace possession placeholders. Finder
+paintings show fine at 4-6 HP, hurt at 2-3 and near death at 1; the last takes
+priority over transient hurt. These presentation motions consume no time.
 
 Pressure plates are shallow inset floor trapezoids, with a pressed rim/state.
 Possessions paint after the supporting plate. The latch is a lever hinged to
@@ -155,7 +176,8 @@ a fixed wall beside its cell; its handle flips down and stays visible after
 use. The restored Porter raises its palms and lights its chest in a new pose.
 
 There are no labels or boxes on the dungeon picture. A small gold glint marks
-a usable object; its painted body is the tap target. Selected-item targets
+a usable object; its painted body is the tap target. B's three-frame sparkle
+has a long quiet interval and a stable per-object phase. Selected-item targets
 have small corner cues in the item's colour. The strip spells out PLACE,
 RETURN, RING or UNLOCK. A pile chooser names only the objects on that cell.
 The world cue and hit area share the actual sprite projection and occlusion.
@@ -174,6 +196,14 @@ The owner's Android storage and font-import fixes remain intact. The title/end
 menu offers separate MUSIC and SFX switches; the old sound pilot name still
 addresses SFX. Preferences live outside the run snapshot. The app icon and
 launcher framing remain the owner's assets.
+
+A skippable LOST MOTH illustration precedes the title painting. CONTINUE and
+NEW RUN are already reachable beneath it. Win/death plates leave seed, turn
+count, epitaph and controls outside the art. Provenance and floor names come
+from C's validated short text; urgent combat events retain priority. Dust,
+subtle lamp flicker and deeper-floor drips stay inside the picture. Stair and
+lift actions commit/save first, then fade the old picture out and the new one
+in. The fade briefly holds input and never resolves an enemy action.
 
 ## What gives the finished slice its identity
 
@@ -217,7 +247,7 @@ or return-trip spawns. One good restoration is enough.
 
 M4 continues quieter walls, portraits, concise
 knowledge-only Ledger cards, a period-style manual and phone acceptance.
-M3c keeps the full loop and restoration, makes the attack tell visible and
-adds the first original score. No extra enemy or fixture rule ships here.
+M3d keeps the full loop and restoration, integrates the painted kit and makes
+the map a durable survey. No extra enemy or capability fixture rule ships here.
 Third-run appeal, the capability encounters and the return-trip reveal still
 need implementation and human review.
