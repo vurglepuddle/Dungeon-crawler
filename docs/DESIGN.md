@@ -376,3 +376,19 @@ The view frame is fixed at (0,18,154,156), its picture (3,21,148,150), and the
 compass box (85,294,66,44). The owner's optional 154x342 transparent overlay
 loads from assets/art/ui/owner_vines.png, above picture/chrome/needle, hidden
 while a card, modal or map is open. The draft is not wired or copied.
+
+## M4b painted-kit integration
+
+This pass changes presentation only. The three-floor difficulty, timings,
+optional branches, loot and save profiles remain M4a's; the next depth decision
+waits for the owner's three-floor phone verdict. Painted wall dressings and
+wooden lock states replace their native stand-ins. Plates, silk, cord grates,
+side levers, the opened cache and travel-ground tiles use the v2 kit. Hound
+embers remain lit through a separate, occluded glow layer. Deliberate room
+landmarks occur once in a real three-wide space, with ordinary corridor flags
+and vaults left quiet. Spent padding has a torn pack/equipment icon.
+
+Map ink, digits, glints, lanes, movement arrows and the instrument needle stay
+intentional code visuals. The viewport frame and compass registration are
+unchanged. Missing required paintings must fail source/export validation;
+code objects and flat chrome are no longer missing-file substitutes.

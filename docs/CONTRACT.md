@@ -534,3 +534,31 @@ separately exercise deliberate deep hits, coat absorption and healing.
 run_m4a_checks.ps1 runs sixteen suites. run_m4a_pilots.ps1 adds eight muted
 real-input pilots to the twenty-six inherited ones, including a deep Continue
 pair. D's unchanged default QA runner remains a separate audit.
+
+## M4b painted assets
+
+No action, event, coordinate, save profile, generation or difficulty change.
+World families are resolved only by `ArtFamily.for_floor(number)`, with
+independent wall/fixture/prop indices and ordinary-plane prefix/weights.
+Floor three/four continue borrowing the accepted floor-two kit for now.
+
+`RequiredArt.paths()` returns required texture paths and their category;
+`issues(optional_paths)` reports missing/unloadable images. Both source and
+packaged checks must pass this inventory, including all three waiting Porter
+sizes, ordinary/spent inventory states, chrome, animation states and portal
+textures. Optional owner_vines.png is excluded from the requirement. Native
+M1 silhouette/StyleBoxFlat fallbacks are not production missing-art policy.
+
+Travel ground belongs to its fixture's world cell. Orient from negative
+WallFaces binding normal, retaining the source's outer two-pixel ring. Lift
+activity invalidates cached surfaces without movement. A single representation
+of lever hardware uses that same physical wall binding. Web burning holds two
+120ms painted portal frames; web/cord portals have no extra billboard. Open
+locks use the transparent wooden-door overlay. Open caches use a complete
+painted face, with no generated dark aperture rectangle. Coat spent selects
+the torn 16px icon in all Main inventory/equipment/card paths.
+
+The frame remains (0,18,154,156), picture (3,21,148,150), compass box
+(85,294,66,44). This pass adds no gameplay pilot calls. The sample call exists
+only in tests/capture_m4b.gd, a labelled authored visual-fixture harness; normal
+Main does not implement it. The 34 ordinary tap pilots remain separate.

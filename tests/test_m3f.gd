@@ -91,7 +91,8 @@ func _run() -> void:
 	check(app.controls.card_use.disabled and not app.controls.card_drop.disabled,"A full pack disables UNEQUIP but leaves equipped DROP usable")
 	app._command({"type":"drop","item_id":"knife_start"}); app._busy=0
 	check(app.state.pack.size()==8 and app.state.equipment.hand=="" and app.sim.reachable_items().has("knife_start"),"Equipped DROP needs no spare pack slot")
-	check(app._optional_overlay.texture==null and app._optional_overlay.mouse_filter==Control.MOUSE_FILTER_IGNORE,"Vine hook stays empty and never intercepts touch")
+	var vines_present: bool=FileAccess.file_exists(app.OPTIONAL_OVERLAY) or ResourceLoader.exists(app.OPTIONAL_OVERLAY)
+	check((app._optional_overlay.texture!=null)==vines_present and (not vines_present or app._optional_overlay.texture.get_size()==Vector2(154,342)) and app._optional_overlay.mouse_filter==Control.MOUSE_FILTER_IGNORE,"Optional native vine overlay loads only when present and never intercepts touch")
 	check(app.sim.restore_state(stair_selected_state),"Selected-stair UI fixture restores")
 	app.selected="knife_start"; app._sync()
 	check(app.verbs.any(func(v): return v.action.get("target_id","")=="f1_down"),"DOWN remains in the real strip with an unrelated selected item")

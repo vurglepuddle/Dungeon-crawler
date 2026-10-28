@@ -65,19 +65,4 @@ static func texture(kind: String) -> Texture2D:
 static func inventory(kind: String) -> Texture2D:
 	if kind=="torch": return preload("res://scripts/art/presentation_art.gd").texture("res://assets/art/fixtures/reed_torch_icon_unlit_16.png")
 	if kind=="seal": return preload("res://scripts/art/presentation_art.gd").texture("res://assets/art/fixtures/dawn_seal_icon_16.png")
-	var painted: String="res://assets/art/icons/%s.png"%kind
-	if FileAccess.file_exists(painted) or ResourceLoader.exists(painted):
-		return preload("res://scripts/art/presentation_art.gd").texture(painted)
-	var key:=kind+"_inventory"
-	if _cache.has(key): return _cache[key]
-	var source:=texture(kind).get_image()
-	var bounds:=source.get_used_rect()
-	var crop:=source.get_region(bounds)
-	var factor:=minf(14.0/crop.get_width(),16.0/crop.get_height())
-	crop.resize(maxi(1,roundi(crop.get_width()*factor)),maxi(1,roundi(crop.get_height()*factor)),Image.INTERPOLATE_NEAREST)
-	var image:=Image.create(16,16,false,Image.FORMAT_RGBA8)
-	image.fill(Color.TRANSPARENT)
-	image.blit_rect(crop,Rect2i(Vector2i.ZERO,crop.get_size()),Vector2i((16-crop.get_width())/2,(16-crop.get_height())/2))
-	var result:=ImageTexture.create_from_image(image)
-	_cache[key]=result
-	return result
+	return preload("res://scripts/art/presentation_art.gd").texture("res://assets/art/icons/%s.png"%kind)

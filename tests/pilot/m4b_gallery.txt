@@ -1,0 +1,138 @@
+# Authored renderer fixtures, not a gameplay route. Muted by Autopilot.
+wait 5
+call sample f1_drain
+wait 4
+shot f1_drain
+call sample f1_chains
+wait 4
+shot f1_chains
+call sample f1_tapestry
+wait 4
+shot f1_tapestry
+call sample f1_crack
+wait 4
+shot f1_crack
+call sample f1_damp
+wait 4
+shot f1_damp
+call sample f1_sconce_0
+wait 4
+shot f1_sconce_0
+call sample f1_sconce_1
+wait 4
+shot f1_sconce_1
+call sample f1_lock_closed
+wait 4
+shot f1_lock_closed
+call sample f1_lock_open
+wait 4
+shot f1_lock_open
+call sample f1_plate_up
+wait 4
+shot f1_plate_up
+call sample f1_plate_down
+wait 4
+shot f1_plate_down
+call sample f1_lever_front
+wait 4
+shot f1_lever_front
+call sample f1_lever_side
+wait 4
+shot f1_lever_side
+call sample f1_lift_dead_underfoot
+wait 4
+shot f1_lift_dead_underfoot
+call sample f1_lift_working_underfoot
+wait 4
+shot f1_lift_working_underfoot
+call sample f1_lift_approach
+wait 4
+shot f1_lift_approach
+call sample f1_stairs_top
+wait 4
+shot f1_stairs_top
+call sample f1_room
+wait 4
+shot f1_room
+call sample f2_drain
+wait 4
+shot f2_drain
+call sample f2_chains
+wait 4
+shot f2_chains
+call sample f2_tapestry
+wait 4
+shot f2_tapestry
+call sample f2_crack
+wait 4
+shot f2_crack
+call sample f2_damp
+wait 4
+shot f2_damp
+call sample f2_sconce_0
+wait 4
+shot f2_sconce_0
+call sample f2_sconce_1
+wait 4
+shot f2_sconce_1
+call sample f2_lock_closed
+wait 4
+shot f2_lock_closed
+call sample f2_lock_open
+wait 4
+shot f2_lock_open
+call sample f2_plate_up
+wait 4
+shot f2_plate_up
+call sample f2_plate_down
+wait 4
+shot f2_plate_down
+call sample f2_lever_front
+wait 4
+shot f2_lever_front
+call sample f2_lever_side
+wait 4
+shot f2_lever_side
+call sample f2_lift_dead_underfoot
+wait 4
+shot f2_lift_dead_underfoot
+call sample f2_lift_working_underfoot
+wait 4
+shot f2_lift_working_underfoot
+call sample f2_lift_approach
+wait 4
+shot f2_lift_approach
+call sample f2_room
+wait 4
+shot f2_room
+call sample web_intact
+wait 4
+shot web_intact
+call sample web_burning_0
+wait 4
+shot web_burning_0
+call sample web_burning_1
+wait 4
+shot web_burning_1
+call sample web_burnt
+wait 4
+shot web_burnt
+call sample cord_intact
+wait 4
+shot cord_intact
+call sample cord_cut
+wait 4
+shot cord_cut
+call sample cache_open
+wait 4
+shot cache_open
+call sample hound_embers
+wait 4
+shot hound_embers
+call sample spent_coat_pack
+wait 4
+shot spent_coat_pack
+call sample f2_stairs_top
+wait 4
+shot f2_stairs_top
+close

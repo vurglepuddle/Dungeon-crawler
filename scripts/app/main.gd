@@ -436,7 +436,7 @@ func _selection_colour() -> Color:
 func _item_icon(id: String) -> Texture2D:
 	var item: Dictionary=state.items[id]
 	if item.kind=="torch": return Paint.texture("res://assets/art/fixtures/reed_torch_icon_%s_16.png"%("lit" if item.lit else "unlit"))
-	return Art.inventory(item.kind)
+	return Art.inventory("coat_spent" if item.kind=="coat" and item.get("spent",false) else item.kind)
 func _held_kind(id: String="") -> String:
 	if id=="":
 		id=selected if state.items.has(selected) and state.items[selected].kind in ["torch","lamp","seal"] else ""

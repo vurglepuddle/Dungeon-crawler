@@ -178,3 +178,26 @@ queries. Visible travel hotspots have a reach-aware callback. Scene inspection
 never drives a movement or enemy phase. Dedicated assets/art/items frames feed
 the existing sorted/occluded sprite pass and cached opaque-bound shadows.
 The optional owner vine layer has fixed registration and modal visibility.
+
+## M4b presentation data
+
+`art/art_family.gd::for_floor` is the single floor-to-family mapping. Its
+record separates walls, fixtures, props and plane prefix/weight family, so a
+Lower Watch environment can retain the existing fixture/prop kits. All current
+deep visuals still borrow family two. There is no simulation family field.
+
+`plane_materials.gd` derives fixed ground cells from the same `WallFaces`
+bindings as travel. Negative binding normal determines the tile interior's
+rotation; the two-pixel world seam stays unrotated. Actual lift activity is
+part of the surface cache key. Room landmarks are stable presentation choices
+in real 3x3 open areas; fixture ground takes precedence. Levers use the same
+shared wall binding. Portal layers own web/cord/door paintings, with no second
+billboard. The cache's opened face is opaque painted masonry and recess.
+
+`art/required_art.gd` enumerates required runtime texture paths. Source tests
+and an isolated exported PCK load every one. Paint logs missing loads; chrome,
+waiting Porter and inventory paths never silently revert to procedural art.
+The export staging helper consumes this same inventory, so a future family
+change automatically includes its required files. Missing raw source files
+fail staging even if stale imported copies exist. The old M1 texture helper remains available to historical tests, unused by
+current world/inventory rendering. Optional owner vines are not required art.

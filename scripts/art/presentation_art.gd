@@ -10,6 +10,7 @@ static func texture(path: String) -> Texture2D:
 	else:
 		var image:=Image.load_from_file(path)
 		if image!=null and not image.is_empty(): result=ImageTexture.create_from_image(image)
+	if result==null: push_error("Required painted asset failed to load: "+path)
 	_textures[path]=result
 	return result
 static func image(path: String) -> Image:

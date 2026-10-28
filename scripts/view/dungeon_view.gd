@@ -5,6 +5,7 @@ const Art=preload("res://scripts/art/item_art.gd")
 const Paint=preload("res://scripts/art/presentation_art.gd")
 const Held=preload("res://scripts/view/held_item.gd")
 const Faces=preload("res://scripts/sim/wall_faces.gd")
+const Family=preload("res://scripts/art/art_family.gd")
 const Planes=preload("res://scripts/art/plane_materials.gd")
 const WIDTH:=148
 const HEIGHT:=150
@@ -30,6 +31,7 @@ var _fixture_textures: Dictionary={}
 var _effects: Dictionary={}
 var _strike: Dictionary={}
 var _faces: Dictionary={}
+var _bindings: Dictionary={}
 var _portals: Array=[]
 var _visible_cells: Array=[]
 var _face_choices: Dictionary={}
@@ -39,6 +41,9 @@ var _presentation_ms: float=0
 var _has_sconce: bool=false
 var _column_layers: Array=[]
 var _creature_poses: Dictionary={}
+var _hound_glow: Dictionary={}
+var _ground_cells: Dictionary={}
+var _room_cells: Dictionary={}
 var _burning: Dictionary={}
 var _dispel: Dictionary={}
 var toss_lane: Array=[]
@@ -50,7 +55,7 @@ func _ready() -> void:
 	mouse_filter=Control.MOUSE_FILTER_IGNORE
 	texture_filter=CanvasItem.TEXTURE_FILTER_NEAREST
 	for height in [64,40,24]:
-		if ResourceLoader.exists("res://assets/art/porter_%d.png"%height): _porters.append(load("res://assets/art/porter_%d.png"%height))
+		_porters.append(Paint.texture("res://assets/art/porter_%d.png"%height))
 		_restored.append(load("res://assets/art/anim/porter_restored_%d.png"%height))
 	for pose in ["idle","windup","recoil"]:
 		_poses[pose]=[]
@@ -60,11 +65,13 @@ func _ready() -> void:
 		for frame in range(3): _effects[kind].append(load("res://assets/art/fx/%s_%d_64.png"%[kind,frame]))
 	for d in range(1,4):
 		for pressed in ["up","down"]:
-			var name: String="plate_%s_d%d"%[pressed,d]
-			_fixture_textures[name]=load("res://assets/art/fx/%s.png"%name)
+			var name: String
+			for family in [1,2]:
+				name="f%d_plate_%s_d%d"%[family,pressed,d]
+				_fixture_textures[name]=Paint.texture("res://assets/art/fixtures/fixture_v2_%s.png"%name)
 			for side in ["left","right"]:
 				name="lever_%s_%s_d%d"%[side,pressed,d]
-				_fixture_textures[name]=load("res://assets/art/fx/%s.png"%name)
+				_fixture_textures[name]=Paint.texture("res://assets/art/fixtures/fixture_v2_%s.png"%name)
 			name="lever_front_%s_d%d"%[pressed,d]
 			_fixture_textures[name]=Paint.texture("res://assets/art/fixtures/%s.png"%name)
 	for family in ["gold","target"]:
@@ -72,15 +79,22 @@ func _ready() -> void:
 			var key: String="%s_%d"%[family,pixels]
 			_sparkles[key]=[]
 			for frame in range(3): _sparkles[key].append(Paint.texture("res://assets/art/fixtures/glint_%s_%d_%d.png"%[family,frame,pixels]))
-	for floor_number in [1,2]:
-		for frame in range(2): Paint.strips("res://assets/art/env/painted_f%d_sconce_%d.png"%[floor_number,frame])
+	var wall_families: Array=[]
+	for number in range(1,5):
+		var floor_number: int=Family.for_floor(number).walls
+		if not wall_families.has(floor_number): wall_families.append(floor_number)
+	for floor_number in wall_families:
+		for frame in range(2): Paint.strips("res://assets/art/env/painted_f%d_sconce_%d_v2.png"%[floor_number,frame])
 	for kind in ["hound","ghost"]:
 		_creature_poses[kind]={}
 		for pose in ["idle","windup","recoil"]:
 			_creature_poses[kind][pose]=[]
 			for h in [64,40,24]: _creature_poses[kind][pose].append(Paint.texture("res://assets/art/creatures/%s_%s_%d.png"%["ash_hound_ember" if kind=="hound" else "wick_ghost",pose,h]))
+	for pose in ["idle","windup","recoil"]:
+		_hound_glow[pose]=[]
+		for h in [64,40,24]: _hound_glow[pose].append(Paint.texture("res://assets/art/creatures/ash_hound_ember_glow_%s_%d.png"%[pose,h]))
 	for d in range(1,4):
-		for name in ["brazier_lit_0","brazier_lit_1","reed_torch_unlit","reed_torch_lit_0","reed_torch_lit_1","web_intact","web_burning_0","web_burning_1","web_burnt","cord_grate_intact","cord_grate_cut","dawn_seal_pulse_0","dawn_seal_pulse_1"]:
+		for name in ["brazier_lit_0","brazier_lit_1","reed_torch_unlit","reed_torch_lit_0","reed_torch_lit_1","dawn_seal_pulse_0","dawn_seal_pulse_1"]:
 			Paint.texture("res://assets/art/fixtures/%s_d%d.png"%[name,d])
 	for kind in Held.FRAMES:
 		for frame in Held.FRAMES[kind]: Paint.texture("res://assets/art/hands/hand_%s_%s_56.png"%[kind,frame])
@@ -139,19 +153,22 @@ func _face_key(cell: Array,normal: Vector2i) -> String:
 
 func _architecture() -> void:
 	_faces={}; _portals=[]
-	var bindings: Dictionary=Faces.all(state)
+	_bindings=Faces.all(state)
+	var bindings: Dictionary=_bindings
 	for fixture in state.fixtures:
 		var kind: String=fixture.type
 		if kind=="panel":
-			_faces[_face_key(fixture.wall,Vector2i(fixture.normal[0],fixture.normal[1]))]={"id":fixture.id,"kind":"panel","texture_path":"res://assets/art/env/painted_f%d_plain_0.png"%mini(state.floor,2),"panel_state":"open" if fixture.open else ("revealed" if fixture.revealed else "plain")}
+			var path: String="res://assets/art/fixtures/fixture_v2_f%d_cache_open_64.png"%Family.for_floor(state.floor).fixtures if fixture.open else "res://assets/art/env/painted_f%d_plain_0.png"%Family.for_floor(state.floor).walls
+			_faces[_face_key(fixture.wall,Vector2i(fixture.normal[0],fixture.normal[1]))]={"id":fixture.id,"kind":"panel","texture_path":path,"panel_state":"" if fixture.open else ("revealed" if fixture.revealed else "plain")}
 			continue
 		if kind in ["gate","lock","web","cord"]:
 			if kind=="lock" and not fixture.open: continue
 			var p:=Vector2i(fixture.pos[0],fixture.pos[1])
 			var across_x: bool=state.tiles[p.y*state.width+p.x-1]==1 and state.tiles[p.y*state.width+p.x+1]==1
-			var path: String="res://assets/art/fixtures/architecture_f%d_gate_%s_overlay_64.png"%[mini(state.floor,2),"open" if fixture.open else "closed"]
-			if kind=="web": path="res://assets/art/fixtures/web_%s_d1.png"%("burnt" if fixture.open else "intact")
-			if kind=="cord": path="res://assets/art/fixtures/cord_grate_%s_d1.png"%("cut" if fixture.open else "intact")
+			var path: String="res://assets/art/fixtures/architecture_f%d_gate_%s_overlay_64.png"%[Family.for_floor(state.floor).fixtures,"open" if fixture.open else "closed"]
+			if kind=="lock": path="res://assets/art/env/painted_f%d_door_open_overlay_v2.png"%Family.for_floor(state.floor).walls
+			if kind=="web": path="res://assets/art/fixtures/fixture_v2_web_%s_d1.png"%("burnt" if fixture.open else "intact")
+			if kind=="cord": path="res://assets/art/fixtures/fixture_v2_cord_grate_%s_d1.png"%("cut" if fixture.open else "intact")
 			_portals.append({"id":fixture.id,"kind":kind,"pos":fixture.pos,"normal":Vector2(0,1) if across_x else Vector2(1,0),"texture_path":path})
 			continue
 		if kind not in ["exit","stairs_up","stairs_down","lift"]: continue
@@ -159,7 +176,7 @@ func _architecture() -> void:
 		var binding: Dictionary=bindings[fixture.id]
 		var art_kind: String=("lift_working" if fixture.active else "lift_dead") if kind=="lift" else kind
 		var family: String="architecture_v3" if kind in ["stairs_up","stairs_down"] else ("architecture_v2" if art_kind=="lift_dead" else "architecture")
-		_faces[Faces.key(binding.wall,binding.normal)]={"id":fixture.id,"kind":kind,"texture_path":"res://assets/art/fixtures/%s_f%d_%s_64.png"%[family,mini(state.floor,2),art_kind]}
+		_faces[Faces.key(binding.wall,binding.normal)]={"id":fixture.id,"kind":kind,"texture_path":"res://assets/art/fixtures/%s_f%d_%s_64.png"%[family,Family.for_floor(state.floor).fixtures,art_kind]}
 
 func dressing_allowed(cell: Array) -> bool:
 	# Both logical landings and their painted wall faces reserve a full ring.
@@ -195,7 +212,7 @@ func _wall_path(cell: Array,normal: Vector2i) -> String:
 	var suffix: String=_face_choices[key]
 	if suffix=="sconce":
 		_has_sconce=true; suffix="sconce_%d"%(int(_presentation_ms/250)%2)
-	return "res://assets/art/env/painted_f%d_%s.png"%[mini(state.floor,2),suffix]
+	return "res://assets/art/env/painted_f%d_%s%s.png"%[Family.for_floor(state.floor).walls,suffix,"_v2" if suffix in ["drain","chains","tapestry","crack","damp","sconce_0","sconce_1"] else ""]
 
 func visible_cells() -> Array: return _visible_cells.duplicate(true)
 func visible_landmarks() -> Array:
@@ -232,9 +249,13 @@ func _build_camera() -> void:
 	var forward:=Vector2(Sim.DIRS[state.facing][0],Sim.DIRS[state.facing][1])
 	var right:=Vector2(-forward.y,forward.x)
 	var origin:=Vector2(state.pos[0]+0.5,state.pos[1]+0.5)
-	var key: String="calm_v3/%s/%s/%s/%s"%[state.seed,state.floor,state.pos,state.facing]
+	var material_state: Array=[]
+	for fixture in state.fixtures:
+		if fixture.type=="lift": material_state.append([fixture.id,fixture.active])
+	var key: String="painted_v2/%s/%s/%s/%s/%s"%[state.seed,state.floor,state.pos,state.facing,material_state]
 	if key!=_surface_key:
 		_surface_key=key
+		_ground_cells=Planes.ground_cells(state); _room_cells=Planes.room_cells(state)
 		_build_surfaces(origin,forward,right)
 	_depths.clear(); _walls.clear(); _sprites.clear(); _projections.clear()
 	_visible_set={}; _architecture(); _has_sconce=false; _has_flame=false
@@ -262,7 +283,7 @@ func _build_camera() -> void:
 		var path: String=face.get("texture_path",_wall_path([cell.x,cell.y],normal))
 		for fixture in state.fixtures:
 			if fixture.type=="lock" and not fixture.open and fixture.pos==[cell.x,cell.y]:
-				path="res://assets/art/env/painted_f%d_door.png"%mini(state.floor,2); face={"id":fixture.id}
+				path="res://assets/art/env/painted_f%d_door_v2.png"%Family.for_floor(state.floor).walls; face={"id":fixture.id}
 		_walls.append({"depth":depth,"height":maxi(1,roundi(FOCAL/depth)),"u":clampi(int(u*64),0,63),"light":lamp(depth)*(0.78 if side else 1.0),"path":path,"cell":[cell.x,cell.y],"id":face.get("id",""),"panel_state":face.get("panel_state","")})
 		if face.has("id"):
 			var h: float=FOCAL/depth
@@ -315,12 +336,11 @@ func _build_camera() -> void:
 		var wall_normal:=Vector2.ZERO
 		var hinge:=Vector2.ZERO
 		if sprite.kind=="latch":
-			# Choose a fixed physical wall, independently of camera direction.
-			for offset in [Vector2.LEFT,Vector2.RIGHT,Vector2.UP,Vector2.DOWN]:
-				var neighbor:=Vector2i(sprite.pos[0]+int(offset.x),sprite.pos[1]+int(offset.y))
-				if state.tiles[neighbor.y*state.width+neighbor.x]==1:
-					wall_normal=offset; break
-			if wall_normal==Vector2.ZERO: continue
+			# Use the same physical wall binding as forward/PULL interaction.
+			var binding: Dictionary=_bindings.get(sprite.id,{})
+			if binding.is_empty():
+				push_error("Lever has no physical wall: "+sprite.id); continue
+			wall_normal=-Vector2(binding.normal[0],binding.normal[1])
 			hinge=Vector2(sprite.pos[0]+0.5,sprite.pos[1]+0.5)+wall_normal*0.485
 			relative=hinge-origin; depth=relative.dot(forward); lateral=relative.dot(right)
 		# A possession at someone's feet must remain visible beside the body.
@@ -345,7 +365,7 @@ func _build_camera() -> void:
 		var kind: String=sprite.kind
 		var variant: int=0 if depth<1.5 else (1 if depth<2.5 else 2)
 		if kind=="decor":
-			texture=Paint.texture("res://assets/art/props/f%d_%s_d%d.png"%[mini(state.floor,2),sprite.prop_kind,variant+1])
+			texture=Paint.texture("res://assets/art/props/f%d_%s_d%d.png"%[Family.for_floor(state.floor).props,sprite.prop_kind,variant+1])
 			tall=roundi(FOCAL/depth) if sprite.prop_kind=="pillar" else [64,40,24][variant]
 		elif kind=="husk":
 			var pose: String="recoil" if sprite.get("state","")=="recovery" else str(sprite.get("state","idle"))
@@ -355,10 +375,10 @@ func _build_camera() -> void:
 			texture=_creature_poses[kind][pose][variant]; tall=[64,40,24][variant]
 		elif kind in ["brazier","torch","seal"]:
 			texture=_painted_fixture(sprite,variant); tall=texture.get_height(); _has_flame=true
-		elif kind=="porter" and _porters.size()==3:
+		elif kind=="porter":
 			texture=_restored[variant] if sprite.get("restored",false) else _porters[variant]; tall=[64,40,24][variant]
 		elif kind=="plate":
-			texture=_fixture_textures["plate_%s_d%d"%["down" if _pressed(sprite) else "up",variant+1]]
+			texture=_fixture_textures["f%d_plate_%s_d%d"%[Family.for_floor(state.floor).fixtures,"down" if _pressed(sprite) else "up",variant+1]]
 			tall=texture.get_height()
 		elif kind=="latch":
 			var head_on: bool=absf(wall_normal.dot(forward))>0.9
@@ -370,8 +390,7 @@ func _build_camera() -> void:
 			texture=Paint.texture("res://assets/art/items/item_%s_d%d.png"%[item_kind,variant+1])
 			tall=texture.get_height()
 		else:
-			texture=Art.inventory(kind) if not sprite.has("type") else Art.texture(kind)
-			tall=maxi(22,roundi((48.0 if kind=="porter" else 32.0)/depth))
+			push_error("No painted world representation for "+kind); continue
 		var wide:=maxi(1,roundi(tall*texture.get_width()/float(texture.get_height())))
 		var ground:=HORIZON+roundi(FOCAL*0.5/depth)
 		if underfoot:
@@ -443,7 +462,6 @@ func _draw_sprite(sprite: Dictionary,shift: int,force_recoil: bool=false,only_co
 	if sprite.kind in ["brazier","torch","seal"]: texture=_painted_fixture(sprite,sprite.variant)
 	var light: float=sprite.light
 	var tint:=Color(light,light,light)
-	if sprite.kind=="hound": tint=Color(maxf(light,0.48),maxf(light,0.48),maxf(light,0.48))
 	if sprite.kind=="ghost" and not _dispel.is_empty() and _dispel.sprite.id==sprite.id: tint.a=clampf(1.0-_dispel.age/0.18,0,1)
 	if hit and not _strike.get("flash_drawn",false): tint=Color(2.5,2.5,2.5)
 	var start: int=maxi(0,int(rect.position.x)) if only_column<0 else only_column
@@ -461,6 +479,10 @@ func _draw_sprite(sprite: Dictionary,shift: int,force_recoil: bool=false,only_co
 			draw_rect(Rect2(x,mini(HEIGHT-3,rect.end.y-3),1,maxi(1,roundi(3*(1-norm*norm)))),Color("080b11"))
 		var source_x:=floorf((x-rect.position.x)*texture.get_width()/rect.size.x)
 		draw_texture_rect_region(texture,Rect2(x,rect.position.y,1,rect.size.y),Rect2(source_x,0,1,texture.get_height()),tint)
+		if sprite.kind=="hound":
+			var pose: String="recoil" if hit or force_recoil or sprite.state=="recovery" else ("windup" if sprite.state=="windup" else "idle")
+			var glow: Texture2D=_hound_glow[pose][sprite.variant]
+			draw_texture_rect_region(glow,Rect2(x,rect.position.y,1,rect.size.y),Rect2(source_x,0,1,glow.get_height()),Color(0.85,0.85,0.85,tint.a))
 
 func _build_surfaces(origin: Vector2,forward: Vector2,right: Vector2) -> void:
 	var image:=Image.create(WIDTH,HEIGHT,false,Image.FORMAT_RGBA8)
@@ -476,9 +498,15 @@ func _build_surfaces(origin: Vector2,forward: Vector2,right: Vector2) -> void:
 			var point:=origin+(forward+right*((x+0.5-WIDTH*0.5)/FOCAL))*depth
 			var u:=posmod(floori(point.x*64),64)
 			var v:=posmod(floori(point.y*64),64)
-			var path: String=Planes.path(state.seed,state.floor,"floor" if floor_side else "ceiling",floori(point.x),floori(point.y))
+			var cell:=Vector2i(floori(point.x),floori(point.y))
+			var uv:=Vector2i(u,v)
+			var path: String
+			if floor_side and _ground_cells.has(cell):
+				path=_ground_cells[cell].path; uv=Planes.ground_uv(u,v,_ground_cells[cell].normal)
+			elif _room_cells.has(cell): path=_room_cells[cell]["floor" if floor_side else "ceiling"]
+			else: path=Planes.path(state.seed,state.floor,"floor" if floor_side else "ceiling",cell.x,cell.y)
 			if not images.has(path): images[path]=Paint.image(path)
-			var colour: Color=images[path].get_pixel(u,v)
+			var colour: Color=images[path].get_pixel(uv.x,uv.y)
 			image.set_pixel(x,y,Color(colour.r*light,colour.g*light,colour.b*light,1))
 	_surfaces=ImageTexture.create_from_image(image)
 
@@ -495,15 +523,11 @@ func _draw() -> void:
 		var light: float=wall.light
 		if bottom<=top: continue
 		var path: String=wall.path
-		if path.contains("sconce_"): path=path.left(path.rfind("sconce_"))+"sconce_%d.png"%(int(_presentation_ms/250)%2)
+		if path.contains("sconce_"): path=path.left(path.rfind("sconce_"))+"sconce_%d_v2.png"%(int(_presentation_ms/250)%2)
 		draw_texture_rect_region(Paint.strips(path)[wall.u],Rect2(column,top,1,bottom-top),Rect2(0,(top-top_wall)*64.0/wall.height,1,(bottom-top)*64.0/wall.height),Color(light,light,light))
 		if wall.panel_state!="":
 			var marks: String="res://assets/art/fixtures/panel_sigil_%s_64.png"%("plain" if wall.panel_state=="plain" else "revealed")
 			draw_texture_rect_region(Paint.strips(marks)[wall.u],Rect2(column,top,1,bottom-top),Rect2(0,(top-top_wall)*64.0/wall.height,1,(bottom-top)*64.0/wall.height),Color.WHITE if wall.panel_state!="plain" else Color(light,light,light))
-			if wall.panel_state=="open" and wall.u>=14 and wall.u<=50:
-				var y0: float=maxf(0,top_wall+wall.height*22.0/64)
-				var y1: float=minf(HEIGHT,top_wall+wall.height*51.0/64)
-				if y1>y0: draw_rect(Rect2(column,y0,1,y1-y0),Color("080b11") if wall.u>14 and wall.u<50 else Color("80643c"))
 		for layer in _column_layers[column]:
 			if layer.has("sprite"):
 				_draw_sprite(layer.sprite,shift,false,column)
@@ -513,7 +537,7 @@ func _draw() -> void:
 				var from_y: float=maxf(0,py); var to_y: float=minf(HEIGHT,py+p.height)
 				var gain: float=lamp(p.depth)
 				var strips: Array=layer.portal.strips
-				if _burning.has(layer.portal.id): strips=Paint.strips("res://assets/art/fixtures/web_burning_%d_d1.png"%mini(1,int(float(_burning[layer.portal.id])/0.12)))
+				if _burning.has(layer.portal.id): strips=Paint.strips("res://assets/art/fixtures/fixture_v2_web_burning_%d_d1.png"%mini(1,int(float(_burning[layer.portal.id])/0.12)))
 				if to_y>from_y: draw_texture_rect_region(strips[p.u],Rect2(column,from_y,1,to_y-from_y),Rect2(0,(from_y-py)*64.0/p.height,1,(to_y-from_y)*64.0/p.height),Color(gain,gain,gain))
 	if not _dispel.is_empty(): _draw_sprite(_dispel.sprite,shift,true)
 	if not _strike.is_empty():
