@@ -1,7 +1,10 @@
 extends "res://tests/qa/adversarial.gd"
 
 func _initialize() -> void:
-	var data: Dictionary=Codec.normalize(JSON.parse_string(FileAccess.get_file_as_string("res://tests/qa/results/adversarial.json")))
+	var input: String="adversarial"
+	for arg in OS.get_cmdline_user_args():
+		if arg.begins_with("--input="): input=arg.get_slice("=",1)
+	var data: Dictionary=Codec.normalize(JSON.parse_string(FileAccess.get_file_as_string("res://tests/qa/results/"+input+".json")))
 	var results: Array=[]
 	for record in data.unresolved:
 		context=record.context; trace=[]
@@ -40,7 +43,7 @@ func _initialize() -> void:
 				visited[key]=true
 				pending.append({"state":state,"actions":node.actions+[action]})
 		if not solved: results.append({"context":context,"status":"search_budget_exhausted","expanded":cursor,"queued":pending.size()})
-	var file:=FileAccess.open("res://tests/qa/results/resume_samples.json",FileAccess.WRITE)
+	var file:=FileAccess.open("res://tests/qa/results/"+("deep_resume" if input=="deep_adversarial" else "resume_samples")+".json",FileAccess.WRITE)
 	file.store_string(JSON.stringify({"results":results,"findings":findings,"checks":checks,"stats":stats},"\t")); file.close()
 	print("QA RESUME SAMPLES ",JSON.stringify(results))
 	quit(1 if not findings.is_empty() else 0)

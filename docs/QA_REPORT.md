@@ -1,5 +1,9 @@
 # UNDERCROFT independent QA
 
+Historical M3 results follow first. QA-01 and QA-02 were fixed in M3e.
+The [M4a deep-profile results](#m4a-deep-profile-29-october-2026) below are the
+current audit; the earlier limitations describe that earlier rules profile.
+
 28 October 2026. Codex D. Godot 4.3 stable, Windows, **headless only**.
 Rules/content m3.2, generator m3.1, snapshot schema 2. No game code, existing
 tests, project settings or other contributors' files edited. Nothing committed.
@@ -229,3 +233,184 @@ TOSS requests reject without changing state; actual throwing trajectories
 cannot yet be exercised. FIRE/EDGE/FOOD/GLOW encounter modules beyond the
 current healing/combat/weight rules are likewise not implemented. No claim of
 all-seed or exhaustive all-state solvability is made.
+
+## M4a deep profile, 29 October 2026
+
+This audit uses the detached QA worktree at `9d637ad` (asset-only changes above
+M4a gameplay commit `1da39f8`). All new played runs have three floors and
+rules/content/generator **m4.1**, snapshot/envelope schema 2. The old one/two-floor
+cohort remains in the default runner. No game code, assets, other contributors'
+tests or main-checkout files were edited; no commit was made. Godot 4.3 ran
+headless throughout. All shared-user-directory files now have `qa_m4a_` prefixes,
+including those used by the older QA phases.
+
+**Result: all 18 phases passed; no new confirmed softlock, data-loss, crash or
+wrong-rule finding. All 3,337 sampled live randomized states have witnessed
+wins after bounded recovery. No sample remains search-budget exhausted.**
+
+The legacy nine-phase runner was rerun with `-Suite legacy -Seeds 256
+-AdversarialSeeds 16`: 325 codes including edges, 2,600 witnesses, 128 mutation
+trajectories, all 511 live samples recovered, 682 malformed type cases, and
+401 fresh-process checkpoints/4,877 continuation commands. All nine passed;
+the retained QA-01/02 regressions remain green. The nine new phases ran at their
+full documented cohort sizes as separate headless invocations; their error
+logs were also scanned with the runner's script-error rules. The complete
+combined default command was not redundantly rerun after these passes.
+
+### Deep generation
+
+**2,117 seed codes, 6,351 floors, 6,351 witness wins, zero failures.** The sweep
+uses 2,048 generated codes plus all 32 single alphabet characters, all 32
+six-character repeats, and five named edge codes. Every carved floor is
+connected; each gate cuts the core route, each key is reachable before its
+lock, and every third floor has its keyed gate and the three expected deep
+actors with 2/3/2 damage. All witness endings validate at 6/6 HP. The keep,
+return and return-plus-capability-tour routes each cover all 2,117 codes.
+Independent replays check 399 routes, 70,911 accepted actions and exact ending
+hashes. All 12,702 start/landing side-capacity checks pass.
+
+| Safe witness route | Runs | Minimum turns | Median | P90 | Maximum | Mean |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Keep clapper, core | 2,117 | 102 | 122 | 131 | 146 | 122.43 |
+| Return clapper, core/lift | 2,117 | 83 | 104 | 113 | 126 | 103.63 |
+| Return clapper, capability tour | 2,117 | 170 | 202 | 215 | 229 | 201.36 |
+
+These are consumed simulation turns, not elapsed phone minutes; free rotations
+are excluded. The capability tour visits the optional rooms but does not fill
+the pack with every offering. The separate difficulty tourists do collect loot.
+
+### Randomized deep play and recovery
+
+| Check | Completed deep coverage | Result |
+| --- | --- | --- |
+| Cohort | 96 seeds x keep/return x random/greedy/careless/spiteful; 768 trajectories, every anchor on floor three | No invariant finding |
+| Actions | 329,281 calls, including cloned recovery/save play; 271,237 accepted, 58,044 rejected | 57,069,422 assertions pass |
+| Recovery | 3,337 live sampled states; 3,332 immediate recovery wins, five initially budget-limited | All five subsequently won |
+| Extended recovery | Exact prefix/hash replay, up to 512 frontier expansions with planner continuations per sample | Needed only 19, 36, 39, 76 and 22 expansions |
+| Random save fuzz | 2,645 JSON round trips, 171 also through production disk envelopes | Full hashes match |
+| Random save continuation | 21,160 same-action comparisons on original/restored copies | Events and full hashes match |
+| Deaths | 184 mutation trajectories ended dead | Expected terminal outcomes; never classified as softlocks |
+
+The five initial recovery failures were a **QA planner limitation**, not game
+bugs: after tossing a deep weight onto another floor, the single recovery
+policy tried to solve the deep plate without fetching a replacement. Extended
+search picks up a first-floor stone/club; one sample first rides the restored
+lift home. Seeds/policies are `QA4AT` return/careless (three successive samples),
+`QA4CA` return/spiteful, and `QA4C3` return/random. Their exact reached-by action
+lists and winning prefixes/continuations are in `deep_adversarial.json` and
+`deep_resume.json`. No failure of a bounded planner is reported as a softlock.
+
+### Measured difficulty
+
+Each row is 128 fixed deep seeds (`QH4AA` through `QH4D9`), with the same seeds
+used for keeping/returning the clapper. These are explicit deterministic play
+policies with competent inherited navigation, not measured human failure rates.
+Careless uses the core route, ignores tells, never heals and skips optional
+wards/feeding. Greedy tours the optional rooms, gathers until full, equips
+improvements, feeds/dispels, and heals at 3 HP or below while ignoring tells.
+It reserves food while a Hound is hostile. Never-guard adds an early club/coat
+pickup to that tour and explicitly asserts zero accepted GUARD commands.
+In fact all 768 difficulty runs issued zero accepted GUARDs. Planner failures
+would be a separate outcome: there were none in this cohort.
+
+| Policy / clapper | Wins | Deaths | Death floor | Living HP at Seal | Carried food at win: 0 / 1 / 2 / 3 |
+| --- | ---: | ---: | --- | --- | --- |
+| Careless / keep | 70/128 | 58 (45.31%) | All 3 | 2 | 70 / 0 / 0 / 0 |
+| Careless / return | 34/128 | 94 (73.44%) | All 3 | 2 | 34 / 0 / 0 / 0 |
+| Greedy / keep | 128/128 | 0 | None | 2-5, mean 4.46 | 65 / 57 / 6 / 0 |
+| Greedy / return | 128/128 | 0 | None | 2-5, mean 4.38 | 55 / 56 / 16 / 1 |
+| Never-guard / keep | 128/128 | 0 | None | 2-5, mean 4.46 | 65 / 57 / 6 / 0 |
+| Never-guard / return | 128/128 | 0 | None | 2-5, mean 4.47 | 54 / 57 / 15 / 2 |
+
+"Food" here means carried bread/bones with the FOOD capability, excluding
+tonics and supplies left on floors. Greedy finishes with mean 0.625 carried
+food, median 1, range 0-3; never-guard mean 0.633, median 1, range 0-3.
+Careless wins carry none. Living greedy/never-guard Seal pickups have median
+5 HP. Careless also has **22 Seal pickups with HP 0 on that same action**
+(11 per clapper choice); those are deaths, excluded from the living-HP column.
+Five additional careless/return runs collect the Seal alive but die before
+leaving floor three. Careless overall dies 152/256 (59.38%), all on three.
+Equipped, healing tourist play without GUARD is demonstrably viable: the
+dedicated never-guard policy wins 256/256. This is not proof that all arbitrary
+routes without GUARD can win.
+
+### Directed adversarial cases and persistence
+
+`deep_edges.gd` exercises 16 other seeds, both clapper choices, ten cases per
+choice: 320 directed cases, 65,499 checked API calls, zero invariant failures.
+The three repeated deep-tell cases deliberately die in all 96 runs (Husk,
+Hound and Ghost). All 224 other cases have actual winning continuations,
+including a spent early coat meeting the Hound, entering deep on 1 HP without
+carried heals, burning/cutting the barriers, tossing away all ordinary carried
+equipment including the lit torch, trying to drop/toss/eat/equip the protected
+floor-three key or Seal and walking away, eight floor-two/three round trips,
+and opening the storeroom with a full pack. Full-pack pickup rejects atomically;
+freeing a pocket permits pickup and completion.
+
+`deep_food.gd` separately gathers and exhausts **all FOOD items offered on
+floors one and two**, including leftovers the full-pack tourist skipped. Prior
+Hound feeding counts as consumption; the remainder are eaten beside the still
+living second-floor Ghost. All 32 runs enter floor three at exactly 1 HP with
+no early bread/bone remaining anywhere, and all have witnessed wins. This
+supersedes the weaker "no carried heals" case as the food-exhaustion check.
+
+`deep_sidle.gd` filters 64 seeds for a public lure route. It actually lures
+the living second-floor Husk onto the down landing in 18 cases across both
+clapper choices, then rejects ordinary occupied arrivals and SIDLEs back four
+times per case: **72 occupied-arrival/SIDLE pairs**, zero overlaps or rejection
+mutations. The large generation sweep additionally checks each start/landing
+has at least as many intrinsically clear neighboring cells as actors on that
+floor. With one actor occupying the landing, the remaining actors cannot fill
+all those neighbors. Closed gates/webs/cords and porters are excluded from the
+clear-neighbor count; loose items do not block walking.
+
+Hostile save checkpoints are reached by public actions and their full prefix
+action lists are independently replayed to the exact snapshot hash. They
+include pending deep Hound lane attacks, immediate post-BURN state, floor-three
+landings, spent armour, spent armour facing a Hound, 1 HP, full-pack storage,
+before win, won, and lost. BURN commits atomically in the sim: there is no
+persistent multi-turn burn state to save. Rendering midway through a burn or
+lunge animation is outside these headless sim tests.
+
+The writer saved **321 checkpoints** (32 of each of the ten deep categories,
+plus the M3f fixture), fully exited, and a different Godot process loaded every
+file. All 321 full hashes and **14,280 complete continuation action/event/hash
+pairs** matched. Writer PID 130832 had exited before reader PID 123608 started.
+Won/lost saves correctly refuse Continue. The directed warm-save probes add
+320 round trips and 2,560 randomized lockstep continuation commands.
+
+The production M3f fixture loads through SaveStore to its exact original hash,
+`14bc4617236bd22d78840604a84d7d5a4d49c6a5debe23859c1b536fe622db23`,
+retains two floors and m3.3, and continues to a win. The deep malformed-save
+matrix rejects 915 wrong-type replacements, six mixed version triples, legacy
+headers with deep damage fields, 15 out-of-range/wrong-type deep damage values,
+eight truncation lengths, malformed envelope versions and a bad checksum.
+Inputs are rehashed where appropriate so payload validation is exercised.
+Every rejected restore preserves the complete prior hash; invalid backup/tmp
+files prevent transaction recovery from concealing a bad primary. No script
+exceptions, crashes or partial adoption occurred.
+
+### Reproduction and limits
+
+`tests/qa/run.ps1` defaults to all **18 phases**, including the nine legacy and
+nine deep phases. `-Suite deep` runs the new cohort; the knobs are
+`-DeepSeeds 2048 -DeepAdversarialSeeds 96 -DifficultySeeds 128 -DeepEdgeSeeds 16`.
+The directed edge writer runs before the hostile-save reader/writer phases.
+See `tests/qa/DEEP_PROFILE.md` for the policy definitions and individual tools.
+JSON results, exact sampled action traces and process manifests are regenerated
+under ignored `tests/qa/results/`.
+
+Every issued adversarial/recovery/randomized save-probe action checks ownership, protected
+belt continuity, HP, revision/turn, rejected-state preservation, event ordering,
+floor persistence, actor/fixture cells and blocking overlaps. New checks include
+web/cord occupancy and advertised SIDLE acceptance. No HP, position, inventory,
+fixture or actor state is injected into any played run. Only malformed-save
+inputs are deliberately altered; cloned sims restore unmodified snapshots.
+
+No Pixel 9a, touch/UI route, Android export/lifecycle/force-stop, animation,
+audio, wall-clock human play duration or frame timing was tested. These tests
+exercise production simulation and persistence in fresh desktop headless
+processes. The main checkout's concurrent art/view wiring is outside this
+snapshot. Recovery search is bounded; successful continuations prove those
+samples are winnable, but budget exhaustion does not prove a softlock. There
+is no exhaustive all-seed/all-state solvability claim.

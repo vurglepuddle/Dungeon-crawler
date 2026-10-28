@@ -4,7 +4,7 @@ const Store = preload("res://scripts/persistence/save_store.gd")
 
 func _initialize() -> void:
 	var sim=Sim.new("BELL42")
-	var path: String="user://tests/qa/repro_type.json"
+	var path: String="user://qa_m4a_legacy_repro_type.json"
 	if not Store.save_run(sim,{},path,true): quit(1); return
 	var envelope: Dictionary=JSON.parse_string(FileAccess.get_file_as_string(path))
 	# A single corrupted type must be refused without a script error, even when

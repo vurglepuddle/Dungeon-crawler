@@ -12,7 +12,7 @@ var context: Dictionary = {}
 var trace: Array = []
 var stats := {"trajectories":0,"actions":0,"accepted":0,"rejected":0,"deaths":0,"sampled_states":0,"reachable":0,"search_budget_exhausted":0,"save_roundtrips":0,"lockstep_actions":0,"disk_roundtrips":0,"action_types":{},"coverage":{}}
 var unresolved: Array = []
-var disk_path := "user://tests/qa/fuzz.json"
+var disk_path := "user://qa_m4a_legacy_fuzz.json"
 
 func require(ok: bool, code: String, detail: String = "") -> void:
 	checks += 1

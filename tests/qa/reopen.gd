@@ -76,6 +76,6 @@ func _initialize() -> void:
 	quit(1 if not findings.is_empty() else 0)
 
 func save_record(records: Array, sim, continuation: Array, point: String) -> void:
-	var path: String="user://tests/qa/reopen_%03d.json" % records.size()
+	var path: String="user://qa_m4a_legacy_reopen_%03d.json" % records.size()
 	require(Store.save_run(sim,{},path,true),"REOPEN_SAVE")
 	records.append({"path":path,"hash":sim.state_hash(),"state":sim.snapshot(),"continuation":continuation,"point":point})

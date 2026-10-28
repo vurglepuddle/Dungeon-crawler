@@ -4,7 +4,7 @@ const Store = preload("res://scripts/persistence/save_store.gd")
 const Codec = preload("res://scripts/persistence/state_codec.gd")
 const Witness = preload("res://scripts/gen/witness.gd")
 var stats := {"checks":0,"failures":[],"type_cases":0,"accepted_corruptions":[],"truncations":0,"recovery_cases":0}
-var path := "user://tests/qa/corrupt.json"
+var path := "user://qa_m4a_legacy_corrupt.json"
 
 func check(ok: bool, message: String) -> void:
 	stats.checks+=1
