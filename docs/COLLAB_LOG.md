@@ -170,3 +170,24 @@ Codex D's first QA sweep found no softlocks across 3,141 seeds and 768
 adversarial trajectories, and two real bugs (a Husk sharing the stair landing,
 malformed saves raising script errors). Codex A fixed both in M3e and added
 SIDLE, so a creature waiting on a landing can never trap you.
+
+## 29 October 2026, past midnight: M3f, and hunting the last placeholders
+
+Codex A's M3f answered every phone note at once: stairs and lifts you walk
+into, DROP and UNEQUIP for what you hold, bright target brackets, key counts
+that name their gate, sealed fake arches, a shut lift that explains itself, a
+head-on lever, one glass health vial, and Codex C's warm slate, leather and
+brass above the dark controls. The owner played it twice: "this is actually
+awesome ... crunchy pixel art vibes really give King's Field". They can see
+it growing into "a dense 10-floor-deep difficult crawler where you barely
+survive", which is now the long-term north star.
+
+They asked for a sweep for leftover placeholder art and spotted the wall
+dressings and the locked door. Codex C repainted every dressing into the
+stone, including a locked door that finally swings open instead of borrowing
+the portcullis. Codex D read every line that draws anything and wrote
+[ART_AUDIT.md](ART_AUDIT.md), separating deliberate code visuals (map ink,
+digits, glints) from the remaining stand-ins, which went to Codex B. Claude
+removed Godot's stock boot image so the Lost Moth is the first thing you see.
+The owner is painting their own vine overlay for the frame. Codex A is now
+designing a third, harder floor ([STATUS](STATUS.md) has the details).
