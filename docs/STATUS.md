@@ -17,7 +17,7 @@ Latest verified and pushed milestone: **M4a** (`1da39f8`): a third floor, The
 Lower Watch (harder blows: 2 HP, the Hound 3), plus the owner's brazier, web
 and travel-face fixes and B's painted floor items. Then B's painted fixtures
 v2 (`9d637ad`, not wired yet). Latest phone build:
-`build/Undercroft-M4a.apk`, **built but not yet installed or played** (the
+`build/Undercroft-M4a-vines.apk` (M4a plus the owner's overlay), **built but not yet installed or played** (the
 phone was not connected). The owner last played M3f.
 
 The owner's verdicts that steer what comes next:
@@ -58,8 +58,10 @@ the chrome and above the compass needle, below cards, modals and the map.
    "what I would cut").
 2. A wires C's floor-three family, B's floor-three music and painted pack
    icons, and fixes anything D's deep sweep finds.
-3. **The owner's vine overlay**, when the owner delivers it (copy to
-   `assets/art/ui/owner_vines.png`; A's layer is ready).
+3. Done: **the owner's vine overlay** is wired (`90f6077`,
+   `assets/art/ui/owner_vines.png`, source in
+   `art_src/ui_offer/owner_vines/templates/`). Keep the frame and compass box
+   pixel-exact under it. The owner: "the blue added a nice contrast".
 
 Claude disabled Godot's stock boot image (`b4d6719`), so the LOST MOTH splash
 comes first.
