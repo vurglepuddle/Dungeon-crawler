@@ -1,0 +1,1240 @@
+{
+  "palette": "art_src/spike/palette.gpl",
+  "colours_union": 18,
+  "files": [
+    {
+      "path": "art_src/props/lower_watch/bone_heap/contact_sheet_4x.png",
+      "size": [
+        1216,
+        544
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        1216,
+        544
+      ],
+      "colours": 17,
+      "sha256": "ff4a711bf1f04710e54a4d1d9730b63dcc474a18604fb3a7f190f403d4801590"
+    },
+    {
+      "path": "art_src/props/lower_watch/bone_heap/contact_sheet_native.png",
+      "size": [
+        304,
+        136
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        304,
+        136
+      ],
+      "colours": 17,
+      "sha256": "506a6acf18e9dac7efef6a364482fb0d9634dc379ee1e0ee21e85a68a69bb2f3"
+    },
+    {
+      "path": "art_src/props/lower_watch/candles/contact_sheet_4x.png",
+      "size": [
+        1216,
+        544
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        1216,
+        544
+      ],
+      "colours": 17,
+      "sha256": "e498961da106c206e3d45e3a438c2777df58ff1de753caa660478e8854288d04"
+    },
+    {
+      "path": "art_src/props/lower_watch/candles/contact_sheet_native.png",
+      "size": [
+        304,
+        136
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        304,
+        136
+      ],
+      "colours": 17,
+      "sha256": "3af091e9210c7c7c1c6cabd5cfffc368764a3b76f37415720575612ff79bb9db"
+    },
+    {
+      "path": "art_src/props/lower_watch/contact_sheet_4x.png",
+      "size": [
+        1840,
+        1368
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        1840,
+        1368
+      ],
+      "colours": 17,
+      "sha256": "296833d0ee75d8cc6aec4fd6930ecc06fb7e83ab1b015aba370f5ec00c582a54"
+    },
+    {
+      "path": "art_src/props/lower_watch/contact_sheet_native.png",
+      "size": [
+        460,
+        342
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        460,
+        342
+      ],
+      "colours": 17,
+      "sha256": "9b9d6e756aeb1c99ae0cd3caa7ae66d87eb66891a5c0b979501959a90a2c3f10"
+    },
+    {
+      "path": "art_src/props/lower_watch/crate/contact_sheet_4x.png",
+      "size": [
+        1216,
+        544
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        1216,
+        544
+      ],
+      "colours": 17,
+      "sha256": "109ce04977e6892c9e71dcc496845da7a90021257afca8d4fc77159df77fdc1e"
+    },
+    {
+      "path": "art_src/props/lower_watch/crate/contact_sheet_native.png",
+      "size": [
+        304,
+        136
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        304,
+        136
+      ],
+      "colours": 17,
+      "sha256": "240a33a27217270b04ac9a054c7c37e6708c9a39120574feb7bc0620e1c40e39"
+    },
+    {
+      "path": "art_src/props/lower_watch/pillar/contact_sheet_4x.png",
+      "size": [
+        1216,
+        544
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        1216,
+        544
+      ],
+      "colours": 17,
+      "sha256": "c75af2870561d5734f3b970bfd2ca1a89794178e3e0436ec5ecdadd464e22f9f"
+    },
+    {
+      "path": "art_src/props/lower_watch/pillar/contact_sheet_native.png",
+      "size": [
+        304,
+        136
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        304,
+        136
+      ],
+      "colours": 17,
+      "sha256": "d52ca0ffc7e06af1a73b8d663b2d89e2f1962406aa5a3aa0222aca86bee8db04"
+    },
+    {
+      "path": "art_src/props/lower_watch/pots/contact_sheet_4x.png",
+      "size": [
+        1216,
+        544
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        1216,
+        544
+      ],
+      "colours": 17,
+      "sha256": "d77f1adc976750a34c52513213285d6aa8e17e84bdbb317b433ff65d0047c6d7"
+    },
+    {
+      "path": "art_src/props/lower_watch/pots/contact_sheet_native.png",
+      "size": [
+        304,
+        136
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        304,
+        136
+      ],
+      "colours": 17,
+      "sha256": "fd113b2b279481069ef1ef958b47d2fc7053b2ff5b803faff737d15773cd33a1"
+    },
+    {
+      "path": "art_src/props/lower_watch/puddle/contact_sheet_4x.png",
+      "size": [
+        1216,
+        544
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        1216,
+        544
+      ],
+      "colours": 12,
+      "sha256": "5bff192a2bce0ee4e02fc66cae286149ff5e2e134c88bb4ba67082496adcb567"
+    },
+    {
+      "path": "art_src/props/lower_watch/puddle/contact_sheet_native.png",
+      "size": [
+        304,
+        136
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        304,
+        136
+      ],
+      "colours": 12,
+      "sha256": "a0464bf710a8d33e9140a18d89159306f1e872cdb58037a293e36286a2ebf9e1"
+    },
+    {
+      "path": "art_src/props/lower_watch/rubble/contact_sheet_4x.png",
+      "size": [
+        1216,
+        544
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        1216,
+        544
+      ],
+      "colours": 17,
+      "sha256": "6190b541c476415ffff2ce3b2817c4935f9fc6b8ac3c2e71b219df9e9996b34e"
+    },
+    {
+      "path": "art_src/props/lower_watch/rubble/contact_sheet_native.png",
+      "size": [
+        304,
+        136
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        304,
+        136
+      ],
+      "colours": 17,
+      "sha256": "72f05d4e6a7e6fecea06c6b2cf8599910698ec5eeb8119fc6351f10cfa779a2f"
+    },
+    {
+      "path": "art_src/props/lower_watch/skeleton/contact_sheet_4x.png",
+      "size": [
+        1216,
+        544
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        1216,
+        544
+      ],
+      "colours": 17,
+      "sha256": "2a6763437ff94e514337e7ab37172283b82cc3f69204c341a0b649e2b35c9f9e"
+    },
+    {
+      "path": "art_src/props/lower_watch/skeleton/contact_sheet_native.png",
+      "size": [
+        304,
+        136
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        304,
+        136
+      ],
+      "colours": 17,
+      "sha256": "0135756d21a47c5a222a284026dbe2fa4c604aca1cb9824c5d405c0ba1c04b59"
+    },
+    {
+      "path": "art_src/props/lower_watch/statue/contact_sheet_4x.png",
+      "size": [
+        1216,
+        544
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        1216,
+        544
+      ],
+      "colours": 17,
+      "sha256": "4def5d2c26c2bd7231b406a333ef5a9486bff2d5aba7a392401cc4b473581156"
+    },
+    {
+      "path": "art_src/props/lower_watch/statue/contact_sheet_native.png",
+      "size": [
+        304,
+        136
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        304,
+        136
+      ],
+      "colours": 17,
+      "sha256": "4cef3e3fdc3911d1e54af1550045c11c03db28ebc8c1b7fbf79379a83e79a8e8"
+    },
+    {
+      "path": "assets/art/props/f3_bone_heap_d1.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        3,
+        47,
+        61,
+        64
+      ],
+      "colours": 17,
+      "sha256": "01e3efe5b725e08f6e0204c010d9687507837745c550bf0cacf18d687da3e604"
+    },
+    {
+      "path": "assets/art/props/f3_bone_heap_d2.png",
+      "size": [
+        40,
+        40
+      ],
+      "opaque_bounds": [
+        2,
+        29,
+        38,
+        40
+      ],
+      "colours": 16,
+      "sha256": "840f40f57d48f71e804b73680e56efbeb9f391c6fb8eea0503f470a26dc15ed6"
+    },
+    {
+      "path": "assets/art/props/f3_bone_heap_d3.png",
+      "size": [
+        24,
+        24
+      ],
+      "opaque_bounds": [
+        1,
+        18,
+        23,
+        24
+      ],
+      "colours": 16,
+      "sha256": "cc49cf619567b1a22a0b76ffa5d32fbbe5e19ccd007902921f7e56a6d426b512"
+    },
+    {
+      "path": "assets/art/props/f3_candles_d1.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        9,
+        40,
+        55,
+        64
+      ],
+      "colours": 17,
+      "sha256": "3222500f196bbde60d6896e01d7298b23ee77366d5d57daec4e5223a8d73f122"
+    },
+    {
+      "path": "assets/art/props/f3_candles_d2.png",
+      "size": [
+        40,
+        40
+      ],
+      "opaque_bounds": [
+        6,
+        25,
+        34,
+        40
+      ],
+      "colours": 16,
+      "sha256": "1fe9ca50a9f403c3247f3f677556a775c3f1ffe8daa64826b4c4544d6faf2270"
+    },
+    {
+      "path": "assets/art/props/f3_candles_d3.png",
+      "size": [
+        24,
+        24
+      ],
+      "opaque_bounds": [
+        3,
+        15,
+        20,
+        24
+      ],
+      "colours": 13,
+      "sha256": "cb4e4f9ad246540101cfc518e41986f8fa4fd9c9dcef094106ed149ff13b5612"
+    },
+    {
+      "path": "assets/art/props/f3_crate_d1.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        7,
+        35,
+        57,
+        64
+      ],
+      "colours": 17,
+      "sha256": "176cced689d93d7e5e57bd7b4fa8caffe6d0363caf8213c5c43b8e6adb4127b4"
+    },
+    {
+      "path": "assets/art/props/f3_crate_d2.png",
+      "size": [
+        40,
+        40
+      ],
+      "opaque_bounds": [
+        4,
+        22,
+        36,
+        40
+      ],
+      "colours": 17,
+      "sha256": "69f5ff3832eb1c4ef9ab1534ade72188e0627970ae169441576a1200bbc90619"
+    },
+    {
+      "path": "assets/art/props/f3_crate_d3.png",
+      "size": [
+        24,
+        24
+      ],
+      "opaque_bounds": [
+        3,
+        13,
+        21,
+        24
+      ],
+      "colours": 16,
+      "sha256": "5ae064c8bbdf8eac44be48b601845a884bdf1ce9325cb35bfb54faffac4e08f5"
+    },
+    {
+      "path": "assets/art/props/f3_pillar_d1.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        22,
+        0,
+        42,
+        64
+      ],
+      "colours": 17,
+      "sha256": "8fa52e58bb492344d65cc8c216870eb7564192eff327145dc47e5450c9e53307"
+    },
+    {
+      "path": "assets/art/props/f3_pillar_d2.png",
+      "size": [
+        40,
+        40
+      ],
+      "opaque_bounds": [
+        14,
+        0,
+        26,
+        40
+      ],
+      "colours": 17,
+      "sha256": "3fcdbe2b65baa8edfc809582c6416c3947bd7facaf802e12bee58e9109dc9e71"
+    },
+    {
+      "path": "assets/art/props/f3_pillar_d3.png",
+      "size": [
+        24,
+        24
+      ],
+      "opaque_bounds": [
+        8,
+        0,
+        16,
+        24
+      ],
+      "colours": 15,
+      "sha256": "a09a9cfb562ec68faf3d4f09a40c3732cdce6d754caa022667ec412c753c7d8c"
+    },
+    {
+      "path": "assets/art/props/f3_pots_d1.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        4,
+        33,
+        60,
+        64
+      ],
+      "colours": 17,
+      "sha256": "f27fc4edc959d5f02f1561fe42c5e3739b53687c77176b3430f9e971c090f168"
+    },
+    {
+      "path": "assets/art/props/f3_pots_d2.png",
+      "size": [
+        40,
+        40
+      ],
+      "opaque_bounds": [
+        2,
+        21,
+        37,
+        40
+      ],
+      "colours": 17,
+      "sha256": "400415a72ebb8d5f47de6ddf9fe73099818e0a10e78b16d4f0aa070d268e630b"
+    },
+    {
+      "path": "assets/art/props/f3_pots_d3.png",
+      "size": [
+        24,
+        24
+      ],
+      "opaque_bounds": [
+        1,
+        12,
+        22,
+        24
+      ],
+      "colours": 17,
+      "sha256": "04cda03e056b2396a427f4441287d066bdbc276a4609e8e8b2a2e91dce70562f"
+    },
+    {
+      "path": "assets/art/props/f3_puddle_d1.png",
+      "size": [
+        64,
+        20
+      ],
+      "opaque_bounds": [
+        2,
+        9,
+        62,
+        20
+      ],
+      "colours": 12,
+      "sha256": "14cf05ae0386ec3a5ec947218e45bb07dfab8281e48255c8d036a42f10ef7611"
+    },
+    {
+      "path": "assets/art/props/f3_puddle_d2.png",
+      "size": [
+        40,
+        12
+      ],
+      "opaque_bounds": [
+        1,
+        5,
+        39,
+        12
+      ],
+      "colours": 11,
+      "sha256": "e4c2ff18df4067411266f44062a48083122b58317a6268fa455ff0096895fa3a"
+    },
+    {
+      "path": "assets/art/props/f3_puddle_d3.png",
+      "size": [
+        24,
+        8
+      ],
+      "opaque_bounds": [
+        1,
+        4,
+        23,
+        8
+      ],
+      "colours": 10,
+      "sha256": "ebd7763c96e938cf348929eeb825dbb6fa6343abd7e93be4eb9ba9c48e725c54"
+    },
+    {
+      "path": "assets/art/props/f3_rubble_d1.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        2,
+        43,
+        62,
+        64
+      ],
+      "colours": 17,
+      "sha256": "d15203a61f135b3e9fec4fdcf1a0e3cd108f98921b32e63e1f3f2e1dbc9725c7"
+    },
+    {
+      "path": "assets/art/props/f3_rubble_d2.png",
+      "size": [
+        40,
+        40
+      ],
+      "opaque_bounds": [
+        1,
+        27,
+        38,
+        40
+      ],
+      "colours": 17,
+      "sha256": "405469563c4456ebddd269c4066c70056c4b8bedac69870f300383ddbe94efb2"
+    },
+    {
+      "path": "assets/art/props/f3_rubble_d3.png",
+      "size": [
+        24,
+        24
+      ],
+      "opaque_bounds": [
+        1,
+        16,
+        23,
+        24
+      ],
+      "colours": 17,
+      "sha256": "05bb618a3f35d49258a5346aee4aba5997c219a8189fbe4a8c6ba0b7ab0c5d12"
+    },
+    {
+      "path": "assets/art/props/f3_skeleton_d1.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        5,
+        14,
+        59,
+        64
+      ],
+      "colours": 17,
+      "sha256": "3641e318f09f86c32a719b2f986ef5f51d8a79ed270ea7e33ce63e4c116a7ff3"
+    },
+    {
+      "path": "assets/art/props/f3_skeleton_d2.png",
+      "size": [
+        40,
+        40
+      ],
+      "opaque_bounds": [
+        3,
+        9,
+        37,
+        40
+      ],
+      "colours": 17,
+      "sha256": "984a135f53371f439f8f37a01331f1c1dc5f2bf9550031e98667b222b7f176a7"
+    },
+    {
+      "path": "assets/art/props/f3_skeleton_d3.png",
+      "size": [
+        24,
+        24
+      ],
+      "opaque_bounds": [
+        2,
+        5,
+        22,
+        24
+      ],
+      "colours": 17,
+      "sha256": "d79d3bdecfcf5c6de379b9dd34f597d685eeeb1b01b7d0f8c0aee6178918b9ed"
+    },
+    {
+      "path": "assets/art/props/f3_statue_d1.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        2,
+        42,
+        62,
+        64
+      ],
+      "colours": 17,
+      "sha256": "496f1b0f764beb78a6584ead554b38230557ce4a11975361cb2a1f4894dfbcda"
+    },
+    {
+      "path": "assets/art/props/f3_statue_d2.png",
+      "size": [
+        40,
+        40
+      ],
+      "opaque_bounds": [
+        1,
+        26,
+        39,
+        40
+      ],
+      "colours": 17,
+      "sha256": "f8c128aa975160d0bdb2c724e82443e8678fe00e1f959fb47b4c578a899af3d4"
+    },
+    {
+      "path": "assets/art/props/f3_statue_d3.png",
+      "size": [
+        24,
+        24
+      ],
+      "opaque_bounds": [
+        1,
+        16,
+        23,
+        24
+      ],
+      "colours": 17,
+      "sha256": "11cc7f96afc5dcc4e5bd2fbcdab99f46a5cc83b7e7957f9afbdb92f63de25037"
+    }
+  ],
+  "sources": [
+    {
+      "path": "art_src/props/lower_watch/sources/bone_heap.png",
+      "sha256": "cb09359aebfce98862796245659e9382115f3d9a8c27156af6bb43891824b1f0"
+    },
+    {
+      "path": "art_src/props/lower_watch/sources/candles.png",
+      "sha256": "e6d3bcb7a1051dbaf99ebc41dc3237339b11716ee56ed043af8c2feb2cf7aaab"
+    },
+    {
+      "path": "art_src/props/lower_watch/sources/crate.png",
+      "sha256": "ca17fe47bd4dd0cec7283966f24bf5af55e5dae4d73f879eef887eb01480b744"
+    },
+    {
+      "path": "art_src/props/lower_watch/sources/pillar.png",
+      "sha256": "ab180b4d25ee07297c64fd4d2bdcc1931043f2311f0abc9e34c99d2aaf4051d5"
+    },
+    {
+      "path": "art_src/props/lower_watch/sources/pots.png",
+      "sha256": "d6da26d301b83bdc017eceb7063069d001e0cee056c6c466be19f8eb2a8b001a"
+    },
+    {
+      "path": "art_src/props/lower_watch/sources/puddle.png",
+      "sha256": "8807c6899483802c7be80f3b779f67d9313a2636f7a84f901e140219c2616801"
+    },
+    {
+      "path": "art_src/props/lower_watch/sources/rubble.png",
+      "sha256": "7a396d2c19e1daa499aff279c65e2149b99fcafc8e687ddee3d9134cb22e17d7"
+    },
+    {
+      "path": "art_src/props/lower_watch/sources/skeleton.png",
+      "sha256": "26ff4af309dd4f660896c3e9fe011ef6fe9e38e7bfdac1c290be017d14dee43a"
+    },
+    {
+      "path": "art_src/props/lower_watch/sources/statue.png",
+      "sha256": "d89aa8441de7ad51dbcfa2a6d4536aa5ade34ca501cd3bf914e7766c2d31beb5"
+    }
+  ],
+  "runtime_count": 27,
+  "registrations": [
+    {
+      "path": "assets/art/props/f3_rubble_d1.png",
+      "floor": 3,
+      "kind": "rubble",
+      "depth": 1,
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        64
+      ],
+      "interactive": false,
+      "art_supplies_collision": false,
+      "needs_solid_cell_if_blocking": false,
+      "state": "static"
+    },
+    {
+      "path": "assets/art/props/f3_rubble_d2.png",
+      "floor": 3,
+      "kind": "rubble",
+      "depth": 2,
+      "canvas": [
+        40,
+        40
+      ],
+      "anchor": [
+        20,
+        40
+      ],
+      "interactive": false,
+      "art_supplies_collision": false,
+      "needs_solid_cell_if_blocking": false,
+      "state": "static"
+    },
+    {
+      "path": "assets/art/props/f3_rubble_d3.png",
+      "floor": 3,
+      "kind": "rubble",
+      "depth": 3,
+      "canvas": [
+        24,
+        24
+      ],
+      "anchor": [
+        12,
+        24
+      ],
+      "interactive": false,
+      "art_supplies_collision": false,
+      "needs_solid_cell_if_blocking": false,
+      "state": "static"
+    },
+    {
+      "path": "assets/art/props/f3_bone_heap_d1.png",
+      "floor": 3,
+      "kind": "bone_heap",
+      "depth": 1,
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        64
+      ],
+      "interactive": false,
+      "art_supplies_collision": false,
+      "needs_solid_cell_if_blocking": false,
+      "state": "static"
+    },
+    {
+      "path": "assets/art/props/f3_bone_heap_d2.png",
+      "floor": 3,
+      "kind": "bone_heap",
+      "depth": 2,
+      "canvas": [
+        40,
+        40
+      ],
+      "anchor": [
+        20,
+        40
+      ],
+      "interactive": false,
+      "art_supplies_collision": false,
+      "needs_solid_cell_if_blocking": false,
+      "state": "static"
+    },
+    {
+      "path": "assets/art/props/f3_bone_heap_d3.png",
+      "floor": 3,
+      "kind": "bone_heap",
+      "depth": 3,
+      "canvas": [
+        24,
+        24
+      ],
+      "anchor": [
+        12,
+        24
+      ],
+      "interactive": false,
+      "art_supplies_collision": false,
+      "needs_solid_cell_if_blocking": false,
+      "state": "static"
+    },
+    {
+      "path": "assets/art/props/f3_skeleton_d1.png",
+      "floor": 3,
+      "kind": "skeleton",
+      "depth": 1,
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        64
+      ],
+      "interactive": false,
+      "art_supplies_collision": false,
+      "needs_solid_cell_if_blocking": false,
+      "state": "static"
+    },
+    {
+      "path": "assets/art/props/f3_skeleton_d2.png",
+      "floor": 3,
+      "kind": "skeleton",
+      "depth": 2,
+      "canvas": [
+        40,
+        40
+      ],
+      "anchor": [
+        20,
+        40
+      ],
+      "interactive": false,
+      "art_supplies_collision": false,
+      "needs_solid_cell_if_blocking": false,
+      "state": "static"
+    },
+    {
+      "path": "assets/art/props/f3_skeleton_d3.png",
+      "floor": 3,
+      "kind": "skeleton",
+      "depth": 3,
+      "canvas": [
+        24,
+        24
+      ],
+      "anchor": [
+        12,
+        24
+      ],
+      "interactive": false,
+      "art_supplies_collision": false,
+      "needs_solid_cell_if_blocking": false,
+      "state": "static"
+    },
+    {
+      "path": "assets/art/props/f3_pots_d1.png",
+      "floor": 3,
+      "kind": "pots",
+      "depth": 1,
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        64
+      ],
+      "interactive": false,
+      "art_supplies_collision": false,
+      "needs_solid_cell_if_blocking": false,
+      "state": "static"
+    },
+    {
+      "path": "assets/art/props/f3_pots_d2.png",
+      "floor": 3,
+      "kind": "pots",
+      "depth": 2,
+      "canvas": [
+        40,
+        40
+      ],
+      "anchor": [
+        20,
+        40
+      ],
+      "interactive": false,
+      "art_supplies_collision": false,
+      "needs_solid_cell_if_blocking": false,
+      "state": "static"
+    },
+    {
+      "path": "assets/art/props/f3_pots_d3.png",
+      "floor": 3,
+      "kind": "pots",
+      "depth": 3,
+      "canvas": [
+        24,
+        24
+      ],
+      "anchor": [
+        12,
+        24
+      ],
+      "interactive": false,
+      "art_supplies_collision": false,
+      "needs_solid_cell_if_blocking": false,
+      "state": "static"
+    },
+    {
+      "path": "assets/art/props/f3_pillar_d1.png",
+      "floor": 3,
+      "kind": "pillar",
+      "depth": 1,
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        64
+      ],
+      "interactive": false,
+      "art_supplies_collision": false,
+      "needs_solid_cell_if_blocking": true,
+      "state": "static"
+    },
+    {
+      "path": "assets/art/props/f3_pillar_d2.png",
+      "floor": 3,
+      "kind": "pillar",
+      "depth": 2,
+      "canvas": [
+        40,
+        40
+      ],
+      "anchor": [
+        20,
+        40
+      ],
+      "interactive": false,
+      "art_supplies_collision": false,
+      "needs_solid_cell_if_blocking": true,
+      "state": "static"
+    },
+    {
+      "path": "assets/art/props/f3_pillar_d3.png",
+      "floor": 3,
+      "kind": "pillar",
+      "depth": 3,
+      "canvas": [
+        24,
+        24
+      ],
+      "anchor": [
+        12,
+        24
+      ],
+      "interactive": false,
+      "art_supplies_collision": false,
+      "needs_solid_cell_if_blocking": true,
+      "state": "static"
+    },
+    {
+      "path": "assets/art/props/f3_statue_d1.png",
+      "floor": 3,
+      "kind": "statue",
+      "depth": 1,
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        64
+      ],
+      "interactive": false,
+      "art_supplies_collision": false,
+      "needs_solid_cell_if_blocking": false,
+      "state": "static"
+    },
+    {
+      "path": "assets/art/props/f3_statue_d2.png",
+      "floor": 3,
+      "kind": "statue",
+      "depth": 2,
+      "canvas": [
+        40,
+        40
+      ],
+      "anchor": [
+        20,
+        40
+      ],
+      "interactive": false,
+      "art_supplies_collision": false,
+      "needs_solid_cell_if_blocking": false,
+      "state": "static"
+    },
+    {
+      "path": "assets/art/props/f3_statue_d3.png",
+      "floor": 3,
+      "kind": "statue",
+      "depth": 3,
+      "canvas": [
+        24,
+        24
+      ],
+      "anchor": [
+        12,
+        24
+      ],
+      "interactive": false,
+      "art_supplies_collision": false,
+      "needs_solid_cell_if_blocking": false,
+      "state": "static"
+    },
+    {
+      "path": "assets/art/props/f3_candles_d1.png",
+      "floor": 3,
+      "kind": "candles",
+      "depth": 1,
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        64
+      ],
+      "interactive": false,
+      "art_supplies_collision": false,
+      "needs_solid_cell_if_blocking": false,
+      "state": "spent/unlit"
+    },
+    {
+      "path": "assets/art/props/f3_candles_d2.png",
+      "floor": 3,
+      "kind": "candles",
+      "depth": 2,
+      "canvas": [
+        40,
+        40
+      ],
+      "anchor": [
+        20,
+        40
+      ],
+      "interactive": false,
+      "art_supplies_collision": false,
+      "needs_solid_cell_if_blocking": false,
+      "state": "spent/unlit"
+    },
+    {
+      "path": "assets/art/props/f3_candles_d3.png",
+      "floor": 3,
+      "kind": "candles",
+      "depth": 3,
+      "canvas": [
+        24,
+        24
+      ],
+      "anchor": [
+        12,
+        24
+      ],
+      "interactive": false,
+      "art_supplies_collision": false,
+      "needs_solid_cell_if_blocking": false,
+      "state": "spent/unlit"
+    },
+    {
+      "path": "assets/art/props/f3_crate_d1.png",
+      "floor": 3,
+      "kind": "crate",
+      "depth": 1,
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        64
+      ],
+      "interactive": false,
+      "art_supplies_collision": false,
+      "needs_solid_cell_if_blocking": false,
+      "state": "static"
+    },
+    {
+      "path": "assets/art/props/f3_crate_d2.png",
+      "floor": 3,
+      "kind": "crate",
+      "depth": 2,
+      "canvas": [
+        40,
+        40
+      ],
+      "anchor": [
+        20,
+        40
+      ],
+      "interactive": false,
+      "art_supplies_collision": false,
+      "needs_solid_cell_if_blocking": false,
+      "state": "static"
+    },
+    {
+      "path": "assets/art/props/f3_crate_d3.png",
+      "floor": 3,
+      "kind": "crate",
+      "depth": 3,
+      "canvas": [
+        24,
+        24
+      ],
+      "anchor": [
+        12,
+        24
+      ],
+      "interactive": false,
+      "art_supplies_collision": false,
+      "needs_solid_cell_if_blocking": false,
+      "state": "static"
+    },
+    {
+      "path": "assets/art/props/f3_puddle_d1.png",
+      "floor": 3,
+      "kind": "puddle",
+      "depth": 1,
+      "canvas": [
+        64,
+        20
+      ],
+      "anchor": [
+        32,
+        20
+      ],
+      "interactive": false,
+      "art_supplies_collision": false,
+      "needs_solid_cell_if_blocking": false,
+      "state": "rare iron seep"
+    },
+    {
+      "path": "assets/art/props/f3_puddle_d2.png",
+      "floor": 3,
+      "kind": "puddle",
+      "depth": 2,
+      "canvas": [
+        40,
+        12
+      ],
+      "anchor": [
+        20,
+        12
+      ],
+      "interactive": false,
+      "art_supplies_collision": false,
+      "needs_solid_cell_if_blocking": false,
+      "state": "rare iron seep"
+    },
+    {
+      "path": "assets/art/props/f3_puddle_d3.png",
+      "floor": 3,
+      "kind": "puddle",
+      "depth": 3,
+      "canvas": [
+        24,
+        8
+      ],
+      "anchor": [
+        12,
+        8
+      ],
+      "interactive": false,
+      "art_supplies_collision": false,
+      "needs_solid_cell_if_blocking": false,
+      "state": "rare iron seep"
+    }
+  ],
+  "layout": "layout.json",
+  "floor": 3
+}

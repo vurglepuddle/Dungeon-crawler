@@ -1,0 +1,284 @@
+{
+  "schema_version": 1,
+  "floor": 3,
+  "canvas": [
+    64,
+    64
+  ],
+  "anchor": [
+    0,
+    0
+  ],
+  "walls": [
+    "painted_f3_plain_0",
+    "painted_f3_plain_1",
+    "painted_f3_plain_2",
+    "painted_f3_door_v2",
+    "painted_f3_door_open_v2",
+    "painted_f3_drain_v2",
+    "painted_f3_sconce_0_v2",
+    "painted_f3_sconce_1_v2",
+    "painted_f3_chains_v2",
+    "painted_f3_tapestry_v2",
+    "painted_f3_crack_v2",
+    "painted_f3_damp_v2",
+    "painted_f3_door_open_overlay_v2",
+    "painted_f3_arch_blocked",
+    "painted_f3_door_barricaded"
+  ],
+  "planes": [
+    "calm_v3_f3_floor_dry_a",
+    "calm_v3_f3_floor_dry_b",
+    "calm_v3_f3_floor_dry_c",
+    "calm_v3_f3_floor_stain",
+    "calm_v3_f3_floor_chip",
+    "calm_v3_f3_floor_crack",
+    "calm_v3_f3_floor_wet_small",
+    "calm_v3_f3_floor_wet_hook",
+    "calm_v3_f3_floor_wet_corner",
+    "calm_v3_f3_floor_wet_split",
+    "calm_v3_f3_floor_wet_wide",
+    "calm_v3_f3_ceiling_plain",
+    "calm_v3_f3_ceiling_root",
+    "calm_v3_f3_ceiling_drip",
+    "calm_v3_f3_room_floor_drain",
+    "calm_v3_f3_room_floor_cracked",
+    "calm_v3_f3_room_floor_compass",
+    "calm_v3_f3_room_ceiling_roots",
+    "calm_v3_f3_room_ceiling_chain",
+    "calm_v3_f3_room_ceiling_boss"
+  ],
+  "base_aliases": [
+    "painted_f3_floor",
+    "painted_f3_ceiling"
+  ],
+  "wall_path": "res://assets/art/env/painted_f3_{same_existing_suffix}.png",
+  "plane_path": "res://assets/art/env/calm_v3_f3_{plane}_{same_existing_kind}.png",
+  "plane_one_line_mapping": "path.replace(\"calm_v3_\", \"calm_v3_f3_\") if floor >= 3 else path",
+  "wall_prop_mapping": "mini(floor, 3) in the existing painted_f%d and props/f%d path formats",
+  "art_family_mapping": {
+    "walls": 3,
+    "fixtures": 2,
+    "props": 3,
+    "planes": "calm_v3_f3",
+    "weights": 2
+  },
+  "art_family_rule": "Use this dictionary only for number >= 3; keep upper-floor mapping unchanged. weights:2 is compatible; add the optional third weight row before selecting weights:3.",
+  "room_landmark_mapping": "calm_v3_room_ becomes calm_v3_f3_room_ only on floor 3",
+  "floor_slot_meaning": "wet_* filenames are compatibility slots; here they contain dry ash deposits, without water reflections.",
+  "floor_weights": [
+    26,
+    22,
+    18,
+    10,
+    10,
+    7,
+    3,
+    1,
+    1,
+    1,
+    1
+  ],
+  "floor_names": [
+    "dry_a",
+    "dry_b",
+    "dry_c",
+    "stain",
+    "chip",
+    "crack",
+    "wet_small",
+    "wet_hook",
+    "wet_corner",
+    "wet_split",
+    "wet_wide"
+  ],
+  "ceiling_weights": [
+    94,
+    3,
+    3
+  ],
+  "reference_samples": [
+    {
+      "seed": "BELL42",
+      "floor": 3,
+      "plane": "floor",
+      "x": 10,
+      "y": 10,
+      "hash": 150291108,
+      "kind": "dry_a",
+      "path": "calm_v3_f3_floor_dry_a"
+    },
+    {
+      "seed": "BELL42",
+      "floor": 3,
+      "plane": "floor",
+      "x": 10,
+      "y": 9,
+      "hash": 1062436608,
+      "kind": "dry_a",
+      "path": "calm_v3_f3_floor_dry_a"
+    },
+    {
+      "seed": "BELL42",
+      "floor": 3,
+      "plane": "floor",
+      "x": -1,
+      "y": 5,
+      "hash": 2044257455,
+      "kind": "dry_c",
+      "path": "calm_v3_f3_floor_dry_c"
+    },
+    {
+      "seed": "BELL42",
+      "floor": 3,
+      "plane": "ceiling",
+      "x": 10,
+      "y": 10,
+      "hash": 951458103,
+      "kind": "plain",
+      "path": "calm_v3_f3_ceiling_plain"
+    },
+    {
+      "seed": "BELL42",
+      "floor": 3,
+      "plane": "ceiling",
+      "x": 10,
+      "y": 9,
+      "hash": 1782053657,
+      "kind": "plain",
+      "path": "calm_v3_f3_ceiling_plain"
+    },
+    {
+      "seed": "BELL42",
+      "floor": 3,
+      "plane": "ceiling",
+      "x": -1,
+      "y": 5,
+      "hash": 509761876,
+      "kind": "plain",
+      "path": "calm_v3_f3_ceiling_plain"
+    }
+  ],
+  "cell_size": 1,
+  "floor_ceiling_ring_px": 2,
+  "plane_ring_reference": "corresponding calm_v3 plain base, exact pixels",
+  "wall_ring": "own painted_f3_plain_0, exact 2px ring; opposite edges identical",
+  "door_interior": [
+    [
+      14,
+      57
+    ],
+    [
+      14,
+      21
+    ],
+    [
+      16,
+      16
+    ],
+    [
+      20,
+      12
+    ],
+    [
+      25,
+      10
+    ],
+    [
+      31,
+      9
+    ],
+    [
+      37,
+      10
+    ],
+    [
+      43,
+      13
+    ],
+    [
+      47,
+      18
+    ],
+    [
+      49,
+      24
+    ],
+    [
+      49,
+      57
+    ]
+  ],
+  "door_aperture": [
+    [
+      27,
+      56
+    ],
+    [
+      27,
+      15
+    ],
+    [
+      31,
+      11
+    ],
+    [
+      36,
+      12
+    ],
+    [
+      42,
+      15
+    ],
+    [
+      46,
+      20
+    ],
+    [
+      47,
+      25
+    ],
+    [
+      47,
+      56
+    ]
+  ],
+  "torch_fire": [
+    [
+      22,
+      5
+    ],
+    [
+      40,
+      5
+    ],
+    [
+      40,
+      19
+    ],
+    [
+      37,
+      20
+    ],
+    [
+      28,
+      20
+    ],
+    [
+      28,
+      24
+    ],
+    [
+      22,
+      24
+    ]
+  ],
+  "torch_frame_ms": [
+    250,
+    250
+  ],
+  "open_door": "Use door_open_overlay_v2 in the real lock portal; opaque door_open_v2 is only a flat-face/reference option.",
+  "no_collision_changes": true,
+  "filter": "nearest",
+  "runtime_source": "individual saved paintings, quiet stone reduction, shared-palette dry grade and registration only"
+}

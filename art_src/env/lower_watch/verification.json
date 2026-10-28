@@ -1,0 +1,38 @@
+{
+  "runtime_pngs": 64,
+  "environment_pngs": 37,
+  "prop_pngs": 27,
+  "saved_paintings": 33,
+  "preserved_pngs": 274,
+  "floor_hash_counts_10000_cells": {
+    "chip": 984,
+    "crack": 718,
+    "dry_a": 2590,
+    "dry_b": 2195,
+    "stain": 960,
+    "wet_small": 273,
+    "wet_corner": 102,
+    "wet_hook": 110,
+    "wet_wide": 108,
+    "dry_c": 1871,
+    "wet_split": 89
+  },
+  "sconce_changed_pixels": 147,
+  "passed": [
+    "shared palette and binary alpha",
+    "all preserved PNG hashes",
+    "15 common-ring wall states",
+    "exact calm_v3 two-pixel plane seams",
+    "11 distinct stable floor slots",
+    "unobstructed open portal and stationary arch",
+    "stationary two-frame torch hardware",
+    "27 prop depth canvases and anchors",
+    "F1/F2 hash choices unchanged",
+    "d1-d3 same-camera comparisons",
+    "three distinct forward steps",
+    "exact nearest 4x proofs",
+    "21-character two-line flavour"
+  ],
+  "status": "Offline art checks only; no Godot runs, integration, gameplay test or phone acceptance.",
+  "identical_rebuild_files": 157
+}

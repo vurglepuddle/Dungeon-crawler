@@ -5,13 +5,17 @@ simulation, main scene, UI chrome, catalog, or original PNGs. Painted source
 PNGs, exact built-in imagegen prompts, code drawings, deterministic reduction,
 and contact sheets live in the corresponding `art_src/` folders.
 
-**Primary revision:** use `painted_f1_*.png` / `painted_f2_*.png` for walls;
+**Primary revision:** F1/F2 keep their accepted art. **The Lower Watch (F3)**
+now has a complete painted soot/rust/ash family: `painted_f3_*` walls,
+`calm_v3_f3_*` planes/landmarks and `props/f3_*` sprites. See **The Lower
+Watch** for exact registrations and A's family-map switch. No F1/F2 files
+were repainted. Use `painted_f1_*.png` / `painted_f2_*.png` for upper walls;
 the latest **painted dressing** faces are `painted_fN_<kind>_v2.png` for
 door/open door, drain, two sconce frames, chains, tapestry, crack and damp.
 Use the matching `door_open_overlay_v2` for an opened live lock portal.
 The large-block plain walls remain unchanged. See **Painted dressing v2**.
 The decorative blockages are `painted_fN_arch_blocked.png` and
-`painted_fN_door_barricaded.png` (both floors). Retire the old open-looking
+`painted_fN_door_barricaded.png` (all three floors). Retire the old open-looking
 `painted_fN_arch.png` from random dressing. Keep actual lock/gate art distinct.
 the latest plane offer is the shared `calm_v3_floor_*` / `calm_v3_ceiling_*`
 family, with `calm_v3_room_*` for matching landmark faces. The earlier
@@ -39,6 +43,17 @@ All previous art remains intact. See
 ## Rebuild and inspect
 
 From the repository root, with Python and Pillow installed:
+
+```powershell
+python -B art_src/env/lower_watch/build_lower_watch.py
+python -B art_src/env/lower_watch/verify_lower_watch.py --rebuild
+python -B art_src/env/verify_polish.py
+```
+
+This builds only the Lower Watch: 37 environment PNGs, 27 registered prop
+sprites and comparison proofs from 33 saved paintings. The focused check
+verifies old PNG hashes, seams, portal alpha, torch masks, anchors, stable
+selection and an identical rebuild. For the preceding upper-floor dressings:
 
 ```powershell
 python -B art_src/env/dressing_v2/build_dressings.py
@@ -114,6 +129,11 @@ and contact sheets still use the shared indexed palette and binary alpha.
 
 | Set | Native size | 4x review sheet |
 | --- | --- | --- |
+| Lower Watch complete environment | Thirty-seven 64 x 64 materials/states | `art_src/env/lower_watch/contact_sheet_4x.png` |
+| Lower Watch props | Nine families, three registered depth canvases each | `art_src/props/lower_watch/contact_sheet_4x.png` |
+| All three floors, same corridor and room camera | Six 148 x 150 views | `art_src/env/lower_watch/mockup_comparison_4x.png` |
+| All three floors, near/middle/far front faces | Eighteen 148 x 150 views | `art_src/env/lower_watch/mockup_depths_4x.png` |
+| Lower Watch movement proof | Three forward squares | `art_src/env/lower_watch/mockup_steps_4x.png` |
 | Current painted wall dressings v2 | Twenty 64 x 64 faces/portal layers | `art_src/env/dressing_v2/contact_sheet_4x.png` |
 | Painted dressing per floor | Ten 64 x 64 faces each | `art_src/env/dressing_v2/floor{1,2}/contact_sheet_4x.png` |
 | Old shapes / painted F1 / painted F2 | Seven rows of comparison | `art_src/env/dressing_v2/comparison/contact_sheet_4x.png` |
@@ -163,6 +183,112 @@ and contact sheets still use the shared indexed palette and binary alpha.
 | Overhead / underfoot interest | Twelve 64 × 64 faces | `art_src/env/room_faces/contact_sheet_4x.png` |
 | Painted logotype / launcher offer | Sizes below; layer thumbnails labelled | `art_src/screens/room_batch/contact_sheet_4x.png` |
 | Title illustration with logo/subtitle | 154 × 184 proposal | `art_src/screens/room_batch/title_mockup_4x.png` |
+
+## The Lower Watch: dry soot, rusty iron and bone ash
+
+Floor three is the abandoned guard level: broad watch-post stones rubbed
+with soot, rust scars, ash in the mortar and an oxblood bell hanging. Its
+iron-grey flags retain chips and rust stains, with much quieter faces than
+the masonry. The ceiling keeps F1's crossing rib-vault structure, subdued
+under soot; sparse dead roots and a mineral drip scar prevent a second wet
+cave. It is an old, dry level with a rare iron-brown seep, rather than another
+teal cellar. All marks are painted source detail reduced to the shared palette.
+
+There are **37 new environment PNGs** and **27 new prop PNGs**, derived from
+**33 saved individual paintings**. Sources and exact prompts are under
+`art_src/env/lower_watch/` and `art_src/props/lower_watch/`; each has a
+`layout.json`, manifest and 4x contact sheet. Reduction uses nearest-neighbour
+sampling, the shared 31 opaque inks plus transparent index 0, restrained
+palette grading, and a luminance-based median pass to quiet plane grain.
+No accepted wall, prop or plane is a build output of this batch.
+
+All environment faces are **64 x 64**, anchor **(0,0)**, nearest sampling.
+Path prefixes below are relative to `res://assets/art/`:
+
+| Family | Exact new path pattern / suffixes |
+| --- | --- |
+| Three plain walls | `env/painted_f3_plain_{0,1,2}.png` |
+| Painted dressings / functional lock states | `env/painted_f3_<kind>_v2.png`; kind = `door`, `door_open`, `door_open_overlay`, `drain`, `sconce_0`, `sconce_1`, `chains`, `tapestry`, `crack`, `damp` |
+| Impassable decorative infill | `env/painted_f3_arch_blocked.png`, `env/painted_f3_door_barricaded.png` |
+| Eleven floor slots | `env/calm_v3_f3_floor_<kind>.png`; kind = `dry_a`, `dry_b`, `dry_c`, `stain`, `chip`, `crack`, `wet_small`, `wet_hook`, `wet_corner`, `wet_split`, `wet_wide` |
+| Three ceiling slots | `env/calm_v3_f3_ceiling_{plain,root,drip}.png` |
+| Room floor landmarks | `env/calm_v3_f3_room_floor_{drain,cracked,compass}.png` |
+| Room ceiling landmarks | `env/calm_v3_f3_room_ceiling_{roots,chain,boss}.png` |
+| Older base-only path aliases | `env/painted_f3_floor.png`, `env/painted_f3_ceiling.png` |
+| Nine props at three depths | `props/f3_<kind>_d{1,2,3}.png`; kind = `rubble`, `bone_heap`, `skeleton`, `pots`, `puddle`, `pillar`, `statue`, `candles`, `crate` |
+
+Every F3 wall shares the exact two-pixel ring of `painted_f3_plain_0`;
+opposite outer edges are pixel-identical. Doors retain the accepted v2
+interior/aperture masks and stationary arch and threshold. Use
+**`painted_f3_door_open_overlay_v2.png` for the actual opened lock portal**:
+the centre/right passage is transparent, while the inward door slab remains
+opaque on the left. `door_open_v2` is the opaque flat-face/reference option.
+The bricked arch and nailed barricade remain solid decorative faces, never
+travel clues. Sconce frames alternate **250 / 250 ms**; only the flame mask
+changes, with bracket, soot, stone and placement held still.
+
+One **64 x 64 plane tile equals one world cell**. Sample world-space cell
+fractions at `floor(frac(world_x) * 64)` / `floor(frac(world_y) * 64)`;
+choose the material using the stable cell hash, independent of facing and
+turn count. Floor and ceiling orientation stay world-aligned. Every F3
+floor/landmark has the **exact accepted `calm_v3_floor_dry_a` two-pixel
+border ring**; ceilings use the exact `calm_v3_ceiling_plain` ring, including
+the rib endpoints. All 11 floor variants can meet each other or the upper
+families without a broken cell joint. Keep the existing lamp factors.
+
+The five `wet_*` filenames are **compatibility slots containing dry ash
+deposits and wear on F3**, not standing water. Their asymmetric marks occupy
+different orientations and positions, so movement has landmarks without
+repeating a puddle. Optional F3 weights, in the table's existing order:
+`[26,22,18,10,10,7,3,1,1,1,1]`; ceiling `[94,3,3]`. That is 66% ordinary flags,
+27% wear/stain/chip/crack and 7% ash deposits. Hash the unchanged actual-floor
+key `seed/floor/plane/x/y` with `PresentationArt.mix_hash`, modulo 100 and
+cumulative weights. `selection.py` and layout samples give exact reference
+values; F1/F2 selection remains unchanged. Merely switching paths with the
+old F2 weights is compatible; it places more ash variation.
+
+Props keep B's full-canvas, bottom-centre registration: ordinary sprites
+**64 x 64 / 40 x 40 / 24 x 24**, anchors **(32,64) / (20,40) / (12,24)**;
+the floor decal is **64 x 20 / 40 x 12 / 24 x 8**, anchors **(32,20) /
+(20,12) / (12,8)**. Resize the full registered d1 canvas for d2/d3; never
+refit opaque bounds separately. Keep existing depth bands, ground placement,
+occlusion and reservation rules. The candles are spent wax, without a flame
+or LIGHT affordance. Place the iron seep very rarely. A pillar requires an
+actually blocked cell if used as a full-height obstruction. Keep decorations
+off interactable, item, actor, puzzle and travel cells.
+
+**Codex A:** the current `art_family.gd` makes this a one-line family mapping.
+For `number >= 3`, return
+`{"walls":3,"fixtures":2,"props":3,"planes":"calm_v3_f3","weights":2}`;
+retain its present dictionary for F1/F2. This switches the owned wall/plane/
+prop paths while retaining B's existing fixture family and a valid weight
+index. Do not raise the fixture clamp: this batch adds no F3 stairs/lift/gate
+files. Preserve the dressing `_v2` suffixes and the live open-door override.
+For any remaining direct room-landmark path, replace `calm_v3_room_` with
+`calm_v3_f3_room_` only on F3. In a pre-family-map consumer, the equivalent
+plane one-liner is `path.replace("calm_v3_", "calm_v3_f3_") if floor >= 3
+else path`; C-owned wall/prop formats can select `mini(floor,3)`. The optional
+weight row needs the separate array/ceiling-table addition before using
+`weights:3`; path-only integration can safely keep `weights:2`.
+
+Start with **`mockup_comparison_4x.png`**, then **`mockup_depths_4x.png`**
+under `art_src/env/lower_watch/`. Both compare all three floors at the same
+148 x 150 camera, lamp, horizon and widths; the distance sheet shows front
+faces at 1, 2 and 3 cells. Individual `mockup_f3_corridor_4x.png` and
+`mockup_f3_room_4x.png` are supplied too. The corridor places six wall
+dressings across near/middle/far side segments, with registered d1/d2/d3
+props. `mockup_steps_4x.png` moves the camera across three stable world cells.
+These are offline material proofs, not captures or proposed spawn locations.
+The broad room exposes more ceiling, so judge its quietness alongside the
+preferred corridor framing. Final phone acceptance belongs to integration.
+
+The manual now describes the three descents and harder deep blows in its
+box voice. LIGHT kindles **the reeds from an already burning brazier**;
+BURN retains held/selected lit reeds, TOSS still works, and distant travel
+faces ask the Finder to step closer without spending a beat. The flavour
+file adds floor name `3` and five optional two-line hints. Existing floor-name
+loading can use the new key; descriptive `when` strings still need A's event
+wiring and must yield to urgent combat/save messages.
 
 ## Wall faces: texture selection only
 
@@ -1320,7 +1446,7 @@ python -B art_src/env/verify_polish.py
 
 `data/text/provenance.json` maps current catalog kind IDs to one/two-line
 arrays, plus the reserved torch. `flavour.json` supplies numbered floor names,
-six death couplets and eight hint records with stable IDs and descriptive
+six death couplets and thirteen hint records with stable IDs and descriptive
 `when` hooks. Those hook strings are integration suggestions, not registered
 events. Every display line is at most 21 characters, at most two lines per
 entry. Keep the arrays as lines or join with `"\n"`; never rewrap at spaces
@@ -1341,22 +1467,6 @@ the asset checks and focused FX test do not claim phone performance acceptance.
 
 
 
-
-## Leafy ivy v4 revision receipt, 28 October 2026
-
-- Added **three runtime PNGs**: broader leafy game, compass and map layers.
-  The combined C kit verifies at **252 runtime PNGs**, with the shared 31
-  opaque inks, binary alpha and exact nearest 4x proofs.
-- All **249 earlier C runtime PNGs**, both owner references and the entire
-  v3 source pack remain byte-for-byte unchanged. The accepted skull, verb
-  icons, full words and button contents are preserved.
-- Focused checks pass for 39 intact native leaf stamps, six bronze
-  underpasses, camera/content/control clearance, compass dial/heading, map
-  ink/alpha/header/CLOSE, and an identical **22-file** PNG/JSON rebuild.
-- A swaps the three vine layers, places the expanded compass canvas at
-  **`(80,291)`**, and retains old icons/torches. Full-screen/map, side-by-side
-  and contact proofs are under `art_src/ui_offer/ivy_v4/`; `layout.json`
-  supplies the exact registrations. No Godot runs, staging or commits by C.
 
 ## Painted dressing v2 receipt, 29 October 2026
 
@@ -1379,3 +1489,23 @@ the asset checks and focused FX test do not claim phone performance acceptance.
   `art_src/env/dressing_v2/rebuild_receipt.json` and `verification.json`.
   A swaps the six dressing families, the closed lock override, and only
   the opened lock's portal path. No Godot runs, staging or commits by C.
+
+## Lower Watch receipt, 29 October 2026
+
+- Added **64 runtime PNGs**: 37 environment materials/states and nine prop
+  families at three depths, from **33 saved individual paintings**. Every
+  runtime texture uses the shared palette, binary alpha and nearest sampling.
+- All **274 pre-batch PNGs** in the preservation receipt remain unchanged,
+  including the original favourite stone wall. The 11 distinct floor slots
+  keep exact calm_v3 rings; the torch hardware, door arch and depth anchors
+  are stable. F1/F2 hash selections are unchanged.
+- Focused checks and the **157-file identical rebuild** pass; receipts are
+  `art_src/env/lower_watch/verification.json` and `rebuild_receipt.json`.
+  The older all-kit verifier currently stops on the pre-existing, undeclared
+  `assets/art/icons/coat_spent.png`; this batch leaves that integration asset
+  and the older verifier alone. Its new PNGs are all declared in manifests.
+- Review `mockup_comparison_4x.png`, `mockup_depths_4x.png` and
+  `mockup_steps_4x.png` under `art_src/env/lower_watch/`. The exact family-map
+  dictionary, fixture exception, optional weights and landmark prefix are
+  documented above and in `layout.json`. The manual and five short flavour
+  hints cover M4a. No Godot runs, staging or commits by C.

@@ -3,7 +3,8 @@
   "max_line_chars": 21,
   "floor_names": {
     "1": ["The Abbey Below"],
-    "2": ["The Drowned Courses"]
+    "2": ["The Drowned Courses"],
+    "3": ["The Lower Watch"]
   },
   "death_epitaphs": [
     ["Filed under: missing.", "A Finder, unfound."],
@@ -21,6 +22,11 @@
     {"id": "ring", "when": "inspect_clapper", "lines": ["One ring, each floor.", "One beat to answer."]},
     {"id": "home", "when": "take_seal", "lines": ["Dawn knows the way.", "Take it to the door."]},
     {"id": "pack", "when": "full_pack", "lines": ["Eight pockets only.", "The floor keeps lost."]},
-    {"id": "coat", "when": "inspect_spent_coat", "lines": ["One blow well taken.", "No padding left now."]}
+    {"id": "coat", "when": "inspect_spent_coat", "lines": ["One blow well taken.", "No padding left now."]},
+    {"id": "lower_watch", "when": "enter_floor_3", "lines": ["No relief came.", "The watch stayed."]},
+    {"id": "deep_blows", "when": "inspect_deep_actor", "lines": ["Old hands hit hard.", "Mind the warning."]},
+    {"id": "light_reeds", "when": "inspect_brazier_with_cold_torch", "lines": ["The reeds want fire.", "Touch the brazier."]},
+    {"id": "touch_web", "when": "inspect_web_with_lit_torch", "lines": ["Keep the torch.", "Touch the web."]},
+    {"id": "travel_distance", "when": "touch_distant_travel_face", "lines": ["The door can wait.", "Step a little closer."]}
   ]
 }

@@ -1,0 +1,207 @@
+{
+  "tool": "image_gen.imagegen",
+  "method": "Individual painted edits from accepted sources. Saved source images are the reproducible input; image generation itself is nondeterministic. See build scripts for nearest reduction, registration and shared-palette grading.",
+  "entries": [
+    {
+      "source": "sources/wall_plain_0.png",
+      "prompt": "Use case: precise-object-edit. Production texture for UNDERCROFT, original forgotten-1993 dungeon crawler; painted, chunky handmade material clusters intended for nearest reduction to64x64 and a shared31-colour palette. Image1 is the geometry/material-density reference. Make FLOOR THREE: THE LOWER WATCH, an abandoned dry underground guard level. Distinct identity: charcoal soot in crevices, dry iron-grey and weathered umber/ochre, pale BONE ASH caught on chipped lower edges, scattered ancient iron/rust scars. NO teal, blue-green moss or wet turquoise. Dirty and aged, restrained highlights, low frontal warm lamplight, cool soot shadow. Full-bleed opaque square orthographic texture face, no room perspective, writing, labels, UI or watermark. Repaint this large FOUR-COURSE chipped abbey stone wall as old watch-post masonry. Preserve broad irregular stone sizes and course positions, but use charcoal/rust/bone-ochre dry material. A few old iron dowel holes are filled with rust and ash, broad soot brush scars in recesses. Pale dust grazes lower-front lips, slightly darker flatter stone faces, no speckled noise. No doors, slit openings or fixtures on this PLAIN repeatable wall. Keep edges seamless and uninterrupted masonry.",
+      "referenced_image_paths": [
+        "art_src/spike/sources/stone_wall_painted.png"
+      ],
+      "transparent_background": false
+    },
+    {
+      "source": "sources/wall_plain_1.png",
+      "prompt": "Use case: precise-object-edit. LOWER WATCH floor-three texture for UNDERCROFT, original1993 painted dungeon. Preserve exact object/stone registration of image1; image2 when supplied is the floor-three palette/material target. Dry soot charcoal, rusted iron, umber/ochre stone, pale bone ash caught on low edges; absolutely NO green/teal damp, plants, glossy wetness or saturated orange. Coarse tactile handmade painted clusters survive nearest64x64 reduction. Low-front warm lamp catches chipped protrusions, recesses cool soot-black. Front-on opaque square wall-face, unchanged edge masonry, no camera perspective, floor beyond bottom, UI, letters or watermark. Make a SUBTLE second PLAIN variation of this exact wall: repaint two individual stone interiors with different shallow chipped grain and one small old rust scar. The same broad four-course geometry and dry watch-post identity, no new openings or fixtures, no extra brick grid. Keep course boundaries and outside border unchanged.",
+      "referenced_image_paths": [
+        "art_src/env/lower_watch/sources/wall_plain_0.png"
+      ],
+      "transparent_background": false
+    },
+    {
+      "source": "sources/wall_plain_2.png",
+      "prompt": "Use case: precise-object-edit. LOWER WATCH floor-three texture for UNDERCROFT, original1993 painted dungeon. Preserve exact object/stone registration of image1; image2 when supplied is the floor-three palette/material target. Dry soot charcoal, rusted iron, umber/ochre stone, pale bone ash caught on low edges; absolutely NO green/teal damp, plants, glossy wetness or saturated orange. Coarse tactile handmade painted clusters survive nearest64x64 reduction. Low-front warm lamp catches chipped protrusions, recesses cool soot-black. Front-on opaque square wall-face, unchanged edge masonry, no camera perspective, floor beyond bottom, UI, letters or watermark. Make a SUBTLE third PLAIN variation: a little broad soot rub and pale dry ash in low mortar, two partly filled rusty dowel scars where a guard's spear rack once hung. Same large-stone course geometry, no intact rack/object, no open slit/door/window, no icons or words. Low-contrast stone faces, outside border unchanged.",
+      "referenced_image_paths": [
+        "art_src/env/lower_watch/sources/wall_plain_0.png"
+      ],
+      "transparent_background": false
+    },
+    {
+      "source": "sources/wall_door.png",
+      "prompt": "Use case: precise-object-edit. LOWER WATCH floor-three texture for UNDERCROFT, original1993 painted dungeon. Preserve exact object/stone registration of image1; image2 when supplied is the floor-three palette/material target. Dry soot charcoal, rusted iron, umber/ochre stone, pale bone ash caught on low edges; absolutely NO green/teal damp, plants, glossy wetness or saturated orange. Coarse tactile handmade painted clusters survive nearest64x64 reduction. Low-front warm lamp catches chipped protrusions, recesses cool soot-black. Front-on opaque square wall-face, unchanged edge masonry, no camera perspective, floor beyond bottom, UI, letters or watermark. Repaint this same CLOSED iron-banded keyed oak door for a forgotten dry guard level. Keep exact arch, planks, straps, lock plate/keyhole/ring pull and position. Nearly black scorched wood with coarse splinters, rust-fretted iron, bone ash at threshold and lower-front ridges. Stone arch and outside masonry now match image2. Retain readable functional lock/keyhole; no barricade, portcullis, symbols or second door.",
+      "referenced_image_paths": [
+        "art_src/env/dressing_v2/sources/f1_door.png",
+        "art_src/env/lower_watch/sources/wall_plain_0.png"
+      ],
+      "transparent_background": false
+    },
+    {
+      "source": "sources/wall_door_open.png",
+      "prompt": "Use case: precise-object-edit. Edit ONLY this actual Lower Watch wooden lock door into its OPEN state. Preserve every surrounding arch stone, jamb, threshold and outside masonry exactly. Same charred oak leaf, rusted straps/rivets and lock plate, hinged LEFT and swung75degrees INWARD so it is a foreshortened narrow slab along LEFT reveal. Broad clear dark passage fills centre/right under the same arch; faint floor beyond, no bars, portcullis, second door or blockage. Keep dry soot/rust/bone-ash material, chunky1993 painted clusters, square orthographic64px-wall-face composition, no UI/text/watermark.",
+      "referenced_image_paths": [
+        "art_src/env/lower_watch/sources/wall_door.png"
+      ],
+      "transparent_background": false
+    },
+    {
+      "source": "sources/wall_drain.png",
+      "prompt": "Use case: precise-object-edit. LOWER WATCH floor-three texture for UNDERCROFT, original1993 painted dungeon. Preserve exact object/stone registration of image1; image2 when supplied is the floor-three palette/material target. Dry soot charcoal, rusted iron, umber/ochre stone, pale bone ash caught on low edges; absolutely NO green/teal damp, plants, glossy wetness or saturated orange. Coarse tactile handmade painted clusters survive nearest64x64 reduction. Low-front warm lamp catches chipped protrusions, recesses cool soot-black. Front-on opaque square wall-face, unchanged edge masonry, no camera perspective, floor beyond bottom, UI, letters or watermark. Repaint the same RECESSED GRATE for an old guardhouse: blackened rough iron bars, big rust flakes, dry bone ash trapped in the lower lip, brown iron leaching below its chipped recess. Same six or seven bars and broad stone grid. No moss or water; retain carved depth, grimy recess and warm low-front highlights. Outside stone matches image2.",
+      "referenced_image_paths": [
+        "art_src/env/dressing_v2/sources/f1_drain.png",
+        "art_src/env/lower_watch/sources/wall_plain_0.png"
+      ],
+      "transparent_background": false
+    },
+    {
+      "source": "sources/wall_sconce_0.png",
+      "prompt": "Use case: precise-object-edit. FLOOR THREE, THE LOWER WATCH: image1 is the exact finished painted object/face to preserve; image2 is the new dry guard-level wall material target. Repaint surfaces and surrounding masonry into soot-blackened charcoal, old iron/rust and subdued umber/bone-ash ochre. No teal/green moss or wet gloss. Keep object silhouette, large four-course stone boundaries, mounting, position, frontal orthographic registration and canvas. Tactile chunky original1993 hand-painted clusters, low frontal warm lamp edges, contact shadow and dirt integrated in stone. Full-bleed opaque square face; no room camera, text/UI or watermark. Same forged torch basket/bracket, mounting plate, soot above and LEFT-leaning flame. Surrounding stone is dry soot/ochre, old ash below bracket; flame retains amber/ivory heart, light only gently catches nearby chips. Keep hardware and flame readable, no new flame source.",
+      "referenced_image_paths": [
+        "art_src/env/dressing_v2/sources/f1_sconce_0.png",
+        "art_src/env/lower_watch/sources/wall_plain_0.png"
+      ],
+      "transparent_background": false
+    },
+    {
+      "source": "sources/wall_sconce_1.png",
+      "prompt": "Use case: precise-object-edit. SECOND and final torch flicker frame. Change ONLY flame/very immediate halo: now slightly shorter, leaning RIGHT, amber shoulder and ivory core. Keep exact torch cloth, basket, bracket, soot, all wall/hardware and dry Lower Watch materials unchanged and registered. No moving smoke, added objects, camera change or full-wall flicker. Opaque square painted64px texture, no text or watermark.",
+      "referenced_image_paths": [
+        "art_src/env/lower_watch/sources/wall_sconce_0.png"
+      ],
+      "transparent_background": false
+    },
+    {
+      "source": "sources/wall_chains.png",
+      "prompt": "Use case: precise-object-edit. FLOOR THREE, THE LOWER WATCH: image1 is the exact finished painted object/face to preserve; image2 is the new dry guard-level wall material target. Repaint surfaces and surrounding masonry into soot-blackened charcoal, old iron/rust and subdued umber/bone-ash ochre. No teal/green moss or wet gloss. Keep object silhouette, large four-course stone boundaries, mounting, position, frontal orthographic registration and canvas. Tactile chunky original1993 hand-painted clusters, low frontal warm lamp edges, contact shadow and dirt integrated in stone. Full-bleed opaque square face; no room camera, text/UI or watermark. Same two heavy chain lengths and cuff shackles on wall rings. Darker dry iron with broad orange-brown rust chips and pale ash only on lower faces; cast shadows on watch-post stone. No extra chains or changed poses.",
+      "referenced_image_paths": [
+        "art_src/env/dressing_v2/sources/f1_chains.png",
+        "art_src/env/lower_watch/sources/wall_plain_0.png"
+      ],
+      "transparent_background": false
+    },
+    {
+      "source": "sources/wall_tapestry.png",
+      "prompt": "Use case: precise-object-edit. FLOOR THREE, THE LOWER WATCH: image1 is the exact finished painted object/face to preserve; image2 is the new dry guard-level wall material target. Repaint surfaces and surrounding masonry into soot-blackened charcoal, old iron/rust and subdued umber/bone-ash ochre. No teal/green moss or wet gloss. Keep object silhouette, large four-course stone boundaries, mounting, position, frontal orthographic registration and canvas. Tactile chunky original1993 hand-painted clusters, low frontal warm lamp edges, contact shadow and dirt integrated in stone. Full-bleed opaque square face; no room camera, text/UI or watermark. Same folded moth-eaten BELL-motif hanging and rod, now a long-abandoned watch-house textile in faded OXBLOOD/UMBER and ash-ochre, its single bell motif dusty bone-gold. Retain folds, holes and fraying. Desaturated reddish brown fabric, no green. No new coat of arms or words.",
+      "referenced_image_paths": [
+        "art_src/env/dressing_v2/sources/f1_tapestry.png",
+        "art_src/env/lower_watch/sources/wall_plain_0.png"
+      ],
+      "transparent_background": false
+    },
+    {
+      "source": "sources/wall_crack.png",
+      "prompt": "Use case: precise-object-edit. FLOOR THREE, THE LOWER WATCH: image1 is the exact finished painted object/face to preserve; image2 is the new dry guard-level wall material target. Repaint surfaces and surrounding masonry into soot-blackened charcoal, old iron/rust and subdued umber/bone-ash ochre. No teal/green moss or wet gloss. Keep object silhouette, large four-course stone boundaries, mounting, position, frontal orthographic registration and canvas. Tactile chunky original1993 hand-painted clusters, low frontal warm lamp edges, contact shadow and dirt integrated in stone. Full-bleed opaque square face; no room camera, text/UI or watermark. Same structural fissure, dark deep core, jagged lit lower-front lip and chipped offshoots. Old dry bone-ash lodged in a few crack pockets and iron-ochre dust stains, no water. Match surrounding broad stones to image2.",
+      "referenced_image_paths": [
+        "art_src/env/dressing_v2/sources/f1_crack.png",
+        "art_src/env/lower_watch/sources/wall_plain_0.png"
+      ],
+      "transparent_background": false
+    },
+    {
+      "source": "sources/wall_damp.png",
+      "prompt": "Use case: precise-object-edit. FLOOR THREE LOWER WATCH. Image1 is the exact wall face/object to retain; image2 is the dry guard-level material reference. Preserve geometry, pose and square orthographic wall-face registration, coarse original1993 hand-painted stone clusters. Repaint masonry soot-charcoal/umber and dry bone-ash ochre, iron rust in old scars, low-front pale lamp edges. No teal/green moss or saturated colour, no clean flat icon shapes, no room render, letters, UI or watermark. Full opaque square texture. Repaint the water/moss staining into a mostly DRIED mineral and iron seep on guard stones: thin porous brown/rust trails descend from existing joints, pale old salts and ash in cracks, tiny blackened dry lichen tufts. Keep lots of stone visible through varied stains. A trace of moisture only in one low joint. NO flat coloured blob, no green fill or broad puddle; weathered stain belongs in grain.",
+      "referenced_image_paths": [
+        "art_src/env/dressing_v2/sources/f1_damp.png",
+        "art_src/env/lower_watch/sources/wall_plain_0.png"
+      ],
+      "transparent_background": false
+    },
+    {
+      "source": "sources/wall_arch_blocked.png",
+      "prompt": "Use case: precise-object-edit. FLOOR THREE LOWER WATCH. Image1 is the exact wall face/object to retain; image2 is the dry guard-level material reference. Preserve geometry, pose and square orthographic wall-face registration, coarse original1993 hand-painted stone clusters. Repaint masonry soot-charcoal/umber and dry bone-ash ochre, iron rust in old scars, low-front pale lamp edges. No teal/green moss or saturated colour, no clean flat icon shapes, no room render, letters, UI or watermark. Full opaque square texture. Keep this arch BRICKED SOLID: huge blocking stones all the way to crown, no black passage, handle, keyhole or opening. Dry soot/ochre guard masonry and pale ash wedged in rough joints; cannot be mistaken for a usable door.",
+      "referenced_image_paths": [
+        "art_src/env/closed_v4/sources/arch.png",
+        "art_src/env/lower_watch/sources/wall_plain_0.png"
+      ],
+      "transparent_background": false
+    },
+    {
+      "source": "sources/wall_door_barricaded.png",
+      "prompt": "Use case: precise-object-edit. FLOOR THREE LOWER WATCH. Image1 is the exact wall face/object to retain; image2 is the dry guard-level material reference. Preserve geometry, pose and square orthographic wall-face registration, coarse original1993 hand-painted stone clusters. Repaint masonry soot-charcoal/umber and dry bone-ash ochre, iron rust in old scars, low-front pale lamp edges. No teal/green moss or saturated colour, no clean flat icon shapes, no room render, letters, UI or watermark. Full opaque square texture. Keep the split-plank decorative door permanently BARRICADED by its thick crossbeam and nailed diagonal brace. Old charred wood, rust-fretted hanging straps, dry ash in splinters, no handle/keyhole or route through. Surrounding stone matches image2. Retain clear blockage silhouette.",
+      "referenced_image_paths": [
+        "art_src/env/closed_v4/sources/door.png",
+        "art_src/env/lower_watch/sources/wall_plain_0.png"
+      ],
+      "transparent_background": false
+    },
+    {
+      "source": "sources/floor_base.png",
+      "prompt": "Use case: precise-object-edit. Production texture for UNDERCROFT, original forgotten-1993 dungeon crawler; painted, chunky handmade material clusters intended for nearest reduction to64x64 and a shared31-colour palette. Image1 is the geometry/material-density reference. Make FLOOR THREE: THE LOWER WATCH, an abandoned dry underground guard level. Distinct identity: charcoal soot in crevices, dry iron-grey and weathered umber/ochre, pale BONE ASH caught on chipped lower edges, scattered ancient iron/rust scars. NO teal, blue-green moss or wet turquoise. Dirty and aged, restrained highlights, low frontal warm lamplight, cool soot shadow. Full-bleed opaque square orthographic texture face, no room perspective, writing, labels, UI or watermark. This is a TOP-DOWN FLOOR tile, one64x64tile is one walkable cell. Keep the large readable quiet uneven flagstones and clear dark perimeter cell joint of image1. Lower Watch floor: worn dry charcoal/umber flags with thin old rust-ochre joint dirt and restrained pale bone-ash dust in a few low chips. Quieter stone faces with very few flecks; worn walkable centre relatively clear, no scattered objects, motifs, grids inside the main cell, or puddles. Floor easy to count steps in perspective. Keep exact broad flag boundaries and dark outside perimeter; seamless against any neighbour.",
+      "referenced_image_paths": [
+        "art_src/env/calm_v3/sources/floor.png"
+      ],
+      "transparent_background": false
+    },
+    {
+      "source": "sources/floor_wear.png",
+      "prompt": "Use case: precise-object-edit. Variant of this EXACT Lower Watch top-down flagstone floor: add one shallow chipped flake at lower-right, one fine fractured lip at upper-left across a stone face, and a small mottled iron-brown boot scuff away from centre. Preserve all main flag geometry, broad quiet stone faces and exact outside perimeter. Dry charcoal/umber, ash-ochre low edge, NO teal, water or speckled noise. Coarse painted1993 surface for64px reduction, one square=one walkable cell, seamless ring, no objects/text/watermark.",
+      "referenced_image_paths": [
+        "art_src/env/lower_watch/sources/floor_base.png"
+      ],
+      "transparent_background": false
+    },
+    {
+      "source": "sources/floor_ash.png",
+      "prompt": "Use case: precise-object-edit. Same exact Lower Watch top-down floor geometry/perimeter. Add THREE restrained irregular pale BONE-ASH deposits caught in different low cracks, one thin crooked drift near lower-left, a little fan-shaped dust at upper-right, a broken narrow trail near right-bottom. Light grey/ivory with warm ochre undergrain, dusty/mottled/translucent-looking paint letting stone texture read through, not thick snow or solid blobs. Most walking surface stays clear and low-contrast. Dry, NO puddles/teal, no objects, footprints, arrows or repeated dots. Square painted texture for64px and sharedpalette reduction, no text/UI/watermark.",
+      "referenced_image_paths": [
+        "art_src/env/lower_watch/sources/floor_base.png"
+      ],
+      "transparent_background": false
+    },
+    {
+      "source": "sources/floor_drain.png",
+      "prompt": "Use case: precise-object-edit. Add a single small RUSTED IRON FLOOR DRAIN into the middle of this exact Lower Watch top-down flagstone tile, about32%of tile width: recessed square iron frame with five rough bars and a cross brace, deep gaps, chipped stone lip, small rust leaching and dry ash in the corners. Preserve quiet flag faces around it, full outside perimeter and same geometry. No standing water, teal, room perspective, writing or labels. Coarse chunky hand-painted1993 texture for64px tile sampling, opaque.",
+      "referenced_image_paths": [
+        "art_src/env/lower_watch/sources/floor_base.png"
+      ],
+      "transparent_background": false
+    },
+    {
+      "source": "sources/floor_compass.png",
+      "prompt": "Use case: precise-object-edit. Add one old worn BRASS COMPASS ROSE inlaid flush into the centre of this exact Lower Watch top-down floor tile, about45%of tile width. Four broad points and a faint circular rim, no letters or compass abbreviations, rubbed bone-gold/dirty bronze inlay partly lost among cracked charcoal/umber flags. Keep it matte, subdued, aged and dusty, no bright magic symbol. Preserve main flag geometry, quiet faces and exact perimeter; original1993 painted64px texture, opaque square, no UI/text/watermark.",
+      "referenced_image_paths": [
+        "art_src/env/lower_watch/sources/floor_base.png"
+      ],
+      "transparent_background": false
+    },
+    {
+      "source": "sources/ceiling_base.png",
+      "prompt": "Use case: precise-object-edit. Production texture for UNDERCROFT, original forgotten-1993 dungeon crawler; painted, chunky handmade material clusters intended for nearest reduction to64x64 and a shared31-colour palette. Image1 is the geometry/material-density reference. Make FLOOR THREE: THE LOWER WATCH, an abandoned dry underground guard level. Distinct identity: charcoal soot in crevices, dry iron-grey and weathered umber/ochre, pale BONE ASH caught on chipped lower edges, scattered ancient iron/rust scars. NO teal, blue-green moss or wet turquoise. Dirty and aged, restrained highlights, low frontal warm lamplight, cool soot shadow. Full-bleed opaque square orthographic texture face, no room perspective, writing, labels, UI or watermark. This is a TOP-DOWN CEILING face: keep the same readable diagonal STONE RIB VAULT crossing of image1, with shallow old cellar vault stones between ribs. The guard level used smoke: dry charcoal soot in the central vault and near joints, a little pale ash on projecting rib lips, faint rusty iron cramps embedded at two joints. Make it a step DARKER overall than the reference, quiet and open-feeling, no low hanging mass, oppressive rock cave, giant boss, visible room/camera or timber. No green moisture. Broad subdued ribs remain legible after64px reduction; all four outer edges are tileable.",
+      "referenced_image_paths": [
+        "art_src/env/calm_v3/sources/ceiling.png"
+      ],
+      "transparent_background": false
+    },
+    {
+      "source": "sources/ceiling_root.png",
+      "prompt": "Use case: precise-object-edit. This exact Lower Watch soot-dark rib-vault CEILING tile; add only a SMALL brittle charred ROOT sneaking from the upper-right joint, with one short side branch, x70-86%, y12-37%. Not thick hanging vegetation, no green. Keep centre and all other stones/iron cramps exactly as they are, no added contrast or texture noise. A little dry ash catches its lower edge. Broad quiet original1993 painted texture, top-down square ceiling face, same outer ring and geometry, opaque, no text/UI/watermark.",
+      "referenced_image_paths": [
+        "art_src/env/lower_watch/sources/ceiling_base.png"
+      ],
+      "transparent_background": false
+    },
+    {
+      "source": "sources/ceiling_drip.png",
+      "prompt": "Use case: precise-object-edit. Same exact Lower Watch soot-dark rib-vault CEILING tile, add one QUIET thin old iron/rust MINERAL TRACE down an existing low-left joint, a few dry ochre stains and a tiny pale salt edge. Mostly dried, no teal/moss or glossy water. Keep all rib geometry, quiet centre, outside border, lighting and registration unchanged; no oppressive hanging mass. Broad hand-painted1993 surface for64px reduction, square top-down plane, opaque, no text/UI/watermark.",
+      "referenced_image_paths": [
+        "art_src/env/lower_watch/sources/ceiling_base.png"
+      ],
+      "transparent_background": false
+    },
+    {
+      "source": "sources/ceiling_chain.png",
+      "prompt": "Use case: precise-object-edit. Add one small rusted iron hanging-point RING and a SHORT crooked length of four heavy chain links against the lower-right bay of this exact Lower Watch rib-vault ceiling. Read as old ceiling hardware attached to stone, no massive hanging prop or blocked view. Recessed fixing, contact shadow, tiny pale ash on iron; quiet soot-charcoal/umber vault/ribs unchanged. Top-down square ceiling face for64px sampling, chunky original1993 painted material, keep outer border and geometry, no teal/plants, text/UI/watermark.",
+      "referenced_image_paths": [
+        "art_src/env/lower_watch/sources/ceiling_base.png"
+      ],
+      "transparent_background": false
+    },
+    {
+      "source": "sources/ceiling_boss.png",
+      "prompt": "Use case: precise-object-edit. At the crossing of these exact Lower Watch stone ribs, paint a SMALL shallow worn stone VAULT BOSS about18%of tile width, four simple old guard-notch cuts, one chipped broken edge with dark core and warm pale ash lip. No face, eyes, letters, rune, bright emblem, oversized disc or hanging lump. The vault remains quiet, dark and open-feeling; dry soot-charcoal/umber/ochre, same ribs and edge registration. Top-down square ceiling tile for64px reduction, old tactile1993 paint clusters, no UI/text/watermark.",
+      "referenced_image_paths": [
+        "art_src/env/lower_watch/sources/ceiling_base.png"
+      ],
+      "transparent_background": false
+    }
+  ]
+}

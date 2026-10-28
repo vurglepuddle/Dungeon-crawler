@@ -1,0 +1,559 @@
+{
+  "schema_version": 1,
+  "floor": 3,
+  "registrations": [
+    {
+      "path": "assets/art/props/f3_rubble_d1.png",
+      "floor": 3,
+      "kind": "rubble",
+      "depth": 1,
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        64
+      ],
+      "interactive": false,
+      "art_supplies_collision": false,
+      "needs_solid_cell_if_blocking": false,
+      "state": "static"
+    },
+    {
+      "path": "assets/art/props/f3_rubble_d2.png",
+      "floor": 3,
+      "kind": "rubble",
+      "depth": 2,
+      "canvas": [
+        40,
+        40
+      ],
+      "anchor": [
+        20,
+        40
+      ],
+      "interactive": false,
+      "art_supplies_collision": false,
+      "needs_solid_cell_if_blocking": false,
+      "state": "static"
+    },
+    {
+      "path": "assets/art/props/f3_rubble_d3.png",
+      "floor": 3,
+      "kind": "rubble",
+      "depth": 3,
+      "canvas": [
+        24,
+        24
+      ],
+      "anchor": [
+        12,
+        24
+      ],
+      "interactive": false,
+      "art_supplies_collision": false,
+      "needs_solid_cell_if_blocking": false,
+      "state": "static"
+    },
+    {
+      "path": "assets/art/props/f3_bone_heap_d1.png",
+      "floor": 3,
+      "kind": "bone_heap",
+      "depth": 1,
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        64
+      ],
+      "interactive": false,
+      "art_supplies_collision": false,
+      "needs_solid_cell_if_blocking": false,
+      "state": "static"
+    },
+    {
+      "path": "assets/art/props/f3_bone_heap_d2.png",
+      "floor": 3,
+      "kind": "bone_heap",
+      "depth": 2,
+      "canvas": [
+        40,
+        40
+      ],
+      "anchor": [
+        20,
+        40
+      ],
+      "interactive": false,
+      "art_supplies_collision": false,
+      "needs_solid_cell_if_blocking": false,
+      "state": "static"
+    },
+    {
+      "path": "assets/art/props/f3_bone_heap_d3.png",
+      "floor": 3,
+      "kind": "bone_heap",
+      "depth": 3,
+      "canvas": [
+        24,
+        24
+      ],
+      "anchor": [
+        12,
+        24
+      ],
+      "interactive": false,
+      "art_supplies_collision": false,
+      "needs_solid_cell_if_blocking": false,
+      "state": "static"
+    },
+    {
+      "path": "assets/art/props/f3_skeleton_d1.png",
+      "floor": 3,
+      "kind": "skeleton",
+      "depth": 1,
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        64
+      ],
+      "interactive": false,
+      "art_supplies_collision": false,
+      "needs_solid_cell_if_blocking": false,
+      "state": "static"
+    },
+    {
+      "path": "assets/art/props/f3_skeleton_d2.png",
+      "floor": 3,
+      "kind": "skeleton",
+      "depth": 2,
+      "canvas": [
+        40,
+        40
+      ],
+      "anchor": [
+        20,
+        40
+      ],
+      "interactive": false,
+      "art_supplies_collision": false,
+      "needs_solid_cell_if_blocking": false,
+      "state": "static"
+    },
+    {
+      "path": "assets/art/props/f3_skeleton_d3.png",
+      "floor": 3,
+      "kind": "skeleton",
+      "depth": 3,
+      "canvas": [
+        24,
+        24
+      ],
+      "anchor": [
+        12,
+        24
+      ],
+      "interactive": false,
+      "art_supplies_collision": false,
+      "needs_solid_cell_if_blocking": false,
+      "state": "static"
+    },
+    {
+      "path": "assets/art/props/f3_pots_d1.png",
+      "floor": 3,
+      "kind": "pots",
+      "depth": 1,
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        64
+      ],
+      "interactive": false,
+      "art_supplies_collision": false,
+      "needs_solid_cell_if_blocking": false,
+      "state": "static"
+    },
+    {
+      "path": "assets/art/props/f3_pots_d2.png",
+      "floor": 3,
+      "kind": "pots",
+      "depth": 2,
+      "canvas": [
+        40,
+        40
+      ],
+      "anchor": [
+        20,
+        40
+      ],
+      "interactive": false,
+      "art_supplies_collision": false,
+      "needs_solid_cell_if_blocking": false,
+      "state": "static"
+    },
+    {
+      "path": "assets/art/props/f3_pots_d3.png",
+      "floor": 3,
+      "kind": "pots",
+      "depth": 3,
+      "canvas": [
+        24,
+        24
+      ],
+      "anchor": [
+        12,
+        24
+      ],
+      "interactive": false,
+      "art_supplies_collision": false,
+      "needs_solid_cell_if_blocking": false,
+      "state": "static"
+    },
+    {
+      "path": "assets/art/props/f3_pillar_d1.png",
+      "floor": 3,
+      "kind": "pillar",
+      "depth": 1,
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        64
+      ],
+      "interactive": false,
+      "art_supplies_collision": false,
+      "needs_solid_cell_if_blocking": true,
+      "state": "static"
+    },
+    {
+      "path": "assets/art/props/f3_pillar_d2.png",
+      "floor": 3,
+      "kind": "pillar",
+      "depth": 2,
+      "canvas": [
+        40,
+        40
+      ],
+      "anchor": [
+        20,
+        40
+      ],
+      "interactive": false,
+      "art_supplies_collision": false,
+      "needs_solid_cell_if_blocking": true,
+      "state": "static"
+    },
+    {
+      "path": "assets/art/props/f3_pillar_d3.png",
+      "floor": 3,
+      "kind": "pillar",
+      "depth": 3,
+      "canvas": [
+        24,
+        24
+      ],
+      "anchor": [
+        12,
+        24
+      ],
+      "interactive": false,
+      "art_supplies_collision": false,
+      "needs_solid_cell_if_blocking": true,
+      "state": "static"
+    },
+    {
+      "path": "assets/art/props/f3_statue_d1.png",
+      "floor": 3,
+      "kind": "statue",
+      "depth": 1,
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        64
+      ],
+      "interactive": false,
+      "art_supplies_collision": false,
+      "needs_solid_cell_if_blocking": false,
+      "state": "static"
+    },
+    {
+      "path": "assets/art/props/f3_statue_d2.png",
+      "floor": 3,
+      "kind": "statue",
+      "depth": 2,
+      "canvas": [
+        40,
+        40
+      ],
+      "anchor": [
+        20,
+        40
+      ],
+      "interactive": false,
+      "art_supplies_collision": false,
+      "needs_solid_cell_if_blocking": false,
+      "state": "static"
+    },
+    {
+      "path": "assets/art/props/f3_statue_d3.png",
+      "floor": 3,
+      "kind": "statue",
+      "depth": 3,
+      "canvas": [
+        24,
+        24
+      ],
+      "anchor": [
+        12,
+        24
+      ],
+      "interactive": false,
+      "art_supplies_collision": false,
+      "needs_solid_cell_if_blocking": false,
+      "state": "static"
+    },
+    {
+      "path": "assets/art/props/f3_candles_d1.png",
+      "floor": 3,
+      "kind": "candles",
+      "depth": 1,
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        64
+      ],
+      "interactive": false,
+      "art_supplies_collision": false,
+      "needs_solid_cell_if_blocking": false,
+      "state": "spent/unlit"
+    },
+    {
+      "path": "assets/art/props/f3_candles_d2.png",
+      "floor": 3,
+      "kind": "candles",
+      "depth": 2,
+      "canvas": [
+        40,
+        40
+      ],
+      "anchor": [
+        20,
+        40
+      ],
+      "interactive": false,
+      "art_supplies_collision": false,
+      "needs_solid_cell_if_blocking": false,
+      "state": "spent/unlit"
+    },
+    {
+      "path": "assets/art/props/f3_candles_d3.png",
+      "floor": 3,
+      "kind": "candles",
+      "depth": 3,
+      "canvas": [
+        24,
+        24
+      ],
+      "anchor": [
+        12,
+        24
+      ],
+      "interactive": false,
+      "art_supplies_collision": false,
+      "needs_solid_cell_if_blocking": false,
+      "state": "spent/unlit"
+    },
+    {
+      "path": "assets/art/props/f3_crate_d1.png",
+      "floor": 3,
+      "kind": "crate",
+      "depth": 1,
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        64
+      ],
+      "interactive": false,
+      "art_supplies_collision": false,
+      "needs_solid_cell_if_blocking": false,
+      "state": "static"
+    },
+    {
+      "path": "assets/art/props/f3_crate_d2.png",
+      "floor": 3,
+      "kind": "crate",
+      "depth": 2,
+      "canvas": [
+        40,
+        40
+      ],
+      "anchor": [
+        20,
+        40
+      ],
+      "interactive": false,
+      "art_supplies_collision": false,
+      "needs_solid_cell_if_blocking": false,
+      "state": "static"
+    },
+    {
+      "path": "assets/art/props/f3_crate_d3.png",
+      "floor": 3,
+      "kind": "crate",
+      "depth": 3,
+      "canvas": [
+        24,
+        24
+      ],
+      "anchor": [
+        12,
+        24
+      ],
+      "interactive": false,
+      "art_supplies_collision": false,
+      "needs_solid_cell_if_blocking": false,
+      "state": "static"
+    },
+    {
+      "path": "assets/art/props/f3_puddle_d1.png",
+      "floor": 3,
+      "kind": "puddle",
+      "depth": 1,
+      "canvas": [
+        64,
+        20
+      ],
+      "anchor": [
+        32,
+        20
+      ],
+      "interactive": false,
+      "art_supplies_collision": false,
+      "needs_solid_cell_if_blocking": false,
+      "state": "rare iron seep"
+    },
+    {
+      "path": "assets/art/props/f3_puddle_d2.png",
+      "floor": 3,
+      "kind": "puddle",
+      "depth": 2,
+      "canvas": [
+        40,
+        12
+      ],
+      "anchor": [
+        20,
+        12
+      ],
+      "interactive": false,
+      "art_supplies_collision": false,
+      "needs_solid_cell_if_blocking": false,
+      "state": "rare iron seep"
+    },
+    {
+      "path": "assets/art/props/f3_puddle_d3.png",
+      "floor": 3,
+      "kind": "puddle",
+      "depth": 3,
+      "canvas": [
+        24,
+        8
+      ],
+      "anchor": [
+        12,
+        8
+      ],
+      "interactive": false,
+      "art_supplies_collision": false,
+      "needs_solid_cell_if_blocking": false,
+      "state": "rare iron seep"
+    }
+  ],
+  "source_crop_bounds": {
+    "rubble": [
+      27,
+      225,
+      1707,
+      823
+    ],
+    "bone_heap": [
+      58,
+      287,
+      1771,
+      798
+    ],
+    "skeleton": [
+      95,
+      42,
+      1281,
+      1141
+    ],
+    "pots": [
+      59,
+      75,
+      1567,
+      906
+    ],
+    "pillar": [
+      432,
+      40,
+      801,
+      1225
+    ],
+    "statue": [
+      74,
+      267,
+      1553,
+      811
+    ],
+    "candles": [
+      74,
+      170,
+      1563,
+      944
+    ],
+    "crate": [
+      55,
+      252,
+      1258,
+      948
+    ],
+    "puddle": [
+      63,
+      213,
+      2025,
+      560
+    ]
+  },
+  "path": "res://assets/art/props/f3_{same_kind}_d{same_depth}.png",
+  "depth_thresholds": [
+    1.5,
+    2.5,
+    3.6
+  ],
+  "filter": "nearest",
+  "scale_rule": "Resize full registered d1 canvas, never refit separate depths.",
+  "placement": "Keep current decorative reservation; no interactable/loot/travel/monster/puzzle cells or item-hiding placement. Pillar needs an actually blocked cell if used.",
+  "puddle": "Rare iron-brown seep, not a floor-wide wet effect; use very sparsely on this predominantly dry level.",
+  "candles": "Static unlit wax; no flame, glint, LIGHT action or fuel implied."
+}

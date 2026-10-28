@@ -1,0 +1,87 @@
+{
+  "tool": "image_gen.imagegen",
+  "method": "Individual painted edits from accepted sources. Saved source images are the reproducible input; image generation itself is nondeterministic. See build scripts for nearest reduction, registration and shared-palette grading.",
+  "entries": [
+    {
+      "source": "sources/rubble.png",
+      "prompt": "Use case: precise-object-edit. Original UNDERCROFT room-prop sprite; repaint image1 into the LOWER WATCH guard-level material of image2. Preserve the EXACT object, pose, outline, isolated cutout silhouette, framing and relative feature positions. Dry soot-charcoal crevices, weathered iron/rust and bone-ash ochre, restrained pale dust highlights along lower-front lips. NO teal/green moss or wet blue. Keep original coarse hand-painted1993 material clusters, broad readable silhouette for64px reduction. Background genuinely TRANSPARENT, no floor, wall, stage or opaque shadow backdrop; preserve transparency and all holes. No text, new tools, added objects, UI or watermark. Same fallen big masonry blocks and chips, now dry watch-post stone with rusty iron stains and grey/cream ash lodged in crevices. Preserve mound height and width.",
+      "referenced_image_paths": [
+        "art_src/props/sources/rubble.png",
+        "art_src/env/lower_watch/sources/wall_plain_0.png"
+      ],
+      "transparent_background": true
+    },
+    {
+      "source": "sources/bone_heap.png",
+      "prompt": "Use case: precise-object-edit. Original UNDERCROFT room-prop sprite; repaint image1 into the LOWER WATCH guard-level material of image2. Preserve the EXACT object, pose, outline, isolated cutout silhouette, framing and relative feature positions. Dry soot-charcoal crevices, weathered iron/rust and bone-ash ochre, restrained pale dust highlights along lower-front lips. NO teal/green moss or wet blue. Keep original coarse hand-painted1993 material clusters, broad readable silhouette for64px reduction. Background genuinely TRANSPARENT, no floor, wall, stage or opaque shadow backdrop; preserve transparency and all holes. No text, new tools, added objects, UI or watermark. Same old skull and loose rib/long-bone heap. Drier chalky ivory with ochre/soot in cracks and dark sockets, a little ash, no blood or flesh. Keep all bone positions.",
+      "referenced_image_paths": [
+        "art_src/props/sources/bone_heap.png",
+        "art_src/env/lower_watch/sources/wall_plain_0.png"
+      ],
+      "transparent_background": true
+    },
+    {
+      "source": "sources/skeleton.png",
+      "prompt": "Use case: precise-object-edit. LOWER WATCH dry guard-level PROP variant. Repaint image1 only in the material vocabulary of image2: soot charcoal, old rust/iron and bone-ash ochre with tiny pale dusty lower-front highlights. Preserve the EXACT subject, silhouette, pose, framing and relative feature positions; no new objects or geometry. No teal/green/moss or blue gloss. Chunky tactile original1993 hand-painted clusters for64px sprite reduction. Isolated genuinely TRANSPARENT background and internal gaps, no wall, floor, backdrop, added stage or opaque cast-shadow rectangle, no writing/UI/watermark. Same slumped dead skeleton and torn cloth. Dirty dry bone ivory, dark eye sockets, black/oxblood faded cloth with ash in folds. No living motion, weapons, flesh or blood.",
+      "referenced_image_paths": [
+        "art_src/props/sources/skeleton.png",
+        "art_src/env/lower_watch/sources/wall_plain_0.png"
+      ],
+      "transparent_background": true
+    },
+    {
+      "source": "sources/pots.png",
+      "prompt": "Use case: precise-object-edit. Original UNDERCROFT room-prop sprite; repaint image1 into the LOWER WATCH guard-level material of image2. Preserve the EXACT object, pose, outline, isolated cutout silhouette, framing and relative feature positions. Dry soot-charcoal crevices, weathered iron/rust and bone-ash ochre, restrained pale dust highlights along lower-front lips. NO teal/green moss or wet blue. Keep original coarse hand-painted1993 material clusters, broad readable silhouette for64px reduction. Background genuinely TRANSPARENT, no floor, wall, stage or opaque shadow backdrop; preserve transparency and all holes. No text, new tools, added objects, UI or watermark. Same broken pots and large shards, now soot-darkened earthenware and dry iron-ochre glaze. Chipped bone-colour ceramic edges, blackened inside; no extra vessels.",
+      "referenced_image_paths": [
+        "art_src/props/sources/pots.png",
+        "art_src/env/lower_watch/sources/wall_plain_0.png"
+      ],
+      "transparent_background": true
+    },
+    {
+      "source": "sources/pillar.png",
+      "prompt": "Use case: precise-object-edit. LOWER WATCH dry guard-level PROP variant. Repaint image1 only in the material vocabulary of image2: soot charcoal, old rust/iron and bone-ash ochre with tiny pale dusty lower-front highlights. Preserve the EXACT subject, silhouette, pose, framing and relative feature positions; no new objects or geometry. No teal/green/moss or blue gloss. Chunky tactile original1993 hand-painted clusters for64px sprite reduction. Isolated genuinely TRANSPARENT background and internal gaps, no wall, floor, backdrop, added stage or opaque cast-shadow rectangle, no writing/UI/watermark. Same carved stone pillar and base, exactly full height and width. Dry charcoal/umber watch-post stone, old rust scars from iron cramps, pale ash on chipped ledges. No hanging accessories or extra pedestals.",
+      "referenced_image_paths": [
+        "art_src/props/sources/pillar.png",
+        "art_src/env/lower_watch/sources/wall_plain_0.png"
+      ],
+      "transparent_background": true
+    },
+    {
+      "source": "sources/statue.png",
+      "prompt": "Use case: precise-object-edit. LOWER WATCH dry guard-level PROP variant. Repaint image1 only in the material vocabulary of image2: soot charcoal, old rust/iron and bone-ash ochre with tiny pale dusty lower-front highlights. Preserve the EXACT subject, silhouette, pose, framing and relative feature positions; no new objects or geometry. No teal/green/moss or blue gloss. Chunky tactile original1993 hand-painted clusters for64px sprite reduction. Isolated genuinely TRANSPARENT background and internal gaps, no wall, floor, backdrop, added stage or opaque cast-shadow rectangle, no writing/UI/watermark. Same TOPPLED hooded saint stone statue lying on its side, same hand and broken pedestal pieces. Guard-level soot-charcoal and worn ochre stone, bone-ash on folds, no green. Do not stand it upright or add a face or weapon.",
+      "referenced_image_paths": [
+        "art_src/props/sources/statue.png",
+        "art_src/env/lower_watch/sources/wall_plain_0.png"
+      ],
+      "transparent_background": true
+    },
+    {
+      "source": "sources/candles.png",
+      "prompt": "Use case: precise-object-edit. LOWER WATCH dry guard-level PROP variant. Repaint image1 only in the material vocabulary of image2: soot charcoal, old rust/iron and bone-ash ochre with tiny pale dusty lower-front highlights. Preserve the EXACT subject, silhouette, pose, framing and relative feature positions; no new objects or geometry. No teal/green/moss or blue gloss. Chunky tactile original1993 hand-painted clusters for64px sprite reduction. Isolated genuinely TRANSPARENT background and internal gaps, no wall, floor, backdrop, added stage or opaque cast-shadow rectangle, no writing/UI/watermark. Same THREE spent UNLIT candle stubs and pooled wax. Soot-grey/bone wax, charred wicks, fine dry ash and ochre dirt in old wax folds. NO flame, glow, smoke animation, holders or extra candles; static decorative spent wax.",
+      "referenced_image_paths": [
+        "art_src/props/sources/candles.png",
+        "art_src/env/lower_watch/sources/wall_plain_0.png"
+      ],
+      "transparent_background": true
+    },
+    {
+      "source": "sources/crate.png",
+      "prompt": "Use case: precise-object-edit. Original UNDERCROFT room-prop sprite; repaint image1 into the LOWER WATCH guard-level material of image2. Preserve the EXACT object, pose, outline, isolated cutout silhouette, framing and relative feature positions. Dry soot-charcoal crevices, weathered iron/rust and bone-ash ochre, restrained pale dust highlights along lower-front lips. NO teal/green moss or wet blue. Keep original coarse hand-painted1993 material clusters, broad readable silhouette for64px reduction. Background genuinely TRANSPARENT, no floor, wall, stage or opaque shadow backdrop; preserve transparency and all holes. No text, new tools, added objects, UI or watermark. Same lost-property crate, rope grip, splintered boards and old paper label. Dry near-black wood, rusty nails, ash-grey paper with the SAME illegible old marks. No readable letters/numbers. Do not open it or add contents.",
+      "referenced_image_paths": [
+        "art_src/props/sources/crate.png",
+        "art_src/env/lower_watch/sources/wall_plain_0.png"
+      ],
+      "transparent_background": true
+    },
+    {
+      "source": "sources/puddle.png",
+      "prompt": "Use case: precise-object-edit. Same shallow floor-decal puddle silhouette and perspective as image1, but for dry LOWER WATCH watch-post stone (image2 material reference). A RARE thin IRON-BROWN seep in a low ash-filled joint: nearly charcoal water, restrained dull bronze-grey reflections, a little grey bone-ash sediment along portions of rim. NO teal, turquoise, blue-green, vivid colour, magical glow, bright ring ripples or smooth opaque brown fill. Mottled quiet surface and broken tiny reflections retain depth. Keep exact broad flat aspect and transparent irregular outside, original hand-painted1993 clusters for64x20 decal reduction. Genuinely transparent background, no surrounding floor/objects, text/UI/watermark.",
+      "referenced_image_paths": [
+        "art_src/props/sources/puddle.png",
+        "art_src/env/lower_watch/sources/wall_plain_0.png"
+      ],
+      "transparent_background": true
+    }
+  ]
+}
