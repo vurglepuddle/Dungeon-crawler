@@ -114,3 +114,29 @@ Porter's body); the log says "Looking is free." on every turn; and a kept
 clapper is only one extra point of damage, so Claude proposed it should
 *ring*, making every Husk in sight reel. Then keeping it is a different tool
 rather than a bigger number.
+
+## 28 October 2026: M3b, and three Codex workers
+
+Codex A rebuilt the screen in the period style: a 148 x 150 view in a painted
+bronze frame, a compact pad with a compass dial, a boxless inventory, gold
+glints instead of labels over the picture, and a clapper you can keep and RING
+once per floor to make every Husk in sight reel. Claude reran 120,615 checks
+and seven pilots. The owner liked the buttons and compass and called the rest
+"a bit of an old chocolate bar": a visible tile pattern, too uniform, needing
+detail, diegetic elements and a second colour.
+
+With Codex budget to spare, the owner asked for more workers. **Codex B** now
+paints creatures, effects and fixtures and writes the music; **Codex C** does
+the dungeon's dressing, icons, portraits, story plates, an ambience layer and
+a manual. Both write only new files; Codex A remains the one who wires code.
+B's first batch: three readable poses each for the Husk (its fist raised high
+before it strikes), the Ash Hound and the Wick Ghost, the restored Porter,
+crisp strike effects per weapon, a lever that flips and a plate that lies flat,
+and three original pieces on a D-A-E-F bell motif. C's: wall dressing for both
+floors, icons, the Finder in three states, title/win/death paintings, the LOST
+MOTH emblem (the moth's body is a key), dust in the lamplight and a manual
+written as if it came in the box. The owner: "Love the art."
+
+Claude asked C to rebuild its walls on the painted stone the owner loves rather
+than replacing it, and to offer A a set of non-tiling interface materials and
+diegetic props with one contrasting accent colour.
