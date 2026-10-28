@@ -1,0 +1,17 @@
+{
+  "tool": "built-in image_gen.imagegen",
+  "mode": "identity-preserve edit",
+  "reference": "art_src/spike/sources/finder_portrait_painted.png",
+  "sources": {
+    "hurt": {
+      "path": "sources/hurt.png",
+      "prompt": "Use case: identity-preserve. Edit target: the original painted Finder portrait attached. Make a MUCH more readable HURT state for 32x32 reduction. Keep exactly the same cute brown-skinned Finder identity, short curly black hair, teal hood with pale edge, shoulder strap, face proportions, three-quarter pose, background and crop. Change expression strongly: the eye nearest the viewer is squeezed SHUT in a pronounced wince, the other eye remains open; one eyebrow is visibly drawn down, mouth clenched into a clear crooked grimace. A conspicuous short diagonal red-brown cut crosses the nearer cheek, using a broad simple shape. No gore or disfigurement. Painterly VGA pixel-game character, bold broad colour clusters, not photographic. Critical: eye closure, grimace and cheek cut must survive reduction to32x32 and differ from the neutral at a glance. Do not change hood silhouette, gender, age, lighting direction or head size; no UI, no text. Opaque square."
+    },
+    "near_death": {
+      "path": "sources/near_death.png",
+      "prompt": "Use case: identity-preserve. Edit target: original painted Finder portrait attached. Make the NEAR DEATH reactive state clearly different at32x32, same cute adult brown-skinned Finder identity, short dark curls and teal hood with worn pale edge. Keep face size, three-quarter camera angle, framing and shoulder strap. Strong readable changes: face notably PALE and desaturated with cool grey-beige highlights but recognisably the same person; BOTH eyes HALF CLOSED, upper lids low with narrow dark slits; mouth slightly open in exhaustion; a visible broad dark red-brown blood patch at the brow and a small run down the temple; hood has slipped back on one side, exposing more of the hairline. No missing flesh, no gore, no skeletal distortion. This is old dungeon crawler health portrait art, not horror. Make exhaustion unmistakable in broad pixel-painterly clusters after nearest-neighbour32x32 reduction. Do not redraw as a different age, gender or person, no UI or text. Opaque square."
+    }
+  },
+  "fine": "Existing finder_fine.png is used read-only and must remain pixel-identical.",
+  "derivation": "Nearest reduction to32x32, fixed palette, then a five-pixel native cheek-cut cleanup to prevent blood merging with warm skin. Original reactive portraits remain untouched."
+}

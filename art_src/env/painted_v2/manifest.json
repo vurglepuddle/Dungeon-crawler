@@ -1,0 +1,559 @@
+{
+  "palette": "art_src/spike/palette.gpl",
+  "colours_union": 24,
+  "files": [
+    {
+      "path": "art_src/env/painted_v2/comparison/contact_sheet_4x.png",
+      "size": [
+        1552,
+        552
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        1552,
+        552
+      ],
+      "colours": 21,
+      "sha256": "091b73df6f3abaed754ca7c7460d1c0b5512deedda24a7ae98f152561e5f9688"
+    },
+    {
+      "path": "art_src/env/painted_v2/comparison/contact_sheet_native.png",
+      "size": [
+        388,
+        138
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        388,
+        138
+      ],
+      "colours": 21,
+      "sha256": "17b5d3d3ed6553388606451ee29ad4e35c5d385416da1d86408f661110f27486"
+    },
+    {
+      "path": "art_src/env/painted_v2/contact_sheet_4x.png",
+      "size": [
+        3040,
+        1704
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        3040,
+        1704
+      ],
+      "colours": 24,
+      "sha256": "fa52c8f44fdfab42989a1f85f4f41456c4a074d09c52345762df0b3afabf27d6"
+    },
+    {
+      "path": "art_src/env/painted_v2/contact_sheet_native.png",
+      "size": [
+        760,
+        426
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        760,
+        426
+      ],
+      "colours": 24,
+      "sha256": "d35ea6703b477e8a0cd83cd362a1d6f2c312b77a045898c57ecf13610307cf80"
+    },
+    {
+      "path": "art_src/env/painted_v2/floor1/contact_sheet_4x.png",
+      "size": [
+        2048,
+        1320
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        2048,
+        1320
+      ],
+      "colours": 23,
+      "sha256": "b1eb1f6632e1f142a4d3082c32262f4fc4c05a857140d21d31e4fd306b7e4d2d"
+    },
+    {
+      "path": "art_src/env/painted_v2/floor1/contact_sheet_native.png",
+      "size": [
+        512,
+        330
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        512,
+        330
+      ],
+      "colours": 23,
+      "sha256": "d103c2b9fbe8e87f8a12ba2848fe0380205ed076a08d591ef7ce8cf35da80ae2"
+    },
+    {
+      "path": "art_src/env/painted_v2/floor1/repeat_4x.png",
+      "size": [
+        1024,
+        768
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        1024,
+        768
+      ],
+      "colours": 23,
+      "sha256": "101a2cfbf15f239aa9b6c15e3b2acc33dd0058535593d2ff4ad0746822b6a984"
+    },
+    {
+      "path": "art_src/env/painted_v2/floor1/repeat_native.png",
+      "size": [
+        256,
+        192
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        256,
+        192
+      ],
+      "colours": 23,
+      "sha256": "625e0cf1f7b5659faa53edc0efb47ab902ec85e69cd491312efa9d4c38d84c3e"
+    },
+    {
+      "path": "art_src/env/painted_v2/floor2/contact_sheet_4x.png",
+      "size": [
+        2048,
+        1320
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        2048,
+        1320
+      ],
+      "colours": 24,
+      "sha256": "5e7267a91bd09a9f54b6ac8620cdc2a29614ec2aa160b07a4940db686f2a109d"
+    },
+    {
+      "path": "art_src/env/painted_v2/floor2/contact_sheet_native.png",
+      "size": [
+        512,
+        330
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        512,
+        330
+      ],
+      "colours": 24,
+      "sha256": "a639b4b651634efcf1f9092d46a6417954161fa971084b5ba5a48ba012661921"
+    },
+    {
+      "path": "art_src/env/painted_v2/floor2/repeat_4x.png",
+      "size": [
+        1024,
+        768
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        1024,
+        768
+      ],
+      "colours": 24,
+      "sha256": "50fec38a0c37aa6cd357fc61f1eca6e4c4212533a1e1e2fe25e9b5b07feeb1ee"
+    },
+    {
+      "path": "art_src/env/painted_v2/floor2/repeat_native.png",
+      "size": [
+        256,
+        192
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        256,
+        192
+      ],
+      "colours": 24,
+      "sha256": "c50c678787d297d650040fd1b0771252ea9e6ff88e011e740632a82b41055310"
+    },
+    {
+      "path": "assets/art/env/painted_f1_arch.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 16,
+      "sha256": "7278cf36e568d045e84ff1c6c1106ca4cabea759411bed028cd92faa313279b9"
+    },
+    {
+      "path": "assets/art/env/painted_f1_chains.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 16,
+      "sha256": "014e707e5b817f4d46d66f1a4e8645f788561db1f089426be597ac2bcba6acd5"
+    },
+    {
+      "path": "assets/art/env/painted_f1_crack.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 16,
+      "sha256": "6890ffdb3a93331153c086b2c4809f4424379f581dd8a415eee00fa92d2f8a1a"
+    },
+    {
+      "path": "assets/art/env/painted_f1_damp.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 17,
+      "sha256": "c444f2681e4d4c78793edc26b591ee022b16906986ceb6546b125968966d9e00"
+    },
+    {
+      "path": "assets/art/env/painted_f1_door.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 17,
+      "sha256": "0ffb41da56b559a7098c2a2e9ed7c0038cea17cd0ed5db611b988ad8cb52cefb"
+    },
+    {
+      "path": "assets/art/env/painted_f1_drain.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 16,
+      "sha256": "0749de558be6897048e537910f502db1709d17ced2e5dfb99ee98dcab4449c7d"
+    },
+    {
+      "path": "assets/art/env/painted_f1_plain_0.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 16,
+      "sha256": "a21da69a48822d9445374180f4ed9afa21a752abe9eae78bde94dbf6e74f51c7"
+    },
+    {
+      "path": "assets/art/env/painted_f1_plain_1.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 16,
+      "sha256": "7aa1f34344b908f83927ec95c52edd267f6186b39ee75a91710bba3849aa6788"
+    },
+    {
+      "path": "assets/art/env/painted_f1_plain_2.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 18,
+      "sha256": "68fd1cf0cc2b020cb6bc34783a152698f0bb0790977b00030b505d40a6e4b735"
+    },
+    {
+      "path": "assets/art/env/painted_f1_sconce_0.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 19,
+      "sha256": "695106ffa48181420ce2264fb08ba37ece4a89df770d6b11c46696118d630417"
+    },
+    {
+      "path": "assets/art/env/painted_f1_sconce_1.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 19,
+      "sha256": "5a1340190e4c20434dce2555f95f36d04d9d74df90724a1c0485af9a1dc4dd18"
+    },
+    {
+      "path": "assets/art/env/painted_f1_tapestry.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 16,
+      "sha256": "881f55ea9bf19f351b889e2e7751b4ade7889e0e650b4c0d19667c5aff1cb93c"
+    },
+    {
+      "path": "assets/art/env/painted_f2_arch.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 18,
+      "sha256": "4205b1325f6013c6ce4c0ef3214f1a0687efae09d376205767eaf749f0a47f0b"
+    },
+    {
+      "path": "assets/art/env/painted_f2_chains.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 18,
+      "sha256": "1120ee7da9e59efc43552bf2c3a36826add8f18d3e8935e6f746aeb418a2749b"
+    },
+    {
+      "path": "assets/art/env/painted_f2_crack.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 18,
+      "sha256": "de01acee668e3976ce4389ec34b78c97e92cc6168641e5089fb3813f72f3c34b"
+    },
+    {
+      "path": "assets/art/env/painted_f2_damp.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 18,
+      "sha256": "59a6db697d14b7d84bfc9d822200d1ea4279392f40401df171117f45a9b9f1f6"
+    },
+    {
+      "path": "assets/art/env/painted_f2_door.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 20,
+      "sha256": "143b1336b598511af8ebfc27d5c98434f6254d0320ad3f6e62b9804f63b997f2"
+    },
+    {
+      "path": "assets/art/env/painted_f2_drain.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 18,
+      "sha256": "8a4c3f7a57e64542377d8a78a610b671d04490019a91ca12ba2d5fd3dabe4763"
+    },
+    {
+      "path": "assets/art/env/painted_f2_plain_0.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 18,
+      "sha256": "f55986c528aa55ca8da5ab7b7725d7f8bf05d0d182cee5ba3eb8d59416acbcd2"
+    },
+    {
+      "path": "assets/art/env/painted_f2_plain_1.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 18,
+      "sha256": "4c9d21cf016ea14c0fb156243b7bc98eb1d05384540013efaacfe3302972496d"
+    },
+    {
+      "path": "assets/art/env/painted_f2_plain_2.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 18,
+      "sha256": "4191668d149f3ac4756e1f1bb27ea224c9de221a7e2252f0d9b5f5cc495601bd"
+    },
+    {
+      "path": "assets/art/env/painted_f2_sconce_0.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 22,
+      "sha256": "edd9a343c07635225534f2dc9495a3712ba11473986d1f785d387c584607cb66"
+    },
+    {
+      "path": "assets/art/env/painted_f2_sconce_1.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 22,
+      "sha256": "98c63e4c4db8a1ef313a8b471e9c46f8d7e3a3c7084b50f7d4d4a49a42c72a01"
+    },
+    {
+      "path": "assets/art/env/painted_f2_tapestry.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 19,
+      "sha256": "4e8a0dd24632458c8ebba1e2c0dce97aa189f6c39362e21c156c51d18e01ad93"
+    }
+  ],
+  "sources": [
+    {
+      "path": "art_src/env/painted_v2/sources/stone_wall_original_64.png",
+      "sha256": "18e9e64516e59c5f3d6c265710d3d13250fecdd62138d4f659bcc4f75253b5c5"
+    }
+  ],
+  "primary_prefix": "painted_fN_",
+  "alternate_prefix": "fN_",
+  "original_unchanged_pixels": 3968,
+  "original_total_pixels": 4096,
+  "interior_contract": "The full 62x62 interior of floor-one plain_0 is pixel-exact to stone_wall.png.",
+  "floor2_method": "Palette repaint and broad damp trails on original geometry; no new masonry.",
+  "sconce_fps": 4
+}

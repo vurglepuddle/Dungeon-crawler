@@ -1,0 +1,8 @@
+{
+  "tool": "No new wall image generation; direct approved-asset derivation",
+  "source": "sources/stone_wall_original_64.png",
+  "original": "assets/art/stone_wall.png",
+  "original_prompt_record": "art_src/spike/prompts.json",
+  "brief": "Retain the owner's favourite painted wall. Repair only the outer pixel ring; add subtle original-geometry variants and existing editable pixel dressing. Floor two repaints these same stones with a darker damp palette, without rebuilding the masonry.",
+  "derivation": "Deterministic palette/geometry operations in build_painted.py. Original and previous alternate PNGs stay untouched."
+}

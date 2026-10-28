@@ -1,0 +1,259 @@
+{
+  "palette": "art_src/spike/palette.gpl",
+  "colours_union": 31,
+  "files": [
+    {
+      "path": "art_src/ui_offer/contact_sheet_4x.png",
+      "size": [
+        2000,
+        2120
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        2000,
+        2120
+      ],
+      "colours": 30,
+      "sha256": "1d8cf9680b8d1e936ca5a6819de399c675f141dbfc76febb73e83f95363a44a3"
+    },
+    {
+      "path": "art_src/ui_offer/contact_sheet_native.png",
+      "size": [
+        500,
+        530
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        500,
+        530
+      ],
+      "colours": 30,
+      "sha256": "f1bb91c5a2e3070486b4e81e2f78a83cac691c6d3b2d5992857e71f7cccc3aa5"
+    },
+    {
+      "path": "assets/art/ui_offer/belt_loops.png",
+      "size": [
+        53,
+        24
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        53,
+        24
+      ],
+      "colours": 18,
+      "sha256": "1995351721c956f9eab3b022b7ce5621c51c7d06140580515b99913d6831a2b9"
+    },
+    {
+      "path": "assets/art/ui_offer/brass_label.png",
+      "size": [
+        64,
+        18
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        18
+      ],
+      "colours": 23,
+      "sha256": "431cc5ff00256739629673666a2137c42fe684294c1fb8701d125a6f41ca938d"
+    },
+    {
+      "path": "assets/art/ui_offer/candle_0.png",
+      "size": [
+        12,
+        24
+      ],
+      "opaque_bounds": [
+        0,
+        10,
+        12,
+        24
+      ],
+      "colours": 18,
+      "sha256": "6e836be86a0690cf9c0957ba583ef5647c57d1e97c90bcfd7c41c8076276439d"
+    },
+    {
+      "path": "assets/art/ui_offer/candle_1.png",
+      "size": [
+        12,
+        24
+      ],
+      "opaque_bounds": [
+        0,
+        8,
+        12,
+        24
+      ],
+      "colours": 18,
+      "sha256": "f1957fea7a9ca76f3c256d075dc5fbb806064688b86e256761f75ba55084119b"
+    },
+    {
+      "path": "assets/art/ui_offer/hanging_chain.png",
+      "size": [
+        8,
+        34
+      ],
+      "opaque_bounds": [
+        1,
+        0,
+        7,
+        34
+      ],
+      "colours": 8,
+      "sha256": "ee56b99187f77292759f28c0ce7f85c7023c9dd92878675f3cf506a803e8cd8e"
+    },
+    {
+      "path": "assets/art/ui_offer/hp_vial_empty.png",
+      "size": [
+        6,
+        28
+      ],
+      "opaque_bounds": [
+        1,
+        0,
+        5,
+        28
+      ],
+      "colours": 16,
+      "sha256": "0daedfc00dbbcab8bf2a10b073d6406118eee137cca1a2098ffbaa4420828a02"
+    },
+    {
+      "path": "assets/art/ui_offer/hp_vial_full.png",
+      "size": [
+        6,
+        28
+      ],
+      "opaque_bounds": [
+        2,
+        6,
+        4,
+        24
+      ],
+      "colours": 4,
+      "sha256": "eb03b769c2706709391cd83de959ae0d704767dca6e0d95e40a011404f11c6c6"
+    },
+    {
+      "path": "assets/art/ui_offer/map_parchment.png",
+      "size": [
+        144,
+        324
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        144,
+        324
+      ],
+      "colours": 20,
+      "sha256": "3c3fe3c3781e59286ea6675da6f78a53adb5fb691bedcca85a0c9117676019aa"
+    },
+    {
+      "path": "assets/art/ui_offer/message_slate.png",
+      "size": [
+        150,
+        34
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        150,
+        34
+      ],
+      "colours": 11,
+      "sha256": "020967574be6447747b34e1cd46689c72215a630361b45500d30912a6d00fbe0"
+    },
+    {
+      "path": "assets/art/ui_offer/pack_leather.png",
+      "size": [
+        152,
+        22
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        152,
+        22
+      ],
+      "colours": 17,
+      "sha256": "d206f4e41692d8ff25948e04b7914eb9a3c0bf3f0217ae8e1950cc02f144b41f"
+    }
+  ],
+  "sources": [
+    {
+      "path": "art_src/ui_offer/sources/belt.png",
+      "sha256": "c0bb6d452bb76903fb1de50f8f310ab4cf2417107f5702cd87b846f8c31c1223"
+    },
+    {
+      "path": "art_src/ui_offer/sources/brass.png",
+      "sha256": "6a96099d4f1f6fecc1d99881d6a9c2c1dfe5f5f94fb696abcccea5f3c1af7b03"
+    },
+    {
+      "path": "art_src/ui_offer/sources/candle.png",
+      "sha256": "61cdd3774d6778176eb2d2323adfef2b4bd9146b0d3f5576bd580877681a0b1e"
+    },
+    {
+      "path": "art_src/ui_offer/sources/leather.png",
+      "sha256": "3f073e3495773c0eefa1d75479da5c147c0c11779e8fd32f73a958af67a45fa0"
+    },
+    {
+      "path": "art_src/ui_offer/sources/m3b_map_reference.png",
+      "sha256": "c38f2286fbdfe9cb6197f2f64fd95776ccb31f398477ad82ca3c6b26215e4600"
+    },
+    {
+      "path": "art_src/ui_offer/sources/m3b_room_reference.png",
+      "sha256": "3b8191d5dc078ecaaefb7997ab9cfbae9d6b9d91c953541b83b5d531a6bca039"
+    },
+    {
+      "path": "art_src/ui_offer/sources/parchment.png",
+      "sha256": "06f1b940ed424ecacdf5bb90b75f3803337e4ae0b43b806b34d001e14f2f4ed0"
+    },
+    {
+      "path": "art_src/ui_offer/sources/slate.png",
+      "sha256": "0678062f66d269203decf5101c541afba71b9085367d52ed321eeb7282348586"
+    },
+    {
+      "path": "art_src/ui_offer/sources/vial.png",
+      "sha256": "c4a168e667e3bbf67aac18e878d917d87e9d2a971386ce22a998a97a639de232"
+    }
+  ],
+  "runtime_count": 10,
+  "logical_viewport": [
+    154,
+    342
+  ],
+  "mockup_preserves": "Dungeon, buttons, compass, equipment controls and fine portrait",
+  "accent_family": "verdigris",
+  "layout": "rects.json",
+  "note": "Illustrative composite; packed objects are representative, not the saved run inventory.",
+  "preview_files": [
+    {
+      "path": "art_src/ui_offer/mockup_game_4x.png",
+      "sha256": "d9d62112e72ac1c8bf5f5e0d76b5cd82087ac06cdce582ee3c8b0a34ab25d5cd"
+    },
+    {
+      "path": "art_src/ui_offer/mockup_game_native.png",
+      "sha256": "08aa746ff4154f19d708395207a691fab38f06364ca233d2807175ba3fd05503"
+    },
+    {
+      "path": "art_src/ui_offer/mockup_map_4x.png",
+      "sha256": "ed5a57ed1551b082676671c9f9c87ef8f68f58a76f16b21c2dd97d0c6985e2b1"
+    },
+    {
+      "path": "art_src/ui_offer/mockup_map_native.png",
+      "sha256": "67e4d46d009a9bfb7f262a5eb355832ede69e00258e22aee012ef7448b2a0263"
+    },
+    {
+      "path": "art_src/ui_offer/mockup_screen_4x.png",
+      "sha256": "3ee5a4babc5dfa8405c8a87d1b9ff2a2558389cc7a1c5d904de80078f89ab219"
+    },
+    {
+      "path": "art_src/ui_offer/mockup_screen_native.png",
+      "sha256": "ded3cfbf92937be35cd18d10694a5b2074e2690722873ffb6244b1999f38e342"
+    }
+  ]
+}

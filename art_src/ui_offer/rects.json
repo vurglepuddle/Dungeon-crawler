@@ -1,0 +1,201 @@
+{
+  "schema_version": 1,
+  "accent": "verdigris; shared palette teal ramp",
+  "tiling": false,
+  "nine_slice_order": "left top right bottom",
+  "stretch_mode": "STRETCH, never TILE",
+  "assets": {
+    "message_slate": {
+      "rect": [
+        2,
+        174,
+        150,
+        34
+      ],
+      "nine_slice_ltrb": [
+        3,
+        2,
+        4,
+        2
+      ],
+      "text_origin": [
+        4,
+        175
+      ]
+    },
+    "map_parchment": {
+      "rect": [
+        5,
+        16,
+        144,
+        324
+      ],
+      "nine_slice_ltrb": [
+        8,
+        12,
+        8,
+        12
+      ],
+      "content_padding_ltrb": [
+        7,
+        7,
+        7,
+        7
+      ]
+    },
+    "pack_leather": {
+      "rect": [
+        1,
+        246,
+        152,
+        22
+      ],
+      "nine_slice_ltrb": [
+        2,
+        1,
+        3,
+        3
+      ],
+      "icon_pitch": 19,
+      "icon_origin": [
+        2,
+        249
+      ]
+    },
+    "belt_loops": {
+      "rect": [
+        99,
+        210,
+        53,
+        24
+      ],
+      "nine_slice_ltrb": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "resize": false,
+      "item_centres": [
+        [
+          112,
+          221
+        ],
+        [
+          138,
+          221
+        ]
+      ]
+    },
+    "hp_vial_empty": {
+      "rect": [
+        36,
+        212,
+        6,
+        28
+      ],
+      "nine_slice_ltrb": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "resize": false
+    },
+    "hp_vial_full": {
+      "rect": [
+        36,
+        212,
+        6,
+        28
+      ],
+      "liquid_aperture": [
+        2,
+        6,
+        2,
+        18
+      ],
+      "fill_direction": "bottom to top",
+      "nine_slice_ltrb": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "resize": false
+    },
+    "candle_0": {
+      "size": [
+        12,
+        24
+      ],
+      "anchor": [
+        6,
+        24
+      ],
+      "fps": 4,
+      "nine_slice_ltrb": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "resize": false
+    },
+    "candle_1": {
+      "size": [
+        12,
+        24
+      ],
+      "anchor": [
+        6,
+        24
+      ],
+      "fps": 4,
+      "nine_slice_ltrb": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "resize": false
+    },
+    "hanging_chain": {
+      "size": [
+        8,
+        34
+      ],
+      "anchor": [
+        4,
+        0
+      ],
+      "nine_slice_ltrb": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "resize": false
+    },
+    "brass_label": {
+      "size": [
+        64,
+        18
+      ],
+      "nine_slice_ltrb": [
+        9,
+        3,
+        9,
+        3
+      ],
+      "label_ink": "0c101c",
+      "inner_text_rect": [
+        10,
+        1,
+        44,
+        16
+      ]
+    }
+  },
+  "mockup_status": "Offline illustrative composite of saved M3b screenshots; not implemented or a live gameplay capture."
+}

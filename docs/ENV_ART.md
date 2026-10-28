@@ -3,18 +3,28 @@
 This pack is prepared for Codex A to wire in. It does not change the renderer,
 simulation, main scene, UI chrome, catalog, or original PNGs. Painted source
 PNGs, exact built-in imagegen prompts, code drawings, deterministic reduction,
-and contact sheets live in the four corresponding `art_src/` folders.
+and contact sheets live in the corresponding `art_src/` folders.
+
+**Primary revision:** use `painted_f1_*.png` / `painted_f2_*.png` for walls,
+`finder_hurt_v2.png` / `finder_near_death_v2.png` for injured portraits, and the
+existing unchanged `finder_fine.png` for fine. The first `f1_` / `f2_` wall
+sets and original reactive portraits remain intact as alternates. The UI
+materials in `assets/art/ui_offer/` are an offer for A, not an implemented skin.
 
 ## Rebuild and inspect
 
 From the repository root, with Python and Pillow installed:
 
 ```powershell
-python -B art_src/env/build_all.py
+python -B art_src/env/painted_v2/build_revision.py
 ```
 
-Or run `build_env.py`, `build_icons.py`, `build_portrait.py`, and
-`build_screens.py` in their respective folders. No API, network, model or
+This rebuilds only the primary painted walls, stronger portraits and UI offer,
+then verifies all packs, including preservation hashes for the old PNGs.
+`art_src/env/build_all.py` remains the first pack's original builder. Individual
+revision builders are `env/painted_v2/build_painted.py`,
+`portrait/v2/build_states.py`, and `ui_offer/build_offer.py` under `art_src/`.
+No API, network, model or
 Godot is used by the rebuild. The saved paintings are the reproducible input;
 rerunning imagegen from the recorded prompts can produce different paintings.
 
@@ -24,25 +34,37 @@ neighbour; no dithering or translucent fringes. Text on sheets uses native
 VETKA 16, rendered without antialiasing. Manifests record hashes, dimensions,
 opaque bounds and source hashes. Generated sources themselves keep their
 original unrestricted colour and resolution. No old art is overwritten.
+The UI mockups are RGBA exceptions: they retain the saved screenshot's exact
+renderer lighting colours in protected regions. All runtime material PNGs
+and contact sheets still use the shared indexed palette and binary alpha.
 
 | Set | Native size | 4x review sheet |
 | --- | --- | --- |
-| Environment, combined | 28 tiles, each 64 × 64 | `art_src/env/contact_sheet_4x.png` |
-| Abbey stone | 14 tiles, each 64 × 64 | `art_src/env/floor1/contact_sheet_4x.png` |
-| Older wet stone | 14 tiles, each 64 × 64 | `art_src/env/floor2/contact_sheet_4x.png` |
-| Mixed tile repeats | 256 × 192 | `art_src/env/floor1/repeat_4x.png`, `floor2/repeat_4x.png` |
+| Primary walls, combined | 24 tiles, each 64 × 64 | `art_src/env/painted_v2/contact_sheet_4x.png` |
+| Primary abbey stone | 12 tiles, each 64 × 64 | `art_src/env/painted_v2/floor1/contact_sheet_4x.png` |
+| Primary older wet stone | 12 tiles, each 64 × 64 | `art_src/env/painted_v2/floor2/contact_sheet_4x.png` |
+| Primary mixed tile repeats | 256 × 192 | `art_src/env/painted_v2/floor1/repeat_4x.png`, `floor2/repeat_4x.png` |
+| Original / primary / wet comparison | Three 64 × 64 samples | `art_src/env/painted_v2/comparison/contact_sheet_4x.png` |
+| First wall set, alternates + surfaces | 28 tiles, each 64 × 64 | `art_src/env/contact_sheet_4x.png` |
 | Possessions | 13 icons, each 16 × 16 | `art_src/icons/contact_sheet_4x.png` |
-| Finder states | 3 portraits, each 32 × 32 | `art_src/portrait/contact_sheet_4x.png` |
+| Primary Finder states | 3 portraits, each 32 × 32 | `art_src/portrait/v2/contact_sheet_4x.png` |
+| Original Finder states, alternates | 3 portraits, each 32 × 32 | `art_src/portrait/contact_sheet_4x.png` |
 | Story plates | title/splash 154 × 150; endings 128 × 80 | `art_src/screens/contact_sheet_4x.png` |
+| UI material offer | Ten assets, sizes below | `art_src/ui_offer/contact_sheet_4x.png` |
+| Whole-screen UI mockup, game + map | Two 154 × 342 screens | `art_src/ui_offer/mockup_screen_4x.png` |
 
 ## Wall faces: texture selection only
 
-Runtime root: `assets/art/env/`. Prefix `f1_` means abbey limestone; `f2_`
-means the older, colder courses below. Each prefix has these suffixes:
+Runtime root: `assets/art/env/`. Primary prefix `painted_f1_` means the
+owner's favourite painted abbey wall; `painted_f2_` repaints that exact masonry
+as older, wetter and darker. Old `f1_` / `f2_` textures are smaller-bricked,
+flatter **alternates**, not the default replacement. Do not mix alternate and
+primary wall faces in one room: their masonry and boundary rings differ.
+Each primary prefix has these wall suffixes:
 
 | Suffix, before `.png` | Intended use |
 | --- | --- |
-| `plain_0`, `plain_1`, `plain_2` | Common quiet wall faces; small wear variations |
+| `plain_0`, `plain_1`, `plain_2` | Original painted stone; local shifted-stone crop / damp stain variants |
 | `sconce_0`, `sconce_1` | One fixed iron bracket; two flame states, suggested 4 fps |
 | `crack` | Long single fracture, purely decorative |
 | `damp` | Moss-coloured damp trails and a wet foot |
@@ -51,7 +73,6 @@ means the older, colder courses below. Each prefix has these suffixes:
 | `drain` | Low iron grate, opaque background |
 | `arch` | Dark arched recess/opening picture; no transparent hole |
 | `door` | Closed iron-banded wood inside the matching arch |
-| `floor`, `ceiling` | Optional world-space surface samples, described below |
 
 Wall anchor is the whole face: UV origin top left, U rightwards, V downwards,
 64 × 64, fully opaque. Every wall variant within a floor shares the outer
@@ -59,9 +80,15 @@ two-pixel ring. Opposite endpoint rows/columns also match exactly. Mixed tile
 repeat sheets show the shared seams. Floor-two shades are deliberately darker;
 avoid stacking another strong blue/dark floor tint over them.
 
-The original paintings supply broad surface clusters. The builder compresses
-their contrast, rebuilds aligned mortar, and adds editable integer-pixel
-dressing. This is hybrid art, not 24 independent generated paintings.
+The primary set starts from a preserved exact copy of `assets/art/stone_wall.png`.
+`painted_f1_plain_0.png` retains **3968/4096 pixels (96.875%)** exactly, including
+the complete 62 × 62 interior. Only the outermost row/column ring is reconciled
+to close the seams. No block grid is rebuilt. Plain 1 changes two small stone
+interiors with shifted source crops; plain 2 adds a localized stain. The darker
+floor uses a deterministic palette repaint and broad damp trails while retaining
+the same original stones, chips, cracks and mortar. Existing editable pixel
+dressing is composited on this painted substrate, with shared two-pixel edges.
+`stone_wall.png` itself and every first-set PNG remain byte-for-byte unchanged.
 
 **Codex A's renderer hook:** cache one array of 64 `AtlasTexture` strips per
 texture, as the renderer currently does for `stone_wall.png`. During DDA,
@@ -84,6 +111,10 @@ decorative recess unless the renderer explicitly draws the space behind it.
 Do not make a working gate or exit visually lie by casually assigning a door.
 
 ### Floor and ceiling
+
+The first pack's `f1_floor.png`, `f1_ceiling.png`, `f2_floor.png`, and
+`f2_ceiling.png` remain optional surface materials. No `painted_fN_floor` or
+`painted_fN_ceiling` is supplied; the primary revision changes wall faces.
 
 The current `_build_surfaces()` already computes `point`, world-space `u`,
 `v`, floor/ceiling side, and lamp attenuation. Replace the procedural base
@@ -114,14 +145,19 @@ paths. Retain old procedural art as a fallback for unknown kinds.
 
 ## Reactive Finder
 
-Runtime: `assets/art/portrait/finder_fine.png`, `finder_hurt.png`,
-`finder_near_death.png`. All 32 × 32, opaque, top-left drawing origin, centre
-anchor `(16,16)`. `finder_strip.png` is 96 × 32 in that order.
+Primary runtime: `assets/art/portrait/finder_fine.png`, `finder_hurt_v2.png`,
+`finder_near_death_v2.png`. All 32 × 32, opaque, top-left drawing origin, centre
+anchor `(16,16)`. `finder_strip_v2.png` is 96 × 32 in that order.
+The old injured images and `finder_strip.png` remain unchanged as alternates.
 
 Fine is reduced from a preserved copy of the original painted source and is
-pixel-identical to `assets/art/finder.png`. Hurt and near-death are separate
-identity-preserving imagegen edits of that same original, with fixed hood,
-strap, pose and crop. No colour-tint substitute or new character.
+pixel-identical to `assets/art/finder.png`. The v2 injured images are separate
+identity-preserving imagegen edits of the same original. Hurt has a pronounced
+wince, clenched mouth and diagonal cheek cut, with a five-pixel native scar
+cleanup after reduction to prevent its red-brown colour merging with skin.
+Near-death has pale cool skin, half-closed eyes, brow blood and a slipped-back
+hood exposing the same dark curls. Identity, pose, strap and framing hold.
+`art_src/portrait/v2/faces_8x.png` gives a larger expression-only comparison.
 
 **Codex A:** draw at the existing portrait rectangle. Suggested thresholds
 for the current 6 HP: fine at 4–6, hurt at 2–3, near-death at 1; a brief hit
@@ -150,6 +186,88 @@ no mandatory startup delay. Select win/death only from committed run status.
 Nearest filtering, no mipmaps or lossy compression. Reference runtime paths
 only, and exclude the `art_src/` tree in the Android export preset so saved
 paintings and contact sheets do not inflate the APK.
+
+## UI material offer: non-tiling surfaces and small props
+
+Runtime root: `assets/art/ui_offer/`. Source paintings, exact built-in imagegen
+prompts, native cleanup, `rects.json`, contact sheet and mockups are in
+`art_src/ui_offer/`. These do not edit or implement `chrome.gd`, any controls,
+the compass, or the scene. A chooses which pieces belong in the interface.
+
+All panel paints are made for their whole logical rectangle. They are not
+32px tiles. Use a TextureRect at native size, or StyleBoxTexture with both
+axis stretch modes **STRETCH**, never TILE. The margins below preserve edges
+if a panel must change size; they are **left, top, right, bottom**. Prefer the
+native size so individual scratches, folds and wear do not move or repeat.
+
+| File, before `.png` | Native size | Intended logical rect `(x,y,w,h)` | 9-slice L,T,R,B |
+| --- | --- | --- | --- |
+| `message_slate` | 150 × 34 | `(2,174,150,34)` | `3,2,4,2` |
+| `map_parchment` | 144 × 324 | `(5,16,144,324)` | `8,12,8,12` |
+| `pack_leather` | 152 × 22 | `(1,246,152,22)` | `2,1,3,3` |
+| `belt_loops` | 53 × 24 | `(99,210,53,24)` | `0,0,0,0`; native only |
+| `hp_vial_empty` | 6 × 28 | `(36,212,6,28)` | `0,0,0,0`; native only |
+| `hp_vial_full` | 6 × 28 | Same as empty | `0,0,0,0`; native only |
+| `candle_0`, `candle_1` | 12 × 24 | Optional decoration; bottom-centre anchor `(6,24)` | `0,0,0,0`; native only |
+| `hanging_chain` | 8 × 34 | Optional decoration; top-centre anchor `(4,0)` | `0,0,0,0`; native only |
+| `brass_label` | 64 × 18 | Optional short heading; top-left origin | `9,3,9,3` |
+
+The message slab is charcoal slate, with a quiet dark reading field and sparse
+mineral wear at the rim. Keep the two VETKA lines at `(4,175)` and `(4,191)`.
+The leather tray has a folded corner and stitched lower edge, no pocket boxes;
+icons start at `(2,249)` and retain the existing 19px pitch. The belt's keepers
+leave spans for the current key/Seal centres `(112,221)` and `(138,221)`.
+Keep the existing belt touch targets and protected inventory rules.
+
+The map is a single worn parchment with a quiet writing field and storage
+folds. Its supplied rect matches `_open_map()`'s current `_panel(...,16,324)`
+and the panel width 144 from `main.gd`; it is not guessed from a scaled gallery.
+The mockup darkens seen map squares from `777970` to `59616a` so the marks read
+on light paper, keeping symbols and explored geometry. A should choose inks
+for all map symbols with that light surface in mind. Do not shrink the map or
+font to accommodate props. Short brass labels use dark ink `0c101c`, native
+VETKA 16, inside local `(10,1,44,16)`. Long labels need a larger plate, not a
+smaller font. No labels are baked into the material assets.
+
+Verdigris is the **one accent hue family**, using the existing teal palette
+ramp in a few insets and the HP liquid. Bronze, slate, leather and parchment
+remain material colours. There is no added palette, glow shader or UI texture
+tiling. The little hanging chain is native pixel work; the second candle flame
+is a native pixel derivative of its painted first frame. The wax body/saucer
+stay identical. Suggested candle playback is 4 fps, only while visible.
+
+### Filling the HP vial
+
+This is a **health indicator**, not lamp oil or a new fuel clock. Draw
+`hp_vial_empty.png` first. The full layer contains only liquid, with transparent
+pixels everywhere except local `(2,6,2,18)`. For a fraction `hp/max_hp`, clamp
+to 0–1 and take `fill_px = round(18 * fraction)`. If nonzero, draw the source
+region `(0,24-fill_px,6,fill_px)` from `hp_vial_full.png` at vial origin plus
+`(0,24-fill_px)`. This fills bottom-up without scaling the liquid or its rim.
+The sheet shows all seven current 0–6 HP levels. The gauge is decorative;
+numeric health and existing accessible touch targets remain authoritative.
+
+### Whole-screen mockups
+
+- `art_src/ui_offer/mockup_game_native.png` / `mockup_game_4x.png`:
+  one 154 × 342 game screen with slate, leather, loops and the HP vial.
+- `art_src/ui_offer/mockup_map_native.png` / `mockup_map_4x.png`:
+  one 154 × 342 map screen with parchment, brass MAP plate, a margin chain
+  at `(5,48)` and a candle in the unused footer at `(133,313)`.
+- `art_src/ui_offer/mockup_screen_native.png` / `mockup_screen_4x.png`:
+  the pair side by side, 316 × 342 native / 1264 × 1368 at 4x.
+
+These are **offline illustrative composites**, not captures of an implemented
+skin. Representative possessions show loose-icon readability; they are not the
+saved screenshot's inventory. The game mockup preserves the entire dungeon
+picture and upper strip, buttons, compass, equipment controls, and fine portrait
+pixel-for-pixel from the nearest-downsampled M3b capture. No palette remapping
+changes the screenshot's world lighting. Map seen bounds/geometry come from
+the preserved map capture. Its existing CLOSE button is retained.
+
+The offer's manifest separates indexed runtime/contact-sheet files from RGBA
+mockup previews and records hashes for both. Source screenshots remain intact
+in `art_src/ui_offer/sources/`. Keep all of `art_src/` out of Android exports.
 
 ## Ambience Node2D API
 
@@ -218,7 +336,7 @@ The box manual is `docs/MANUAL.md`. Further optional work and cost estimates
 are in `docs/POLISH.md`. This pack needs integration and Pixel 9a visual review;
 the asset checks and focused FX test do not claim phone performance acceptance.
 
-## Verification receipt, 28 October 2026
+## First-pack verification receipt, 28 October 2026
 
 - Godot 4.3 `--check-only` accepted `ambience.gd`.
 - The focused FX run exited 0: **172 checks, 0 failures**. Godot printed a host
@@ -230,3 +348,19 @@ the asset checks and focused FX test do not claim phone performance acceptance.
   **83 PNG/JSON files**, including sources, sheets, prompts and manifests.
 - No full game run, Android export, phone performance test, or integration
   acceptance was performed. No files were staged or committed by Codex C.
+
+## Painted-wall/UI revision receipt, 28 October 2026
+
+- Added **37 runtime PNGs**: 24 painted-substrate walls, two stronger injured
+  portraits plus their strip, and ten UI offer assets. Both packs now verify
+  together: **87 runtime PNGs**, shared 31 opaque inks, binary alpha, dimensions,
+  exact 4x sheets, source/output hashes and mixed wall-edge checks.
+- The primary abbey base retains **3968/4096 original pixels**; its complete
+  62 × 62 interior is exact. Preservation hashes confirm the 34 recorded
+  existing wall/portrait PNGs are byte-for-byte unchanged. Earlier pack assets
+  also continue to match their recorded manifests.
+- Two revision builds produced identical SHA-256 hashes for **80 PNG/JSON
+  files**. The whole-screen mockup's protected dungeon, controls, compass and
+  fine portrait regions match the saved screenshot at native sampling.
+- This revision used **no Godot runs**. It has not been integrated or tested
+  on the phone. No files were staged or committed by Codex C.

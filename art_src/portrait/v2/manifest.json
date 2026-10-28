@@ -1,0 +1,126 @@
+{
+  "palette": "art_src/spike/palette.gpl",
+  "colours_union": 25,
+  "files": [
+    {
+      "path": "art_src/portrait/v2/contact_sheet_4x.png",
+      "size": [
+        1408,
+        496
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        1408,
+        496
+      ],
+      "colours": 25,
+      "sha256": "8907f5c0d471c38e21cb8ebb992aff7fa57e333e802ad2d5bf616a11ba0eeb5b"
+    },
+    {
+      "path": "art_src/portrait/v2/contact_sheet_native.png",
+      "size": [
+        352,
+        124
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        352,
+        124
+      ],
+      "colours": 25,
+      "sha256": "70cabcf8ed36e01f016004326cc6608428bcf52c261a6692c488b26ba5fd9b3d"
+    },
+    {
+      "path": "art_src/portrait/v2/faces_8x.png",
+      "size": [
+        768,
+        256
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        768,
+        256
+      ],
+      "colours": 24,
+      "sha256": "8327b8932be19e570be5d8b0398d4496800c2481d2720b52d3657d7335a8eddd"
+    },
+    {
+      "path": "assets/art/portrait/finder_hurt_v2.png",
+      "size": [
+        32,
+        32
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        32,
+        32
+      ],
+      "colours": 23,
+      "sha256": "835b95c745c76143bc07c30510ce515c93c598cbc8840d2f4a4a61ede86b2304"
+    },
+    {
+      "path": "assets/art/portrait/finder_near_death_v2.png",
+      "size": [
+        32,
+        32
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        32,
+        32
+      ],
+      "colours": 23,
+      "sha256": "d49bf2a7a81b8d57a55c9991e81dfbc71eec5e9f2222e3d34e70638c1c54e541"
+    },
+    {
+      "path": "assets/art/portrait/finder_strip_v2.png",
+      "size": [
+        96,
+        32
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        96,
+        32
+      ],
+      "colours": 24,
+      "sha256": "510f9eec4528b988ad2eb6964cb4f48e3ecd735771347c2fb56629421cbe0b96"
+    }
+  ],
+  "sources": [
+    {
+      "path": "art_src/portrait/v2/sources/hurt.png",
+      "sha256": "2fda48fe30d3f3bc0c0f0f758323801bb559917dea2ab231364249401e0f9939"
+    },
+    {
+      "path": "art_src/portrait/v2/sources/near_death.png",
+      "sha256": "aa1eeff715513261722ddfab3ef6b02627732d87260b24dc93828a6735348c55"
+    }
+  ],
+  "fine_reference": "assets/art/portrait/finder_fine.png",
+  "fine_is_pixel_exact": true,
+  "face_region_changed_pixels": {
+    "hurt": 138,
+    "near_death": 184
+  },
+  "face_region_total_pixels": 289,
+  "order": [
+    "fine",
+    "hurt_v2",
+    "near_death_v2"
+  ],
+  "size": [
+    32,
+    32
+  ],
+  "anchor": [
+    16,
+    16
+  ]
+}

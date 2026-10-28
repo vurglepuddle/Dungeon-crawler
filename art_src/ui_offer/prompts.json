@@ -1,0 +1,42 @@
+{
+  "tool": "built-in image_gen.imagegen",
+  "mode": "generate",
+  "sources": {
+    "slate": {
+      "path": "sources/slate.png",
+      "prompt": "Use case: stylized-concept. Asset type: one non-tiling dark SLATE message panel for a 1993 painted VGA dungeon crawler. Very wide horizontal slab, target150x34 pixels. Orthographic face-on. Near-black blue-grey slate, subtly chipped irregular outer rim, a hairline muted verdigris mineral inset near one short end. Broad quiet stone surface, naturally unique wear, NO repeating tiles or brick pattern. Centre completely calm and very dark for two cream text lines. No baked writing, icons, dividers or controls. Handmade understated pixel-painterly material, no glossy modern effects. Flat uniform lighting, opaque material fills whole image. Wide landscape composition.",
+      "transparent_background": false
+    },
+    "parchment": {
+      "path": "sources/parchment.png",
+      "prompt": "Use case: stylized-concept. Asset type: one NON-TILING aged parchment map sheet for a 1993 hand-painted VGA dungeon crawler, intended native144x324 tall portrait pixels. Orthographic face-on, entire sheet fills tall rectangular image. Warm grey-beige and muted parchment, gently curled worn edges, a few small dark age marks ONLY around perimeter; faint uneven horizontal and vertical storage folds. Quiet broad light centre for drawing a readable map. One tiny sparse verdigris pigmented stitch-like mark at lower-left margin. No map, no grid, no letters, no handwriting, no border frame or UI controls, no symbols. Original old paper, not glossy, not yellow-orange sepia, no tiling repetition. Opaque tall portrait.",
+      "transparent_background": false
+    },
+    "leather": {
+      "path": "sources/leather.png",
+      "prompt": "Use case: stylized-concept. Asset type: one NON-TILING dark leather fold for an eight-item pack tray in a forgotten 1993 VGA dungeon crawler. Very wide narrow horizontal leather lip, target152x22 pixels, front orthographic face-on. Dark charcoal-brown worn leather, one irregular diagonal fold near the right end, a thin worn turned edge along the bottom, sparse simple bronze-tan hand stitching along the very bottom edge. Centre and upper field exceptionally quiet and nearly black so small loose object icons stand out. No separate pockets, no boxes, no dividers, no repeated tiles, no text or buckles. Restrained painted broad pixel clusters, flat illumination, full bleed opaque wide landscape.",
+      "transparent_background": false
+    },
+    "belt": {
+      "path": "sources/belt.png",
+      "prompt": "Use case: stylized-concept. Asset type: a small diegetic belt strip for two loose item icons in a 1993 VGA dungeon crawler, final53x24 pixels. Orthographic flat front view. One dark worn charcoal-brown leather strap crossing horizontally, with three narrow vertical keeper loops, one near either end and one in the middle, leaving two clear spans for a key and a medallion. Tiny aged brass rivets, one sparse dull verdigris enamel inset on the middle keeper. No buckle, no actual items, no separate rectangular pockets or inventory boxes, no words. The keepers visibly wrap around the strap. Painterly chunky forms readable when tiny. Fit entire strip with a little margin, transparent background.",
+      "transparent_background": true
+    },
+    "vial": {
+      "path": "sources/vial.png",
+      "prompt": "Use case: stylized-concept. Asset type: tiny vertical health vial gauge for a painted 1993 dungeon crawler, to be reduced to6x28pixels. One very slender straight-sided clear glass tube, tarnished brass collar and small stopper at top, small brass foot at bottom. Front orthographic view, simple bold silhouette. Empty dark interior; a couple of pale glass glints along one side. It must be a rectangular-width tube, not a wide potion bottle, no bulb, no labels, no numbers, no elaborate stand. Flat old VGA painterly clusters, no soft halo, no background, actual transparency. Tall isolated object fills most canvas height.",
+      "transparent_background": true
+    },
+    "candle": {
+      "path": "sources/candle.png",
+      "prompt": "Use case: stylized-concept. Asset type: tiny candle-stub decorative sprite for a painted 1993 VGA dungeon crawler, final12x24pixels. One short irregular parchment-beige wax candle stub with a warm small amber flame, wax drips gathered in a small dull brass saucer. Straight-on side view, simple bold silhouette, wick visible. Broad painterly pixel-like clusters, no tiny engraved detail or glow halo. Small enough not to dominate interface. No hand, table, scene, writing or frame. Actual transparent background; whole flame and saucer fully inside canvas.",
+      "transparent_background": true
+    },
+    "brass": {
+      "path": "sources/brass.png",
+      "prompt": "Use case: stylized-concept. Asset type: small engraved brass label plate for a forgotten 1993 painted VGA dungeon crawler, target64x18 pixels. Very wide narrow horizontal front-facing flat plate, clipped corners, aged dark gold brass, two tiny rivets near ends, fine shallow engraved line around perimeter. Empty broad dark-brass centre for a short label to be added later. One tiny sparse VERDIGRIS enamel inset near left end, no other colour accent. Hand-painted worn metal, restrained broad clusters, not glossy, no ornamental UI frame or repeated tile. NO words, NO numbers, NO runes, NO logo. Entire plate on transparent background.",
+      "transparent_background": true
+    }
+  },
+  "derivation": "Nearest reduction, shared fixed palette, binary alpha. Code reserves quiet text/map fields and fixed HP liquid aperture; second candle flame and hanging chain are native pixel drawings. Full-panel paints are non-tiling; mockups preserve screenshot lighting colours."
+}
