@@ -40,6 +40,11 @@ var _seed_note: Label
 var _view_action: Dictionary={}
 var _marker_names: Array=[]
 var _item_markers: Dictionary={}
+var _compass_swing: float=0
+var _compass_velocity: float=0
+var _music
+var _settings_path: String="user://settings.cfg"
+var _closing: bool=false
 
 func _ready() -> void:
 	clip_contents=true
@@ -52,10 +57,16 @@ func _ready() -> void:
 			_save_path=arg.trim_prefix("--save-path="); explicit_save_path=true
 		if arg.begins_with("--floors="): _floor_count=clampi(arg.trim_prefix("--floors=").to_int(),1,4)
 	if Engine.has_meta("pilot") and not explicit_save_path: _save_path="user://tests/pilot.json"
+	# Pilots/tests keep preferences beside their isolated save, never in the
+	# player's settings. Preferences are independent of run-state hashes.
+	if Engine.has_meta("pilot") or _save_path!=Store.DEFAULT_PATH:
+		_settings_path=_save_path.trim_suffix(".json")+"_settings.cfg"
 	if not _save_path.begins_with("user://") or _save_path.contains("..") or not _save_path.ends_with(".json"):
 		push_error("Invalid save path"); get_tree().quit(1); return
 	view=View.new(); view.position=VIEW_RECT.position; view.size=VIEW_RECT.size; view.clip_contents=true; add_child(view)
 	sfx=Sfx.new(); add_child(sfx)
+	_music=get_node_or_null("/root/Music")
+	_load_settings()
 	_build_controls()
 	_build_menu()
 	_show_menu("title")
@@ -101,7 +112,7 @@ func _build_controls() -> void:
 	_button("hot_husk",Rect2(0,0,18,18),"",_look_husk,null,false)
 func _build_menu() -> void:
 	_menu=Panel.new(); _menu.size=Vector2(154,342)
-	_menu.add_theme_stylebox_override("panel",_style(Color("0c101c"),Color("80643c"),8))
+	_menu.add_theme_stylebox_override("panel",Chrome.surface("slate",8))
 	add_child(_menu)
 	var column:=VBoxContainer.new(); column.position=Vector2(13,30); column.size=Vector2(128,284)
 	column.add_theme_constant_override("separation",12); _menu.add_child(column)
@@ -111,23 +122,50 @@ func _build_menu() -> void:
 	_button("continue",Rect2(0,0,128,28),"CONTINUE",_continue,column)
 	_button("retry",Rect2(0,0,128,28),"RETRY SEED",_retry,column)
 	_button("start",Rect2(0,0,128,28),"NEW RUN",_open_seed,column)
-	_button("sound",Rect2(0,0,128,24),"SOUND ON",_toggle_sound,column)
+	_button("sound",Rect2(0,0,128,24),"SFX ON" if sfx.enabled else "SFX OFF",_toggle_sound,column)
+	_button("music",Rect2(0,0,128,24),"MUSIC ON" if _music!=null and _music.enabled else "MUSIC OFF",_toggle_music,column)
 func _show_menu(mode: String) -> void:
 	_close_modal(); _close_card(); _mode=mode; _busy=0
 	for key in controls:
 		if is_instance_valid(controls[key]): controls[key].visible=false
 	view.visible=false; _menu.visible=true
-	controls.start.visible=true; controls.sound.visible=true
+	controls.start.visible=true; controls.sound.visible=true; controls.music.visible=true
 	controls.continue.visible=mode=="title"
 	controls.continue.disabled=not Store.can_continue(_save_path)
 	controls.retry.visible=mode=="end"
 	_menu_title.text="UNDERCROFT" if mode=="title" else ("HOME AGAIN" if state.status=="won" else "LOST PROPERTY")
 	_menu_note.text="Lost things wait.\nBring one home." if mode=="title" else ("You brought back dawn.\n%s / %d turns."%[state.seed,state.turn] if state.status=="won" else "The Husk found you.\n%s / try again."%state.seed)
+	if _music!=null:
+		if mode=="title": _music.play("title")
+		elif state.status=="won": _music.play("win")
+		else: _music.stop()
 	_refresh_save_indicator()
 	queue_redraw()
 func _toggle_sound() -> void:
 	sfx.enabled=not sfx.enabled
-	controls.sound.text="SOUND ON" if sfx.enabled else "SOUND OFF"
+	if not sfx.enabled: sfx.stop()
+	controls.sound.text="SFX ON" if sfx.enabled else "SFX OFF"
+	_save_settings()
+func _toggle_music() -> void:
+	if _music==null: return
+	_music.set_enabled(not _music.enabled)
+	controls.music.text="MUSIC ON" if _music.enabled else "MUSIC OFF"
+	_save_settings()
+func _load_settings() -> void:
+	var settings:=ConfigFile.new()
+	if settings.load(_settings_path)!=OK: return
+	sfx.enabled=bool(settings.get_value("audio","sfx",true))
+	if _music!=null: _music.set_enabled(bool(settings.get_value("audio","music",true)))
+func _save_settings() -> void:
+	var settings:=ConfigFile.new()
+	settings.set_value("audio","sfx",sfx.enabled)
+	settings.set_value("audio","music",_music.enabled if _music!=null else true)
+	# Tests already create this folder through SaveStore; title-only pilot
+	# settings also need the parent. No absolute Android path conversion.
+	var directory:=DirAccess.open("user://")
+	var subfolder: String=_settings_path.trim_prefix("user://").get_base_dir()
+	if directory!=null and not subfolder.is_empty(): directory.make_dir_recursive(subfolder)
+	settings.save(_settings_path)
 func _retry() -> void:
 	if _busy<=0 and not state.is_empty(): new_run(state.seed,state.floor_count)
 func new_run(raw: String,count: int=2) -> bool:
@@ -137,6 +175,9 @@ func new_run(raw: String,count: int=2) -> bool:
 	if not proof.ok: push_error("Generation failed: "+proof.reason); return false
 	_close_modal(); _close_card()
 	sim=Sim.new(seed,count); selected=""; _busy=0; _hurt_time=0; _mode="game"
+	_compass_swing=0; _compass_velocity=0
+	view.clear_strike()
+	if _music!=null: _music.play("floor")
 	lines=["Find the Dawn Seal.","Bring it home."]
 	_save(true); _sync()
 	return true
@@ -146,6 +187,8 @@ func _continue() -> void:
 	var loaded=Sim.new(saved.payload.seed,saved.payload.floor_count)
 	if not loaded.restore_state(saved.payload): return
 	sim=loaded; _mode="game"; _busy=0; _hurt_time=0
+	view.clear_strike()
+	if _music!=null: _music.play("floor")
 	selected=str(saved.ui.get("selected",""))
 	lines=["Your place is kept.","The abbey is waiting."]
 	_save_ok=true; _sync()
@@ -171,9 +214,26 @@ func _retry_save() -> void:
 func _notification(what: int) -> void:
 	if what==NOTIFICATION_APPLICATION_PAUSED: _save()
 	if what==NOTIFICATION_WM_CLOSE_REQUEST:
+		if _closing: return
+		_closing=true
 		_save()
-		if is_instance_valid(sfx): sfx.stop()
+		_retire_audio()
 		get_tree().quit()
+func _exit_tree() -> void:
+	_retire_audio()
+func _retire_audio() -> void:
+	# Stop/release scene-owned references before teardown, then give the mixer
+	# two short quanta to handle its queued fade. AudioServer garbage collection
+	# still needs the next engine frame. The pilot immediately quits after its
+	# WM_CLOSE_REQUEST, so an awaited timer here would never finish.
+	var had_playback: bool=false
+	for source in [sfx,_music]:
+		if not is_instance_valid(source): continue
+		for child in source.get_children():
+			if child is AudioStreamPlayer and child.has_stream_playback():
+				had_playback=true
+		source.stop()
+	if had_playback: OS.delay_msec(50)
 func _can_game() -> bool: return _mode=="game" and _busy<=0 and not is_instance_valid(_modal)
 func _sync() -> void:
 	state=sim.snapshot()
@@ -272,6 +332,15 @@ func _command(command: Dictionary) -> void:
 	if not _can_game(): return
 	_close_card()
 	command=command.duplicate(true); command.expected_revision=state.revision
+	# Capture the old pose/projection before a fatal hit removes the actor.
+	var strike_target: Dictionary={}
+	var strike_kind: String="hands"
+	if command.type=="hit":
+		strike_target=view.projection(command.get("target_id",""))
+		var weapon_id: String=state.equipment.hand
+		if weapon_id!="":
+			var tags: Array=sim.definition(weapon_id).tags
+			strike_kind="heavy" if tags.has("HEAVY") else ("edge" if tags.has("EDGE") else "hands")
 	var result: Dictionary=sim.apply(command)
 	if not result.accepted:
 		lines=[result.reason,"Drop or use an item." if result.reason=="Your pack is full." else ""]
@@ -279,7 +348,7 @@ func _command(command: Dictionary) -> void:
 	_bob=command.type=="move"
 	match command.type:
 		"move": sfx.play("step")
-		"turn": pass
+		"turn": _compass_velocity+=float(command.delta)*5.5
 		"pickup":
 			var definition: Dictionary=sim.definition(command.item_id)
 			lines=[definition.name,definition.provenance]; sfx.play("pickup")
@@ -291,6 +360,7 @@ func _command(command: Dictionary) -> void:
 		"guard": lines=["You brace yourself.",""]
 	for event in result.events:
 		match event.type:
+			"struck": view.show_strike(event.target_id,strike_target,strike_kind,event.damage)
 			"gate_changed":
 				lines=["The gate opens." if event.open else "It shuts behind you.","Leave a HEAVY thing." if not event.open else ""]
 				sfx.play("gate")
@@ -361,7 +431,7 @@ func _belt_card(kind: String) -> void:
 func _open_card(id: String) -> void:
 	_close_card()
 	var panel:=PanelContainer.new(); panel.position=Vector2(4,208); panel.size=Vector2(146,132)
-	panel.add_theme_stylebox_override("panel",_style(Color("171d2b"),GOLD,4))
+	panel.add_theme_stylebox_override("panel",Chrome.surface("card",4))
 	var column:=VBoxContainer.new(); column.add_theme_constant_override("separation",0); panel.add_child(column)
 	var definition: Dictionary=sim.definition(id)
 	_label(definition.name,column)
@@ -409,7 +479,7 @@ func _dismiss_card() -> void:
 func _panel(title: String,top: int=32,height: int=276) -> VBoxContainer:
 	_close_modal(); _close_card()
 	var panel:=PanelContainer.new(); panel.position=Vector2(5,top); panel.size=Vector2(144,height)
-	panel.add_theme_stylebox_override("panel",_style(Color("171d2b"),GOLD,7))
+	panel.add_theme_stylebox_override("panel",Chrome.surface("map" if title.begins_with("Visited") else "slate",7))
 	var column:=VBoxContainer.new(); column.add_theme_constant_override("separation",7)
 	panel.add_child(column); _label(title,column)
 	add_child(panel); _modal=panel
@@ -473,6 +543,11 @@ func _open_map() -> void:
 	map.data=sim.view_snapshot(); map.custom_minimum_size=Vector2(128,231); column.add_child(map)
 	_modal_button("map_close","CLOSE",_close_modal,column)
 func _process(delta: float) -> void:
+	# A damped instrument movement; never part of the simulation or input gate.
+	var step: float=minf(delta,0.04)
+	_compass_velocity+=(-_compass_swing*100.0-_compass_velocity*12.0)*step
+	_compass_swing+=_compass_velocity*step
+	if absf(_compass_swing)>0.001 or absf(_compass_velocity)>0.01: queue_redraw()
 	if _busy>0:
 		_busy=maxf(0,_busy-delta)
 		view.motion=sin(_busy/0.13*PI)*1.4 if _bob else 0
@@ -488,23 +563,38 @@ func _process(delta: float) -> void:
 func _text(at: Vector2,value: String,colour: Color=INK) -> void:
 	draw_string(FONT,at+Vector2(0,FONT.get_ascent(16)),value,HORIZONTAL_ALIGNMENT_LEFT,-1,16,colour)
 func _draw() -> void:
-	draw_style_box(Chrome.style(),Rect2(Vector2.ZERO,size))
+	draw_style_box(Chrome.surface("leather"),Rect2(Vector2.ZERO,size))
 	if _mode!="game" or state.is_empty(): return
 	draw_rect(Rect2(0,0,154,18),Color("0c101c"))
-	draw_style_box(Chrome.style(),Rect2(0,18,154,156))
-	draw_rect(Rect2(2,174,150,34),Color("0c101c"))
+	draw_style_box(Chrome.surface("frame"),Rect2(0,18,154,156))
+	draw_style_box(Chrome.surface("slate"),Rect2(0,174,154,34))
 	if not is_instance_valid(_card):
 		_text(Vector2(4,175),lines[0]); _text(Vector2(4,191),lines[1])
-	draw_style_box(Chrome.style(),Rect2(1,208,36,38))
-	draw_texture_rect(PORTRAIT,Rect2(3,210,32,32),false,Color(1,0.65,0.6) if _hurt_time>0 or state.hp<=2 else Color.WHITE)
+	draw_style_box(Chrome.surface("frame"),Rect2(1,208,36,38))
+	var shudder:=Vector2(roundi(sin(_hurt_time*100)*2) if _hurt_time>0 else 0,0)
+	draw_texture_rect(PORTRAIT,Rect2(Vector2(3,210)+shudder,Vector2(32,32)),false,Color(1,0.65,0.6) if _hurt_time>0 or state.hp<=2 else Color.WHITE)
 	draw_rect(Rect2(3,242,32,3),Color("312018"))
 	draw_rect(Rect2(3,242,roundi(32.0*state.hp/state.max_hp),3),Color("73a29a") if state.hp>2 else Color("965c48"))
 	if _hurt_time>0:
 		draw_rect(Rect2(3,210,32,32),Color("965c48"),false,2)
-		for points in [[Vector2(19,224),Vector2(23,226)],[Vector2(26,222),Vector2(29,224)],[Vector2(23,233),Vector2(27,232)]]: draw_line(points[0],points[1],Color("312018"),1)
+		for points in [[Vector2(19,224),Vector2(23,226)],[Vector2(26,222),Vector2(29,224)],[Vector2(23,233),Vector2(27,232)]]: draw_line(points[0]+shudder,points[1]+shudder,Color("312018"),1)
+	# Belt loops sit behind the possessions; a narrow glass oil gauge makes
+	# health read as a physical instrument without stealing an icon pitch.
+	for x in [101,127]:
+		draw_rect(Rect2(x,209,22,25),Color("312018"))
+		for edge in [x,x+20]:
+			draw_line(Vector2(edge,211),Vector2(edge,232),Color("80643c"),1)
+			draw_rect(Rect2(edge,210,2,2),Color("a18750"))
+	draw_rect(Rect2(96,211,5,31),Color("80643c"))
+	draw_rect(Rect2(97,213,3,27),Color("0c101c"))
+	var oil: int=roundi(25.0*state.hp/state.max_hp)
+	draw_rect(Rect2(97,240-oil,3,oil),Color("4c8585") if state.hp>2 else Color("965c48"))
+	draw_line(Vector2(97,214),Vector2(97,238),Color("73a29a"),1)
 	_text(Vector2(101,232),"HP %d/%d"%[state.hp,state.max_hp])
 	# One continuous recessed surface, eight invisible 19px touch pitches.
-	draw_rect(Rect2(1,246,152,22),Color("0c101c"))
+	draw_style_box(Chrome.surface("leather"),Rect2(0,246,154,22))
+	draw_line(Vector2(3,247),Vector2(150,247),Color("5d4b30"),1)
+	for x in [4,149]: draw_rect(Rect2(x,249,1,1),Color("a18750"))
 	for i in range(8):
 		if i>=state.pack.size(): draw_line(Vector2(8+i*19,264),Vector2(11+i*19,264),Color("5d4b30"),1)
 	for key in ["turn_l","fwd","turn_r","strafe_l","back","strafe_r"]:
@@ -526,7 +616,9 @@ func _draw_compass() -> void:
 	var heading: String=["N","E","S","W"][state.facing]
 	var width: float=FONT.get_string_size(heading,HORIZONTAL_ALIGNMENT_LEFT,-1,16).x
 	_text(Vector2(roundf(118-width/2),296),heading)
-	draw_colored_polygon(PackedVector2Array([center+Vector2(0,-16),center+Vector2(-3,0),center+Vector2(3,0)]),Color("eeb95a"))
+	var needle:=Vector2(sin(_compass_swing),-cos(_compass_swing))
+	var side:=Vector2(-needle.y,needle.x)*3
+	draw_colored_polygon(PackedVector2Array([(center+needle*16).round(),(center-side).round(),(center+side).round()]),Color("eeb95a"))
 	draw_circle(center,2,Color("bc7433"))
 
 func _arrow(center: Vector2,key: String) -> void:
@@ -541,12 +633,16 @@ func _arrow(center: Vector2,key: String) -> void:
 		draw_colored_polygon(PackedVector2Array([center+d*7,center+d+side*4,center+d-side*4]),GOLD)
 		if key.begins_with("strafe"): draw_line(center-d*7-side*3,center-d*7+side*3,GOLD,1)
 func _public_state() -> Dictionary:
-	if sim==null: return {"status":"title","can_continue":Store.can_continue(_save_path)}
+	var audio: Dictionary={"music":_music!=null and _music.enabled,"sfx":sfx.enabled}
+	if sim==null:
+		audio.merge({"status":"title","can_continue":Store.can_continue(_save_path)})
+		return audio
 	var public: Dictionary={"seed":state.seed,"floor":state.floor,"floor_count":state.floor_count,
 		"pos":state.pos.duplicate(),"facing":state.facing,"hp":state.hp,"turn":state.turn,"revision":state.revision,
 		"status":state.status,"pack":state.pack.duplicate(),"belt":state.belt.duplicate(),
 		"equipment":state.equipment.duplicate(),"selected":selected,"porter":sim.porter_state(),"ring_ready":sim.ring_ready(),"front":sim.inspect_front(),
 		"hash":sim.state_hash(),"save_ok":_save_ok}
+	public.merge(audio)
 	return public
 func pilot_call(name_key: String,args: Array) -> String:
 	match name_key:
@@ -556,6 +652,7 @@ func pilot_call(name_key: String,args: Array) -> String:
 		"where":
 			if args.is_empty(): return ""
 			var key:=str(args[0])
+			if key=="sfx": key="sound"
 			if key=="view" and _mode=="game": return "77 96"
 			if key=="new_seed": key="seed"
 			if key=="save_status": key="floor_label"

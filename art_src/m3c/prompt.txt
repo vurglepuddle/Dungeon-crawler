@@ -1,0 +1,5 @@
+Use case: game UI material asset. Paint ONE rectangular sheet of very dark blue-green slate, aged verdigris enamel and faint rubbed charcoal leather, for a tiny original 1993 VGA dungeon crawler. Flat front-on unlit orthographic material swatch, edge-to-edge, no objects, no frame, no text, no grid, no tiling checkerboard, no repeating ornaments, no symbols, no brown. The whole sheet is one quiet near-black teal slate surface, with subtle broad natural variations and sparse minute scratches, barely lighter toward upper left. All variation very low contrast so pale game text can sit anywhere. Inspired by painted material reduced to 32 colors later. Entirely original. Landscape aspect around 3:2; opaque. Do not include a mockup or background outside the swatch.
+
+Generated with the built-in imagegen tool. Original painting is slate_source.png.
+Derived UI surfaces are native palette drawings over the reduced material;
+build_surfaces.py is the editable source for insets, bevels and corner studs.

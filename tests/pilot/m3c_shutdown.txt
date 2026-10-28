@@ -1,0 +1,5 @@
+# Short real-renderer audio shutdown regression; use an isolated save path.
+wait 5
+call new_run BELL42
+wait 8
+close

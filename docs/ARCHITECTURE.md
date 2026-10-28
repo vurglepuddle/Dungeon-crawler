@@ -1,4 +1,4 @@
-# M3b architecture
+# M3c architecture
 
 One deterministic simulation owns a whole run. The scene presents its committed
 results. See CONTRACT for exact data and DESIGN for what is playable.
@@ -39,11 +39,14 @@ results. See CONTRACT for exact data and DESIGN for what is playable.
   The controller creates transparent object hit areas from these same records;
   there are no view labels/leader lines. Small objects get input priority over
   large bodies. Grouped TAKE targets retain stable per-item where aliases.
-- scripts/ui/chrome.gd shares one painted, palette-reduced bronze nine-slice
-  across frame, panels and tiles. Its centre tiles at native resolution.
+- scripts/ui/chrome.gd keeps the painted bronze nine-slice on buttons and
+  compass. Larger slate/map/card/leather/frame surfaces stretch one continuous
+  source once, with native bevels/studs and no repeated tiles. Offline sources
+  and builder are in art_src/m3c; runtime assets are assets/art/ui.
   scripts/ui/item_button.gd draws full-bound 16px icons explicitly centred,
   with selection corners instead of per-pocket boxes. The root draws the
-  compact pad, framed portrait/HP bar and half-dial compass.
+  compact pad, framed portrait/HP bar, glass gauge, belt loops and half-dial
+  compass. Damped needle motion and hurt shudder remain presentation only.
 - During an item card, the controller docks the strip below the picture and
   preserves the hidden event text. Save failures update a persistent status
   control, never the event array. Looking also preserves the event array.
@@ -54,6 +57,13 @@ results. See CONTRACT for exact data and DESIGN for what is playable.
 - scripts/audio/sfx.gd synthesises local PCM once for a small voice pool. A
   new warm restoration chord differs from the hostile wind-up bell. Close
   stops voices before quitting; its noise stream never touches gameplay RNG.
+- The B-owned Music autoload streams its original note-data scores. Main
+  selects title/floor/win, stops on death/close and independently persists
+  MUSIC/SFX preferences outside the run. B owns synthesis and pause/resume.
+- The view loads registered state poses and three-frame strike effects from
+  B's assets/art/anim and fx. It retains a killed target visually for 240ms,
+  never in the sim. Wall levers use a world-fixed hinge and wall-plane depth;
+  inset plates draw before their carried weight. Rule snapshots are unchanged.
 - scripts/ui/map_view.gd fits seen bounds and distinguishes known stairs,
   gates, owner, lift landings and Seal site. Its scale/marks cannot reveal
   unseen extents or mutate the simulation.

@@ -5,10 +5,11 @@ collect below; some are useful, some are still wanted. Find another use for
 something ordinary. Bring the Dawn Seal home. Eventually, put something back
 where it belongs and watch the dungeon come alive again.
 
-Current milestone: **M3b, the period interface**. The dungeon now has centre
-stage inside painted bronze, with compact controls, possessions on a dark
-tray and quiet object glints. The owner's Pixel 9a feedback takes precedence
-over the old M2/M3a screen bands. Capability encounters remain the next round.
+Current milestone: **M3c, tactile panels and readable combat**. The dungeon has
+centre stage, with dark slate, verdigris insets, compact bronze controls and
+quiet object glints. The owner's phone feedback takes precedence over the old
+screen bands. This checkpoint completes chrome and the first art/audio wiring;
+capability encounters remain the next content round.
 
 ## The playable run
 
@@ -95,8 +96,17 @@ Inactive floors do not take enemy turns, and stairs add no arrival attack.
 
 A real hit adds a red view border, a small view knock and a hurt portrait
 overlay/tint, alongside health and short text. Locally synthesised effects cover footsteps, bumps, hits, guard clangs,
-wind-up bells, gates, pickup, a kept-clapper ring and a warm restoration chord. There are no samples, music, downloads or external services. Music is
-M4: original, not the reused Warren/VETKA Bach pieces.
+wind-up bells, gates, pickup, a kept-clapper ring and a warm restoration chord.
+An original sparse bell/reed score now accompanies the title and floors, with
+a short win cue. MUSIC and SFX have independent persistent switches. No samples,
+downloads, reused Warren music or external services are involved.
+
+The Husk's idle, raised-fist wind-up and staggered recovery are separate painted
+poses at 64/40/24 px. A real hit briefly uses recoil and flashes the target for
+one drawn frame. EDGE cuts a thin streak, HEAVY makes a broad impact and bare
+hands make a small knock; a native 16px number shows actual damage. Three
+80ms effect frames never extend the normal input gate or resolve combat.
+The Finder's portrait shudders by two pixels when hurt, alongside the border.
 
 ## Finish, pause, return
 
@@ -130,11 +140,19 @@ phone camera. NEW remains a named pilot alias to the seed control. The normal
 342px height is divided into top strip 18, framed view 156, messages 34,
 portrait/equipment/belt 38, pack 22, verbs 24, controls/compass 48 and footer 2.
 
-One painted dark bronze material supplies the frame, panels and small movement
-tiles. The portrait keeps its painted face, framed above a health bar; hands
-and belt sit beside it. Eight pack icons lie on one dark surface at a 19px
-pitch, with selection brackets and no individual boxes. Icons use their full
-opaque bounds, fit a native 16 x 16 canvas and are explicitly centred.
+The original painted bronze remains on buttons and the compass. Large panels
+use continuous, nonrepeating dark slate or teal enamel with thin bevels and
+corner studs. The map is a quieter green slate; cards use a dark verdigris
+inset. A leather fold holds eight boxless icons at 19px pitch. Belt loops sit
+behind the protected possessions, and a slim glass oil gauge repeats health
+beside the portrait's bar. Icons retain their native centred 16 x 16 canvas.
+The compass needle kicks and settles when turning; its letter remains precise.
+These presentation motions never consume time.
+
+Pressure plates are shallow inset floor trapezoids, with a pressed rim/state.
+Possessions paint after the supporting plate. The latch is a lever hinged to
+a fixed wall beside its cell; its handle flips down and stays visible after
+use. The restored Porter raises its palms and lights its chest in a new pose.
 
 There are no labels or boxes on the dungeon picture. A small gold glint marks
 a usable object; its painted body is the tap target. Selected-item targets
@@ -152,9 +170,10 @@ offers status and retry. Saving never substitutes an error for an event.
 The six movement tiles are 24 x 22 in a tight block beside a half-dial compass.
 Bent arrows turn freely; straight arrows step. VETKA remains native 16 px,
 nearest filtering remains, and every touch target is at least 18 x 18.
-The owner's Android storage and font-import fixes remain intact. SOUND controls
-SFX while there is no music. When music arrives, MUSIC and SFX need separate
-controls; the app icon and launcher framing remain the owner's assets.
+The owner's Android storage and font-import fixes remain intact. The title/end
+menu offers separate MUSIC and SFX switches; the old sound pilot name still
+addresses SFX. Preferences live outside the run snapshot. The app icon and
+launcher framing remain the owner's assets.
 
 ## What gives the finished slice its identity
 
@@ -196,9 +215,9 @@ opens a clearly hinted optional panel; FOOD can spare a hound encounter.
 No thieves, item-eating enemies, item-swallowing pits, compulsory hidden walls
 or return-trip spawns. One good restoration is enough.
 
-M4 polishes poses, quieter walls, portraits, original bell-motif music, concise
+M4 continues quieter walls, portraits, concise
 knowledge-only Ledger cards, a period-style manual and phone acceptance.
-M3b keeps the full loop and restoration, and gives the dungeon a cleaner,
-larger stage.
+M3c keeps the full loop and restoration, makes the attack tell visible and
+adds the first original score. No extra enemy or fixture rule ships here.
 Third-run appeal, the capability encounters and the return-trip reveal still
 need implementation and human review.

@@ -1,4 +1,4 @@
-# M3b contract
+# M3c contract
 
 New runs use rules/content m3.2 with generator m3.1; snapshot/envelope schema
 stays 2. Exact m2.1 and m3.1 cohorts remain readable and playable from stored
@@ -20,6 +20,10 @@ Codex owns scripts except scripts/dev/autopilot.gd; scenes, content/data,
 assets/art, art_src, headless tests and own pilots; DESIGN/CONTRACT/ARCHITECTURE
 and results. Claude owns project/export settings, autopilot, collaborator
 pilots, BRIEF/COLLAB_LOG, exports/device tests and Git. No commits this turn.
+Parallel B owns its new creature/fixture/effect/music sources and data; C owns
+env/icons/screens/portrait art, scripts/fx, data/text and its manual/polish docs.
+The primary Codex alone wires those contributions into the scene. This round
+does not change their authored files or C's presentation integration.
 
 ## Sim API
 
@@ -220,8 +224,8 @@ The current scene root implements pilot_call(name,args)->String:
 - state: compact public JSON. In-game fields: seed, floor/floor_count, pos,
   facing, hp, turn, revision, status, pack/belt IDs, equipment, selected,
   front contents, porter:{present,restored}, ring_ready, opaque complete-state
-  hash, save_ok. At initial title:
-  {status:"title",can_continue:bool}.
+  hash, save_ok, music and sfx booleans. At initial title:
+  {status:"title",can_continue:bool,music:bool,sfx:bool}.
 - where NAME: logical global centre "x y"; absent/hidden/disabled controls
   return empty. No physical-window assumptions.
 - new_run SEED [FLOOR_COUNT]: explicit reset/setup hook, returns public state.
@@ -254,8 +258,27 @@ card_ring for an owned clapper. A spent RING is disabled. Item cards leave the
 full picture visible and dock verbs at y179 while open; ordinary verb y is269.
 The log contents survive inspection, free rotation and failed saves.
 A failed save sets ! on floor_label; save_retry/save_close belong to its free
-status panel. Title/end: continue, retry, start, sound. SOUND is SFX only until
-music exists; future music must have an independent control.
+status panel. Title/end: continue, retry, start, sound (also where sfx), music.
+The independent switches read SFX ON/OFF and MUSIC ON/OFF.
+
+Audio preferences use user://settings.cfg, ConfigFile section audio, bool keys
+music/sfx; absent settings default enabled. They are outside snapshot/hash and
+new-run replacement. Pilots and isolated tests derive *_settings.cfg beside
+their own save path, so they cannot change a player's preferences. The existing
+Android run-save implementation is untouched. Music requests title at title,
+floor on new/continue, win once on committed victory, and silence on death.
+B's player handles pause/resume; main stops it on WM_CLOSE_REQUEST.
+
+Husk state maps idle->idle, windup->windup, recovery->recoil. Canvas anchors
+stay fixed across states. Hit presentation keeps a target/pose briefly through
+a lethal strike; that ghost has no collision, intent or simulation ownership.
+struck events select EDGE/HEAVY/hands from the pre-action weapon and display
+the event damage at the pre-action target. Effects last 240ms without adding
+an input gate. No presentation timer changes saved state. Plate depth variants
+keep their shallow aspect; plate first, possession second at equal depth.
+Lever wall placement is fixed in world coordinates, not selected from camera
+direction. Used gate.latched state selects the down handle independently of
+the active target list. No rule/content/generator/schema versions change.
 
 Blocking panels: seed_input/seed_start/seed_random/seed_cancel;
 map_close; loot_ITEM_ID, loot_prev/loot_next, loot_cancel. Loot is paginated
@@ -275,3 +298,9 @@ and a separate close/reopen pair with a spent charge and pending recovery.
 The original M3 pilot builder regenerates its names/hashes for current rules.
 All gameplay in playback is still actual taps. The gallery deliberately takes
 one blow in place of a guard; that is not a damage-free witness.
+
+tests/build_m3c_pilots.gd emits an expanded phone gallery, separate full runs
+capturing HEAVY and bare-hand impacts, and an independent audio preference
+close/reopen pair. tests/run_m3c_pilots.ps1 runs 13 windowed pilots, including
+the retained-clapper and restoration reopen regressions. Hound/Ghost cells in
+the contact sheet are explicitly labelled asset previews, not playable scenes.

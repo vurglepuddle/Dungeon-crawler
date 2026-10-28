@@ -1,0 +1,14 @@
+wait 4
+call assert music false
+call assert sfx false
+tapnamed music
+call assert music true
+call assert sfx false
+tapnamed sound
+call assert music true
+call assert sfx true
+tapnamed continue
+waitidle
+call assert turn 0
+call assert hp 6
+close
