@@ -1,0 +1,12 @@
+# Fresh process after m3_save_a, same --save-path.
+wait 4
+call assert status title
+tapnamed continue
+waitidle
+call assert porter {"present":true,"restored":true}
+call assert turn 29
+call assert hash 57a92330aab268bc5ca386b4966153116c95767eb6484957322911fee15998d3
+call assert save_ok true
+call state
+shot 28_restored_continued
+quit

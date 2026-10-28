@@ -26,7 +26,7 @@ static func _cell(value, f: Dictionary) -> bool:
 static func validate(s: Dictionary) -> bool:
 	for key in ["schema_version","rules_version","generator_version","content_version","seed","floor_count","floor","pos","facing","turn","revision","hp","max_hp","status","pack","equipment","belt","floors","items"]:
 		if not s.has(key): return false
-	if s.schema_version!=2 or s.rules_version!="m2.1" or s.generator_version!="m2.1" or s.content_version!="m2.1": return false
+	if s.schema_version!=2 or s.rules_version not in ["m2.1","m3.1"] or s.generator_version!=s.rules_version or s.content_version!=s.rules_version: return false
 	if not s.seed is String or Gen.normalize_seed(s.seed)!=s.seed: return false
 	for key in ["floor_count","floor","facing","turn","revision","hp","max_hp"]:
 		if not s[key] is int: return false
@@ -37,7 +37,11 @@ static func validate(s: Dictionary) -> bool:
 	if not s.pack is Array or s.pack.size()>8 or not s.belt is Array or s.belt.size()>s.floor_count+1: return false
 	if not s.equipment is Dictionary or s.equipment.keys().size()!=2 or not s.equipment.has("hand") or not s.equipment.has("body"): return false
 	var all_ids: Dictionary={}
+	var fixtures_all: Dictionary={}
+	var fixture_floors: Dictionary={}
+	var floor_number:=0
 	for f in s.floors:
+		floor_number+=1
 		if not f is Dictionary: return false
 		for key in ["width","height","tiles","fixtures","actors","visited","start","landing"]:
 			if not f.has(key): return false
@@ -53,10 +57,15 @@ static func validate(s: Dictionary) -> bool:
 			if not fixture is Dictionary or not fixture.get("id") is String or not _cell(fixture.get("pos"),f): return false
 			if all_ids.has(fixture.id): return false
 			all_ids[fixture.id]=true; fixture_ids[fixture.id]=fixture
-			if fixture.get("type") not in ["plate","gate","latch","lock","stairs_up","stairs_down","exit"]: return false
+			fixtures_all[fixture.id]=fixture; fixture_floors[fixture.id]=floor_number
+			if fixture.get("type") not in ["plate","gate","latch","lock","stairs_up","stairs_down","exit","porter","lift"]: return false
 			if fixture.type in ["gate","lock"] and not fixture.get("open") is bool: return false
 			if fixture.type=="gate" and not fixture.get("latched") is bool: return false
 			if fixture.type=="plate" and not fixture.get("pressed") is bool: return false
+			if fixture.type=="porter" and (not fixture.get("restored") is bool or not fixture.get("item_id") is String): return false
+			if fixture.type=="lift":
+				if not fixture.get("active") is bool or not fixture.get("owner_id") is String or not fixture.get("destination_id") is String: return false
+				if not fixture.get("destination_floor") is int or fixture.destination_floor<1 or fixture.destination_floor>s.floor_count: return false
 		for fixture in f.fixtures:
 			if fixture.type in ["plate","latch"] and (not fixture_ids.has(fixture.get("gate_id")) or fixture_ids[fixture.gate_id].type!="gate"): return false
 			if fixture.type=="gate" and (not fixture_ids.has(fixture.get("plate_id")) or fixture_ids[fixture.plate_id].type!="plate"): return false
@@ -72,6 +81,19 @@ static func validate(s: Dictionary) -> bool:
 			if actor.state=="windup":
 				if not _cell(actor.intent.get("cell"),f) or actor.intent.get("due_in")!=1: return false
 			elif not actor.intent.is_empty(): return false
+	# Validate links only after every floor and fixture has been checked.
+	for fixture in fixtures_all.values():
+		if fixture.type=="porter":
+			var item = s.items.get(fixture.item_id)
+			if not item is Dictionary or item.get("kind")!="clapper": return false
+			if fixture.restored!=(item.get("location")=="returned"): return false
+			if fixture.restored and item.get("owner_id")!=fixture.id: return false
+		if fixture.type=="lift":
+			var owner = fixtures_all.get(fixture.owner_id)
+			var dest = fixtures_all.get(fixture.destination_id)
+			if not owner is Dictionary or owner.type!="porter" or fixture.active!=owner.restored: return false
+			if not dest is Dictionary or dest.type!="lift" or dest.owner_id!=fixture.owner_id: return false
+			if fixture_floors[dest.id]!=fixture.destination_floor or fixture.get("destination")!=dest.pos or dest.destination_id!=fixture.id: return false
 	if not _cell(s.pos,s.floors[s.floor-1]): return false
 	var carried: Dictionary={}
 	for id in s.pack+s.belt+[s.equipment.hand,s.equipment.body]:
@@ -94,6 +116,10 @@ static func validate(s: Dictionary) -> bool:
 				if not s.belt.has(id) or definition.slot!="belt" or item.floor!=0 or item.pos!=[]: return false
 			"equip":
 				if item.slot not in ["hand","body"] or s.equipment[item.slot]!=id or definition.slot!=item.slot or item.floor!=0 or item.pos!=[]: return false
+			"returned":
+				var owner = fixtures_all.get(item.get("owner_id"))
+				if item.kind!="clapper" or carried.has(id) or item.floor!=0 or item.pos!=[] or item.slot!="": return false
+				if not owner is Dictionary or owner.type!="porter" or not owner.restored or owner.item_id!=id: return false
 			"consumed":
 				if definition.heal<=0 or carried.has(id) or item.floor!=0 or item.pos!=[]: return false
 			_: return false

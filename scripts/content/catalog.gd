@@ -3,6 +3,7 @@ extends RefCounted
 ## JSON-safe content. Rules refer to capabilities/fields, never specific item IDs.
 const CREATURES := {"husk":{"hp":2,"braced":true,"sight":4}}
 const ITEMS := {
+	"clapper": {"name":"Bell clapper","tags":["HEAVY"],"slot":"hand","damage":3,"heal":0,"provenance":"Lost by the Porter.","purpose":"Return: wakes the lift."},
 	"knife": {"name": "Rust knife", "tags": ["EDGE"], "slot": "hand", "damage": 1, "heal": 0, "provenance": "Lost by a cook, 1203."},
 	"stone": {"name": "Round stone", "tags": ["HEAVY"], "slot": "hand", "damage": 2, "heal": 0, "provenance": "Lost by a mason, 1211."},
 	"club": {"name": "Iron club", "tags": ["HEAVY"], "slot": "hand", "damage": 2, "heal": 0, "provenance": "Lost by a guard, 1194."},

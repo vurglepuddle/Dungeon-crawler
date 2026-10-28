@@ -1,11 +1,11 @@
 extends Node
-## Seven local PCM effects. Synthesised once; no files/samples or gameplay RNG.
+## Local PCM effects. Synthesised once; no files/samples or gameplay RNG.
 var _streams: Dictionary={}
 var _voices: Array[AudioStreamPlayer]=[]
 var enabled:=true
 var _cursor:=0
 func _ready() -> void:
-	for kind in ["step","bump","hit","guard","bell","gate","pickup"]: _streams[kind]=_synth(kind)
+	for kind in ["step","bump","hit","guard","bell","gate","pickup","restore"]: _streams[kind]=_synth(kind)
 	for _i in range(4):
 		var voice:=AudioStreamPlayer.new()
 		voice.volume_db=-16
@@ -15,8 +15,12 @@ func play(kind: String) -> void:
 	var voice:=_voices[_cursor%_voices.size()]; _cursor+=1
 	voice.stream=_streams[kind]; voice.volume_db=-23 if kind=="step" else -16
 	voice.play()
+func stop() -> void:
+	for voice in _voices:
+		voice.stop()
+		voice.stream=null
 func _synth(kind: String) -> AudioStreamWAV:
-	var length:=0.23 if kind in ["bell","guard","gate"] else 0.075
+	var length:=0.8 if kind=="restore" else (0.23 if kind in ["bell","guard","gate"] else 0.075)
 	var rate:=22050
 	var bytes:=PackedByteArray()
 	var noise_state: int=127
@@ -32,6 +36,7 @@ func _synth(kind: String) -> AudioStreamWAV:
 			"hit": sample=sin(TAU*100*t)*0.45+noise*0.45
 			"guard": sample=(sin(TAU*780*t)+sin(TAU*1437*t)*0.5+noise*0.2)*0.5
 			"bell": sample=(sin(TAU*220*t)+sin(TAU*607*t)*0.4+sin(TAU*1188*t)*0.2)*0.55
+			"restore": sample=(sin(TAU*330*t)+sin(TAU*440*t)*0.65+sin(TAU*660*t)*0.45)*0.4
 			"gate": sample=sin(TAU*(80*t+70*t*t))*0.5+noise*0.3
 			"pickup": sample=(sin(TAU*660*t)+sin(TAU*990*t)*0.4)*0.55
 		var value:=clampi(roundi(sample*envelope*23000),-32768,32767)&0xffff

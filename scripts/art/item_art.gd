@@ -14,6 +14,9 @@ static func texture(kind: String) -> Texture2D:
 				"knife","shard":
 					if y>=5 and y<=19 and abs(x-(18-y)/2)<2: ink=Color("d3c8a4") if x<8 else Color("59616a")
 					if kind=="knife" and y in [17,18] and x<9: ink=Color("a18750")
+				"clapper":
+					if x>=6 and x<=9 and y>=4 and y<=16: ink=Color("a18750") if x<8 else Color("80643c")
+					if (x-8)*(x-8)+(y-17)*(y-17)<=20: ink=Color("eeb95a") if x+y<25 else Color("80643c")
 				"club":
 					if x>=5 and x<=10 and y>=5 and y<=20: ink=Color("999883") if x<8 else Color("3b4757")
 					if x>=4 and x<=11 and y>=4 and y<=9: ink=Color("b6ae91")

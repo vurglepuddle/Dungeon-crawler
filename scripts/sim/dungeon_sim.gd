@@ -13,8 +13,8 @@ func _init(seed: String = "BELL42", floor_count: int = 2) -> void:
 	if not generated.ok:
 		_s = {"status": "error", "error": generated.error}
 		return
-	_s = {"schema_version": 2, "rules_version": "m2.1", "generator_version": "m2.1",
-		"content_version": "m2.1", "seed": generated.seed, "floor_count": floor_count,
+	_s = {"schema_version": 2, "rules_version": "m3.1", "generator_version": "m3.1",
+		"content_version": "m3.1", "seed": generated.seed, "floor_count": floor_count,
 		"floor": 1, "pos": generated.floors[0].start.duplicate(), "facing": 0,
 		"turn": 0, "revision": 0, "hp": 6, "max_hp": 6, "status": "playing",
 		"pack": [], "equipment": {"hand": "knife_start", "body": ""}, "belt": [],
@@ -53,7 +53,7 @@ func _adjacent(a: Array,b: Array) -> bool: return absi(a[0]-b[0])+absi(a[1]-b[1]
 func can_walk(cell: Array, ignore_actors: bool = false) -> bool:
 	if terrain(cell) != 0: return false
 	for fixture in _floor().fixtures:
-		if fixture.pos == cell and fixture.type in ["gate","lock"] and not fixture.open: return false
+		if fixture.pos==cell and (fixture.type=="porter" or fixture.type in ["gate","lock"] and not fixture.open): return false
 	if not ignore_actors:
 		for actor in _floor().actors:
 			if actor.hp>0 and actor.pos==cell: return false
@@ -101,19 +101,41 @@ func fixture_actions() -> Array:
 			"lock":
 				if not fixture.open and _s.belt.has(fixture.key_id): kind="unlock"; label="UNLOCK"
 			"stairs_up","stairs_down": kind="stairs"; label="UP" if fixture.type=="stairs_up" else "DOWN"
+			"lift":
+				if fixture.active and _arrival_clear(fixture.destination_floor,fixture.destination): kind="ride"; label="RIDE"
+			"porter":
+				var item: Dictionary=_s.items[fixture.item_id]
+				if not fixture.restored and item.location in ["pack","equip"]:
+					result.append({"label":"RETURN","action":{"type":"return_item","target_id":fixture.id,"item_id":fixture.item_id}})
 			"exit":
 				if has_seal(): kind="leave"; label="LEAVE"
 		if kind!="": result.append({"label":label,"action":{"type":kind,"target_id":fixture.id}})
 	return result
 func targets(selected: String) -> Array:
-	if _s.status!="playing" or not _s.pack.has(selected): return []
-	if not definition(selected).tags.has("HEAVY"): return []
+	if _s.status!="playing" or not _s.items.has(selected) or _s.items[selected].location not in ["pack","equip"]: return []
 	var result: Array=[]
-	for fixture in _floor().fixtures:
-		if fixture.type=="plate" and fixture.pos==front_pos():
-			result.append({"target_id": fixture.id, "pos": fixture.pos.duplicate(),
-				"verb": "PLACE", "action": {"type":"place","item_id":selected,"target_id":fixture.id}})
+	for fixture in local_fixtures():
+		if fixture.type=="porter" and not fixture.restored and fixture.item_id==selected:
+			result.append({"target_id":fixture.id,"pos":fixture.pos.duplicate(),"verb":"RETURN","action":{"type":"return_item","item_id":selected,"target_id":fixture.id}})
+		elif fixture.type=="plate" and fixture.pos==front_pos() and _s.pack.has(selected) and definition(selected).tags.has("HEAVY"):
+			result.append({"target_id":fixture.id,"pos":fixture.pos.duplicate(),"verb":"PLACE","action":{"type":"place","item_id":selected,"target_id":fixture.id}})
 	return result
+
+func _arrival_clear(number: int,cell: Array) -> bool:
+	var f: Dictionary=_s.floors[number-1]
+	if f.tiles[cell[1]*f.width+cell[0]]!=0: return false
+	for actor in f.actors:
+		if actor.hp>0 and actor.pos==cell: return false
+	for fixture in f.fixtures:
+		if fixture.type in ["gate","lock"] and fixture.pos==cell and not fixture.open: return false
+	return true
+
+func porter_state() -> Dictionary:
+	for f in _s.floors:
+		for fixture in f.fixtures:
+			if fixture.type=="porter": return {"present":true,"restored":fixture.restored}
+	return {"present":false,"restored":false}
+
 func legal_verbs(selected: String = "") -> Array:
 	if _s.status!="playing": return []
 	var front := inspect_front()
@@ -122,7 +144,7 @@ func legal_verbs(selected: String = "") -> Array:
 			{"label":"GUARD","action":{"type":"guard"}},{"label":"WAIT","action":{"type":"wait"}}]
 	var result: Array=[]
 	var valid := targets(selected)
-	if not valid.is_empty(): result.append({"label":"PLACE","action":valid[0].action})
+	if not valid.is_empty(): result.append({"label":valid[0].verb,"action":valid[0].action})
 	elif _s.pack.has(selected): result.append({"label":"DROP","action":{"type":"drop","item_id":selected}})
 	else:
 		var fixtures:=fixture_actions()
@@ -256,6 +278,12 @@ func apply(action: Dictionary) -> Dictionary:
 			if kind=="unlock" and (fixture.type!="lock" or fixture.open or not _s.belt.has(fixture.key_id)): return _reject("Find the matching key.")
 			if kind=="stairs" and fixture.type not in ["stairs_up","stairs_down"]: return _reject("No stair here.")
 			if kind=="leave" and (fixture.type!="exit" or not has_seal()): return _reject("Find the Dawn Seal.")
+		"return_item":
+			if fixture.get("type","")!="porter" or not _near(fixture.pos) or fixture.restored or fixture.item_id!=id: return _reject("That is not its owner.")
+			if not _s.items.has(id) or _s.items[id].location not in ["pack","equip"]: return _reject("Bring its clapper.")
+		"ride":
+			if fixture.get("type","")!="lift" or not _near(fixture.pos) or not fixture.active: return _reject("The lift is sleeping.")
+			if not _arrival_clear(fixture.destination_floor,fixture.destination): return _reject("The landing is blocked.")
 		"hit":
 			if actor.is_empty() or actor.hp<=0 or actor.pos!=front_pos(): return _reject("Nothing to hit.")
 		"guard","wait": pass
@@ -311,6 +339,21 @@ func apply(action: Dictionary) -> Dictionary:
 		"unlock":
 			fixture.open=true
 			_event("unlocked","mechanism",{"target_id":fixture.id})
+		"return_item":
+			var item: Dictionary=_s.items[id]
+			_s.pack.erase(id)
+			if item.location=="equip": _s.equipment[item.slot]=""
+			item.location="returned"; item.slot=""; item.pos=[]; item.floor=0; item.owner_id=fixture.id
+			fixture.restored=true
+			for f in _s.floors:
+				for landing in f.fixtures:
+					if landing.type=="lift" and landing.owner_id==fixture.id: landing.active=true
+			_event("restored","mechanism",{"owner_id":fixture.id,"item_id":id})
+		"ride":
+			transition=true
+			var old_floor: int=_s.floor
+			_s.floor=fixture.destination_floor; _s.pos=fixture.destination.duplicate(); _s.facing=0
+			_event("lift_ride","transition",{"from":old_floor,"to":_s.floor,"target_id":fixture.destination_id})
 		"hit":
 			var damage:=attack_damage(actor.id)
 			actor.hp=maxi(0,actor.hp-damage)
@@ -338,7 +381,8 @@ func apply(action: Dictionary) -> Dictionary:
 func view_snapshot() -> Dictionary:
 	var f:=floor_data()
 	f.merge({"pos":_s.pos.duplicate(),"facing":_s.facing,"floor":_s.floor,
-		"hp":_s.hp,"max_hp":_s.max_hp,"status":_s.status,"objects":[]})
+		"hp":_s.hp,"max_hp":_s.max_hp,"status":_s.status,"objects":[],
+		"seal_site":f.landing.duplicate() if _s.floor==_s.floor_count else []})
 	for id in _s.items:
 		var item: Dictionary=_s.items[id]
 		if item.location=="floor" and item.floor==_s.floor:

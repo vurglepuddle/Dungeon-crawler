@@ -117,6 +117,7 @@ func _rules() -> void:
 	var setup: Dictionary=sim.snapshot()
 	setup.pos=[setup.pos[0],13]; setup.floors[0].visited[13*17+setup.pos[0]]=true
 	setup.floors[0].fixtures[0].pressed=true; setup.floors[0].fixtures[1].open=true
+	setup.items.f1_bone_5={"id":"f1_bone_5","kind":"bone","location":"floor","floor":1,"pos":setup.pos.duplicate(),"slot":"","spent":false}
 	for id in ["f1_bread_3","f1_bone_5"]:
 		setup.pack.append(id); setup.items[id].location="pack"; setup.items[id].floor=0; setup.items[id].pos=[]
 	check(sim.restore_state(setup),"Capability fixture valid")
@@ -143,6 +144,9 @@ func _combat(heavy: bool,coat: bool):
 func _inventory() -> void:
 	var sim=Sim.new("BELL42")
 	var state: Dictionary=sim.snapshot()
+	for n in range(8):
+		var id: String="test_loot_%d"%n
+		state.items[id]={"id":id,"kind":"bread","location":"floor","floor":1,"pos":state.pos.duplicate(),"slot":"","spent":false}
 	for id in state.items:
 		if state.pack.size()==8: break
 		if state.items[id].floor==1 and Catalog.ITEMS[state.items[id].kind].slot!="belt":
@@ -211,14 +215,15 @@ func _sweep() -> void:
 		layouts[JSON.stringify(generated.floors.map(func(f): return f.tiles))]=true
 		for f in generated.floors:
 			check(_connected(f).size()==f.tiles.count(0),"Every floor cell connected")
-			var gate: Dictionary=f.fixtures[1]; var lock: Dictionary=f.fixtures[3]
-			check(not _connected(f,[gate.pos]).has(Vector2i(f.landing[0],f.landing[1])),"Weight gate cuts floor")
-			var locked:=_connected(f,[lock.pos])
-			check(not locked.has(Vector2i(f.landing[0],f.landing[1])),"Key gate cuts final room")
-			var key_item: Dictionary=generated.items[lock.key_id]
-			check(locked.has(Vector2i(key_item.pos[0],key_item.pos[1])),"Matching key lies before its lock")
+			for gate in f.fixtures:
+				if gate.type=="gate": check(not _connected(f,[gate.pos]).has(Vector2i(f.landing[0],f.landing[1])),"Weight gate cuts floor")
+				if gate.type=="lock":
+					var locked:=_connected(f,[gate.pos])
+					check(not locked.has(Vector2i(f.landing[0],f.landing[1])),"Key gate cuts final room")
+					var key_item: Dictionary=generated.items[gate.key_id]
+					check(locked.has(Vector2i(key_item.pos[0],key_item.pos[1])),"Matching key lies before its lock")
 			var spine: int=f.start[0]
-			check(_connected(f,[[spine,8]]).has(Vector2i(spine,6)),"Useful middle loop survives main corridor cut")
+			check(_connected(f,[[spine,8]]).has(Vector2i(spine,f.layout.loop_top)),"Useful middle loop survives main corridor cut")
 		var proof: Dictionary=Witness.build(seed)
 		check(proof.ok,"Full down-and-back witness "+seed+" "+proof.reason)
 		if not proof.ok: continue

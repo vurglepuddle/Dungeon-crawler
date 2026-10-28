@@ -1,14 +1,17 @@
-# M2 contract
+# M3a contract
 
-Rules/content/generator m2.1; snapshot schema 2. This replaces the M1 runtime
-contract. M1 result documents and pilots remain historical; tests/test_m1.gd
-now runs the migrated focused rule regressions against current M2 rules.
+New runs use rules/content/generator m3.1; snapshot/envelope schema stays 2.
+Exact m2.1 version cohorts remain readable and playable from stored floors.
+Loading never regenerates a run, inserts fixtures, or changes its version/hash.
+The M2 fixture in tests/fixtures proves the original 77-turn final hash still
+matches. Unsupported version combinations fail closed.
 
 ## Coordinates, identity and ownership
 
 World cells are integer [x,y], x right and y down. Facing 0=N, 1=E, 2=S, 3=W.
 Floor numbers are 1-based. Each current floor is 17 x 17 with row-major tiles:
-0=floor, 1=wall. IDs are stable instance strings qualified by floor. Item
+0=floor, 1=wall. IDs are stable, unique across the run; ordinary floor content
+uses a floor prefix, while the Porter/clapper/lift IDs are run-wide. Item
 definitions are separate IDs such as stone or club. Never use display names
 or screen coordinates as rule identifiers.
 
@@ -48,14 +51,25 @@ playing/won/lost/error (error is construction-only and never saved).
 pack is ordered IDs, capacity 8. equipment is {hand:id-or-empty,body:id-or-empty};
 belt is protected key/Seal IDs and has no pack cost. items is an ID-keyed table
 of {id,kind,location,floor,pos,slot,spent}. location is floor/pack/equip/belt/
-consumed; floor positions exist only for floor items. Every item has exactly
+consumed/returned; floor positions exist only for floor items. A returned
+clapper has owner_id, no slot/position/floor, and its matching Porter is
+restored. It never remains in a pack/equipment reference. Every item has exactly
 one location. spent records an individual coat's used protection. Selection
 and open panels are UI state, not an extra inventory slot.
 
 Each floor has width/height, tiles, fixtures, actors, visited, start and
 landing. Fixtures are typed records: plate links gate_id; gate has plate_id,
 open/latched; latch links gate_id; lock has key_id/open; exit/stairs_up/
-stairs_down have positions. Actors have id/kind/pos/hp/state/intent.
+stairs_down have positions. M3 floors also contain:
+
+- porter: item_id for its clapper, restored boolean; a peaceful, blocking fixture.
+- lift: owner_id, active boolean, destination_floor, destination cell and
+  reciprocal destination_id. Both linked lifts agree with their owner's
+  restored state. Destinations point to real landing fixtures on real floors.
+- layout: generation metadata (loop_top/loop_bottom/branch/weight/keyed),
+  used to describe/test structural modules; never a runtime movement override.
+
+Actors have id/kind/pos/hp/state/intent.
 Husk states: idle/windup/recovery/dead. Intent is {cell,due_in:1} or empty.
 It resolves on the next consumed beat on its own floor, not a wall clock or
 a global deadline while another floor is active.
@@ -81,6 +95,8 @@ unchanged. Queries, selection, cards, map and seed cancellation are free.
 | stairs | target_id of current/front stairs |
 | leave | current/front entrance exit, floor 1, Seal on belt |
 | hit | target_id of living actor directly ahead |
+| return_item | item_id is the nearby Porter's clapper, in pack or hand; target_id is that unrestored Porter |
+| ride | current/front active lift target_id; destination must be walkable and unoccupied |
 | guard / wait | no extra fields |
 
 A body presses a plate. HEAVY floor items and living Husks do too. Stepping
@@ -99,7 +115,11 @@ attack. A recovering Husk can approach again after the player's next action.
 
 Stairs replace the active floor/position/facing and freeze the departed actors.
 There is no arrival enemy phase. Down arrives at the next start facing north;
-up arrives at the previous landing facing south. All floor/item state persists.
+up arrives at the previous landing facing south. RIDE arrives at the linked
+lift cell facing north, with no arrival enemy phase. RETURN removes the sole
+item reference from pack/equipment, sets location returned with owner_id,
+restores the owner and activates both lifts atomically. It costs one beat.
+All floor/item state persists.
 Leaving with the Seal wins; zero health loses. Terminal commands reject.
 
 Events contain type, phase, sequence, turn, revision and floor. Types/payloads:
@@ -113,6 +133,8 @@ Events contain type, phase, sequence, turn, revision and floor. Types/payloads:
 - attack_resolved: actor_id, cell, damage, blocked, armour.
 - monster_moved: actor_id, from/to; intent_announced: actor_id, intent.
 - floor_changed: from/to; run_ended: status.
+- restored: owner_id, item_id.
+- lift_ride: from/to floor numbers, target_id of destination lift.
 
 The controller saves committed state before animation. Events do not own a
 second simulation; rendering re-syncs from the authoritative snapshot. One
@@ -126,19 +148,27 @@ UTF-8 initializes the 32-bit LCG (1664525*s+1013904223 masked to 32 bits;
 (s>>8)%limit). No runtime randomness affects rules. All floors are prebuilt;
 their generated output is saved, so no generator state is needed after load.
 
-Floor count is 1–4. Layouts have rooms, corridors, an actual alternate middle
-route, pressure/latch and keyed cuts. Each matching key is before its lock.
-UndercroftWitness.build(seed,count=2,explore=false) returns ok/reason/actions/
-snapshot/pressure. It uses real moves, rotations, pickup/drop, guarding,
-striking, latches, keys, stairs and leaving. The app admits only a full,
-damage-free return witness. It cannot grant items, bypass gates or freeze AI.
+Floor count is 1-4. Entry/upper rooms are three cells wide. A floor has a
+useful loop with variable reach/height, a side room and a variable landing.
+Floor one teaches weight/latch plus keyed cuts; later floors choose weight,
+keyed, or both. Every key precedes its lock; no gate bypass is introduced.
+There is no random hidden mandatory connection. The lift is optional.
 
-The optional greedy policy equips better weapons/an initial coat and collects
-available ordinary loot until full. Its per-floor report contains offered,
-free_on_entry, free_on_exit and left_on_floor. Essentials are excluded from
-ordinary offerings. This is inventory pressure instrumentation, not an optimal
-or realistic human policy. Recovering a previously dropped stone is not a new
-offering. Broad sweeps and exploratory probes have separate counts.
+UndercroftWitness.build(seed,count=2,explore=false,porter_policy="skip")
+returns ok/reason/actions/snapshot/pressure. Policies skip/keep/return use
+ordinary commands only. Return repairs the lift and uses it on the way home;
+keep carries the equipped clapper and returns by stairs. The one-floor lift
+links entry and upper landing; multi-floor lifts link entrance and deepest
+entry landing. The app admits only a damage-free stairs return witness.
+
+A separate greedy policy equips better weapons/an initial coat and collects
+ordinary loot until full. Per-floor reports include offered, offered_kinds,
+free_on_entry, free_on_exit and left_on_floor. Original item membership is
+recorded before any move, so imports and re-pickups are not extra offerings.
+Belt essentials are excluded; the clapper counts as an ordinary offering.
+Counts describe this greedy policy, not human utility or optimum routes.
+Later floors offer a healing/FOOD item, an EDGE/GLOW item and distinct extras;
+capability interactions beyond existing healing/combat remain M3b.
 
 ## Disk persistence
 
@@ -174,7 +204,7 @@ The current scene root implements pilot_call(name,args)->String:
   Title/end menus and item cards have usable controls and are not busy.
 - state: compact public JSON. In-game fields: seed, floor/floor_count, pos,
   facing, hp, turn, revision, status, pack/belt IDs, equipment, selected,
-  front contents, opaque complete-state hash, save_ok. At initial title:
+  front contents, porter:{present,restored}, opaque complete-state hash, save_ok. At initial title:
   {status:"title",can_continue:bool}.
 - where NAME: logical global centre "x y"; absent/hidden/disabled controls
   return empty. No physical-window assumptions.
@@ -185,11 +215,19 @@ The current scene root implements pilot_call(name,args)->String:
 
 Static game names: seed, map, new_seed, portrait, equip_hand/equip_body,
 belt_key/belt_seal, pack0..pack7, verb0..verb2, fwd/back/turn_l/turn_r/
-strafe_l/strafe_r, view. hot_item opens pickup or the named loot chooser.
-hot_front is the selected PLACE or currently usable nearby fixture marker;
-hot_plate/hot_exit/hot_stairs/hot_latch alias it. hot_husk inspects an adjacent
-Husk. Markers come from shared rule queries, including a latch usable during
-combat. Item cards expose card_use/card_eat (where applicable), card_drop,
+strafe_l/strafe_r, view. World labels and object hit areas share the renderer's
+projection/occlusion. Labels collide/stack in stable ID order, within the view.
+hot_item opens one object or a chooser for one cell's pile. hot_item_ITEM_ID
+is a stable where alias for that item's pile label; it does not move or grant
+anything. The strip TAKE still offers all reachable loot. hot_front is the
+first selected target or nearby usable fixture; hot_FIXTURE_ID names later
+fixture labels. hot_plate/hot_exit/hot_stairs/hot_latch alias hot_front.
+hot_husk inspects an adjacent Husk. hot_porter opens its free owner card;
+porter_return commits RETURN, porter_close closes it. Selected clapper RETURN
+and HEAVY PLACE remain tappable while the item card is open. A sleeping lift
+can be inspected through hot_lift_home/hot_lift_deep. Every label also has a
+KEY_object button covering its object, at least 18 x 18 logical pixels.
+Item cards expose card_use/card_eat (where applicable), card_drop,
 card_close. Title/end: continue, retry, start, sound.
 
 Blocking panels: seed_input/seed_start/seed_random/seed_cancel;
@@ -197,8 +235,10 @@ map_close; loot_ITEM_ID, loot_prev/loot_next, loot_cancel. Loot is paginated
 six entries at a time. Do not waitidle while a blocking panel is intentionally
 open: wait a few frames, interact with its named controls, then waitidle.
 
-tests/build_m2_pilots.gd emits the committed fixed-seed full run, save A /
-reopen B and feedback pilots. Gameplay is real named taps. Hooks do not move
-the Finder, grant items, force gates or advance turns. Use isolated save paths
-when running pilots. Screenshot output directories must exist. The save pair
-must run A then B as fresh processes sharing the same save path.
+tests/build_m3_pilots.gd emits return, keep, four-direction room and restoration
+close/reopen pilots. M2 pilots/builders are historical fixtures for the M2
+generator; use M3 pilots for new runs. Gameplay remains real named taps. Hooks
+do not move the Finder, grant items, force gates or advance turns. Use isolated
+save paths and create the screenshot directory. Run save A then B as fresh
+processes sharing one save path. A closes after restoration; B checks the exact
+saved hash, turn, owner/lift state and save_ok.

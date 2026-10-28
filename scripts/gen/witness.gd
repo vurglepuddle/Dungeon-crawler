@@ -7,9 +7,9 @@ var actions: Array=[]
 var error: String=""
 var pressure: Array=[]
 
-static func build(seed: String, count: int=2, explore: bool=false) -> Dictionary:
+static func build(seed: String, count: int=2, explore: bool=false,porter_policy: String="skip") -> Dictionary:
 	var bot=UndercroftWitness.new()
-	return bot.run(seed,count,explore)
+	return bot.run(seed,count,explore,porter_policy)
 
 func _raw(action: Dictionary) -> bool:
 	var result: Dictionary=sim.apply(action)
@@ -101,7 +101,7 @@ func _explore() -> bool:
 	var state: Dictionary=sim.snapshot()
 	var ids: Array=[]
 	for id in state.items:
-		if id.begins_with("f%d_"%state.floor) and state.items[id].location=="floor" and sim.definition(id).slot!="belt":
+		if (id.begins_with("f%d_"%state.floor) or id=="bell_clapper" and state.floor==1) and state.items[id].location=="floor" and sim.definition(id).slot!="belt":
 			ids.append(id)
 	for id in ids:
 		state=sim.snapshot()
@@ -114,40 +114,64 @@ func _explore() -> bool:
 			if not _commit({"type":"equip","item_id":id}): return false
 	return true
 
-func run(seed: String,count: int,explore: bool) -> Dictionary:
+func run(seed: String,count: int,explore: bool,porter_policy: String="skip",initial_state: Dictionary={}) -> Dictionary:
 	sim=Sim.new(seed,count)
+	if not initial_state.is_empty() and not sim.restore_state(initial_state): return {"ok":false,"reason":"Invalid initial state"}
 	if sim.snapshot().status=="error": return {"ok":false,"reason":"Bad seed","actions":[]}
+	var original: Dictionary=sim.snapshot().items
 	for number in range(1,count+1):
 		var state: Dictionary=sim.snapshot()
-		var offered:=0
-		for id in state.items:
-			if state.items[id].floor==number and sim.definition(id).slot!="belt": offered+=1
-		var report: Dictionary={"floor":number,"offered":offered,"free_on_entry":8-state.pack.size()}
+		var ids: Array=[]
+		var kinds: Array=[]
+		for id in original:
+			if original[id].floor==number and sim.definition(id).slot!="belt": ids.append(id); kinds.append(original[id].kind)
+		var report: Dictionary={"floor":number,"offered":ids.size(),"offered_kinds":kinds,"free_on_entry":8-state.pack.size()}
 		pressure.append(report)
-		var stone: String="f%d_stone"%number
-		if not _space() or not _pickup(stone): return _finish(false)
 		var plate:=_fixture("plate")
-		if not go(plate.pos,false) or not _commit({"type":"drop","item_id":stone}): return _finish(false)
-		var latch:=_fixture("latch")
-		if not go(latch.pos) or not _commit({"type":"latch","target_id":latch.id}): return _finish(false)
-		if not _pickup("f%d_key"%number): return _finish(false)
+		if not plate.is_empty():
+			var stone: String="f%d_stone"%number
+			if not _space() or not _pickup(stone): return _finish(false)
+			if not go(plate.pos,false) or not _commit({"type":"drop","item_id":stone}): return _finish(false)
+			var latch:=_fixture("latch")
+			if not go(latch.pos) or not _commit({"type":"latch","target_id":latch.id}): return _finish(false)
 		var lock:=_fixture("lock")
-		if not go(lock.pos) or not _commit({"type":"unlock","target_id":lock.id}): return _finish(false)
+		if not lock.is_empty():
+			if not _pickup(lock.key_id): return _finish(false)
+		if number==1 and porter_policy!="skip":
+			if not _space() or not _pickup("bell_clapper"): return _finish(false)
+		if not lock.is_empty():
+			if not go(lock.pos) or not _commit({"type":"unlock","target_id":lock.id}): return _finish(false)
+		if number==1 and porter_policy!="skip":
+			if porter_policy=="return":
+				var porter:=_fixture("porter")
+				if not go(porter.pos) or not _commit({"type":"return_item","target_id":porter.id,"item_id":"bell_clapper"}): return _finish(false)
+			elif porter_policy=="keep":
+				if not _commit({"type":"equip","item_id":"bell_clapper"}): return _finish(false)
 		if explore and not _explore(): return _finish(false)
 		state=sim.snapshot()
 		report.free_on_exit=8-state.pack.size()
 		report.left_on_floor=0
-		for id in state.items:
-			if id.begins_with("f%d_"%number) and state.items[id].location=="floor" and sim.definition(id).slot!="belt":
-				report.left_on_floor+=1
+		for id in ids:
+			if state.items[id].location=="floor": report.left_on_floor+=1
 		if number<count:
 			var down:=_fixture("stairs_down")
 			if not go(down.pos) or not _commit({"type":"stairs","target_id":down.id}): return _finish(false)
 		elif not _pickup("f%d_seal"%number): return _finish(false)
 	for number in range(count,0,-1):
+		if sim.snapshot().floor!=number: continue
+		var lift:=_fixture("lift")
+		if count==1:
+			for landing in sim.floor_data().fixtures:
+				if landing.id=="lift_deep": lift=landing
+		if porter_policy=="return" and not lift.is_empty() and lift.active and (number>1 or count==1):
+			if not go(lift.pos) or not _commit({"type":"ride","target_id":lift.id}): return _finish(false)
+			if count>1: continue
 		var up:=_fixture("exit" if number==1 else "stairs_up")
 		if not go(up.pos): return _finish(false)
 		if not _commit({"type":"leave" if number==1 else "stairs","target_id":up.id}): return _finish(false)
+	if sim.snapshot().status=="playing" and sim.snapshot().floor==1:
+		var exit:=_fixture("exit")
+		if not go(exit.pos) or not _commit({"type":"leave","target_id":exit.id}): return _finish(false)
 	return _finish(sim.snapshot().status=="won")
 
 func _finish(ok: bool) -> Dictionary:

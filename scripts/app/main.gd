@@ -35,6 +35,8 @@ var _menu_note: Label
 var _seed_input: LineEdit
 var _seed_note: Label
 var _view_action: Dictionary={}
+var _marker_names: Array=[]
+var _item_markers: Dictionary={}
 
 func _ready() -> void:
 	clip_contents=true
@@ -158,6 +160,7 @@ func _notification(what: int) -> void:
 	if what==NOTIFICATION_APPLICATION_PAUSED: _save()
 	if what==NOTIFICATION_WM_CLOSE_REQUEST:
 		_save()
+		if is_instance_valid(sfx): sfx.stop()
 		get_tree().quit()
 func _can_game() -> bool: return _mode=="game" and _busy<=0 and not is_instance_valid(_modal)
 func _sync() -> void:
@@ -185,23 +188,89 @@ func _sync() -> void:
 	for i in range(3):
 		controls["verb%d"%i].visible=i<verbs.size()
 		controls["verb%d"%i].text=verbs[i].label if i<verbs.size() else ""
-	controls.hot_front.visible=false; controls.hot_item.visible=false; controls.hot_husk.visible=false
-	_view_action={}
-	if state.status=="playing":
+	view.update_state(sim.view_snapshot())
+	_sync_markers()
+	queue_redraw()
+
+func _sync_markers() -> void:
+	for key in _marker_names:
+		if controls.has(key): controls[key].queue_free(); controls.erase(key)
+	_marker_names=[]; _item_markers={}
+	for key in ["hot_front","hot_item","hot_husk"]: controls[key].visible=false
+	_view_action={}; view.marker_links=[]
+	if state.status!="playing": return
+	var markers: Array=[]
+	var targets: Array=sim.targets(selected)
+	if not targets.is_empty():
+		for target in targets:
+			markers.append({"key":"hot_front" if markers.is_empty() else "hot_"+target.target_id,"id":target.target_id,"label":target.verb,"callback":_command.bind(target.action)})
+		_view_action=targets[0].action
+	elif selected=="":
+		for fixture in sim.fixture_actions():
+			if fixture.action.type=="return_item": continue
+			var key: String="hot_front" if markers.is_empty() else "hot_"+fixture.action.target_id
+			markers.append({"key":key,"id":fixture.action.target_id,"label":fixture.label,"callback":_command.bind(fixture.action)})
+			if _view_action.is_empty(): _view_action=fixture.action
+	if selected=="":
+		var piles: Dictionary={}
+		for id in sim.reachable_items():
+			var cell_key: String=JSON.stringify(state.items[id].pos)
+			if not piles.has(cell_key): piles[cell_key]=[]
+			piles[cell_key].append(id)
+		for ids in piles.values():
+			var key: String="hot_item" if _item_markers.is_empty() else "hot_take_"+ids[0]
+			for id in ids: _item_markers[id]=key
+			markers.append({"key":key,"id":ids[0],"label":"TAKE","callback":_take_ids.bind(ids)})
 		var front: Dictionary=sim.inspect_front()
-		controls.hot_husk.visible=front.monster!="" and selected==""
-		controls.hot_item.visible=selected=="" and not sim.reachable_items().is_empty()
-		var targets: Array=sim.targets(selected)
-		if not targets.is_empty():
-			controls.hot_front.visible=true; controls.hot_front.text=targets[0].verb
-			controls.hot_front.position=Vector2(48,68)
-			_view_action=targets[0].action
-		elif selected=="":
-			var fixtures: Array=sim.fixture_actions()
-			if not fixtures.is_empty():
-				controls.hot_front.visible=true; controls.hot_front.text=fixtures[0].label
-				controls.hot_front.position=Vector2(3,91); _view_action=fixtures[0].action
-	view.update_state(sim.view_snapshot()); queue_redraw()
+		if front.monster!="": markers.append({"key":"hot_husk","id":front.monster,"label":"HUSK","callback":_look_husk})
+	if selected=="":
+		for fixture in sim.local_fixtures():
+			if fixture.type=="porter" and not markers.any(func(m): return m.id==fixture.id):
+				markers.append({"key":"hot_porter","id":fixture.id,"label":"PORTER","callback":_porter_card.bind(fixture)})
+			elif fixture.type=="lift" and not fixture.active:
+				markers.append({"key":"hot_"+fixture.id,"id":fixture.id,"label":"ASLEEP","callback":_sleeping_lift})
+	markers.sort_custom(func(a,b): return a.id<b.id)
+	var occupied: Array=[]
+	for marker in markers:
+		var projection: Dictionary=view.projection(marker.id)
+		if projection.is_empty(): continue
+		var anchor: Vector2=projection.anchor
+		var width: float=maxf(34,FONT.get_string_size(marker.label,HORIZONTAL_ALIGNMENT_LEFT,-1,16).x+8)
+		var preferred:=Rect2(clampf(anchor.x-width/2,1,153-width),clampf(projection.rect.position.y-19,20,98),width,18)
+		var label_rect:=preferred
+		if _marker_collides(label_rect,occupied):
+			var best:=100000.0
+			for y in [20,40,60,80,98]:
+				for x in [clampf(anchor.x-width/2,1,153-width),1.0,153-width]:
+					var candidate:=Rect2(x,y,width,18)
+					var score: float=candidate.get_center().distance_squared_to(preferred.get_center())
+					if not _marker_collides(candidate,occupied) and score<best: best=score; label_rect=candidate
+		occupied.append(label_rect)
+		var hit_rect: Rect2=projection.rect
+		hit_rect.size=hit_rect.size.max(Vector2(18,18))
+		hit_rect.position.x=clampf(hit_rect.position.x,0,154-hit_rect.size.x)
+		hit_rect.position.y=clampf(hit_rect.position.y,19,118-hit_rect.size.y)
+		var object_key: String=marker.key+"_object"
+		_button(object_key,hit_rect,"",marker.callback,null,false); _marker_names.append(object_key)
+		var button: Button
+		if controls.has(marker.key):
+			button=controls[marker.key]
+			for connection in button.pressed.get_connections(): button.pressed.disconnect(connection.callable)
+			button.pressed.connect(marker.callback)
+			button.position=label_rect.position; button.custom_minimum_size=label_rect.size; button.size=label_rect.size
+		else:
+			button=_button(marker.key,label_rect,marker.label,marker.callback); _marker_names.append(marker.key)
+		button.text=marker.label; button.visible=true; button.move_to_front()
+		view.marker_links.append({"from":label_rect.get_center(),"to":anchor})
+	# All labels must be above every transparent object hit area.
+	for marker in markers:
+		if controls.has(marker.key): controls[marker.key].move_to_front()
+	view.queue_redraw()
+
+func _marker_collides(rect: Rect2,others: Array) -> bool:
+	for other in others:
+		if rect.grow(1).intersects(other): return true
+	return false
 func _command(command: Dictionary) -> void:
 	if not _can_game(): return
 	_close_card()
@@ -240,6 +309,8 @@ func _command(command: Dictionary) -> void:
 			"intent_announced": lines=["A bell arm rises.","GUARD or step away."]; sfx.play("bell")
 			"monster_moved": lines=["Heavy footsteps.",""]
 			"monster_defeated": lines=["The bell falls silent.","The way is clear."]
+			"restored": lines=["A bell finds its voice.","The lift wakes below."]; sfx.play("restore")
+			"lift_ride": lines=["Chains sing in the dark.","Floor %d / landing."%event.to]; sfx.play("gate"); selected=""
 			"floor_changed": lines=["A different silence.","Floor %d."%event.to]; selected=""
 	_busy=0.13 if result.consumed_turn else 0.05
 	if _hurt_time>0: _busy=0.24
@@ -257,6 +328,20 @@ func _verb(index: int) -> void:
 func _front_action() -> void:
 	if not _can_game(): return
 	if not _view_action.is_empty(): _command(_view_action)
+func _sleeping_lift() -> void:
+	if _can_game(): lines=["Its chains are still.","The Porter may know."]; queue_redraw()
+func _porter_card(fixture: Dictionary) -> void:
+	if not _can_game(): return
+	var column:=_panel("The Bell Porter",65,240)
+	var message: String="My voice is back.\nThe lift is yours."
+	if not fixture.restored: message="My clapper is lost.\nReturn it; I can lift\nyou between landings.\nOr keep its HEAVY blow."
+	_label(message,column)
+	var item: Dictionary=state.items[fixture.item_id]
+	if not fixture.restored and item.location in ["pack","equip"]:
+		_modal_button("porter_return","RETURN CLAPPER",_return_from_card.bind(fixture),column)
+	_modal_button("porter_close","CLOSE",_close_modal,column)
+func _return_from_card(fixture: Dictionary) -> void:
+	_close_modal(); _command({"type":"return_item","target_id":fixture.id,"item_id":fixture.item_id})
 func _look_husk() -> void:
 	if _can_game(): lines=["A hollow bell, awake.","GUARD, then HIT it."]; queue_redraw()
 func _portrait_help() -> void:
@@ -271,11 +356,11 @@ func _select(index: int) -> void:
 func _equipment_card(slot: String) -> void:
 	if not _can_game(): return
 	var id: String=state.equipment[slot]
-	if id!="": selected=id; _save(); _open_card(id)
+	if id!="": selected=id; _save(); _sync(); _open_card(id)
 func _belt_card(kind: String) -> void:
 	if not _can_game(): return
 	for id in state.belt:
-		if state.items[id].kind==kind: selected=id; _save(); _open_card(id); return
+		if state.items[id].kind==kind: selected=id; _save(); _sync(); _open_card(id); return
 func _open_card(id: String) -> void:
 	_close_card()
 	var panel:=PanelContainer.new(); panel.position=Vector2(4,154); panel.size=Vector2(146,108)
@@ -289,6 +374,7 @@ func _open_card(id: String) -> void:
 	elif definition.heal>0: info+=": heal %d"%definition.heal
 	if info.begins_with(": "): info=info.trim_prefix(": ")
 	_label(info,column); _label(definition.provenance,column)
+	if definition.has("purpose"): _label(definition.purpose,column)
 	var row:=HBoxContainer.new(); row.add_theme_constant_override("separation",3); column.add_child(row)
 	if state.items[id].location=="pack":
 		if definition.slot in ["hand","body"]:
@@ -354,6 +440,10 @@ func _take() -> void:
 	if loot.size()==1: _command({"type":"pickup","item_id":loot[0]}); return
 	if loot.is_empty(): return
 	_loot_page(loot,0)
+func _take_ids(ids: Array) -> void:
+	if not _can_game() or ids.is_empty(): return
+	if ids.size()==1: _command({"type":"pickup","item_id":ids[0]})
+	else: _loot_page(ids,0)
 func _loot_page(loot: Array,page: int) -> void:
 	var column:=_panel("Take which thing?",32,280)
 	column.add_theme_constant_override("separation",4)
@@ -423,7 +513,7 @@ func _public_state() -> Dictionary:
 	var public: Dictionary={"seed":state.seed,"floor":state.floor,"floor_count":state.floor_count,
 		"pos":state.pos.duplicate(),"facing":state.facing,"hp":state.hp,"turn":state.turn,"revision":state.revision,
 		"status":state.status,"pack":state.pack.duplicate(),"belt":state.belt.duplicate(),
-		"equipment":state.equipment.duplicate(),"selected":selected,"front":sim.inspect_front(),
+		"equipment":state.equipment.duplicate(),"selected":selected,"porter":sim.porter_state(),"front":sim.inspect_front(),
 		"hash":sim.state_hash(),"save_ok":_save_ok}
 	return public
 func pilot_call(name_key: String,args: Array) -> String:
@@ -435,6 +525,8 @@ func pilot_call(name_key: String,args: Array) -> String:
 			if args.is_empty(): return ""
 			var key:=str(args[0])
 			if key=="view" and _mode=="game": return "77 63"
+			if key.begins_with("hot_item_"):
+				key=_item_markers.get(key.trim_prefix("hot_item_"),key)
 			if key in ["hot_plate","hot_exit","hot_stairs","hot_latch"]: key="hot_front"
 			if controls.has(key) and is_instance_valid(controls[key]) and controls[key].is_visible_in_tree() and not (controls[key] is Button and controls[key].disabled):
 				var center: Vector2=controls[key].get_global_rect().get_center()
