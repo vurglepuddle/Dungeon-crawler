@@ -1,0 +1,68 @@
+# Focused UI lifecycle: modal, new seed, deliberate death, same-seed retry.
+wait 4
+call new_run BELL42
+waitidle
+tapnamed seed
+wait 4
+call busy
+shot 10_seed_entry
+tapnamed seed_cancel
+waitidle
+call assert seed BELL42
+call assert revision 0
+tapnamed new_seed
+waitidle
+call assert turn 0
+call state
+call new_run BELL42
+waitidle
+tapnamed verb0
+waitidle
+tapnamed fwd
+waitidle
+tapnamed pack0
+tapnamed hot_plate
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+# Ignore every announced strike. Wind-up alternates with recovery.
+tapnamed verb2
+waitidle
+tapnamed verb2
+waitidle
+tapnamed verb2
+waitidle
+tapnamed verb2
+waitidle
+tapnamed verb2
+waitidle
+tapnamed verb2
+waitidle
+tapnamed verb2
+waitidle
+tapnamed verb2
+waitidle
+tapnamed verb2
+waitidle
+tapnamed verb2
+waitidle
+tapnamed verb2
+waitidle
+call assert status lost
+call assert hp 0
+shot 11_lost
+tapnamed verb0
+waitidle
+call assert status playing
+call assert seed BELL42
+call assert hp 6
+call assert turn 0
+call assert revision 0
+call assert pack []
+call assert gate_open false
+shot 12_retry
+quit

@@ -1,0 +1,73 @@
+# Actual controls, no direct sim actions. BELL42 bends right after the Husk.
+wait 4
+call new_run BELL42
+waitidle
+call assert status playing
+call assert turn 0
+shot 01_entry
+tapnamed verb0
+waitidle
+call assert pack ["stone"]
+shot 02_stone_taken
+tapnamed fwd
+waitidle
+tapnamed pack0
+call assert selected stone
+shot 03_place_marker
+tapnamed hot_plate
+waitidle
+call assert gate_open true
+call assert pack []
+call assert selected ""
+shot 04_gate_latched
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+call assert turn 6
+call assert hp 6
+shot 05_windup
+# Looking both ways must not resolve a pending attack.
+tapnamed turn_l
+waitidle
+tapnamed turn_r
+waitidle
+call assert turn 6
+call assert hp 6
+tapnamed verb1
+waitidle
+shot 06_guard_recovery
+tapnamed verb0
+waitidle
+tapnamed verb1
+waitidle
+tapnamed verb0
+waitidle
+call assert hp 6
+shot 07_husk_defeated
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_l
+waitidle
+tapnamed fwd
+waitidle
+shot 08_exit_ahead
+tapnamed verb0
+waitidle
+call assert status won
+call assert hp 6
+call assert turn 16
+call assert revision 20
+call state
+shot 09_won
+quit
