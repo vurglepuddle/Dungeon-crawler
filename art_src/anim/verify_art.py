@@ -7,7 +7,7 @@ from pathlib import Path
 from PIL import Image
 from pipeline import ROOT, TABLE, NEAREST
 
-SOURCES = [ROOT / 'art_src/anim', ROOT / 'art_src/creatures', ROOT / 'art_src/fx']
+SOURCES = [ROOT / 'art_src/anim', ROOT / 'art_src/creatures', ROOT / 'art_src/fx', ROOT / 'art_src/fixtures']
 
 
 def main():
@@ -29,11 +29,12 @@ def main():
             assert len(set(im.getdata())-{0}) == record['opaque_colors'], path
             assert im.getbbox(), path
             if '_strip_' in path.name:
-                w = im.width//3
-                assert w*3 == im.width
-                for i in range(3):
+                states = record.get('frame_order', [str(i) for i in range(3)] if path.parent.name == 'fx' else ['idle', 'windup', 'recoil'])
+                w = im.width//len(states)
+                assert w*len(states) == im.width
+                if 'frame_size' in record: assert record['frame_size'] == [w,im.height], path
+                for i,state in enumerate(states):
                     stem, height = path.stem.rsplit('_strip_', 1)
-                    state = ['idle', 'windup', 'recoil'][i] if path.parent.name != 'fx' else str(i)
                     frame_path = path.with_name(f'{stem}_{state}_{height}.png')
                     with Image.open(frame_path) as frame:
                         assert im.crop((i*w, 0, (i+1)*w, im.height)).tobytes() == frame.tobytes(), path
