@@ -1,15 +1,17 @@
-# M3d contract
+# M3e contract
 
-New runs use rules/content m3.2 with generator m3.1; snapshot/envelope schema
-stays 2. Exact m2.1 and m3.1 cohorts remain readable and playable from stored
+New runs use rules/content/generator m3.3; snapshot/envelope schema stays 2.
+Exact m2.1, m3.1 and m3.2 cohorts remain readable and playable from stored
 floors. Loading never regenerates or changes a hash. The first RING in a legacy
 M3a run upgrades rules/content to m3.2 while retaining its generator and floors.
 Unsupported profile combinations fail closed. Captured M2 and M3a fixtures
 prove their original ending hashes still match when no new action is used.
 
-M3d adds seed to detached view_snapshot output and optional checked survey
-metadata under ui. No rule, generation, coordinate, fixture/action or payload
-version changes. Existing witness turn counts and legacy ending hashes remain.
+M3d's checked survey remains optional metadata under ui. M3e adds capability
+rooms, actor/item/fixture fields and explicit capability/throw actions. Older
+stored geometry is never decorated or regenerated. The stair occupancy/type
+validation corrections apply to every accepted profile. Existing legacy
+ending hashes still match along their ordinary unoccupied routes.
 
 ## Coordinates, identity and ownership
 
@@ -20,15 +22,16 @@ uses a floor prefix, while the Porter/clapper/lift IDs are run-wide. Item
 definitions are separate IDs such as stone or club. Never use display names
 or screen coordinates as rule identifiers.
 
-Codex owns scripts except scripts/dev/autopilot.gd; scenes, content/data,
+Codex owns scripts except scripts/dev/autopilot.gd and scripts/dev/pointer.gd; scenes, content/data,
 assets/art, art_src, headless tests and own pilots; DESIGN/CONTRACT/ARCHITECTURE
 and results. Claude owns project/export settings, autopilot, collaborator
 pilots, BRIEF/COLLAB_LOG, exports/device tests and Git. No commits this turn.
 Parallel B owns its new creature/fixture/effect/music sources and data; C owns
 env/icons/screens/portrait art, scripts/fx, data/text and its manual/polish docs.
-The primary Codex alone wires those contributions into the scene. M3d changes
-that integration but leaves their authored files intact. Late room props,
-room-face variants, the title logotype and icon option wait for M3e.
+The primary Codex alone wires those contributions into the scene. D owns
+tests/qa and QA_REPORT; its harness is unchanged. Authored B/C inputs remain
+read-only. Props/pillars, the logotype/menu animation backlog and the next
+floor/ceiling/parchment repaint remain deferred.
 
 ## Sim API
 
@@ -51,6 +54,7 @@ detached. Static content is in scripts/content/catalog.gd.
 | targets(selected_id) | Marked selected-item targets with verb and ordinary action |
 | fixture_actions(), legal_verbs(selected_id="") | Currently usable fixture actions / ordered strip actions |
 | ring_ready(), ring_targets(item_id) | Unspent current-floor charge / eligible living Husk IDs |
+| toss_preview(item_id) | Detached {cells,landing,actor_id,fixture_id}; at most two forward cells, no mutation |
 | weapon_damage(), attack_damage(target_id), has_seal() | Shared rule queries; attack_damage accounts for a braced target |
 | apply(action) | accepted, reason, consumed_turn, revision, ordered events |
 
@@ -103,13 +107,53 @@ unchanged. Queries, selection, cards, map and seed cancellation are free.
 | eat | pack item_id with healing effect; needs missing health |
 | latch | target_id of accessible current/front latch |
 | unlock | target_id of accessible closed lock; matching key already on belt |
-| stairs | target_id of current/front stairs |
+| stairs | target_id of current/front stairs; destination must be unoccupied and traversable |
+| squeeze | same stair target; only when normal arrival is occupied, choosing the first clear adjacent cell in N/E/S/W order; UI label SIDLE |
 | leave | current/front entrance exit, floor 1, Seal on belt |
 | hit | target_id of living actor directly ahead |
 | return_item | item_id is the nearby Porter's clapper, in pack or hand; target_id is that unrestored Porter |
 | ride | current/front active lift target_id; destination must be walkable and unoccupied |
 | ring | item_id is an owned clapper in pack/hand, current floor unspent, at least one eligible Husk |
 | guard / wait | no extra fields |
+| light | owned unlit torch item_id; target_id is a current/front lit brazier |
+| burn | owned FIRE item_id; target_id is a current/front closed web |
+| cut | owned EDGE item_id; target_id is a current/front closed cord grate or revealed panel |
+| feed | owned FOOD item_id; target_id is a current/front unpacified living Hound |
+| dispel | owned GLOW item_id; target_id is a living Ghost within two straight unobstructed cells |
+| reveal | owned GLOW item_id; target_id is a current/front unrevealed panel |
+| toss | ordinary owned pack/hand item_id; nonempty safe preview; explicit release costs one beat |
+
+Capability actions require m3.3. LIGHT, BURN, CUT, REVEAL and DISPEL retain the
+source. FEED consumes its food, including an equipped bone. TOSS removes one
+carried reference and lands that same instance; FOOD instead becomes consumed
+on feeding a Hound. FIRE opens a struck web; GLOW dispels a struck Ghost;
+HEAVY deals one damage. A protected belt item has no toss lane. A closed wall,
+gate, cord or unburnable web stops the lane before itself. Lit reeds can open
+the web and land on its newly cleared floor. No item enters masonry or a pit.
+Targets expose TOSS at distance two; the UI opens its preview before allowing
+release. Opening, rotating a preview and cancelling it never throw an item.
+
+m3.3 adds torch.lit and cache-item.hidden booleans. Hidden rewards remain floor
+instances, excluded from reachable_items/contents/view objects until their
+panel opens. New fixtures are brazier {lit}, web/cord {open}, and panel
+{wall,normal,revealed,open,item_id}. A panel's wall is adjacent masonry;
+its pos is the reachable floor cell. Only the current floor can be revealed.
+Owned Seal GLOW reveals forward panels through clear sight, up to three cells
+deep; it does not open them. A carried GLOW source can also reveal one early.
+
+Actors additionally support hound (3 HP) and ghost (2 HP). Hound windup intent
+is {cell,lane:[one-or-two-cells],due_in:1}, with a cardinal contiguous lane.
+It attacks the stored lane, then advances only through unoccupied traversable
+cells, stopping before the Finder. One backstep from adjacency stays in range;
+guard or a side step answers it. Feeding cancels its intent and sets peaceful
+with positive HP; it remains solid and may step into a clear perch. Ghosts
+remain in their optional branch and can also be fought by guard/counter.
+
+New ordered events: torch_lit, web_burnt, cord_cut, hound_fed,
+ghost_dispelled, item_tossed, panel_revealed, secret_found and landing_skirted.
+They carry the involved item_id/target_id/actor_id; item_tossed also carries
+cells/pos. Hound attack_resolved includes its stored lane. Displaying flame,
+recoil, held items or light pulses never changes these committed results.
 
 A body presses a plate. HEAVY floor items and living Husks do too. Stepping
 off closes its unlatched gate unless another weight remains. The plate/gate
@@ -132,6 +176,21 @@ lift cell facing north, with no arrival enemy phase. RETURN removes the sole
 item reference from pack/equipment, sets location returned with owner_id,
 restores the owner and activates both lifts atomically. It costs one beat.
 All floor/item state persists.
+
+Normal occupied stairs reject before revision, time, floor or mechanism
+mutation. SIDLE is a separate ordinary transition to a clear neighbouring
+landing cell; it preserves both floors' actor arrays and gives no arrival
+enemy phase. With a creature directly ahead, the strip retains HIT/GUARD and
+exposes the nearby stair action in its third slot. This keeps the trip usable
+when its wall face is out of view. Generated landing side space exceeds the
+floor's possible living actor count; the sweep checks that bound. The witness
+chooses this ordinary alternative when recovery needs it.
+
+The codec validates types before comparisons, lookups and typed assignments.
+It also rejects living actor/player overlap, duplicate living actor positions
+and living occupancy in blocking fixtures. Invalid restore remains atomic.
+The save envelope likewise guards version/checksum field types. Android's
+relative user:// staging/rename algorithm is unchanged.
 
 RING costs one beat and sets optional floor.bell_rung=true. It reaches living
 Husks at forward depth 1-3 and lateral magnitude <= depth, with an integer
@@ -229,7 +288,8 @@ The current scene root implements pilot_call(name,args)->String:
 - state: compact public JSON. In-game fields: seed, floor/floor_count, pos,
   facing, hp, turn, revision, status, pack/belt IDs, equipment, selected,
   front contents, porter:{present,restored}, ring_ready, opaque complete-state
-  hash, survey_hash, travel_pending, save_ok, music and sfx booleans. At initial title:
+  hash, survey_hash, travel_pending, save_ok, tossing, toss_preview,
+  secrets_found, music and sfx. At initial title:
   {status:"title",can_continue:bool,music:bool,sfx:bool}.
 - where NAME: logical global centre "x y"; absent/hidden/disabled controls
   return empty. No physical-window assumptions.
@@ -258,7 +318,7 @@ there is no visible world button for the same action. This creates no hidden
 screen target and does not bypass the action validator.
 
 The view exposes visible_cells() and visible_landmarks(), using its camera,
-FOV, range and wall layout. Closed gates/doors stop survey knowledge even
+FOV, range and wall layout. Closed gates/doors/webs/cords stop survey knowledge even
 where painted iron has apertures. The old sim visited mask stays unchanged
 for rule/hash compatibility; the live map never reads that coarse mask.
 
@@ -291,7 +351,10 @@ porter_return commits RETURN, porter_close closes it. A sleeping lift uses
 hot_lift_home/hot_lift_deep. KEY_object remains a where alias to KEY.
 
 Item-card controls: card_use/card_eat where applicable, card_drop, card_close,
-card_ring for an owned clapper. A spent RING is disabled. Item cards leave the
+card_ring for an owned clapper, card_toss for an ordinary m3.3 possession.
+A spent RING is disabled. The TOSS strip offers confirm/cancel; moving ends
+the preview and turning updates its lane. Preview state is not saved or
+replayed on Continue. Item cards leave the
 full picture visible and dock verbs at y179 while open; ordinary verb y is269.
 The log contents survive inspection, free rotation and failed saves.
 A failed save sets ! on floor_label; save_retry/save_close belong to its free
@@ -353,3 +416,16 @@ tests/run_m3d_pilots.ps1 runs these seven plus thirteen M3c regressions, using
 new isolated slots and separate screenshot folders. The autopilot is unchanged.
 The external art probe is named probe_m3d_pack.gd because it requires
 --main-pack instead of a source-tree test run.
+
+M3e adds a capability tour (actual FOOD toss), adjacent Hound dodge,
+lit-torch/peaceful-Hound close/reopen, and QA-01's occupied stair through SIDLE.
+The reference tour is 118 turns; the screenshot pilot takes 122, adding four
+real steps into/out of the kennel to photograph its peaceful occupant.
+run_m3e_pilots.ps1 runs those five plus the twenty inherited regressions.
+Every windowed run supplies a pilot and retains the autopilot's default master
+mute; --with-sound is never passed. Pointer/autopilot remain owner-managed.
+run_m3e_checks.ps1 runs thirteen headless suites, including 300 replayed tours
+and a pure-sim/UI route comparison. D's harness remains independent and intact.
+stage_m3e.py/run_m3e_pack.ps1 include held-item resources and prove the full
+tour using an exported PCK from an empty resource directory. No APK/device
+acceptance is implied by a desktop packaged-resource test.

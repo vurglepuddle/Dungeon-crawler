@@ -1,0 +1,30 @@
+"""Copy finalized runtime inputs to a disposable export project; preserve WIP."""
+from pathlib import Path
+import shutil
+ROOT=Path(__file__).resolve().parents[1]
+STAGE=ROOT/'build/m3e_export_stage'
+STAGE.mkdir(parents=True,exist_ok=True)
+def copy(path):
+    dest=STAGE/path
+    dest.parent.mkdir(parents=True,exist_ok=True)
+    shutil.copy2(ROOT/path,dest)
+for name in ['project.godot','export_presets.cfg']: copy(Path(name))
+for directory in ['scripts','scenes','data','assets/font','assets/icon']:
+    for path in (ROOT/directory).rglob('*'):
+        if path.is_file(): copy(path.relative_to(ROOT))
+for path in (ROOT/'assets/art').glob('*'):
+    if path.is_file(): copy(path.relative_to(ROOT))
+for directory in ['anim','fx','fixtures','creatures','hands','icons','ui','ui_offer']:
+    for path in (ROOT/'assets/art'/directory).rglob('*'):
+        if path.is_file(): copy(path.relative_to(ROOT))
+for floor in [1,2]:
+    names=[f'f{floor}_floor',f'f{floor}_ceiling']
+    names += [f'painted_f{floor}_{suffix}' for suffix in ['plain_0','plain_1','plain_2','sconce_0','sconce_1','crack','damp','chains','tapestry','drain','arch','door']]
+    for name in names:
+        for path in (ROOT/'assets/art/env').glob(name+'.png*'): copy(path.relative_to(ROOT))
+for name in ['finder_fine','finder_hurt_v2','finder_near_death_v2']:
+    for path in (ROOT/'assets/art/portrait').glob(name+'.png*'): copy(path.relative_to(ROOT))
+for name in ['title','splash','win','death']:
+    for path in (ROOT/'assets/art/screens').glob(name+'.png*'): copy(path.relative_to(ROOT))
+(ROOT/'build/m3e_pack_probe').mkdir(parents=True,exist_ok=True)
+print('M3e staged. Held items included; props, screen backlog and material proposals excluded.')

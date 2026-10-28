@@ -56,6 +56,7 @@ var _transition_token: int=0
 var _menu_art: TextureRect
 var _menu_receipt: Label
 var _splash_time: float=0
+var _tossing: String=""
 
 func _ready() -> void:
 	clip_contents=true
@@ -269,6 +270,7 @@ func _retire_audio() -> void:
 	if had_playback: OS.delay_msec(50)
 func _can_game() -> bool: return _mode=="game" and _busy<=0 and not _transitioning and not is_instance_valid(_modal)
 func _reset_presentation() -> void:
+	_tossing=""; view.toss_lane=[]
 	_transition_token+=1; _transitioning=false
 	_ambience.fade_in(0); _ambience.visible=true; _ambience.set_process(true)
 func _capture_survey() -> void:
@@ -285,10 +287,10 @@ func _sync() -> void:
 	for i in range(8):
 		var button: Button=controls["pack%d"%i]
 		button.visible=true; button.text=""
-		button.set_item(Art.inventory(state.items[state.pack[i]].kind) if i<state.pack.size() else null,i<state.pack.size() and state.pack[i]==selected,_selection_colour())
+		button.set_item(_item_icon(state.pack[i]) if i<state.pack.size() else null,i<state.pack.size() and state.pack[i]==selected,_selection_colour())
 	for slot in ["hand","body"]:
 		var id: String=state.equipment[slot]
-		controls["equip_"+slot].set_item(Art.inventory(state.items[id].kind) if id!="" else null,id!="" and id==selected,_selection_colour())
+		controls["equip_"+slot].set_item(_item_icon(id) if id!="" else null,id!="" and id==selected,_selection_colour())
 		controls["equip_"+slot].text=""
 	for kind in ["key","seal"]:
 		var found:=false
@@ -296,10 +298,16 @@ func _sync() -> void:
 			if state.items[id].kind==kind: found=true
 		controls["belt_"+kind].set_item(Art.inventory(kind) if found else null)
 	verbs=sim.legal_verbs(selected)
+	view.toss_lane=[]
+	if _tossing!="":
+		var lane: Dictionary=sim.toss_preview(_tossing); view.toss_lane=lane.cells
+		verbs=[{"label":"TOSS","action":{"type":"toss","item_id":_tossing}},{"label":"CANCEL","action":{"type":"cancel_toss"}}]
 	for i in range(3):
 		controls["verb%d"%i].visible=i<verbs.size()
+		controls["verb%d"%i].disabled=_tossing!="" and i==0 and sim.toss_preview(_tossing).landing.is_empty()
 		controls["verb%d"%i].text=verbs[i].label if i<verbs.size() else ""
 	_capture_survey()
+	view.held.set_kind(_held_kind())
 	_ambience.set_floor(state.floor)
 	_sync_markers()
 	queue_redraw()
@@ -315,7 +323,7 @@ func _sync_markers() -> void:
 	var targets: Array=sim.targets(selected)
 	if not targets.is_empty():
 		for target in targets:
-			markers.append({"key":"hot_front" if markers.is_empty() else "hot_"+target.target_id,"id":target.target_id,"label":target.verb,"callback":_command.bind(target.action)})
+			markers.append({"key":"hot_front" if markers.is_empty() else "hot_"+target.target_id,"id":target.target_id,"label":target.verb,"callback":_open_toss.bind(target.action.item_id) if target.action.type=="toss" else _command.bind(target.action)})
 		_view_action=targets[0].action
 	elif selected=="":
 		for fixture in sim.fixture_actions():
@@ -341,6 +349,11 @@ func _sync_markers() -> void:
 				markers.append({"key":"hot_porter","id":fixture.id,"label":"PORTER","callback":_porter_card.bind(fixture)})
 			elif fixture.type=="lift" and not fixture.active:
 				markers.append({"key":"hot_"+fixture.id,"id":fixture.id,"label":"ASLEEP","callback":_sleeping_lift})
+			elif fixture.type in ["brazier","web","cord","panel"]:
+				markers.append({"key":"hot_"+fixture.id,"id":fixture.id,"label":"LOOK","callback":_inspect_capability.bind(fixture)})
+		for actor in state.floors[state.floor-1].actors:
+			if actor.kind in ["hound","ghost"] and actor.hp>0 and absi(actor.pos[0]-state.pos[0])+absi(actor.pos[1]-state.pos[1])<=3:
+				markers.append({"key":"hot_"+actor.id,"id":actor.id,"label":"LOOK","callback":_inspect_creature.bind(actor.id)})
 	# Large bodies first; a small possession at their feet wins overlapping taps.
 	markers.sort_custom(func(a,b):
 		var ra: Rect2=view.projection(a.id).get("rect",Rect2())
@@ -369,24 +382,54 @@ func _sync_markers() -> void:
 func _selection_colour() -> Color:
 	if sim==null or selected=="": return GOLD
 	return Art.accent(state.items[selected].kind) if state.items.has(selected) else GOLD
+func _item_icon(id: String) -> Texture2D:
+	var item: Dictionary=state.items[id]
+	if item.kind=="torch": return Paint.texture("res://assets/art/fixtures/reed_torch_icon_%s_16.png"%("lit" if item.lit else "unlit"))
+	return Art.inventory(item.kind)
+func _held_kind(id: String="") -> String:
+	if id=="":
+		id=selected if state.items.has(selected) and state.items[selected].kind in ["torch","lamp","seal"] else ""
+		if id=="" and sim.has_seal(): return "seal"
+		if id=="": id=state.equipment.hand
+	if id=="" or not state.items.has(id): return "fist"
+	var item: Dictionary=state.items[id]
+	return "torch_lit" if item.kind=="torch" and item.lit else ("torch_unlit" if item.kind=="torch" else item.kind)
+func _open_toss(id: String) -> void:
+	if not _can_game(): return
+	_close_card(); _tossing=id; selected=id
+	lines=["Toss up to two steps.","Turn; TOSS to release."]; _sync()
+func _cancel_toss() -> void:
+	_tossing=""; _sync()
+func _inspect_capability(fixture: Dictionary) -> void:
+	if not _can_game(): return
+	var column:=_panel({"brazier":"Banked coals","web":"Old web","cord":"Cord-bound grate","panel":"A scored dawn"}[fixture.type],62,242)
+	var note: String={"brazier":"LIGHT a reed torch.\nThe coals keep burning.","web":"Dry silk blocks it.\nA FIRE would clear it.","cord":"A stout knot holds it.\nAn EDGE would cut it.","panel":"Dawn wakes the scar.\nAn EDGE can lift it."}[fixture.type]
+	_label(note,column); _modal_button("fixture_close","CLOSE",_close_modal,column)
 func _command(command: Dictionary) -> void:
 	if not _can_game(): return
 	_close_card()
+	if command.type!="turn": _tossing=""
 	var old_picture: Dictionary=view.state.duplicate(true)
 	command=command.duplicate(true); command.expected_revision=state.revision
 	# Capture the old pose/projection before a fatal hit removes the actor.
 	var strike_target: Dictionary={}
 	var strike_kind: String="hands"
+	var hand_kind: String=_held_kind(command.get("item_id","") if command.type!="hit" else state.equipment.hand)
+	if command.type=="hit" and state.equipment.hand=="": hand_kind="fist"
 	if command.type=="hit":
 		strike_target=view.projection(command.get("target_id",""))
 		var weapon_id: String=state.equipment.hand
 		if weapon_id!="":
 			var tags: Array=sim.definition(weapon_id).tags
 			strike_kind="heavy" if tags.has("HEAVY") else ("edge" if tags.has("EDGE") else "hands")
+	elif command.type=="toss":
+		strike_target=view.projection(sim.toss_preview(command.get("item_id","")).actor_id)
+		if sim.definition(command.get("item_id","")).get("tags",[]).has("HEAVY"): strike_kind="heavy"
 	var result: Dictionary=sim.apply(command)
 	if not result.accepted:
 		lines=[result.reason,"Drop or use an item." if result.reason=="Your pack is full." else ""]
 		sfx.play("bump"); queue_redraw(); return
+	if command.type in ["hit","ring","light","burn","cut","toss","dispel","place"]: view.held.animate(hand_kind,command.type)
 	_bob=command.type=="move"
 	match command.type:
 		"move": sfx.play("step")
@@ -395,6 +438,7 @@ func _command(command: Dictionary) -> void:
 			var definition: Dictionary=sim.definition(command.item_id)
 			lines=[definition.name,Flavour.provenance(state.items[command.item_id].kind,definition.provenance)]; sfx.play("pickup")
 			if definition.slot=="belt": lines=[definition.name,"Take it home." if definition.name=="Dawn Seal" else "Kept safe on the belt."]
+			if definition.name=="Dawn Seal": selected=""
 		"drop","place": lines=["You set it down.",""]; sfx.play("pickup")
 		"equip","unequip": lines=["Equipment changed.",""]; sfx.play("pickup")
 		"eat": lines=["A little less weary.",""]; sfx.play("pickup")
@@ -421,10 +465,31 @@ func _command(command: Dictionary) -> void:
 			"restored": lines=["A bell finds its voice.","The lift wakes below."]; sfx.play("restore")
 			"lift_ride": lines=["Chains sing in the dark.","Floor %d / landing."%event.to]; sfx.play("gate"); selected=""
 			"floor_changed": lines=[Flavour.floor_name(event.to),"Floor %d."%event.to]; selected=""
+			"landing_skirted": lines=["You slip past a shape.","A clear step beside it."]
+			"torch_lit": lines=["The reeds catch fire.","FIRE / GLOW. No fuel."]; sfx.play("pickup")
+			"web_burnt": lines=["The dry web catches.","The way stays clear."]; view.show_burn(event.target_id); sfx.play("gate")
+			"cord_cut": lines=["The cords fall away.","The grate hangs open."]; sfx.play("gate")
+			"hound_fed": lines=["It takes the offering.","Warm ash. Quiet jaws."]; sfx.play("pickup")
+			"ghost_dispelled": lines=["The wick gutters out.","Your light stays."]; view.show_dispel(event.actor_id); sfx.play("pickup")
+			"item_tossed":
+				if not result.events.any(func(e): return e.type in ["hound_fed","ghost_dispelled","web_burnt"]): lines=["It arcs through air.","The floor keeps it."]
+				sfx.play("pickup")
+			"panel_revealed":
+				if not result.events.any(func(e): return e.type=="attack_resolved" and e.damage>0): lines=["Dawn finds an old scar.","An EDGE can lift it."]
+			"secret_found": lines=["A hidden cache opens.","Something left behind."]; sfx.play("pickup")
+		if event.type=="intent_announced":
+			var creature: String=sim._actor(event.actor_id).kind
+			if creature=="hound": lines=["It crouches. Two steps.","Sidestep or GUARD."]
+			elif creature=="ghost": lines=["Its wick flares cold.","GLOW / GUARD."]
+		if event.type=="attack_resolved" and event.damage>0:
+			var creature: String=sim._actor(event.actor_id).kind
+			if creature=="hound": lines=["The lunge finds you.","Leave the marked lane."]
+			elif creature=="ghost": lines=["The cold finds you.","GLOW clears the wick."]
 	_busy=0.13 if result.consumed_turn else 0.05
 	if _hurt_time>0: _busy=0.24
 	state=sim.snapshot()
 	if not state.pack.has(selected): selected=""
+	if command.type in ["burn","cut","feed","dispel","reveal"]: selected=""
 	var travel: bool=result.events.any(func(e): return e.type in ["floor_changed","lift_ride"])
 	if travel:
 		_capture_survey(); _save()
@@ -450,6 +515,8 @@ func _movement(key: String) -> void:
 	else: _command({"type":"move","step":key})
 func _verb(index: int) -> void:
 	if not _can_game() or index>=verbs.size(): return
+	if verbs[index].action.type=="cancel_toss": _cancel_toss(); return
+	if verbs[index].action.type=="toss" and _tossing=="": _open_toss(verbs[index].action.item_id); return
 	if verbs[index].action.type=="pickup": _take()
 	else: _command(verbs[index].action)
 func _front_action() -> void:
@@ -471,12 +538,19 @@ func _return_from_card(fixture: Dictionary) -> void:
 	_close_modal(); _command({"type":"return_item","target_id":fixture.id,"item_id":fixture.item_id})
 func _look_husk() -> void:
 	if _can_game(): lines=["A hollow bell, awake.","GUARD, then HIT it."]; queue_redraw()
+func _inspect_creature(id: String) -> void:
+	if not _can_game(): return
+	var actor: Dictionary=sim._actor(id)
+	var column:=_panel("Ash Hound" if actor.kind=="hound" else "Wick Ghost",62,242)
+	_label("Two steps, then rest.\nStep aside or GUARD.\nFOOD buys its peace." if actor.kind=="hound" else "An unspent cold wick.\nGLOW would snuff it.\nGUARD its cold flare.",column)
+	_modal_button("creature_close","CLOSE",_close_modal,column)
 func _portrait_help() -> void:
 	if _can_game():
 		selected=""; _close_card(); _save(); _sync()
 		lines=["Curves turn for free.","Straight arrows step."]; queue_redraw()
 func _select(index: int) -> void:
 	if not _can_game(): return
+	_tossing=""
 	if index>=state.pack.size():
 		selected=""; _close_card(); _save(); _sync(); return
 	selected=state.pack[index]; _save(); _sync(); _open_card(selected)
@@ -518,6 +592,10 @@ func _open_card(id: String) -> void:
 			row=HBoxContainer.new(); row.add_theme_constant_override("separation",3); column.add_child(row)
 		_card_button("card_ring","RING",{"type":"ring","item_id":id},row)
 		controls.card_ring.disabled=not sim.ring_ready()
+	if state.rules_version=="m3.3" and state.items[id].location in ["pack","equip"]:
+		if row.get_child_count()>=3:
+			row=HBoxContainer.new(); row.add_theme_constant_override("separation",3); column.add_child(row)
+		_button("card_toss",Rect2(0,0,42,20),"TOSS",_open_toss.bind(id),row); _card_names.append("card_toss")
 	if row.get_child_count()>=3:
 		row=HBoxContainer.new(); row.add_theme_constant_override("separation",3); column.add_child(row)
 	_button("card_close",Rect2(0,0,42,20),"CLOSE",_dismiss_card,row)
@@ -726,6 +804,9 @@ func _public_state() -> Dictionary:
 	public.merge(audio)
 	public.survey_hash=_survey.hash_value()
 	public.travel_pending=_transitioning
+	public.tossing=_tossing
+	public.toss_preview=sim.toss_preview(_tossing) if _tossing!="" else {}
+	public.secrets_found=state.floors.reduce(func(total,f): return total+f.fixtures.filter(func(v): return v.type=="panel" and v.open).size(),0)
 	return public
 func pilot_call(name_key: String,args: Array) -> String:
 	match name_key:

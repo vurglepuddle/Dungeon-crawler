@@ -1,0 +1,9 @@
+wait 4
+tapnamed continue
+waitidle
+wait 3
+call assert save_ok true
+call assert hash fcb875f0daeed49655436c77dedbb17f6103a7628eeae3bae23e55edb6f8a370
+call assert hp 6
+shot 16_lit_fed_continued
+close

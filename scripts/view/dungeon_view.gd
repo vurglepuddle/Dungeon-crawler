@@ -3,6 +3,7 @@ extends Control
 const Sim=preload("res://scripts/sim/dungeon_sim.gd")
 const Art=preload("res://scripts/art/item_art.gd")
 const Paint=preload("res://scripts/art/presentation_art.gd")
+const Held=preload("res://scripts/view/held_item.gd")
 const WIDTH:=148
 const HEIGHT:=150
 const FOCAL:=74.0
@@ -35,6 +36,12 @@ var _sparkles: Dictionary={}
 var _presentation_ms: float=0
 var _has_sconce: bool=false
 var _column_layers: Array=[]
+var _creature_poses: Dictionary={}
+var _burning: Dictionary={}
+var _dispel: Dictionary={}
+var toss_lane: Array=[]
+var held=Held.new()
+var _has_flame: bool=false
 const DAMAGE_FONT=preload("res://assets/font/vetka.ttf")
 
 func _ready() -> void:
@@ -63,9 +70,25 @@ func _ready() -> void:
 			for frame in range(3): _sparkles[key].append(Paint.texture("res://assets/art/fixtures/glint_%s_%d_%d.png"%[family,frame,pixels]))
 	for floor_number in [1,2]:
 		for frame in range(2): Paint.strips("res://assets/art/env/painted_f%d_sconce_%d.png"%[floor_number,frame])
+	for kind in ["hound","ghost"]:
+		_creature_poses[kind]={}
+		for pose in ["idle","windup","recoil"]:
+			_creature_poses[kind][pose]=[]
+			for h in [64,40,24]: _creature_poses[kind][pose].append(Paint.texture("res://assets/art/creatures/%s_%s_%d.png"%["ash_hound_ember" if kind=="hound" else "wick_ghost",pose,h]))
+	for d in range(1,4):
+		for name in ["brazier_lit_0","brazier_lit_1","reed_torch_unlit","reed_torch_lit_0","reed_torch_lit_1","web_intact","web_burning_0","web_burning_1","web_burnt","cord_grate_intact","cord_grate_cut","dawn_seal_pulse_0","dawn_seal_pulse_1"]:
+			Paint.texture("res://assets/art/fixtures/%s_d%d.png"%[name,d])
+	for kind in Held.FRAMES:
+		for frame in Held.FRAMES[kind]: Paint.texture("res://assets/art/hands/hand_%s_%s_56.png"%[kind,frame])
+
+func show_burn(id: String) -> void: _burning[id]=0.0; queue_redraw()
+func show_dispel(id: String) -> void:
+	for sprite in _sprites:
+		if sprite.id==id: _dispel={"sprite":sprite.duplicate(),"age":0.0}; break
+	queue_redraw()
 
 func clear_strike() -> void:
-	_strike={}; queue_redraw()
+	_strike={}; _burning={}; _dispel={}; toss_lane=[]; held.remaining=0; queue_redraw()
 
 func show_strike(id: String,target: Dictionary,kind: String,damage: int) -> void:
 	if target.is_empty(): return
@@ -92,6 +115,7 @@ func update_state(snapshot: Dictionary) -> void:
 		# Input can resume before the effect ends. Never leave a hit painted on
 		# empty space after stepping/turning or arriving on another landing.
 		_strike={}
+		_dispel={}
 	state=snapshot
 	_build_camera()
 	queue_redraw()
@@ -113,11 +137,17 @@ func _architecture() -> void:
 	_faces={}; _portals=[]
 	for fixture in state.fixtures:
 		var kind: String=fixture.type
-		if kind in ["gate","lock"]:
+		if kind=="panel":
+			_faces[_face_key(fixture.wall,Vector2i(fixture.normal[0],fixture.normal[1]))]={"id":fixture.id,"kind":"panel","texture_path":"res://assets/art/env/painted_f%d_plain_0.png"%mini(state.floor,2),"panel_state":"open" if fixture.open else ("revealed" if fixture.revealed else "plain")}
+			continue
+		if kind in ["gate","lock","web","cord"]:
 			if kind=="lock" and not fixture.open: continue
 			var p:=Vector2i(fixture.pos[0],fixture.pos[1])
 			var across_x: bool=state.tiles[p.y*state.width+p.x-1]==1 and state.tiles[p.y*state.width+p.x+1]==1
-			_portals.append({"id":fixture.id,"kind":"portal","pos":fixture.pos,"normal":Vector2(0,1) if across_x else Vector2(1,0),"texture_path":"res://assets/art/fixtures/architecture_f%d_gate_%s_overlay_64.png"%[mini(state.floor,2),"open" if fixture.open else "closed"]})
+			var path: String="res://assets/art/fixtures/architecture_f%d_gate_%s_overlay_64.png"%[mini(state.floor,2),"open" if fixture.open else "closed"]
+			if kind=="web": path="res://assets/art/fixtures/web_%s_d1.png"%("burnt" if fixture.open else "intact")
+			if kind=="cord": path="res://assets/art/fixtures/cord_grate_%s_d1.png"%("cut" if fixture.open else "intact")
+			_portals.append({"id":fixture.id,"kind":kind,"pos":fixture.pos,"normal":Vector2(0,1) if across_x else Vector2(1,0),"texture_path":path})
 			continue
 		if kind not in ["exit","stairs_up","stairs_down","lift"]: continue
 		var preferred: Array=[Vector2i.UP,Vector2i.LEFT,Vector2i.RIGHT,Vector2i.DOWN] if kind=="stairs_down" else [Vector2i.DOWN,Vector2i.RIGHT,Vector2i.LEFT,Vector2i.UP]
@@ -177,7 +207,7 @@ func _survey_ray(origin: Vector2,ray: Vector2) -> void:
 			_visible_set[key]=[cell.x,cell.y]
 		var stop: bool=state.tiles[cell.y*state.width+cell.x]==1
 		for fixture in state.fixtures:
-			if fixture.type in ["gate","lock"] and not fixture.open and fixture.pos==[cell.x,cell.y]: stop=true
+			if fixture.type in ["gate","lock","web","cord"] and not fixture.open and fixture.pos==[cell.x,cell.y]: stop=true
 		if stop: break
 		if tx<ty: entry=tx; tx+=dx; cell.x+=sx
 		else: entry=ty; ty+=dy; cell.y+=sy
@@ -194,7 +224,7 @@ func _build_camera() -> void:
 		_surface_key=key
 		_build_surfaces(origin,forward,right)
 	_depths.clear(); _walls.clear(); _sprites.clear(); _projections.clear()
-	_visible_set={}; _architecture(); _has_sconce=false
+	_visible_set={}; _architecture(); _has_sconce=false; _has_flame=false
 	for column in range(WIDTH):
 		var ray:=forward+right*((column+0.5-WIDTH*0.5)/FOCAL)
 		_survey_ray(origin,ray)
@@ -220,7 +250,7 @@ func _build_camera() -> void:
 		for fixture in state.fixtures:
 			if fixture.type=="lock" and not fixture.open and fixture.pos==[cell.x,cell.y]:
 				path="res://assets/art/env/painted_f%d_door.png"%mini(state.floor,2); face={"id":fixture.id}
-		_walls.append({"depth":depth,"height":maxi(1,roundi(FOCAL/depth)),"u":clampi(int(u*64),0,63),"light":lamp(depth)*(0.78 if side else 1.0),"path":path,"cell":[cell.x,cell.y],"id":face.get("id","")})
+		_walls.append({"depth":depth,"height":maxi(1,roundi(FOCAL/depth)),"u":clampi(int(u*64),0,63),"light":lamp(depth)*(0.78 if side else 1.0),"path":path,"cell":[cell.x,cell.y],"id":face.get("id",""),"panel_state":face.get("panel_state","")})
 		if face.has("id"):
 			var h: float=FOCAL/depth
 			_project_column(face.id,column,HORIZON-h/2,h,depth)
@@ -245,7 +275,7 @@ func _build_camera() -> void:
 		portal.strips=Paint.strips(portal.texture_path)
 	var sprites: Array=state.objects.duplicate(true)
 	for fixture in state.fixtures:
-		if fixture.type not in ["gate","lock","stairs_up","stairs_down","exit","lift"]:
+		if fixture.type not in ["gate","lock","stairs_up","stairs_down","exit","lift","web","cord","panel"]:
 			var sprite: Dictionary=fixture.duplicate(true)
 			sprite.kind="lift_on" if fixture.type=="lift" and fixture.get("active",false) else fixture.type
 			sprites.append(sprite)
@@ -270,6 +300,7 @@ func _build_camera() -> void:
 		# This is sprite placement only; pickup still targets the same sim cell.
 		if not sprite.has("type") and not sprite.has("hp"):
 			for fixture in state.fixtures:
+				if fixture.pos==sprite.pos and fixture.type=="panel": lateral-=0.3; break
 				if fixture.pos==sprite.pos and fixture.type in ["porter","lift"]:
 					lateral+=0.3; break
 		# Own-cell contents are shown at the bottom edge, where hands can reach.
@@ -284,6 +315,11 @@ func _build_camera() -> void:
 		if kind=="husk":
 			var pose: String="recoil" if sprite.get("state","")=="recovery" else str(sprite.get("state","idle"))
 			texture=_poses.get(pose,_poses.idle)[variant]; tall=[64,40,24][variant]
+		elif kind in ["hound","ghost"]:
+			var pose: String="recoil" if sprite.state=="recovery" else ("windup" if sprite.state=="windup" else "idle")
+			texture=_creature_poses[kind][pose][variant]; tall=[64,40,24][variant]
+		elif kind in ["brazier","torch","seal"]:
+			texture=_painted_fixture(sprite,variant); tall=texture.get_height(); _has_flame=true
 		elif kind=="porter" and _porters.size()==3:
 			texture=_restored[variant] if sprite.get("restored",false) else _porters[variant]; tall=[64,40,24][variant]
 		elif kind=="plate":
@@ -362,8 +398,12 @@ func _draw_sprite(sprite: Dictionary,shift: int,force_recoil: bool=false,only_co
 	var texture: Texture2D=sprite.texture
 	var hit: bool=not _strike.is_empty() and sprite.id==_strike.id
 	if sprite.kind=="husk" and (hit or force_recoil): texture=_poses.recoil[sprite.variant]
+	if sprite.kind in ["hound","ghost"] and (hit or force_recoil): texture=_creature_poses[sprite.kind].recoil[sprite.variant]
+	if sprite.kind in ["brazier","torch","seal"]: texture=_painted_fixture(sprite,sprite.variant)
 	var light: float=sprite.light
 	var tint:=Color(light,light,light)
+	if sprite.kind=="hound": tint=Color(maxf(light,0.48),maxf(light,0.48),maxf(light,0.48))
+	if sprite.kind=="ghost" and not _dispel.is_empty() and _dispel.sprite.id==sprite.id: tint.a=clampf(1.0-_dispel.age/0.18,0,1)
 	if hit and not _strike.get("flash_drawn",false): tint=Color(2.5,2.5,2.5)
 	var start: int=maxi(0,int(rect.position.x)) if only_column<0 else only_column
 	var end: int=mini(WIDTH,int(rect.end.x)) if only_column<0 else only_column+1
@@ -416,6 +456,13 @@ func _draw() -> void:
 		var path: String=wall.path
 		if path.contains("sconce_"): path=path.left(path.rfind("sconce_"))+"sconce_%d.png"%(int(_presentation_ms/250)%2)
 		draw_texture_rect_region(Paint.strips(path)[wall.u],Rect2(column,top,1,bottom-top),Rect2(0,(top-top_wall)*64.0/wall.height,1,(bottom-top)*64.0/wall.height),Color(light,light,light))
+		if wall.panel_state!="":
+			var marks: String="res://assets/art/fixtures/panel_sigil_%s_64.png"%("plain" if wall.panel_state=="plain" else "revealed")
+			draw_texture_rect_region(Paint.strips(marks)[wall.u],Rect2(column,top,1,bottom-top),Rect2(0,(top-top_wall)*64.0/wall.height,1,(bottom-top)*64.0/wall.height),Color.WHITE if wall.panel_state!="plain" else Color(light,light,light))
+			if wall.panel_state=="open" and wall.u>=14 and wall.u<=50:
+				var y0: float=maxf(0,top_wall+wall.height*22.0/64)
+				var y1: float=minf(HEIGHT,top_wall+wall.height*51.0/64)
+				if y1>y0: draw_rect(Rect2(column,y0,1,y1-y0),Color("080b11") if wall.u>14 and wall.u<50 else Color("80643c"))
 		for layer in _column_layers[column]:
 			if layer.has("sprite"):
 				_draw_sprite(layer.sprite,shift,false,column)
@@ -424,7 +471,10 @@ func _draw() -> void:
 				var py: float=HORIZON+shift-p.height/2
 				var from_y: float=maxf(0,py); var to_y: float=minf(HEIGHT,py+p.height)
 				var gain: float=lamp(p.depth)
-				if to_y>from_y: draw_texture_rect_region(layer.portal.strips[p.u],Rect2(column,from_y,1,to_y-from_y),Rect2(0,(from_y-py)*64.0/p.height,1,(to_y-from_y)*64.0/p.height),Color(gain,gain,gain))
+				var strips: Array=layer.portal.strips
+				if _burning.has(layer.portal.id): strips=Paint.strips("res://assets/art/fixtures/web_burning_%d_d1.png"%mini(1,int(float(_burning[layer.portal.id])/0.12)))
+				if to_y>from_y: draw_texture_rect_region(strips[p.u],Rect2(column,from_y,1,to_y-from_y),Rect2(0,(from_y-py)*64.0/p.height,1,(to_y-from_y)*64.0/p.height),Color(gain,gain,gain))
+	if not _dispel.is_empty(): _draw_sprite(_dispel.sprite,shift,true)
 	if not _strike.is_empty():
 		if _strike.has("ghost") and not _sprites.any(func(s): return s.id==_strike.id): _draw_sprite(_strike.ghost,shift,true)
 		var frame: int=clampi(int(_strike.age/0.08),0,2)
@@ -457,13 +507,49 @@ func _draw() -> void:
 				var inward: Vector2=(rect.get_center()-corner).sign()
 				draw_line(corner,corner+Vector2(inward.x*3,0),colour,1)
 				draw_line(corner,corner+Vector2(0,inward.y*3),colour,1)
+	_draw_lane()
+	draw_texture(held.texture(),Vector2(100,94))
 	if flash>0: draw_rect(Rect2(1,1,WIDTH-2,HEIGHT-2),Color(0.9,0.15,0.1,flash),false,2)
 
+func _painted_fixture(sprite: Dictionary,variant: int) -> Texture2D:
+	var frame: int=int(_presentation_ms/(700 if sprite.kind=="seal" else 180))%2
+	var name: String="dawn_seal_pulse_%d"%frame if sprite.kind=="seal" else ("brazier_lit_%d"%frame if sprite.kind=="brazier" else ("reed_torch_lit_%d"%frame if sprite.get("lit",false) else "reed_torch_unlit"))
+	return Paint.texture("res://assets/art/fixtures/%s_d%d.png"%[name,variant+1])
+
+func _draw_lane() -> void:
+	var lanes: Array=[]
+	if not toss_lane.is_empty(): lanes.append({"cells":toss_lane,"colour":Color("eeb95a")})
+	for actor in state.actors:
+		if actor.kind=="hound" and actor.state=="windup": lanes.append({"cells":actor.intent.lane,"colour":Color("965c48")})
+	var forward:=Vector2(Sim.DIRS[state.facing][0],Sim.DIRS[state.facing][1])
+	var right:=Vector2(-forward.y,forward.x)
+	for lane in lanes:
+		for cell in lane.cells:
+			var relative:=Vector2(cell[0]-state.pos[0],cell[1]-state.pos[1])
+			var depth: float=relative.dot(forward)
+			if depth<0.5 or depth>=FAR: continue
+			var center:=Vector2(WIDTH*0.5+relative.dot(right)*FOCAL/depth,HORIZON+FOCAL*0.5/depth-3)
+			var half: float=minf(18,12/depth)
+			if center.x<0 or center.x>=WIDTH or depth>_depths[clampi(int(center.x),0,WIDTH-1)]: continue
+			draw_polyline(PackedVector2Array([center+Vector2(-half,0),center+Vector2(0,-3),center+Vector2(half,0),center+Vector2(0,3),center+Vector2(-half,0)]),lane.colour,1)
+
 func _process(delta: float) -> void:
+	var hand_active: bool=held.remaining>0
+	held.advance(delta)
+	if hand_active or held.kind in ["torch_lit","seal"]: queue_redraw()
+	for id in _burning.keys():
+		_burning[id]+=delta
+		if _burning[id]>=0.24: _burning.erase(id)
+		queue_redraw()
+	if not _dispel.is_empty():
+		_dispel.age+=delta
+		if _dispel.age>=0.18: _dispel={}
+		queue_redraw()
 	var previous: int=int(_presentation_ms/40)
 	var previous_flame: int=int(_presentation_ms/250)
+	var previous_fixture: int=int(_presentation_ms/180)
 	_presentation_ms=fmod(_presentation_ms+delta*1000.0,22000000.0)
-	if (not interaction_cues.is_empty() and int(_presentation_ms/40)!=previous) or (_has_sconce and int(_presentation_ms/250)!=previous_flame): queue_redraw()
+	if (not interaction_cues.is_empty() and int(_presentation_ms/40)!=previous) or (_has_sconce and int(_presentation_ms/250)!=previous_flame) or (_has_flame and int(_presentation_ms/180)!=previous_fixture): queue_redraw()
 	if not _strike.is_empty():
 		_strike.age+=delta
 		if _strike.age>=0.24: _strike={}

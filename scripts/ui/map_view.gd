@@ -34,7 +34,7 @@ func frontier_cells() -> Array:
 	for y in range(data.height):
 		for x in range(data.width):
 			if not _known([x,y]) or data.tiles[y*data.width+x]!=0: continue
-			if data.fixtures.any(func(f): return f.pos==[x,y] and f.type in ["gate","lock"] and not f.open): continue
+			if data.fixtures.any(func(f): return f.pos==[x,y] and f.type in ["gate","lock","web","cord"] and not f.open): continue
 			for delta in [[0,-1],[1,0],[0,1],[-1,0]]:
 				# No terrain lookup beyond the known edge. '?' means unsurveyed,
 				# never proof that a hidden wall is a secret door or passage.
@@ -70,6 +70,14 @@ func _draw() -> void:
 		var c:=_center(fixture.pos)
 		var r:=maxf(2,cell_size*0.36)
 		match fixture.type:
+			"web","cord":
+				_dashed(c+Vector2(-r,-r),c+Vector2(r,r),FAINT if fixture.open else INK)
+				if not fixture.open: _dashed(c+Vector2(-r,r),c+Vector2(r,-r),INK)
+			"brazier":
+				draw_arc(c,r,0,PI,6,INK,1); draw_line(c+Vector2(0,-r),c,INK,1)
+			"panel":
+				draw_line(c-Vector2(0,r),c+Vector2(0,r),INK if fixture.revealed else FAINT,1)
+				if fixture.revealed: draw_line(c-Vector2(r,0),c+Vector2(r,0),INK,1)
 			"gate","lock":
 				draw_line(c+Vector2(-r,-r),c+Vector2(r,r),INK,1)
 				if not fixture.open: draw_line(c+Vector2(-r,r),c+Vector2(r,-r),INK,1)

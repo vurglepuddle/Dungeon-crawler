@@ -108,6 +108,6 @@ shot 09_spent_clapper
 tapnamed card_close
 waitidle
 call assert ring_ready false
-call assert hash 86687467cc03a4e1b6fa1a6f097265e6ca66ef2ea45c9424d87bd918195378b5
+call assert hash 86cc303ad150cb01cd994e5994b0c0c2bb095d41a9109fc1f2ae74e7fb26e60a
 call state
 close

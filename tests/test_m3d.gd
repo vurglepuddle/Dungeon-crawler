@@ -97,7 +97,7 @@ func _run() -> void:
 			var picture: Dictionary=full.floors[number].duplicate(true)
 			picture.floor=number+1; picture.seed=full.seed
 			app.view.state=picture; app.view._architecture()
-			var required: Array=picture.fixtures.filter(func(f): return f.type in ["exit","stairs_up","stairs_down","lift"])
+			var required: Array=picture.fixtures.filter(func(f): return f.type in ["exit","stairs_up","stairs_down","lift","panel"])
 			check(app.view._faces.size()==required.size(),"Every architectural fixture gets one distinct backing wall")
 			for fixture in required:
 				check(app.view._faces.values().any(func(f): return f.id==fixture.id),"Backed architecture: "+fixture.id)

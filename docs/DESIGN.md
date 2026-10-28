@@ -5,11 +5,12 @@ collect below; some are useful, some are still wanted. Find another use for
 something ordinary. Bring the Dawn Seal home. Eventually, put something back
 where it belongs and watch the dungeon come alive again.
 
-Current milestone: **M3d, the painted undercroft**. Doors, stairs and lift
-landings belong to the masonry. The floors have painted dressing, cast stone
-surfaces, restrained ambience and reactive Finder portraits. The parchment map
-distinguishes walked ground from forward glimpses. The owner's phone feedback
-takes precedence over the old bands. Capability encounters remain M3e.
+Current milestone: **M3e, choose another use**. A lit reed torch clears a web;
+food can spare an Ash Hound; light dispels a Wick Ghost. The Seal wakes a
+scored panel on the walk home. Painted hands show what the Finder is using.
+Doors, stairs and lift still belong to the masonry, and the ink map preserves
+the distinction between walking and glimpsing. The accepted floor, ceiling
+and parchment materials stay in place pending the owner's next art review.
 
 ## The playable run
 
@@ -19,17 +20,28 @@ return home. Later floors can have a weight gate, a keyed gate, or both.
 Stairs work both ways. Gates, monsters, dropped loot, equipment, restored
 landings and visited cells retain their state while the Finder is elsewhere.
 
+An occupied arrival rejects a normal stair trip without spending a beat.
+SIDLE then offers a clear adjacent landing cell. It neither displaces the
+waiting creature nor gives it an arrival attack. Generated landings have
+more clear side spaces than the floor can contain living creatures, so this
+correction does not strand the Finder below a frozen enemy.
+
 Entry and upper rooms are three cells wide; narrow corridors join a useful
 loop and a small side room. Seeds vary loop reach, loop height, which side
 holds the key, landing position, later gate modules and ordinary loot.
 Floor count remains a parameter (1-4). No corridor length is added merely to
 make a witness longer. Across 300 two-floor seeds, stairs-only witnesses take
 65-95 turns and restoration witnesses 60-85. This is more structural variety
-than M2's 77-81, but it is still one encounter vocabulary.
+than M2's 77-81. Optional capability branches now add another encounter vocabulary.
 
 BELL42 takes 73 turns if the clapper is left alone, 74 if carried as a club,
 or 66 if returned and the lift used. These are reproducible bot routes, not
 optimal-path or fifteen-minute human pacing claims.
+
+The two-floor capability tour includes the fire/kennel, cord/ghost and return
+secret. BELL42 takes 118 turns without damage; 300 replayed tour seeds take
+114-144. The greedy BELL42 collector takes 190. These are different choices
+about detours and possessions, not extra mandatory corridor length.
 
 ## Hands, pockets and small decisions
 
@@ -45,12 +57,11 @@ a named chooser. A full pack rejects ordinary pickup without losing anything:
 drop, equip or use something to make room. Keys and the Seal go to the belt,
 even with a full pack, and cannot be dropped or consumed.
 
-The current slice has twelve item definitions: rust knife, round stone, iron club,
+The current slice has thirteen item definitions: rust knife, round stone, iron club,
 padded coat, red tonic, dry bread, ham bone, glass shard, hooded lamp, abbey
-key, Dawn Seal and Bell clapper. Thirteen remains the slice ceiling; the
-reed torch is reserved for the FIRE module. HEAVY, EDGE, FOOD and
-GLOW appear on cards, but current rules implement weight, weapon, food/healing and Seal
-objective rules. Cutting, burning and ghost interactions belong to the later content round.
+key, Dawn Seal, Bell clapper and reed torch. Thirteen remains the slice ceiling.
+HEAVY, EDGE, FOOD, FIRE and GLOW now have physical uses as well as combat or
+healing roles. A lit torch supplies both FIRE and GLOW, with no fuel clock.
 
 The knife does 1 damage; ordinary HEAVY weapons do 2 during recovery.
 The clapper does 3; the same braced-arm limit still applies. It can also
@@ -61,13 +72,12 @@ spent state stored on the item so swapping cannot refresh it. Healing items
 are consumed only when healing is needed. Equipment exchange transfers the
 old item into the vacated pack slot. There is no durability or weight tally.
 
-Pressure is measured, not assumed. Across 64 greedy probes, the first floor
-offers 8-12 ordinary items and the second 4-7. Floor-one exit capacity ranges
-from zero to one free pocket; floor two ends full. BELL42 offers nine then
-four ordinary items. Its greedy bot enters floor two full and leaves three
-of that floor's four offerings. Keys and the Seal are excluded from these
-counts. Clapper recovery is optional; returning it frees its pocket/hand.
-The bot retains duplicates and does not model human taste.
+Pressure is measured, not assumed. Two-floor seeds offer 10-14 visible ordinary
+possessions upstairs and 6-9 downstairs, plus one concealed cache reward.
+BELL42 offers eleven then six, excluding belt items and that concealed reward.
+Its greedy collector enters floor two full and leaves five offerings there;
+the capability tour carries fewer things. Returning the clapper frees its
+pocket/hand. The collector retains duplicates and does not model human taste.
 
 ## Weight and a way back
 
@@ -79,6 +89,45 @@ A latch on the far side opens the gate permanently. It remains reachable if
 the Finder has crossed. Recovering the weight after latching cannot trap
 anyone. A body or HEAVY object in the doorway also holds it open; gates do not
 crush or destroy items. A matching belt key opens a keyed gate permanently.
+
+## Capability branches
+
+A banked brazier and reed torch sit beside the entrance. LIGHT costs one beat
+and makes that torch a persistent FIRE/GLOW source. BURN permanently clears
+the web into the kennel; its two flame frames follow the saved opening.
+The brazier stays lit and the reeds are not consumed. The web guards this
+optional reward branch. Reaching the Seal does not require using up a source.
+
+An Ash Hound has three health and crouches before a two-cell straight lunge.
+Its two marked cells are fixed for the next beat. One backstep from adjacent
+range remains in the lane; a sidestep escapes it. GUARD blocks the blow, and
+recovery admits a counter. FOOD provides another answer: FEED from directly
+ahead, or TOSS from two cells away. It consumes the offering, cancels the
+pending lunge and makes the Hound peaceful. It steps toward a clear perch and
+remains a solid body. Other creatures still take their normal beat.
+
+A cord-bound grate guards the second optional branch (also present in a
+one-floor run). CUT needs a carried or wielded EDGE and opens it permanently.
+A hooded lamp is available outside; a Wick Ghost waits within. DISPEL uses
+owned GLOW at up to two straight cells and consumes no light source. The
+Ghost's recoil fades after its removal is committed. Guard/counter combat
+also works, so leaving a lamp elsewhere cannot prevent finishing the run.
+
+TOSS is an explicit card action. Its free preview marks up to two forward
+cells; turn freely, confirm TOSS or CANCEL. Walls and closed blockers stop
+the lane. Ordinary possessions land on recoverable floor; a HEAVY hit deals
+one damage. FOOD feeds a struck Hound, FIRE opens a struck web, and GLOW
+dispels a struck Ghost. Torches/lamps then remain on the floor. Keys, Seal
+and returned property cannot be thrown. A throw spends one beat; a preview
+or rejected throw spends none. Finished capability uses clear selection so
+ordinary pickup and inspection cues return immediately.
+
+One scored wall panel waits near the entrance. Its free inspection hints:
+"Dawn wakes the scar. An EDGE can lift it." Returning with the Seal reveals
+the mark in the forward light cone. A carried light can also REVEAL it early.
+Revelation alone does not open the cache: CUT loosens the slab and exposes a
+tonic. This is an optional secret, not a compulsory hidden route. The sigil
+overlays the accepted painted masonry and an opened cache is a dark inset.
 
 ## Read the creature, choose a beat
 
@@ -107,6 +156,11 @@ one drawn frame. EDGE cuts a thin streak, HEAVY makes a broad impact and bare
 hands make a small knock; a native 16px number shows actual damage. Three
 80ms effect frames never extend the normal input gate or resolve combat.
 The Finder's portrait shudders by two pixels when hurt, alongside the border.
+
+One painted right hand sits at the lower-right of the view. Weapons swing on
+use, lamps and reeds replace that sleeve while explicitly held, and the Seal
+is raised automatically after pickup. Its pulse and every pose are cosmetic;
+no hand animation decides a hit, turn, save or inventory location.
 
 ## Finish, pause, return
 
@@ -234,20 +288,16 @@ text and a lowered, muted recovery sprite. The guaranteed guard/counter route
 continues to work without using the bell.
 
 Balance remains provisional: RING has reach and can interrupt several Husks,
-but the current floors contain one Husk each. The extra damage point alone
-still adds no value over a HEAVY counter against two health. Future encounters
-must make the choice richer; this turn does not add enemies to manufacture it.
+but generated floors still contain one Husk each. It does not pacify Hounds
+or dispel Ghosts. The clapper's three damage can finish a recovering Hound;
+returning it instead provides the lift. FOOD can heal the Finder or buy peace.
 
-The next content round still needs these modules, one reviewed interaction
-at a time. The Seal's GLOW reveals optional marks on the way home and keeps optional
-ghosts at a distance. A renewable FIRE source precedes a required web; EDGE
-opens a clearly hinted optional panel; FOOD can spare a hound encounter.
 No thieves, item-eating enemies, item-swallowing pits, compulsory hidden walls
 or return-trip spawns. One good restoration is enough.
 
 M4 continues quieter walls, portraits, concise
 knowledge-only Ledger cards, a period-style manual and phone acceptance.
-M3d keeps the full loop and restoration, integrates the painted kit and makes
-the map a durable survey. No extra enemy or capability fixture rule ships here.
-Third-run appeal, the capability encounters and the return-trip reveal still
-need implementation and human review.
+M3e adds the encounter choices and return reveal. Room props/pillars,
+the painted logotype and extra life in menu paintings remain unwired. The
+floor/ceiling/parchment repaint is intentionally awaiting its next handoff.
+Third-run appeal, branch discovery and combat comfort need human review.

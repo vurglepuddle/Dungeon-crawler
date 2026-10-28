@@ -203,7 +203,7 @@ tapnamed hot_front
 waitidle
 call assert status won
 call assert hp 5
-call assert hash 3db1eabf3c72c267222da53f59c5138b8d3e352c60a640bbe5a4ff781f339576
+call assert hash 9ec40fdb663087c374ba1d3a090b40348be915be5041e924f1a5e4d818ad4f29
 call state
 shot 11_gallery_home
 quit

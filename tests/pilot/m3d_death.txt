@@ -49,6 +49,6 @@ tapnamed verb2
 waitidle
 call assert status lost
 call assert hp 0
-call assert hash de520323b481aa441a1c71d184cbf49c67c921d20724b4f44ab0e5c33182e42e
+call assert hash 202d77e43f9296d01b541d1612850300b7ff9e6b9a75c0e22d167d33d1e33ea3
 shot 16_death_plate
 close

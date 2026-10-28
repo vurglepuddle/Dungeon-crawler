@@ -1,4 +1,4 @@
-# M3d architecture
+# M3e architecture
 
 One deterministic simulation owns a whole run. The scene presents its committed
 results. See CONTRACT for exact data and DESIGN for what is playable.
@@ -10,21 +10,32 @@ results. See CONTRACT for exact data and DESIGN for what is playable.
   with the specified seed hash/PRNG. No timing, engine/global randomness or
   presentation state decides geometry. Floors are stored, never regenerated
   during descent or load.
+- scripts/gen/capability_rooms.gd appends small kennel/reliquary branches below
+  the existing gate cuts, plus a hinted entrance-wall cache. Their brazier,
+  torch, food access and lamp precede their optional obstacles. Floor count
+  one puts both branches on its single floor. It uses no runtime RNG.
 - scripts/sim/dungeon_sim.gd owns inventory locations, equipment, belt, active
   floor, mechanisms, combat, stairs/lifts, restoration, exploration and terminal state. It is
   RefCounted with no nodes, filesystem, clock or input. Snapshot/query returns
   are detached. view_snapshot supplies current-floor drawable data and seed;
   the latter is a read-only presentation addition, not a rule/state change.
+- scripts/sim/capabilities.gd supplies deterministic target queries, toss lanes,
+  validation/commit, fixed-lane Hound phases and active-floor Seal revelation.
+  Static calls receive the sim; they retain no host reference or second state.
+  The sim owns every final item/fixture/actor mutation and ordered event.
 - scripts/gen/witness.gd expands BFS navigation and interaction macros into
   ordinary commands through that same sim. It has no teleport, gate override,
   loot grant or damage immunity. The app requires a successful full-return
   witness before exposing a new run. Separate skip/keep/return policies prove the Porter choice. A greedy policy
   measures pack pressure; it is not a utility-optimal player model.
+  A separate tour flag visits capability branches and the return cache without
+  collecting every ordinary offering. Navigation guards the whole Hound lane
+  and chooses the explicit safe stair alternative when a landing is occupied.
 - scripts/persistence/state_codec.gd validates/normalises JSON-safe state and
   canonicalises it. save_store.gd handles staging, backup and recovery under
   user://. Persistence is outside the rules. CONTINUE adopts a fully validated
   snapshot, not a seed replay or freshly generated approximation. Codec accepts
-  complete m2.1, m3.1 and m3.2 profiles; old runs keep old geometry and hashes. M3
+  complete m2.1, m3.1, m3.2 and m3.3 profiles; old runs keep old geometry and hashes. M3
   adds strict cross-floor owner/landing references and returned-item ownership.
 - scripts/app/main.gd owns title/end flows, named touch controls, cards, map/
   seed/loot panels, feedback, selection, the short input gate and lifecycle
@@ -93,6 +104,18 @@ inputs into build/m3d_export_stage. Import/export there leaves source project
 settings and C's new props/room faces untouched. An external SceneTree probe
 loads the resulting PCK from an empty resource directory and checks runtime
 art/alpha/JSON availability. It is not an APK/device performance test.
+
+M3e uses tests/stage_m3e.py and run_m3e_pack.ps1 for that check. The staging
+copy explicitly includes B's held items and excludes props, new screen assets
+and the pending material proposals. Its probe completes the entire capability
+tour from a resource pack, including transactional saves.
+
+scripts/view/held_item.gd caches one native 48x56 right-hand frame at view-local
+(100,94). Main chooses equipment, an explicitly used light, or the return
+Seal; action poses and pulses stay entirely in presentation. The world view
+also keeps short web/ghost transition ghosts after the corresponding sim
+state is committed. Panels use B's transparent sigil on current painted stone,
+with a wall-UV inset after opening. No floor/ceiling material is swapped.
 
 Data flow: seed -> bounded construction -> replayed full-run witness -> live
 sim -> save -> events/snapshot -> visual/audio feedback -> touch command -> sim.

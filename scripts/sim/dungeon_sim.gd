@@ -3,6 +3,7 @@ extends RefCounted
 const Gen = preload("res://scripts/gen/floor_gen.gd")
 const Catalog = preload("res://scripts/content/catalog.gd")
 const Codec = preload("res://scripts/persistence/state_codec.gd")
+const Cap=preload("res://scripts/sim/capabilities.gd")
 const DIRS := [[0,-1],[1,0],[0,1],[-1,0]]
 const PACK_SIZE := 8
 var _s: Dictionary = {}
@@ -13,8 +14,8 @@ func _init(seed: String = "BELL42", floor_count: int = 2) -> void:
 	if not generated.ok:
 		_s = {"status": "error", "error": generated.error}
 		return
-	_s = {"schema_version": 2, "rules_version": "m3.2", "generator_version": "m3.1",
-		"content_version": "m3.2", "seed": generated.seed, "floor_count": floor_count,
+	_s = {"schema_version": 2, "rules_version": "m3.3", "generator_version": "m3.3",
+		"content_version": "m3.3", "seed": generated.seed, "floor_count": floor_count,
 		"floor": 1, "pos": generated.floors[0].start.duplicate(), "facing": 0,
 		"turn": 0, "revision": 0, "hp": 6, "max_hp": 6, "status": "playing",
 		"pack": [], "equipment": {"hand": "knife_start", "body": ""}, "belt": [],
@@ -39,7 +40,11 @@ func terrain(cell: Array) -> int:
 	if cell[0]<0 or cell[1]<0 or cell[0]>=f.width or cell[1]>=f.height: return 1
 	return f.tiles[cell[1]*f.width+cell[0]]
 func definition(id: String) -> Dictionary:
-	return Catalog.item(_s.items[id].kind) if _s.items.has(id) else {}
+	if not _s.items.has(id): return {}
+	var result: Dictionary=Catalog.item(_s.items[id].kind)
+	if _s.items[id].kind=="torch" and _s.items[id].get("lit",false): result.tags=["FIRE","GLOW"]; result.purpose="BURN webs. No fuel."
+	return result
+func toss_preview(id: String) -> Dictionary: return Cap.toss_preview(self,id)
 func _fixture(id: String) -> Dictionary:
 	for fixture in _floor().fixtures:
 		if fixture.id == id: return fixture
@@ -53,7 +58,7 @@ func _adjacent(a: Array,b: Array) -> bool: return absi(a[0]-b[0])+absi(a[1]-b[1]
 func can_walk(cell: Array, ignore_actors: bool = false) -> bool:
 	if terrain(cell) != 0: return false
 	for fixture in _floor().fixtures:
-		if fixture.pos==cell and (fixture.type=="porter" or fixture.type in ["gate","lock"] and not fixture.open): return false
+		if fixture.pos==cell and (fixture.type=="porter" or fixture.type in ["gate","lock"] and not fixture.open or Cap.blocks(fixture)): return false
 	if not ignore_actors:
 		for actor in _floor().actors:
 			if actor.hp>0 and actor.pos==cell: return false
@@ -65,7 +70,7 @@ func contents(cell: Array) -> Dictionary:
 		if fixture.pos == cell: result.fixtures.append(fixture.duplicate(true))
 	for id in _s.items:
 		var item: Dictionary = _s.items[id]
-		if item.location=="floor" and item.floor==_s.floor and item.pos==cell:
+		if item.location=="floor" and item.floor==_s.floor and item.pos==cell and not item.get("hidden",false):
 			result.items.append(id)
 	for actor in _floor().actors:
 		if actor.hp>0 and actor.pos==cell:
@@ -77,7 +82,7 @@ func reachable_items() -> Array:
 	var result: Array = []
 	for id in _s.items:
 		var item: Dictionary = _s.items[id]
-		if item.location=="floor" and item.floor==_s.floor and _near(item.pos):
+		if item.location=="floor" and item.floor==_s.floor and _near(item.pos) and not item.get("hidden",false):
 			result.append(id)
 	return result
 func local_fixtures() -> Array:
@@ -100,7 +105,10 @@ func fixture_actions() -> Array:
 				if not _fixture(fixture.gate_id).latched: kind="latch"; label="LATCH"
 			"lock":
 				if not fixture.open and _s.belt.has(fixture.key_id): kind="unlock"; label="UNLOCK"
-			"stairs_up","stairs_down": kind="stairs"; label="UP" if fixture.type=="stairs_up" else "DOWN"
+			"stairs_up","stairs_down":
+				var arrival: Dictionary=_stair_arrival(fixture)
+				kind="stairs" if _arrival_clear(arrival.floor,arrival.pos) else "squeeze"
+				label=("UP" if fixture.type=="stairs_up" else "DOWN") if kind=="stairs" else "SIDLE"
 			"lift":
 				if fixture.active and _arrival_clear(fixture.destination_floor,fixture.destination): kind="ride"; label="RIDE"
 			"porter":
@@ -125,16 +133,29 @@ func targets(selected: String) -> Array:
 			result.append({"target_id":fixture.id,"pos":fixture.pos.duplicate(),"verb":"PLACE","action":{"type":"place","item_id":selected,"target_id":fixture.id}})
 	for actor_id in ring_targets(selected):
 		result.append({"target_id":actor_id,"pos":_actor(actor_id).pos.duplicate(),"verb":"RING","action":{"type":"ring","item_id":selected}})
+	result.append_array(Cap.targets(self,selected))
 	return result
 
 func _arrival_clear(number: int,cell: Array) -> bool:
+	if number<1 or number>_s.floor_count or cell[0]<0 or cell[1]<0 or cell[0]>=17 or cell[1]>=17: return false
 	var f: Dictionary=_s.floors[number-1]
 	if f.tiles[cell[1]*f.width+cell[0]]!=0: return false
 	for actor in f.actors:
 		if actor.hp>0 and actor.pos==cell: return false
 	for fixture in f.fixtures:
-		if fixture.type in ["gate","lock"] and fixture.pos==cell and not fixture.open: return false
+		if fixture.pos==cell and (fixture.type=="porter" or fixture.type in ["gate","lock"] and not fixture.open or Cap.blocks(fixture)): return false
 	return true
+func _stair_arrival(fixture: Dictionary) -> Dictionary:
+	var number: int=_s.floor+(1 if fixture.type=="stairs_down" else -1)
+	if number<1 or number>_s.floor_count: return {"floor":_s.floor,"pos":_s.pos.duplicate()}
+	return {"floor":number,"pos":(_s.floors[number-1].start if number>_s.floor else _s.floors[number-1].landing).duplicate()}
+func _stair_side(arrival: Dictionary) -> Array:
+	# Landings are small rooms. Stepping off to a clear side is an explicit
+	# alternate action, with no displacement/remote turn of the waiting actor.
+	for d in DIRS:
+		var cell: Array=[arrival.pos[0]+d[0],arrival.pos[1]+d[1]]
+		if _arrival_clear(arrival.floor,cell): return cell
+	return []
 
 func porter_state() -> Dictionary:
 	for f in _s.floors:
@@ -147,7 +168,7 @@ func ring_ready() -> bool: return not _floor().get("bell_rung",false)
 func _sight_blocked(cell: Array) -> bool:
 	if terrain(cell)!=0: return true
 	for fixture in _floor().fixtures:
-		if fixture.pos==cell and fixture.type in ["gate","lock"] and not fixture.open: return true
+		if fixture.pos==cell and (fixture.type in ["gate","lock"] and not fixture.open or Cap.blocks(fixture)): return true
 	return false
 
 func _clear_sight(cell: Array) -> bool:
@@ -171,7 +192,7 @@ func _clear_sight(cell: Array) -> bool:
 	return false
 
 func ring_targets(id: String) -> Array:
-	if _s.status!="playing" or _s.rules_version not in ["m3.1","m3.2"] or not _s.items.has(id) or _s.items[id].kind!="clapper" or _s.items[id].location not in ["pack","equip"] or not ring_ready(): return []
+	if _s.status!="playing" or _s.rules_version not in ["m3.1","m3.2","m3.3"] or not _s.items.has(id) or _s.items[id].kind!="clapper" or _s.items[id].location not in ["pack","equip"] or not ring_ready(): return []
 	var result: Array=[]
 	var direction: Array=DIRS[_s.facing]
 	for actor in _floor().actors:
@@ -186,13 +207,18 @@ func ring_targets(id: String) -> Array:
 func legal_verbs(selected: String = "") -> Array:
 	if _s.status!="playing": return []
 	var front := inspect_front()
+	var matches: Array=Cap.targets(self,selected)
+	if not matches.is_empty(): return [{"label":matches[0].verb,"action":matches[0].action},{"label":"GUARD","action":{"type":"guard"}},{"label":"WAIT","action":{"type":"wait"}}]
 	if not ring_targets(selected).is_empty():
 		var ringing: Array=[{"label":"RING","action":{"type":"ring","item_id":selected}}, {"label":"GUARD","action":{"type":"guard"}}]
 		ringing.append({"label":"HIT","action":{"type":"hit","target_id":front.monster}} if front.monster!="" else {"label":"WAIT","action":{"type":"wait"}})
 		return ringing
 	if not front.monster.is_empty():
+		var third: Dictionary={"label":"WAIT","action":{"type":"wait"}}
+		for entry in fixture_actions():
+			if entry.action.type in ["stairs","squeeze"]: third=entry; break
 		return [{"label":"HIT","action":{"type":"hit","target_id":front.monster}},
-			{"label":"GUARD","action":{"type":"guard"}},{"label":"WAIT","action":{"type":"wait"}}]
+			{"label":"GUARD","action":{"type":"guard"}},third]
 	var result: Array=[]
 	var valid := targets(selected)
 	if not valid.is_empty(): result.append({"label":valid[0].verb,"action":valid[0].action})
@@ -258,6 +284,9 @@ func _enemies(old_states: Dictionary, guarded: bool) -> void:
 		if actor.hp<=0: continue
 		var old: String=old_states.get(actor.id,"idle")
 		if old=="bell_stunned": continue
+		if Cap.hound_phase(self,actor,old,guarded):
+			if _s.status=="lost": return
+			continue
 		if old=="windup":
 			var cell: Array=actor.intent.cell.duplicate()
 			var damage:=0
@@ -275,7 +304,7 @@ func _enemies(old_states: Dictionary, guarded: bool) -> void:
 			if _s.hp<=0: _s.status="lost"; return
 			continue
 		if old=="recovery": actor.state="idle"
-		if _los(actor.pos,_s.pos,int(Catalog.CREATURES[actor.kind].sight)) and not _adjacent(actor.pos,_s.pos):
+		if actor.kind!="ghost" and _los(actor.pos,_s.pos,int(Catalog.CREATURES[actor.kind].sight)) and not _adjacent(actor.pos,_s.pos):
 			var d: Array=[signi(_s.pos[0]-actor.pos[0]),signi(_s.pos[1]-actor.pos[1])]
 			var next: Array=[actor.pos[0]+d[0],actor.pos[1]+d[1]]
 			if can_walk(next) and next!=_s.pos:
@@ -286,6 +315,13 @@ func _enemies(old_states: Dictionary, guarded: bool) -> void:
 			actor.state="windup"
 			actor.intent={"cell":_s.pos.duplicate(),"due_in":1}
 			_event("intent_announced","prepare",{"actor_id":actor.id,"intent":actor.intent.duplicate(true)})
+func _resolve_damage(hit: bool,guarded: bool) -> int:
+	if not hit or guarded: return 0
+	var coat_id: String=_s.equipment.body
+	if coat_id!="" and not _s.items[coat_id].spent:
+		_s.items[coat_id].spent=true; return 0
+	_s.hp-=1
+	return 1
 func weapon_damage() -> int:
 	var id: String=_s.equipment.hand
 	return int(definition(id).get("damage",1)) if not id.is_empty() else 1
@@ -297,6 +333,9 @@ func attack_damage(target_id: String) -> int:
 
 func apply(action: Dictionary) -> Dictionary:
 	if _s.status!="playing": return _reject("Run has ended.")
+	for field in ["type","item_id","target_id","slot","step"]:
+		if action.has(field) and not action[field] is String: return _reject("Malformed action.")
+	if action.has("expected_revision") and not action.expected_revision is int: return _reject("Malformed revision.")
 	if action.has("expected_revision") and action.expected_revision!=_s.revision: return _reject("Stale action.")
 	var kind: String=action.get("type","")
 	var id: String=action.get("item_id","")
@@ -304,7 +343,11 @@ func apply(action: Dictionary) -> Dictionary:
 	var fixture:=_fixture(target)
 	var actor:=_actor(target)
 	var destination: Array=[]
+	if kind in Cap.ACTIONS:
+		var refusal: String=Cap.validate_action(self,action)
+		if refusal!="": return _reject(refusal)
 	match kind:
+		"light","burn","cut","feed","dispel","reveal","toss": pass
 		"turn":
 			if action.get("delta",0) not in [-1,1]: return _reject("Bad turn.")
 		"move":
@@ -324,11 +367,20 @@ func apply(action: Dictionary) -> Dictionary:
 		"unequip":
 			var slot: String=action.get("slot","")
 			if slot not in ["hand","body"] or _s.equipment[slot].is_empty() or _s.pack.size()>=PACK_SIZE: return _reject("No room in the pack.")
-		"latch","unlock","stairs","leave":
+		"latch","unlock","stairs","squeeze","leave":
 			if fixture.is_empty() or not _near(fixture.pos): return _reject("Get closer first.")
 			if kind=="latch" and (fixture.type!="latch" or _fixture(fixture.gate_id).latched): return _reject("Already latched.")
 			if kind=="unlock" and (fixture.type!="lock" or fixture.open or not _s.belt.has(fixture.key_id)): return _reject("Find the matching key.")
-			if kind=="stairs" and fixture.type not in ["stairs_up","stairs_down"]: return _reject("No stair here.")
+			if kind in ["stairs","squeeze"] and fixture.type not in ["stairs_up","stairs_down"]: return _reject("No stair here.")
+			if kind in ["stairs","squeeze"]:
+				var number: int=_s.floor+(1 if fixture.type=="stairs_down" else -1)
+				if number<1 or number>_s.floor_count: return _reject("No landing there.")
+				var arrival: Array=_s.floors[number-1].start if number>_s.floor else _s.floors[number-1].landing
+				if kind=="stairs" and not _arrival_clear(number,arrival): return _reject("The landing is blocked.")
+				if kind=="squeeze":
+					if _arrival_clear(number,arrival): return _reject("The landing is clear.")
+					destination=_stair_side({"floor":number,"pos":arrival})
+					if destination.is_empty(): return _reject("No room beside it.")
 			if kind=="leave" and (fixture.type!="exit" or not has_seal()): return _reject("Find the Dawn Seal.")
 		"return_item":
 			if fixture.get("type","")!="porter" or not _near(fixture.pos) or fixture.restored or fixture.item_id!=id: return _reject("That is not its owner.")
@@ -350,6 +402,7 @@ func apply(action: Dictionary) -> Dictionary:
 	for enemy in _floor().actors: old_states[enemy.id]=enemy.state
 	var transition:=false
 	match kind:
+		"light","burn","cut","feed","dispel","reveal","toss": Cap.commit(self,action,old_states)
 		"turn":
 			_s.facing=posmod(_s.facing+action.delta,4)
 			_event("facing_changed","player",{"to":_s.facing})
@@ -410,7 +463,7 @@ func apply(action: Dictionary) -> Dictionary:
 			_event("lift_ride","transition",{"from":old_floor,"to":_s.floor,"target_id":fixture.destination_id})
 		"ring":
 			var listeners: Array=ring_targets(id)
-			_s.rules_version="m3.2"; _s.content_version="m3.2"
+			if _s.rules_version!="m3.3": _s.rules_version="m3.2"; _s.content_version="m3.2"
 			_floor().bell_rung=true
 			for listener in listeners:
 				var husk:=_actor(listener)
@@ -424,18 +477,20 @@ func apply(action: Dictionary) -> Dictionary:
 				actor.state="dead"; actor.intent={}
 				_event("monster_defeated","player",{"actor_id":actor.id})
 		"guard","wait": _event("guarded" if kind=="guard" else "waited","player")
-		"stairs":
+		"stairs","squeeze":
 			transition=true
 			var old_floor: int=_s.floor
 			_s.floor+=1 if fixture.type=="stairs_down" else -1
-			_s.pos=(_floor().start if _s.floor>old_floor else _floor().landing).duplicate()
+			_s.pos=destination.duplicate() if kind=="squeeze" else (_floor().start if _s.floor>old_floor else _floor().landing).duplicate()
 			_s.facing=0 if _s.floor>old_floor else 2
 			_event("floor_changed","transition",{"from":old_floor,"to":_s.floor})
+			if kind=="squeeze": _event("landing_skirted","transition",{"target_id":fixture.id})
 		"leave": _s.status="won"
 	_mechanisms()
 	if consumed and not transition and _s.status=="playing":
 		_enemies(old_states,kind=="guard")
 		_mechanisms()
+	Cap.glow_reveals(self)
 	_visit()
 	if _s.status!="playing": _event("run_ended","transition",{"status":_s.status})
 	return {"accepted":true,"reason":"","consumed_turn":consumed,"revision":_s.revision,"events":_events.duplicate(true)}
@@ -444,9 +499,9 @@ func view_snapshot() -> Dictionary:
 	var f:=floor_data()
 	f.merge({"pos":_s.pos.duplicate(),"facing":_s.facing,"floor":_s.floor,"seed":_s.seed,
 		"hp":_s.hp,"max_hp":_s.max_hp,"status":_s.status,"objects":[],
-		"seal_site":f.landing.duplicate() if _s.floor==_s.floor_count else []})
+		"seal_site":f.landing.duplicate() if _s.floor==_s.floor_count else [],"seal_glow":has_seal()})
 	for id in _s.items:
 		var item: Dictionary=_s.items[id]
-		if item.location=="floor" and item.floor==_s.floor:
-			f.objects.append({"id":id,"kind":item.kind,"pos":item.pos.duplicate()})
+		if item.location=="floor" and item.floor==_s.floor and not item.get("hidden",false):
+			f.objects.append({"id":id,"kind":item.kind,"pos":item.pos.duplicate(),"lit":item.get("lit",false)})
 	return f

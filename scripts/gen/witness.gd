@@ -8,9 +8,9 @@ var error: String=""
 var pressure: Array=[]
 var use_bell:=false
 
-static func build(seed: String, count: int=2, explore: bool=false,porter_policy: String="skip") -> Dictionary:
+static func build(seed: String, count: int=2, explore: bool=false,porter_policy: String="skip",tour: bool=false) -> Dictionary:
 	var bot=UndercroftWitness.new()
-	return bot.run(seed,count,explore,porter_policy)
+	return bot.run(seed,count,explore,porter_policy,{},tour)
 
 func _raw(action: Dictionary) -> bool:
 	var result: Dictionary=sim.apply(action)
@@ -24,16 +24,28 @@ func _raw(action: Dictionary) -> bool:
 	return true
 
 func _commit(action: Dictionary) -> bool:
+	if action.type=="stairs":
+		for entry in sim.fixture_actions():
+			if entry.action.type=="squeeze" and entry.action.target_id==action.target_id: action=entry.action.duplicate(); break
 	var state: Dictionary=sim.snapshot()
+	var landing: Array=state.pos
+	if action.type=="move":
+		var offset: int={"fwd":0,"back":2,"strafe_l":3,"strafe_r":1}[action.step]
+		var d: Array=Sim.DIRS[(state.facing+offset)%4]
+		landing=[state.pos[0]+d[0],state.pos[1]+d[1]]
 	for actor in state.floors[state.floor-1].actors:
-		if actor.hp>0 and actor.state=="windup" and actor.intent.cell==state.pos and action.type not in ["turn","guard"]:
-			var dodges: bool=action.type=="move"
+		var lane: Array=actor.intent.get("lane",[actor.intent.get("cell",[])])
+		if actor.hp>0 and actor.state=="windup" and (lane.has(state.pos) or lane.has(landing)) and action.type not in ["turn","guard"]:
+			var dodges: bool=action.type=="move" and not lane.has(landing)
 			var lethal: bool=action.type=="hit" and action.get("target_id","")==actor.id and sim.attack_damage(actor.id)>=actor.hp
-			if not dodges and not lethal:
+			var pacifies: bool=action.type in ["feed","dispel"] and action.get("target_id","")==actor.id
+			if action.type=="toss" and sim.toss_preview(action.get("item_id","")).actor_id==actor.id and sim.definition(action.item_id).tags.has("FOOD") and actor.kind=="hound": pacifies=true
+			if not dodges and not lethal and not pacifies:
 				var listeners: Array=sim.ring_targets("bell_clapper") if use_bell else []
 				var threats: Array=state.floors[state.floor-1].actors.filter(func(a): return a.hp>0 and a.state=="windup" and a.intent.cell==state.pos)
 				var safe_bell: bool=not listeners.is_empty() and threats.all(func(a): return listeners.has(a.id))
 				if not _raw({"type":"ring","item_id":"bell_clapper"} if safe_bell else {"type":"guard"}): return false
+	if action.type=="move" and not sim.can_walk(landing): return true # A guarded lunge may now occupy it; go() replans.
 	return _raw(action)
 
 func _face(direction: int) -> bool:
@@ -105,7 +117,7 @@ func _explore() -> bool:
 	var state: Dictionary=sim.snapshot()
 	var ids: Array=[]
 	for id in state.items:
-		if (id.begins_with("f%d_"%state.floor) or id=="bell_clapper" and state.floor==1) and state.items[id].location=="floor" and sim.definition(id).slot!="belt":
+		if (id.begins_with("f%d_"%state.floor) or id=="bell_clapper" and state.floor==1) and state.items[id].location=="floor" and not state.items[id].get("hidden",false) and sim.definition(id).slot!="belt":
 			ids.append(id)
 	for id in ids:
 		state=sim.snapshot()
@@ -118,7 +130,60 @@ func _explore() -> bool:
 			if not _commit({"type":"equip","item_id":id}): return false
 	return true
 
-func run(seed: String,count: int,explore: bool,porter_policy: String="skip",initial_state: Dictionary={}) -> Dictionary:
+func _acquire_tag(tag: String) -> String:
+	var state: Dictionary=sim.snapshot()
+	for id in state.pack+state.belt+[state.equipment.hand]:
+		if id!="" and sim.definition(id).tags.has(tag): return id
+	for id in state.items:
+		var item: Dictionary=state.items[id]
+		if item.location!="floor" or item.floor!=state.floor or item.get("hidden",false) or not sim.definition(id).tags.has(tag): continue
+		if _path(item.pos,true).is_empty() and absi(item.pos[0]-state.pos[0])+absi(item.pos[1]-state.pos[1])>1: continue
+		if _space() and _pickup(id): return id
+	return ""
+
+func capability_rooms() -> bool:
+	if sim.snapshot().rules_version!="m3.3": return true
+	var food: String=""
+	if sim.floor_data().actors.any(func(a): return a.kind=="hound" and a.hp>0 and a.state!="peaceful"): food=_acquire_tag("FOOD")
+	var web:=_fixture("web")
+	if not web.is_empty() and not web.open:
+		var torch: String="f1_torch"
+		if not _space() or not _pickup(torch): return false
+		if not sim.snapshot().items[torch].lit:
+			var brazier:=_fixture("brazier")
+			if not go(brazier.pos) or not _commit({"type":"light","item_id":torch,"target_id":brazier.id}): return false
+		if not go(web.pos) or not _commit({"type":"burn","item_id":torch,"target_id":web.id}): return false
+	for actor in sim.floor_data().actors:
+		if actor.kind!="hound" or actor.hp<=0 or actor.state=="peaceful": continue
+		if food!="":
+			if not sim.Cap.in_reach(sim,sim._actor(actor.id)) and not go(sim._actor(actor.id).pos): return false
+			if sim._actor(actor.id).hp>0:
+				var cell: Array=sim._actor(actor.id).pos
+				var s: Dictionary=sim.snapshot()
+				if not _face(Sim.DIRS.find([signi(cell[0]-s.pos[0]),signi(cell[1]-s.pos[1])])): return false
+				if not _commit({"type":"feed","item_id":food,"target_id":actor.id} if sim._near(cell) else {"type":"toss","item_id":food}): return false
+		else:
+			while sim._actor(actor.id).hp>0:
+				if not go(sim._actor(actor.id).pos) or not _commit({"type":"hit","target_id":actor.id}): return false
+	var cord:=_fixture("cord")
+	if not cord.is_empty() and not cord.open:
+		var edge:=_acquire_tag("EDGE")
+		if edge=="" or not go(cord.pos) or not _commit({"type":"cut","item_id":edge,"target_id":cord.id}): return false
+	for actor in sim.floor_data().actors:
+		if actor.kind!="ghost" or actor.hp<=0: continue
+		var glow:=_acquire_tag("GLOW")
+		if glow=="" or not go(actor.pos) or not _commit({"type":"dispel","item_id":glow,"target_id":actor.id}): return false
+	return true
+
+func find_secret() -> bool:
+	var panel:=_fixture("panel")
+	if panel.is_empty() or panel.open: return true
+	if not go(panel.pos): return false
+	var edge:=_acquire_tag("EDGE")
+	if edge=="" or not _commit({"type":"cut","item_id":edge,"target_id":panel.id}): return false
+	return _space() and _pickup(panel.item_id)
+
+func run(seed: String,count: int,explore: bool,porter_policy: String="skip",initial_state: Dictionary={},tour: bool=false) -> Dictionary:
 	use_bell=porter_policy=="ring"
 	sim=Sim.new(seed,count)
 	if not initial_state.is_empty() and not sim.restore_state(initial_state): return {"ok":false,"reason":"Invalid initial state"}
@@ -128,30 +193,34 @@ func run(seed: String,count: int,explore: bool,porter_policy: String="skip",init
 		var state: Dictionary=sim.snapshot()
 		var ids: Array=[]
 		var kinds: Array=[]
+		var concealed: int=0
 		for id in original:
-			if original[id].floor==number and sim.definition(id).slot!="belt": ids.append(id); kinds.append(original[id].kind)
-		var report: Dictionary={"floor":number,"offered":ids.size(),"offered_kinds":kinds,"free_on_entry":8-state.pack.size()}
+			if original[id].floor==number and sim.definition(id).slot!="belt":
+				if original[id].get("hidden",false): concealed+=1
+				else: ids.append(id); kinds.append(original[id].kind)
+		var report: Dictionary={"floor":number,"offered":ids.size(),"concealed":concealed,"offered_kinds":kinds,"free_on_entry":8-state.pack.size()}
 		pressure.append(report)
 		var plate:=_fixture("plate")
-		if not plate.is_empty():
+		if not plate.is_empty() and not _fixture("gate").latched:
 			var stone: String="f%d_stone"%number
 			if not _space() or not _pickup(stone): return _finish(false)
 			if not go(plate.pos,false) or not _commit({"type":"drop","item_id":stone}): return _finish(false)
 			var latch:=_fixture("latch")
 			if not go(latch.pos) or not _commit({"type":"latch","target_id":latch.id}): return _finish(false)
 		var lock:=_fixture("lock")
-		if not lock.is_empty():
+		if not lock.is_empty() and not lock.open:
 			if not _pickup(lock.key_id): return _finish(false)
 		if number==1 and porter_policy!="skip":
 			if not _space() or not _pickup("bell_clapper"): return _finish(false)
-		if not lock.is_empty():
+		if not lock.is_empty() and not lock.open:
 			if not go(lock.pos) or not _commit({"type":"unlock","target_id":lock.id}): return _finish(false)
 		if number==1 and porter_policy!="skip":
 			if porter_policy=="return":
 				var porter:=_fixture("porter")
-				if not go(porter.pos) or not _commit({"type":"return_item","target_id":porter.id,"item_id":"bell_clapper"}): return _finish(false)
+				if not porter.restored and (not go(porter.pos) or not _commit({"type":"return_item","target_id":porter.id,"item_id":"bell_clapper"})): return _finish(false)
 			elif porter_policy in ["keep","ring"]:
-				if not _commit({"type":"equip","item_id":"bell_clapper"}): return _finish(false)
+				if sim.snapshot().items.bell_clapper.location=="pack" and not _commit({"type":"equip","item_id":"bell_clapper"}): return _finish(false)
+		if (explore or tour) and not capability_rooms(): return _finish(false)
 		if explore and not _explore(): return _finish(false)
 		state=sim.snapshot()
 		report.free_on_exit=8-state.pack.size()
@@ -164,6 +233,7 @@ func run(seed: String,count: int,explore: bool,porter_policy: String="skip",init
 		elif not _pickup("f%d_seal"%number): return _finish(false)
 	for number in range(count,0,-1):
 		if sim.snapshot().floor!=number: continue
+		if (explore or tour) and number==1 and not find_secret(): return _finish(false)
 		var lift:=_fixture("lift")
 		if count==1:
 			for landing in sim.floor_data().fixtures:
@@ -175,6 +245,7 @@ func run(seed: String,count: int,explore: bool,porter_policy: String="skip",init
 		if not go(up.pos): return _finish(false)
 		if not _commit({"type":"leave" if number==1 else "stairs","target_id":up.id}): return _finish(false)
 	if sim.snapshot().status=="playing" and sim.snapshot().floor==1:
+		if (explore or tour) and not find_secret(): return _finish(false)
 		var exit:=_fixture("exit")
 		if not go(exit.pos) or not _commit({"type":"leave","target_id":exit.id}): return _finish(false)
 	return _finish(sim.snapshot().status=="won")

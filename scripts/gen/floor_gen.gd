@@ -1,6 +1,7 @@
 class_name UndercroftFloorGen
 extends RefCounted
 const Catalog = preload("res://scripts/content/catalog.gd")
+const Rooms=preload("res://scripts/gen/capability_rooms.gd")
 const ALPHABET := "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"
 const WIDTH := 17
 const HEIGHT := 17
@@ -99,4 +100,6 @@ func generate(raw: String,count: int=2) -> Dictionary:
 	first.fixtures.append({"id":"lift_home","type":"lift","pos":low,"owner_id":"bell_porter","active":false,"destination_floor":count,"destination":high.duplicate(),"destination_id":"lift_deep"})
 	last.fixtures.append({"id":"lift_deep","type":"lift","pos":high,"owner_id":"bell_porter","active":false,"destination_floor":1,"destination":low.duplicate(),"destination_id":"lift_home"})
 	items.bell_clapper={"id":"bell_clapper","kind":"clapper","location":"floor","floor":1,"pos":[first.layout.branch,8],"slot":"","spent":false}
-	return {"ok":true,"seed":seed,"floors":floors,"items":items}
+	var result: Dictionary={"ok":true,"seed":seed,"floors":floors,"items":items}
+	Rooms.decorate(result)
+	return result

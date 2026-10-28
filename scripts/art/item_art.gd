@@ -63,6 +63,8 @@ static func texture(kind: String) -> Texture2D:
 	return result
 
 static func inventory(kind: String) -> Texture2D:
+	if kind=="torch": return preload("res://scripts/art/presentation_art.gd").texture("res://assets/art/fixtures/reed_torch_icon_unlit_16.png")
+	if kind=="seal": return preload("res://scripts/art/presentation_art.gd").texture("res://assets/art/fixtures/dawn_seal_icon_16.png")
 	var painted: String="res://assets/art/icons/%s.png"%kind
 	if FileAccess.file_exists(painted) or ResourceLoader.exists(painted):
 		return preload("res://scripts/art/presentation_art.gd").texture(painted)
