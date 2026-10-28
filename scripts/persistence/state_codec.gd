@@ -26,7 +26,9 @@ static func _cell(value, f: Dictionary) -> bool:
 static func validate(s: Dictionary) -> bool:
 	for key in ["schema_version","rules_version","generator_version","content_version","seed","floor_count","floor","pos","facing","turn","revision","hp","max_hp","status","pack","equipment","belt","floors","items"]:
 		if not s.has(key): return false
-	if s.schema_version!=2 or s.rules_version not in ["m2.1","m3.1"] or s.generator_version!=s.rules_version or s.content_version!=s.rules_version: return false
+	if s.schema_version!=2: return false
+	var profiles: Dictionary={"m2.1":"m2.1","m3.1":"m3.1","m3.2":"m3.1"}
+	if not profiles.has(s.rules_version) or s.generator_version!=profiles[s.rules_version] or s.content_version!=s.rules_version: return false
 	if not s.seed is String or Gen.normalize_seed(s.seed)!=s.seed: return false
 	for key in ["floor_count","floor","facing","turn","revision","hp","max_hp"]:
 		if not s[key] is int: return false
@@ -50,6 +52,7 @@ static func validate(s: Dictionary) -> bool:
 			if not tile is int or tile not in [0,1]: return false
 		for seen in f.visited:
 			if not seen is bool: return false
+		if f.has("bell_rung") and (not f.bell_rung is bool or s.rules_version!="m3.2"): return false
 		if not _cell(f.start,f) or not _cell(f.landing,f): return false
 		if not f.fixtures is Array or f.fixtures.size()>32 or not f.actors is Array or f.actors.size()>8: return false
 		var fixture_ids: Dictionary={}

@@ -1,0 +1,5 @@
+{
+  "tool": "built-in imagegen",
+  "asset": "chrome_source.png",
+  "prompt": "Use case: stylized-concept. Asset type: one original square UI material panel for an early-1990s VGA fantasy dungeon crawler. Paint a single dark aged bronze tablet, viewed perfectly straight on, rectangular, entirely filling the square canvas. A broad raised beveled rim around a quiet recessed nearly black brown bronze centre. Four subtly chamfered corners. Warm worn gold highlights on the upper left bevel; deep aubergine brown shading on bottom right; a few broad hand hammering facets and faint teal verdigris dots near the rim. Main centre must be very dark, quiet and uncluttered so pale pixel-font text will remain readable over it. No words, no letters, no numbers, no controls, no emblems, no characters, no figures, no repeated ornamental motifs. The panel will be crushed to 32 by 32 pixels and used as nine-slice chrome, so use large simple painted shapes and a 4-pixel-wide rim at that reduction. Hand-painted 1993 game material, restrained palette, warm patina, not glossy modern 3D. Opaque image; no external background, no border outside the tablet."
+}

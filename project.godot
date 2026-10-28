@@ -15,6 +15,10 @@ run/main_scene="res://scenes/main.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://assets/icon/icon_192.png"
 
+[autoload]
+
+Autopilot="*res://scripts/dev/autopilot.gd"
+
 [display]
 
 window/size/viewport_width=154
@@ -43,7 +47,3 @@ renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
 textures/vram_compression/import_etc2_astc=true
 environment/defaults/default_clear_color=Color(0.03, 0.02, 0.05, 1)
-
-[autoload]
-
-Autopilot="*res://scripts/dev/autopilot.gd"

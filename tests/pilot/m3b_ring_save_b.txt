@@ -1,0 +1,15 @@
+# Fresh process after A, same isolated --save-path.
+wait 4
+call assert status title
+tapnamed continue
+waitidle
+call assert ring_ready false
+call assert hp 6
+call assert hash 86687467cc03a4e1b6fa1a6f097265e6ca66ef2ea45c9424d87bd918195378b5
+tapnamed equip_hand
+wait 4
+shot 10_ring_continued
+tapnamed card_close
+waitidle
+call state
+quit

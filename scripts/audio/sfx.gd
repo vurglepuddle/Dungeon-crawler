@@ -5,7 +5,7 @@ var _voices: Array[AudioStreamPlayer]=[]
 var enabled:=true
 var _cursor:=0
 func _ready() -> void:
-	for kind in ["step","bump","hit","guard","bell","gate","pickup","restore"]: _streams[kind]=_synth(kind)
+	for kind in ["step","bump","hit","guard","bell","gate","pickup","restore","ring"]: _streams[kind]=_synth(kind)
 	for _i in range(4):
 		var voice:=AudioStreamPlayer.new()
 		voice.volume_db=-16
@@ -20,7 +20,7 @@ func stop() -> void:
 		voice.stop()
 		voice.stream=null
 func _synth(kind: String) -> AudioStreamWAV:
-	var length:=0.8 if kind=="restore" else (0.23 if kind in ["bell","guard","gate"] else 0.075)
+	var length:=0.8 if kind=="restore" else (0.23 if kind in ["bell","guard","gate","ring"] else 0.075)
 	var rate:=22050
 	var bytes:=PackedByteArray()
 	var noise_state: int=127
@@ -36,6 +36,7 @@ func _synth(kind: String) -> AudioStreamWAV:
 			"hit": sample=sin(TAU*100*t)*0.45+noise*0.45
 			"guard": sample=(sin(TAU*780*t)+sin(TAU*1437*t)*0.5+noise*0.2)*0.5
 			"bell": sample=(sin(TAU*220*t)+sin(TAU*607*t)*0.4+sin(TAU*1188*t)*0.2)*0.55
+			"ring": sample=(sin(TAU*330*t)+sin(TAU*677*t)*0.5+sin(TAU*990*t)*0.3)*0.45
 			"restore": sample=(sin(TAU*330*t)+sin(TAU*440*t)*0.65+sin(TAU*660*t)*0.45)*0.4
 			"gate": sample=sin(TAU*(80*t+70*t*t))*0.5+noise*0.3
 			"pickup": sample=(sin(TAU*660*t)+sin(TAU*990*t)*0.4)*0.55

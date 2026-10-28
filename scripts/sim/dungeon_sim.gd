@@ -13,8 +13,8 @@ func _init(seed: String = "BELL42", floor_count: int = 2) -> void:
 	if not generated.ok:
 		_s = {"status": "error", "error": generated.error}
 		return
-	_s = {"schema_version": 2, "rules_version": "m3.1", "generator_version": "m3.1",
-		"content_version": "m3.1", "seed": generated.seed, "floor_count": floor_count,
+	_s = {"schema_version": 2, "rules_version": "m3.2", "generator_version": "m3.1",
+		"content_version": "m3.2", "seed": generated.seed, "floor_count": floor_count,
 		"floor": 1, "pos": generated.floors[0].start.duplicate(), "facing": 0,
 		"turn": 0, "revision": 0, "hp": 6, "max_hp": 6, "status": "playing",
 		"pack": [], "equipment": {"hand": "knife_start", "body": ""}, "belt": [],
@@ -112,13 +112,19 @@ func fixture_actions() -> Array:
 		if kind!="": result.append({"label":label,"action":{"type":kind,"target_id":fixture.id}})
 	return result
 func targets(selected: String) -> Array:
-	if _s.status!="playing" or not _s.items.has(selected) or _s.items[selected].location not in ["pack","equip"]: return []
+	if _s.status!="playing" or not _s.items.has(selected) or _s.items[selected].location not in ["pack","equip","belt"]: return []
 	var result: Array=[]
 	for fixture in local_fixtures():
 		if fixture.type=="porter" and not fixture.restored and fixture.item_id==selected:
 			result.append({"target_id":fixture.id,"pos":fixture.pos.duplicate(),"verb":"RETURN","action":{"type":"return_item","item_id":selected,"target_id":fixture.id}})
+		elif fixture.type=="lock" and not fixture.open and fixture.key_id==selected and _s.belt.has(selected):
+			result.append({"target_id":fixture.id,"pos":fixture.pos.duplicate(),"verb":"UNLOCK","action":{"type":"unlock","target_id":fixture.id}})
+		elif fixture.type=="exit" and definition(selected).slot=="belt" and _s.items[selected].kind=="seal":
+			result.append({"target_id":fixture.id,"pos":fixture.pos.duplicate(),"verb":"LEAVE","action":{"type":"leave","target_id":fixture.id}})
 		elif fixture.type=="plate" and fixture.pos==front_pos() and _s.pack.has(selected) and definition(selected).tags.has("HEAVY"):
 			result.append({"target_id":fixture.id,"pos":fixture.pos.duplicate(),"verb":"PLACE","action":{"type":"place","item_id":selected,"target_id":fixture.id}})
+	for actor_id in ring_targets(selected):
+		result.append({"target_id":actor_id,"pos":_actor(actor_id).pos.duplicate(),"verb":"RING","action":{"type":"ring","item_id":selected}})
 	return result
 
 func _arrival_clear(number: int,cell: Array) -> bool:
@@ -136,9 +142,54 @@ func porter_state() -> Dictionary:
 			if fixture.type=="porter": return {"present":true,"restored":fixture.restored}
 	return {"present":false,"restored":false}
 
+func ring_ready() -> bool: return not _floor().get("bell_rung",false)
+
+func _sight_blocked(cell: Array) -> bool:
+	if terrain(cell)!=0: return true
+	for fixture in _floor().fixtures:
+		if fixture.pos==cell and fixture.type in ["gate","lock"] and not fixture.open: return true
+	return false
+
+func _clear_sight(cell: Array) -> bool:
+	# Integer supercover ray between cell centres, including closed corners.
+	var dx: int=cell[0]-_s.pos[0]
+	var dy: int=cell[1]-_s.pos[1]
+	var ax:=absi(dx); var ay:=absi(dy)
+	var sx:=signi(dx); var sy:=signi(dy)
+	var at: Array=_s.pos.duplicate()
+	var nx:=1; var ny:=1
+	for _step in range(16):
+		if at==cell: return true
+		var crossing_x: int=nx*ay
+		var crossing_y: int=ny*ax
+		if crossing_x<crossing_y: at[0]+=sx; nx+=2
+		elif crossing_x>crossing_y: at[1]+=sy; ny+=2
+		else:
+			if _sight_blocked([at[0]+sx,at[1]]) or _sight_blocked([at[0],at[1]+sy]): return false
+			at[0]+=sx; at[1]+=sy; nx+=2; ny+=2
+		if _sight_blocked(at): return false
+	return false
+
+func ring_targets(id: String) -> Array:
+	if _s.status!="playing" or _s.rules_version not in ["m3.1","m3.2"] or not _s.items.has(id) or _s.items[id].kind!="clapper" or _s.items[id].location not in ["pack","equip"] or not ring_ready(): return []
+	var result: Array=[]
+	var direction: Array=DIRS[_s.facing]
+	for actor in _floor().actors:
+		if actor.hp<=0 or actor.kind!="husk": continue
+		var dx: int=actor.pos[0]-_s.pos[0]
+		var dy: int=actor.pos[1]-_s.pos[1]
+		var depth: int=dx*direction[0]+dy*direction[1]
+		var side: int=-dx*direction[1]+dy*direction[0]
+		if depth>=1 and depth<=3 and absi(side)<=depth and _clear_sight(actor.pos): result.append(actor.id)
+	return result
+
 func legal_verbs(selected: String = "") -> Array:
 	if _s.status!="playing": return []
 	var front := inspect_front()
+	if not ring_targets(selected).is_empty():
+		var ringing: Array=[{"label":"RING","action":{"type":"ring","item_id":selected}}, {"label":"GUARD","action":{"type":"guard"}}]
+		ringing.append({"label":"HIT","action":{"type":"hit","target_id":front.monster}} if front.monster!="" else {"label":"WAIT","action":{"type":"wait"}})
+		return ringing
 	if not front.monster.is_empty():
 		return [{"label":"HIT","action":{"type":"hit","target_id":front.monster}},
 			{"label":"GUARD","action":{"type":"guard"}},{"label":"WAIT","action":{"type":"wait"}}]
@@ -206,6 +257,7 @@ func _enemies(old_states: Dictionary, guarded: bool) -> void:
 	for actor in _floor().actors:
 		if actor.hp<=0: continue
 		var old: String=old_states.get(actor.id,"idle")
+		if old=="bell_stunned": continue
 		if old=="windup":
 			var cell: Array=actor.intent.cell.duplicate()
 			var damage:=0
@@ -284,6 +336,8 @@ func apply(action: Dictionary) -> Dictionary:
 		"ride":
 			if fixture.get("type","")!="lift" or not _near(fixture.pos) or not fixture.active: return _reject("The lift is sleeping.")
 			if not _arrival_clear(fixture.destination_floor,fixture.destination): return _reject("The landing is blocked.")
+		"ring":
+			if ring_targets(id).is_empty(): return _reject("No Husk in sight." if ring_ready() else "The bell rests here.")
 		"hit":
 			if actor.is_empty() or actor.hp<=0 or actor.pos!=front_pos(): return _reject("Nothing to hit.")
 		"guard","wait": pass
@@ -354,6 +408,14 @@ func apply(action: Dictionary) -> Dictionary:
 			var old_floor: int=_s.floor
 			_s.floor=fixture.destination_floor; _s.pos=fixture.destination.duplicate(); _s.facing=0
 			_event("lift_ride","transition",{"from":old_floor,"to":_s.floor,"target_id":fixture.destination_id})
+		"ring":
+			var listeners: Array=ring_targets(id)
+			_s.rules_version="m3.2"; _s.content_version="m3.2"
+			_floor().bell_rung=true
+			for listener in listeners:
+				var husk:=_actor(listener)
+				husk.state="recovery"; husk.intent={}; old_states[listener]="bell_stunned"
+			_event("bell_rung","player",{"item_id":id,"actor_ids":listeners})
 		"hit":
 			var damage:=attack_damage(actor.id)
 			actor.hp=maxi(0,actor.hp-damage)

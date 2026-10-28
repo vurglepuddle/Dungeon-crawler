@@ -1,6 +1,14 @@
 class_name UndercroftItemArt
 extends RefCounted
 static var _cache: Dictionary={}
+static func accent(kind: String) -> Color:
+	match kind:
+		"stone","knife","shard","bone": return Color("d3c8a4")
+		"club": return Color("999883")
+		"coat": return Color("73a29a")
+		"tonic": return Color("965c48")
+		"lamp","seal": return Color("efe3ba")
+	return Color("eeb95a")
 static func texture(kind: String) -> Texture2D:
 	if _cache.has(kind): return _cache[kind]
 	var image:=Image.create(16,24,false,Image.FORMAT_RGBA8)
@@ -57,7 +65,14 @@ static func texture(kind: String) -> Texture2D:
 static func inventory(kind: String) -> Texture2D:
 	var key:=kind+"_inventory"
 	if _cache.has(key): return _cache[key]
-	var image:=texture(kind).get_image().get_region(Rect2i(0,5,16,16))
+	var source:=texture(kind).get_image()
+	var bounds:=source.get_used_rect()
+	var crop:=source.get_region(bounds)
+	var factor:=minf(14.0/crop.get_width(),16.0/crop.get_height())
+	crop.resize(maxi(1,roundi(crop.get_width()*factor)),maxi(1,roundi(crop.get_height()*factor)),Image.INTERPOLATE_NEAREST)
+	var image:=Image.create(16,16,false,Image.FORMAT_RGBA8)
+	image.fill(Color.TRANSPARENT)
+	image.blit_rect(crop,Rect2i(Vector2i.ZERO,crop.get_size()),Vector2i((16-crop.get_width())/2,(16-crop.get_height())/2))
 	var result:=ImageTexture.create_from_image(image)
 	_cache[key]=result
 	return result

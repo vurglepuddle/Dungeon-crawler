@@ -27,22 +27,16 @@ func _run() -> void:
 		check(result.accepted,"View probe uses ordinary actions")
 		app._sync()
 		await process_frame
-		for key in ["hot_front","hot_item","hot_husk","hot_porter","hot_lift_deep"]:
-			if not app.controls.has(key) or not app.controls[key].is_visible_in_tree(): continue
-			var label_rect: Rect2=app.controls[key].get_global_rect()
-			check(label_rect.position.x>=0 and label_rect.end.x<=154 and label_rect.position.y>=19 and label_rect.end.y<=118,"Marker remains in view: "+key)
-			var object_key: String=key+"_object"
-			check(app.controls.has(object_key),"Marker has an object hit area: "+key)
-			if app.controls.has(object_key):
-				var object_rect: Rect2=app.controls[object_key].get_global_rect()
-				check(object_rect.size.x>=18 and object_rect.size.y>=18,"Object touch target minimum: "+key)
-				check(app.get_children().find(app.controls[key])>app.get_children().find(app.controls[object_key]),"Label is above object input: "+key)
-		var visible_labels: Array=[]
 		for key in app.controls:
-			if key.begins_with("hot_") and not key.ends_with("_object") and app.controls[key].is_visible_in_tree():
-				var rect: Rect2=app.controls[key].get_global_rect()
-				for other in visible_labels: check(not rect.intersects(other),"Markers do not overlap")
-				visible_labels.append(rect)
+			if not key.begins_with("hot_") or not app.controls[key].is_visible_in_tree(): continue
+			var control: Control=app.controls[key]
+			var hit: Rect2=control.get_global_rect()
+			check(app.VIEW_RECT.encloses(hit),"World target remains in dungeon picture: "+key)
+			check(hit.size.x>=18 and hit.size.y>=18,"World touch target minimum: "+key)
+			check(control.text=="" and control.get_theme_stylebox("normal") is StyleBoxEmpty,"World target has no label or box: "+key)
+			check(app.pilot_call("where",[key+"_object"])==app.pilot_call("where",[key]),"Historical object alias remains valid: "+key)
+		for cue in app.view.interaction_cues:
+			check(not app.view.projection(cue.id).is_empty(),"Glint belongs to projected object")
 		if action.type=="unlock":
 			check(not app.view.projection(action.target_id).is_empty() or app.sim.fixture_actions().all(func(f): return f.action.type!="unlock"),"Unlocked gate clears its marker")
 		if action.type=="return_item":
@@ -58,7 +52,7 @@ func _run() -> void:
 	app._open_map(); await process_frame
 	check(app.sim.state_hash()==hash_before,"Map remains free")
 	app._close_modal()
-	# Depth/occlusion fixture: the lock can be labelled even though it is a wall.
+	# Depth/occlusion fixture: the lock remains a target even though it is a wall.
 	var initial=load("res://scripts/sim/dungeon_sim.gd").new("BELL42")
 	var s: Dictionary=initial.snapshot()
 	var spine: int=s.pos[0]
@@ -66,6 +60,9 @@ func _run() -> void:
 	check(initial.restore_state(s),"Closed-lock view fixture validates")
 	app.sim=initial; app.selected=""; app._sync()
 	check(not app.view.projection("f1_lock").is_empty() and app.controls.hot_front.visible,"Closed lock projects its unlock marker")
+	app.selected="f1_key"; app._sync()
+	check(app.controls.verb0.text=="UNLOCK" and app.view.interaction_cues.any(func(c): return c.id=="f1_lock" and c.selected),"Selected belt key marks its matching lock")
+	app.selected=""; app._sync()
 	for item in app.state.items.values():
 		if item.floor==1 and item.location=="floor" and item.pos[1]<=4: check(app.view.projection(item.id).is_empty(),"Closed lock occludes room loot")
 	# Floor loot at a peaceful owner's feet must not sit behind its torso.
@@ -76,5 +73,16 @@ func _run() -> void:
 	var item_projection: Dictionary=app.view.projection("f1_stone")
 	var owner_projection: Dictionary=app.view.projection("bell_porter")
 	check(not item_projection.rect.has_point(owner_projection.anchor),"Loot projects beside the owner's body")
-	print("M3 view: %d checks, %d failures"%[checks,failures])
+	# Selected PLACE remains explicit in the strip, with coloured object cues.
+	app.sim=load("res://scripts/sim/dungeon_sim.gd").new("BELL42")
+	app.sim.apply({"type":"pickup","item_id":"f1_stone"})
+	app.sim.apply({"type":"move","step":"fwd"})
+	app.selected="f1_stone"; app._sync()
+	check(app.controls.verb0.text=="PLACE" and app.controls.hot_front.visible,"Selected item exposes its actual world verb")
+	app._open_card("f1_stone")
+	check(app.controls.verb0.position.y==179 and app.controls.verb0.position.y+app.controls.verb0.size.y<=208,"Selected verb remains visible above item card")
+	check(app.view.interaction_cues.size()==1 and app.view.interaction_cues[0].selected and app.view.interaction_cues[0].colour==app._selection_colour(),"Selected target glints in item colour")
+	hash_before=app.sim.state_hash(); app.view._process(0.25)
+	check(app.sim.state_hash()==hash_before,"Glint pulse cannot change sim state")
+	print("M3b view: %d checks, %d failures"%[checks,failures])
 	quit(1 if failures else 0)

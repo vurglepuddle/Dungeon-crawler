@@ -5,9 +5,10 @@ collect below; some are useful, some are still wanted. Find another use for
 something ordinary. Bring the Dawn Seal home. Eventually, put something back
 where it belongs and watch the dungeon come alive again.
 
-Current milestone: **M3a, the lamp and the Bell Porter**. A complete short
-run now includes one restoration. Capability encounters follow in M3b; this
-checkpoint deliberately stops before adding more enemies.
+Current milestone: **M3b, the period interface**. The dungeon now has centre
+stage inside painted bronze, with compact controls, possessions on a dark
+tray and quiet object glints. The owner's Pixel 9a feedback takes precedence
+over the old M2/M3a screen bands. Capability encounters remain the next round.
 
 ## The playable run
 
@@ -43,15 +44,16 @@ a named chooser. A full pack rejects ordinary pickup without losing anything:
 drop, equip or use something to make room. Keys and the Seal go to the belt,
 even with a full pack, and cannot be dropped or consumed.
 
-Twelve definitions are active in M3a: rust knife, round stone, iron club,
+The current slice has twelve item definitions: rust knife, round stone, iron club,
 padded coat, red tonic, dry bread, ham bone, glass shard, hooded lamp, abbey
 key, Dawn Seal and Bell clapper. Thirteen remains the slice ceiling; the
 reed torch is reserved for the FIRE module. HEAVY, EDGE, FOOD and
 GLOW appear on cards, but current rules implement weight, weapon, food/healing and Seal
-objective rules. Cutting, burning and ghost interactions belong to M3b.
+objective rules. Cutting, burning and ghost interactions belong to the later content round.
 
 The knife does 1 damage; ordinary HEAVY weapons do 2 during recovery.
-The clapper does 3; the same braced-arm limit still applies. A raised/braced
+The clapper does 3; the same braced-arm limit still applies. It can also
+RING once per floor, described below. A raised/braced
 arm limits an impatient hit to 1, so gear does not erase the guard/dodge tell.
 A coat absorbs one blow, with its
 spent state stored on the item so swapping cannot refresh it. Healing items
@@ -93,7 +95,7 @@ Inactive floors do not take enemy turns, and stairs add no arrival attack.
 
 A real hit adds a red view border, a small view knock and a hurt portrait
 overlay/tint, alongside health and short text. Locally synthesised effects cover footsteps, bumps, hits, guard clangs,
-wind-up bells, gates, pickup and a warm restoration chord. There are no samples, music, downloads or external services. Music is
+wind-up bells, gates, pickup, a kept-clapper ring and a warm restoration chord. There are no samples, music, downloads or external services. Music is
 M4: original, not the reused Warren/VETKA Bach pieces.
 
 ## Finish, pause, return
@@ -122,15 +124,37 @@ with descending treads; up stairs rise inside a stone frame. Own-cell items
 and stairs remain visible at the bottom edge. These are readable sprite
 conventions at 154 pixels, not an attempt at physically exact perspective.
 
-A TAKE marker identifies one object or one pile on a single cell. The pile
-chooser lists only that pile. Its label and object both accept taps. Labels
-use the same projection/occlusion as their objects and stack in stable ID
-order when they collide. A selected clapper marks its owner RETURN, just as
-a selected HEAVY item marks a plate PLACE.
+The dungeon picture is 148 x 150 inside a three-pixel bronze frame. The top
+strip is separate: seed left, floor/MAP right, logical x54-96 empty for the
+phone camera. NEW remains a named pilot alias to the seed control. The normal
+342px height is divided into top strip 18, framed view 156, messages 34,
+portrait/equipment/belt 38, pack 22, verbs 24, controls/compass 48 and footer 2.
 
-The 154 x 342 bands, VETKA 16 px minimum, nearest filtering and at least
-18 x 18 touch targets remain fixed. Curved gold arrows turn; straight green
-arrows step. Touch is sufficient; no swipe or joystick is needed.
+One painted dark bronze material supplies the frame, panels and small movement
+tiles. The portrait keeps its painted face, framed above a health bar; hands
+and belt sit beside it. Eight pack icons lie on one dark surface at a 19px
+pitch, with selection brackets and no individual boxes. Icons use their full
+opaque bounds, fit a native 16 x 16 canvas and are explicitly centred.
+
+There are no labels or boxes on the dungeon picture. A small gold glint marks
+a usable object; its painted body is the tap target. Selected-item targets
+have small corner cues in the item's colour. The strip spells out PLACE,
+RETURN, RING or UNLOCK. A pile chooser names only the objects on that cell.
+The world cue and hit area share the actual sprite projection and occlusion.
+
+Item cards occupy the lower screen. While inspecting, the verb strip moves
+into the message band immediately below the picture, so the selected verb
+remains visible while its object glints. Closing the card restores the event
+lines unchanged. Looking and ordinary footsteps no longer replace those lines.
+Save failure uses a small persistent ! in the floor/status control; tapping it
+offers status and retry. Saving never substitutes an error for an event.
+
+The six movement tiles are 24 x 22 in a tight block beside a half-dial compass.
+Bent arrows turn freely; straight arrows step. VETKA remains native 16 px,
+nearest filtering remains, and every touch target is at least 18 x 18.
+The owner's Android storage and font-import fixes remain intact. SOUND controls
+SFX while there is no music. When music arrives, MUSIC and SFX need separate
+controls; the app icon and launcher framing remain the owner's assets.
 
 ## What gives the finished slice its identity
 
@@ -147,13 +171,26 @@ the departed floor, like stairs, with no arrival attack. A blocked destination
 rejects the trip. The ordinary stairs always remain viable. Returning late
 is allowed. No quest expires or optional weapon becomes secretly essential.
 
-Honest balance limit: against a two-health Husk, the three-damage clapper's
-extra point adds no benefit over another HEAVY counter. Restoration already
-has a travel payoff; the keep choice needs the later encounters to justify
-its extra damage. Do not pretend that this checkpoint has solved that trade.
+Keeping the clapper grants RING once per floor from pack or hand. It reaches
+Husks in the facing 90-degree cone, up to three cells away, with clear sight
+past walls and closed gates. Every listener's wind-up is cancelled and it
+reels into recovery for this beat. There is one action to counter or get past;
+other creatures and hidden/rear Husks remain dangerous. An empty call costs
+nothing. Leaving/re-entering, dropping/equipping and saving cannot recharge a
+floor. Returning the used clapper later still restores the lift.
 
-M3b still needs the following modules, one reviewed interaction at a time.
-The Seal's GLOW reveals optional marks on the way home and keeps optional
+The clapper card explains the charge and shows whether it is spent here.
+RING targets glint; the successful ring has its own synthesized tone, event
+text and a lowered, muted recovery sprite. The guaranteed guard/counter route
+continues to work without using the bell.
+
+Balance remains provisional: RING has reach and can interrupt several Husks,
+but the current floors contain one Husk each. The extra damage point alone
+still adds no value over a HEAVY counter against two health. Future encounters
+must make the choice richer; this turn does not add enemies to manufacture it.
+
+The next content round still needs these modules, one reviewed interaction
+at a time. The Seal's GLOW reveals optional marks on the way home and keeps optional
 ghosts at a distance. A renewable FIRE source precedes a required web; EDGE
 opens a clearly hinted optional panel; FOOD can spare a hound encounter.
 No thieves, item-eating enemies, item-swallowing pits, compulsory hidden walls
@@ -161,6 +198,7 @@ or return-trip spawns. One good restoration is enough.
 
 M4 polishes poses, quieter walls, portraits, original bell-motif music, concise
 knowledge-only Ledger cards, a period-style manual and phone acceptance.
-M3a proves the full loop, persistent restoration and a useful way home.
+M3b keeps the full loop and restoration, and gives the dungeon a cleaner,
+larger stage.
 Third-run appeal, the capability encounters and the return-trip reveal still
 need implementation and human review.

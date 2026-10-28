@@ -6,6 +6,7 @@ var sim
 var actions: Array=[]
 var error: String=""
 var pressure: Array=[]
+var use_bell:=false
 
 static func build(seed: String, count: int=2, explore: bool=false,porter_policy: String="skip") -> Dictionary:
 	var bot=UndercroftWitness.new()
@@ -29,7 +30,10 @@ func _commit(action: Dictionary) -> bool:
 			var dodges: bool=action.type=="move"
 			var lethal: bool=action.type=="hit" and action.get("target_id","")==actor.id and sim.attack_damage(actor.id)>=actor.hp
 			if not dodges and not lethal:
-				if not _raw({"type":"guard"}): return false
+				var listeners: Array=sim.ring_targets("bell_clapper") if use_bell else []
+				var threats: Array=state.floors[state.floor-1].actors.filter(func(a): return a.hp>0 and a.state=="windup" and a.intent.cell==state.pos)
+				var safe_bell: bool=not listeners.is_empty() and threats.all(func(a): return listeners.has(a.id))
+				if not _raw({"type":"ring","item_id":"bell_clapper"} if safe_bell else {"type":"guard"}): return false
 	return _raw(action)
 
 func _face(direction: int) -> bool:
@@ -115,6 +119,7 @@ func _explore() -> bool:
 	return true
 
 func run(seed: String,count: int,explore: bool,porter_policy: String="skip",initial_state: Dictionary={}) -> Dictionary:
+	use_bell=porter_policy=="ring"
 	sim=Sim.new(seed,count)
 	if not initial_state.is_empty() and not sim.restore_state(initial_state): return {"ok":false,"reason":"Invalid initial state"}
 	if sim.snapshot().status=="error": return {"ok":false,"reason":"Bad seed","actions":[]}
@@ -145,7 +150,7 @@ func run(seed: String,count: int,explore: bool,porter_policy: String="skip",init
 			if porter_policy=="return":
 				var porter:=_fixture("porter")
 				if not go(porter.pos) or not _commit({"type":"return_item","target_id":porter.id,"item_id":"bell_clapper"}): return _finish(false)
-			elif porter_policy=="keep":
+			elif porter_policy in ["keep","ring"]:
 				if not _commit({"type":"equip","item_id":"bell_clapper"}): return _finish(false)
 		if explore and not _explore(): return _finish(false)
 		state=sim.snapshot()

@@ -188,7 +188,7 @@ waitidle
 call assert status won
 call assert hp 6
 call assert turn 66
-call assert hash 3c40e7c48b85952d68ae17cfbf784b7170cffd0c59d72dd69b669d4968264987
+call assert hash 69f9b5f095216b015d396d629535a3f49350538830d95dbc02d28cee7c62950f
 call state
 shot 27_m3_home_return
 quit

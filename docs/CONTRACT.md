@@ -1,10 +1,11 @@
-# M3a contract
+# M3b contract
 
-New runs use rules/content/generator m3.1; snapshot/envelope schema stays 2.
-Exact m2.1 version cohorts remain readable and playable from stored floors.
-Loading never regenerates a run, inserts fixtures, or changes its version/hash.
-The M2 fixture in tests/fixtures proves the original 77-turn final hash still
-matches. Unsupported version combinations fail closed.
+New runs use rules/content m3.2 with generator m3.1; snapshot/envelope schema
+stays 2. Exact m2.1 and m3.1 cohorts remain readable and playable from stored
+floors. Loading never regenerates or changes a hash. The first RING in a legacy
+M3a run upgrades rules/content to m3.2 while retaining its generator and floors.
+Unsupported profile combinations fail closed. Captured M2 and M3a fixtures
+prove their original ending hashes still match when no new action is used.
 
 ## Coordinates, identity and ownership
 
@@ -40,6 +41,7 @@ detached. Static content is in scripts/content/catalog.gd.
 | reachable_items(), local_fixtures() | Current/front interaction candidates |
 | targets(selected_id) | Marked selected-item targets with verb and ordinary action |
 | fixture_actions(), legal_verbs(selected_id="") | Currently usable fixture actions / ordered strip actions |
+| ring_ready(), ring_targets(item_id) | Unspent current-floor charge / eligible living Husk IDs |
 | weapon_damage(), attack_damage(target_id), has_seal() | Shared rule queries; attack_damage accounts for a braced target |
 | apply(action) | accepted, reason, consumed_turn, revision, ordered events |
 
@@ -97,6 +99,7 @@ unchanged. Queries, selection, cards, map and seed cancellation are free.
 | hit | target_id of living actor directly ahead |
 | return_item | item_id is the nearby Porter's clapper, in pack or hand; target_id is that unrestored Porter |
 | ride | current/front active lift target_id; destination must be walkable and unoccupied |
+| ring | item_id is an owned clapper in pack/hand, current floor unspent, at least one eligible Husk |
 | guard / wait | no extra fields |
 
 A body presses a plate. HEAVY floor items and living Husks do too. Stepping
@@ -120,6 +123,16 @@ lift cell facing north, with no arrival enemy phase. RETURN removes the sole
 item reference from pack/equipment, sets location returned with owner_id,
 restores the owner and activates both lifts atomically. It costs one beat.
 All floor/item state persists.
+
+RING costs one beat and sets optional floor.bell_rung=true. It reaches living
+Husks at forward depth 1-3 and lateral magnitude <= depth, with an integer
+supercover ray clear of walls/closed gates, including blocked corners. Actors
+do not block the sound. Listener intents are cleared and states become
+recovery; they neither resolve the old strike nor rearm on the ringing beat.
+Their next ordinary phase resumes the normal recovery rules. Nonlisteners
+still take their ordinary phase. No target/spent/wrong-owner attempts mutate
+anything. Dropping, equipping, stairs, save and load never reset bell_rung.
+Optional bell_rung values must be bool and require the m3.2 rules profile.
 Leaving with the Seal wins; zero health loses. Terminal commands reject.
 
 Events contain type, phase, sequence, turn, revision and floor. Types/payloads:
@@ -134,6 +147,7 @@ Events contain type, phase, sequence, turn, revision and floor. Types/payloads:
 - monster_moved: actor_id, from/to; intent_announced: actor_id, intent.
 - floor_changed: from/to; run_ended: status.
 - restored: owner_id, item_id.
+- bell_rung: item_id, actor_ids (stable listener order).
 - lift_ride: from/to floor numbers, target_id of destination lift.
 
 The controller saves committed state before animation. Events do not own a
@@ -155,9 +169,10 @@ keyed, or both. Every key precedes its lock; no gate bypass is introduced.
 There is no random hidden mandatory connection. The lift is optional.
 
 UndercroftWitness.build(seed,count=2,explore=false,porter_policy="skip")
-returns ok/reason/actions/snapshot/pressure. Policies skip/keep/return use
+returns ok/reason/actions/snapshot/pressure. Policies skip/keep/return/ring use
 ordinary commands only. Return repairs the lift and uses it on the way home;
-keep carries the equipped clapper and returns by stairs. The one-floor lift
+keep carries the equipped clapper and returns by stairs. Ring keeps it and
+substitutes RING for a guard only when all incoming threats are listeners. The one-floor lift
 links entry and upper landing; multi-floor lifts link entrance and deepest
 entry landing. The app admits only a damage-free stairs return witness.
 
@@ -204,7 +219,8 @@ The current scene root implements pilot_call(name,args)->String:
   Title/end menus and item cards have usable controls and are not busy.
 - state: compact public JSON. In-game fields: seed, floor/floor_count, pos,
   facing, hp, turn, revision, status, pack/belt IDs, equipment, selected,
-  front contents, porter:{present,restored}, opaque complete-state hash, save_ok. At initial title:
+  front contents, porter:{present,restored}, ring_ready, opaque complete-state
+  hash, save_ok. At initial title:
   {status:"title",can_continue:bool}.
 - where NAME: logical global centre "x y"; absent/hidden/disabled controls
   return empty. No physical-window assumptions.
@@ -213,22 +229,33 @@ The current scene root implements pilot_call(name,args)->String:
 - assert KEY VALUE: public value comparison; failure logs and defers exit 1.
   Compact JSON for arrays/numbers/bools; strings unquoted or JSON-quoted.
 
-Static game names: seed, map, new_seed, portrait, equip_hand/equip_body,
-belt_key/belt_seal, pack0..pack7, verb0..verb2, fwd/back/turn_l/turn_r/
-strafe_l/strafe_r, view. World labels and object hit areas share the renderer's
-projection/occlusion. Labels collide/stack in stable ID order, within the view.
-hot_item opens one object or a chooser for one cell's pile. hot_item_ITEM_ID
-is a stable where alias for that item's pile label; it does not move or grant
-anything. The strip TAKE still offers all reachable loot. hot_front is the
-first selected target or nearby usable fixture; hot_FIXTURE_ID names later
-fixture labels. hot_plate/hot_exit/hot_stairs/hot_latch alias hot_front.
-hot_husk inspects an adjacent Husk. hot_porter opens its free owner card;
-porter_return commits RETURN, porter_close closes it. Selected clapper RETURN
-and HEAVY PLACE remain tappable while the item card is open. A sleeping lift
-can be inspected through hot_lift_home/hot_lift_deep. Every label also has a
-KEY_object button covering its object, at least 18 x 18 logical pixels.
-Item cards expose card_use/card_eat (where applicable), card_drop,
-card_close. Title/end: continue, retry, start, sound.
+Static names: seed, map, floor_label (also save_status), portrait,
+equip_hand/equip_body, belt_key/belt_seal, pack0..pack7, verb0..verb2,
+fwd/back/turn_l/turn_r/strafe_l/strafe_r, compass, view. new_seed is a where
+alias to seed; no duplicate NEW button occupies the camera gap. Frame/view
+and normal band geometry are documented in DESIGN and M3B_RESULTS.
+
+World controls contain no text or visible style boxes. They cover opaque
+sprite bounds (minimum 18 x 18, clamped inside the view); small possessions
+win overlapping hits over larger bodies. Gold glints identify default targets;
+selected valid targets get item-colour corner cues. The view exposes projection
+records and interaction_cues; neither is authoritative state.
+
+hot_item opens one object's/pile's pickup. hot_item_ITEM_ID remains a stable
+where alias to its pile control. The strip TAKE offers all nearby loot.
+hot_front is the first selected target or usable fixture; hot_FIXTURE_ID names
+later fixture targets. hot_plate/hot_exit/hot_stairs/hot_latch alias hot_front.
+hot_husk inspects an adjacent Husk; hot_porter opens the owner card;
+porter_return commits RETURN, porter_close closes it. A sleeping lift uses
+hot_lift_home/hot_lift_deep. KEY_object remains a where alias to KEY.
+
+Item-card controls: card_use/card_eat where applicable, card_drop, card_close,
+card_ring for an owned clapper. A spent RING is disabled. Item cards leave the
+full picture visible and dock verbs at y179 while open; ordinary verb y is269.
+The log contents survive inspection, free rotation and failed saves.
+A failed save sets ! on floor_label; save_retry/save_close belong to its free
+status panel. Title/end: continue, retry, start, sound. SOUND is SFX only until
+music exists; future music must have an independent control.
 
 Blocking panels: seed_input/seed_start/seed_random/seed_cancel;
 map_close; loot_ITEM_ID, loot_prev/loot_next, loot_cancel. Loot is paginated
@@ -242,3 +269,9 @@ do not move the Finder, grant items, force gates or advance turns. Use isolated
 save paths and create the screenshot directory. Run save A then B as fresh
 processes sharing one save path. A closes after restoration; B checks the exact
 saved hash, turn, owner/lift state and save_ok.
+
+M3b adds tests/build_m3b_pilots.gd for an eight-frame gallery, full RING route
+and a separate close/reopen pair with a spent charge and pending recovery.
+The original M3 pilot builder regenerates its names/hashes for current rules.
+All gameplay in playback is still actual taps. The gallery deliberately takes
+one blow in place of a guard; that is not a damage-free witness.

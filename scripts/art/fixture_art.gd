@@ -9,6 +9,10 @@ static func texture(kind: String) -> Texture2D:
 		for x in range(64):
 			var ink:=Color.TRANSPARENT
 			match kind:
+				"lift_floor":
+					if y>=42 and y<=61 and x>=10-(y-42)/3 and x<=53+(y-42)/3:
+						ink=Color("80643c") if (x+y)%8<2 else Color("4d2b1d")
+						if y in [42,43,60] or x in [9,54]: ink=Color("a18750")
 				"stairs_down":
 					# Splayed stone rim around a real black well; treads descend into it.
 					if y>=20 and y<=58 and x>=8-(y-20)/7 and x<=55+(y-20)/7:

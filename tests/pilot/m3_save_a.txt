@@ -91,7 +91,7 @@ waitidle
 shot 22_porter_restored
 call assert porter {"present":true,"restored":true}
 call assert save_ok true
-call assert hash 57a92330aab268bc5ca386b4966153116c95767eb6484957322911fee15998d3
+call assert hash 3cf212a1f6732294ac884ff62fd036204b5165d28b1ec30717ce1014a1004468
 call state
 shot 23_restored_before_close
 close

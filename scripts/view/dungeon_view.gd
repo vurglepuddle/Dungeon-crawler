@@ -3,13 +3,17 @@ extends Control
 const Sim=preload("res://scripts/sim/dungeon_sim.gd")
 const Art=preload("res://scripts/art/item_art.gd")
 const Fixtures=preload("res://scripts/art/fixture_art.gd")
-const FOCAL:=76.0
-const HORIZON:=63
+const WIDTH:=148
+const HEIGHT:=150
+const FOCAL:=74.0
+const HORIZON:=71
 const FAR:=3.6
 var state: Dictionary={}
 var motion:=0.0
 var flash:=0.0
-var marker_links: Array=[]
+var interaction_cues: Array=[]
+var _pulse:=0.0
+var _opaque_bounds: Dictionary={}
 var _wall_strips: Array[Texture2D]=[]
 var _monsters: Array[Texture2D]=[]
 var _depths: Array[float]=[]
@@ -61,8 +65,8 @@ func _build_camera() -> void:
 		_surface_key=key
 		_build_surfaces(origin,forward,right)
 	_depths.clear(); _walls.clear(); _sprites.clear(); _projections.clear()
-	for column in range(154):
-		var ray:=forward+right*((column+0.5-77.0)/FOCAL)
+	for column in range(WIDTH):
+		var ray:=forward+right*((column+0.5-WIDTH*0.5)/FOCAL)
 		var cell:=Vector2i(floori(origin.x),floori(origin.y))
 		var dx:=absf(1.0/ray.x) if absf(ray.x)>0.00001 else 100000.0
 		var dy:=absf(1.0/ray.y) if absf(ray.y)>0.00001 else 100000.0
@@ -86,14 +90,14 @@ func _build_camera() -> void:
 	# Closed gates are rendered as walls, but still have an object projection.
 	for fixture in state.fixtures:
 		if fixture.type not in ["gate","lock"] or fixture.open: continue
-		var first: int=154
+		var first: int=WIDTH
 		var last: int=-1
 		var height: int=0
 		for x in range(_walls.size()):
 			if _walls[x].cell==fixture.pos:
 				first=mini(first,x); last=maxi(last,x); height=maxi(height,_walls[x].height)
 		if last>=first:
-			var rect:=Rect2(first,maxi(19,HORIZON-height/2),last-first+1,mini(98,height))
+			var rect:=Rect2(first,HORIZON-height/2,last-first+1,height).intersection(Rect2(0,0,WIDTH,HEIGHT))
 			_projections[fixture.id]={"rect":rect,"anchor":rect.get_center(),"depth":1.0}
 	var sprites: Array=state.objects.duplicate(true)
 	for fixture in state.fixtures:
@@ -115,6 +119,7 @@ func _build_camera() -> void:
 					lateral+=0.3; break
 		# Own-cell contents are shown at the bottom edge, where hands can reach.
 		var underfoot: bool=sprite.pos==state.pos
+		if underfoot and sprite.kind=="exit": continue # The entrance is behind us.
 		if underfoot: depth=0.72; lateral=0.0
 		if depth<0.5 or depth>=FAR: continue
 		var texture: Texture2D
@@ -127,38 +132,45 @@ func _build_camera() -> void:
 			var variant: int=0 if depth<1.5 else (1 if depth<2.5 else 2)
 			texture=_porters[variant]; tall=[64,40,24][variant]
 		elif kind in ["stairs_up","stairs_down","plate","lift","lift_on"]:
-			texture=Fixtures.texture(kind); tall=maxi(24,roundi(58.0/depth))
+			texture=Fixtures.texture("lift_floor" if underfoot and kind in ["lift","lift_on"] else kind); tall=maxi(24,roundi(58.0/depth))
 		else:
 			texture=Art.texture(kind); tall=maxi(22,roundi((48.0 if kind in ["exit","porter"] else 32.0)/depth))
 		var wide:=maxi(1,roundi(tall*texture.get_width()/float(texture.get_height())))
 		var ground:=HORIZON+roundi(FOCAL*0.5/depth)
+		if kind=="husk" and sprite.get("state","")=="recovery": ground+=4
 		if underfoot:
 			tall=44 if kind in ["stairs_up","stairs_down"] else (30 if kind in ["plate","exit"] else tall)
 			wide=64 if kind in ["stairs_up","stairs_down"] else (58 if kind=="plate" else wide)
-			ground=126 if kind in ["stairs_up","stairs_down","plate"] else 131
+			ground=HEIGHT+8 if kind in ["stairs_up","stairs_down","plate"] else HEIGHT+4
+			if kind in ["lift","lift_on"]: tall=44; wide=64; ground=HEIGHT+2
 			if kind=="exit": wide=26
-		var rect:=Rect2(roundi(77+lateral*FOCAL/depth)-wide/2,ground-tall,wide,tall)
+		var rect:=Rect2(roundi(WIDTH*0.5+lateral*FOCAL/depth)-wide/2,ground-tall,wide,tall)
 		var visible:=false
-		for x in range(maxi(0,int(rect.position.x)),mini(154,int(rect.end.x))):
+		for x in range(maxi(0,int(rect.position.x)),mini(WIDTH,int(rect.end.x))):
 			if depth<_depths[x]: visible=true; break
-		if not visible or rect.end.y<=18 or rect.position.y>=118: continue
+		if not visible or rect.end.y<=0 or rect.position.y>=HEIGHT: continue
 		sprite.merge({"depth":depth,"rect":rect,"texture":texture,"light":maxf(0.18,lamp(depth)),"underfoot":underfoot},true)
 		_sprites.append(sprite)
-		var clipped:=rect.intersection(Rect2(0,19,154,98))
-		_projections[sprite.id]={"rect":clipped,"anchor":Vector2(clipped.get_center().x,clampf(rect.position.y+rect.size.y*0.55,24,109)),"depth":depth}
+		var texture_key: int=texture.get_instance_id()
+		if not _opaque_bounds.has(texture_key): _opaque_bounds[texture_key]=texture.get_image().get_used_rect()
+		var opaque: Rect2=Rect2(_opaque_bounds[texture_key])
+		var ratio:=rect.size/Vector2(texture.get_width(),texture.get_height())
+		var clipped:=Rect2(rect.position+opaque.position*ratio,opaque.size*ratio).intersection(Rect2(0,0,WIDTH,HEIGHT))
+		if not clipped.has_area(): continue
+		_projections[sprite.id]={"rect":clipped,"anchor":clipped.get_center(),"depth":depth}
 	_sprites.sort_custom(func(a,b): return a.depth>b.depth if a.depth!=b.depth else a.id>b.id)
 
 func _build_surfaces(origin: Vector2,forward: Vector2,right: Vector2) -> void:
-	var image:=Image.create(154,118,false,Image.FORMAT_RGBA8)
+	var image:=Image.create(WIDTH,HEIGHT,false,Image.FORMAT_RGBA8)
 	image.fill(Color("050609"))
-	for y in range(18,118):
+	for y in range(HEIGHT):
 		var floor_side: bool=y>HORIZON
 		var offset: float=absf(y-HORIZON)+0.5
 		var depth: float=FOCAL*0.5/offset
 		if depth>=FAR: continue
 		var light: float=lamp(depth)*(0.86 if floor_side else 0.64)
-		for x in range(154):
-			var point:=origin+(forward+right*((x+0.5-77)/FOCAL))*depth
+		for x in range(WIDTH):
+			var point:=origin+(forward+right*((x+0.5-WIDTH*0.5)/FOCAL))*depth
 			var u:=posmod(floori(point.x*64),64)
 			var v:=posmod(floori(point.y*64),64)
 			var cell:=Vector2i(floori(point.x),floori(point.y))
@@ -180,22 +192,22 @@ func _build_surfaces(origin: Vector2,forward: Vector2,right: Vector2) -> void:
 	_surfaces=ImageTexture.create_from_image(image)
 
 func _draw() -> void:
-	draw_rect(Rect2(0,0,154,118),Color("050609"))
+	draw_rect(Rect2(0,0,WIDTH,HEIGHT),Color("050609"))
 	if state.is_empty() or _wall_strips.is_empty(): return
 	var shift:=roundi(motion)
 	if _surfaces!=null: draw_texture(_surfaces,Vector2(0,shift))
 	for column in range(_walls.size()):
 		var wall: Dictionary=_walls[column]
 		var top_wall: int=HORIZON+shift-wall.height/2
-		var top:=maxi(18,top_wall)
-		var bottom:=mini(118,top_wall+wall.height)
+		var top:=maxi(0,top_wall)
+		var bottom:=mini(HEIGHT,top_wall+wall.height)
 		var light: float=wall.light
 		if bottom<=top: continue
 		if wall.gate!="":
 			var colour:=Color("80643c") if wall.u%12<4 or wall.u<3 or wall.u>60 else Color("080b11")
 			draw_rect(Rect2(column,top,1,bottom-top),colour*Color(light,light,light))
 			for cross in [top_wall+wall.height/5,top_wall+wall.height*4/5]:
-				if cross>=18 and cross<118: draw_rect(Rect2(column,cross,1,maxi(1,wall.height/20)),Color("a18750")*Color(light,light,light))
+				if cross>=0 and cross<HEIGHT: draw_rect(Rect2(column,cross,1,maxi(1,wall.height/20)),Color("a18750")*Color(light,light,light))
 		else:
 			draw_texture_rect_region(_wall_strips[wall.u],Rect2(column,top,1,bottom-top),Rect2(0,(top-top_wall)*64.0/wall.height,1,(bottom-top)*64.0/wall.height),Color(light*(0.8 if state.floor>1 else 0.95),light,light))
 	for sprite in _sprites:
@@ -203,23 +215,40 @@ func _draw() -> void:
 		rect.position.y+=shift
 		var texture: Texture2D=sprite.texture
 		var light: float=sprite.light
+		var tint:=Color(light*0.72,light*0.86,light*0.92) if sprite.kind=="husk" and sprite.get("state","")=="recovery" else Color(light,light,light)
 		# Shadow obeys the same wall depth as the sprite.
-		for x in range(maxi(0,int(rect.position.x)),mini(154,int(rect.end.x))):
+		for x in range(maxi(0,int(rect.position.x)),mini(WIDTH,int(rect.end.x))):
 			if sprite.depth>=_depths[x]: continue
 			var norm: float=(x-rect.get_center().x)/maxf(1.0,rect.size.x*0.5)
 			var shadow_height:=maxi(1,roundi(3*(1-norm*norm)))
-			draw_rect(Rect2(x,mini(115,rect.end.y-3),1,shadow_height),Color("080b11"))
+			draw_rect(Rect2(x,mini(HEIGHT-3,rect.end.y-3),1,shadow_height),Color("080b11"))
 			var source_x:=floorf((x-rect.position.x)*texture.get_width()/rect.size.x)
-			draw_texture_rect_region(texture,Rect2(x,rect.position.y,1,rect.size.y),Rect2(source_x,0,1,texture.get_height()),Color(light,light,light))
+			draw_texture_rect_region(texture,Rect2(x,rect.position.y,1,rect.size.y),Rect2(source_x,0,1,texture.get_height()),tint)
 	for sprite in _sprites:
 		if sprite.kind=="porter" and sprite.get("restored",false):
 			var rect: Rect2=sprite.rect
 			var center:=rect.position+rect.size*Vector2(0.5,0.43)+Vector2(0,shift)
-			var x:=clampi(roundi(center.x),0,153)
+			var x:=clampi(roundi(center.x),0,WIDTH-1)
 			if sprite.depth<_depths[x]:
 				draw_circle(center,maxf(2,rect.size.y*0.055),Color("eeb95a"))
 				draw_line(center-Vector2(0,2),center+Vector2(0,2),Color("efe3ba"),2)
-	for link in marker_links:
-		draw_line(link.from,link.to,Color("eeb95a"),1)
-		draw_circle(link.to,1,Color("efe3ba"))
-	if flash>0: draw_rect(Rect2(2,20,150,96),Color(0.9,0.15,0.1,flash),false,3)
+	for cue in interaction_cues:
+		var rect: Rect2=cue.rect
+		rect.position.y+=shift
+		var colour: Color=cue.colour
+		colour.a=(0.7+sin(_pulse*2.0)*0.25) if cue.selected else (0.55+sin(_pulse*2.0)*0.2)
+		if cue.selected:
+			for corner in [rect.position,rect.end-Vector2.ONE]:
+				var inward: Vector2=(rect.get_center()-corner).sign()
+				draw_line(corner,corner+Vector2(inward.x*3,0),colour,1)
+				draw_line(corner,corner+Vector2(0,inward.y*3),colour,1)
+		else:
+			var glint:=Vector2(clampf(rect.end.x-1,2,WIDTH-3),clampf(rect.end.y-3,2,HEIGHT-3)).round()
+			draw_line(glint-Vector2(2,0),glint+Vector2(2,0),colour,1)
+			draw_line(glint-Vector2(0,2),glint+Vector2(0,2),colour,1)
+	if flash>0: draw_rect(Rect2(1,1,WIDTH-2,HEIGHT-2),Color(0.9,0.15,0.1,flash),false,2)
+
+func _process(delta: float) -> void:
+	var before:=int(_pulse*8)
+	_pulse=fmod(_pulse+delta,TAU)
+	if not interaction_cues.is_empty() and int(_pulse*8)!=before: queue_redraw()

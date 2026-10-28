@@ -1,4 +1,4 @@
-# M3a architecture
+# M3b architecture
 
 One deterministic simulation owns a whole run. The scene presents its committed
 results. See CONTRACT for exact data and DESIGN for what is playable.
@@ -23,23 +23,30 @@ results. See CONTRACT for exact data and DESIGN for what is playable.
   canonicalises it. save_store.gd handles staging, backup and recovery under
   user://. Persistence is outside the rules. CONTINUE adopts a fully validated
   snapshot, not a seed replay or freshly generated approximation. Codec accepts
-  complete m2.1 and m3.1 cohorts; old runs keep old geometry and hashes. M3
+  complete m2.1, m3.1 and m3.2 profiles; old runs keep old geometry and hashes. M3
   adds strict cross-floor owner/landing references and returned-item ownership.
 - scripts/app/main.gd owns title/end flows, named touch controls, cards, map/
   seed/loot panels, feedback, selection, the short input gate and lifecycle
   saves. It saves before starting presentation and does not buffer actions.
 - scripts/view/dungeon_view.gd uses 2D grid rays, nearest-sampled wall
-  columns and sprite depth occlusion. A cached 154 x 118 floor/ceiling image
+  columns and sprite depth occlusion. A cached 148 x 150 floor/ceiling image
   casts world-aligned stone seams and ribs. Lamp falloff is shared by surfaces,
   walls and objects, reaching black at 3.6 cells. It rebuilds the surface image
   only when floor/position/facing changes, not on animation frames or card sync.
   There are no 3D nodes, physics or runtime image-processing dependencies.
-- That view exposes detached projection(id) records: clipped object rect,
-  anchor and depth. Closed gates project from their hit columns; own-cell
-  objects/stairs have a bottom-of-view convention. The controller uses those
-  exact records for labels and object buttons; it owns rule candidates and
-  stable label collision placement. Transparent object buttons sit below all
-  labels. Grouped TAKE markers name one cell's pile, with stable per-item aliases.
+- That view exposes projection(id) records using opaque sprite bounds and
+  wall depth. It draws only tiny default glints or selected-item corner cues.
+  The controller creates transparent object hit areas from these same records;
+  there are no view labels/leader lines. Small objects get input priority over
+  large bodies. Grouped TAKE targets retain stable per-item where aliases.
+- scripts/ui/chrome.gd shares one painted, palette-reduced bronze nine-slice
+  across frame, panels and tiles. Its centre tiles at native resolution.
+  scripts/ui/item_button.gd draws full-bound 16px icons explicitly centred,
+  with selection corners instead of per-pocket boxes. The root draws the
+  compact pad, framed portrait/HP bar and half-dial compass.
+- During an item card, the controller docks the strip below the picture and
+  preserves the hidden event text. Save failures update a persistent status
+  control, never the event array. Looking also preserves the event array.
 - scripts/art/fixture_art.gd draws larger stairs, plates and lift landings;
   item_art.gd retains small native item/inventory art. The painted Porter uses
   the same fixed palette as the R1 wall/Husk/portrait. Source, prompt, reduction
@@ -70,3 +77,15 @@ reopen pair. Historical M2 pilots remain alongside them. Headless checks separat
 generation cuts/loops, both owner policies, exact M2 save compatibility,
 projection/marker geometry, replay and pressure. Android lifecycle durability,
 performance and comfort still require the owner's device.
+
+RING remains pure simulation: deterministic cone/supercover sight, listener
+IDs, cancelled intents, a stored floor.bell_rung charge and events. The enemy
+phase skips just those stunned listeners on the ringing beat. No animation
+or audio callback can decide recovery. An old M3a snapshot stays byte-for-byte
+canonical until the new action upgrades its rules/content profile.
+
+The Android storage implementation from 90f8e89 remains unchanged: user://
+DirAccess handles with relative replacement. Font import/project filtering,
+launcher art and export settings remain owner-managed. Art authoring and the
+contact-sheet builder use offline Python only; the game has no Python/runtime
+image-tool dependency. The new painted source/prompt/pipeline are in art_src/m3b.
