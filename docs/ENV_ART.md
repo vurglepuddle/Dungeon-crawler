@@ -5,15 +5,19 @@ simulation, main scene, UI chrome, catalog, or original PNGs. Painted source
 PNGs, exact built-in imagegen prompts, code drawings, deterministic reduction,
 and contact sheets live in the corresponding `art_src/` folders.
 
-**Primary revision:** use `painted_f1_*.png` / `painted_f2_*.png` for walls,
+**Primary revision:** use `painted_f1_*.png` / `painted_f2_*.png` for walls;
+`painted_fN_floor.png` / `painted_fN_ceiling.png` for plane bases;
+`painted_room_fN_*` for the matching twelve room-face variants;
 `finder_hurt_v2.png` / `finder_near_death_v2.png` for injured portraits, and the
 existing unchanged `finder_fine.png` for fine. The first `f1_` / `f2_` wall
 sets and original reactive portraits remain intact as alternates. The UI
 materials in `assets/art/ui_offer/` are an offer for A, not an implemented skin.
-The next room batch adds decorative `assets/art/props/`, `room_fN_*` surface
-faces, a painted title logotype and an optional launcher set. Placement,
+Decorative `assets/art/props/`, earlier alternate `room_fN_*` surface
+faces, a painted title logotype and an optional launcher set are also supplied. Placement,
 collision and launcher selection remain A/Claude's integration decisions.
-The latest addition is eleven registered screen-animation frames. See
+The latest addition is four painted floor/ceiling bases and twelve rebased
+room-face variants, with wall/floor/ceiling mock-ups. The previous addition
+is eleven registered screen-animation frames. See
 **Small life in the story plates** below for exact playback and hold timings.
 `POLISH.md` records the A/B/C features now visible in A's current source.
 
@@ -22,11 +26,19 @@ The latest addition is eleven registered screen-animation frames. See
 From the repository root, with Python and Pillow installed:
 
 ```powershell
+python -B art_src/env/painted_surfaces/build_surfaces.py
+python -B art_src/env/verify_polish.py
+```
+
+These rebuild only the new painted plane materials and mock-ups, then verify
+the combined C kit. For the preceding screen-animation batch:
+
+```powershell
 python -B art_src/screens/life/build_life.py
 python -B art_src/env/verify_polish.py
 ```
 
-These build/check only the new screen frames and verify the combined kit.
+These build/check only the screen frames and verify the combined kit.
 For the preceding room/identity batch:
 
 ```powershell
@@ -50,8 +62,9 @@ neighbour; no dithering or translucent fringes. Text on sheets uses native
 VETKA 16, rendered without antialiasing. Manifests record hashes, dimensions,
 opaque bounds and source hashes. Generated sources themselves keep their
 original unrestricted colour and resolution. No old art is overwritten.
-The UI mockups are RGBA exceptions: they retain the saved screenshot's exact
-renderer lighting colours in protected regions. All runtime material PNGs
+The UI and plane-material mockups are RGBA exceptions: they retain the saved
+screenshot's renderer lighting colours in protected regions, and the latter
+apply the actual lamp factors to the sampled planes. All runtime material PNGs
 and contact sheets still use the shared indexed palette and binary alpha.
 
 | Set | Native size | 4x review sheet |
@@ -62,6 +75,11 @@ and contact sheets still use the shared indexed palette and binary alpha.
 | Primary mixed tile repeats | 256 × 192 | `art_src/env/painted_v2/floor1/repeat_4x.png`, `floor2/repeat_4x.png` |
 | Original / primary / wet comparison | Three 64 × 64 samples | `art_src/env/painted_v2/comparison/contact_sheet_4x.png` |
 | First wall set, alternates + surfaces | 28 tiles, each 64 × 64 | `art_src/env/contact_sheet_4x.png` |
+| Primary painted floors/ceilings + variants | Sixteen 64 × 64 tiles | `art_src/env/painted_surfaces/contact_sheet_4x.png` |
+| Primary planes, by floor | Eight 64 × 64 tiles each | `art_src/env/painted_surfaces/floor{1,2}/contact_sheet_4x.png` |
+| Primary mixed plane repeats | 3 × 3 cells per plane/floor | `art_src/env/painted_surfaces/floor{1,2}/{floor,ceiling}_repeat_4x.png` |
+| Walls + planes, view mock-ups | Four 148 × 150 views | `art_src/env/painted_surfaces/mockup_view_4x.png` |
+| Walls + planes, screen mock-ups | Four 154 × 342 screens | `art_src/env/painted_surfaces/mockup_screen_4x.png` |
 | Possessions | 13 icons, each 16 × 16 | `art_src/icons/contact_sheet_4x.png` |
 | Primary Finder states | 3 portraits, each 32 × 32 | `art_src/portrait/v2/contact_sheet_4x.png` |
 | Original Finder states, alternates | 3 portraits, each 32 × 32 | `art_src/portrait/contact_sheet_4x.png` |
@@ -216,9 +234,123 @@ source crop and SHA-256. Rebuild just this set with:
 python -B art_src/props/build_props.py
 ```
 
-## Floor and ceiling faces with room interest
+## Primary painted floor and ceiling planes
 
-Runtime root: `assets/art/env/`; all twelve new images are **64 × 64 opaque
+These supersede the original cleaner `fN_floor.png` / `fN_ceiling.png` bases
+and their `room_fN_*` derivatives. Every older PNG remains intact as an
+alternate; do not mix an old room face into the new painted plane family.
+
+| New runtime base under `assets/art/env/` | Material |
+| --- | --- |
+| `painted_f1_floor.png` | Worn, uneven abbey flags; grime joints, chipped edges, scuffed faces, small stains and subdued damp |
+| `painted_f1_ceiling.png` | Stone rib vault: diagonal X ribs meet at the cell centre; rough infill, soot at the crossing and a little damp |
+| `painted_f2_floor.png` | Older, darker slick flags; cold standing water and sediment in low joints, mineral stains and worn ochre-grey edges |
+| `painted_f2_ceiling.png` | Rough-hewn eroded rock vault; damp ridges, mineral/drip trails and sparse roots in a fissure |
+
+**Stone ribs were chosen over timber** because the space is an abbey
+undercroft. A thick diagonal X reads as a vault at the 148px view width, and
+its corner connections continue into neighbouring cells. The game still
+samples a flat ceiling plane; the ribs supply painted relief, not curved
+geometry. No new wall height, collision, shadows or mesh is required.
+
+All four bases and all twelve matching variants are **64 × 64, fully opaque,
+indexed to the shared 31-colour palette**, with top-left origin `(0,0)`.
+They are painted from the approved stone wall's material reference and reduced
+with nearest-neighbour sampling. Broad irregular painted stone clusters stay
+visible; no smooth procedural replacement or dither pass is applied. Floor
+two receives a restrained cold/darker palette pass after painting, before
+reduction. Keep the current renderer's lamp/floor/ceiling factors.
+
+### Rebased room faces
+
+Use the same six kinds per floor, with the new prefix:
+
+- `painted_room_f{1,2}_floor_drain.png`
+- `painted_room_f{1,2}_floor_cracked.png`
+- `painted_room_f{1,2}_floor_compass.png`
+- `painted_room_f{1,2}_ceiling_roots.png`
+- `painted_room_f{1,2}_ceiling_chain.png`
+- `painted_room_f{1,2}_ceiling_boss.png`
+
+The existing editable native decoration recipe is drawn over each new painted
+base. Every face preserves that base's complete outer **two-pixel ring**.
+Opposite outer rows/columns match exactly, so base/base, base/variant and
+variant/variant joins agree on either axis. Mixed 3 × 3 repeat proofs are in
+`art_src/env/painted_surfaces/floor{1,2}/`. The old room faces and their old
+build script remain untouched.
+
+### One cell, one texture repeat
+
+**One 64px texture = one world cell**, not one individual flagstone. The floor
+cell perimeter has a continuous two-pixel grime joint on each side of the
+boundary: four texels across a repeated join. Internal flag joins are quieter
+and irregular. The perimeter follows the movement grid, so its perspective
+transverse lines mark whole steps. It is dark under the same lamp lighting,
+not an overlaid grid; do not add another code flagstone seam pass.
+
+The current renderer already uses the following world sampling contract:
+
+```text
+canvas = 148 x 150; focal = 74; horizon = 71; far = 3.6
+floor_side = y > horizon
+depth = focal * 0.5 / (abs(y - horizon) + 0.5)
+point = origin + (forward + right * ((x + 0.5 - 74) / 74)) * depth
+u = floor(point.x * 64) modulo 64
+v = floor(point.y * 64) modulo 64
+gain = lamp(depth) * (0.86 for floor, 0.64 for ceiling)
+```
+
+U increases with world X; V increases with world Y. The compass's small arrow
+points toward **negative V / world north**. Sample the same world-aligned UVs
+for every facing. Do not rotate/mirror compass tiles or rotate the texture
+with the camera. Roots, chains and drip streaks are part of the sampled
+ceiling plane; they do not extend as hanging billboards into the view.
+Use the existing floor-two ambience for any moving drops; these plane
+textures stay static.
+
+**Codex A:** replace the two base image paths in `_build_surfaces()` from
+`f%d_floor.png` / `f%d_ceiling.png` to `painted_f%d_floor.png` /
+`painted_f%d_ceiling.png`, keeping the existing one-based floor clamp and
+current sampling. For cell variants, change `room_f%d_...` to
+`painted_room_f%d_...`. Cache images and stable cell/plane choices outside the
+pixel loop; invalidate the surface cache when the material family changes.
+No extra scale, offset, tint or second darkness multiplier is needed. Use
+ordinary bases most often and reserve compass/boss/drain faces as landmarks.
+The texture kit supplies no placement, interactable, or movement rules.
+
+### Whole-picture mock-ups
+
+`art_src/env/painted_surfaces/mockup_view_4x.png` places the four material
+comparisons together: corridor and room for each floor. The corresponding
+`mockup_screen_4x.png` shows them inside the supplied M3c framing and UI.
+Individual pairs are `mockup_f{1,2}_{corridor,room}_native.png` and `_4x.png`.
+Each preview is an exact nearest 4x enlargement of its native counterpart.
+
+The offline authoring sampler reproduces the current view's 148 × 150 camera,
+world-cell UVs, 64px wall columns, lamp falloff and plane factors. Simple
+north-facing proxy spaces let the same material be compared in a narrow
+corridor and a three-cell-wide room. The room includes one compass and vault
+boss to show mixed-face joins. This is a material proposal, **not a Godot
+capture or a reconstruction of BELL42's simulation**. No actors/items are
+placed by the mock-up script. For that reason the supplied screenshots'
+messages and floor indicator remain their original UI, including on the
+floor-two material examples; captions identify the material floor.
+
+The source references are immutable copies of
+`build/m3c_shots/03_corridor.png` and `01_room.png`, saved in this set's
+`sources/`. Their UI outside `(3,21,148,150)` is preserved pixel-for-pixel
+after native nearest reduction. All art is authored inside C's directories;
+the real renderer/UI are untouched.
+
+Recipe: `art_src/env/painted_surfaces/build_surfaces.py`, with saved painting
+sources, exact built-in imagegen prompts, manifest and preservation receipt
+beside it. `verify_surfaces.py` checks all sixteen planes, mixed-family rings,
+wrap edges, darker wet level, readable perimeter contrast, exact 4x proofs
+and protected screenshot UI. No Godot process is needed.
+
+## Earlier floor and ceiling faces: alternates
+
+Runtime root: `assets/art/env/`; these twelve older images are **64 × 64 opaque
 world-UV textures**, not perspective billboards or room backgrounds:
 
 - `room_f{1,2}_floor_drain.png`
@@ -597,19 +729,6 @@ are in `docs/POLISH.md`. This pack needs integration and Pixel 9a visual review;
 the asset checks and focused FX test do not claim phone performance acceptance.
 
 
-## Room/identity batch receipt, 28 October 2026
-
-- Added **68 runtime PNGs**: 51 props, twelve floor/ceiling faces, logotype,
-  subtitle and three icon files. All C packs now verify together at **155
-  runtime PNGs**, with shared palette, binary alpha, registered depth resizes,
-  source/output hashes, exact 4x sheets and shared surface boundaries.
-- Adaptive foreground fits completely within the central radius 132px;
-  background and legacy icon are opaque. The source silhouette is fitted,
-  not cut by a circular mask. Phone/launcher acceptance remains outstanding.
-- Rebuilding produced identical SHA-256 hashes for **114 PNG/JSON files**.
-  All **90 recorded earlier C/launcher PNGs** remain byte-for-byte unchanged.
-- No Godot runs, gameplay/placement changes, launcher-setting changes,
-  staging or commits were performed in this batch.
 
 ## Screen-animation batch receipt, 28 October 2026
 
@@ -630,3 +749,22 @@ the asset checks and focused FX test do not claim phone performance acceptance.
   A, remaining original picks and five small new suggestions with costs.
 - No Godot runs, game/UI edits, staging or commits. The new animation playback
   still needs A's integration and phone review.
+
+## Painted-plane batch receipt, 28 October 2026
+
+- Added **16 runtime PNGs**: four primary painted plane bases and all twelve
+  matching room-face variants. The combined C kit verifies at **182 runtime
+  PNGs**, shared 31 opaque inks and binary alpha. All **166 earlier C runtime
+  PNGs** match their pre-batch hashes; originals remain as alternates.
+- Opposite edge texels and complete two-pixel variant border rings match.
+  Both wet bases have lower overall luminance than their abbey equivalents.
+  Floor cell-joint contrast, opaque 64px dimensions and exact 4x enlargements
+  pass focused checks.
+- Three material sheet pairs, four mixed-repeat pairs and six mock-up pairs
+  are saved with sources, prompts, registrations and build scripts. The
+  proxy-view mock-ups use the actual camera/UV/light formulas; screenshot UI
+  outside the view remains exact at native nearest sampling.
+- Rebuilding produced identical SHA-256 hashes for **51 PNG/JSON files**;
+  `art_src/env/painted_surfaces/rebuild_receipt.json` records the comparison.
+- No Godot runs, renderer/UI/game edits, staging or commits. A still needs
+  the documented texture path swaps and phone review.

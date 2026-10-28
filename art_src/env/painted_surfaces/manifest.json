@@ -1,0 +1,653 @@
+{
+  "palette": "art_src/spike/palette.gpl",
+  "colours_union": 21,
+  "files": [
+    {
+      "path": "art_src/env/painted_surfaces/contact_sheet_4x.png",
+      "size": [
+        2688,
+        1768
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        2688,
+        1768
+      ],
+      "colours": 21,
+      "sha256": "25c140538be07d8b516a29c3fd5a12538394fd4d7849574a7e10bb33f7f0e324"
+    },
+    {
+      "path": "art_src/env/painted_surfaces/contact_sheet_native.png",
+      "size": [
+        672,
+        442
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        672,
+        442
+      ],
+      "colours": 21,
+      "sha256": "b905121dc747f3fe2326b9b9826e61c18fa4042c6e235d3b89f5fd08a540e376"
+    },
+    {
+      "path": "art_src/env/painted_surfaces/floor1/ceiling_repeat_4x.png",
+      "size": [
+        768,
+        768
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        768,
+        768
+      ],
+      "colours": 16,
+      "sha256": "d8a636b5963fd0ad0bd459a761bc1b375a781f6877e4210afb45378b1e3e4bdf"
+    },
+    {
+      "path": "art_src/env/painted_surfaces/floor1/ceiling_repeat_native.png",
+      "size": [
+        192,
+        192
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        192,
+        192
+      ],
+      "colours": 16,
+      "sha256": "28e6f87ac189de79c699b21b32247d4ef252e46d39efe4c7e17cf2f6bc691bba"
+    },
+    {
+      "path": "art_src/env/painted_surfaces/floor1/contact_sheet_4x.png",
+      "size": [
+        2112,
+        952
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        2112,
+        952
+      ],
+      "colours": 19,
+      "sha256": "46ee6da402d5a807098e7de433a8519abdbea70b1fcf179b80766d66bfbb493b"
+    },
+    {
+      "path": "art_src/env/painted_surfaces/floor1/contact_sheet_native.png",
+      "size": [
+        528,
+        238
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        528,
+        238
+      ],
+      "colours": 19,
+      "sha256": "9357bee6ad09c68bcd49605e9cfa9f4099876248b954353aeb69c6178414fc98"
+    },
+    {
+      "path": "art_src/env/painted_surfaces/floor1/floor_repeat_4x.png",
+      "size": [
+        768,
+        768
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        768,
+        768
+      ],
+      "colours": 17,
+      "sha256": "d5714f9038ec403b796556bb1cdbb66658bb6f169eb96c85ad0c979b42a54a73"
+    },
+    {
+      "path": "art_src/env/painted_surfaces/floor1/floor_repeat_native.png",
+      "size": [
+        192,
+        192
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        192,
+        192
+      ],
+      "colours": 17,
+      "sha256": "cb3e50bdd6df311f5d3479d808b9ef51e006e1a7db653c9d420177faaa7b4302"
+    },
+    {
+      "path": "art_src/env/painted_surfaces/floor2/ceiling_repeat_4x.png",
+      "size": [
+        768,
+        768
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        768,
+        768
+      ],
+      "colours": 16,
+      "sha256": "30c7e1fba4db34ac6f8ce41e58ffaa0f2475606fc83fb2eace6b74ffe2501569"
+    },
+    {
+      "path": "art_src/env/painted_surfaces/floor2/ceiling_repeat_native.png",
+      "size": [
+        192,
+        192
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        192,
+        192
+      ],
+      "colours": 16,
+      "sha256": "551b25d26e3f52493ec51c01724dc2798b21b2646d2be9317f22333f5b893682"
+    },
+    {
+      "path": "art_src/env/painted_surfaces/floor2/contact_sheet_4x.png",
+      "size": [
+        2112,
+        952
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        2112,
+        952
+      ],
+      "colours": 19,
+      "sha256": "ebe590f7306eab347f51b7b25be499061dfa2e0e126d13a4292942e34cb297a2"
+    },
+    {
+      "path": "art_src/env/painted_surfaces/floor2/contact_sheet_native.png",
+      "size": [
+        528,
+        238
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        528,
+        238
+      ],
+      "colours": 19,
+      "sha256": "b914b8815c1e1d5df150f675136366d010c1122b8f32f309b6c9b393890294aa"
+    },
+    {
+      "path": "art_src/env/painted_surfaces/floor2/floor_repeat_4x.png",
+      "size": [
+        768,
+        768
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        768,
+        768
+      ],
+      "colours": 17,
+      "sha256": "97c26a0c55e973a782ab09b2f14a4ad26eebb25dcb998bad2f012edf0a4a2009"
+    },
+    {
+      "path": "art_src/env/painted_surfaces/floor2/floor_repeat_native.png",
+      "size": [
+        192,
+        192
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        192,
+        192
+      ],
+      "colours": 17,
+      "sha256": "1185463e7bd17ac0eeaa22ef1a38c6890937b65aeec4ae32753c2193f612aab1"
+    },
+    {
+      "path": "assets/art/env/painted_f1_ceiling.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 16,
+      "sha256": "3dc829d732505f24e26139fefeef5337067800518ed1c3d6d8fd58a8d274868f"
+    },
+    {
+      "path": "assets/art/env/painted_f1_floor.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 15,
+      "sha256": "07933fd1ac5c515c969eee0fd8419a222fc04661b9b28b2edf5b9d53f846c721"
+    },
+    {
+      "path": "assets/art/env/painted_f2_ceiling.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 15,
+      "sha256": "6334eb19d8935469122692cbf81b7fa37841e6085d8d8da8e1521786e01f694d"
+    },
+    {
+      "path": "assets/art/env/painted_f2_floor.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 14,
+      "sha256": "d4b1a944873be667c918f0e5e9f59eb57a89671919670388d68c7617187aeee8"
+    },
+    {
+      "path": "assets/art/env/painted_room_f1_ceiling_boss.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 16,
+      "sha256": "04eed132a2e20b4d0f8bb79c4c8ca74de628c9cc35b1e897f043349d0fa76019"
+    },
+    {
+      "path": "assets/art/env/painted_room_f1_ceiling_chain.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 14,
+      "sha256": "6a8744e8b6e1128439d863191cdceb203748f79a393487d4e99b6d02216ae488"
+    },
+    {
+      "path": "assets/art/env/painted_room_f1_ceiling_roots.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 15,
+      "sha256": "cdaa2bd323c96e724247f86f4436b7924a30fe852868251a0d7acedfc83fb051"
+    },
+    {
+      "path": "assets/art/env/painted_room_f1_floor_compass.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 17,
+      "sha256": "9487f7d0993beb4c758114d46b57ddaa5dde8c21ebe431adddab5f493f09e38d"
+    },
+    {
+      "path": "assets/art/env/painted_room_f1_floor_cracked.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 15,
+      "sha256": "91899f341c0ccf07cf7259476d34cd4b8a41d4b0f61f2f54931fc2f4121adbdb"
+    },
+    {
+      "path": "assets/art/env/painted_room_f1_floor_drain.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 15,
+      "sha256": "5feef392c078e4c6f0b980273c4b95cb6f3b51af6dd92e319193866673aead52"
+    },
+    {
+      "path": "assets/art/env/painted_room_f2_ceiling_boss.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 15,
+      "sha256": "a8ebe5ca1b550132d83459687cfe065bafb1980ae2b86090b9e4fc72988e39b0"
+    },
+    {
+      "path": "assets/art/env/painted_room_f2_ceiling_chain.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 16,
+      "sha256": "6cc309106d654de2fcf9755107957eb4ba9e404deff04132c6df69a62a8888b8"
+    },
+    {
+      "path": "assets/art/env/painted_room_f2_ceiling_roots.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 15,
+      "sha256": "c5a93116d98c15928873e87b6550e589b563014f4792a3e4423c8af4dba01344"
+    },
+    {
+      "path": "assets/art/env/painted_room_f2_floor_compass.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 16,
+      "sha256": "e3baf3b153aa7260283f10d1eaa7496d65b01fecfe274e434a2bc9586bdd624b"
+    },
+    {
+      "path": "assets/art/env/painted_room_f2_floor_cracked.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 14,
+      "sha256": "1092471deef9892b35a515264d4cf84e63441cde5ce9a089cf7b03f4f42b6706"
+    },
+    {
+      "path": "assets/art/env/painted_room_f2_floor_drain.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 15,
+      "sha256": "17edb83c9cbaf4efcb8e15749657184576310d2a1b76a82dd375342926fa371f"
+    }
+  ],
+  "sources": [
+    {
+      "path": "art_src/env/painted_surfaces/sources/01_room.png",
+      "sha256": "c3f30a8392022a61b2f28fcd82d2b27558e27df8cc4bfd726a919ae331ae1b66"
+    },
+    {
+      "path": "art_src/env/painted_surfaces/sources/03_corridor.png",
+      "sha256": "93e1c7a58ffb48a9b9304c06dac8296da754c22acd39d65b4fc15e5b8e9805ef"
+    },
+    {
+      "path": "art_src/env/painted_surfaces/sources/f1_ceiling.png",
+      "sha256": "c8494ebff72728e71043c950c0e6c7c4daadc4e04edbf8764718e869e8d91bf5"
+    },
+    {
+      "path": "art_src/env/painted_surfaces/sources/f1_floor.png",
+      "sha256": "72eabc300f1d7ceeead18b865526a3038dd4acf9f6753ff03e39de6f3a7c296a"
+    },
+    {
+      "path": "art_src/env/painted_surfaces/sources/f2_ceiling.png",
+      "sha256": "f30b88b9ff5f3151735b0e64aca9eb511cf7e2efda1aa7d68e4f6b283700a3bc"
+    },
+    {
+      "path": "art_src/env/painted_surfaces/sources/f2_floor.png",
+      "sha256": "164920be44155960c5082b5ddc2a055363d9400dee0d5bf7b21f9e5ef85a2144"
+    }
+  ],
+  "preview_files": [
+    {
+      "path": "art_src/env/painted_surfaces/mockup_f1_corridor_native.png",
+      "sha256": "912589f704232d2a46afdc94edb9e30ddf319e8e399e1c940d24240cfcb3eab6"
+    },
+    {
+      "path": "art_src/env/painted_surfaces/mockup_f1_corridor_4x.png",
+      "sha256": "d600eeccd67096e3902fae40f3b64b333fa167df2be98b1447ef1737500ec9a2"
+    },
+    {
+      "path": "art_src/env/painted_surfaces/mockup_f1_room_native.png",
+      "sha256": "274c24d60ffdce7da40c969cfc160e1fbef01545d44642f9b13401cf418ce1b1"
+    },
+    {
+      "path": "art_src/env/painted_surfaces/mockup_f1_room_4x.png",
+      "sha256": "6047737960505cb1b7aadc7cec077cf4aa9ede4821142c20113173c31739cfec"
+    },
+    {
+      "path": "art_src/env/painted_surfaces/mockup_f2_corridor_native.png",
+      "sha256": "8cf69627b0c3e0f298dcebbf013b14b6761a56ecf91c6b3e890e0e2852e857a5"
+    },
+    {
+      "path": "art_src/env/painted_surfaces/mockup_f2_corridor_4x.png",
+      "sha256": "43b6da02018056036183c2c7545781704c7f7d240449b71500d55f476c6218f4"
+    },
+    {
+      "path": "art_src/env/painted_surfaces/mockup_f2_room_native.png",
+      "sha256": "dafabbfefeb7f42a4a2857f2b87d7f89c192d191d34fd97ffe6c172b9d3b1ff9"
+    },
+    {
+      "path": "art_src/env/painted_surfaces/mockup_f2_room_4x.png",
+      "sha256": "1e3738d63f86d13466a3b28b0111c11f4a43b11a1cae247ae6ac85ee54145534"
+    },
+    {
+      "path": "art_src/env/painted_surfaces/mockup_screen_native.png",
+      "sha256": "32ef2edc3bccc4a1298eff3991406c9ce7a62111fb23f16968c40de1b543b536"
+    },
+    {
+      "path": "art_src/env/painted_surfaces/mockup_screen_4x.png",
+      "sha256": "6610cae2b1b7616110cc537912ae0b2253611112484c1d9ecb876b92ba4db43c"
+    },
+    {
+      "path": "art_src/env/painted_surfaces/mockup_view_native.png",
+      "sha256": "647d0c57d7a458663678d27a9a9347c2b8e25f617626d1273eecce77355e98bd"
+    },
+    {
+      "path": "art_src/env/painted_surfaces/mockup_view_4x.png",
+      "sha256": "b1de7b8444923829be5146fc4921e7df7562ea639a15c7303960bb46b4a197ea"
+    }
+  ],
+  "registrations": [
+    {
+      "path": "assets/art/env/painted_f1_floor.png",
+      "floor": 1,
+      "plane": "floor",
+      "kind": "base",
+      "base": null
+    },
+    {
+      "path": "assets/art/env/painted_room_f1_floor_drain.png",
+      "floor": 1,
+      "plane": "floor",
+      "kind": "drain",
+      "base": "assets/art/env/painted_f1_floor.png"
+    },
+    {
+      "path": "assets/art/env/painted_room_f1_floor_cracked.png",
+      "floor": 1,
+      "plane": "floor",
+      "kind": "cracked",
+      "base": "assets/art/env/painted_f1_floor.png"
+    },
+    {
+      "path": "assets/art/env/painted_room_f1_floor_compass.png",
+      "floor": 1,
+      "plane": "floor",
+      "kind": "compass",
+      "base": "assets/art/env/painted_f1_floor.png"
+    },
+    {
+      "path": "assets/art/env/painted_f1_ceiling.png",
+      "floor": 1,
+      "plane": "ceiling",
+      "kind": "base",
+      "base": null
+    },
+    {
+      "path": "assets/art/env/painted_room_f1_ceiling_roots.png",
+      "floor": 1,
+      "plane": "ceiling",
+      "kind": "roots",
+      "base": "assets/art/env/painted_f1_ceiling.png"
+    },
+    {
+      "path": "assets/art/env/painted_room_f1_ceiling_chain.png",
+      "floor": 1,
+      "plane": "ceiling",
+      "kind": "chain",
+      "base": "assets/art/env/painted_f1_ceiling.png"
+    },
+    {
+      "path": "assets/art/env/painted_room_f1_ceiling_boss.png",
+      "floor": 1,
+      "plane": "ceiling",
+      "kind": "boss",
+      "base": "assets/art/env/painted_f1_ceiling.png"
+    },
+    {
+      "path": "assets/art/env/painted_f2_floor.png",
+      "floor": 2,
+      "plane": "floor",
+      "kind": "base",
+      "base": null
+    },
+    {
+      "path": "assets/art/env/painted_room_f2_floor_drain.png",
+      "floor": 2,
+      "plane": "floor",
+      "kind": "drain",
+      "base": "assets/art/env/painted_f2_floor.png"
+    },
+    {
+      "path": "assets/art/env/painted_room_f2_floor_cracked.png",
+      "floor": 2,
+      "plane": "floor",
+      "kind": "cracked",
+      "base": "assets/art/env/painted_f2_floor.png"
+    },
+    {
+      "path": "assets/art/env/painted_room_f2_floor_compass.png",
+      "floor": 2,
+      "plane": "floor",
+      "kind": "compass",
+      "base": "assets/art/env/painted_f2_floor.png"
+    },
+    {
+      "path": "assets/art/env/painted_f2_ceiling.png",
+      "floor": 2,
+      "plane": "ceiling",
+      "kind": "base",
+      "base": null
+    },
+    {
+      "path": "assets/art/env/painted_room_f2_ceiling_roots.png",
+      "floor": 2,
+      "plane": "ceiling",
+      "kind": "roots",
+      "base": "assets/art/env/painted_f2_ceiling.png"
+    },
+    {
+      "path": "assets/art/env/painted_room_f2_ceiling_chain.png",
+      "floor": 2,
+      "plane": "ceiling",
+      "kind": "chain",
+      "base": "assets/art/env/painted_f2_ceiling.png"
+    },
+    {
+      "path": "assets/art/env/painted_room_f2_ceiling_boss.png",
+      "floor": 2,
+      "plane": "ceiling",
+      "kind": "boss",
+      "base": "assets/art/env/painted_f2_ceiling.png"
+    }
+  ],
+  "cell_world_size": 1,
+  "uv_texels_per_cell": 64,
+  "uv": "U +world X, V +world Y; north = -V. Sample floor(world_coord*64) modulo 64.",
+  "ceiling_geometry": "Painted rib relief on the existing flat plane; no actual curved mesh.",
+  "primary_bases": "painted_f{1,2}_{floor,ceiling}.png",
+  "primary_variants": "painted_room_f{1,2}_{floor|ceiling}_{kind}.png",
+  "originals": "art_src/env/painted_surfaces/preserved_hashes.json"
+}

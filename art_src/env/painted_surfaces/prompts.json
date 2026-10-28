@@ -1,0 +1,5 @@
+{
+  "tool": "built-in image_gen.imagegen",
+  "mode": "generate with material reference",
+  "derivation": "Nearest reduction to 64x64 in the shared palette, common opposite-edge repair and deliberate two-pixel cell joints. Old files stay intact. Twelve room-face variants reuse the existing editable decoration recipe over the new bases."
+}
