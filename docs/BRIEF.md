@@ -70,8 +70,10 @@ not a template). What worked:
   and on pause/close (`NOTIFICATION_APPLICATION_PAUSED`, `WM_CLOSE_REQUEST`).
 - Strings were capped for the phone (21 chars x 2 lines). The owner reads the
   game with no strain only because of this discipline.
-- Music: public-domain Bach as chiptune synthesised at runtime from note JSON
-  (see the Crawler `CREDITS.md`). The owner loves Bach.
+- Music: last time it was public-domain Bach synthesised at runtime from note
+  JSON. **Not this time**: the owner has heard those pieces far too often and
+  Bach is not required. Original music (or fresh public-domain sources) is
+  welcome; runtime synthesis still fits the offline rule.
 
 ## How to run things
 

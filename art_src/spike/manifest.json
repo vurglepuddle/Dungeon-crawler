@@ -1,0 +1,159 @@
+{
+  "pipeline": "build_spike.py / offline Pillow",
+  "pillow_version": "11.1.0",
+  "source_generation": "built-in image_gen.imagegen; see prompts.json",
+  "resize": "NEAREST for every image resize including source reduction",
+  "dither": "none",
+  "alpha": "source preserved; derived sprites threshold at 128",
+  "palette_entries": 32,
+  "opaque_palette_entries": 31,
+  "union_derived_rgba_colours": 32,
+  "monster_source_crop_xyxy": [
+    52,
+    13,
+    1212,
+    1235
+  ],
+  "files": [
+    {
+      "path": "sources/bell_porter_code_64.png",
+      "size": [
+        64,
+        64
+      ],
+      "mode": "P",
+      "colours_rgba": 22,
+      "sha256": "42c620f435003e921fef6e3d5a434c5b11ae87375e3eedc97f1fb6851b7c3996"
+    },
+    {
+      "path": "sources/bell_porter_painted.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "colours_rgba": 179930,
+      "sha256": "cff3d5af662ced7f1e0397e5a5c2728856cd11b0222592403e8f02f65b9dd6d7"
+    },
+    {
+      "path": "sources/finder_portrait_painted.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGB",
+      "colours_rgba": 99433,
+      "sha256": "4e4da3fb804e91cd994f5a1ff98354d7e21b04bf09fcaa764d99a2684ded9e0d"
+    },
+    {
+      "path": "sources/stone_wall_painted.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGB",
+      "colours_rgba": 81519,
+      "sha256": "201489206529b6ca293f70f3929e7823f2516d4e317d7b23bed5b6602dac8f15"
+    },
+    {
+      "path": "results/bell_porter_code_h24.png",
+      "size": [
+        24,
+        24
+      ],
+      "mode": "P",
+      "colours_rgba": 21,
+      "sha256": "b755090ad8f0595c76f0e4736347f48beeaf21e59ee15d769458238f501324c6"
+    },
+    {
+      "path": "results/bell_porter_code_h40.png",
+      "size": [
+        40,
+        40
+      ],
+      "mode": "P",
+      "colours_rgba": 22,
+      "sha256": "e8cff38146727046dad8d7e96ac3f220be77ad84b1803ca132ce61937f67567c"
+    },
+    {
+      "path": "results/bell_porter_code_h64.png",
+      "size": [
+        64,
+        64
+      ],
+      "mode": "P",
+      "colours_rgba": 22,
+      "sha256": "42c620f435003e921fef6e3d5a434c5b11ae87375e3eedc97f1fb6851b7c3996"
+    },
+    {
+      "path": "results/bell_porter_painted_h24.png",
+      "size": [
+        23,
+        24
+      ],
+      "mode": "P",
+      "colours_rgba": 28,
+      "sha256": "5b35d022e4d5f6bdae2819b8f79ee2bf5903f49403e0b5e47dcfe2e57a9a4eda"
+    },
+    {
+      "path": "results/bell_porter_painted_h40.png",
+      "size": [
+        38,
+        40
+      ],
+      "mode": "P",
+      "colours_rgba": 30,
+      "sha256": "f5e375635ca979508cc8a509641306aefa1f0dd475a92b2bcda3510c7c968be2"
+    },
+    {
+      "path": "results/bell_porter_painted_h64.png",
+      "size": [
+        61,
+        64
+      ],
+      "mode": "P",
+      "colours_rgba": 30,
+      "sha256": "e6757f31e3443ecfb2f317b4bd39d24f7434033a91f4ab92695fc3660886c34d"
+    },
+    {
+      "path": "results/finder_portrait_32.png",
+      "size": [
+        32,
+        32
+      ],
+      "mode": "P",
+      "colours_rgba": 23,
+      "sha256": "0d7bec886d97d1b60ec6532e4283b7581ba892711e328a1847586adc529edbe2"
+    },
+    {
+      "path": "results/stone_wall_64.png",
+      "size": [
+        64,
+        64
+      ],
+      "mode": "P",
+      "colours_rgba": 16,
+      "sha256": "18e9e64516e59c5f3d6c265710d3d13250fecdd62138d4f659bcc4f75253b5c5"
+    },
+    {
+      "path": "contact_sheet_native.png",
+      "size": [
+        640,
+        400
+      ],
+      "mode": "P",
+      "colours_rgba": 31,
+      "sha256": "cf3d9a56995a09fcf5ba6c4eb44e47dcbe65bd04c19ca13bb1f5771d983d5cfe"
+    },
+    {
+      "path": "contact_sheet_4x.png",
+      "size": [
+        2560,
+        1600
+      ],
+      "mode": "P",
+      "colours_rgba": 31,
+      "sha256": "b73f8104e37531a09a28d4efeb84ed2f940f9b9537fe60b7719776b9d9aa857c"
+    }
+  ]
+}
