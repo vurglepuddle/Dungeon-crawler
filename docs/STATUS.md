@@ -48,8 +48,11 @@ verifies, commits with explicit paths and pushes.
 
 The owner also paints: a hand-made 154 x 342 **vine overlay** in progress in
 `art_src/ui_offer/owner_vines/` (Aseprite `.ase` files may be committed; the
-repo is private). A's overlay layer is ready and empty. Rules: draw it above
+repo is private). It is wired (`assets/art/ui/owner_vines.png`). Rules: draw it above
 the chrome and above the compass needle, below cards, modals and the map.
+**It stays visible while cards and menus are open; only the map hides it**
+(owner, 29 Oct: the map "makes sense not to have the overlay, as it's
+distracting"). Today's code hides it for cards and modals too: change that.
 
 ## Queue after this round
 
@@ -74,15 +77,16 @@ the chrome and above the compass needle, below cards, modals and the map.
      - bat-skull crest: (75,16) and (79,16);
      - top-left skull: (5,21) and (9,21);
      - bottom-left skull: (1,163) and (6,163);
-     - compass hub skull: (116,337) and (119,337). The owner named "the 2
-       skulls and the bat-skull", so ask before including this one.
+     - compass hub skull: (116,337) and (119,337).
 
-     Now and then, at random, one socket flares 15 -> 16 -> 17 -> 16 -> 15
-     (`73a29a`, `a8c2ad`) over about 0.3 s. Sometimes both sockets of one
+     **All four skulls glint** (owner confirmed).
+
+     Now and then, at random and **pretty rare**, one socket flares
+     15 -> 16 -> 17 -> 16 -> 15 (`73a29a`, `a8c2ad`) over about 0.3 s. Sometimes both sockets of one
      skull flare together ("ooo spooky"). Keep it rare enough to catch the
-     eye, not a constant twinkle. Draw it in code over the overlay. Hide it
-     whenever the overlay hides, and keep it out of the simulation and the
-     pilots' pixel checks.
+     eye, not a constant twinkle. Draw it in code over the overlay. It shows
+     whenever the overlay shows (with cards and menus open too, not with the
+     map open). Keep it out of the simulation and the pilots' pixel checks.
 
 Claude disabled Godot's stock boot image (`b4d6719`), so the LOST MOTH splash
 comes first.
