@@ -1,0 +1,194 @@
+{
+  "source": "art_src/creatures/sources/ash_hound_ember_sheet.png",
+  "source_sha256": "c5c69dcac940f3ab5bbd306127c97a20dc20bc438ea0fb4133a057f4e756bd4a",
+  "source_bounds": [
+    [
+      33,
+      25,
+      711,
+      672
+    ],
+    [
+      691,
+      226,
+      1613,
+      664
+    ],
+    [
+      1513,
+      87,
+      2136,
+      669
+    ]
+  ],
+  "shared_source_scale_at_64": 0.09582689335394126,
+  "states": [
+    "idle",
+    "windup",
+    "recoil"
+  ],
+  "assets": [
+    {
+      "path": "assets/art/creatures/ash_hound_ember_idle_64.png",
+      "size": [
+        96,
+        64
+      ],
+      "opaque_colors": 24,
+      "sha256": "74066978a4628c783d7cd73a2f90345d27450ac6489852f8b6258a292236bc56",
+      "state": "idle",
+      "anchor": [
+        48,
+        64
+      ],
+      "anchor_kind": "feet / hover bottom centre"
+    },
+    {
+      "path": "assets/art/creatures/ash_hound_ember_windup_64.png",
+      "size": [
+        96,
+        64
+      ],
+      "opaque_colors": 24,
+      "sha256": "b5cf2bede4d27efc70b7e59a3c4cb43cd394698ca461ffdb09ae709a3d701af6",
+      "state": "windup",
+      "anchor": [
+        48,
+        64
+      ],
+      "anchor_kind": "feet / hover bottom centre"
+    },
+    {
+      "path": "assets/art/creatures/ash_hound_ember_recoil_64.png",
+      "size": [
+        96,
+        64
+      ],
+      "opaque_colors": 24,
+      "sha256": "9255ce658bec54b342f93972de1e1e8bfd8ba1c8da7a6fc8822a58fd947227b1",
+      "state": "recoil",
+      "anchor": [
+        48,
+        64
+      ],
+      "anchor_kind": "feet / hover bottom centre"
+    },
+    {
+      "path": "assets/art/creatures/ash_hound_ember_strip_64.png",
+      "size": [
+        288,
+        64
+      ],
+      "opaque_colors": 24,
+      "sha256": "527378a4313330eff69517a70016c493c0db0fe72f1d3e97097d9eb46527a531"
+    },
+    {
+      "path": "assets/art/creatures/ash_hound_ember_idle_40.png",
+      "size": [
+        60,
+        40
+      ],
+      "opaque_colors": 24,
+      "sha256": "61f6215b02a20b106dbae23eb4927b144cf7ecda099040302acce2695e2aa016",
+      "state": "idle",
+      "anchor": [
+        30,
+        40
+      ],
+      "anchor_kind": "feet / hover bottom centre"
+    },
+    {
+      "path": "assets/art/creatures/ash_hound_ember_windup_40.png",
+      "size": [
+        60,
+        40
+      ],
+      "opaque_colors": 24,
+      "sha256": "28a911652b56eb62ee3afd86635bf1c1f77eb3fadfd79460748abda73171dd8e",
+      "state": "windup",
+      "anchor": [
+        30,
+        40
+      ],
+      "anchor_kind": "feet / hover bottom centre"
+    },
+    {
+      "path": "assets/art/creatures/ash_hound_ember_recoil_40.png",
+      "size": [
+        60,
+        40
+      ],
+      "opaque_colors": 24,
+      "sha256": "faad6bb0b88b2374478699fb891c70cee1ae924e10aa19cd64d36f0821d84fab",
+      "state": "recoil",
+      "anchor": [
+        30,
+        40
+      ],
+      "anchor_kind": "feet / hover bottom centre"
+    },
+    {
+      "path": "assets/art/creatures/ash_hound_ember_strip_40.png",
+      "size": [
+        180,
+        40
+      ],
+      "opaque_colors": 24,
+      "sha256": "9e270d743263b6b18ad2f2164cf06cb21f418327e00774a065b158f6113b679e"
+    },
+    {
+      "path": "assets/art/creatures/ash_hound_ember_idle_24.png",
+      "size": [
+        36,
+        24
+      ],
+      "opaque_colors": 23,
+      "sha256": "73be5d941c79bf7870dc793ff3b9e5885260ce2d386c8dbb31fa9ef12880eb71",
+      "state": "idle",
+      "anchor": [
+        18,
+        24
+      ],
+      "anchor_kind": "feet / hover bottom centre"
+    },
+    {
+      "path": "assets/art/creatures/ash_hound_ember_windup_24.png",
+      "size": [
+        36,
+        24
+      ],
+      "opaque_colors": 24,
+      "sha256": "b735e7fbc85e4bf1821e1b3933a7a1e708e5421ea08e65899c81335023790074",
+      "state": "windup",
+      "anchor": [
+        18,
+        24
+      ],
+      "anchor_kind": "feet / hover bottom centre"
+    },
+    {
+      "path": "assets/art/creatures/ash_hound_ember_recoil_24.png",
+      "size": [
+        36,
+        24
+      ],
+      "opaque_colors": 23,
+      "sha256": "61693cc95e8f5006e917d1a734dce630c2cdbcfe02962a255167f7577583e587",
+      "state": "recoil",
+      "anchor": [
+        18,
+        24
+      ],
+      "anchor_kind": "feet / hover bottom centre"
+    },
+    {
+      "path": "assets/art/creatures/ash_hound_ember_strip_24.png",
+      "size": [
+        108,
+        24
+      ],
+      "opaque_colors": 24,
+      "sha256": "fb035bdfa0ba8dc01952e4f23e12a1a1f0bc569df0c8b68703e6fc87251d3841"
+    }
+  ]
+}

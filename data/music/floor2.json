@@ -1,0 +1,109 @@
+{
+  "schema": 1,
+  "id": "floor2",
+  "title": "Under the Last Landing",
+  "mode": "D Dorian",
+  "bpm": 56,
+  "beats": 32,
+  "loop": true,
+  "notes": [
+    {
+      "beat": 0,
+      "pitch": 38,
+      "beats": 7.5,
+      "voice": "drone",
+      "velocity": 0.25
+    },
+    {
+      "beat": 1,
+      "pitch": 62,
+      "beats": 3,
+      "voice": "bell",
+      "velocity": 0.32
+    },
+    {
+      "beat": 4,
+      "pitch": 50,
+      "beats": 2,
+      "voice": "reed",
+      "velocity": 0.14
+    },
+    {
+      "beat": 5,
+      "pitch": 69,
+      "beats": 2.5,
+      "voice": "bell",
+      "velocity": 0.26
+    },
+    {
+      "beat": 8,
+      "pitch": 33,
+      "beats": 7.5,
+      "voice": "drone",
+      "velocity": 0.21
+    },
+    {
+      "beat": 8,
+      "pitch": 64,
+      "beats": 3,
+      "voice": "bell",
+      "velocity": 0.29
+    },
+    {
+      "beat": 12,
+      "pitch": 65,
+      "beats": 3,
+      "voice": "bell",
+      "velocity": 0.3
+    },
+    {
+      "beat": 16,
+      "pitch": 36,
+      "beats": 7.5,
+      "voice": "drone",
+      "velocity": 0.22
+    },
+    {
+      "beat": 18,
+      "pitch": 62,
+      "beats": 3,
+      "voice": "bell",
+      "velocity": 0.27
+    },
+    {
+      "beat": 20,
+      "pitch": 48,
+      "beats": 2,
+      "voice": "reed",
+      "velocity": 0.14
+    },
+    {
+      "beat": 22,
+      "pitch": 59,
+      "beats": 2.5,
+      "voice": "bell",
+      "velocity": 0.24
+    },
+    {
+      "beat": 24,
+      "pitch": 38,
+      "beats": 7.5,
+      "voice": "drone",
+      "velocity": 0.25
+    },
+    {
+      "beat": 26,
+      "pitch": 57,
+      "beats": 2.5,
+      "voice": "bell",
+      "velocity": 0.26
+    },
+    {
+      "beat": 29,
+      "pitch": 62,
+      "beats": 2.5,
+      "voice": "bell",
+      "velocity": 0.29
+    }
+  ]
+}

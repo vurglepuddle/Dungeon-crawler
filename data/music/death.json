@@ -1,0 +1,53 @@
+{
+  "schema": 1,
+  "id": "death",
+  "title": "The Last Wick",
+  "mode": "D Dorian",
+  "bpm": 60,
+  "beats": 4,
+  "loop": false,
+  "notes": [
+    {
+      "beat": 0,
+      "pitch": 38,
+      "beats": 3.6,
+      "voice": "drone",
+      "velocity": 0.18
+    },
+    {
+      "beat": 0,
+      "pitch": 62,
+      "beats": 1.3,
+      "voice": "bell",
+      "velocity": 0.36
+    },
+    {
+      "beat": 0.75,
+      "pitch": 57,
+      "beats": 1.2,
+      "voice": "bell",
+      "velocity": 0.26
+    },
+    {
+      "beat": 1.5,
+      "pitch": 52,
+      "beats": 1.2,
+      "voice": "bell",
+      "velocity": 0.21
+    },
+    {
+      "beat": 2.15,
+      "pitch": 53,
+      "beats": 0.9,
+      "voice": "bell",
+      "velocity": 0.15
+    },
+    {
+      "beat": 2.75,
+      "pitch": 50,
+      "beats": 0.9,
+      "voice": "bell",
+      "velocity": 0.12
+    }
+  ]
+}

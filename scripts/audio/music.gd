@@ -7,7 +7,9 @@ const BUFFER_SECONDS: float = 0.14
 const TRACK_PATHS: Dictionary = {
 	"title": "res://data/music/title.json",
 	"floor": "res://data/music/floor.json",
+	"floor2": "res://data/music/floor2.json",
 	"win": "res://data/music/win.json",
+	"death": "res://data/music/death.json",
 }
 
 class Tone:
@@ -101,6 +103,11 @@ func stop() -> void:
 	## Explicit stop forgets the selection, so toggling MUSIC cannot restart it.
 	_current_track = ""
 	_halt_audio()
+
+
+func play_floor(floor_number: int) -> bool:
+	## First landing keeps its theme; deeper floors use the lower, slower answer.
+	return play("floor2" if floor_number >= 2 else "floor")
 
 
 func set_enabled(value: bool) -> void:

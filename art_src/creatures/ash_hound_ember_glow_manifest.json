@@ -1,0 +1,141 @@
+{
+  "assets": [
+    {
+      "path": "assets/art/creatures/ash_hound_ember_glow_idle_64.png",
+      "size": [
+        96,
+        64
+      ],
+      "opaque_colors": 4,
+      "sha256": "4f50eba369aace9fc5228e3bc53d6d069f11db28959a0c484c995802773f7eb9",
+      "state": "idle",
+      "anchor": [
+        48,
+        64
+      ],
+      "purpose": "optional emissive colour overlay; same canvas and pose; draw after lamp tint"
+    },
+    {
+      "path": "assets/art/creatures/ash_hound_ember_glow_windup_64.png",
+      "size": [
+        96,
+        64
+      ],
+      "opaque_colors": 4,
+      "sha256": "052e68a28e08f4248f4e5433164ecd86ba9bb25541a733e7a146221149757bc0",
+      "state": "windup",
+      "anchor": [
+        48,
+        64
+      ],
+      "purpose": "optional emissive colour overlay; same canvas and pose; draw after lamp tint"
+    },
+    {
+      "path": "assets/art/creatures/ash_hound_ember_glow_recoil_64.png",
+      "size": [
+        96,
+        64
+      ],
+      "opaque_colors": 4,
+      "sha256": "4adfa54618efaf3fe51353ee8d817c2dddd0f32660e6222f014c03c6f0ea5ae3",
+      "state": "recoil",
+      "anchor": [
+        48,
+        64
+      ],
+      "purpose": "optional emissive colour overlay; same canvas and pose; draw after lamp tint"
+    },
+    {
+      "path": "assets/art/creatures/ash_hound_ember_glow_idle_40.png",
+      "size": [
+        60,
+        40
+      ],
+      "opaque_colors": 4,
+      "sha256": "dd3aa071c1a18954fe83da7baba17145c2bd85570e4d260b24e77e003e10adb3",
+      "state": "idle",
+      "anchor": [
+        30,
+        40
+      ],
+      "purpose": "optional emissive colour overlay; same canvas and pose; draw after lamp tint"
+    },
+    {
+      "path": "assets/art/creatures/ash_hound_ember_glow_windup_40.png",
+      "size": [
+        60,
+        40
+      ],
+      "opaque_colors": 4,
+      "sha256": "38f7f136756aa8470b40baa3557d81a8a5df872310179870f507f5fbf3c594e6",
+      "state": "windup",
+      "anchor": [
+        30,
+        40
+      ],
+      "purpose": "optional emissive colour overlay; same canvas and pose; draw after lamp tint"
+    },
+    {
+      "path": "assets/art/creatures/ash_hound_ember_glow_recoil_40.png",
+      "size": [
+        60,
+        40
+      ],
+      "opaque_colors": 4,
+      "sha256": "835f769e9b0623058fb3d7e49bd6dfeb2f2ff0e6a9a794fc33643ae5605de932",
+      "state": "recoil",
+      "anchor": [
+        30,
+        40
+      ],
+      "purpose": "optional emissive colour overlay; same canvas and pose; draw after lamp tint"
+    },
+    {
+      "path": "assets/art/creatures/ash_hound_ember_glow_idle_24.png",
+      "size": [
+        36,
+        24
+      ],
+      "opaque_colors": 4,
+      "sha256": "9683d80e52e13e37cb220a0c93d2d342f4d4d9a6cf76ce4a18a90238daac2123",
+      "state": "idle",
+      "anchor": [
+        18,
+        24
+      ],
+      "purpose": "optional emissive colour overlay; same canvas and pose; draw after lamp tint"
+    },
+    {
+      "path": "assets/art/creatures/ash_hound_ember_glow_windup_24.png",
+      "size": [
+        36,
+        24
+      ],
+      "opaque_colors": 4,
+      "sha256": "facd08761701c3667feeb164d82bb2c247d59f8cd0c2ab4a81bea04971fdb4c3",
+      "state": "windup",
+      "anchor": [
+        18,
+        24
+      ],
+      "purpose": "optional emissive colour overlay; same canvas and pose; draw after lamp tint"
+    },
+    {
+      "path": "assets/art/creatures/ash_hound_ember_glow_recoil_24.png",
+      "size": [
+        36,
+        24
+      ],
+      "opaque_colors": 3,
+      "sha256": "ce7ee6758fc9405eb1284e91e90047189a2d41c4bafd0f3559022983346878de",
+      "state": "recoil",
+      "anchor": [
+        18,
+        24
+      ],
+      "purpose": "optional emissive colour overlay; same canvas and pose; draw after lamp tint"
+    }
+  ],
+  "body_prefix": "ash_hound_ember",
+  "overlay_gain": 0.85
+}

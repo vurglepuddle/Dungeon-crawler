@@ -39,7 +39,21 @@ def scores():
              bpm=84, beats=8, loop=False, notes=[
                  note(0, 50, 6.5, 'drone', .30), note(0, 74, 1.6, velocity=.50), note(1, 81, 1.6, velocity=.43),
                  note(2, 76, 1.6, velocity=.46), note(3, 77, 1.6, velocity=.48), note(4, 83, 1.2, velocity=.35),
-                 note(5, 86, 2.5, velocity=.48), note(5, 69, 2.5, 'reed', .23), note(5, 62, 2.5, 'reed', .22)])]
+                 note(5, 86, 2.5, velocity=.48), note(5, 69, 2.5, 'reed', .23), note(5, 62, 2.5, 'reed', .22)]),
+        dict(schema=1, id='floor2', title='Under the Last Landing', mode='D Dorian',
+             bpm=56, beats=32, loop=True, notes=[
+                 note(0, 38, 7.5, 'drone', .25), note(8, 33, 7.5, 'drone', .21),
+                 note(16, 36, 7.5, 'drone', .22), note(24, 38, 7.5, 'drone', .25),
+                 note(1, 62, 3, velocity=.32), note(5, 69, 2.5, velocity=.26),
+                 note(8, 64, 3, velocity=.29), note(12, 65, 3, velocity=.30),
+                 note(18, 62, 3, velocity=.27), note(22, 59, 2.5, velocity=.24),
+                 note(26, 57, 2.5, velocity=.26), note(29, 62, 2.5, velocity=.29),
+                 note(4, 50, 2, 'reed', .14), note(20, 48, 2, 'reed', .14)]),
+        dict(schema=1, id='death', title='The Last Wick', mode='D Dorian',
+             bpm=60, beats=4, loop=False, notes=[
+                 note(0, 38, 3.6, 'drone', .18), note(0, 62, 1.3, velocity=.36),
+                 note(.75, 57, 1.2, velocity=.26), note(1.5, 52, 1.2, velocity=.21),
+                 note(2.15, 53, .9, velocity=.15), note(2.75, 50, .9, velocity=.12)])]
 
 
 def round_sample(value):

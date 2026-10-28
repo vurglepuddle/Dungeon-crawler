@@ -1,0 +1,1400 @@
+{
+  "palette": "art_src/spike/palette.gpl",
+  "sources": {
+    "art_src/fixtures/sources/brazier_cold.png": "b703801390b3d0b64a46596a3c4e8073dd1d2cfd899d1c1b7878ee3a44b1d37c",
+    "art_src/fixtures/sources/dawn_seal_pedestal.png": "e4618233e7b8a4eb2b331d8c7f4b5f588a171b9c5d5555729146b0cdfd6bccb4",
+    "art_src/fixtures/sources/panel_f1_base.png": "22eb73da8f23353f4bdf446ca60eb7292cb5d43f86a94bc4b5bfd8e5a9a924e8",
+    "art_src/fixtures/sources/panel_f2_base.png": "0003e9c0132f2ef0dedda6feb7a13aaf05f03071d0b03b3eb26fd72dea45844d",
+    "art_src/fixtures/sources/reed_torch_unlit.png": "f57bb4620f2c209b52bd9c3fd5a770789a935fecb58508a32d7dca2f4e02511c",
+    "art_src/fixtures/sources/reed_torch_unlit_draft.png": "f57bb4620f2c209b52bd9c3fd5a770789a935fecb58508a32d7dca2f4e02511c"
+  },
+  "native_only": false,
+  "assets": [
+    {
+      "path": "assets/art/fixtures/web_intact_d1.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 4,
+      "sha256": "db324ca0fb8a7bd238e05d75f58655a4721fee8e88508e5ec11deed12d8bcc74",
+      "anchor": [
+        32,
+        64
+      ],
+      "purpose": "corridor / doorway face overlay",
+      "frame_ms": 0,
+      "depth": 1
+    },
+    {
+      "path": "assets/art/fixtures/web_burning_0_d1.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 8,
+      "sha256": "9d394ef42b408d5d746ed8dbb48437d403b4029260f5855f025492159cecc8ac",
+      "anchor": [
+        32,
+        64
+      ],
+      "purpose": "corridor / doorway face overlay",
+      "frame_ms": 120,
+      "depth": 1
+    },
+    {
+      "path": "assets/art/fixtures/web_burning_1_d1.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 8,
+      "sha256": "ee16a292ccb21f9b59cd8e982d2cf61ca3489c700363bac4e87908384091732d",
+      "anchor": [
+        32,
+        64
+      ],
+      "purpose": "corridor / doorway face overlay",
+      "frame_ms": 120,
+      "depth": 1
+    },
+    {
+      "path": "assets/art/fixtures/web_burnt_d1.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 3,
+      "sha256": "b3210398a0985acbc5d1ebebc1a8644db4ae3047f01aaf8612d83f4f877f5fd4",
+      "anchor": [
+        32,
+        64
+      ],
+      "purpose": "corridor / doorway face overlay",
+      "frame_ms": 0,
+      "depth": 1
+    },
+    {
+      "path": "assets/art/fixtures/web_strip_d1.png",
+      "size": [
+        256,
+        64
+      ],
+      "opaque_colors": 10,
+      "sha256": "36737ab992cafbe5c39a3bc0eab71a1da7fb16fe6c64a67c100d155f12f6acba",
+      "anchor": [
+        32,
+        64
+      ],
+      "purpose": "four STATE frames; only middle two animate",
+      "frame_ms": 0,
+      "depth": 1,
+      "frame_count": 4,
+      "frame_order": [
+        "intact",
+        "burning_0",
+        "burning_1",
+        "burnt"
+      ],
+      "frame_size": [
+        64,
+        64
+      ]
+    },
+    {
+      "path": "assets/art/fixtures/web_intact_d2.png",
+      "size": [
+        40,
+        40
+      ],
+      "opaque_colors": 3,
+      "sha256": "9dd37d0101c00374ba9b29d610add07293d80fd191d4f21e024218cb9125b71e",
+      "anchor": [
+        20,
+        40
+      ],
+      "purpose": "corridor / doorway face overlay",
+      "frame_ms": 0,
+      "depth": 2
+    },
+    {
+      "path": "assets/art/fixtures/web_burning_0_d2.png",
+      "size": [
+        40,
+        40
+      ],
+      "opaque_colors": 7,
+      "sha256": "d50235f79876f3608e7a2bae739da221f7b42c93ace975af71413d56fc9b3b0e",
+      "anchor": [
+        20,
+        40
+      ],
+      "purpose": "corridor / doorway face overlay",
+      "frame_ms": 120,
+      "depth": 2
+    },
+    {
+      "path": "assets/art/fixtures/web_burning_1_d2.png",
+      "size": [
+        40,
+        40
+      ],
+      "opaque_colors": 7,
+      "sha256": "a04176440b4014437a5df4362a9664d38f00eaabbc0e08c267b466a7c0b61c9b",
+      "anchor": [
+        20,
+        40
+      ],
+      "purpose": "corridor / doorway face overlay",
+      "frame_ms": 120,
+      "depth": 2
+    },
+    {
+      "path": "assets/art/fixtures/web_burnt_d2.png",
+      "size": [
+        40,
+        40
+      ],
+      "opaque_colors": 3,
+      "sha256": "d45a4c75f54ba1ad2768368363800e04256d9de2a7d4637c79e6610794c24592",
+      "anchor": [
+        20,
+        40
+      ],
+      "purpose": "corridor / doorway face overlay",
+      "frame_ms": 0,
+      "depth": 2
+    },
+    {
+      "path": "assets/art/fixtures/web_strip_d2.png",
+      "size": [
+        160,
+        40
+      ],
+      "opaque_colors": 9,
+      "sha256": "0ee2e4a3dcb4aec3b446f0a71265dd84f84abca81b4cb3612f5e742176383fa6",
+      "anchor": [
+        20,
+        40
+      ],
+      "purpose": "four STATE frames; only middle two animate",
+      "frame_ms": 0,
+      "depth": 2,
+      "frame_count": 4,
+      "frame_order": [
+        "intact",
+        "burning_0",
+        "burning_1",
+        "burnt"
+      ],
+      "frame_size": [
+        40,
+        40
+      ]
+    },
+    {
+      "path": "assets/art/fixtures/web_intact_d3.png",
+      "size": [
+        24,
+        24
+      ],
+      "opaque_colors": 2,
+      "sha256": "3c496375b8913f6d6d66b9854ece33eba4b018c0acd80118479b48666e50533c",
+      "anchor": [
+        12,
+        24
+      ],
+      "purpose": "corridor / doorway face overlay",
+      "frame_ms": 0,
+      "depth": 3
+    },
+    {
+      "path": "assets/art/fixtures/web_burning_0_d3.png",
+      "size": [
+        24,
+        24
+      ],
+      "opaque_colors": 6,
+      "sha256": "5be05aee407241e89fe660ba54ac6b2270ea85733f1bd9e66006b1542c22fe87",
+      "anchor": [
+        12,
+        24
+      ],
+      "purpose": "corridor / doorway face overlay",
+      "frame_ms": 120,
+      "depth": 3
+    },
+    {
+      "path": "assets/art/fixtures/web_burning_1_d3.png",
+      "size": [
+        24,
+        24
+      ],
+      "opaque_colors": 6,
+      "sha256": "168cceb8d455f27437404cd8852ca82975cee32cc05a5ffc56aa3d69cb9bd402",
+      "anchor": [
+        12,
+        24
+      ],
+      "purpose": "corridor / doorway face overlay",
+      "frame_ms": 120,
+      "depth": 3
+    },
+    {
+      "path": "assets/art/fixtures/web_burnt_d3.png",
+      "size": [
+        24,
+        24
+      ],
+      "opaque_colors": 3,
+      "sha256": "c7af68cbe2da608a4c65198ab3130dbbe7834ea1fdaec9b6002d65b4fc02af36",
+      "anchor": [
+        12,
+        24
+      ],
+      "purpose": "corridor / doorway face overlay",
+      "frame_ms": 0,
+      "depth": 3
+    },
+    {
+      "path": "assets/art/fixtures/web_strip_d3.png",
+      "size": [
+        96,
+        24
+      ],
+      "opaque_colors": 9,
+      "sha256": "0d317e89f4cd5eaa6cad351083667f16951e83b1d4d7f73089f5f8cf73c78ba2",
+      "anchor": [
+        12,
+        24
+      ],
+      "purpose": "four STATE frames; only middle two animate",
+      "frame_ms": 0,
+      "depth": 3,
+      "frame_count": 4,
+      "frame_order": [
+        "intact",
+        "burning_0",
+        "burning_1",
+        "burnt"
+      ],
+      "frame_size": [
+        24,
+        24
+      ]
+    },
+    {
+      "path": "assets/art/fixtures/cord_grate_intact_d1.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 11,
+      "sha256": "af43f88e4c1bd1a9d0313c2c27b7c84e1de5a87f8ee64b3a8deaddf1847edbd9",
+      "anchor": [
+        32,
+        64
+      ],
+      "purpose": "EDGE cord on a front-facing opening",
+      "frame_ms": 0,
+      "depth": 1
+    },
+    {
+      "path": "assets/art/fixtures/cord_grate_left_intact_d1.png",
+      "size": [
+        32,
+        48
+      ],
+      "opaque_colors": 10,
+      "sha256": "6a52a9fe68831636d663f688e41d69452fd3fcc41be40c4a3738f15f7ef533dd",
+      "anchor": [
+        16,
+        24
+      ],
+      "purpose": "wall-centre anchor / side opening EDGE cord",
+      "frame_ms": 0,
+      "depth": 1
+    },
+    {
+      "path": "assets/art/fixtures/cord_grate_right_intact_d1.png",
+      "size": [
+        32,
+        48
+      ],
+      "opaque_colors": 10,
+      "sha256": "3080d36ba41ae3ff7849ddc2cbcf080ffb8862c2d2c75ae50ebde4516d826a97",
+      "anchor": [
+        15,
+        24
+      ],
+      "purpose": "wall-centre anchor / side opening EDGE cord",
+      "frame_ms": 0,
+      "depth": 1
+    },
+    {
+      "path": "assets/art/fixtures/cord_grate_cut_d1.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 11,
+      "sha256": "1633e847d844aceaddc38eef96a970bc7cf4eba981ac1fc391d5a8e407b70983",
+      "anchor": [
+        32,
+        64
+      ],
+      "purpose": "EDGE cord on a front-facing opening",
+      "frame_ms": 0,
+      "depth": 1
+    },
+    {
+      "path": "assets/art/fixtures/cord_grate_left_cut_d1.png",
+      "size": [
+        32,
+        48
+      ],
+      "opaque_colors": 10,
+      "sha256": "a8a314f91150e73174f2e2965dbbab4cb2b75f11c68bf9cfd528d5ef4a32ea90",
+      "anchor": [
+        16,
+        24
+      ],
+      "purpose": "wall-centre anchor / side opening EDGE cord",
+      "frame_ms": 0,
+      "depth": 1
+    },
+    {
+      "path": "assets/art/fixtures/cord_grate_right_cut_d1.png",
+      "size": [
+        32,
+        48
+      ],
+      "opaque_colors": 10,
+      "sha256": "7fe124201490ff89c4c87c34027dd38e81a24d94c4adc98d915704c71574e8b1",
+      "anchor": [
+        15,
+        24
+      ],
+      "purpose": "wall-centre anchor / side opening EDGE cord",
+      "frame_ms": 0,
+      "depth": 1
+    },
+    {
+      "path": "assets/art/fixtures/cord_grate_strip_d1.png",
+      "size": [
+        128,
+        64
+      ],
+      "opaque_colors": 12,
+      "sha256": "603c21c68d35b537b4cb14142cdb7d7a5e4d9f41cf8f9a50b6f8be9f02cfdc36",
+      "anchor": [
+        32,
+        64
+      ],
+      "purpose": "intact / cut state strip",
+      "frame_ms": 0,
+      "depth": 1,
+      "frame_count": 2,
+      "frame_order": [
+        "intact",
+        "cut"
+      ],
+      "frame_size": [
+        64,
+        64
+      ]
+    },
+    {
+      "path": "assets/art/fixtures/cord_grate_intact_d2.png",
+      "size": [
+        40,
+        40
+      ],
+      "opaque_colors": 11,
+      "sha256": "584eb1b79ee9de5dbcd11ced352229befd6adddcd31370e3b09a9ff407ea3767",
+      "anchor": [
+        20,
+        40
+      ],
+      "purpose": "EDGE cord on a front-facing opening",
+      "frame_ms": 0,
+      "depth": 2
+    },
+    {
+      "path": "assets/art/fixtures/cord_grate_left_intact_d2.png",
+      "size": [
+        20,
+        30
+      ],
+      "opaque_colors": 11,
+      "sha256": "5e0339803909581bb995b7a7318d57e9e65b6be60a1e261bbbcb66ff6ef783ea",
+      "anchor": [
+        10,
+        15
+      ],
+      "purpose": "wall-centre anchor / side opening EDGE cord",
+      "frame_ms": 0,
+      "depth": 2
+    },
+    {
+      "path": "assets/art/fixtures/cord_grate_right_intact_d2.png",
+      "size": [
+        20,
+        30
+      ],
+      "opaque_colors": 11,
+      "sha256": "a0644c7d190dc2416a36442e53253214ca1fbf1d006f69092be4c0df9b226204",
+      "anchor": [
+        9,
+        15
+      ],
+      "purpose": "wall-centre anchor / side opening EDGE cord",
+      "frame_ms": 0,
+      "depth": 2
+    },
+    {
+      "path": "assets/art/fixtures/cord_grate_cut_d2.png",
+      "size": [
+        40,
+        40
+      ],
+      "opaque_colors": 11,
+      "sha256": "5c04f40803c06cb9700d2a40c8587b0b579d005fc45d9bec40504f14e613c10c",
+      "anchor": [
+        20,
+        40
+      ],
+      "purpose": "EDGE cord on a front-facing opening",
+      "frame_ms": 0,
+      "depth": 2
+    },
+    {
+      "path": "assets/art/fixtures/cord_grate_left_cut_d2.png",
+      "size": [
+        20,
+        30
+      ],
+      "opaque_colors": 11,
+      "sha256": "83aed3ba4e9845c663af81c49bcb931826176d29a19d983cba2b44a97a003006",
+      "anchor": [
+        10,
+        15
+      ],
+      "purpose": "wall-centre anchor / side opening EDGE cord",
+      "frame_ms": 0,
+      "depth": 2
+    },
+    {
+      "path": "assets/art/fixtures/cord_grate_right_cut_d2.png",
+      "size": [
+        20,
+        30
+      ],
+      "opaque_colors": 11,
+      "sha256": "03a17e45bb53cd058abfcc424a3c3cc76eeead9507a223b4a74acbe0416d7103",
+      "anchor": [
+        9,
+        15
+      ],
+      "purpose": "wall-centre anchor / side opening EDGE cord",
+      "frame_ms": 0,
+      "depth": 2
+    },
+    {
+      "path": "assets/art/fixtures/cord_grate_strip_d2.png",
+      "size": [
+        80,
+        40
+      ],
+      "opaque_colors": 12,
+      "sha256": "4d43f8131612eadb5990ecbfa8b3c51a81b20f488160042d06940516644d991b",
+      "anchor": [
+        20,
+        40
+      ],
+      "purpose": "intact / cut state strip",
+      "frame_ms": 0,
+      "depth": 2,
+      "frame_count": 2,
+      "frame_order": [
+        "intact",
+        "cut"
+      ],
+      "frame_size": [
+        40,
+        40
+      ]
+    },
+    {
+      "path": "assets/art/fixtures/cord_grate_intact_d3.png",
+      "size": [
+        24,
+        24
+      ],
+      "opaque_colors": 10,
+      "sha256": "ba9fb977dddc326183ccd32710abf95f8f6eddac8fb5e466e22361618bee3507",
+      "anchor": [
+        12,
+        24
+      ],
+      "purpose": "EDGE cord on a front-facing opening",
+      "frame_ms": 0,
+      "depth": 3
+    },
+    {
+      "path": "assets/art/fixtures/cord_grate_left_intact_d3.png",
+      "size": [
+        12,
+        18
+      ],
+      "opaque_colors": 9,
+      "sha256": "e07022035f33320d4c50d3e074be187afc9a792348067e32323c8ce80b2ec413",
+      "anchor": [
+        6,
+        9
+      ],
+      "purpose": "wall-centre anchor / side opening EDGE cord",
+      "frame_ms": 0,
+      "depth": 3
+    },
+    {
+      "path": "assets/art/fixtures/cord_grate_right_intact_d3.png",
+      "size": [
+        12,
+        18
+      ],
+      "opaque_colors": 9,
+      "sha256": "4f7630de3578d080531da678c6d4eea035c6ac0fe3ff9a0279a2f8800c3a7abd",
+      "anchor": [
+        5,
+        9
+      ],
+      "purpose": "wall-centre anchor / side opening EDGE cord",
+      "frame_ms": 0,
+      "depth": 3
+    },
+    {
+      "path": "assets/art/fixtures/cord_grate_cut_d3.png",
+      "size": [
+        24,
+        24
+      ],
+      "opaque_colors": 10,
+      "sha256": "c05d2bcf1c162a28663f488b27f6eba817304fbcea35a91119e98da5395b76cc",
+      "anchor": [
+        12,
+        24
+      ],
+      "purpose": "EDGE cord on a front-facing opening",
+      "frame_ms": 0,
+      "depth": 3
+    },
+    {
+      "path": "assets/art/fixtures/cord_grate_left_cut_d3.png",
+      "size": [
+        12,
+        18
+      ],
+      "opaque_colors": 9,
+      "sha256": "5b944bf55fe12ad2b86a01d572abf39913fc331672d46ed3fd1eafbc6f6c41bc",
+      "anchor": [
+        6,
+        9
+      ],
+      "purpose": "wall-centre anchor / side opening EDGE cord",
+      "frame_ms": 0,
+      "depth": 3
+    },
+    {
+      "path": "assets/art/fixtures/cord_grate_right_cut_d3.png",
+      "size": [
+        12,
+        18
+      ],
+      "opaque_colors": 9,
+      "sha256": "32e7fc417fd6c0c21e7ad26a30963c39a07cbf11fa7680e6d1ce3346597da165",
+      "anchor": [
+        5,
+        9
+      ],
+      "purpose": "wall-centre anchor / side opening EDGE cord",
+      "frame_ms": 0,
+      "depth": 3
+    },
+    {
+      "path": "assets/art/fixtures/cord_grate_strip_d3.png",
+      "size": [
+        48,
+        24
+      ],
+      "opaque_colors": 11,
+      "sha256": "3d1adca281f846206bbc2a791666c8751e5c2b9f8340abc4d46bcb6c5cb600ab",
+      "anchor": [
+        12,
+        24
+      ],
+      "purpose": "intact / cut state strip",
+      "frame_ms": 0,
+      "depth": 3,
+      "frame_count": 2,
+      "frame_order": [
+        "intact",
+        "cut"
+      ],
+      "frame_size": [
+        24,
+        24
+      ]
+    },
+    {
+      "path": "assets/art/fixtures/panel_f1_plain_64.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 5,
+      "sha256": "e878a9cc26d8d83eba27c6c23730ebfd572f955d4e15af9ffda9e1fe33a33668",
+      "anchor": [
+        32,
+        64
+      ],
+      "purpose": "opaque 64x64 wall UV variant; not a floor prop",
+      "frame_ms": 0
+    },
+    {
+      "path": "assets/art/fixtures/panel_sigil_plain_64.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 1,
+      "sha256": "ad0004da9dcf64af8fc72bc2640dda93b73be434254e99699b15f3654cf12199",
+      "anchor": [
+        32,
+        64
+      ],
+      "purpose": "transparent wall-face overlay",
+      "frame_ms": 0
+    },
+    {
+      "path": "assets/art/fixtures/panel_f1_revealed_64.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 9,
+      "sha256": "ae04f17e6071951ab9fff294f8c332c646de5cd11087121551fe70cefdf41231",
+      "anchor": [
+        32,
+        64
+      ],
+      "purpose": "opaque 64x64 wall UV variant; not a floor prop",
+      "frame_ms": 0
+    },
+    {
+      "path": "assets/art/fixtures/panel_sigil_revealed_64.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 1,
+      "sha256": "36e954d19d9f08b1b6ac723fea371eb8f45a2803a8d7fe2f92ad7f66c49185f7",
+      "anchor": [
+        32,
+        64
+      ],
+      "purpose": "transparent wall-face overlay",
+      "frame_ms": 0
+    },
+    {
+      "path": "assets/art/fixtures/panel_f2_plain_64.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 4,
+      "sha256": "df3fcb4a9e8d7bf9fdbfbb99caf14f7d9cd6b73ef1e430235575511bc7b3f578",
+      "anchor": [
+        32,
+        64
+      ],
+      "purpose": "opaque 64x64 wall UV variant; not a floor prop",
+      "frame_ms": 0
+    },
+    {
+      "path": "assets/art/fixtures/panel_f2_revealed_64.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 8,
+      "sha256": "74981064367a44429a03721a8d4a824d0b2b4c76954722c457dc70988f22e8cd",
+      "anchor": [
+        32,
+        64
+      ],
+      "purpose": "opaque 64x64 wall UV variant; not a floor prop",
+      "frame_ms": 0
+    },
+    {
+      "path": "assets/art/fixtures/reed_torch_icon_unlit_16.png",
+      "size": [
+        16,
+        16
+      ],
+      "opaque_colors": 7,
+      "sha256": "9bf7bb246c4b0cdf06a6564985df34c9c29a785c05ca91fbe58965da2fbb3e08",
+      "anchor": [
+        8,
+        8
+      ],
+      "purpose": "16x16 inventory icon; centred; no animation",
+      "frame_ms": 0
+    },
+    {
+      "path": "assets/art/fixtures/reed_torch_icon_lit_16.png",
+      "size": [
+        16,
+        16
+      ],
+      "opaque_colors": 9,
+      "sha256": "e19b60aa3dd150727f8109c55f7809d7a8f1d719715e7469370ec5124272d0ef",
+      "anchor": [
+        8,
+        8
+      ],
+      "purpose": "16x16 inventory icon; centred; no animation",
+      "frame_ms": 0
+    },
+    {
+      "path": "assets/art/fixtures/dawn_seal_icon_16.png",
+      "size": [
+        16,
+        16
+      ],
+      "opaque_colors": 6,
+      "sha256": "b72d9d425e6abdcc4f9f3f56fb29036e8d3627f1029fa7918a75216cc5b9c292",
+      "anchor": [
+        8,
+        8
+      ],
+      "purpose": "16x16 essential belt icon; no pedestal",
+      "frame_ms": 0
+    },
+    {
+      "path": "assets/art/fixtures/brazier_cold_d1.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 23,
+      "sha256": "0d83d9175ee089ed69800b67a28072a7f02c4dc11d91c921dd2a4c7cc41b3e4e",
+      "anchor": [
+        32,
+        64
+      ],
+      "purpose": "floor brazier / torch LIGHT target",
+      "frame_ms": 0,
+      "depth": 1
+    },
+    {
+      "path": "assets/art/fixtures/brazier_lit_0_d1.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 23,
+      "sha256": "7fdf45a12d9524f46189ae3575022e2a6a9bc258ed346e61e04ab1047fad6bd6",
+      "anchor": [
+        32,
+        64
+      ],
+      "purpose": "floor brazier / torch LIGHT target",
+      "frame_ms": 180,
+      "depth": 1
+    },
+    {
+      "path": "assets/art/fixtures/brazier_lit_1_d1.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 22,
+      "sha256": "3d5bfd05738fd3b053c4450a2907ee89278b62f1deffcfcc4b71820c378591a9",
+      "anchor": [
+        32,
+        64
+      ],
+      "purpose": "floor brazier / torch LIGHT target",
+      "frame_ms": 180,
+      "depth": 1
+    },
+    {
+      "path": "assets/art/fixtures/brazier_strip_d1.png",
+      "size": [
+        192,
+        64
+      ],
+      "opaque_colors": 23,
+      "sha256": "98caadf00060233dabeaef2b59c01f50f9d974c1e5732c0f5523aa6186dd8ab1",
+      "anchor": [
+        32,
+        64
+      ],
+      "purpose": "state strip; per-frame anchor",
+      "frame_ms": 0,
+      "depth": 1,
+      "frame_count": 3,
+      "frame_order": [
+        "cold",
+        "lit_0",
+        "lit_1"
+      ],
+      "frame_size": [
+        64,
+        64
+      ]
+    },
+    {
+      "path": "assets/art/fixtures/brazier_cold_d2.png",
+      "size": [
+        40,
+        40
+      ],
+      "opaque_colors": 22,
+      "sha256": "1e8e988e9b11a98f76f33cc2dc73c214747a3308c124f016715826120b0a1df9",
+      "anchor": [
+        20,
+        40
+      ],
+      "purpose": "floor brazier / torch LIGHT target",
+      "frame_ms": 0,
+      "depth": 2
+    },
+    {
+      "path": "assets/art/fixtures/brazier_lit_0_d2.png",
+      "size": [
+        40,
+        40
+      ],
+      "opaque_colors": 21,
+      "sha256": "cfb7a7e615651f77addcb743d97cfa8dfd6ad77cf9d027860c422067c75d2223",
+      "anchor": [
+        20,
+        40
+      ],
+      "purpose": "floor brazier / torch LIGHT target",
+      "frame_ms": 180,
+      "depth": 2
+    },
+    {
+      "path": "assets/art/fixtures/brazier_lit_1_d2.png",
+      "size": [
+        40,
+        40
+      ],
+      "opaque_colors": 21,
+      "sha256": "ad2431bd0e8e8c61e5bf4ade1696e46218d1d1d044c8bdc7b0cc3ac0d90fb73b",
+      "anchor": [
+        20,
+        40
+      ],
+      "purpose": "floor brazier / torch LIGHT target",
+      "frame_ms": 180,
+      "depth": 2
+    },
+    {
+      "path": "assets/art/fixtures/brazier_strip_d2.png",
+      "size": [
+        120,
+        40
+      ],
+      "opaque_colors": 23,
+      "sha256": "98d1626f0cc3e13874172ef85b4fb098d4d7615cfec8e18f604d0dd211db1b78",
+      "anchor": [
+        20,
+        40
+      ],
+      "purpose": "state strip; per-frame anchor",
+      "frame_ms": 0,
+      "depth": 2,
+      "frame_count": 3,
+      "frame_order": [
+        "cold",
+        "lit_0",
+        "lit_1"
+      ],
+      "frame_size": [
+        40,
+        40
+      ]
+    },
+    {
+      "path": "assets/art/fixtures/brazier_cold_d3.png",
+      "size": [
+        24,
+        24
+      ],
+      "opaque_colors": 21,
+      "sha256": "862d68cb1429e3d93cf3928bd31a327b9345b2ba31e73b6c1f8523b88f86e2a9",
+      "anchor": [
+        12,
+        24
+      ],
+      "purpose": "floor brazier / torch LIGHT target",
+      "frame_ms": 0,
+      "depth": 3
+    },
+    {
+      "path": "assets/art/fixtures/brazier_lit_0_d3.png",
+      "size": [
+        24,
+        24
+      ],
+      "opaque_colors": 21,
+      "sha256": "f60d000e9f58353b674168ef393504b4842c7a6e89439423040444472d4e51e2",
+      "anchor": [
+        12,
+        24
+      ],
+      "purpose": "floor brazier / torch LIGHT target",
+      "frame_ms": 180,
+      "depth": 3
+    },
+    {
+      "path": "assets/art/fixtures/brazier_lit_1_d3.png",
+      "size": [
+        24,
+        24
+      ],
+      "opaque_colors": 21,
+      "sha256": "0067f00b8d944b12da725395ea338914b2f341ca2a685e4640830c93933c80a4",
+      "anchor": [
+        12,
+        24
+      ],
+      "purpose": "floor brazier / torch LIGHT target",
+      "frame_ms": 180,
+      "depth": 3
+    },
+    {
+      "path": "assets/art/fixtures/brazier_strip_d3.png",
+      "size": [
+        72,
+        24
+      ],
+      "opaque_colors": 22,
+      "sha256": "733ec433ce7bc7d595fa4ba2711339bfe0b5e800fbebe9802c6bbf4d03edff36",
+      "anchor": [
+        12,
+        24
+      ],
+      "purpose": "state strip; per-frame anchor",
+      "frame_ms": 0,
+      "depth": 3,
+      "frame_count": 3,
+      "frame_order": [
+        "cold",
+        "lit_0",
+        "lit_1"
+      ],
+      "frame_size": [
+        24,
+        24
+      ]
+    },
+    {
+      "path": "assets/art/fixtures/reed_torch_unlit_d1.png",
+      "size": [
+        32,
+        48
+      ],
+      "opaque_colors": 20,
+      "sha256": "a9d7f0cd91e77d2032ac9d2aa95f1c9918a652d5dd74052cbf984b38edba67a0",
+      "anchor": [
+        16,
+        48
+      ],
+      "purpose": "floor pickup / reed torch state",
+      "frame_ms": 0,
+      "depth": 1
+    },
+    {
+      "path": "assets/art/fixtures/reed_torch_lit_0_d1.png",
+      "size": [
+        32,
+        48
+      ],
+      "opaque_colors": 18,
+      "sha256": "1c6b89285e88c815a582e2746e98d0992b5f14cf2a3d0e985d461cc5dac63e1f",
+      "anchor": [
+        16,
+        48
+      ],
+      "purpose": "floor pickup / reed torch state",
+      "frame_ms": 180,
+      "depth": 1
+    },
+    {
+      "path": "assets/art/fixtures/reed_torch_lit_1_d1.png",
+      "size": [
+        32,
+        48
+      ],
+      "opaque_colors": 18,
+      "sha256": "84f65cd3f6f251d7b0694ac8ce0372c0d9652e446c7d4b9baa5db6270907a259",
+      "anchor": [
+        16,
+        48
+      ],
+      "purpose": "floor pickup / reed torch state",
+      "frame_ms": 180,
+      "depth": 1
+    },
+    {
+      "path": "assets/art/fixtures/reed_torch_strip_d1.png",
+      "size": [
+        96,
+        48
+      ],
+      "opaque_colors": 20,
+      "sha256": "3b6fd9516c5d2d0135b4b93b6793731e367bd977029e9acb943e8f3d8a7e2722",
+      "anchor": [
+        16,
+        48
+      ],
+      "purpose": "state strip; per-frame anchor",
+      "frame_ms": 0,
+      "depth": 1,
+      "frame_count": 3,
+      "frame_order": [
+        "unlit",
+        "lit_0",
+        "lit_1"
+      ],
+      "frame_size": [
+        32,
+        48
+      ]
+    },
+    {
+      "path": "assets/art/fixtures/reed_torch_unlit_d2.png",
+      "size": [
+        20,
+        30
+      ],
+      "opaque_colors": 16,
+      "sha256": "87149ff1f5a1a144812d3f8b6776b9887ec3cfae1d805eca58a592273fd36ce2",
+      "anchor": [
+        10,
+        30
+      ],
+      "purpose": "floor pickup / reed torch state",
+      "frame_ms": 0,
+      "depth": 2
+    },
+    {
+      "path": "assets/art/fixtures/reed_torch_lit_0_d2.png",
+      "size": [
+        20,
+        30
+      ],
+      "opaque_colors": 15,
+      "sha256": "d59d6cda280db085236dc10a6edcfdac1a69693c2d2819fe8ace0472b5006110",
+      "anchor": [
+        10,
+        30
+      ],
+      "purpose": "floor pickup / reed torch state",
+      "frame_ms": 180,
+      "depth": 2
+    },
+    {
+      "path": "assets/art/fixtures/reed_torch_lit_1_d2.png",
+      "size": [
+        20,
+        30
+      ],
+      "opaque_colors": 15,
+      "sha256": "5073437268d004cea73b12e6e504a2bfc8a9c0946f70323dc8180e2fe130e1bf",
+      "anchor": [
+        10,
+        30
+      ],
+      "purpose": "floor pickup / reed torch state",
+      "frame_ms": 180,
+      "depth": 2
+    },
+    {
+      "path": "assets/art/fixtures/reed_torch_strip_d2.png",
+      "size": [
+        60,
+        30
+      ],
+      "opaque_colors": 16,
+      "sha256": "8a3588353449954e0bfa7089cfcf6c753ea1e88cc7725db96926d06ab1fe6e26",
+      "anchor": [
+        10,
+        30
+      ],
+      "purpose": "state strip; per-frame anchor",
+      "frame_ms": 0,
+      "depth": 2,
+      "frame_count": 3,
+      "frame_order": [
+        "unlit",
+        "lit_0",
+        "lit_1"
+      ],
+      "frame_size": [
+        20,
+        30
+      ]
+    },
+    {
+      "path": "assets/art/fixtures/reed_torch_unlit_d3.png",
+      "size": [
+        12,
+        18
+      ],
+      "opaque_colors": 11,
+      "sha256": "63077c474df7e93bd91427b812155126ebf53bb6c89ba6df6dd8c217679a0381",
+      "anchor": [
+        6,
+        18
+      ],
+      "purpose": "floor pickup / reed torch state",
+      "frame_ms": 0,
+      "depth": 3
+    },
+    {
+      "path": "assets/art/fixtures/reed_torch_lit_0_d3.png",
+      "size": [
+        12,
+        18
+      ],
+      "opaque_colors": 9,
+      "sha256": "28e7c18e9cc897dd22480c823c9eee8ab213eb51a7ac291e404fbe8b0bd2aae9",
+      "anchor": [
+        6,
+        18
+      ],
+      "purpose": "floor pickup / reed torch state",
+      "frame_ms": 180,
+      "depth": 3
+    },
+    {
+      "path": "assets/art/fixtures/reed_torch_lit_1_d3.png",
+      "size": [
+        12,
+        18
+      ],
+      "opaque_colors": 9,
+      "sha256": "e87c9a9e8183f1ed66d8a2953697d1b12ea2ae818d2b3e2a5652f8c6880569c5",
+      "anchor": [
+        6,
+        18
+      ],
+      "purpose": "floor pickup / reed torch state",
+      "frame_ms": 180,
+      "depth": 3
+    },
+    {
+      "path": "assets/art/fixtures/reed_torch_strip_d3.png",
+      "size": [
+        36,
+        18
+      ],
+      "opaque_colors": 12,
+      "sha256": "9b4168bf589f97abb950a44ba6d4f38f83ef626ec6ccb01999673a12530ca1c3",
+      "anchor": [
+        6,
+        18
+      ],
+      "purpose": "state strip; per-frame anchor",
+      "frame_ms": 0,
+      "depth": 3,
+      "frame_count": 3,
+      "frame_order": [
+        "unlit",
+        "lit_0",
+        "lit_1"
+      ],
+      "frame_size": [
+        12,
+        18
+      ]
+    },
+    {
+      "path": "assets/art/fixtures/dawn_seal_pulse_0_d1.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 30,
+      "sha256": "b20da655c9b4d1a908286901cc49dc77c6906b28b0530b8b95442e78a09d576c",
+      "anchor": [
+        32,
+        64
+      ],
+      "purpose": "Dawn Seal objective on floor pedestal",
+      "frame_ms": 700,
+      "depth": 1
+    },
+    {
+      "path": "assets/art/fixtures/dawn_seal_pulse_1_d1.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 31,
+      "sha256": "85e680b8fa59740fb939dfa87baf0f26383f898b7dbce79497ae3cf6a2d2d8a5",
+      "anchor": [
+        32,
+        64
+      ],
+      "purpose": "Dawn Seal objective on floor pedestal",
+      "frame_ms": 700,
+      "depth": 1
+    },
+    {
+      "path": "assets/art/fixtures/dawn_seal_strip_d1.png",
+      "size": [
+        128,
+        64
+      ],
+      "opaque_colors": 31,
+      "sha256": "4168f3cb7ddc4a776b78867d525881e8735fc4c6d0d45274cb8fb417ca2ab49e",
+      "anchor": [
+        32,
+        64
+      ],
+      "purpose": "state strip; per-frame anchor",
+      "frame_ms": 0,
+      "depth": 1,
+      "frame_count": 2,
+      "frame_order": [
+        "pulse_0",
+        "pulse_1"
+      ],
+      "frame_size": [
+        64,
+        64
+      ]
+    },
+    {
+      "path": "assets/art/fixtures/dawn_seal_pulse_0_d2.png",
+      "size": [
+        40,
+        40
+      ],
+      "opaque_colors": 30,
+      "sha256": "c1bb7bb898b4fa713bea61176d0441a2c633bb013172e0d056990d5288d42228",
+      "anchor": [
+        20,
+        40
+      ],
+      "purpose": "Dawn Seal objective on floor pedestal",
+      "frame_ms": 700,
+      "depth": 2
+    },
+    {
+      "path": "assets/art/fixtures/dawn_seal_pulse_1_d2.png",
+      "size": [
+        40,
+        40
+      ],
+      "opaque_colors": 31,
+      "sha256": "072bb84aff898665ad1020de48975cfb2c492f02d3552c7f417573be9b372a3a",
+      "anchor": [
+        20,
+        40
+      ],
+      "purpose": "Dawn Seal objective on floor pedestal",
+      "frame_ms": 700,
+      "depth": 2
+    },
+    {
+      "path": "assets/art/fixtures/dawn_seal_strip_d2.png",
+      "size": [
+        80,
+        40
+      ],
+      "opaque_colors": 31,
+      "sha256": "54c3539678891e1eb396c365ca0b19aba9f786d672b6e772bdef98834f477d34",
+      "anchor": [
+        20,
+        40
+      ],
+      "purpose": "state strip; per-frame anchor",
+      "frame_ms": 0,
+      "depth": 2,
+      "frame_count": 2,
+      "frame_order": [
+        "pulse_0",
+        "pulse_1"
+      ],
+      "frame_size": [
+        40,
+        40
+      ]
+    },
+    {
+      "path": "assets/art/fixtures/dawn_seal_pulse_0_d3.png",
+      "size": [
+        24,
+        24
+      ],
+      "opaque_colors": 29,
+      "sha256": "18bba542a571e3a0dc2647116ec962607f2a4f01f1b86b20fcc0b026a960a28e",
+      "anchor": [
+        12,
+        24
+      ],
+      "purpose": "Dawn Seal objective on floor pedestal",
+      "frame_ms": 700,
+      "depth": 3
+    },
+    {
+      "path": "assets/art/fixtures/dawn_seal_pulse_1_d3.png",
+      "size": [
+        24,
+        24
+      ],
+      "opaque_colors": 30,
+      "sha256": "5f3b7c55f6999e2bc36a2211169bb4ab0c6c122a27e06a2f15c793e0b7a23060",
+      "anchor": [
+        12,
+        24
+      ],
+      "purpose": "Dawn Seal objective on floor pedestal",
+      "frame_ms": 700,
+      "depth": 3
+    },
+    {
+      "path": "assets/art/fixtures/dawn_seal_strip_d3.png",
+      "size": [
+        48,
+        24
+      ],
+      "opaque_colors": 30,
+      "sha256": "52a097d3cb30fb5eeb09f221e727a8ec4a4d9694c35b53698f5e13897e653ed2",
+      "anchor": [
+        12,
+        24
+      ],
+      "purpose": "state strip; per-frame anchor",
+      "frame_ms": 0,
+      "depth": 3,
+      "frame_count": 2,
+      "frame_order": [
+        "pulse_0",
+        "pulse_1"
+      ],
+      "frame_size": [
+        24,
+        24
+      ]
+    }
+  ]
+}

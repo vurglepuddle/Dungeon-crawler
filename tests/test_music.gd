@@ -1,7 +1,7 @@
 extends SceneTree
 ## Focused score / streaming / controls regression. No scene or save is loaded.
 
-const Music = preload("res://scripts/audio/music.gd")
+const MusicScript = preload("res://scripts/audio/music.gd")
 var checks: int = 0
 var failures: int = 0
 
@@ -18,10 +18,10 @@ func _initialize() -> void:
 
 
 func run() -> void:
-	var music = Music.new()
+	var music = MusicScript.new()
 	root.add_child(music)
 	check(not music.is_playing(), "Autoload stays silent until requested")
-	for track: String in ["title", "floor", "win"]:
+	for track: String in ["title", "floor", "win", "floor2", "death"]:
 		var score: Dictionary = music._load_score(track)
 		check(not score.is_empty(), "%s original note data validates" % track)
 		music._prepare_score(track)
@@ -41,6 +41,9 @@ func run() -> void:
 	check(not music.is_playing() and music._suspended, "Android pause stops audio")
 	music._notification(Node.NOTIFICATION_APPLICATION_RESUMED)
 	check(music.is_playing() and not music._suspended, "Android resume restarts selected phrase")
+	music.stop()
+	check(music.play_floor(2) and music._current_track == "floor2", "Deeper-floor hook selects the variation")
+	check(music.play_floor(1) and music._current_track == "floor", "Returning upstairs restores floor-one theme")
 	music.stop()
 	music.set_enabled(false); music.set_enabled(true)
 	check(not music.is_playing() and music._current_track.is_empty(), "Explicit stop survives toggle")
@@ -74,6 +77,25 @@ func run() -> void:
 	check(finite and stereo and peak > 0.01 and peak < 0.4, "Full floor PCM is finite, centred stereo and safely below clipping")
 	check(absf(looped[length-1].x-looped[length].x) < 0.002, "Loop seam has no waveform jump")
 	check(music._voices.size() <= 4, "Sparse score has bounded active voices")
+
+	music._prepare_score("floor2")
+	check(music._length_samples > length, "Floor-two phrase is slower than the first-floor phrase")
+	var lower_peak: float = 0.0
+	var lower_finite: bool = true
+	var lower_looped: PackedVector2Array = music._mix_frames(music._length_samples+2205)
+	for frame: Vector2 in lower_looped:
+		lower_peak = maxf(lower_peak,absf(frame.x))
+		lower_finite = lower_finite and is_finite(frame.x) and frame.x == frame.y
+	check(music._loops_completed == 1 and music._sample_cursor == 2205, "Floor-two loop wraps at its actual sample boundary")
+	check(lower_finite and lower_peak > 0.01 and lower_peak < 0.4, "Lower floor PCM is finite and below clipping")
+	music._prepare_score("death")
+	music._mix_frames(music._length_samples+512)
+	check(not music._loop and music._score_done and music._voices.is_empty(), "Death cue ends once with no lingering voices")
+	var dead_tail: PackedVector2Array = music._mix_frames(256)
+	var death_silent: bool = true
+	for frame: Vector2 in dead_tail:
+		death_silent = death_silent and frame == Vector2.ZERO
+	check(death_silent, "Lamp-out cue finishes in exact silence")
 
 	music.play("win")
 	var playback_watch: WeakRef = weakref(music._playback)
