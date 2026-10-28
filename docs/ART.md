@@ -658,3 +658,80 @@ owner's original. `build_architecture_readability.py` rebuilds all runtime art
 and main reviews offline, without Godot. `verify_architecture_readability.py`
 checks 54 runtime PNGs, eight review sheets, input/output hashes, palette and
 alpha, exact nearest sampling, original anchors and material seams.
+
+## Front-facing lever and stone-cut stair marks
+
+This correction adds **54 new PNGs** in `assets/art/fixtures/`: 18 lever assets
+and 36 stair variants. Old runtime art, builders and original paintings remain
+unchanged. All new art uses the shared 31 opaque inks, binary alpha and nearest
+sampling. There are two discrete lever states, swapped immediately on use.
+
+### Lever wall faces and optional front sprites
+
+The newly painted lever faces directly forward: square iron plate, rust-brown
+inset, four bolts, central pivot and brass shaft/knob. The handle points straight
+up or straight down, matching the old side art's materials. The plate rim, bolts
+and hinge stay fixed when the state changes. The wall behind it is the exact
+accepted floor-one or darker wet floor-two painted masonry.
+
+| Runtime path pattern | Size | Anchor / placement |
+| --- | --- | --- |
+| `lever_wall_f<1|2>_<up|down>_64.png` | 64x64 | Wall UV (0,0); hinge (32,27) |
+| `lever_wall_f<1|2>_<up|down>_40.png` | 40x40 | Wall UV (0,0); hinge (20,17) |
+| `lever_wall_f<1|2>_<up|down>_24.png` | 24x24 | Wall UV (0,0); hinge (12,10) |
+| `lever_front_<up|down>_d1.png` | 32x40 | Transparent hardware; hinge (16,22) |
+| `lever_front_<up|down>_d2.png` | 20x26 | Transparent hardware; hinge (10,14) |
+| `lever_front_<up|down>_d3.png` | 12x16 | Transparent hardware; hinge (6,8) |
+
+For a wall-material implementation, map the canonical 64x64 wall face onto the
+latch's fixed physical wall and let the renderer project it at any angle. The
+hinge UV gives almost exactly the current `HORIZON - 6/depth` hand height.
+For the existing sprite implementation, the optional transparent front files
+have the **same canvas sizes and hinge anchors as the old side sprites**. Select
+front versus side from the fixed wall normal relative to camera facing; continue
+using the existing `assets/art/fx/lever_<left|right>_<up|down>_d<1|2|3>.png` for
+side-on views. Draw one representation per latch. Keep used/down levers visible
+after their active interaction target is removed. No renderer code is changed
+in this art batch.
+
+### Carved V and ^ keystones
+
+Use `architecture_v3_f<1|2>_stairs_<down|up>_<64|40|24>.png` and matching
+`architecture_v3_f<1|2>_stairs_<down|up>_<left|right>_d<1|2|3>.png`.
+All dimensions, UV origins, thresholds and projected side anchors are identical
+to the v2 stair assets listed above. The dead lift keeps its v2 assets and the
+working lift keeps its original assets.
+
+Both old flat signs are removed from a clean copy of the keystone. A small
+single **V** or **^** is recessed into the stone face, clear of the adjacent arch
+joints. The cut uses dark top/left shadows, a grimed grey cavity and a muted
+stone-colour lower bevel lit from below/front. No cream/white paint is used in
+the cut. A few source speckles on the keystone face are softened so they do not
+compete with the incision. The groove reads at 64/40px and may recede at 24px;
+the steps remain the primary distant cue.
+
+Only the 17x12 repair patch **x=24..40, y=5..16** changes in the canonical stair
+faces. Every other pixel, including the owner's down painting, tread geometry,
+lights, damp stone and seam ring, matches the accepted v2 runtime face exactly.
+The owner's source file itself is never written.
+
+### Review and rebuilding
+
+All six review sheets have paired native PNGs and exact 4x enlargement:
+
+| Review | Path |
+| --- | --- |
+| Both lever states/floors at 64/40/24 | `art_src/fixtures/lever_front/lever_front_contact_4x.png` |
+| New front hardware beside original side variants | `art_src/fixtures/lever_front/lever_hardware_contact_4x.png` |
+| Front near, front middle distance and side wall | `art_src/fixtures/lever_front/lever_corridor_f1_4x.png`, `lever_corridor_f2_4x.png` in the same folder |
+| Both carved stair marks/floors at all three sizes | `art_src/fixtures/keystone_carved/keystone_contact_4x.png` |
+| Enlarged old/new keystone comparison | `art_src/fixtures/keystone_carved/keystone_detail_4x.png` |
+
+The corridor views are offline 148x150 ray-cast mock-ups with lamp shading,
+not Godot captures. The front lever source and exact built-in imagegen prompt
+are preserved under `art_src/fixtures/lever_front/`. Keystone cuts are native
+editable pixel geometry in the new `build_wall_controls.py`, which rebuilds the
+whole correction offline. `verify_wall_controls.py` checks all 54 runtime PNGs,
+six review enlargements, hashes, shared palette/alpha, original anchors, exact
+nearest sampling, fixed lever hinge/rim and unchanged pixels outside the stair
+repair patch. Actual turn-to-face behavior remains A/owner integration review.

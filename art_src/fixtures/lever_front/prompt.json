@@ -1,0 +1,8 @@
+{
+  "tool": "Built-in imagegen",
+  "references": [
+    "art_src/fx/lever_contact_4x.png: hardware identity",
+    "art_src/fixtures/architecture/sources/painted_f1_base.png: painted material style"
+  ],
+  "prompt": "Use case: stylized-concept. UNDERCROFT first-person 1993 dungeon crawler, paint a front-facing wall lever TWO-STATE sprite sheet on genuine TRANSPARENT background. Reference1 is the existing SIDE lever art, for identity/material colours only. Reference2 is dungeon stone STYLE only (do not paint wall/background). Two EQUAL square cells, side by side, transparent gutter. EXACT ORTHOGRAPHIC FRONT ELEVATION: iron mounting plate is a symmetrical upright rectangle with four bolts, vertical edges vertical, top/bottom edges horizontal, all bolts same size, NO perspective, NO angled plate, NO side view. One simple aged slate-grey iron backplate with dark rusty brown inset, a square brass/iron pivot housing in centre, ochre brass lever shaft with a small rounded brass knob, same design as side reference. LEFT: handle extends VERTICALLY UP from centre hinge; RIGHT: the SAME handle literally flipped VERTICALLY DOWN about same hinge. Both states exactly same backplate, scale and registration. Broad restrained gouache-painted worn surfaces, same slate iron, dark brown/rust, muted warm ochre shaft and gold knob, sparse ivory edge glint. Hand-sized practical fixture, no ornate embellishments or switch labels. Will reduce to 32x40 hardware, mounted on 64x64 masonry. All hardware fits cell with transparent margins. No letters/text/UI, no hand/person, no wall, no painted checkerboard, no cast shadow outside plate. Original readable and tactile rather than shiny 3D."
+}
