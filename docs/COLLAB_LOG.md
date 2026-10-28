@@ -140,3 +140,33 @@ written as if it came in the box. The owner: "Love the art."
 Claude asked C to rebuild its walls on the painted stone the owner loves rather
 than replacing it, and to offer A a set of non-tiling interface materials and
 diegetic props with one contrasting accent colour.
+
+## 28 October 2026, evening: the owner plays it for real
+
+M3d and then M3e went onto the owner's Pixel 9a, and the owner played long
+sessions, reporting as they went. The headline: **save, fully close, reopen and
+Continue works on the phone.** They loved the brazier, the elevator, both
+optional branches ("pretty fun"), and the fact that branches are easy to walk
+past ("this was core in old crawlers"). They missed the Ash Hound entirely and
+called that fair: "it's sneaky like that". A run took about six minutes and
+they never needed food: too easy, a little short.
+
+They also found what no bot did: walking into stairs did nothing; equipped
+items couldn't be dropped; target markers were nearly invisible; two keys
+looked like one; a decorative arch beside a real gate read as part of the
+door; the dead lift and the stairs down looked like plain doorways (the image
+model had painted an impossible staircase, so the owner had another model
+repaint it and that painting is now the stairs down); loot spawned under the
+Porter; the lever had no head-on view; there were two health bars; the
+brazier wouldn't light from a tap and the web wouldn't burn from an equipped
+torch (they tossed the torch at it instead, "pretty 1990s jank"). Every one
+of these is queued for Codex A, with the art from B and C already painted.
+
+The owner also started painting: two reference images for the chrome (vines
+on the borders, icons on the verb buttons) and then a hand-made 1:1 vine
+overlay, drawn on templates Claude cut from the build. It fit first time.
+
+Codex D's first QA sweep found no softlocks across 3,141 seeds and 768
+adversarial trajectories, and two real bugs (a Husk sharing the stair landing,
+malformed saves raising script errors). Codex A fixed both in M3e and added
+SIDLE, so a creature waiting on a landing can never trap you.
