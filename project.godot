@@ -26,6 +26,12 @@ window/stretch/aspect="keep_width"
 window/stretch/scale_mode="integer"
 window/handheld/orientation=1
 
+[gui]
+
+theme/default_font_antialiasing=0
+theme/default_font_hinting=0
+theme/default_font_subpixel_positioning=0
+
 [input_devices]
 
 pointing/emulate_touch_from_mouse=true

@@ -39,11 +39,14 @@ static func save_run(sim,ui: Dictionary={},path: String=DEFAULT_PATH,new_run: bo
 	if not path.begins_with("user://") or path.contains("..") or not path.ends_with(".json"): return false
 	var payload: Dictionary=sim.save_state()
 	if not Codec.validate(payload): return false
-	var directory:=ProjectSettings.globalize_path(path).get_base_dir()
-	if DirAccess.make_dir_recursive_absolute(directory)!=OK: return false
+	# Stay on user:// paths: globalize_path() + *_absolute() silently failed on Android.
+	var directory:=path.get_base_dir()
+	if not DirAccess.dir_exists_absolute(directory) and DirAccess.make_dir_recursive_absolute(directory)!=OK: return _fail(path,"make dir")
+	var dir:=DirAccess.open(directory)
+	if dir==null: return _fail(path,"open dir")
 	var text:=JSON.stringify({"save_version":2,"payload":payload,"ui":ui,
 		"sha256":Codec.canonical(payload).sha256_text()})
-	if not _write(path+".tmp",text) or _read(path+".tmp").is_empty(): return false
+	if not _write(path+".tmp",text) or _read(path+".tmp").is_empty(): return _fail(path,"write tmp")
 	var previous:=_read(path)
 	var mirror: bool=new_run or payload.status!="playing"
 	if mirror:
@@ -51,5 +54,9 @@ static func save_run(sim,ui: Dictionary={},path: String=DEFAULT_PATH,new_run: bo
 	elif not previous.is_empty():
 		var old_text:=FileAccess.get_file_as_string(path)
 		if not _write(path+".bak",old_text) or _read(path+".bak").is_empty(): return false
-	if FileAccess.file_exists(path) and DirAccess.remove_absolute(ProjectSettings.globalize_path(path))!=OK: return false
-	return DirAccess.rename_absolute(ProjectSettings.globalize_path(path+".tmp"),ProjectSettings.globalize_path(path))==OK
+	if dir.file_exists(path.get_file()) and dir.remove(path.get_file())!=OK: return _fail(path,"remove old")
+	return dir.rename(path.get_file()+".tmp",path.get_file())==OK or _fail(path,"rename")
+
+static func _fail(path: String,step: String) -> bool:
+	push_error("Save failed at %s: %s" % [step,path])
+	return false
