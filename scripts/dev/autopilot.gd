@@ -19,6 +19,7 @@ extends Node
 ##   pause           send APPLICATION_PAUSED (Android backgrounding) to the tree
 ##   quit
 ## Blank lines and lines starting with # are ignored.
+## Pilot runs are muted (master bus) unless --with-sound is passed.
 
 var _lines: PackedStringArray = []
 var _pc := 0
@@ -44,6 +45,11 @@ func _ready() -> void:
 	_lines = FileAccess.get_file_as_string(pilot).split("\n")
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	Engine.set_meta("pilot", true)
+	# Pilots run in real windows on the owner's desktop: keep them silent unless
+	# a run asks for sound. Muting the master bus leaves the game's own MUSIC/SFX
+	# switches (and pilots that test them) untouched.
+	if not OS.get_cmdline_user_args().has("--with-sound"):
+		AudioServer.set_bus_mute(0, true)
 	_deadline = Time.get_ticks_msec() + (_deadline if _deadline > 0 else 120000)
 	print("[pilot] running ", pilot)
 
