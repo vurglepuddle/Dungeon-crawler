@@ -1,0 +1,23 @@
+{
+  "tool": "built-in image_gen.imagegen",
+  "mode": "edit",
+  "sources": {
+    "moth_fold": {
+      "reference": "art_src/screens/sources/splash.png",
+      "prompt": "Edit this exact original Lost Moth emblem for the second frame of a very restrained 1993 game publisher animation. Keep the central old key body, head ring, antennae and its position, size, colors, dark blue background and painted texture exactly unchanged. Only alter both wings: a gentle inward fold, about 20 percent narrower than the original spread; tips just slightly higher, eye marks and original identity preserved. Same canvas, camera and center registration. The wings must still be broad and clearly a moth, not edge-on. No lettering, frame, new objects, lighting effects, or extra animation frames. One image, one folded wing state."
+    },
+    "title_low": {
+      "reference": "art_src/screens/sources/title.png",
+      "prompt": "Edit this exact original UNDERCROFT painted title illustration for a subtle lamp flicker animation. Exact same composition, camera, Finder silhouette, lost key, stone blocks, stairs, arches and chains. Change ONLY the light cast by the small Finder's hand lamp: make the flame slightly shorter and dimmer, the pool of warm light on the nearby lower stair treads and floor about 15 percent dimmer, and the warm reflections on the lower nearby columns slightly dimmer. Leave the top half and especially quiet dark upper title area unchanged. This is a subtle light-only second animation frame, no scenery or anatomy movement. Keep the original early 1990s VGA painted texture. No lettering, no frame, no new objects. One image."
+    },
+    "win_light": {
+      "reference": "art_src/screens/sources/win.png",
+      "prompt": "Edit this exact original UNDERCROFT victory vignette for the final held frame of a slow dawn animation. Exact same camera, landscape, cloud shapes, abbey, hand and fingers, octagonal Dawn Seal silhouette and sun emblem geometry. ONLY change illumination: dawn on the horizon and reflecting off mist is softly warmer and brighter, the Seal's existing gold sun emblem glows gently like a small reflected dawn, its rays readable and teal center still teal. Restrained hopeful warm light, not a magical white explosion; all dark stone detail remains. Do not move any feature or add anything. Painted early 1990s game picture, same landscape aspect ratio. No text, borders or additional frames. One image."
+    },
+    "death_dark": {
+      "reference": "art_src/screens/sources/death.png",
+      "prompt": "Edit this exact original UNDERCROFT death vignette into the final held frame after the little lamp has gone out. Preserve EXACT lantern silhouette, glass panes, metal braces, key and floor seams, camera and every stone. Remove the yellow flame entirely: inside the lantern is cold dark glass with a tiny black wick, no ember, no orange light. Remove the warm orange pool and its gold reflections from flagstones and nearby lantern metal; use the original cold blue-grey ambient light so the lantern and nearby lost key are still readable. Keep the thin smoke ghost very faint. Change only light and the flame, no geometry or object positions. The picture should be dark and poignant, not black, no gore. Same landscape format and original painted texture, one image, no text."
+    }
+  },
+  "derivation": "Saved edited paintings are references for registered native-frame construction; original plates are never overwritten. Geometry and publisher lettering are protected. Deterministic builder and per-set timings are beside this file."
+}

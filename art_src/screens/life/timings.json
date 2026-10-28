@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "clock": "elapsed presentation milliseconds; reset on entry",
+  "zero_duration": "Only the last once_hold frame may use 0: hold indefinitely.",
+  "sequences": {
+    "splash": {
+      "canvas": [
+        154,
+        150
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "frames": [
+        "res://assets/art/screens/splash_flutter_0.png",
+        "res://assets/art/screens/splash_flutter_1.png"
+      ],
+      "durations_ms": [
+        900,
+        300
+      ],
+      "playback": "loop",
+      "hold_frame": null
+    },
+    "title": {
+      "canvas": [
+        154,
+        150
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "frames": [
+        "res://assets/art/screens/title_flicker_0.png",
+        "res://assets/art/screens/title_flicker_1.png",
+        "res://assets/art/screens/title_flicker_2.png"
+      ],
+      "durations_ms": [
+        680,
+        160,
+        240
+      ],
+      "playback": "loop",
+      "hold_frame": null
+    },
+    "win": {
+      "canvas": [
+        128,
+        80
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "frames": [
+        "res://assets/art/screens/win_dawn_0.png",
+        "res://assets/art/screens/win_dawn_1.png",
+        "res://assets/art/screens/win_dawn_2.png"
+      ],
+      "durations_ms": [
+        500,
+        650,
+        0
+      ],
+      "playback": "once_hold",
+      "hold_frame": 2
+    },
+    "death": {
+      "canvas": [
+        128,
+        80
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "frames": [
+        "res://assets/art/screens/death_gutter_0.png",
+        "res://assets/art/screens/death_gutter_1.png",
+        "res://assets/art/screens/death_gutter_2.png"
+      ],
+      "durations_ms": [
+        400,
+        700,
+        0
+      ],
+      "playback": "once_hold",
+      "hold_frame": 2
+    }
+  }
+}

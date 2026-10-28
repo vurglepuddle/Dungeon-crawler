@@ -1,6 +1,6 @@
 # Codex C: dressing, possessions, portraits and atmosphere
 
-This pack is prepared for Codex A to wire in. It does not change the renderer,
+Codex C supplies this art kit for Codex A's integration. It does not change the renderer,
 simulation, main scene, UI chrome, catalog, or original PNGs. Painted source
 PNGs, exact built-in imagegen prompts, code drawings, deterministic reduction,
 and contact sheets live in the corresponding `art_src/` folders.
@@ -13,10 +13,21 @@ materials in `assets/art/ui_offer/` are an offer for A, not an implemented skin.
 The next room batch adds decorative `assets/art/props/`, `room_fN_*` surface
 faces, a painted title logotype and an optional launcher set. Placement,
 collision and launcher selection remain A/Claude's integration decisions.
+The latest addition is eleven registered screen-animation frames. See
+**Small life in the story plates** below for exact playback and hold timings.
+`POLISH.md` records the A/B/C features now visible in A's current source.
 
 ## Rebuild and inspect
 
 From the repository root, with Python and Pillow installed:
+
+```powershell
+python -B art_src/screens/life/build_life.py
+python -B art_src/env/verify_polish.py
+```
+
+These build/check only the new screen frames and verify the combined kit.
+For the preceding room/identity batch:
 
 ```powershell
 python -B art_src/props/build_room_pack.py
@@ -55,6 +66,8 @@ and contact sheets still use the shared indexed palette and binary alpha.
 | Primary Finder states | 3 portraits, each 32 × 32 | `art_src/portrait/v2/contact_sheet_4x.png` |
 | Original Finder states, alternates | 3 portraits, each 32 × 32 | `art_src/portrait/contact_sheet_4x.png` |
 | Story plates | title/splash 154 × 150; endings 128 × 80 | `art_src/screens/contact_sheet_4x.png` |
+| Screen animation, combined | Eleven full plates; 2–3 frames per set | `art_src/screens/life/contact_sheet_4x.png` |
+| Screen animation, each set | Same native sizes as the original plates | `art_src/screens/life/{splash,title,win,death}/contact_sheet_4x.png` |
 | UI material offer | Ten assets, sizes below | `art_src/ui_offer/contact_sheet_4x.png` |
 | Whole-screen UI mockup, game + map | Two 154 × 342 screens | `art_src/ui_offer/mockup_screen_4x.png` |
 | Room props, dry/wet overview | Seventeen near samples | `art_src/props/contact_sheet_4x.png` |
@@ -299,6 +312,80 @@ Nearest filtering, no mipmaps or lossy compression. Reference runtime paths
 only, and exclude the `art_src/` tree in the Android export preset so saved
 paintings and contact sheets do not inflate the APK.
 
+## Small life in the story plates
+
+Eleven **new** runtime PNGs beside the original plates; all fully opaque,
+31-colour palette, top-left anchor `(0,0)`, no added border or crop. The four
+original plates are unchanged. Frame 0 of every set has exactly the original
+plate's indexed pixels, so it is also the static fallback.
+
+| Set / filenames under `assets/art/screens/` | Canvas | Frame durations, in order | Playback |
+| --- | --- | --- | --- |
+| `splash_flutter_0.png`, `splash_flutter_1.png` | 154 × 150 | 900 / 300 ms | Open / gently folded; loop every 1200 ms |
+| `title_flicker_0.png` through `_2.png` | 154 × 150 | 680 / 160 / 240 ms | Steady / low / warm; loop every 1080 ms |
+| `win_dawn_0.png` through `_2.png` | 128 × 80 | 500 / 650 / indefinite | First light / Seal pulse / brighter dawn; hold frame 2 from 1150 ms |
+| `death_gutter_0.png` through `_2.png` | 128 × 80 | 400 / 700 / indefinite | Flame / two-pixel ember / cold glass; hold frame 2 from 1100 ms |
+
+The publisher's original key body, antennae and `LOST MOTH / 1993` lettering
+are copied pixel-for-pixel between poses. Only the painted wings fold. Title
+lighting varies on nearby steps, floor and lower columns, leaving all pixels
+in the top 55 rows untouched. The logotype remains a separate static overlay
+at `(7,6)` within the title illustration; it is **not baked into runtime
+frames**. The title contact sheets/GIF add that same overlay for review.
+There is no moving mote: the lamp provides enough motion on its own.
+
+Win keeps the hand, abbey and Seal geometry fixed: the gold pulse rises in
+frame 1 and settles in frame 2 while dawn continues to brighten. Death removes
+the flame and warm floor reflections, retaining cold stone detail and the
+nearby key. The dark frame is a legible picture, not a full-screen blackout.
+
+**Codex A:** preload/cache the small PNG arrays with the existing art cache.
+Swap the plate texture only at a frame boundary using elapsed **menu
+presentation** time, reset when entering that screen. The table uses
+half-open intervals: win 0 is `[0,500)`, 1 is `[500,1150)`, 2 is everything
+afterwards; death changes at 400 and 1100 ms. Loop only splash/title; never
+wrap the result sequences back to their first frame. Pause the clock while
+the app is suspended. Keep current plate rects, nearest filtering and the
+separate logo/subtitle/text layers. At this source checkpoint those plate
+rects are `(0,20,154,150)` for splash/title and `(13,62,128,80)` for results;
+the animation needs no layout change if A moves those rects later.
+
+Keep splash skip and existing menu/retry buttons usable throughout. The
+current 1400 ms splash display already allows one complete 1200 ms flutter;
+do not extend it to show more cycles. End holds last until the existing user
+action; they add no input lock, simulation turns, save writes or RNG calls.
+Static frame 0 remains available if animation is disabled. Import only
+runtime PNGs into gameplay; `art_src/` stays excluded from Android exports.
+
+Offline recipe and review files:
+
+- `art_src/screens/life/build_life.py`: rebuild all eleven frames, five
+  native/4x sheet pairs and four tiny three-or-fewer-frame GIF previews.
+- `art_src/screens/life/timings.json`: machine-readable copy of the table,
+  resource paths, canvas sizes and anchors. For `once_hold`, its final
+  duration `0` means **indefinite**, not a zero-length frame. This is an
+  authoring record; A can copy its values into presentation code.
+- `art_src/screens/life/{splash,title,win,death}/preview_4x.gif`: timing
+  previews. Splash/title loop; win/death play once and retain their last
+  frame. Reload a result GIF to replay it. Their last duration is 2400 ms
+  for viewers; the game holds it indefinitely.
+- `art_src/screens/life/prompts.json` and `sources/`: four exact built-in
+  imagegen edit prompts and preserved edited paintings. Wings and cold
+  glass come from those paintings; lighting fields are projected onto the
+  original native pixel clusters to avoid scenery shimmer. Only numeric
+  light fields are blurred; visible image sampling and enlargement remain
+  nearest-neighbour. The ember uses two native palette pixels.
+- `art_src/screens/life/verify_life.py`: registration, distinct frame counts,
+  opaque palette, original plate preservation, lamp/glow direction, dawn
+  growth, GIF timing, exact 4x scale and loop/hold boundary checks.
+
+The preservation receipt captures the 155 earlier C runtime PNGs unchanged.
+It also retains an informational snapshot of Claude's three launcher PNGs;
+those changed concurrently during this batch and are outside C ownership.
+Neither verifier restores or overwrites launcher choices. The older room
+receipt is retained, with its launcher entries now treated as historical
+rather than a lock on Claude's accepted changes.
+
 ## Painted logotype, subtitle and launcher option
 
 Runtime files under `assets/art/screens/`:
@@ -509,21 +596,6 @@ The box manual is `docs/MANUAL.md`. Further optional work and cost estimates
 are in `docs/POLISH.md`. This pack needs integration and Pixel 9a visual review;
 the asset checks and focused FX test do not claim phone performance acceptance.
 
-## Painted-wall/UI revision receipt, 28 October 2026
-
-- Added **37 runtime PNGs**: 24 painted-substrate walls, two stronger injured
-  portraits plus their strip, and ten UI offer assets. Both packs now verify
-  together: **87 runtime PNGs**, shared 31 opaque inks, binary alpha, dimensions,
-  exact 4x sheets, source/output hashes and mixed wall-edge checks.
-- The primary abbey base retains **3968/4096 original pixels**; its complete
-  62 × 62 interior is exact. Preservation hashes confirm the 34 recorded
-  existing wall/portrait PNGs are byte-for-byte unchanged. Earlier pack assets
-  also continue to match their recorded manifests.
-- Two revision builds produced identical SHA-256 hashes for **80 PNG/JSON
-  files**. The whole-screen mockup's protected dungeon, controls, compass and
-  fine portrait regions match the saved screenshot at native sampling.
-- This revision used **no Godot runs**. It has not been integrated or tested
-  on the phone. No files were staged or committed by Codex C.
 
 ## Room/identity batch receipt, 28 October 2026
 
@@ -538,3 +610,23 @@ the asset checks and focused FX test do not claim phone performance acceptance.
   All **90 recorded earlier C/launcher PNGs** remain byte-for-byte unchanged.
 - No Godot runs, gameplay/placement changes, launcher-setting changes,
   staging or commits were performed in this batch.
+
+## Screen-animation batch receipt, 28 October 2026
+
+- Added **11 runtime PNGs**: two moth poses and three frames each for title,
+  win and death. Combined C verification passes at **166 runtime PNGs**,
+  shared 31 opaque inks, binary alpha and exact 4x sheets.
+- Five sheet pairs and four animated GIF previews accompany the saved edit
+  paintings, prompts, deterministic builder and machine-readable timings.
+  Rebuilding produced identical SHA-256 hashes for **33 PNG/JSON/GIF files**;
+  `art_src/screens/life/rebuild_receipt.json` records the comparison.
+- Focused checks verify frame counts, distinct states, fixed publisher/key
+  pixels and title area, dim/bright lamp order, a Seal pulse over growing dawn,
+  fading death light, preview durations, loop boundaries and indefinite end
+  holds. All **155 earlier C runtime PNGs** remain byte-for-byte unchanged.
+- Claude's launcher PNGs changed concurrently; their historical hashes were
+  retained and their files left alone. Checks now respect that ownership.
+- `POLISH.md` distinguishes A/B work already wired, animation art ready for
+  A, remaining original picks and five small new suggestions with costs.
+- No Godot runs, game/UI edits, staging or commits. The new animation playback
+  still needs A's integration and phone review.
