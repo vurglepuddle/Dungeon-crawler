@@ -1,0 +1,224 @@
+{
+  "palette": "art_src/spike/palette.gpl",
+  "colours_union": 19,
+  "files": [
+    {
+      "path": "art_src/env/room_faces/contact_sheet_4x.png",
+      "size": [
+        2944,
+        936
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        2944,
+        936
+      ],
+      "colours": 19,
+      "sha256": "bbbdccb280619d4448753e566d5a81cacc54375b572353e2fecf4ff167fd7933"
+    },
+    {
+      "path": "art_src/env/room_faces/contact_sheet_native.png",
+      "size": [
+        736,
+        234
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        736,
+        234
+      ],
+      "colours": 19,
+      "sha256": "7dd6e51c33483706b1bdc51b4c2a23aec16a569d3cb8745f73f126b47e6e6ba5"
+    },
+    {
+      "path": "assets/art/env/room_f1_ceiling_boss.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 8,
+      "sha256": "c52f7d73eae6d5c0011e752fa5407834dc0d43d2cb32c0ee7dcbc5de223edc47"
+    },
+    {
+      "path": "assets/art/env/room_f1_ceiling_chain.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 7,
+      "sha256": "0d3a4a12e8dba8aba329d03502c5ec63c1feab1cd5985f811e9e5bf7c0c8ab5e"
+    },
+    {
+      "path": "assets/art/env/room_f1_ceiling_roots.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 8,
+      "sha256": "a58cb40dae7c920f09d2079f26eba940409209517631198855f14089f33e7f49"
+    },
+    {
+      "path": "assets/art/env/room_f1_floor_compass.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 11,
+      "sha256": "a65fbe6808116a5c8ba6ba3872f9f266af87c707310ffde6fd7a76bcde2549f1"
+    },
+    {
+      "path": "assets/art/env/room_f1_floor_cracked.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 6,
+      "sha256": "e877458fbc42fe6dee1c7b1c3fa97109dff661e37de63457e29add882747b842"
+    },
+    {
+      "path": "assets/art/env/room_f1_floor_drain.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 8,
+      "sha256": "712736d68b591843afa3a13b4e1b6f2e66d5355139662973ab15b87d4c525dfc"
+    },
+    {
+      "path": "assets/art/env/room_f2_ceiling_boss.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 8,
+      "sha256": "627350c04fa006fcea07d2c0a4461bb75572232432b0fb78fa672ac249339b91"
+    },
+    {
+      "path": "assets/art/env/room_f2_ceiling_chain.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 8,
+      "sha256": "4c409aaf460ae340de8d92e7161ab8228a0f22d1f465c40c3481bcbeb02df7ee"
+    },
+    {
+      "path": "assets/art/env/room_f2_ceiling_roots.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 7,
+      "sha256": "05042e2d3dbd1f4a453764d820a7ff740aee35f413347299ec252ca97232e860"
+    },
+    {
+      "path": "assets/art/env/room_f2_floor_compass.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 11,
+      "sha256": "72cad6b69b75fc3d13a698b0808097474e892a3ca4af300c1894ca5bec86fd6e"
+    },
+    {
+      "path": "assets/art/env/room_f2_floor_cracked.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 7,
+      "sha256": "fe14b40223473d369621bdbdec0e781360cdfdfaa9555c3522c968abe24d296b"
+    },
+    {
+      "path": "assets/art/env/room_f2_floor_drain.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 9,
+      "sha256": "eea468f7de519603bf4e0c14de99b5ecdc6d0bf7fe7d0b2bb7f7c71ebff2218e"
+    }
+  ],
+  "sources": [],
+  "world_uv_origin": "top-left; U +world X, V +world Y",
+  "size": [
+    64,
+    64
+  ],
+  "compass_north": "Negative world Y; do not randomly rotate this tile.",
+  "plane_only": "Roots and chain lie on the ceiling plane. No hanging geometry or collision is supplied."
+}

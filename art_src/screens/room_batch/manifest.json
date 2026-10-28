@@ -1,0 +1,207 @@
+{
+  "palette": "art_src/spike/palette.gpl",
+  "colours_union": 32,
+  "files": [
+    {
+      "path": "art_src/screens/room_batch/adaptive_composite_432.png",
+      "size": [
+        432,
+        432
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        432,
+        432
+      ],
+      "colours": 31,
+      "sha256": "c72d2f64882e220f879c6d98a83116442ee016bdd142997775ba5404e1345a2a"
+    },
+    {
+      "path": "art_src/screens/room_batch/contact_sheet_4x.png",
+      "size": [
+        1856,
+        1752
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        1856,
+        1752
+      ],
+      "colours": 31,
+      "sha256": "c9778385741ba8a03ea8bf2ea507573fd69af67f7c572baa8b3268b9c4490f3f"
+    },
+    {
+      "path": "art_src/screens/room_batch/contact_sheet_native.png",
+      "size": [
+        464,
+        438
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        464,
+        438
+      ],
+      "colours": 31,
+      "sha256": "cc1b66a2765a894726eec4bcd4e1769b61c3dbd2e68e7f6acdf209a34f3e3fc9"
+    },
+    {
+      "path": "art_src/screens/room_batch/title_mockup_4x.png",
+      "size": [
+        616,
+        736
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        616,
+        736
+      ],
+      "colours": 31,
+      "sha256": "f2aa9f1846fdcc4a402dc03ef19cec20a9f6b3836c91464b1fe84f2a3589edbe"
+    },
+    {
+      "path": "art_src/screens/room_batch/title_mockup_native.png",
+      "size": [
+        154,
+        184
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        154,
+        184
+      ],
+      "colours": 31,
+      "sha256": "b59e07b398caa48b508b53680510632248c4544db56390608b1fd5167cead16c"
+    },
+    {
+      "path": "assets/art/screens/icon_offer_192.png",
+      "size": [
+        192,
+        192
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        192,
+        192
+      ],
+      "colours": 31,
+      "sha256": "2527e0b0b98e8935b22bfe15bf269ae8d545df7b2e8c02013a87b8575bce2f49"
+    },
+    {
+      "path": "assets/art/screens/icon_offer_background_432.png",
+      "size": [
+        432,
+        432
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        432,
+        432
+      ],
+      "colours": 5,
+      "sha256": "bcbea16dad7394c837a561bd3d7ccd6a51e123a63a5755f6b954accae649725f"
+    },
+    {
+      "path": "assets/art/screens/icon_offer_foreground_432.png",
+      "size": [
+        432,
+        432
+      ],
+      "opaque_bounds": [
+        116,
+        132,
+        316,
+        300
+      ],
+      "colours": 31,
+      "sha256": "84011a6ed38c27d630ebd9434ef52f22973512df4c952bad8f30cb78e5410f9e"
+    },
+    {
+      "path": "assets/art/screens/logotype_140.png",
+      "size": [
+        140,
+        40
+      ],
+      "opaque_bounds": [
+        1,
+        8,
+        139,
+        32
+      ],
+      "colours": 26,
+      "sha256": "f88620c04e2ab214e9d51e32a4597b5df2bba6526e95e4a176ba005f5a8caa62"
+    },
+    {
+      "path": "assets/art/screens/subtitle_plate_140.png",
+      "size": [
+        140,
+        20
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        140,
+        20
+      ],
+      "colours": 23,
+      "sha256": "4935f2675efa71cfd543724c9107909992f3d7027a41c661309f3ac2dddf1743"
+    }
+  ],
+  "sources": [
+    {
+      "path": "art_src/screens/room_batch/sources/icon_arch_seal.png",
+      "sha256": "7f29a28238831e56cbafd1962515cb88debb7fd84f4ae181e5d4aba1720e2381"
+    },
+    {
+      "path": "art_src/screens/room_batch/sources/icon_arch_seal_compact.png",
+      "sha256": "0f6a2568c6a23f4d4c017b051c3bf46a33b698e992a2b220782b17318e8c1447"
+    },
+    {
+      "path": "art_src/screens/room_batch/sources/logotype.png",
+      "sha256": "1a6cbf14097ab45ad067ad94f2e1cda0996079d708180dbba1a18e8ecda925cc"
+    }
+  ],
+  "logotype": {
+    "text": "UNDERCROFT",
+    "size": [
+      140,
+      40
+    ],
+    "anchor": [
+      70,
+      20
+    ]
+  },
+  "subtitle": {
+    "text": "THE FINDER'S DESCENT",
+    "font": "VETKA",
+    "font_size": 16,
+    "size": [
+      140,
+      20
+    ]
+  },
+  "adaptive": {
+    "layers": [
+      432,
+      432
+    ],
+    "foreground_alpha_radius_px": 127.35972675850086,
+    "safe_circle_centre": [
+      216,
+      216
+    ],
+    "safe_circle_radius_px": 132,
+    "background_opaque": true,
+    "art_is_fitted_not_circle_clipped": true,
+    "reference": "https://developer.android.com/develop/ui/compose/system/icon_design_adaptive"
+  },
+  "scope": "Offer only. assets/icon/ and Android/project export settings are unchanged.",
+  "preview": "Mask outlines appear on review sheets only; exported layers are full square canvases."
+}

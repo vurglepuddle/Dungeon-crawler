@@ -1,0 +1,11 @@
+{
+  "tool": "No new generation; native pixel dressing on existing editable surface pipeline",
+  "sources": [
+    "assets/art/stone_wall.png",
+    "assets/art/env/f1_floor.png",
+    "assets/art/env/f2_floor.png",
+    "assets/art/env/f1_ceiling.png",
+    "assets/art/env/f2_ceiling.png"
+  ],
+  "brief": "Interest over cleanliness: painted-stone scuffs, drain, cracked flag, worn brass compass inlay, overhead roots, chain and cracked vault boss. Same31opaqueinks; outer2px surface-family ring preserved. Plane textures only."
+}

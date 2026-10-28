@@ -1,0 +1,20 @@
+{
+  "tool": "built-in image_gen.imagegen",
+  "sources": {
+    "logotype": {
+      "path": "sources/logotype.png",
+      "prompt": "Use case: logo-brand. Asset type: painted title logotype for UNDERCROFT, original forgotten1993 first-person VGA dungeon crawler. Exact text, one line, uppercase: UNDERCROFT. Spell U N D E R C R O F T, ten unmistakable letters. Large broad carved limestone serif letters with worn bronze bevels, chipped corners, deep slate shadow in the carving and just a few muted verdigris traces. Sturdy slightly irregular hand-painted1993 computer-game box logo, aged and lived-in; no modern clean sans font, no illegible decorative ligatures, no blackletter. A tiny old bell detail may sit in the dark counter of the O but must not obscure it. Final image is reduced to about140px wide40px high; all ten letters must remain readable on a phone at7x. Short descenders, simple letterforms, no stray ornaments beyond the word. Complete entire word fully inside a wide horizontal composition with small transparent margin. No other text, subtitle, slogan, border, panel, scene, drop-shadow backdrop or watermark. Actual transparent background."
+    },
+    "icon_original": {
+      "path": "sources/icon_arch_seal.png",
+      "reference": "art_src/fixtures/sources/dawn_seal_pedestal.png",
+      "prompt": "Use case: logo-brand. Asset type: original painted launcher icon FOREGROUND offer for UNDERCROFT, a forgotten1993 VGA dungeon crawler. Attached image is a supporting design reference for the Dawn Seal: aged gold rim, muted teal enamel and a simple luminous rising-dawn arch in its centre. Make a compact front-facing worn stone archway with that small glowing Dawn Seal suspended in the dark opening, no pedestal. Strong simple silhouette, arch and warm gold/teal Seal instantly readable at64 pixels. Old grey limestone, worn bronze, quiet teal, warm parchment-gold centre; chunky hand-painted computer-game box-art character, not photorealistic or glossy. Keep the overall mark a compact upright oval, narrow at the foot, with stone jambs gently tapering inward at the bottom, so the entire artwork can fit a central round safe zone. Entire complete arch and Seal visible, compact with generous transparent margin on all sides. No square tile, disc background, baked halo outside the mark, outer cast shadow, lettering, border, characters, monsters, UI or watermark. ACTUAL transparent background. The icon background is supplied separately."
+    },
+    "icon_compact": {
+      "path": "sources/icon_arch_seal_compact.png",
+      "edit_reference": "sources/icon_arch_seal.png",
+      "prompt": "Use case: precise-object-edit. Edit target: attached painted Dawn Seal stone arch launcher mark. Keep the same carved stone arch, aged bronze and teal medallion, luminous dawn arch symbol, colour palette and front view, actual transparency. Make the whole mark much more COMPACT and round-compatible: shorten the lower stone jambs drastically, remove the tall empty space under the medallion, enlarge and lower the medallion so it fills almost the whole opening, let the two short stone feet tuck inward beside the medallion's lower rim. Overall silhouette should be a near-round dome rather than a tall doorway. Keep the arch complete, the central seal highly readable, no cut-off edges, no outer circular border, no background, no added letters, halo or cast shadow. It must fit fully inside a central round safe zone while remaining large at64px. Preserve the painterly1993 VGA hand-made look."
+    }
+  },
+  "derivation": "Nearest fixed-palette reduction. Logotype140x40; subtitle uses existing painted brass material with native VETKA16. Foreground is fitted as a complete silhouette inside a circle, never circle-clipped; background is opaque repainted approved stone. Adaptive layers4x from108px layout; legacy icon3x from64px."
+}

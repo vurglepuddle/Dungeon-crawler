@@ -10,17 +10,22 @@ and contact sheets live in the corresponding `art_src/` folders.
 existing unchanged `finder_fine.png` for fine. The first `f1_` / `f2_` wall
 sets and original reactive portraits remain intact as alternates. The UI
 materials in `assets/art/ui_offer/` are an offer for A, not an implemented skin.
+The next room batch adds decorative `assets/art/props/`, `room_fN_*` surface
+faces, a painted title logotype and an optional launcher set. Placement,
+collision and launcher selection remain A/Claude's integration decisions.
 
 ## Rebuild and inspect
 
 From the repository root, with Python and Pillow installed:
 
 ```powershell
-python -B art_src/env/painted_v2/build_revision.py
+python -B art_src/props/build_room_pack.py
 ```
 
-This rebuilds only the primary painted walls, stronger portraits and UI offer,
-then verifies all packs, including preservation hashes for the old PNGs.
+This rebuilds only room props, the new floor/ceiling faces, logotype and icon
+offer, then verifies all C packs and the earlier PNG preservation receipts.
+`python -B art_src/env/painted_v2/build_revision.py` remains the previous
+painted-wall/portrait/UI-offer revision builder; it does not rebuild this batch.
 `art_src/env/build_all.py` remains the first pack's original builder. Individual
 revision builders are `env/painted_v2/build_painted.py`,
 `portrait/v2/build_states.py`, and `ui_offer/build_offer.py` under `art_src/`.
@@ -52,6 +57,11 @@ and contact sheets still use the shared indexed palette and binary alpha.
 | Story plates | title/splash 154 × 150; endings 128 × 80 | `art_src/screens/contact_sheet_4x.png` |
 | UI material offer | Ten assets, sizes below | `art_src/ui_offer/contact_sheet_4x.png` |
 | Whole-screen UI mockup, game + map | Two 154 × 342 screens | `art_src/ui_offer/mockup_screen_4x.png` |
+| Room props, dry/wet overview | Seventeen near samples | `art_src/props/contact_sheet_4x.png` |
+| Each room prop at depths 1–3 | Registered full canvases | `art_src/props/{kind}/contact_sheet_4x.png` |
+| Overhead / underfoot interest | Twelve 64 × 64 faces | `art_src/env/room_faces/contact_sheet_4x.png` |
+| Painted logotype / launcher offer | Sizes below; layer thumbnails labelled | `art_src/screens/room_batch/contact_sheet_4x.png` |
+| Title illustration with logo/subtitle | 154 × 184 proposal | `art_src/screens/room_batch/title_mockup_4x.png` |
 
 ## Wall faces: texture selection only
 
@@ -125,7 +135,109 @@ These are orthographic materials, **not** perspective pictures. Map one tile
 to one world cell, with the same orientation on every cell. The ceiling has
 restrained stone ribs; floor two has pooled teal water, with no gameplay hazard.
 
-## Loose possessions
+## Decorative room props: depths 1–3
+
+Runtime root: `assets/art/props/`. These are original painted sources reduced
+to the same palette and B's registration conventions in `docs/ART.md`.
+All nine subjects have their own `art_src/props/{kind}/contact_sheet_4x.png`;
+the overview sheet shows all dry/wet near variants together. Original source
+PNGs and exact built-in imagegen prompts are retained in `art_src/props/`.
+
+| Kind | Subject | Floor-one / floor-two variants |
+| --- | --- | --- |
+| `rubble` | Fallen carved masonry and mortar debris | Dust / wet stone and damp stains |
+| `bone_heap` | Low bones with a clearly visible skull | Dry ivory / dark wet undersides |
+| `skeleton` | Slumped remains with hanging skull and cloth scraps | Dust / damp cloth and bone shadows |
+| `pots` | Two broken earthenware pots and large shards | Dust / dark glaze and wet lower edges |
+| `pillar` | Complete worn stone pillar, base through capital | Dust / cold damp stone |
+| `statue` | Toppled hooded stone saint, broken shoulder and open hand | Dust / wet folds and mossy shadows |
+| `candles` | Three spent stubs in accumulated floor wax | Dust / damp dirt; both remain unlit |
+| `crate` | Closed lost-property crate, rope handle, faded label | Dust / soaked wood and worn label |
+| `puddle` | Very shallow irregular water decal | Floor two only |
+
+Static paths are `f{1,2}_{kind}_d{1,2,3}.png`, except puddle, which is only
+`f2_puddle_dN.png`. There are **51 runtime prop PNGs**. Labels are fading paint
+marks, not tiny readable text. Crates are not loot containers, bones are not
+the FOOD item, and these candles are not LIGHT sources. No action, fixture,
+glint, item card, actor, state machine, or collision is supplied by the art.
+
+| Prop type | d1 canvas / anchor | d2 canvas / anchor | d3 canvas / anchor |
+| --- | --- | --- | --- |
+| Eight standing/low clutter families | 64 × 64 / `(32,64)` | 40 × 40 / `(20,40)` | 24 × 24 / `(12,24)` |
+| Puddle decal | 64 × 20 / `(32,20)` | 40 × 12 / `(20,12)` | 24 × 8 / `(12,8)` |
+
+Anchors are the bottom-centre **boundary**, exactly as in B's brazier and Seal.
+Select d1 below 1.5 depth, d2 below 2.5, otherwise d3 inside the existing view
+range. Each source is fitted once to its d1 canvas, reserving true scale:
+rubble and bones stay low, the skeleton sits higher, the pillar fills the
+height. Every d2/d3 is an exact nearest resize of the **whole d1 canvas**.
+Wet variants preserve alpha and silhouette at every depth. Never crop/refit
+each opaque bound or enlarge low clutter to fill a square.
+
+**Codex A:** cache the three textures for a chosen floor/kind, then append
+render-only props to the depth-sorted sprite pass using the existing projected
+floor coordinate minus the registered anchor. Keep wall/actor occlusion. Do
+not route them through reachable-items, fixture actions, or interaction cues.
+The puddle keeps its shallow height; the old minimum 22/24px sprite-height
+clamp would make it stand upright. Its transparent regions expose the floor.
+
+Placement remains yours: use deterministic empty-cell/corner candidates and
+exclude interactables, loose loot, gates, plates, stairs, landings, exits,
+encounter lanes and their needed sightlines. Do not stack clutter over an
+item or create a new hidden-item puzzle. A skeleton leaning against a wall
+needs a wall-adjacent placement, not the middle of an open room.
+
+The **pillar is the special case**: its native image spans the full canvas
+height. If it is used as a cell-blocking architectural pillar, generation,
+collision and visibility must agree. Project its top and base to ceiling and
+floor (approximately `FOCAL / depth` total height), scaling the sampled canvas
+with nearest filtering. Do not rely on the PNG to block movement, place a
+blocking-looking pillar over a traversable cell, or hide a wall face behind it
+without supporting transparent-column occlusion. A owns that integration and
+any route/solvability checks; a non-walkable wall recess is a simpler art use.
+
+The prop manifest gives every runtime path, canvas, anchor, kind, floor, depth,
+source crop and SHA-256. Rebuild just this set with:
+
+```powershell
+python -B art_src/props/build_props.py
+```
+
+## Floor and ceiling faces with room interest
+
+Runtime root: `assets/art/env/`; all twelve new images are **64 × 64 opaque
+world-UV textures**, not perspective billboards or room backgrounds:
+
+- `room_f{1,2}_floor_drain.png`
+- `room_f{1,2}_floor_cracked.png`
+- `room_f{1,2}_floor_compass.png`
+- `room_f{1,2}_ceiling_roots.png`
+- `room_f{1,2}_ceiling_chain.png`
+- `room_f{1,2}_ceiling_boss.png`
+
+The substrate has scuffed detail sampled from the approved painted stone;
+existing flagstone joints/ribs remain. Floor two adds cold dampness and worn
+metal. Each image retains the complete outer two-pixel ring of its existing
+`fN_floor.png` or `fN_ceiling.png` family, so mixed variants join correctly.
+The compass rose has a small arrow toward **negative world Y (north)**.
+Do not rotate that texture randomly or imply that it points toward the Seal.
+
+**Codex A:** in `_build_surfaces()`, select a cached image once per world cell
+and plane using a stable presentation hash, sample existing `(u,v)`, and apply
+the current lamp/ceiling factor. Include material/floor selection in the cache
+key. Use ordinary faces most often and reserve compass/boss/drains as landmarks.
+Roots and chain lie on the sampled ceiling plane, with painted relief. They
+do not create physically dangling geometry, animation, or collision; an actual
+hanging chain would need a separate ceiling-anchored projection in the view.
+The drain is floor detail, not a pit or collectible. No mechanic is implied.
+
+Sources/recipe and sheet: `art_src/env/room_faces/`. Rebuild this set with:
+
+```powershell
+python -B art_src/env/room_faces/build_faces.py
+```
+
+## Loose possessions (first pack)
 
 Runtime: `assets/art/icons/{kind}.png`; each is exactly 16 × 16, transparent,
 centered by its opaque bounds within half a pixel, with a one-pixel dark
@@ -169,8 +281,8 @@ scratch/tint overlay is redundant over these portraits and may be removed.
 
 Runtime: `assets/art/screens/title.png`, `splash.png`, `win.png`, `death.png`.
 All opaque, top-left origin. Title and splash are 154 × 150. The title shows
-the Finder entering a lamplit undercroft and has no baked lettering: draw
-UNDERCROFT separately in VETKA. Splash contains an original moth-and-key mark
+the Finder entering a lamplit undercroft and has no baked lettering: overlay
+the new painted logotype, or use a separate VETKA label. Splash contains an original moth-and-key mark
 with real native VETKA `LOST MOTH` and `1993`, added after reduction so the
 lettering is crisp. No UI frames or panels are painted into these assets.
 
@@ -186,6 +298,67 @@ no mandatory startup delay. Select win/death only from committed run status.
 Nearest filtering, no mipmaps or lossy compression. Reference runtime paths
 only, and exclude the `art_src/` tree in the Android export preset so saved
 paintings and contact sheets do not inflate the APK.
+
+## Painted logotype, subtitle and launcher option
+
+Runtime files under `assets/art/screens/`:
+
+| Filename | Size | Anchor / use |
+| --- | --- | --- |
+| `logotype_140.png` | 140 × 40, transparent | Centre `(70,20)`; painted UNDERCROFT heading |
+| `subtitle_plate_140.png` | 140 × 20, transparent corners | Centre `(70,10)`; THE FINDER'S DESCENT |
+| `icon_offer_192.png` | 192 × 192, opaque | Optional legacy/application icon only |
+| `icon_offer_foreground_432.png` | 432 × 432, transparent | Adaptive foreground, centred at `(216,216)` |
+| `icon_offer_background_432.png` | 432 × 432, opaque | Adaptive full-bleed background |
+
+The logotype is a new painted source: all ten letters remain explicit, with
+carved stone, worn bronze edges, small verdigris traces and a bell in the O.
+It is reduced with nearest sampling and the shared palette, not synthesized
+from the body font. It occupies a full 140 × 40 canvas with transparent padding;
+keep its native aspect ratio and centre it at x77 on the 154px title screen.
+The subtitle uses the existing painted brass material and actual VETKA 16,
+rendered without antialiasing. No runtime font change is required.
+
+`art_src/screens/room_batch/title_mockup_4x.png` shows the unchanged 154 × 150
+title painting with the logo at `(7,6)` and subtitle below at `(7,158)`, on a
+154 × 184 proposal canvas. This is an offline art layout, not an implemented
+menu. A must keep CONTINUE/NEW RUN/audio controls readable and within the full
+screen; the logo can overlay the existing title picture rather than consume
+another 40px row. Existing `title.png`, `splash.png`, `win.png`, and `death.png`
+are untouched.
+
+The icon option puts the Dawn Seal inside a compact worn arch, with the same
+gold/teal/bright-dawn language as B's Seal. Both original and compact source
+paintings remain saved. A complete silhouette is fitted into the safe region;
+no artwork is circularly cut to manufacture safety. Only review previews show
+round/squircle masks or a gold guide circle. Foreground/background exports are
+full square layers, with no baked outer disc, mask, outer shadow or lettering.
+
+The 432px layers use a 108px authoring layout enlarged exactly 4x. The entire
+foreground is checked inside a **264px-diameter circle**, centre `(216,216)`,
+equivalent to the central 66dp zone in the 108dp layer. The background has no
+transparent pixels and fills the complete layer. This follows the foreground,
+background and safe-zone guidance in the [official Android adaptive-icon
+documentation](https://developer.android.com/develop/ui/compose/system/icon_design_adaptive).
+Our foreground's measured maximum alpha radius is about 127.36px, below the
+132px limit. The standalone icon is exactly a 3x nearest enlargement of its
+64px composition; adaptive pixels come from a 4x enlargement. All output still
+uses the shared 31 opaque inks and binary alpha.
+
+**Claude/A:** choosing these is a separate integration step. If accepted, point
+the existing app-icon and Android adaptive foreground/background settings at
+the respective offered files; keep their 192/432 sizes. `assets/icon/`, project
+settings and export presets have not been touched. This is not a launcher or
+phone acceptance test, and no existing launcher art has been replaced.
+
+The source paintings, exact built-in imagegen prompts, manifest, 4x contact
+sheet, round/squircle/safe-zone previews and rebuild live in
+`art_src/screens/room_batch/`. The original taller icon exploration is kept as
+source history; the compact version builds the exported offer.
+
+```powershell
+python -B art_src/screens/room_batch/build_identity.py
+```
 
 ## UI material offer: non-tiling surfaces and small props
 
@@ -336,19 +509,6 @@ The box manual is `docs/MANUAL.md`. Further optional work and cost estimates
 are in `docs/POLISH.md`. This pack needs integration and Pixel 9a visual review;
 the asset checks and focused FX test do not claim phone performance acceptance.
 
-## First-pack verification receipt, 28 October 2026
-
-- Godot 4.3 `--check-only` accepted `ambience.gd`.
-- The focused FX run exited 0: **172 checks, 0 failures**. Godot printed a host
-  root-certificate-store error before the result; the offline test itself passed.
-- Offline validation checked **50 runtime PNGs**, the shared **31 opaque inks**,
-  binary alpha, declared dimensions, mixed wall boundaries, source/output
-  hashes, exact 4x nearest sheets, and every JSON display line at <=21 chars ×2.
-- Two consecutive complete builds produced identical SHA-256 hashes for
-  **83 PNG/JSON files**, including sources, sheets, prompts and manifests.
-- No full game run, Android export, phone performance test, or integration
-  acceptance was performed. No files were staged or committed by Codex C.
-
 ## Painted-wall/UI revision receipt, 28 October 2026
 
 - Added **37 runtime PNGs**: 24 painted-substrate walls, two stronger injured
@@ -364,3 +524,17 @@ the asset checks and focused FX test do not claim phone performance acceptance.
   fine portrait regions match the saved screenshot at native sampling.
 - This revision used **no Godot runs**. It has not been integrated or tested
   on the phone. No files were staged or committed by Codex C.
+
+## Room/identity batch receipt, 28 October 2026
+
+- Added **68 runtime PNGs**: 51 props, twelve floor/ceiling faces, logotype,
+  subtitle and three icon files. All C packs now verify together at **155
+  runtime PNGs**, with shared palette, binary alpha, registered depth resizes,
+  source/output hashes, exact 4x sheets and shared surface boundaries.
+- Adaptive foreground fits completely within the central radius 132px;
+  background and legacy icon are opaque. The source silhouette is fitted,
+  not cut by a circular mask. Phone/launcher acceptance remains outstanding.
+- Rebuilding produced identical SHA-256 hashes for **114 PNG/JSON files**.
+  All **90 recorded earlier C/launcher PNGs** remain byte-for-byte unchanged.
+- No Godot runs, gameplay/placement changes, launcher-setting changes,
+  staging or commits were performed in this batch.
