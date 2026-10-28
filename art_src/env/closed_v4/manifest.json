@@ -1,0 +1,520 @@
+{
+  "palette": "art_src/spike/palette.gpl",
+  "colours_union": 27,
+  "files": [
+    {
+      "path": "art_src/env/closed_v4/contact_sheet_4x.png",
+      "size": [
+        1376,
+        968
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        1376,
+        968
+      ],
+      "colours": 27,
+      "sha256": "a24918491a3d3416ab4f09aea1968c0979c55e01aa4a7068400e87032dc74332"
+    },
+    {
+      "path": "art_src/env/closed_v4/contact_sheet_native.png",
+      "size": [
+        344,
+        242
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        344,
+        242
+      ],
+      "colours": 27,
+      "sha256": "66a332b44cc80aac99f7eb297456fe6f26799971a7d7653232d3bd2eaea1b825"
+    },
+    {
+      "path": "art_src/env/closed_v4/floor1_repeat_4x.png",
+      "size": [
+        768,
+        512
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        768,
+        512
+      ],
+      "colours": 23,
+      "sha256": "b421d8bdef134621b791bce8f0fa3a351e4f61c552a811a2e0e689ae46d97906"
+    },
+    {
+      "path": "art_src/env/closed_v4/floor1_repeat_native.png",
+      "size": [
+        192,
+        128
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        192,
+        128
+      ],
+      "colours": 23,
+      "sha256": "84ba8cfb3d74bb85b6ab288441ccdab3be0ef6c7070c386ff4e6da8a8cda1e29"
+    },
+    {
+      "path": "art_src/env/closed_v4/floor2_repeat_4x.png",
+      "size": [
+        768,
+        512
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        768,
+        512
+      ],
+      "colours": 21,
+      "sha256": "abce73e38afb8b3490eb2f367780e1ca7621972c15153412cff2719791f16867"
+    },
+    {
+      "path": "art_src/env/closed_v4/floor2_repeat_native.png",
+      "size": [
+        192,
+        128
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        192,
+        128
+      ],
+      "colours": 21,
+      "sha256": "1c7a031f94ba5790616a394e545c59ac4b6fdb79ed7777e53fc80df8ceb59f32"
+    },
+    {
+      "path": "assets/art/env/painted_f1_arch_blocked.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 16,
+      "sha256": "255a766196c72014991ce6f3b373913eae44aeff6a24736d1629396f0f78e6d9"
+    },
+    {
+      "path": "assets/art/env/painted_f1_door_barricaded.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 21,
+      "sha256": "96785bb601098bbfbdd0cb4a72739c756fba33f6498351880f00a53b5317d985"
+    },
+    {
+      "path": "assets/art/env/painted_f2_arch_blocked.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 18,
+      "sha256": "b68b34e4a7603a68b604e0b9078ad31c5f681fc1713666e1f8fce484ced651d4"
+    },
+    {
+      "path": "assets/art/env/painted_f2_door_barricaded.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 21,
+      "sha256": "c0121b40ac63b6377d3f38cd25f2c3de554ea5b597659acf58960cbf06318774"
+    }
+  ],
+  "sources": [
+    {
+      "path": "art_src/env/closed_v4/sources/arch.png",
+      "sha256": "6c176b53f54781c6158e56616a1eb04a79683c58159a9572fbb7113c6a33d80b"
+    },
+    {
+      "path": "art_src/env/closed_v4/sources/corridor_reference.png",
+      "sha256": "1270b9e9a96d4de013f8cd09b4559160298656e35d7ea8d9ec22693d3ef2910a"
+    },
+    {
+      "path": "art_src/env/closed_v4/sources/door.png",
+      "sha256": "d8f11be3de9e6d65ca3cb6d2218cccbf37e7cde37e00354bac3a53f77d69651b"
+    }
+  ],
+  "registrations": [
+    {
+      "path": "assets/art/env/painted_f1_arch_blocked.png",
+      "floor": 1,
+      "kind": "arch_blocked",
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "base": "assets/art/env/painted_f1_plain_0.png",
+      "interactive": false,
+      "collision_supplied": false,
+      "patch_polygon": [
+        [
+          8,
+          61
+        ],
+        [
+          8,
+          25
+        ],
+        [
+          10,
+          19
+        ],
+        [
+          15,
+          13
+        ],
+        [
+          22,
+          8
+        ],
+        [
+          29,
+          5
+        ],
+        [
+          36,
+          5
+        ],
+        [
+          43,
+          8
+        ],
+        [
+          49,
+          13
+        ],
+        [
+          54,
+          19
+        ],
+        [
+          56,
+          25
+        ],
+        [
+          56,
+          61
+        ]
+      ]
+    },
+    {
+      "path": "assets/art/env/painted_f2_arch_blocked.png",
+      "floor": 2,
+      "kind": "arch_blocked",
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "base": "assets/art/env/painted_f2_plain_0.png",
+      "interactive": false,
+      "collision_supplied": false,
+      "patch_polygon": [
+        [
+          8,
+          61
+        ],
+        [
+          8,
+          25
+        ],
+        [
+          10,
+          19
+        ],
+        [
+          15,
+          13
+        ],
+        [
+          22,
+          8
+        ],
+        [
+          29,
+          5
+        ],
+        [
+          36,
+          5
+        ],
+        [
+          43,
+          8
+        ],
+        [
+          49,
+          13
+        ],
+        [
+          54,
+          19
+        ],
+        [
+          56,
+          25
+        ],
+        [
+          56,
+          61
+        ]
+      ]
+    },
+    {
+      "path": "assets/art/env/painted_f1_door_barricaded.png",
+      "floor": 1,
+      "kind": "door_barricaded",
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "base": "assets/art/env/painted_f1_plain_0.png",
+      "interactive": false,
+      "collision_supplied": false,
+      "patch_polygon": [
+        [
+          8,
+          61
+        ],
+        [
+          8,
+          25
+        ],
+        [
+          10,
+          19
+        ],
+        [
+          15,
+          13
+        ],
+        [
+          22,
+          8
+        ],
+        [
+          29,
+          5
+        ],
+        [
+          36,
+          5
+        ],
+        [
+          43,
+          8
+        ],
+        [
+          49,
+          13
+        ],
+        [
+          54,
+          19
+        ],
+        [
+          56,
+          25
+        ],
+        [
+          56,
+          61
+        ]
+      ]
+    },
+    {
+      "path": "assets/art/env/painted_f2_door_barricaded.png",
+      "floor": 2,
+      "kind": "door_barricaded",
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "base": "assets/art/env/painted_f2_plain_0.png",
+      "interactive": false,
+      "collision_supplied": false,
+      "patch_polygon": [
+        [
+          8,
+          61
+        ],
+        [
+          8,
+          25
+        ],
+        [
+          10,
+          19
+        ],
+        [
+          15,
+          13
+        ],
+        [
+          22,
+          8
+        ],
+        [
+          29,
+          5
+        ],
+        [
+          36,
+          5
+        ],
+        [
+          43,
+          8
+        ],
+        [
+          49,
+          13
+        ],
+        [
+          54,
+          19
+        ],
+        [
+          56,
+          25
+        ],
+        [
+          56,
+          61
+        ]
+      ]
+    }
+  ],
+  "preview_files": [
+    {
+      "path": "art_src/env/closed_v4/mockup_f1_arch_blocked_side_native.png",
+      "sha256": "c1f6e09da9cbf937564e1e02bfcfb8769af46f11c240e851294094b83132381b"
+    },
+    {
+      "path": "art_src/env/closed_v4/mockup_f1_arch_blocked_side_4x.png",
+      "sha256": "fa06f23bb9628cacf80b54c809075ef68ae4c8b26716b7e3b5338d5b74ae9a07"
+    },
+    {
+      "path": "art_src/env/closed_v4/mockup_f1_door_barricaded_side_native.png",
+      "sha256": "5f8ae4ec0a875351ca66783bedf28a6584469b3083ff7c6dc5c89edb3718db73"
+    },
+    {
+      "path": "art_src/env/closed_v4/mockup_f1_door_barricaded_side_4x.png",
+      "sha256": "f220e646abf48c24824f7db68ac06f0919becdbba18172231ee9106bcc894634"
+    },
+    {
+      "path": "art_src/env/closed_v4/mockup_f2_arch_blocked_side_native.png",
+      "sha256": "19bf9923939559067bdfb55d3ebf048275ebd04b178be4e8f99479e960221921"
+    },
+    {
+      "path": "art_src/env/closed_v4/mockup_f2_arch_blocked_side_4x.png",
+      "sha256": "a41f092eb71fbfdd82acaec3d7591b632c960e08ddbd046024d65c7465987690"
+    },
+    {
+      "path": "art_src/env/closed_v4/mockup_f2_door_barricaded_side_native.png",
+      "sha256": "451f6f1f009ede94b0c08c0f6219eb9d404438041ef5cf5b92344b4f1f0ae511"
+    },
+    {
+      "path": "art_src/env/closed_v4/mockup_f2_door_barricaded_side_4x.png",
+      "sha256": "102ba7bfc5b29e5ca3ce4a69e5e993184e1024e26a4caa98b1cbe9fe3aa6342a"
+    },
+    {
+      "path": "art_src/env/closed_v4/mockup_side_native.png",
+      "sha256": "718fb5a00f1b9db6be2f1ab10d5b05955cb9f4c55b146723f3fd1c77f4bcd0bd"
+    },
+    {
+      "path": "art_src/env/closed_v4/mockup_side_4x.png",
+      "sha256": "993035f5bae8fb2d2fd211e377532fe1522217d671d3ba95a3318f4988ae3e51"
+    },
+    {
+      "path": "art_src/env/closed_v4/mockup_f1_arch_blocked_front_native.png",
+      "sha256": "fb9708b370603dc2326e0cb8eedd4d10c0e19049828582b6c5855a7a300798ca"
+    },
+    {
+      "path": "art_src/env/closed_v4/mockup_f1_arch_blocked_front_4x.png",
+      "sha256": "b051aab2aa1cdf809a86933640de3d46f646c39505827d26fb438010d4d4ef5d"
+    },
+    {
+      "path": "art_src/env/closed_v4/mockup_f1_door_barricaded_front_native.png",
+      "sha256": "047e6aa1f5bf762064cb4cfd6e16c38b1a07eb4099cabef694c42c19b475b814"
+    },
+    {
+      "path": "art_src/env/closed_v4/mockup_f1_door_barricaded_front_4x.png",
+      "sha256": "c5d462bf44145feeec81645a143b2a2cad25b35c81aae6524b6fcbc2b48d2537"
+    },
+    {
+      "path": "art_src/env/closed_v4/mockup_f2_arch_blocked_front_native.png",
+      "sha256": "30078cd0815822377b56426140b47900f976f1920ecd076c69831f85af62292b"
+    },
+    {
+      "path": "art_src/env/closed_v4/mockup_f2_arch_blocked_front_4x.png",
+      "sha256": "622731531c27c3cc2b896bb6c6987ccf7442bc4f82e85a6f90db1def38ddf413"
+    },
+    {
+      "path": "art_src/env/closed_v4/mockup_f2_door_barricaded_front_native.png",
+      "sha256": "f0448b3162e6168c09f90e722ab58626649e152df0732fa7ef2fc5fc337d822b"
+    },
+    {
+      "path": "art_src/env/closed_v4/mockup_f2_door_barricaded_front_4x.png",
+      "sha256": "2584b51217b1250bfaf124fe0365e7738925f035a54a109eec0e2ebe47bb02dc"
+    },
+    {
+      "path": "art_src/env/closed_v4/mockup_front_native.png",
+      "sha256": "cb9915311506e45013f023b64b982abe053835aaf3dd24e615fe7f633a793d8f"
+    },
+    {
+      "path": "art_src/env/closed_v4/mockup_front_4x.png",
+      "sha256": "1a0bbf407da79fbc569c5097b8b9b088a6875289b72936f2b848aa89863c3acf"
+    }
+  ],
+  "integration": "Decorative solid wall faces only. Existing painted_fN_door.png remains the live lock texture.",
+  "originals": "art_src/env/closed_v4/preserved_hashes.json"
+}

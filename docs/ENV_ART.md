@@ -6,6 +6,9 @@ PNGs, exact built-in imagegen prompts, code drawings, deterministic reduction,
 and contact sheets live in the corresponding `art_src/` folders.
 
 **Primary revision:** use `painted_f1_*.png` / `painted_f2_*.png` for walls;
+the new decorative blockages are `painted_fN_arch_blocked.png` and
+`painted_fN_door_barricaded.png` (both floors). Retire the old open-looking
+`painted_fN_arch.png` from random dressing. Keep actual lock/gate art distinct.
 the latest plane offer is the shared `calm_v3_floor_*` / `calm_v3_ceiling_*`
 family, with `calm_v3_room_*` for matching landmark faces. The earlier
 `painted_fN_floor/ceiling` and `painted_room_fN_*` set remains an alternate.
@@ -17,15 +20,24 @@ materials in `assets/art/ui_offer/` are selected and wired by A.
 Decorative `assets/art/props/`, earlier alternate `room_fN_*` surface
 faces, a painted title logotype and an optional launcher set are also supplied. Placement,
 collision and launcher selection remain A/Claude's integration decisions.
-The latest addition follows the owner's preference for the F1 corridor:
-calmer flags, a darker shared rib vault, varied per-cell puddles and a torn
-transparent map leaf. All previous art remains intact. See
+The latest addition closes the misleading decorative doorways with solid
+infill and nailed barricades. The preceding offer follows the F1 corridor:
+calmer flags, a darker shared rib vault, varied puddles and a torn map leaf.
+All previous art remains intact. See
 **Small life in the story plates** below for exact playback and hold timings.
 `POLISH.md` records the A/B/C features now visible in A's current source.
 
 ## Rebuild and inspect
 
 From the repository root, with Python and Pillow installed:
+
+```powershell
+python -B art_src/env/closed_v4/build_closed.py
+python -B art_src/env/verify_polish.py
+```
+
+This rebuilds only the four closed decorative faces and their corridor proofs.
+For the preceding calm-plane / torn-map offer:
 
 ```powershell
 python -B art_src/env/calm_v3/build_revision.py
@@ -84,6 +96,9 @@ and contact sheets still use the shared indexed palette and binary alpha.
 | Primary abbey stone | 12 tiles, each 64 × 64 | `art_src/env/painted_v2/floor1/contact_sheet_4x.png` |
 | Primary older wet stone | 12 tiles, each 64 × 64 | `art_src/env/painted_v2/floor2/contact_sheet_4x.png` |
 | Primary mixed tile repeats | 256 × 192 | `art_src/env/painted_v2/floor1/repeat_4x.png`, `floor2/repeat_4x.png` |
+| Closed decorative arches/doors | Four 64 × 64 faces | `art_src/env/closed_v4/contact_sheet_4x.png` |
+| Closed dressing beside a genuine open gate | Four 148 × 150 corridor views | `art_src/env/closed_v4/mockup_side_4x.png` |
+| Closed dressing from the front | Four 148 × 150 corridor views | `art_src/env/closed_v4/mockup_front_4x.png` |
 | Original / primary / wet comparison | Three 64 × 64 samples | `art_src/env/painted_v2/comparison/contact_sheet_4x.png` |
 | First wall set, alternates + surfaces | 28 tiles, each 64 × 64 | `art_src/env/contact_sheet_4x.png` |
 | Current calm shared planes + landmarks | Twenty 64 × 64 tiles | `art_src/env/calm_v3/contact_sheet_4x.png` |
@@ -132,8 +147,10 @@ Each primary prefix has these wall suffixes:
 | `chains` | Two hanging lengths, no interactive promise |
 | `tapestry` | Faded dawn-and-bell cloth, useful near the Porter |
 | `drain` | Low iron grate, opaque background |
-| `arch` | Dark arched recess/opening picture; no transparent hole |
-| `door` | Closed iron-banded wood inside the matching arch |
+| `arch` | Earlier open-looking recess, preserved; retire from random decoration |
+| `door` | Existing closed iron-banded door used by the live lock path |
+| `arch_blocked` | New decorative arch filled solid with large blocking stones |
+| `door_barricaded` | New decorative broken door with nailed beam and diagonal brace |
 
 Wall anchor is the whole face: UV origin top left, U rightwards, V downwards,
 64 × 64, fully opaque. Every wall variant within a floor shares the outer
@@ -165,17 +182,15 @@ rate only while a sconce is visible, and reuse cached strips. The flame has
 baked local warmth but does not illuminate adjacent faces or the simulation.
 Distance light and side shading still apply. A large lamp halo is unnecessary.
 
-The door and arch **do not** create fixtures, locks, collision or passable
-routes. Reserve door art for an actual closed door/lock if one is implemented;
-remove/swap it with the authoritative open state. Use an arch only as a
-decorative recess unless the renderer explicitly draws the space behind it.
-Do not make a working gate or exit visually lie by casually assigning a door.
+Wall dressing is painted on already-solid faces. Use the new blocked arch
+and barricaded door for decoration; actual locks and gates follow their
+authoritative fixture state and existing art paths, as detailed below.
 
 ### Floor and ceiling
 
 The first pack's `f1_floor.png`, `f1_ceiling.png`, `f2_floor.png`, and
-`f2_ceiling.png` remain optional surface materials. No `painted_fN_floor` or
-`painted_fN_ceiling` is supplied; the primary revision changes wall faces.
+`f2_ceiling.png` remain alternate surface materials. The later painted and
+calm families are documented below; the current offer is `calm_v3_*`.
 
 The current `_build_surfaces()` already computes `point`, world-space `u`,
 `v`, floor/ceiling side, and lamp attenuation. Replace the procedural base
@@ -185,6 +200,65 @@ Keep the surface cache and include the selected floor material in its key.
 These are orthographic materials, **not** perspective pictures. Map one tile
 to one world cell, with the same orientation on every cell. The ceiling has
 restrained stone ribs; floor two has pooled teal water, with no gameplay hazard.
+
+## Closed decorative arches and broken doors
+
+The owner's phone review found that an opaque decorative arch beside a real
+gate still looked like a route. These four **new** faces remove the dark
+walk-through silhouette while keeping the approved painted wall substrate:
+
+| Runtime file under `assets/art/env/` | Visible blockage |
+| --- | --- |
+| `painted_f1_arch_blocked.png` | Abbey arch infilled sill-to-crown with broad mortared blocking stones, including a cracked lower stone and wedged chunk |
+| `painted_f2_arch_blocked.png` | The same solid infill, darker and damp with restrained teal weathering |
+| `painted_f1_door_barricaded.png` | Split planks, broken/sagging iron bands, a thick nailed horizontal beam and diagonal brace; no handle/keyhole |
+| `painted_f2_door_barricaded.png` | The same permanent barricade, weathered darker and wetter |
+
+Every file is **64 × 64, fully opaque**, shared palette, anchor/UV origin
+`(0,0)`. The original `painted_fN_plain_0.png` is copied exactly outside an
+arched interior patch. The full two-pixel ring and opposite outer row/column
+values match the existing wall family, so the new faces mix with every
+accepted painted wall variant. No old arch, door or wall PNG is overwritten.
+Floor two repaints the same physical stones/planks; the closure does not
+change shape with floor number. Narrow mortar and split-plank cracks remain;
+the central face is visibly occupied by stone or timber.
+
+**Codex A's exact hook:** the current `_wall_path()` gives `roll == 6` the
+decorative suffix `arch`. Change that choice to `arch_blocked`. To offer both
+new blockages at that same density, use another stable bit of the existing
+face hash to choose `arch_blocked` or `door_barricaded`; the existing
+`painted_f%d_%s.png` path format then works unchanged. Cache this choice per
+face, like the other dressing. Choose these only for ordinary solid wall faces.
+
+The actual closed-lock override currently loads `painted_f%d_door.png` and
+attaches the fixture ID. **Keep that functional texture path** and its
+authoritative open-state handling. B's real gate/exit/stair architecture and
+transparent portal overlays keep their existing paths too. The new images
+have no fixture ID, action, glint, keyhole, collision or movement rule; their
+job is to make ordinary blocking masonry visibly impassable. This is a
+decorative path substitution, not a global replacement of every door image.
+
+Review files, all with native and exact nearest 4x partners:
+
+- `art_src/env/closed_v4/contact_sheet_4x.png`: four wall-face textures.
+- `mockup_side_4x.png`: the four variants on the right corridor wall beside
+  B's genuine open gate ahead, matching the reported oblique ambiguity.
+- `mockup_front_4x.png`: each blocked face as a solid corridor end wall.
+- `floor1_repeat_4x.png` / `floor2_repeat_4x.png`: each new pair mixed with
+  accepted plain walls to show the shared boundaries.
+
+The mock-ups use the same 148 × 150 camera, UV projection and light falloff
+as the earlier offline material proofs, with the calm plane offer. They are
+authoring comparisons in proxy corridors, not game captures. B's open-gate
+overlay is read-only; all mock-up output is inside C's art source directory.
+The supplied corridor screenshot is preserved as a framing reference.
+
+Rebuild with `python -B art_src/env/closed_v4/build_closed.py`. Saved paintings,
+exact built-in imagegen prompts, manifests and preservation hashes are beside
+the builder. `verify_closed.py` checks the palette, opaque canvas, exact
+substrate outside the patch, shared rings, repeat edges, 4x proofs and a
+regression guard against a broad connected near-black opening. Original
+source PNGs are retained; rebuilding is offline and needs no Godot process.
 
 ## Decorative room props: depths 1–3
 
@@ -910,24 +984,6 @@ the asset checks and focused FX test do not claim phone performance acceptance.
 
 
 
-## Painted-plane batch receipt, 28 October 2026
-
-- Added **16 runtime PNGs**: four primary painted plane bases and all twelve
-  matching room-face variants. The combined C kit verifies at **182 runtime
-  PNGs**, shared 31 opaque inks and binary alpha. All **166 earlier C runtime
-  PNGs** match their pre-batch hashes; originals remain as alternates.
-- Opposite edge texels and complete two-pixel variant border rings match.
-  Both wet bases have lower overall luminance than their abbey equivalents.
-  Floor cell-joint contrast, opaque 64px dimensions and exact 4x enlargements
-  pass focused checks.
-- Three material sheet pairs, four mixed-repeat pairs and six mock-up pairs
-  are saved with sources, prompts, registrations and build scripts. The
-  proxy-view mock-ups use the actual camera/UV/light formulas; screenshot UI
-  outside the view remains exact at native nearest sampling.
-- Rebuilding produced identical SHA-256 hashes for **51 PNG/JSON files**;
-  `art_src/env/painted_surfaces/rebuild_receipt.json` records the comparison.
-- No Godot runs, renderer/UI/game edits, staging or commits. A still needs
-  the documented texture path swaps and phone review.
 
 ## Calm-plane / torn-map revision receipt, 28 October 2026
 
@@ -953,3 +1009,22 @@ the asset checks and focused FX test do not claim phone performance acceptance.
 - A's remaining work is the cached per-cell selector, disabling the old
   procedural grain for this family, swapping the map material and phone
   review. No Godot runs, game/UI changes, staging or commits by C.
+
+## Closed-dressing revision receipt, 28 October 2026
+
+- Added **four runtime PNGs**: a solid infilled arch and permanently braced
+  broken door for each floor. The C kit now verifies at **207 runtime PNGs**,
+  using the shared palette and binary alpha. All **203 earlier C runtime
+  PNGs**, including the original arch and functional lock door, are unchanged.
+- Pixels outside the arched edit patch match the accepted plain wall exactly.
+  Full two-pixel border rings and opposite outer rows/columns match; mixed
+  tile proofs and exact 4x sheets pass. The old broad dark doorway silhouette
+  is absent in the focused regression check and visual review.
+- Four contact-sheet tiles, two mixed-repeat pairs and ten corridor mock-up
+  pairs show the art head-on and on a side wall beside B's genuine open gate.
+  These are offline proxy views, not new Godot captures or phone acceptance.
+- Rebuilding produced identical SHA-256 hashes for **37 PNG/JSON files**;
+  `art_src/env/closed_v4/rebuild_receipt.json` records the comparison.
+- A's handoff distinguishes the random decorative suffix substitution from
+  the actual lock override and gate overlays. No renderer/game edits, Godot
+  runs, staging or commits by C.

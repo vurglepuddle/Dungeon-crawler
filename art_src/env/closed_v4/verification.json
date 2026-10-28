@@ -1,0 +1,18 @@
+{
+  "assets/art/env/painted_f1_arch_blocked.png": {
+    "largest_connected_dark_region": 10,
+    "old_arch_region": 792
+  },
+  "assets/art/env/painted_f2_arch_blocked.png": {
+    "largest_connected_dark_region": 24,
+    "old_arch_region": 792
+  },
+  "assets/art/env/painted_f1_door_barricaded.png": {
+    "largest_connected_dark_region": 32,
+    "old_arch_region": 792
+  },
+  "assets/art/env/painted_f2_door_barricaded.png": {
+    "largest_connected_dark_region": 90,
+    "old_arch_region": 792
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "tool": "built-in image_gen.imagegen",
+  "mode": "edit with original painted-wall style reference",
+  "sources": {
+    "arch": {
+      "reference": "E:/SD/GODOT/Dungeon-crawler/assets/art/env/painted_f1_arch.png",
+      "style_reference": "art_src/spike/sources/stone_wall_painted.png",
+      "prompt": "Use case: precise-object-edit. Edit the decorative arch in image 1 so it is unmistakably SEALED SOLID at a glance. Image2 is painted-material style reference. Keep the arch centred in a square limestone wall and roughly the same outer arch shape and canvas registration. Replace ALL of the dark doorway with a tight wall of huge irregular mortared blocking stones, from threshold right up into the crown: three or four offset courses of broad grey stones, plainly visible horizontal mortar joints. One cracked lower blocking stone and a small wedged chunk add age, but no loose open hole. The central face should be solid midtone masonry, not a dark recess. Keep the arch's worn stone voussoirs as an old architectural scar. NO black walk-through silhouette, visible floor beyond, doorway depth, window, handle, keyhole, lit gap or passage. No magical seal, bars alone, skulls or warning sign. It must read as impassable rubble-filled masonry, an old arch bricked up long ago. Match the original approved painted limestone's chipped blue-grey and warm grey stone, coarse handmade 1993 VGA paint clusters, restrained teal damp; not clean flat small-brick pixel geometry. Full-bleed square flat wall FACE with no camera perspective or UI. Reduce later to64x64; broad readable shapes, no words, numbers or watermark.",
+      "saved_source": "sources/arch.png"
+    },
+    "door": {
+      "reference": "E:/SD/GODOT/Dungeon-crawler/assets/art/env/painted_f1_door.png",
+      "style_reference": "art_src/spike/sources/stone_wall_painted.png",
+      "prompt": "Use case: precise-object-edit. Edit the closed door in image1 into an unmistakably ABANDONED, BROKEN AND PERMANENTLY BARRICADED wall dressing. Image2 is painted-material style reference. Keep its central arched silhouette, surrounding limestone wall and canvas registration. The opening is still completely occupied by thick rotten vertical planks: split edges, several short splinters and jagged cracks no wider than a narrow finger. Two dark iron bands are torn and sagging against the wood. A very thick weathered horizontal timber beam spans the entire width across the lower middle, nailed into both jambs; one nailed diagonal board braces across it. The beam and brace have big visible nail heads and legible wide silhouettes at 64 pixels. NO handle, keyhole, lock plate, intact hinges inviting use, open panel, broad black gap, visible floor behind, or clear way through. Wood should be readable weathered umber and subdued ochre, rather than a black doorway. Broken but still thoroughly blocked. No skull, text or sign. Match the original approved painted limestone's chipped blue-grey and warm grey stone, coarse handmade 1993 VGA paint clusters, restrained teal damp; not clean flat small-brick pixel geometry. Full-bleed square flat wall FACE with no camera perspective or UI. Reduce later to64x64; broad readable shapes, no words, numbers or watermark.",
+      "saved_source": "sources/door.png"
+    }
+  },
+  "derivation": "Nearest palette reduction, arched patch composited onto unchanged painted_fN_plain_0 outside the patch; floor two uses the existing painted-wall dark/damp repaint on the same physical blockage. The common two-pixel wall-face ring is preserved."
+}
