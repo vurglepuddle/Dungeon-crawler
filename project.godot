@@ -18,6 +18,7 @@ config/icon="res://assets/icon/icon_192.png"
 [autoload]
 
 Autopilot="*res://scripts/dev/autopilot.gd"
+Music="*res://scripts/audio/music.gd"
 
 [display]
 
