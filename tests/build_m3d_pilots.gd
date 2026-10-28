@@ -8,7 +8,7 @@ func _begin() -> void:
 	if camera==null:
 		camera=View.new(); root.add_child(camera)
 	_record()
-	lines=["# Real taps; only new_run resets the fixture.","wait 4","shot 00_splash","tapnamed splash_skip","wait 3","shot 01_title","call new_run BELL42","waitidle","wait 3"]
+	lines=["# Real taps; only new_run resets the fixture.","wait 4","shot 00_splash","tapnamed splash_skip","wait 3","shot 01_title","call new_run BELL42 2","waitidle","wait 3"]
 func _record() -> void:
 	var s: Dictionary=replay.snapshot()
 	camera.update_state(replay.view_snapshot()); survey.observe(s.floor,camera.visible_cells(),s.pos,camera.visible_landmarks())

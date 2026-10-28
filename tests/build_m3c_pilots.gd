@@ -71,7 +71,7 @@ func _audio() -> void:
 		"# Fresh isolated save/settings path, then B in a separate process.",
 		"wait 4","call assert music true","call assert sfx true",
 		"tapnamed music","tapnamed sound","call assert music false","call assert sfx false",
-		"shot 35_audio_off","call new_run BELL42","waitidle","close"])
+		"shot 35_audio_off","call new_run BELL42 2","waitidle","close"])
 	write_file("res://tests/pilot/m3c_audio_b.txt",[
 		"wait 4","call assert music false","call assert sfx false",
 		"tapnamed music","call assert music true","call assert sfx false",

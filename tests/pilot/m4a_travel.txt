@@ -1,0 +1,126 @@
+# Ordinary real taps, isolated saves, muted by Autopilot.
+wait 4
+call new_run BELL42 2
+waitidle
+wait 3
+tapnamed hot_item_f1_stone
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed pack0
+wait 2
+tapnamed card_drop
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed verb1
+waitidle
+tapnamed hot_front
+waitidle
+tapnamed verb1
+waitidle
+tapnamed verb0
+waitidle
+tapnamed verb0
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_l
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed fwd
+waitidle
+tapnamed hot_item_f1_key
+wait 3
+tapnamed loot_f1_key
+waitidle
+tapnamed hot_item_bell_clapper
+waitidle
+tapnamed turn_l
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_l
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed hot_front
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_l
+waitidle
+tapnamed hot_porter
+wait 4
+shot 20_porter_offer
+tapnamed porter_close
+wait 3
+tapnamed pack0
+wait 3
+shot 21_clapper_return_target
+tapnamed hot_front
+waitidle
+shot 22_porter_restored
+tapnamed turn_r
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed turn_r
+waitidle
+shot 05_distant_stair
+tapnamed hot_f1_down
+waitidle
+call assert hash 7d7a505650f4a8a68bef79363f6e46e9a6a1498f80ecaf87183e8b8d208fa960
+call assert message ["Step closer.",""]
+shot 06_step_closer
+tapnamed fwd
+waitidle
+tapnamed turn_l
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_r
+waitidle
+shot 07_stair_in_reach
+tapnamed hot_f1_down
+waitidle
+call assert floor 2
+shot 08_stair_tap_arrival
+call assert hash a16950a7191b542126099dd05eb9bd4bd41b1c1a18d189be57a5dcccb07651b2
+call assert hp 6
+close

@@ -365,6 +365,10 @@ func _build_camera() -> void:
 			var lever: String="lever_front_%s_d%d"%["down" if _latch_down(sprite) else "up",variant+1] if head_on else "lever_%s_%s_d%d"%["left" if lateral<0 else "right","down" if _latch_down(sprite) else "up",variant+1]
 			texture=_fixture_textures[lever]
 			tall=texture.get_height()
+		elif not sprite.has("type") and not sprite.has("hp"):
+			var item_kind: String="coat_spent" if kind=="coat" and sprite.get("spent",false) else kind
+			texture=Paint.texture("res://assets/art/items/item_%s_d%d.png"%[item_kind,variant+1])
+			tall=texture.get_height()
 		else:
 			texture=Art.inventory(kind) if not sprite.has("type") else Art.texture(kind)
 			tall=maxi(22,roundi((48.0 if kind=="porter" else 32.0)/depth))
@@ -447,7 +451,13 @@ func _draw_sprite(sprite: Dictionary,shift: int,force_recoil: bool=false,only_co
 	for x in range(start,end):
 		if not _sprite_visible(sprite,x): continue
 		if sprite.kind not in ["plate","latch"]:
-			var norm: float=(x-rect.get_center().x)/maxf(1.0,rect.size.x*0.5)
+			var texture_key: int=texture.get_instance_id()
+			if not _opaque_bounds.has(texture_key): _opaque_bounds[texture_key]=texture.get_image().get_used_rect()
+			var bounds: Rect2=Rect2(_opaque_bounds[texture_key]) if not sprite.has("type") and not sprite.has("hp") else Rect2(Vector2.ZERO,texture.get_size())
+			var scale_factor: Vector2=rect.size/texture.get_size()
+			var shadow: Rect2=Rect2(rect.position+bounds.position*scale_factor,bounds.size*scale_factor)
+			var norm: float=(x-shadow.get_center().x)/maxf(1.0,shadow.size.x*0.5)
+			if absf(norm)>1: continue
 			draw_rect(Rect2(x,mini(HEIGHT-3,rect.end.y-3),1,maxi(1,roundi(3*(1-norm*norm)))),Color("080b11"))
 		var source_x:=floorf((x-rect.position.x)*texture.get_width()/rect.size.x)
 		draw_texture_rect_region(texture,Rect2(x,rect.position.y,1,rect.size.y),Rect2(source_x,0,1,texture.get_height()),tint)

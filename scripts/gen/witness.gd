@@ -69,6 +69,7 @@ func _path(goal: Array, adjacent: bool) -> Array:
 		for d in Sim.DIRS:
 			var next: Array=[cell[0]+d[0],cell[1]+d[1]]
 			var key:=Vector2i(next[0],next[1])
+			if f.actors.any(func(a): return a.hp>0 and a.state=="peaceful" and a.pos==next): continue
 			if not previous.has(key) and sim.can_walk(next,true):
 				previous[key]=Vector2i(cell[0],cell[1]); todo.append(next)
 	if found.x<0: return []
@@ -106,12 +107,14 @@ func _pickup(id: String) -> bool:
 	if not go(state.items[id].pos): return false
 	return _commit({"type":"pickup","item_id":id})
 
-func _space() -> bool:
+func _space(keep: Array=[]) -> bool:
 	var state: Dictionary=sim.snapshot()
 	if state.pack.size()<8: return true
 	for id in state.pack:
-		if not sim.definition(id).tags.has("HEAVY"): return _commit({"type":"drop","item_id":id})
-	return _commit({"type":"drop","item_id":state.pack[0]})
+		if not keep.has(id) and not sim.definition(id).tags.has("HEAVY"): return _commit({"type":"drop","item_id":id})
+	for id in state.pack:
+		if not keep.has(id): return _commit({"type":"drop","item_id":id})
+	return false
 
 func _explore() -> bool:
 	var state: Dictionary=sim.snapshot()
@@ -134,7 +137,14 @@ func _acquire_tag(tag: String) -> String:
 	var state: Dictionary=sim.snapshot()
 	for id in state.pack+state.belt+[state.equipment.hand]:
 		if id!="" and sim.definition(id).tags.has(tag): return id
-	for id in state.items:
+	var candidates: Array=state.items.keys()
+	if state.rules_version=="m4.1":
+		candidates.sort_custom(func(a,b):
+			var ia: Dictionary=state.items[a]; var ib: Dictionary=state.items[b]
+			var da: int=absi(ia.pos[0]-state.pos[0])+absi(ia.pos[1]-state.pos[1]) if ia.pos.size()==2 else 1000
+			var db: int=absi(ib.pos[0]-state.pos[0])+absi(ib.pos[1]-state.pos[1]) if ib.pos.size()==2 else 1000
+			return da<db)
+	for id in candidates:
 		var item: Dictionary=state.items[id]
 		if item.location!="floor" or item.floor!=state.floor or item.get("hidden",false) or not sim.definition(id).tags.has(tag): continue
 		if _path(item.pos,true).is_empty() and absi(item.pos[0]-state.pos[0])+absi(item.pos[1]-state.pos[1])>1: continue
@@ -142,20 +152,28 @@ func _acquire_tag(tag: String) -> String:
 	return ""
 
 func capability_rooms() -> bool:
-	if sim.snapshot().rules_version!="m3.3": return true
+	if not sim.Cap.enabled(sim): return true
 	var food: String=""
 	if sim.floor_data().actors.any(func(a): return a.kind=="hound" and a.hp>0 and a.state!="peaceful"): food=_acquire_tag("FOOD")
 	var web:=_fixture("web")
 	if not web.is_empty() and not web.open:
-		var torch: String="f1_torch"
-		if not _space() or not _pickup(torch): return false
+		var torch: String=""
+		var s: Dictionary=sim.snapshot()
+		for id in s.pack+[s.equipment.hand]:
+			if id!="" and s.items[id].kind=="torch": torch=id; break
+		if torch=="":
+			for id in s.items:
+				if s.items[id].kind=="torch" and s.items[id].location=="floor" and s.items[id].floor==s.floor: torch=id; break
+		if torch=="" or not _space([food,torch]) or not _pickup(torch): return false
 		if not sim.snapshot().items[torch].lit:
 			var brazier:=_fixture("brazier")
 			if not go(brazier.pos) or not _commit({"type":"light","item_id":torch,"target_id":brazier.id}): return false
 		if not go(web.pos) or not _commit({"type":"burn","item_id":torch,"target_id":web.id}): return false
 	for actor in sim.floor_data().actors:
 		if actor.kind!="hound" or actor.hp<=0 or actor.state=="peaceful": continue
-		if food!="":
+		if sim.snapshot().rules_version=="m4.1":
+			if not _settle_hound(actor.id,food): return false
+		elif food!="":
 			if not sim.Cap.in_reach(sim,sim._actor(actor.id)) and not go(sim._actor(actor.id).pos): return false
 			if sim._actor(actor.id).hp>0:
 				var cell: Array=sim._actor(actor.id).pos
@@ -175,6 +193,30 @@ func capability_rooms() -> bool:
 		if glow=="" or not go(actor.pos) or not _commit({"type":"dispel","item_id":glow,"target_id":actor.id}): return false
 	return true
 
+func _settle_hound(id: String,food: String) -> bool:
+	# Re-plan after every committed step: an open-loop Hound can move away
+	# from a stale goal. Never try to face a diagonal/non-cardinal vector.
+	for _step in range(100):
+		var actor: Dictionary=sim._actor(id); var s: Dictionary=sim.snapshot()
+		if actor.hp<=0 or actor.state=="peaceful": return true
+		var dx: int=actor.pos[0]-s.pos[0]; var dy: int=actor.pos[1]-s.pos[1]
+		if (dx==0 or dy==0) and absi(dx)+absi(dy)<=2:
+			if not _face(Sim.DIRS.find([signi(dx),signi(dy)])): return false
+			if food!="" and sim.Cap.in_reach(sim,actor):
+				if sim._near(actor.pos): return _commit({"type":"feed","item_id":food,"target_id":id})
+				if sim.toss_preview(food).actor_id==id: return _commit({"type":"toss","item_id":food})
+			if food=="" and sim._near(actor.pos):
+				if not _commit({"type":"hit","target_id":id}): return false
+				continue
+		var path: Array=_path(actor.pos,true)
+		if path.is_empty(): error="No route beside Hound"; return false
+		if not _face(Sim.DIRS.find([path[0][0]-s.pos[0],path[0][1]-s.pos[1]])): return false
+		var front: Dictionary=sim.inspect_front()
+		if front.monster!="" and front.monster!=id:
+			if not _commit({"type":"hit","target_id":front.monster}): return false
+		elif not _commit({"type":"move","step":"fwd"}): return false
+	error="Hound approach budget"; return false
+
 func find_secret() -> bool:
 	var panel:=_fixture("panel")
 	if panel.is_empty() or panel.open: return true
@@ -189,7 +231,7 @@ func run(seed: String,count: int,explore: bool,porter_policy: String="skip",init
 	if not initial_state.is_empty() and not sim.restore_state(initial_state): return {"ok":false,"reason":"Invalid initial state"}
 	if sim.snapshot().status=="error": return {"ok":false,"reason":"Bad seed","actions":[]}
 	var original: Dictionary=sim.snapshot().items
-	for number in range(1,count+1):
+	for number in range(sim.snapshot().floor,count+1):
 		var state: Dictionary=sim.snapshot()
 		var ids: Array=[]
 		var kinds: Array=[]
@@ -207,6 +249,8 @@ func run(seed: String,count: int,explore: bool,porter_policy: String="skip",init
 			if not go(plate.pos,false) or not _commit({"type":"drop","item_id":stone}): return _finish(false)
 			var latch:=_fixture("latch")
 			if not go(latch.pos) or not _commit({"type":"latch","target_id":latch.id}): return _finish(false)
+		var early_deep: bool=(explore or tour) and number>=3 and sim.snapshot().rules_version=="m4.1"
+		if early_deep and not capability_rooms(): return _finish(false)
 		var lock:=_fixture("lock")
 		if not lock.is_empty() and not lock.open:
 			if not _pickup(lock.key_id): return _finish(false)
@@ -220,7 +264,7 @@ func run(seed: String,count: int,explore: bool,porter_policy: String="skip",init
 				if not porter.restored and (not go(porter.pos) or not _commit({"type":"return_item","target_id":porter.id,"item_id":"bell_clapper"})): return _finish(false)
 			elif porter_policy in ["keep","ring"]:
 				if sim.snapshot().items.bell_clapper.location=="pack" and not _commit({"type":"equip","item_id":"bell_clapper"}): return _finish(false)
-		if (explore or tour) and not capability_rooms(): return _finish(false)
+		if (explore or tour) and not early_deep and not capability_rooms(): return _finish(false)
 		if explore and not _explore(): return _finish(false)
 		state=sim.snapshot()
 		report.free_on_exit=8-state.pack.size()

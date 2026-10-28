@@ -164,3 +164,17 @@ accepted full-size wall controls, native UI surfaces, tiny verb stamps and
 story frames. ItemButton draws measured stamps beside full VETKA words.
 Main owns the optional owner_overlay.png layer, below modals and transparent
 to input. Neither vines nor unreviewed authoring proposals enter staged export.
+
+M4a: scripts/gen/deep_watch.gd recombines the established modules on floors
+three onward before the final spawn-reservation/dressing pass. The Sim chooses
+m4.1 for newly generated deep runs; explicit old snapshots remain m3.3. Actor
+power is data, validated by StateCodec, and used by both enemy families' hit
+resolution. Witness handles a moving Hound one action at a time, with bounded
+replanning and peaceful bodies excluded from routes; stored-floor continuation
+starts at the current floor rather than replaying earlier floors.
+
+Main resolves pocket LIGHT/equipped BURN through the same pure target/action
+queries. Visible travel hotspots have a reach-aware callback. Scene inspection
+never drives a movement or enemy phase. Dedicated assets/art/items frames feed
+the existing sorted/occluded sprite pass and cached opaque-bound shadows.
+The optional owner vine layer has fixed registration and modal visibility.

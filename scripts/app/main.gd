@@ -31,7 +31,7 @@ var _bob: bool=false
 var _mode: String="title"
 var _save_path: String=Store.DEFAULT_PATH
 var _save_ok: bool=true
-var _floor_count: int=2
+var _floor_count: int=3
 var _modal: Control
 var _card: Control
 var _dynamic_names: Array=[]
@@ -44,6 +44,7 @@ var _seed_note: Label
 var _view_action: Dictionary={}
 var _marker_names: Array=[]
 var _item_markers: Dictionary={}
+var _world_markers: Dictionary={}
 var _compass_swing: float=0
 var _compass_velocity: float=0
 var _music
@@ -60,7 +61,7 @@ var _tossing: String=""
 var _menu_clock: float=0
 var _logo: TextureRect
 var _optional_overlay: TextureRect
-const OPTIONAL_OVERLAY="res://assets/art/ui_offer/owner_overlay.png"
+const OPTIONAL_OVERLAY="res://assets/art/ui/owner_vines.png"
 
 func _ready() -> void:
 	clip_contents=true
@@ -239,7 +240,7 @@ func new_run(raw: String,count: int=2) -> bool:
 	_compass_swing=0; _compass_velocity=0
 	view.clear_strike()
 	if _music!=null: _music.play("floor")
-	lines=[Flavour.floor_name(1),"Find the Dawn Seal."]
+	lines=[_floor_name(1),"Find the Dawn Seal."]
 	_sync(); _save(true)
 	return true
 func _continue() -> void:
@@ -303,6 +304,8 @@ func _reset_presentation() -> void:
 	_tossing=""; view.toss_lane=[]
 	_transition_token+=1; _transitioning=false
 	_ambience.fade_in(0); _ambience.visible=true; _ambience.set_process(true)
+func _floor_name(number: int) -> String:
+	return str(sim.snapshot().floors[number-1].get("title",Flavour.floor_name(number)))
 func _capture_survey() -> void:
 	var picture: Dictionary=sim.view_snapshot()
 	view.update_state(picture)
@@ -311,7 +314,7 @@ func _sync() -> void:
 	state=sim.snapshot()
 	if not state.items.has(selected) or state.items[selected].location not in ["pack","belt","equip"]: selected=""
 	_menu.visible=false; view.visible=true
-	_optional_overlay.visible=true
+	_overlay_visibility()
 	for key in ["seed","floor_label","map","portrait","belt_key","belt_seal","equip_hand","equip_body","turn_l","turn_r","fwd","back","strafe_l","strafe_r","compass"]:
 		controls[key].visible=true
 	controls.seed.text=state.seed; _refresh_save_indicator()
@@ -347,12 +350,12 @@ func _sync() -> void:
 func _sync_markers() -> void:
 	for key in _marker_names:
 		if controls.has(key): controls[key].queue_free(); controls.erase(key)
-	_marker_names=[]; _item_markers={}
+	_marker_names=[]; _item_markers={}; _world_markers={}
 	for key in ["hot_front","hot_item","hot_husk"]: controls[key].visible=false
 	_view_action={}; view.interaction_cues=[]
 	if state.status!="playing": return
 	var markers: Array=[]
-	var targets: Array=sim.targets(selected)
+	var targets: Array=sim.interaction_targets(selected)
 	if not targets.is_empty():
 		for target in targets:
 			markers.append({"key":"hot_front" if markers.is_empty() else "hot_"+target.target_id,"id":target.target_id,"label":target.verb,"callback":_open_toss.bind(target.action.item_id) if target.action.type=="toss" else _command.bind(target.action)})
@@ -381,10 +384,10 @@ func _sync_markers() -> void:
 				markers.append({"key":"hot_porter","id":fixture.id,"label":"PORTER","callback":_porter_card.bind(fixture)})
 			elif fixture.type=="lift" and not fixture.active:
 				markers.append({"key":"hot_"+fixture.id,"id":fixture.id,"label":"ASLEEP","callback":_sleeping_lift})
-			elif fixture.type in ["brazier","web","cord","panel"]:
+			elif fixture.type in ["brazier","web","cord","panel"] and not markers.any(func(m): return m.id==fixture.id):
 				markers.append({"key":"hot_"+fixture.id,"id":fixture.id,"label":"LOOK","callback":_inspect_capability.bind(fixture)})
 		for actor in state.floors[state.floor-1].actors:
-			if actor.kind in ["hound","ghost"] and actor.hp>0 and absi(actor.pos[0]-state.pos[0])+absi(actor.pos[1]-state.pos[1])<=3:
+			if actor.kind in ["hound","ghost"] and actor.hp>0 and absi(actor.pos[0]-state.pos[0])+absi(actor.pos[1]-state.pos[1])<=3 and sim._clear_sight(actor.pos):
 				markers.append({"key":"hot_"+actor.id,"id":actor.id,"label":"LOOK","callback":_inspect_creature.bind(actor.id)})
 	if selected!="":
 		for entry in sim.fixture_actions():
@@ -393,6 +396,13 @@ func _sync_markers() -> void:
 		for fixture in sim.local_fixtures():
 			if fixture.type=="lift" and not fixture.active:
 				markers.append({"key":"hot_"+fixture.id,"id":fixture.id,"label":"ASLEEP","callback":_sleeping_lift})
+	# Visible distant travel faces are still tangible. Their tap explains
+	# reach rather than turning into an invisible wall/bump action.
+	for fixture in state.floors[state.floor-1].fixtures:
+		if fixture.type not in ["stairs_up","stairs_down","exit","lift"]: continue
+		if not markers.any(func(m): return m.id==fixture.id): markers.append({"key":"hot_"+fixture.id,"id":fixture.id,"label":"DOWN" if fixture.type=="stairs_down" else "UP","callback":_travel_tap.bind(fixture.id)})
+		for marker in markers:
+			if marker.id==fixture.id: marker.callback=_travel_tap.bind(fixture.id)
 	# Large bodies first; a small possession at their feet wins overlapping taps.
 	markers.sort_custom(func(a,b):
 		var ra: Rect2=view.projection(a.id).get("rect",Rect2())
@@ -415,7 +425,8 @@ func _sync_markers() -> void:
 		else:
 			button=_button(marker.key,hit_rect,"",marker.callback,null,false); _marker_names.append(marker.key)
 		button.text=""; button.visible=true; button.move_to_front()
-		var item_target: bool=selected!="" and targets.any(func(t): return t.target_id==marker.id)
+		_world_markers[marker.id]=marker.key
+		var item_target: bool=selected!="" and targets.any(func(t): return t.target_id==marker.id and t.action.get("item_id",selected)==selected)
 		view.interaction_cues.append({"id":marker.id,"rect":local_rect,"selected":item_target,"threshold":marker.label in ["DOWN","UP","RIDE","ASLEEP","LEAVE","SIDLE"],"colour":_selection_colour() if item_target else GOLD})
 	view.queue_redraw()
 
@@ -505,7 +516,7 @@ func _command(command: Dictionary) -> void:
 			"bell_rung": lines=["The hollow ones reel.","One clear beat. HIT."]; sfx.play("ring")
 			"restored": lines=["A bell finds its voice.","The lift wakes below."]; sfx.play("restore")
 			"lift_ride": lines=["Chains sing in the dark.","Floor %d / landing."%event.to]; sfx.play("gate"); selected=""
-			"floor_changed": lines=[Flavour.floor_name(event.to),"Floor %d."%event.to]; selected=""
+			"floor_changed": lines=[_floor_name(event.to),"Floor %d."%event.to]; selected=""
 			"landing_skirted": lines=["You slip past a shape.","A clear step beside it."]
 			"torch_lit": lines=["The reeds catch fire.","FIRE / GLOW. No fuel."]; sfx.play("pickup")
 			"web_burnt": lines=["The dry web catches.","The way stays clear."]; view.show_burn(event.target_id); sfx.play("gate")
@@ -522,6 +533,9 @@ func _command(command: Dictionary) -> void:
 			var creature: String=sim._actor(event.actor_id).kind
 			if creature=="hound": lines=["It crouches. Two steps.","Sidestep or GUARD."]
 			elif creature=="ghost": lines=["Its wick flares cold.","GLOW / GUARD."]
+			var power: int=sim.enemy_damage(sim._actor(event.actor_id))
+			if power>1:
+				lines=[("Deep jaws" if creature=="hound" else ("Cold wick" if creature=="ghost" else "Deep bell"))+": %d damage."%power,"Two steps. Move aside." if creature=="hound" else ("GLOW / GUARD." if creature=="ghost" else "GUARD or step away.")]
 		if event.type=="attack_resolved" and event.damage>0:
 			var creature: String=sim._actor(event.actor_id).kind
 			if creature=="hound": lines=["The lunge finds you.","Leave the marked lane."]
@@ -567,6 +581,16 @@ func _sleeping_lift() -> void:
 	if _can_game():
 		_close_card(); selected=""; _sync(); _save()
 		lines=["The lift is dead.","Ask the Bell Porter."]; queue_redraw()
+func _travel_tap(id: String) -> void:
+	if not _can_game(): return
+	var fixture: Dictionary=sim._fixture(id)
+	if not sim.fixture_near(fixture):
+		_close_card(); lines=["Step closer.",""]; queue_redraw(); return
+	if fixture.type=="lift" and not fixture.active: _sleeping_lift(); return
+	for entry in sim.fixture_actions():
+		if entry.action.get("target_id","")==id: _command(entry.action); return
+	if fixture.type=="exit": _command({"type":"leave","target_id":id}); return
+	_close_card(); lines=["Someone waits there.","Try the other stairs."]; queue_redraw()
 func _porter_card(fixture: Dictionary) -> void:
 	if not _can_game(): return
 	var column:=_panel("The Bell Porter",65,240)
@@ -580,12 +604,15 @@ func _porter_card(fixture: Dictionary) -> void:
 func _return_from_card(fixture: Dictionary) -> void:
 	_close_modal(); _command({"type":"return_item","target_id":fixture.id,"item_id":fixture.item_id})
 func _look_husk() -> void:
-	if _can_game(): lines=["A hollow bell, awake.","GUARD, then HIT it."]; queue_redraw()
+	if _can_game():
+		var actor: Dictionary=sim._actor(sim.inspect_front().monster)
+		lines=["Deep bell: %d damage."%sim.enemy_damage(actor) if not actor.is_empty() and sim.enemy_damage(actor)>1 else "A hollow bell, awake.","GUARD, then HIT it."]; queue_redraw()
 func _inspect_creature(id: String) -> void:
 	if not _can_game(): return
 	var actor: Dictionary=sim._actor(id)
 	var column:=_panel("Ash Hound" if actor.kind=="hound" else "Wick Ghost",62,242)
 	_label("Two steps, then rest.\nStep aside or GUARD.\nFOOD buys its peace." if actor.kind=="hound" else "An unspent cold wick.\nGLOW would snuff it.\nGUARD its cold flare.",column)
+	if sim.enemy_damage(actor)>1: _label("Missed tell: %d HP."%sim.enemy_damage(actor),column)
 	_modal_button("creature_close","CLOSE",_close_modal,column)
 func _portrait_help() -> void:
 	if _can_game():
@@ -651,7 +678,7 @@ func _open_card(id: String) -> void:
 			row=HBoxContainer.new(); row.add_theme_constant_override("separation",3); column.add_child(row)
 		_card_button("card_ring","RING",{"type":"ring","item_id":id},row)
 		controls.card_ring.disabled=not sim.ring_ready()
-	if state.rules_version=="m3.3" and state.items[id].location in ["pack","equip"]:
+	if state.rules_version in ["m3.3","m4.1"] and state.items[id].location in ["pack","equip"]:
 		if row.get_child_count()>=3:
 			row=HBoxContainer.new(); row.add_theme_constant_override("separation",3); column.add_child(row)
 		_button("card_toss",Rect2(0,0,42,20),"TOSS",_open_toss.bind(id),row); _card_names.append("card_toss")
@@ -660,6 +687,7 @@ func _open_card(id: String) -> void:
 	_button("card_close",Rect2(0,0,42,20),"CLOSE",_dismiss_card,row)
 	_card_names.append("card_close")
 	add_child(panel); _card=panel; _dock_verbs(true); queue_redraw()
+	_overlay_visibility()
 func _card_button(key: String,label: String,action: Dictionary,parent: Node) -> void:
 	_button(key,Rect2(0,0,42,20),label,_command.bind(action),parent); _card_names.append(key)
 func _dock_verbs(inspecting: bool) -> void:
@@ -670,7 +698,10 @@ func _close_card() -> void:
 	if is_instance_valid(_card): _card.queue_free(); _card=null
 	for key in _card_names: controls.erase(key)
 	_card_names=[]
+	_overlay_visibility()
 	queue_redraw()
+func _overlay_visibility() -> void:
+	if is_instance_valid(_optional_overlay): _optional_overlay.visible=_mode=="game" and not is_instance_valid(_modal) and not is_instance_valid(_card)
 func _dismiss_card() -> void:
 	_close_card(); selected=""; _save(); _sync()
 func _panel(title: String,top: int=32,height: int=276) -> VBoxContainer:
@@ -693,6 +724,7 @@ func _panel(title: String,top: int=32,height: int=276) -> VBoxContainer:
 		heading.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
 		heading.add_theme_color_override("font_color",Color("4d2b1d"))
 	add_child(panel); _modal=panel
+	_overlay_visibility()
 	return column
 func _modal_button(key: String,label: String,callback: Callable,parent: Node) -> void:
 	_button(key,Rect2(0,0,128,24),label,callback,parent); _dynamic_names.append(key)
@@ -700,6 +732,7 @@ func _close_modal() -> void:
 	if is_instance_valid(_modal): _modal.queue_free(); _modal=null
 	for key in _dynamic_names: controls.erase(key)
 	_dynamic_names=[]
+	_overlay_visibility()
 func _open_seed() -> void:
 	if _busy>0 or is_instance_valid(_modal): return
 	var column:=_panel("Start a new run?",64,204)
@@ -852,6 +885,7 @@ func _public_state() -> Dictionary:
 		"hash":sim.state_hash(),"save_ok":_save_ok}
 	public.merge(audio)
 	public.survey_hash=_survey.hash_value()
+	public.message=lines.duplicate()
 	public.travel_pending=_transitioning
 	public.tossing=_tossing
 	public.toss_preview=sim.toss_preview(_tossing) if _tossing!="" else {}
@@ -872,6 +906,8 @@ func pilot_call(name_key: String,args: Array) -> String:
 			if key.ends_with("_object"): key=key.trim_suffix("_object")
 			if key.begins_with("hot_item_"):
 				key=_item_markers.get(key.trim_prefix("hot_item_"),key)
+			if key.begins_with("hot_") and _world_markers.has(key.trim_prefix("hot_")):
+				key=_world_markers[key.trim_prefix("hot_")]
 			if key in ["hot_plate","hot_exit","hot_stairs","hot_latch"]: key="hot_front"
 			# Architectural backing walls may be behind us on arrival. The
 			# existing own-cell action is still available on its actual verb.
@@ -888,7 +924,7 @@ func pilot_call(name_key: String,args: Array) -> String:
 		"assert":
 			if args.size()<2: return "error"
 			var actual = _public_state().get(str(args[0]))
-			var expected:=str(args[1])
+			var expected: String=" ".join(args.slice(1))
 			if actual is String and expected.begins_with('"'):
 				var decoded = JSON.parse_string(expected)
 				if decoded is String: expected=decoded

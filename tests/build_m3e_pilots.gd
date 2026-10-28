@@ -80,7 +80,7 @@ func _initialize() -> void:
 	write_file("res://tests/pilot/m3e_dodge.txt",lines)
 	var record: Dictionary=Codec.normalize(JSON.parse_string(FileAccess.get_file_as_string("res://tests/qa/repro_stairs.json")))
 	replay=Sim.new(record.seed,record.count)
-	lines=["# QA-01's unchanged ordinary setup, then the visible safe landing verb.","wait 4","call new_run "+record.seed,"wait 3","waitidle"]
+	lines=["# QA-01's unchanged ordinary setup, then the visible safe landing verb.","wait 4","call new_run "+record.seed+" 2","wait 3","waitidle"]
 	for action in record.actions.slice(0,record.actions.size()-1): emit(action)
 	add("shot 17_blocked_stair_sidle")
 	var side: Dictionary={"type":"squeeze","target_id":"f2_up"}

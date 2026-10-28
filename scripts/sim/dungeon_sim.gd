@@ -19,8 +19,9 @@ func _init(seed: String = "BELL42", floor_count: int = 2) -> void:
 	if not generated.ok:
 		_s = {"status": "error", "error": generated.error}
 		return
-	_s = {"schema_version": 2, "rules_version": "m3.3", "generator_version": "m3.3",
-		"content_version": "m3.3", "seed": generated.seed, "floor_count": floor_count,
+	var profile: String="m4.1" if floor_count>=3 else "m3.3"
+	_s = {"schema_version": 2, "rules_version": profile, "generator_version": profile,
+		"content_version": profile, "seed": generated.seed, "floor_count": floor_count,
 		"floor": 1, "pos": generated.floors[0].start.duplicate(), "facing": 0,
 		"turn": 0, "revision": 0, "hp": 6, "max_hp": 6, "status": "playing",
 		"pack": [], "equipment": {"hand": "knife_start", "body": ""}, "belt": [],
@@ -149,6 +150,23 @@ func targets(selected: String) -> Array:
 	result.append_array(Cap.targets(self,selected))
 	return result
 
+func capability_targets(selected: String="") -> Array:
+	var result: Array=Cap.targets(self,selected)
+	# Lighting can reach a pocketed reed bundle. Burning uses the explicit
+	# selection or the torch already in the Finder's hand; never auto-throw.
+	var candidates: Array=[selected,_s.equipment.hand]+_s.pack
+	for id in candidates:
+		if id=="" or not _s.items.has(id) or _s.items[id].kind!="torch": continue
+		for entry in Cap.targets(self,id):
+			if entry.verb!="LIGHT" and not (entry.verb=="BURN" and id in [selected,_s.equipment.hand]): continue
+			if not result.any(func(t): return t.target_id==entry.target_id and t.verb==entry.verb): result.append(entry)
+	return result
+func interaction_targets(selected: String="") -> Array:
+	var result: Array=targets(selected)
+	for entry in capability_targets(selected):
+		if not result.any(func(t): return t.target_id==entry.target_id and t.verb==entry.verb): result.append(entry)
+	return result
+
 func _arrival_clear(number: int,cell: Array) -> bool:
 	if number<1 or number>_s.floor_count or cell[0]<0 or cell[1]<0 or cell[0]>=17 or cell[1]>=17: return false
 	var f: Dictionary=_s.floors[number-1]
@@ -205,7 +223,7 @@ func _clear_sight(cell: Array) -> bool:
 	return false
 
 func ring_targets(id: String) -> Array:
-	if _s.status!="playing" or _s.rules_version not in ["m3.1","m3.2","m3.3"] or not _s.items.has(id) or _s.items[id].kind!="clapper" or _s.items[id].location not in ["pack","equip"] or not ring_ready(): return []
+	if _s.status!="playing" or _s.rules_version not in ["m3.1","m3.2","m3.3","m4.1"] or not _s.items.has(id) or _s.items[id].kind!="clapper" or _s.items[id].location not in ["pack","equip"] or not ring_ready(): return []
 	var result: Array=[]
 	var direction: Array=DIRS[_s.facing]
 	for actor in _floor().actors:
@@ -220,7 +238,7 @@ func ring_targets(id: String) -> Array:
 func legal_verbs(selected: String = "") -> Array:
 	if _s.status!="playing": return []
 	var front := inspect_front()
-	var matches: Array=Cap.targets(self,selected)
+	var matches: Array=capability_targets(selected)
 	if not matches.is_empty(): return _travel_verb([{"label":matches[0].verb,"action":matches[0].action},{"label":"GUARD","action":{"type":"guard"}},{"label":"WAIT","action":{"type":"wait"}}])
 	if not ring_targets(selected).is_empty():
 		var ringing: Array=[{"label":"RING","action":{"type":"ring","item_id":selected}}, {"label":"GUARD","action":{"type":"guard"}}]
@@ -312,11 +330,11 @@ func _enemies(old_states: Dictionary, guarded: bool) -> void:
 			var damage:=0
 			var absorbed:=false
 			if cell==_s.pos and not guarded:
-				damage=1
+				damage=enemy_damage(actor)
 				var coat_id: String=_s.equipment.body
 				if not coat_id.is_empty() and not _s.items[coat_id].spent:
 					damage=0; absorbed=true; _s.items[coat_id].spent=true
-				_s.hp-=damage
+				_s.hp=maxi(0,_s.hp-damage)
 			_event("attack_resolved","attack",{"actor_id":actor.id,"cell":cell,"damage":damage,
 				"blocked":cell==_s.pos and guarded,"armour":absorbed})
 			actor.intent={}
@@ -335,13 +353,14 @@ func _enemies(old_states: Dictionary, guarded: bool) -> void:
 			actor.state="windup"
 			actor.intent={"cell":_s.pos.duplicate(),"due_in":1}
 			_event("intent_announced","prepare",{"actor_id":actor.id,"intent":actor.intent.duplicate(true)})
-func _resolve_damage(hit: bool,guarded: bool) -> int:
+func enemy_damage(actor: Dictionary) -> int: return int(actor.get("damage",1))
+func _resolve_damage(hit: bool,guarded: bool,amount: int=1) -> int:
 	if not hit or guarded: return 0
 	var coat_id: String=_s.equipment.body
 	if coat_id!="" and not _s.items[coat_id].spent:
 		_s.items[coat_id].spent=true; return 0
-	_s.hp-=1
-	return 1
+	_s.hp=maxi(0,_s.hp-amount)
+	return amount
 func weapon_damage() -> int:
 	var id: String=_s.equipment.hand
 	return int(definition(id).get("damage",1)) if not id.is_empty() else 1
@@ -498,7 +517,7 @@ func apply(action: Dictionary) -> Dictionary:
 			_event("lift_ride","transition",{"from":old_floor,"to":_s.floor,"target_id":fixture.destination_id})
 		"ring":
 			var listeners: Array=ring_targets(id)
-			if _s.rules_version!="m3.3": _s.rules_version="m3.2"; _s.content_version="m3.2"
+			if _s.rules_version not in ["m3.3","m4.1"]: _s.rules_version="m3.2"; _s.content_version="m3.2"
 			_floor().bell_rung=true
 			for listener in listeners:
 				var husk:=_actor(listener)
@@ -538,5 +557,5 @@ func view_snapshot() -> Dictionary:
 	for id in _s.items:
 		var item: Dictionary=_s.items[id]
 		if item.location=="floor" and item.floor==_s.floor and not item.get("hidden",false):
-			f.objects.append({"id":id,"kind":item.kind,"pos":item.pos.duplicate(),"lit":item.get("lit",false)})
+			f.objects.append({"id":id,"kind":item.kind,"pos":item.pos.duplicate(),"lit":item.get("lit",false),"spent":item.spent})
 	return f

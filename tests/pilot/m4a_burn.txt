@@ -1,0 +1,39 @@
+# Ordinary real taps, isolated saves, muted by Autopilot.
+wait 4
+call new_run BELL42 2
+waitidle
+wait 3
+tapnamed fwd
+waitidle
+tapnamed turn_l
+waitidle
+tapnamed hot_item_f1_torch
+waitidle
+tapnamed turn_l
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed verb0
+waitidle
+tapnamed pack0
+wait 2
+tapnamed card_use
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_l
+waitidle
+tapnamed fwd
+waitidle
+shot 03_equipped_torch_burn
+tapnamed hot_f1_web
+wait 2
+shot 04_tap_burning_web
+waitidle
+call assert hash d7957667e4eb46286477f1ad235a3ebe40298661b9cdb23f9d5537e3cf495aa3
+call assert hp 6
+close

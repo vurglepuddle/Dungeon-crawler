@@ -3,6 +3,7 @@ extends RefCounted
 const Catalog = preload("res://scripts/content/catalog.gd")
 const Rooms=preload("res://scripts/gen/capability_rooms.gd")
 const Dressing=preload("res://scripts/gen/room_dressing.gd")
+const Deep=preload("res://scripts/gen/deep_watch.gd")
 const ALPHABET := "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"
 const WIDTH := 17
 const HEIGHT := 17
@@ -42,7 +43,7 @@ func generate(raw: String,count: int=2) -> Dictionary:
 		# Entry floor teaches both gates. Later floors choose a different module mix.
 		var module:=0 if number==1 else _next(3)
 		var weight_gate: bool=module!=2
-		var keyed_gate: bool=module!=1
+		var keyed_gate: bool=module!=1 or number>=3
 		var tiles: Array=[]; tiles.resize(WIDTH*HEIGHT); tiles.fill(1)
 		_carve(tiles,spine-1,12,spine+1,15)
 		_carve(tiles,spine,4,spine,12)
@@ -103,6 +104,7 @@ func generate(raw: String,count: int=2) -> Dictionary:
 	items.bell_clapper={"id":"bell_clapper","kind":"clapper","location":"floor","floor":1,"pos":[first.layout.branch,8],"slot":"","spent":false}
 	var result: Dictionary={"ok":true,"seed":seed,"floors":floors,"items":items}
 	Rooms.decorate(result)
+	Deep.decorate(result)
 	_clear_spawn_cells(result)
 	Dressing.place(result)
 	return result

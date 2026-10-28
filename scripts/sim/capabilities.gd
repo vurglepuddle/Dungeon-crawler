@@ -1,7 +1,7 @@
 extends RefCounted
 ## Explicit, deterministic capability actions. No view/audio or wall-clock state.
 const ACTIONS=["light","burn","cut","feed","dispel","reveal","toss"]
-static func enabled(sim) -> bool: return sim._s.rules_version=="m3.3"
+static func enabled(sim) -> bool: return sim._s.rules_version in ["m3.3","m4.1"]
 static func owned(sim,id: String) -> bool:
 	return sim._s.items.has(id) and sim._s.items[id].location in ["pack","equip","belt"]
 static func has(sim,id: String,tag: String) -> bool:
@@ -129,7 +129,7 @@ static func hound_phase(sim,actor: Dictionary,old: String,guarded: bool) -> bool
 	if old=="windup":
 		var lane: Array=actor.intent.lane.duplicate(true)
 		var hit: bool=lane.has(sim._s.pos)
-		var damage: int=sim._resolve_damage(hit,guarded)
+		var damage: int=sim._resolve_damage(hit,guarded,sim.enemy_damage(actor))
 		for cell in lane:
 			if cell==sim._s.pos or not sim.can_walk(cell): break
 			actor.pos=cell.duplicate()

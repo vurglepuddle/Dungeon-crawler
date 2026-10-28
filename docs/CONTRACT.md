@@ -1,6 +1,7 @@
-# M3f contract
+# M4a contract
 
-New runs use rules/content/generator m3.3; snapshot/envelope schema stays 2.
+New one/two-floor runs use m3.3; new three/four-floor runs use rules/content/
+generator m4.1. Snapshot/envelope schema stays 2.
 Exact m2.1, m3.1 and m3.2 cohorts remain readable and playable from stored
 floors. Loading never regenerates or changes a hash. The first RING in a legacy
 M3a run upgrades rules/content to m3.2 while retaining its generator and floors.
@@ -473,7 +474,7 @@ runtime never reads art_src. Travel glints use the arch aperture projection.
 Story frames use presentation elapsed time, reset per menu, loop only on
 splash/title and hold the last result frame. The splash remains skippable.
 
-Optional overlay path: `res://assets/art/ui_offer/owner_overlay.png`, native
+Optional overlay path: `res://assets/art/ui/owner_vines.png`, native
 154x342 transparent PNG. Main creates one mouse-ignoring layer above chrome
 and below cards/modals; missing file means no overlay. Current vine offers
 are deliberately not loaded. No project setting or export preset is changed.
@@ -484,3 +485,52 @@ active pilots, retaining isolated saves and master mute. The owner route
 uses real forward taps for stairs, working lift and final exit. D's harness
 is unchanged. `run_m3f_pack.ps1` exports only accepted runtime inputs and
 probes a full tour from an empty resource directory; vines/WIP are excluded.
+
+## M4a depth and direct interactions
+
+Ordinary new-game UI defaults to three floors; --floors=1..4 remains available.
+The pure Sim constructor and main.new_run(seed,count=2) retain their explicit
+API default for existing callers. Pilot new_run without a count uses the UI
+floor count. Retained M3 pilots now pass 2 explicitly. Continue reads the
+stored count/profile, including m3.3 two-floor runs, without upgrading them.
+An actual M3f envelope is retained as tests/fixtures/m3f_run.json and checked
+through both the production codec and Main's Continue path.
+
+m4.1 adds an optional integer actor.damage in [1,3], validated before use.
+New deep actors store 2 for Husk/Ghost and 3 for Hound. Missing fields mean
+one, so all prior profiles retain their rules. HP remains bounded at 0..6;
+coats absorb one full hit, guard absorbs the hit, and no timing/HP inflation
+is added. RING retains m4.1 instead of applying the legacy m3.2 upgrade.
+Optional floor.title is a string of at most 22 characters. New deeper floors
+have three actors, a keyed gate and both optional capability modules.
+
+capability_targets(selected) adds implicit LIGHT for an owned cold torch and
+BURN for selected/equipped FIRE, using the same explicit light/burn action
+shapes and validation. interaction_targets combines these with existing item
+targets. Selection and hand take priority over pack order. No implicit FEED,
+DISPEL or throw is introduced. Hidden inspection targets behind closed
+capability fixtures cannot intercept a torch target's real tap.
+
+All projected travel faces have named hotspots, including at a distance.
+Main's travel tap calls the normal action when reachable, says Step closer
+without mutation when distant, explains an inactive lift, and uses SIDLE for
+an occupied stair arrival. The general blocker message is not used for face
+inspection. pilot where hot_FIXTURE_ID resolves its actual target even when
+that fixture also uses the historical hot_front name. Public state adds the
+two feedback lines as message; assert joins multiword expected values.
+
+view_snapshot objects include spent, and the renderer uses the twelve new
+world-item states at native depth canvases. Torch and Seal paths are unchanged.
+Shadows use cached opaque bounds. No texture readback occurs per drawn column.
+The camera, viewport bands, touch targets and compass registration are unchanged.
+The owner's owner_vines.png layer renders above the needle and view edges and
+hides under cards/modals/map. No draft vine PNG is loaded.
+
+The deep witness visits capability modules before the key when touring,
+replans after moving Hounds and walks around peaceful bodies. Its safe route
+proves zero damage without food on core paths; its tour proves food and wards
+as alternative answers. It can resume from a stored current floor. Tests
+separately exercise deliberate deep hits, coat absorption and healing.
+run_m4a_checks.ps1 runs sixteen suites. run_m4a_pilots.ps1 adds eight muted
+real-input pilots to the twenty-six inherited ones, including a deep Continue
+pair. D's unchanged default QA runner remains a separate audit.

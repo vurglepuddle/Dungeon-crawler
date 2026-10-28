@@ -1,0 +1,9 @@
+wait 4
+tapnamed continue
+waitidle
+call assert floor_count 3
+call assert floor 3
+call assert hash df0548ef8f977bc013047734f0ca114f39da508abab25f22b6f09a70aca42fe9
+call assert save_ok true
+shot 10_deep_continue
+close

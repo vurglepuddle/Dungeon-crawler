@@ -7,6 +7,6 @@ tapnamed sound
 call assert music false
 call assert sfx false
 shot 35_audio_off
-call new_run BELL42
+call new_run BELL42 2
 waitidle
 close

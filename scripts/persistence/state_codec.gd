@@ -29,7 +29,7 @@ static func validate(s: Dictionary) -> bool:
 	if not s.schema_version is int or s.schema_version!=2: return false
 	for key in ["rules_version","generator_version","content_version","status"]:
 		if not s[key] is String: return false
-	var profiles: Dictionary={"m2.1":"m2.1","m3.1":"m3.1","m3.2":"m3.1","m3.3":"m3.3"}
+	var profiles: Dictionary={"m2.1":"m2.1","m3.1":"m3.1","m3.2":"m3.1","m3.3":"m3.3","m4.1":"m4.1"}
 	if not profiles.has(s.rules_version) or s.generator_version!=profiles[s.rules_version] or s.content_version!=s.rules_version: return false
 	if not s.seed is String or Gen.normalize_seed(s.seed)!=s.seed: return false
 	for key in ["floor_count","floor","facing","turn","revision","hp","max_hp"]:
@@ -56,7 +56,8 @@ static func validate(s: Dictionary) -> bool:
 			if not tile is int or tile not in [0,1]: return false
 		for seen in f.visited:
 			if not seen is bool: return false
-		if f.has("bell_rung") and (not f.bell_rung is bool or s.rules_version not in ["m3.2","m3.3"]): return false
+		if f.has("bell_rung") and (not f.bell_rung is bool or s.rules_version not in ["m3.2","m3.3","m4.1"]): return false
+		if f.has("title") and (not f.title is String or f.title.length()>22): return false
 		if not _cell(f.start,f) or not _cell(f.landing,f): return false
 		if f.has("props"):
 			if not f.props is Array or f.props.size()>8: return false
@@ -78,7 +79,7 @@ static func validate(s: Dictionary) -> bool:
 			all_ids[fixture.id]=true; fixture_ids[fixture.id]=fixture
 			fixtures_all[fixture.id]=fixture; fixture_floors[fixture.id]=floor_number
 			if not fixture.get("type") is String or fixture.type not in ["plate","gate","latch","lock","stairs_up","stairs_down","exit","porter","lift","brazier","web","cord","panel"]: return false
-			if fixture.type in ["brazier","web","cord","panel"] and s.rules_version!="m3.3": return false
+			if fixture.type in ["brazier","web","cord","panel"] and s.rules_version not in ["m3.3","m4.1"]: return false
 			if fixture.type=="brazier" and not fixture.get("lit") is bool: return false
 			if fixture.type in ["web","cord","panel"] and not fixture.get("open") is bool: return false
 			if fixture.type=="panel":
@@ -109,8 +110,9 @@ static func validate(s: Dictionary) -> bool:
 				if not actor.has(key): return false
 			if not actor.id is String or not actor.kind is String or not actor.state is String or all_ids.has(actor.id) or not Catalog.CREATURES.has(actor.kind) or not _cell(actor.pos,f): return false
 			all_ids[actor.id]=true
+			if actor.has("damage") and (s.rules_version!="m4.1" or not actor.damage is int or actor.damage<1 or actor.damage>3): return false
 			if not actor.hp is int or actor.hp<0 or actor.hp>Catalog.CREATURES[actor.kind].hp or actor.state not in ["idle","windup","recovery","dead","peaceful"] or not actor.intent is Dictionary: return false
-			if actor.kind!="husk" and s.rules_version!="m3.3" or actor.state=="peaceful" and actor.kind!="hound": return false
+			if actor.kind!="husk" and s.rules_version not in ["m3.3","m4.1"] or actor.state=="peaceful" and actor.kind!="hound": return false
 			if (actor.hp==0)!=(actor.state=="dead"): return false
 			if actor.state=="windup":
 				if not _cell(actor.intent.get("cell"),f) or not actor.intent.get("due_in") is int or actor.intent.due_in!=1: return false
@@ -166,8 +168,8 @@ static func validate(s: Dictionary) -> bool:
 		if not item.pos is Array or item.id!=id or not Catalog.ITEMS.has(item.kind) or not item.spent is bool or not item.floor is int: return false
 		if item.has("owner_id") and not item.owner_id is String: return false
 		for key in ["lit","hidden"]:
-			if item.has(key) and (not item[key] is bool or s.rules_version!="m3.3"): return false
-		if item.kind=="torch" and (s.rules_version!="m3.3" or not item.get("lit") is bool): return false
+			if item.has(key) and (not item[key] is bool or s.rules_version not in ["m3.3","m4.1"]): return false
+		if item.kind=="torch" and (s.rules_version not in ["m3.3","m4.1"] or not item.get("lit") is bool): return false
 		var definition: Dictionary=Catalog.ITEMS[item.kind]
 		match item.location:
 			"floor":

@@ -4,7 +4,7 @@ shot 00_splash
 tapnamed splash_skip
 wait 3
 shot 01_title
-call new_run BELL42
+call new_run BELL42 2
 waitidle
 wait 3
 tapnamed hot_item_f1_stone

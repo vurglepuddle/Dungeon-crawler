@@ -1,0 +1,21 @@
+# Ordinary real taps, isolated saves, muted by Autopilot.
+wait 4
+call new_run B3VJ5K 2
+waitidle
+wait 3
+shot 18_world_items_entry
+tapnamed fwd
+waitidle
+shot 19_world_stone_near
+tapnamed turn_r
+waitidle
+shot 20_items_room_0
+tapnamed turn_r
+waitidle
+shot 20_items_room_1
+tapnamed turn_r
+waitidle
+shot 20_items_room_2
+call assert hash 23cdb3deb317f4d74d0c2ee1a5f842f78298511dc05a13278a76a1618671d9ec
+call assert hp 6
+close

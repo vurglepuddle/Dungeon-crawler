@@ -5,15 +5,16 @@ collect below; some are useful, some are still wanted. Find another use for
 something ordinary. Bring the Dawn Seal home. Eventually, put something back
 where it belongs and watch the dungeon come alive again.
 
-Current milestone: **M3f, the owner's phone pass**. Forward movement into a
-stair, exit or lift face now uses it. Equipment can be put down directly;
-keys count on the belt. The painted upper panels, quieter varied stone,
-shut lift and marked stairs make the dungeon's affordances easier to read.
-The M3e encounter choices remain intact. No new combat or quest mechanics.
+Current milestone: **M4a, the lower watch**. New ordinary games descend three
+floors. The third recombines the existing modules and raises the cost of a
+missed tell. Old Continues retain their own floor count and rules. Pocketed
+reeds can be lit by touching a brazier; equipped or selected lit reeds burn a
+web by touch. Dedicated painted world items replace the old enlarged icons.
 
 ## The playable run
 
-Two generated, persistent floors. Cross a weight gate, find the side-room key,
+New ordinary runs have three generated, persistent floors; stored runs keep
+their original count. Cross a weight gate, find the side-room key,
 pass the keyed gate and meet the Bell Porter. Descend, take the Dawn Seal and
 return home. Later floors can have a weight gate, a keyed gate, or both.
 Stairs work both ways. Gates, monsters, dropped loot, equipment, restored
@@ -28,12 +29,12 @@ correction does not strand the Finder below a frozen enemy.
 Entry and upper rooms are three cells wide; narrow corridors join a useful
 loop and a small side room. Seeds vary loop reach, loop height, which side
 holds the key, landing position, later gate modules and ordinary loot.
-Floor count remains a parameter (1-4). No corridor length is added merely to
+Floor count remains a parameter (1-4); new-game UI defaults to three. No corridor length is added merely to
 make a witness longer. Across 300 two-floor seeds, stairs-only witnesses take
 65-95 turns and restoration witnesses 60-85. This is more structural variety
 than M2's 77-81. Optional capability branches now add another encounter vocabulary.
 
-BELL42 takes 73 turns if the clapper is left alone, 74 if carried as a club,
+For the retained two-floor reference, BELL42 takes 73 turns if the clapper is left alone, 74 if carried as a club,
 or 66 if returned and the lift used. These are reproducible bot routes, not
 optimal-path or fifteen-minute human pacing claims.
 
@@ -337,3 +338,41 @@ The optional transparent owner overlay sits above chrome and below modals;
 no vines are enabled yet. Floor materials use stable world-cell choices,
 with wet patches rare on floor one and more common below. Menu paintings
 move through only two or three supplied frames; they never delay input.
+
+## The Lower Watch (M4a)
+
+The first two floors keep their teaching difficulty and easy-to-miss branches.
+On three, a Hound watches the key loop and the Husk watches the spine. A
+webbed storeroom and a corded cold chapel remain optional. Food, fresh padding,
+a light and an EDGE are offered before committing. Deeper floors always have
+a keyed gate; the seed still varies the weight module, loop and ordinary loot.
+Three actors maximum preserve a clear SIDLE neighbour if an arrival is occupied.
+
+Deep Husk/Ghost misses cost two HP and the Hound costs three. Their intent
+text names the damage. Timing, HP, guard, dodge and recovery stay familiar.
+A coat catches one whole hit. Food can heal or spare the Hound; no ration or
+light becomes essential to the Seal route. A perfect witness still takes zero
+damage. We do not force eating through unavoidable chip damage.
+
+Across 300 three-floor seeds, core keep/return/skip routes take 84-146 turns;
+capability tours take 176-225. The BELL42 real-tap route takes 193 with a coat
+catching a deep blow. Roughly 10-15 human minutes is a target pending phone
+play, not a measured result. The complete proposal and cuts are in
+proposals/M4_DEPTH.md. Longer floors and additional combat systems await review.
+
+Brazier LIGHT resolves a selected, hand-held or pocketed cold torch. BURN uses
+a selected or equipped lit torch; ordinary web touches no longer open the
+Hound's inspection card through the strands. The explicit two-cell TOSS remains.
+Visible travel faces take a touch even out of reach: they say Step closer.
+Near stairs choose the ordinary safe arrival/SIDLE action; dead lifts explain
+why they cannot move. These inspections never advance time.
+
+World items use B's complete native 64x48/40x30/24x18 frames and ground anchors,
+with contact shadows fitted to opaque bounds. Spent padding has its torn frame.
+Torches and the Seal retain their dedicated fixture canvases and pulses.
+Inventory icons and the thirteen item definitions remain unchanged.
+
+The view frame is fixed at (0,18,154,156), its picture (3,21,148,150), and the
+compass box (85,294,66,44). The owner's optional 154x342 transparent overlay
+loads from assets/art/ui/owner_vines.png, above picture/chrome/needle, hidden
+while a card, modal or map is open. The draft is not wired or copied.

@@ -34,7 +34,7 @@ func emit(action: Dictionary) -> void:
 			add("tapnamed belt_f1_key"); add("wait 3"); add("shot 21_key_gate_card"); add("tapnamed card_close"); add("waitidle")
 func _initialize() -> void:
 	replay=Sim.new("B3VJ5K")
-	lines=["# Owner's seed; real taps, no state injection. Muted by Autopilot.","wait 4","shot 00_splash","tapnamed splash_skip","wait 3","shot 00_title","call new_run B3VJ5K","wait 3","waitidle","shot 01_upper_materials"]
+	lines=["# Owner's seed; real taps, no state injection. Muted by Autopilot.","wait 4","shot 00_splash","tapnamed splash_skip","wait 3","shot 00_title","call new_run B3VJ5K 2","wait 3","waitidle","shot 01_upper_materials"]
 	add("tapnamed equip_hand"); add("wait 3"); add("shot 02_equipped_drop_card"); add("tapnamed card_close"); add("waitidle")
 	emit({"type":"drop","item_id":"knife_start"}); add("shot 03_equipment_dropped")
 	emit({"type":"pickup","item_id":"knife_start"}); emit({"type":"equip","item_id":"knife_start"})

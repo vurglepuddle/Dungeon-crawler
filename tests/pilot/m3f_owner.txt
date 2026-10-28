@@ -4,7 +4,7 @@ shot 00_splash
 tapnamed splash_skip
 wait 3
 shot 00_title
-call new_run B3VJ5K
+call new_run B3VJ5K 2
 wait 3
 waitidle
 shot 01_upper_materials

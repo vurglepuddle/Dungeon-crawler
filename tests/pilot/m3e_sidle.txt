@@ -1,6 +1,6 @@
 # QA-01's unchanged ordinary setup, then the visible safe landing verb.
 wait 4
-call new_run AAAAAA
+call new_run AAAAAA 2
 wait 3
 waitidle
 tapnamed hot_item_f1_stone
