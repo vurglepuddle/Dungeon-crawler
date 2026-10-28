@@ -80,3 +80,37 @@ new **open rooms break the first-person view**: a thin band of far wall over a
 flat floor, an empty ceiling, tiny items, invisible stairs, and markers that
 float away from their objects. Also, all 300 witness runs took 77 to 81 turns:
 different shapes, same run. Both go first in M3, before the Bell Porter.
+
+## 28 October 2026: The owner plays it on the phone
+
+The owner installed M2 on the Pixel 9a: "Like the janky vibe. I'm serious!
+This has some super retro vibes." They loved the wall, the walking animation
+and the Finder's portrait, and found what no desktop test had: **saves failed
+on the phone** (the same absolute-path trap as in Wind-up Warren; the app's
+data folder held nothing but a shader cache), **the text was blurry** (VETKA
+was imported with antialiasing, so glyph edges went grey before the 7x
+upscale), the camera hole covered the floor number, item icons sat
+off-centre, and the movement pad was too big for the view it served. Claude
+fixed saves and text the same hour and put a playtest build on the phone. It
+also made the app icon from the painted Bell Husk.
+
+The owner then went back to the crawlers of their youth and sent three
+screenshots: the dungeon centre stage, everything else "elegantly squished
+into place", carved frames, a compact arrow block, inventory icons lying loose
+with no boxes. That became the brief for M3b.
+
+## 28 October 2026: M3a, rooms you can read and the Bell Porter
+
+Codex rebuilt the room view: the Finder's lamp now fades the dungeon to black
+three cells out, floors are flagstones in perspective, ceilings have ribs,
+objects are bigger and cast shadows, and stairs look like stairs. The Bell
+Porter arrived, painted the same way as the Husk: return its clapper and its
+chest lights, a warm chord sounds, and the lift wakes between the landings.
+Generation widened (65 to 95 turns down and back, 60 to 85 with the lift) and
+loot became varied. Claude reran the 59,421 checks and the pilots.
+
+Claude's review: the boxed labels now clutter the picture (one covers the
+Porter's body); the log says "Looking is free." on every turn; and a kept
+clapper is only one extra point of damage, so Claude proposed it should
+*ring*, making every Husk in sight reel. Then keeping it is a different tool
+rather than a bigger number.
