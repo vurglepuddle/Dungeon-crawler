@@ -1,0 +1,109 @@
+{
+  "schema": 1,
+  "id": "title",
+  "title": "The Unclaimed Door",
+  "mode": "D Dorian",
+  "bpm": 72,
+  "beats": 24,
+  "loop": true,
+  "notes": [
+    {
+      "beat": 0,
+      "pitch": 50,
+      "beats": 7,
+      "voice": "drone",
+      "velocity": 0.3
+    },
+    {
+      "beat": 0,
+      "pitch": 74,
+      "beats": 2.5,
+      "voice": "bell",
+      "velocity": 0.5
+    },
+    {
+      "beat": 3,
+      "pitch": 81,
+      "beats": 2.5,
+      "voice": "bell",
+      "velocity": 0.42
+    },
+    {
+      "beat": 4,
+      "pitch": 57,
+      "beats": 2,
+      "voice": "reed",
+      "velocity": 0.18
+    },
+    {
+      "beat": 6,
+      "pitch": 76,
+      "beats": 2.5,
+      "voice": "bell",
+      "velocity": 0.46
+    },
+    {
+      "beat": 8,
+      "pitch": 48,
+      "beats": 7,
+      "voice": "drone",
+      "velocity": 0.25
+    },
+    {
+      "beat": 9,
+      "pitch": 77,
+      "beats": 3,
+      "voice": "bell",
+      "velocity": 0.5
+    },
+    {
+      "beat": 12,
+      "pitch": 55,
+      "beats": 2,
+      "voice": "reed",
+      "velocity": 0.18
+    },
+    {
+      "beat": 13,
+      "pitch": 71,
+      "beats": 2,
+      "voice": "reed",
+      "velocity": 0.23
+    },
+    {
+      "beat": 16,
+      "pitch": 50,
+      "beats": 7.5,
+      "voice": "drone",
+      "velocity": 0.28
+    },
+    {
+      "beat": 16,
+      "pitch": 69,
+      "beats": 2.5,
+      "voice": "bell",
+      "velocity": 0.38
+    },
+    {
+      "beat": 19,
+      "pitch": 76,
+      "beats": 2,
+      "voice": "bell",
+      "velocity": 0.5
+    },
+    {
+      "beat": 20,
+      "pitch": 57,
+      "beats": 2,
+      "voice": "reed",
+      "velocity": 0.18
+    },
+    {
+      "beat": 22,
+      "pitch": 74,
+      "beats": 1.5,
+      "voice": "bell",
+      "velocity": 0.5
+    }
+  ]
+}

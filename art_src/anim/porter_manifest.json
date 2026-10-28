@@ -1,0 +1,59 @@
+{
+  "source": "art_src/anim/sources/porter_restored.png",
+  "source_bounds": [
+    [
+      26,
+      5,
+      1287,
+      1174
+    ]
+  ],
+  "source_sha256": "b1f49ed9d71f5d95773833c29df27fd6fed8deb5c82dc782458300ab2c6bad3f",
+  "assets": [
+    {
+      "path": "assets/art/anim/porter_restored_64.png",
+      "size": [
+        70,
+        64
+      ],
+      "opaque_colors": 31,
+      "sha256": "87bd12985ed207ab3083b56856eaf8207b4cc29fc3fb40dcfd120591c8db88ac",
+      "state": "restored",
+      "anchor": [
+        35,
+        64
+      ],
+      "anchor_kind": "feet bottom centre"
+    },
+    {
+      "path": "assets/art/anim/porter_restored_40.png",
+      "size": [
+        44,
+        40
+      ],
+      "opaque_colors": 31,
+      "sha256": "10f72ff11dfdcf1ced336c993ffb8b003d5e04d2e7e49d253a5d33c5897542d8",
+      "state": "restored",
+      "anchor": [
+        22,
+        40
+      ],
+      "anchor_kind": "feet bottom centre"
+    },
+    {
+      "path": "assets/art/anim/porter_restored_24.png",
+      "size": [
+        26,
+        24
+      ],
+      "opaque_colors": 30,
+      "sha256": "6673e3fca68108b13b63dacdd33f3e8bc05a92983305134d003de4935d745f86",
+      "state": "restored",
+      "anchor": [
+        13,
+        24
+      ],
+      "anchor_kind": "feet bottom centre"
+    }
+  ]
+}

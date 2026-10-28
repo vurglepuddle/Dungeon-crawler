@@ -1,0 +1,194 @@
+{
+  "source": "art_src/anim/sources/bell_husk_sheet.png",
+  "source_sha256": "e93c2801fa781b9892671d99b7f0f47c9f0ab87a104bd86f5b0d3f1cbc2f9cf5",
+  "source_bounds": [
+    [
+      66,
+      70,
+      643,
+      710
+    ],
+    [
+      760,
+      6,
+      1396,
+      711
+    ],
+    [
+      1473,
+      148,
+      2147,
+      712
+    ]
+  ],
+  "shared_source_scale_at_64": 0.08794326241134752,
+  "states": [
+    "idle",
+    "windup",
+    "recoil"
+  ],
+  "assets": [
+    {
+      "path": "assets/art/anim/bell_husk_idle_64.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 30,
+      "sha256": "de1747038cb75860091a36e5b840ee97a8095c7763cb35ccf757ccd315101e67",
+      "state": "idle",
+      "anchor": [
+        32,
+        64
+      ],
+      "anchor_kind": "feet / hover bottom centre"
+    },
+    {
+      "path": "assets/art/anim/bell_husk_windup_64.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 31,
+      "sha256": "f6b098fb0f0fd3876bc4418e4742e371f27cd741064e314f8b4de0ea94bb133f",
+      "state": "windup",
+      "anchor": [
+        32,
+        64
+      ],
+      "anchor_kind": "feet / hover bottom centre"
+    },
+    {
+      "path": "assets/art/anim/bell_husk_recoil_64.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 31,
+      "sha256": "28bd1d7c1b9c9d4d0c1cbe729eaf35d1acdf3d890e586a2a423418e83f81403b",
+      "state": "recoil",
+      "anchor": [
+        32,
+        64
+      ],
+      "anchor_kind": "feet / hover bottom centre"
+    },
+    {
+      "path": "assets/art/anim/bell_husk_strip_64.png",
+      "size": [
+        192,
+        64
+      ],
+      "opaque_colors": 31,
+      "sha256": "def740ee0f867661aa4e530f5eb7aaf6301188c18afa0d1e3d5e6f9288ecb4d3"
+    },
+    {
+      "path": "assets/art/anim/bell_husk_idle_40.png",
+      "size": [
+        40,
+        40
+      ],
+      "opaque_colors": 27,
+      "sha256": "4c42f2c34e35eb25c420166e992d0b56d249608c6ab7aca3a64b38b082cebd54",
+      "state": "idle",
+      "anchor": [
+        20,
+        40
+      ],
+      "anchor_kind": "feet / hover bottom centre"
+    },
+    {
+      "path": "assets/art/anim/bell_husk_windup_40.png",
+      "size": [
+        40,
+        40
+      ],
+      "opaque_colors": 31,
+      "sha256": "65787681a7ce19a9ac8847f093b01d9b26c1cbbb8532b4dc258f2b611e745f6e",
+      "state": "windup",
+      "anchor": [
+        20,
+        40
+      ],
+      "anchor_kind": "feet / hover bottom centre"
+    },
+    {
+      "path": "assets/art/anim/bell_husk_recoil_40.png",
+      "size": [
+        40,
+        40
+      ],
+      "opaque_colors": 29,
+      "sha256": "d28360447e61947d525f585734c28461d3beb67c3cc055b25b6646a4cd48627b",
+      "state": "recoil",
+      "anchor": [
+        20,
+        40
+      ],
+      "anchor_kind": "feet / hover bottom centre"
+    },
+    {
+      "path": "assets/art/anim/bell_husk_strip_40.png",
+      "size": [
+        120,
+        40
+      ],
+      "opaque_colors": 31,
+      "sha256": "c18c239ba0ff1cd36410069b4fd9ff12a70a65a3502647fe0e31988129efc960"
+    },
+    {
+      "path": "assets/art/anim/bell_husk_idle_24.png",
+      "size": [
+        24,
+        24
+      ],
+      "opaque_colors": 27,
+      "sha256": "1eb3548bd8f080df2acb52f47afd001b377803bacb7efefc953f65de77bf7ac9",
+      "state": "idle",
+      "anchor": [
+        12,
+        24
+      ],
+      "anchor_kind": "feet / hover bottom centre"
+    },
+    {
+      "path": "assets/art/anim/bell_husk_windup_24.png",
+      "size": [
+        24,
+        24
+      ],
+      "opaque_colors": 26,
+      "sha256": "86edc56934b0d181ab22567283d059eb301b81d9382a54bb28d12c8b6bea6faf",
+      "state": "windup",
+      "anchor": [
+        12,
+        24
+      ],
+      "anchor_kind": "feet / hover bottom centre"
+    },
+    {
+      "path": "assets/art/anim/bell_husk_recoil_24.png",
+      "size": [
+        24,
+        24
+      ],
+      "opaque_colors": 28,
+      "sha256": "6687ece1205250b476a4f103dee1ae1fd9e0ca65c9d3d72561df5b0ea4a17d1f",
+      "state": "recoil",
+      "anchor": [
+        12,
+        24
+      ],
+      "anchor_kind": "feet / hover bottom centre"
+    },
+    {
+      "path": "assets/art/anim/bell_husk_strip_24.png",
+      "size": [
+        72,
+        24
+      ],
+      "opaque_colors": 30,
+      "sha256": "cd45c16dc479ee0a2adddc1297241207bfc3c5b98f4ed1f32ac4a4d83e11b5ab"
+    }
+  ]
+}

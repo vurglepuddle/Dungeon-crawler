@@ -1,0 +1,158 @@
+{
+  "frames": 3,
+  "frame_size": [
+    64,
+    64
+  ],
+  "anchor": [
+    32,
+    32
+  ],
+  "frame_ms": 80,
+  "assets": [
+    {
+      "path": "assets/art/fx/edge_0_64.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 2,
+      "sha256": "88ac63438a120f6568d8fd19a8d7b6d295c3329cc68c5e35508a2a5d039e6b5c"
+    },
+    {
+      "path": "assets/art/fx/edge_1_64.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 4,
+      "sha256": "b76fb6a2541b619be8ab0390c154a9decb4c4d999566133ef7d17b2523f9a413"
+    },
+    {
+      "path": "assets/art/fx/edge_2_64.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 2,
+      "sha256": "64907ee90bacab62dd7ae804582dcc19eba78077c09ece8b241f4afb606936bd"
+    },
+    {
+      "path": "assets/art/fx/edge_strip_64.png",
+      "size": [
+        192,
+        64
+      ],
+      "opaque_colors": 6,
+      "sha256": "6bd34a4928b7343dd1f9d8bceec371370b7d882d1a366f3a3c9409fce6861cd0"
+    },
+    {
+      "path": "assets/art/fx/heavy_0_64.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 3,
+      "sha256": "1d448ad7f272c09f07a8ef230a3277be10a514330089e3f98b670bf6eb04cc2f"
+    },
+    {
+      "path": "assets/art/fx/heavy_1_64.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 3,
+      "sha256": "7f6702bd26e444bd89592d454eba8e65d1a5846d351a8257051077677b07cab9"
+    },
+    {
+      "path": "assets/art/fx/heavy_2_64.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 2,
+      "sha256": "eba0439c7c79cde824d182aba0e53d7602e0b999b6d90bdcf80b16297ad93e32"
+    },
+    {
+      "path": "assets/art/fx/heavy_strip_64.png",
+      "size": [
+        192,
+        64
+      ],
+      "opaque_colors": 7,
+      "sha256": "b3ac90b77fcf3eef39cd0d29340a2b79ca3025aca7e6cee7a36d77cfa52effa2"
+    },
+    {
+      "path": "assets/art/fx/hands_0_64.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 2,
+      "sha256": "12b38521ed629049665a55aacef2be2eaf987514627fdc78fe0bd36907b05346"
+    },
+    {
+      "path": "assets/art/fx/hands_1_64.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 2,
+      "sha256": "485c754b47c63a4657612de3c26be3b3d358cf54614cb9561ece2e073cbf0af2"
+    },
+    {
+      "path": "assets/art/fx/hands_2_64.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 1,
+      "sha256": "ad14580d3d0fff8eec7addacbdd565eb4b2a34863e24baef7a60bb246da9deea"
+    },
+    {
+      "path": "assets/art/fx/hands_strip_64.png",
+      "size": [
+        192,
+        64
+      ],
+      "opaque_colors": 4,
+      "sha256": "79dac9653720f70344939024e0cecc2ed962017940f56d8adfebb40fa8bf40f5"
+    },
+    {
+      "path": "assets/art/fx/damage_burst_0_64.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 1,
+      "sha256": "82573d0345fd86f34b8fd0794ae0b4a1e3966efc0c3b1cd36bdbd5114c4360cc"
+    },
+    {
+      "path": "assets/art/fx/damage_burst_1_64.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 1,
+      "sha256": "b41315a6d1dc53ce765af4c33c2e02c55df6cf4eb092019b9dd483689ddc8439"
+    },
+    {
+      "path": "assets/art/fx/damage_burst_2_64.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_colors": 1,
+      "sha256": "d24a9202d17ab1283262c8e326fcf975e7f69bc66837ff161f21307fdf31080c"
+    },
+    {
+      "path": "assets/art/fx/damage_burst_strip_64.png",
+      "size": [
+        192,
+        64
+      ],
+      "opaque_colors": 3,
+      "sha256": "ad8ae123c1b775837d90ad267d4fd20794bcae0e43cb4449d287f599fd326666"
+    }
+  ]
+}

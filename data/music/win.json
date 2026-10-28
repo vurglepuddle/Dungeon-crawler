@@ -1,0 +1,74 @@
+{
+  "schema": 1,
+  "id": "win",
+  "title": "Something Returned",
+  "mode": "D Dorian",
+  "bpm": 84,
+  "beats": 8,
+  "loop": false,
+  "notes": [
+    {
+      "beat": 0,
+      "pitch": 50,
+      "beats": 6.5,
+      "voice": "drone",
+      "velocity": 0.3
+    },
+    {
+      "beat": 0,
+      "pitch": 74,
+      "beats": 1.6,
+      "voice": "bell",
+      "velocity": 0.5
+    },
+    {
+      "beat": 1,
+      "pitch": 81,
+      "beats": 1.6,
+      "voice": "bell",
+      "velocity": 0.43
+    },
+    {
+      "beat": 2,
+      "pitch": 76,
+      "beats": 1.6,
+      "voice": "bell",
+      "velocity": 0.46
+    },
+    {
+      "beat": 3,
+      "pitch": 77,
+      "beats": 1.6,
+      "voice": "bell",
+      "velocity": 0.48
+    },
+    {
+      "beat": 4,
+      "pitch": 83,
+      "beats": 1.2,
+      "voice": "bell",
+      "velocity": 0.35
+    },
+    {
+      "beat": 5,
+      "pitch": 62,
+      "beats": 2.5,
+      "voice": "reed",
+      "velocity": 0.22
+    },
+    {
+      "beat": 5,
+      "pitch": 69,
+      "beats": 2.5,
+      "voice": "reed",
+      "velocity": 0.23
+    },
+    {
+      "beat": 5,
+      "pitch": 86,
+      "beats": 2.5,
+      "voice": "bell",
+      "velocity": 0.48
+    }
+  ]
+}

@@ -1,0 +1,194 @@
+{
+  "source": "art_src/creatures/sources/wick_ghost_sheet.png",
+  "source_sha256": "8471c92abee86f7191d040a11bd45acbbbfaaf6729fa4d7f7774d4b2cdc2294b",
+  "source_bounds": [
+    [
+      119,
+      58,
+      573,
+      687
+    ],
+    [
+      673,
+      15,
+      1507,
+      709
+    ],
+    [
+      1537,
+      86,
+      2086,
+      693
+    ]
+  ],
+  "shared_source_scale_at_64": 0.0893371757925072,
+  "states": [
+    "idle",
+    "windup",
+    "recoil"
+  ],
+  "assets": [
+    {
+      "path": "assets/art/creatures/wick_ghost_idle_64.png",
+      "size": [
+        80,
+        64
+      ],
+      "opaque_colors": 23,
+      "sha256": "356f2e655030a00ef67b432433e9a6d8c8e8f1744b3ce12dcd9331a76f4086f9",
+      "state": "idle",
+      "anchor": [
+        40,
+        64
+      ],
+      "anchor_kind": "feet / hover bottom centre"
+    },
+    {
+      "path": "assets/art/creatures/wick_ghost_windup_64.png",
+      "size": [
+        80,
+        64
+      ],
+      "opaque_colors": 27,
+      "sha256": "8e691c49a3ce1ad0e35229b8565905556b33092fd16adbd2a2eba6b7713860e4",
+      "state": "windup",
+      "anchor": [
+        40,
+        64
+      ],
+      "anchor_kind": "feet / hover bottom centre"
+    },
+    {
+      "path": "assets/art/creatures/wick_ghost_recoil_64.png",
+      "size": [
+        80,
+        64
+      ],
+      "opaque_colors": 13,
+      "sha256": "b669d3ffbf50a5d6f58cfe88d462cf6f5041476bb05bc94ab4ae4d68f48c9e6a",
+      "state": "recoil",
+      "anchor": [
+        40,
+        64
+      ],
+      "anchor_kind": "feet / hover bottom centre"
+    },
+    {
+      "path": "assets/art/creatures/wick_ghost_strip_64.png",
+      "size": [
+        240,
+        64
+      ],
+      "opaque_colors": 27,
+      "sha256": "1fc3f701de315444529eeb5f6863aaf52c594dadef529ad7b6fd9431a7f8045b"
+    },
+    {
+      "path": "assets/art/creatures/wick_ghost_idle_40.png",
+      "size": [
+        50,
+        40
+      ],
+      "opaque_colors": 19,
+      "sha256": "c66a9a1f39771171f20d78186e6bffec38c014d72147aee880c79dfd1bb7a9d9",
+      "state": "idle",
+      "anchor": [
+        25,
+        40
+      ],
+      "anchor_kind": "feet / hover bottom centre"
+    },
+    {
+      "path": "assets/art/creatures/wick_ghost_windup_40.png",
+      "size": [
+        50,
+        40
+      ],
+      "opaque_colors": 21,
+      "sha256": "7981126b78a2bc0057950a8e29d04ebb0d59a97105141f022688634bee786095",
+      "state": "windup",
+      "anchor": [
+        25,
+        40
+      ],
+      "anchor_kind": "feet / hover bottom centre"
+    },
+    {
+      "path": "assets/art/creatures/wick_ghost_recoil_40.png",
+      "size": [
+        50,
+        40
+      ],
+      "opaque_colors": 12,
+      "sha256": "a76b5a7b614099234cbcd33adb1a3331b8dc0cda3d8e9927223341afee638285",
+      "state": "recoil",
+      "anchor": [
+        25,
+        40
+      ],
+      "anchor_kind": "feet / hover bottom centre"
+    },
+    {
+      "path": "assets/art/creatures/wick_ghost_strip_40.png",
+      "size": [
+        150,
+        40
+      ],
+      "opaque_colors": 23,
+      "sha256": "6888b061de68cc4e57b7ea6a1801faf8c54e054f39ed0644fc6e9a6d10c6d8e2"
+    },
+    {
+      "path": "assets/art/creatures/wick_ghost_idle_24.png",
+      "size": [
+        30,
+        24
+      ],
+      "opaque_colors": 16,
+      "sha256": "db375b853dbbdfa36f0e811bfc02e9e27d227ad60d5d2b41db042a91e0744df0",
+      "state": "idle",
+      "anchor": [
+        15,
+        24
+      ],
+      "anchor_kind": "feet / hover bottom centre"
+    },
+    {
+      "path": "assets/art/creatures/wick_ghost_windup_24.png",
+      "size": [
+        30,
+        24
+      ],
+      "opaque_colors": 19,
+      "sha256": "48ffdde9d7b41ece60abbeec6f6d9329c98dfbbc321a284bf855dfc6f3a38ae6",
+      "state": "windup",
+      "anchor": [
+        15,
+        24
+      ],
+      "anchor_kind": "feet / hover bottom centre"
+    },
+    {
+      "path": "assets/art/creatures/wick_ghost_recoil_24.png",
+      "size": [
+        30,
+        24
+      ],
+      "opaque_colors": 10,
+      "sha256": "31c0788c39e5fed0dbd5e8ca3423235dd9ec53c520c298401df8b553cdd84369",
+      "state": "recoil",
+      "anchor": [
+        15,
+        24
+      ],
+      "anchor_kind": "feet / hover bottom centre"
+    },
+    {
+      "path": "assets/art/creatures/wick_ghost_strip_24.png",
+      "size": [
+        90,
+        24
+      ],
+      "opaque_colors": 20,
+      "sha256": "27bad57d97570dace191d27aa56ae7f4a1028be3e2ba129e143c383beeee1ceb"
+    }
+  ]
+}

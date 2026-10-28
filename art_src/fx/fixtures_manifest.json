@@ -1,0 +1,276 @@
+{
+  "assets": [
+    {
+      "path": "assets/art/fx/lever_left_up_d1.png",
+      "size": [
+        32,
+        40
+      ],
+      "opaque_colors": 11,
+      "sha256": "61bd36b00d8baa2b5ad5cab64fa4e13bb0c504997ff70b3f07370539f94ceac9",
+      "depth": 1,
+      "anchor": [
+        16,
+        22
+      ],
+      "anchor_kind": "wall hinge"
+    },
+    {
+      "path": "assets/art/fx/lever_right_up_d1.png",
+      "size": [
+        32,
+        40
+      ],
+      "opaque_colors": 11,
+      "sha256": "0e1ba92e3032cdeee4b6faf2745d81847f8b2fddd4a0c3c1ee3b01c01f0d098f",
+      "depth": 1,
+      "anchor": [
+        15,
+        22
+      ],
+      "anchor_kind": "wall hinge"
+    },
+    {
+      "path": "assets/art/fx/lever_left_down_d1.png",
+      "size": [
+        32,
+        40
+      ],
+      "opaque_colors": 11,
+      "sha256": "3b21302ede1353f1b8546c693e989fb69ae905d1bc533857aa4d3b0c8f394d5e",
+      "depth": 1,
+      "anchor": [
+        16,
+        22
+      ],
+      "anchor_kind": "wall hinge"
+    },
+    {
+      "path": "assets/art/fx/lever_right_down_d1.png",
+      "size": [
+        32,
+        40
+      ],
+      "opaque_colors": 11,
+      "sha256": "e3c4a789a2d38ee84dcb31d2801b3e9951aa7a3518cd73ebb2d6554ff586fd5c",
+      "depth": 1,
+      "anchor": [
+        15,
+        22
+      ],
+      "anchor_kind": "wall hinge"
+    },
+    {
+      "path": "assets/art/fx/plate_up_d1.png",
+      "size": [
+        64,
+        20
+      ],
+      "opaque_colors": 7,
+      "sha256": "fd1c0c95f12439a5d08a219d5c34fb72e2b69d5329ef3eaaf11e005581681099",
+      "depth": 1,
+      "anchor": [
+        32,
+        20
+      ],
+      "anchor_kind": "floor bottom centre"
+    },
+    {
+      "path": "assets/art/fx/plate_down_d1.png",
+      "size": [
+        64,
+        20
+      ],
+      "opaque_colors": 5,
+      "sha256": "825a5e5244ff54230b46e0a367e79582a20416d1eff1a27963edb1385f43bed9",
+      "depth": 1,
+      "anchor": [
+        32,
+        20
+      ],
+      "anchor_kind": "floor bottom centre"
+    },
+    {
+      "path": "assets/art/fx/lever_left_up_d2.png",
+      "size": [
+        20,
+        26
+      ],
+      "opaque_colors": 11,
+      "sha256": "dbc2b82a535356e07404a23a90e4b149d7f21ea2758ee791609de3235daf07ec",
+      "depth": 2,
+      "anchor": [
+        10,
+        14
+      ],
+      "anchor_kind": "wall hinge"
+    },
+    {
+      "path": "assets/art/fx/lever_right_up_d2.png",
+      "size": [
+        20,
+        26
+      ],
+      "opaque_colors": 11,
+      "sha256": "b9ba567363d520d2176d68c52e78a65e23b163fe150ce82c620ec3a1f8087a0a",
+      "depth": 2,
+      "anchor": [
+        9,
+        14
+      ],
+      "anchor_kind": "wall hinge"
+    },
+    {
+      "path": "assets/art/fx/lever_left_down_d2.png",
+      "size": [
+        20,
+        26
+      ],
+      "opaque_colors": 11,
+      "sha256": "ef1f104036d08f2c2c26fc4fbf60fabb8a2a40fd93d8ed152288d4f50d316460",
+      "depth": 2,
+      "anchor": [
+        10,
+        14
+      ],
+      "anchor_kind": "wall hinge"
+    },
+    {
+      "path": "assets/art/fx/lever_right_down_d2.png",
+      "size": [
+        20,
+        26
+      ],
+      "opaque_colors": 11,
+      "sha256": "1743354011a89b9792dcf4d700e1191ae0d1303cbb05e313ca0b1fdb040840c7",
+      "depth": 2,
+      "anchor": [
+        9,
+        14
+      ],
+      "anchor_kind": "wall hinge"
+    },
+    {
+      "path": "assets/art/fx/plate_up_d2.png",
+      "size": [
+        40,
+        12
+      ],
+      "opaque_colors": 7,
+      "sha256": "b846094e631d0cf0a88ed10d5b705cf824606bbe095f6c70286956888842c30d",
+      "depth": 2,
+      "anchor": [
+        20,
+        12
+      ],
+      "anchor_kind": "floor bottom centre"
+    },
+    {
+      "path": "assets/art/fx/plate_down_d2.png",
+      "size": [
+        40,
+        12
+      ],
+      "opaque_colors": 5,
+      "sha256": "39206e1aef3851ceb1f46e800609aaaf3189a77f5d68a199036389ea75145e77",
+      "depth": 2,
+      "anchor": [
+        20,
+        12
+      ],
+      "anchor_kind": "floor bottom centre"
+    },
+    {
+      "path": "assets/art/fx/lever_left_up_d3.png",
+      "size": [
+        12,
+        16
+      ],
+      "opaque_colors": 11,
+      "sha256": "ef6950663740877cd75d391acf29419ec55c59cdd6433c82ebbe3f1df41da7f7",
+      "depth": 3,
+      "anchor": [
+        6,
+        8
+      ],
+      "anchor_kind": "wall hinge"
+    },
+    {
+      "path": "assets/art/fx/lever_right_up_d3.png",
+      "size": [
+        12,
+        16
+      ],
+      "opaque_colors": 11,
+      "sha256": "8def7460bcadb26a17838f918e5c9dc129057ba50c310bbc6623d49121b1d5dc",
+      "depth": 3,
+      "anchor": [
+        5,
+        8
+      ],
+      "anchor_kind": "wall hinge"
+    },
+    {
+      "path": "assets/art/fx/lever_left_down_d3.png",
+      "size": [
+        12,
+        16
+      ],
+      "opaque_colors": 11,
+      "sha256": "f5ef7a20e82f09a0c43b9a8f7acf61e748c085d5d0f2346153041b43e2ee3810",
+      "depth": 3,
+      "anchor": [
+        6,
+        8
+      ],
+      "anchor_kind": "wall hinge"
+    },
+    {
+      "path": "assets/art/fx/lever_right_down_d3.png",
+      "size": [
+        12,
+        16
+      ],
+      "opaque_colors": 11,
+      "sha256": "d4b72e109a654b6ade4162e30e4bc8f3da6d5f1eec5a9311922ef184b1345d41",
+      "depth": 3,
+      "anchor": [
+        5,
+        8
+      ],
+      "anchor_kind": "wall hinge"
+    },
+    {
+      "path": "assets/art/fx/plate_up_d3.png",
+      "size": [
+        24,
+        8
+      ],
+      "opaque_colors": 5,
+      "sha256": "b7b39875010ef2e4e6d4018e8cf1175c91eae10d90d07e9a51b3ce418ecb19ea",
+      "depth": 3,
+      "anchor": [
+        12,
+        8
+      ],
+      "anchor_kind": "floor bottom centre"
+    },
+    {
+      "path": "assets/art/fx/plate_down_d3.png",
+      "size": [
+        24,
+        8
+      ],
+      "opaque_colors": 4,
+      "sha256": "527af47fe448fcd932336c577a2eb87a6c23ff1dfbb6fbfdbb88e8f9a0304510",
+      "depth": 3,
+      "anchor": [
+        12,
+        8
+      ],
+      "anchor_kind": "floor bottom centre"
+    }
+  ],
+  "lever_states": "discrete swap, never tween",
+  "plate_edge_depth_px": 1
+}

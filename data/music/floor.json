@@ -1,0 +1,123 @@
+{
+  "schema": 1,
+  "id": "floor",
+  "title": "A Bell Below the Stone",
+  "mode": "D Dorian",
+  "bpm": 66,
+  "beats": 32,
+  "loop": true,
+  "notes": [
+    {
+      "beat": 0,
+      "pitch": 38,
+      "beats": 7.5,
+      "voice": "drone",
+      "velocity": 0.28
+    },
+    {
+      "beat": 1,
+      "pitch": 74,
+      "beats": 2.5,
+      "voice": "bell",
+      "velocity": 0.33
+    },
+    {
+      "beat": 3,
+      "pitch": 57,
+      "beats": 2,
+      "voice": "reed",
+      "velocity": 0.17
+    },
+    {
+      "beat": 5,
+      "pitch": 81,
+      "beats": 2,
+      "voice": "bell",
+      "velocity": 0.25
+    },
+    {
+      "beat": 8,
+      "pitch": 45,
+      "beats": 7.5,
+      "voice": "drone",
+      "velocity": 0.23
+    },
+    {
+      "beat": 8,
+      "pitch": 76,
+      "beats": 2.5,
+      "voice": "bell",
+      "velocity": 0.3
+    },
+    {
+      "beat": 11,
+      "pitch": 59,
+      "beats": 2,
+      "voice": "reed",
+      "velocity": 0.16
+    },
+    {
+      "beat": 12,
+      "pitch": 77,
+      "beats": 3,
+      "voice": "bell",
+      "velocity": 0.32
+    },
+    {
+      "beat": 16,
+      "pitch": 36,
+      "beats": 7.5,
+      "voice": "drone",
+      "velocity": 0.25
+    },
+    {
+      "beat": 18,
+      "pitch": 74,
+      "beats": 2.5,
+      "voice": "bell",
+      "velocity": 0.28
+    },
+    {
+      "beat": 19,
+      "pitch": 55,
+      "beats": 2,
+      "voice": "reed",
+      "velocity": 0.17
+    },
+    {
+      "beat": 22,
+      "pitch": 71,
+      "beats": 2,
+      "voice": "bell",
+      "velocity": 0.26
+    },
+    {
+      "beat": 24,
+      "pitch": 38,
+      "beats": 7.5,
+      "voice": "drone",
+      "velocity": 0.28
+    },
+    {
+      "beat": 26,
+      "pitch": 69,
+      "beats": 2.5,
+      "voice": "bell",
+      "velocity": 0.27
+    },
+    {
+      "beat": 27,
+      "pitch": 57,
+      "beats": 2,
+      "voice": "reed",
+      "velocity": 0.17
+    },
+    {
+      "beat": 29,
+      "pitch": 74,
+      "beats": 2.5,
+      "voice": "bell",
+      "velocity": 0.3
+    }
+  ]
+}
