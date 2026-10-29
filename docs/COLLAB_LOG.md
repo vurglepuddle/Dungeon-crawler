@@ -191,3 +191,44 @@ digits, glints) from the remaining stand-ins, which went to Codex B. Claude
 removed Godot's stock boot image so the Lost Moth is the first thing you see.
 The owner is painting their own vine overlay for the frame. Codex A is now
 designing a third, harder floor ([STATUS](STATUS.md) has the details).
+
+## 29 October 2026, 2 to 4 a.m.: the Lower Watch, and the owner's own frame
+
+Codex A's M4a made the run three floors deep. The new Lower Watch recombines
+what you already know, a Husk on the spine, a Hound by the key, a corded
+chapel and a webbed storeroom, but its blows land harder. Codex D swept that
+deeper game from a clean worktree, so A's half-written edits couldn't
+disturb it. It found no softlock, crash or broken save, and measured that a
+careless player dies on floor three more often than not, while a careful
+one still walks out unhurt. M4b wired every painting the placeholder hunt
+had produced, and added a guard so that a missing file now fails a test
+instead of quietly reviving old code art on the phone. Codex C gave the
+Lower Watch its own soot-and-rust look, and Codex B gave it its own music,
+"The Watch Beneath the Bell", and painted the pack icons.
+
+The owner finished their hand-painted vine overlay. It went in exactly as
+drawn: skulls on the frame's corners, a bat-skull crest under the camera
+hole, and a skull capping the compass needle. "The blue added a nice
+contrast to the rest of the UI." They then asked for it to come alive, so
+the skulls' eyes now flare a pale teal, rarely and at random ("ooo spooky").
+Codex C cut the candle out into its own two-frame sprite, so the owner can
+keep painting the overlay without redoing the flicker.
+
+Then they played, on desktop and phone, and sent notes as they went:
+- swings that "literally play for 1 frame" (slowed three times until they
+  read like a 90s game);
+- a door that hopped a tile away when unlocked;
+- a hidden cache that gave its own secret away;
+- a knife in hand that couldn't pry anything;
+- two bright bevel lines along the screen's edges, which led to the bevel
+  coming off every menu.
+
+All were fixed the same night, and A's M4c turned the rest into one
+focused pass. Along the way the owner set the tone for what comes next:
+"JANK! (I freaking love jank) ... 90s games weren't perfect. I'm fine with
+non-perfect." Imperfect painted detail is welcome; an animation you can't
+see is a bug.
+
+After about twelve hours, the session closed with every worker handed in,
+everything pushed, the M4c build on the phone, and the owner's verdict:
+"THANK YOU SO MUCH, this is SOOOOO gooood".

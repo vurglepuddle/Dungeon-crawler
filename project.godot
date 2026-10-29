@@ -13,9 +13,9 @@ config_version=5
 config/name="Undercroft"
 run/main_scene="res://scenes/main.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
-config/icon="res://assets/icon/icon_192.png"
 boot_splash/bg_color=Color(0.03, 0.02, 0.05, 1)
 boot_splash/show_image=false
+config/icon="res://assets/icon/icon_192.png"
 
 [autoload]
 
