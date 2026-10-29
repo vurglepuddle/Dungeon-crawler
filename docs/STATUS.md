@@ -139,10 +139,14 @@ fixes directly.
      `THE_DEEP.md`, "Later the same afternoon"), with f4 as one mood, not all.
    - **Combat revamp:** the owner wants more depth and a more interesting
      loop. Write a proposal before the Deep grows.
-   - **The held-item grip is wrong.** Torch, club, bone and clapper read as
-     held between index and middle finger: the shaft leaves the fist through
-     the knuckles, not through the thumb ring. Either B repaints it, or the
-     owner paints it.
+   - **The held-item grip is wrong for the stone and both torches.** The
+     owner: they reuse "the 'fist' (great as a fist), but you cannot hold
+     objects this way". The torch shaft should pass through the curled hand
+     (the thumb ring), and the stone should sit in curled fingers.
+     - Files: `assets/art/hands/hand_stone_{rest,blow,strip}_56.png`,
+       `hand_torch_unlit_{rest,use,strip}_56.png` and
+       `hand_torch_lit_{a,b,strip}_56.png` (B's `art_src/hands/`).
+     - Either B repaints them, or the owner paints them.
    - **Button icons:** verb icons are 12x12 PNGs in `assets/art/ui_offer/
      verb_*.png` (layout in `data/ui/verb_layout.json`). The arrow pad and
      compass needle are code-drawn (`main.gd`, `_arrow`, `_draw_compass`).
