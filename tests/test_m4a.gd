@@ -40,7 +40,7 @@ func _run() -> void:
 	app._open_map(); await process_frame
 	check(not app._optional_overlay.visible,"Overlay hides while the map is open")
 	app._close_modal(); app._busy=0; app._equipment_card("hand"); await process_frame
-	check(not app._optional_overlay.visible,"Overlay hides while a card is open")
+	check(app._optional_overlay.visible,"Owner vines remain under an open card")
 	app._close_card(); check(app._optional_overlay.visible,"Overlay returns above the needle after closing panels")
 	app._travel_tap("f1_up")
 	check(app.lines[0]=="Step closer.","Remote exit inspection explains reach")

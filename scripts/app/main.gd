@@ -5,6 +5,8 @@ const Gen = preload("res://scripts/gen/floor_gen.gd")
 const Store = preload("res://scripts/persistence/save_store.gd")
 const Art = preload("res://scripts/art/item_art.gd")
 const View = preload("res://scripts/view/dungeon_view.gd")
+const Times=preload("res://scripts/view/effect_times.gd")
+const OverlayLife=preload("res://scripts/ui/overlay_life.gd")
 const Chrome=preload("res://scripts/ui/chrome.gd")
 const ItemButton=preload("res://scripts/ui/item_button.gd")
 const VIEW_RECT:=Rect2(3,21,148,150)
@@ -26,6 +28,7 @@ var verbs: Array=[]
 var view
 var sfx
 var _busy: float=0
+var _hurt_gate_time: float=0
 var _hurt_time: float=0
 var _bob: bool=false
 var _mode: String="title"
@@ -60,6 +63,8 @@ var _splash_time: float=0
 var _tossing: String=""
 var _menu_clock: float=0
 var _logo: TextureRect
+var _map_open: bool=false
+var _overlay_life
 var _optional_overlay: TextureRect
 const OPTIONAL_OVERLAY="res://assets/art/ui/owner_vines.png"
 
@@ -86,12 +91,13 @@ func _ready() -> void:
 	_music=get_node_or_null("/root/Music")
 	_load_settings()
 	_build_controls()
-	# The owner's cleaned PNG can be dropped here later. No backup vine art is
-	# enabled implicitly. This single layer stays below cards and modals.
+	# Owner-painted registration stays untouched. Life is a separate child;
+	# cards/modals cover this layer, and only the map hides it.
 	_optional_overlay=TextureRect.new(); _optional_overlay.mouse_filter=Control.MOUSE_FILTER_IGNORE
 	_optional_overlay.size=Vector2(154,342); _optional_overlay.texture_filter=CanvasItem.TEXTURE_FILTER_NEAREST
 	if ResourceLoader.exists(OPTIONAL_OVERLAY) or FileAccess.file_exists(OPTIONAL_OVERLAY): _optional_overlay.texture=Paint.texture(OPTIONAL_OVERLAY)
 	add_child(_optional_overlay)
+	_overlay_life=OverlayLife.new(); _optional_overlay.add_child(_overlay_life)
 	_build_menu()
 	_show_menu("title")
 
@@ -178,7 +184,7 @@ func _show_menu(mode: String) -> void:
 	for key in controls:
 		if is_instance_valid(controls[key]): controls[key].visible=false
 	view.visible=false; _menu.visible=true
-	_optional_overlay.visible=false
+	_overlay_visibility()
 	controls.start.visible=true; controls.sound.visible=true; controls.music.visible=true
 	controls.continue.visible=mode=="title"
 	controls.continue.disabled=not Store.can_continue(_save_path)
@@ -235,11 +241,11 @@ func new_run(raw: String,count: int=2) -> bool:
 	var proof: Dictionary=Witness.build(seed,count)
 	if not proof.ok: push_error("Generation failed: "+proof.reason); return false
 	_close_modal(); _close_card()
-	sim=Sim.new(seed,count); selected=""; _busy=0; _hurt_time=0; _mode="game"
+	sim=Sim.new(seed,count); selected=""; _busy=0; _hurt_time=0; _hurt_gate_time=0; _mode="game"
 	_survey.reset(count); _reset_presentation()
 	_compass_swing=0; _compass_velocity=0
 	view.clear_strike()
-	if _music!=null: _music.play("floor")
+	if _music!=null: _music.play_floor(1)
 	lines=[_floor_name(1),"Find the Dawn Seal."]
 	_sync(); _save(true)
 	return true
@@ -248,10 +254,10 @@ func _continue() -> void:
 	if saved.is_empty() or saved.payload.status!="playing": return
 	var loaded=Sim.new(saved.payload.seed,saved.payload.floor_count)
 	if not loaded.restore_state(saved.payload): return
-	sim=loaded; _mode="game"; _busy=0; _hurt_time=0
+	sim=loaded; _mode="game"; _busy=0; _hurt_time=0; _hurt_gate_time=0
 	_survey.restore(saved.ui.get("survey",{}),saved.payload); _reset_presentation()
 	view.clear_strike()
-	if _music!=null: _music.play("floor2" if saved.payload.floor>1 else "floor")
+	if _music!=null: _music.play_floor(saved.payload.floor)
 	selected=str(saved.ui.get("selected",""))
 	lines=["Your place is kept.","The abbey is waiting."]
 	_save_ok=true; _sync()
@@ -384,7 +390,7 @@ func _sync_markers() -> void:
 				markers.append({"key":"hot_porter","id":fixture.id,"label":"PORTER","callback":_porter_card.bind(fixture)})
 			elif fixture.type=="lift" and not fixture.active:
 				markers.append({"key":"hot_"+fixture.id,"id":fixture.id,"label":"ASLEEP","callback":_sleeping_lift})
-			elif fixture.type in ["brazier","web","cord","panel"] and not markers.any(func(m): return m.id==fixture.id):
+			elif (fixture.type in ["brazier","web","cord"] or fixture.type=="panel" and fixture.revealed) and not markers.any(func(m): return m.id==fixture.id):
 				markers.append({"key":"hot_"+fixture.id,"id":fixture.id,"label":"LOOK","callback":_inspect_capability.bind(fixture)})
 		for actor in state.floors[state.floor-1].actors:
 			if actor.kind in ["hound","ghost"] and actor.hp>0 and absi(actor.pos[0]-state.pos[0])+absi(actor.pos[1]-state.pos[1])<=3 and sim._clear_sight(actor.pos):
@@ -396,6 +402,10 @@ func _sync_markers() -> void:
 		for fixture in sim.local_fixtures():
 			if fixture.type=="lift" and not fixture.active:
 				markers.append({"key":"hot_"+fixture.id,"id":fixture.id,"label":"ASLEEP","callback":_sleeping_lift})
+	# A hidden scar is touchable masonry, never an advertised secret/LOOK cue.
+	for fixture in sim.local_fixtures():
+		if fixture.type=="panel" and not fixture.revealed and not markers.any(func(m): return m.id==fixture.id):
+			markers.append({"key":"hot_"+fixture.id,"id":fixture.id,"label":"","cue":false,"callback":_inspect_capability.bind(fixture)})
 	# Visible distant travel faces are still tangible. Their tap explains
 	# reach rather than turning into an invisible wall/bump action.
 	for fixture in state.floors[state.floor-1].fixtures:
@@ -427,7 +437,7 @@ func _sync_markers() -> void:
 		button.text=""; button.visible=true; button.move_to_front()
 		_world_markers[marker.id]=marker.key
 		var item_target: bool=selected!="" and targets.any(func(t): return t.target_id==marker.id and t.action.get("item_id",selected)==selected)
-		view.interaction_cues.append({"id":marker.id,"rect":local_rect,"selected":item_target,"threshold":marker.label in ["DOWN","UP","RIDE","ASLEEP","LEAVE","SIDLE"],"colour":_selection_colour() if item_target else GOLD})
+		if marker.get("cue",true): view.interaction_cues.append({"id":marker.id,"rect":local_rect,"selected":item_target,"threshold":marker.label in ["DOWN","UP","RIDE","ASLEEP","LEAVE","SIDLE"],"colour":_selection_colour() if item_target else GOLD})
 	view.queue_redraw()
 
 func _selection_colour() -> Color:
@@ -435,7 +445,7 @@ func _selection_colour() -> Color:
 	return Art.accent(state.items[selected].kind) if state.items.has(selected) else GOLD
 func _item_icon(id: String) -> Texture2D:
 	var item: Dictionary=state.items[id]
-	if item.kind=="torch": return Paint.texture("res://assets/art/fixtures/reed_torch_icon_%s_16.png"%("lit" if item.lit else "unlit"))
+	if item.kind=="torch": return Art.inventory("torch_lit" if item.lit else "torch")
 	return Art.inventory("coat_spent" if item.kind=="coat" and item.get("spent",false) else item.kind)
 func _held_kind(id: String="") -> String:
 	if id=="":
@@ -453,6 +463,8 @@ func _cancel_toss() -> void:
 	_tossing=""; _sync()
 func _inspect_capability(fixture: Dictionary) -> void:
 	if not _can_game(): return
+	if fixture.type=="panel" and not fixture.revealed:
+		_close_card(); lines=["Faint scratches.","You can't make them out."]; queue_redraw(); return
 	var column:=_panel({"brazier":"Banked coals","web":"Old web","cord":"Cord-bound grate","panel":"A scored dawn"}[fixture.type],62,242)
 	var note: String={"brazier":"LIGHT a reed torch.\nThe coals keep burning.","web":"Dry silk blocks it.\nA FIRE would clear it.","cord":"A stout knot holds it.\nAn EDGE would cut it.","panel":"Dawn wakes the scar.\nAn EDGE can lift it."}[fixture.type]
 	_label(note,column); _modal_button("fixture_close","CLOSE",_close_modal,column)
@@ -506,9 +518,9 @@ func _command(command: Dictionary) -> void:
 			"unlocked": lines=["The key remembers.","The lock gives way."]; sfx.play("gate")
 			"attack_resolved":
 				if event.damage>0:
-					lines=["Its arm finds you.","GUARD the raised arm."]; _hurt_time=0.32; sfx.play("hit")
+					lines=["Its arm finds you.","GUARD the raised arm."]; _hurt_time=Times.HURT; _hurt_gate_time=0.32; sfx.play("hit")
 				elif event.blocked: lines=["You catch its blow.","It reels. HIT now."]; sfx.play("guard")
-				elif event.armour: lines=["The coat takes it.","Its padding is spent."]; _hurt_time=0.15; sfx.play("bump")
+				elif event.armour: lines=["The coat takes it.","Its padding is spent."]; _hurt_time=0.3; _hurt_gate_time=0.15; sfx.play("bump")
 				else: lines=["Its blow finds air.","It reels. HIT now."]
 			"intent_announced": lines=["A bell arm rises.","GUARD or step away."]; sfx.play("bell")
 			"monster_moved": lines=["Heavy footsteps.",""]
@@ -541,7 +553,7 @@ func _command(command: Dictionary) -> void:
 			if creature=="hound": lines=["The lunge finds you.","Leave the marked lane."]
 			elif creature=="ghost": lines=["The cold finds you.","GLOW clears the wick."]
 	_busy=0.13 if result.consumed_turn else 0.05
-	if _hurt_time>0: _busy=0.24
+	if _hurt_gate_time>0: _busy=0.24
 	state=sim.snapshot()
 	if not state.pack.has(selected): selected=""
 	if command.type in ["burn","cut","feed","dispel","reveal"]: selected=""
@@ -560,7 +572,7 @@ func _start_transition() -> void:
 	await _ambience.fade_finished
 	if token!=_transition_token or not is_inside_tree(): return
 	_sync()
-	if _music!=null: _music.play("floor2" if state.floor>1 else "floor")
+	if _music!=null: _music.play_floor(state.floor)
 	_ambience.fade_in(0.18)
 	await _ambience.fade_finished
 	if token!=_transition_token or not is_inside_tree(): return
@@ -701,13 +713,14 @@ func _close_card() -> void:
 	_overlay_visibility()
 	queue_redraw()
 func _overlay_visibility() -> void:
-	if is_instance_valid(_optional_overlay): _optional_overlay.visible=_mode=="game" and not is_instance_valid(_modal) and not is_instance_valid(_card)
+	if is_instance_valid(_optional_overlay): _optional_overlay.visible=not _map_open
 func _dismiss_card() -> void:
 	_close_card(); selected=""; _save(); _sync()
 func _panel(title: String,top: int=32,height: int=276) -> VBoxContainer:
 	_close_modal(); _close_card()
 	var panel:=PanelContainer.new(); panel.position=Vector2(5,top); panel.size=Vector2(144,height)
 	var is_map: bool=title.begins_with("Visited")
+	_map_open=is_map
 	var background: StyleBox=Chrome.surface("slate",7)
 	if is_map:
 		var parchment:=StyleBoxTexture.new(); parchment.texture=Paint.texture("res://assets/art/ui_offer/map_parchment_torn_v2.png")
@@ -729,6 +742,7 @@ func _panel(title: String,top: int=32,height: int=276) -> VBoxContainer:
 func _modal_button(key: String,label: String,callback: Callable,parent: Node) -> void:
 	_button(key,Rect2(0,0,128,24),label,callback,parent); _dynamic_names.append(key)
 func _close_modal() -> void:
+	_map_open=false
 	if is_instance_valid(_modal): _modal.queue_free(); _modal=null
 	for key in _dynamic_names: controls.erase(key)
 	_dynamic_names=[]
@@ -787,6 +801,7 @@ func _open_map() -> void:
 	map.custom_minimum_size=Vector2(128,231); column.add_child(map)
 	_modal_button("map_close","CLOSE",_close_modal,column)
 func _process(delta: float) -> void:
+	_hurt_gate_time=maxf(0,_hurt_gate_time-delta)
 	if _mode in ["title","end"]:
 		_menu_clock+=delta; _update_menu_art()
 	if _mode=="title" and _splash_time>0:
@@ -805,8 +820,8 @@ func _process(delta: float) -> void:
 			if not state.is_empty() and state.status!="playing": _show_menu("end")
 	if _hurt_time>0:
 		_hurt_time=maxf(0,_hurt_time-delta)
-		view.flash=_hurt_time/0.32
-		view.position.x=VIEW_RECT.position.x+(roundi(sin(_hurt_time*100)*2) if _hurt_time>0 else 0)
+		view.flash=_hurt_time/Times.HURT
+		view.position.x=VIEW_RECT.position.x+(roundi(sin(_hurt_time*50)*2) if _hurt_time>0 else 0)
 		view.queue_redraw(); queue_redraw()
 	if _busy>0: view.queue_redraw()
 func _text(at: Vector2,value: String,colour: Color=INK) -> void:
@@ -823,7 +838,7 @@ func _draw() -> void:
 	if not is_instance_valid(_card):
 		_text(Vector2(4,175),lines[0]); _text(Vector2(4,191),lines[1])
 	draw_style_box(Chrome.style(),Rect2(1,208,36,38))
-	var shudder:=Vector2(roundi(sin(_hurt_time*100)*2) if _hurt_time>0 else 0,0)
+	var shudder:=Vector2(roundi(sin(_hurt_time*50)*2) if _hurt_time>0 else 0,0)
 	draw_texture_rect(Paint.texture(portrait_path()),Rect2(Vector2(3,210)+shudder,Vector2(32,32)),false)
 	if _hurt_time>0: draw_rect(Rect2(3,210,32,32),Color("965c48"),false,2)
 	draw_texture(Paint.texture("res://assets/art/ui_offer/belt_loops.png"),Vector2(99,210))

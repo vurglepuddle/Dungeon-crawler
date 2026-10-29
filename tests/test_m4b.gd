@@ -22,7 +22,7 @@ func _run() -> void:
  var refused: Array=Required.issues(bad)
  check(refused.size()==1 and refused[0].contains("missing_required_porter"),"Missing assets are detected before drawing; no substitute art")
  check(Chrome.style() is StyleBoxTexture and Chrome.style().texture!=null and Chrome.surface("card") is StyleBoxTexture,"Chrome always uses painted sources")
- check(Family.for_floor(1).walls==1 and Family.for_floor(2).walls==2 and Family.for_floor(3).fixtures==2 and Family.for_floor(4).props==2 and Family.for_floor(3).planes=="calm_v3","One family mapping retains deep borrowed art")
+ check(Family.for_floor(1).walls==1 and Family.for_floor(2).walls==2 and Family.for_floor(3).fixtures==2 and Family.for_floor(4).props==3 and Family.for_floor(3).planes=="calm_v3_f3","One family mapping selects Lower Watch, retaining F2 fixtures")
  var samples: Array=[Vector2i(17,37),Vector2i(37,46),Vector2i(46,26),Vector2i(26,17)]
  for i in range(4):
   var normal: Array=[-Sim.DIRS[i][0],-Sim.DIRS[i][1]]
@@ -64,7 +64,7 @@ func _run() -> void:
  var app=load("res://scenes/main.tscn").instantiate(); app._save_path="user://tests/m4b_art_guard.json"; root.add_child(app)
  check(app.new_run("B3VJ5K",2),"Art-wired main starts")
  var id: String="f1_coat"; app.state.items[id].spent=true
- check(digest(app._item_icon(id))==digest(Paint.texture("res://assets/art/icons/coat_spent.png")),"Spent coat card/pack/equipment icon uses torn art")
+ check(digest(app._item_icon(id))==digest(Paint.texture("res://assets/art/items/icon_coat_spent_16.png")),"Spent coat card/pack/equipment icon uses torn art")
  check(app.VIEW_RECT==Rect2(3,21,148,150) and app.VIEW_RECT.grow(3)==Rect2(0,18,154,156) and app.controls.compass.get_rect()==Rect2(85,294,66,44),"Owner vine registration remains exact")
  view.free(); app.queue_free(); await process_frame; await create_timer(0.3).timeout
  print("M4b painted kit: ",checks," checks, ",failures," failures; ",paths.size()," required textures")

@@ -49,6 +49,6 @@ static func room_cells(state: Dictionary) -> Dictionary:
 			if not open or chosen.any(func(p): return maxi(absi(p.x-x),absi(p.y-y))<3): continue
 			if state.fixtures.any(func(f): return f.pos==[x,y]): continue
 			var index: int=Paint.mix_hash("%s/%d/room/%d/%d"%[state.seed,state.floor,x,y])%3
-			result[Vector2i(x,y)]={"floor":"res://assets/art/env/calm_v3_room_floor_%s.png"%["drain","cracked","compass"][index],"ceiling":"res://assets/art/env/calm_v3_room_ceiling_%s.png"%["roots","chain","boss"][index]}
+			result[Vector2i(x,y)]={"floor":"res://assets/art/env/%s_room_floor_%s.png"%[Family.for_floor(state.floor).planes,["drain","cracked","compass"][index]],"ceiling":"res://assets/art/env/%s_room_ceiling_%s.png"%[Family.for_floor(state.floor).planes,["roots","chain","boss"][index]]}
 			chosen.append(Vector2i(x,y))
 	return result

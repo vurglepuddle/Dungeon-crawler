@@ -32,7 +32,8 @@ env/icons/screens/portrait art, scripts/fx, data/text and its manual/polish docs
 The primary Codex alone wires those contributions into the scene. D owns
 tests/qa and QA_REPORT; its harness is unchanged. Authored B/C inputs remain
 read-only. M3f wires accepted props/pilasters, the logotype/menu frames, calm planes,
-verb stamps and torn parchment. The optional owner vine overlay stays empty.
+verb stamps and torn parchment. The accepted owner vine overlay is registered
+at its original pixels, above the view and needle, below pop-ups.
 
 ## Sim API
 
@@ -378,7 +379,7 @@ Husk state maps idle->idle, windup->windup, recovery->recoil. Canvas anchors
 stay fixed across states. Hit presentation keeps a target/pose briefly through
 a lethal strike; that ghost has no collision, intent or simulation ownership.
 struck events select EDGE/HEAVY/hands from the pre-action weapon and display
-the event damage at the pre-action target. Effects last 240ms without adding
+the event damage at the pre-action target. Effects last 480ms without adding
 an input gate. No presentation timer changes saved state. Plate depth variants
 keep their shallow aspect; plate first, possession second at equal depth.
 Lever wall placement is fixed in world coordinates, not selected from camera
@@ -476,8 +477,8 @@ splash/title and hold the last result frame. The splash remains skippable.
 
 Optional overlay path: `res://assets/art/ui/owner_vines.png`, native
 154x342 transparent PNG. Main creates one mouse-ignoring layer above chrome
-and below cards/modals; missing file means no overlay. Current vine offers
-are deliberately not loaded. No project setting or export preset is changed.
+and below cards/modals; missing file means no overlay. Only the accepted owner
+export is loaded. No project setting or export preset is changed.
 
 `run_m3f_checks.ps1` adds phone/spawn regressions to the thirteen existing
 suites. `run_m3f_pilots.ps1` adds the B3VJ5K owner route to all twenty-five
@@ -504,12 +505,13 @@ is added. RING retains m4.1 instead of applying the legacy m3.2 upgrade.
 Optional floor.title is a string of at most 22 characters. New deeper floors
 have three actors, a keyed gate and both optional capability modules.
 
-capability_targets(selected) adds implicit LIGHT for an owned cold torch and
-BURN for selected/equipped FIRE, using the same explicit light/burn action
-shapes and validation. interaction_targets combines these with existing item
-targets. Selection and hand take priority over pack order. No implicit FEED,
-DISPEL or throw is introduced. Hidden inspection targets behind closed
-capability fixtures cannot intercept a torch target's real tap.
+capability_targets(selected) resolves the explicit selection first, then the
+held tool for all capabilities. Only LIGHT additionally searches the pack.
+Implicit candidates never offer TOSS. interaction_targets combines these with
+existing item targets; unrevealed scars advertise no REVEAL/LOOK target or
+capability verb. Hidden inspection targets behind closed capability fixtures
+cannot intercept a torch target's real tap. Existing action validation remains
+authoritative; inference does not invent a new action or spend a free beat.
 
 All projected travel faces have named hotspots, including at a distance.
 Main's travel tap calls the normal action when reachable, says Step closer
@@ -523,8 +525,8 @@ view_snapshot objects include spent, and the renderer uses the twelve new
 world-item states at native depth canvases. Torch and Seal paths are unchanged.
 Shadows use cached opaque bounds. No texture readback occurs per drawn column.
 The camera, viewport bands, touch targets and compass registration are unchanged.
-The owner's owner_vines.png layer renders above the needle and view edges and
-hides under cards/modals/map. No draft vine PNG is loaded.
+The owner's owner_vines.png layer renders above the needle and view edges,
+below cards/modals/menus. Only the map hides it. No draft vine PNG is loaded.
 
 The deep witness visits capability modules before the key when touring,
 replans after moving Hounds and walks around peaceful bodies. Its safe route
@@ -540,7 +542,8 @@ pair. D's unchanged default QA runner remains a separate audit.
 No action, event, coordinate, save profile, generation or difficulty change.
 World families are resolved only by `ArtFamily.for_floor(number)`, with
 independent wall/fixture/prop indices and ordinary-plane prefix/weights.
-Floor three/four continue borrowing the accepted floor-two kit for now.
+Floors three onward use Lower Watch walls, props and calm_v3_f3 planes;
+fixtures retain floor two. Earlier floors keep their accepted families.
 
 `RequiredArt.paths()` returns required texture paths and their category;
 `issues(optional_paths)` reports missing/unloadable images. Both source and
@@ -553,7 +556,7 @@ Travel ground belongs to its fixture's world cell. Orient from negative
 WallFaces binding normal, retaining the source's outer two-pixel ring. Lift
 activity invalidates cached surfaces without movement. A single representation
 of lever hardware uses that same physical wall binding. Web burning holds two
-120ms painted portal frames; web/cord portals have no extra billboard. Open
+240ms painted portal frames; web/cord portals have no extra billboard. Open
 locks use the transparent wooden-door overlay. Open caches use a complete
 painted face, with no generated dark aperture rectangle. Coat spent selects
 the torn 16px icon in all Main inventory/equipment/card paths.
@@ -562,3 +565,27 @@ The frame remains (0,18,154,156), picture (3,21,148,150), compass box
 (85,294,66,44). This pass adds no gameplay pilot calls. The sample call exists
 only in tests/capture_m4b.gd, a labelled authored visual-fixture harness; normal
 Main does not implement it. The 34 ordinary tap pilots remain separate.
+
+## M4c presentation and capability contract
+
+Portal records carry an immutable world-space center and normal, independent
+of open state and camera approach. Closed/open locks share their south/east
+cell entry boundary; gate/web/cord retain their existing center planes. Cache
+states remain textures on the same solid wall. Source checks compare centers,
+normals, depth columns, UVs and projected sizes across both axes/four approaches.
+Simulation coordinates and passability are unchanged.
+
+effect_times.gd owns strike-frame 0.16, web-frame 0.24, dispel 0.36 and hurt
+0.64 seconds. The accepted held-item timings stay in held_item.gd. A separate
+hurt gate timer preserves the prior input gate while the feedback continues.
+OverlayLife has a private presentation RNG, never a simulation stream or save
+field. data/ui/overlay_glints.json holds skull pairs, palette, timing and rarity.
+data/ui/overlay_candle.json holds the separate candle registration and beat.
+Pilot metadata freezes both; authored capture fixtures may set a static frame.
+The candle is a required asset, but a missing strip draws nothing at runtime.
+
+Unrevealed scar taps only change message lines, with no card or turn. Once
+revealed, an EDGE offers PRY, using the existing cut action shape and cost.
+Cords retain CUT. Selection wins over the hand; only LIGHT reaches pockets;
+TOSS is never inferred. Main uses Music.play_floor(actual_floor) on Continue
+and after travel. No save version, simulation rule or witness route changed.

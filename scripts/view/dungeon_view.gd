@@ -5,6 +5,7 @@ const Art=preload("res://scripts/art/item_art.gd")
 const Paint=preload("res://scripts/art/presentation_art.gd")
 const Held=preload("res://scripts/view/held_item.gd")
 const Faces=preload("res://scripts/sim/wall_faces.gd")
+const Times=preload("res://scripts/view/effect_times.gd")
 const Family=preload("res://scripts/art/art_family.gd")
 const Planes=preload("res://scripts/art/plane_materials.gd")
 const WIDTH:=148
@@ -144,8 +145,6 @@ func projection(id: String) -> Dictionary:
 func _solid(cell: Vector2i) -> bool:
 	if cell.x<0 or cell.y<0 or cell.x>=state.width or cell.y>=state.height: return true
 	if state.tiles[cell.y*state.width+cell.x]==1: return true
-	for fixture in state.fixtures:
-		if fixture.type=="lock" and not fixture.open and fixture.pos==[cell.x,cell.y]: return true
 	return false
 
 func _face_key(cell: Array,normal: Vector2i) -> String:
@@ -162,14 +161,18 @@ func _architecture() -> void:
 			_faces[_face_key(fixture.wall,Vector2i(fixture.normal[0],fixture.normal[1]))]={"id":fixture.id,"kind":"panel","texture_path":path,"panel_state":"" if fixture.open else ("revealed" if fixture.revealed else "plain")}
 			continue
 		if kind in ["gate","lock","web","cord"]:
-			if kind=="lock" and not fixture.open: continue
 			var p:=Vector2i(fixture.pos[0],fixture.pos[1])
 			var across_x: bool=state.tiles[p.y*state.width+p.x-1]==1 and state.tiles[p.y*state.width+p.x+1]==1
 			var path: String="res://assets/art/fixtures/architecture_f%d_gate_%s_overlay_64.png"%[Family.for_floor(state.floor).fixtures,"open" if fixture.open else "closed"]
-			if kind=="lock": path="res://assets/art/env/painted_f%d_door_open_overlay_v2.png"%Family.for_floor(state.floor).walls
+			if kind=="lock": path="res://assets/art/env/painted_f%d_%s_v2.png"%[Family.for_floor(state.floor).walls,"door_open_overlay" if fixture.open else "door"]
 			if kind=="web": path="res://assets/art/fixtures/fixture_v2_web_%s_d1.png"%("burnt" if fixture.open else "intact")
 			if kind=="cord": path="res://assets/art/fixtures/fixture_v2_cord_grate_%s_d1.png"%("cut" if fixture.open else "intact")
-			_portals.append({"id":fixture.id,"kind":kind,"pos":fixture.pos,"normal":Vector2(0,1) if across_x else Vector2(1,0),"texture_path":path})
+			var normal:=Vector2(0,1) if across_x else Vector2(1,0)
+			var center:=Vector2(p)+Vector2(0.5,0.5)
+			# Locks formerly occupied a whole solid cell. Retain its entry face
+			# in both states; never choose a different plane from camera facing.
+			if kind=="lock": center+=normal*0.5
+			_portals.append({"id":fixture.id,"kind":kind,"pos":fixture.pos,"center":center,"normal":normal,"texture_path":path})
 			continue
 		if kind not in ["exit","stairs_up","stairs_down","lift"]: continue
 		if not bindings.has(fixture.id): continue
@@ -281,9 +284,6 @@ func _build_camera() -> void:
 		var normal:=Vector2i(-sx,0) if side else Vector2i(0,-sy)
 		var face: Dictionary=_faces.get(_face_key([cell.x,cell.y],normal),{})
 		var path: String=face.get("texture_path",_wall_path([cell.x,cell.y],normal))
-		for fixture in state.fixtures:
-			if fixture.type=="lock" and not fixture.open and fixture.pos==[cell.x,cell.y]:
-				path="res://assets/art/env/painted_f%d_door_v2.png"%Family.for_floor(state.floor).walls; face={"id":fixture.id}
 		_walls.append({"depth":depth,"height":maxi(1,roundi(FOCAL/depth)),"u":clampi(int(u*64),0,63),"light":lamp(depth)*(0.78 if side else 1.0),"path":path,"cell":[cell.x,cell.y],"id":face.get("id",""),"panel_state":face.get("panel_state","")})
 		if face.has("id"):
 			var h: float=FOCAL/depth
@@ -295,7 +295,7 @@ func _build_camera() -> void:
 	_visible_cells=_visible_set.values()
 	for portal in _portals:
 		var columns: Dictionary={}
-		var center:=Vector2(portal.pos[0]+0.5,portal.pos[1]+0.5)
+		var center: Vector2=portal.center
 		var normal: Vector2=portal.normal
 		var along:=Vector2(normal.y,-normal.x)
 		for x in range(WIDTH):
@@ -462,7 +462,7 @@ func _draw_sprite(sprite: Dictionary,shift: int,force_recoil: bool=false,only_co
 	if sprite.kind in ["brazier","torch","seal"]: texture=_painted_fixture(sprite,sprite.variant)
 	var light: float=sprite.light
 	var tint:=Color(light,light,light)
-	if sprite.kind=="ghost" and not _dispel.is_empty() and _dispel.sprite.id==sprite.id: tint.a=clampf(1.0-_dispel.age/0.18,0,1)
+	if sprite.kind=="ghost" and not _dispel.is_empty() and _dispel.sprite.id==sprite.id: tint.a=clampf(1.0-_dispel.age/Times.DISPEL,0,1)
 	if hit and not _strike.get("flash_drawn",false): tint=Color(2.5,2.5,2.5)
 	var start: int=maxi(0,int(rect.position.x)) if only_column<0 else only_column
 	var end: int=mini(WIDTH,int(rect.end.x)) if only_column<0 else only_column+1
@@ -537,12 +537,12 @@ func _draw() -> void:
 				var from_y: float=maxf(0,py); var to_y: float=minf(HEIGHT,py+p.height)
 				var gain: float=lamp(p.depth)
 				var strips: Array=layer.portal.strips
-				if _burning.has(layer.portal.id): strips=Paint.strips("res://assets/art/fixtures/fixture_v2_web_burning_%d_d1.png"%mini(1,int(float(_burning[layer.portal.id])/0.12)))
+				if _burning.has(layer.portal.id): strips=Paint.strips("res://assets/art/fixtures/fixture_v2_web_burning_%d_d1.png"%mini(1,int(float(_burning[layer.portal.id])/Times.WEB_FRAME)))
 				if to_y>from_y: draw_texture_rect_region(strips[p.u],Rect2(column,from_y,1,to_y-from_y),Rect2(0,(from_y-py)*64.0/p.height,1,(to_y-from_y)*64.0/p.height),Color(gain,gain,gain))
 	if not _dispel.is_empty(): _draw_sprite(_dispel.sprite,shift,true)
 	if not _strike.is_empty():
 		if _strike.has("ghost") and not _sprites.any(func(s): return s.id==_strike.id): _draw_sprite(_strike.ghost,shift,true)
-		var frame: int=clampi(int(_strike.age/0.08),0,2)
+		var frame: int=clampi(int(_strike.age/Times.STRIKE_FRAME),0,2)
 		var anchor: Vector2=_strike.target.anchor+Vector2(0,shift-2*frame)
 		var effect_size: float=clampf(_strike.target.rect.size.y,32,64)
 		draw_texture_rect(_effects[_strike.kind][frame],Rect2((anchor-Vector2.ONE*effect_size*0.5).round(),Vector2.ONE*effect_size),false)
@@ -613,11 +613,11 @@ func _process(delta: float) -> void:
 	if hand_active or held.kind in ["torch_lit","seal"]: queue_redraw()
 	for id in _burning.keys():
 		_burning[id]+=delta
-		if _burning[id]>=0.24: _burning.erase(id)
+		if _burning[id]>=Times.WEB_FRAME*2: _burning.erase(id)
 		queue_redraw()
 	if not _dispel.is_empty():
 		_dispel.age+=delta
-		if _dispel.age>=0.18: _dispel={}
+		if _dispel.age>=Times.DISPEL: _dispel={}
 		queue_redraw()
 	var previous: int=int(_presentation_ms/40)
 	var previous_flame: int=int(_presentation_ms/250)
@@ -626,7 +626,7 @@ func _process(delta: float) -> void:
 	if (not interaction_cues.is_empty() and int(_presentation_ms/40)!=previous) or (_has_sconce and int(_presentation_ms/250)!=previous_flame) or (_has_flame and int(_presentation_ms/180)!=previous_fixture): queue_redraw()
 	if not _strike.is_empty():
 		_strike.age+=delta
-		if _strike.age>=0.24: _strike={}
+		if _strike.age>=Times.STRIKE_FRAME*3: _strike={}
 		queue_redraw()
 	var before:=int(_pulse*8)
 	_pulse=fmod(_pulse+delta,TAU)

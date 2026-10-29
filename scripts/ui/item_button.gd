@@ -10,6 +10,7 @@ const FONT=preload("res://assets/font/vetka.ttf")
 static var _layouts: Dictionary={}
 static func verb_layout(word: String,button_size: Vector2) -> Dictionary:
 	if _layouts.is_empty(): _layouts=JSON.parse_string(FileAccess.get_file_as_string("res://data/ui/verb_layout.json"))
+	if word=="PRY": word="CUT" # same measured three-letter stamp, spoken verb stays PRY
 	if word=="UNEQUIP":
 		return {"icon_path":"assets/art/ui_offer/verb_pack.png","icon_origin":[12,4],"text_origin_godot_top":[26,4]}
 	var table: Array=_layouts.cards if button_size.x<=42 else _layouts.buttons

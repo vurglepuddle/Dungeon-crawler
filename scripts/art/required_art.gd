@@ -3,6 +3,7 @@ extends RefCounted
 ## Optional owner vines are deliberately absent; current paintings never fall back.
 const Family=preload("res://scripts/art/art_family.gd")
 const Paint=preload("res://scripts/art/presentation_art.gd")
+const Icons=preload("res://scripts/art/item_art.gd")
 const Catalog=preload("res://scripts/content/catalog.gd")
 const Held=preload("res://scripts/view/held_item.gd")
 static var _paths: Dictionary={}
@@ -10,12 +11,8 @@ static func add(path: String,family: String) -> void: _paths[path]=family
 static func paths() -> Dictionary:
 	_paths={}
 	add("res://assets/art/finder.png","portrait_preload")
-	for kind in Catalog.ITEMS:
-		var path: String="res://assets/art/icons/%s.png"%kind
-		if kind=="torch": path="res://assets/art/fixtures/reed_torch_icon_unlit_16.png"
-		if kind=="seal": path="res://assets/art/fixtures/dawn_seal_icon_16.png"
-		add(path,"inventory")
-	add("res://assets/art/fixtures/reed_torch_icon_lit_16.png","inventory")
+	for kind in Icons.ICONS: add(Icons.icon_path(kind),"accepted_pack_icon")
+	add("res://assets/art/ui/owner_candle.png","owner_candle")
 	for kind in ["knife","shard","club","stone","bone","bread","tonic","coat","coat_spent","key","clapper","lamp"]:
 		for d in range(1,4): add("res://assets/art/items/item_%s_d%d.png"%[kind,d],"world_items_working_tree")
 	var families: Array=[]
@@ -67,15 +64,15 @@ static func paths() -> Dictionary:
 	for kind in ["splash","title","win","death","logotype_140"]: add("res://assets/art/screens/%s.png"%kind,"screens")
 	for kind in ["splash_flutter","title_flicker","win_dawn","death_gutter"]:
 		for frame in range(2 if kind=="splash_flutter" else 3): add("res://assets/art/screens/%s_%d.png"%[kind,frame],"screens")
-	add("res://assets/art/icons/coat_spent.png","inventory")
 	for family in [1,2]:
 		for state_name in ["up","down"]: add("res://assets/art/fixtures/lever_wall_f%d_%s_64.png"%[family,state_name],"lever_wall")
 		for name in ["floor_lift_dead","floor_lift_working","floor_stairs_down","cache_open"]:
 			add("res://assets/art/fixtures/fixture_v2_f%d_%s_64.png"%[family,name],"ground_cache")
 	for name in ["web_intact","web_burning_0","web_burning_1","web_burnt","cord_grate_intact","cord_grate_cut"]:
 		add("res://assets/art/fixtures/fixture_v2_%s_d1.png"%name,"portal")
-	for name in ["drain","cracked","compass"]: add("res://assets/art/env/calm_v3_room_floor_%s.png"%name,"room_landmarks")
-	for name in ["roots","chain","boss"]: add("res://assets/art/env/calm_v3_room_ceiling_%s.png"%name,"room_landmarks")
+	for family in families:
+		for name in ["drain","cracked","compass"]: add("res://assets/art/env/%s_room_floor_%s.png"%[family.planes,name],"room_landmarks")
+		for name in ["roots","chain","boss"]: add("res://assets/art/env/%s_room_ceiling_%s.png"%[family.planes,name],"room_landmarks")
 	for h in [64,40,24]:
 		for pose in ["idle","windup","recoil"]: add("res://assets/art/creatures/ash_hound_ember_glow_%s_%d.png"%[pose,h],"hound_glow")
 	return _paths.duplicate()

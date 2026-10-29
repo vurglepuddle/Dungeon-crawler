@@ -303,7 +303,7 @@ M4 continues quieter walls, portraits, concise
 knowledge-only Ledger cards, a period-style manual and phone acceptance.
 M3e adds the encounter choices and return reveal. M3f wires the supplied
 room dressing, painted logotype, brief story-plate motion, calm per-cell
-planes and the torn parchment. The owner's vines remain an optional hook.
+planes and the torn parchment. The accepted owner vines now use that hook.
 Third-run appeal, branch discovery and combat comfort need human review.
 
 ## Phone affordances and material pass (M3f)
@@ -335,7 +335,7 @@ verb/pad/compass area stays dark, with the existing painted buttons and dial.
 The vial occupies x36-41; equipment stays at x43/71 so touch targets remain
 24x32. UNEQUIP is widened to 86px so the full word and its stamp stay readable.
 The optional transparent owner overlay sits above chrome and below modals;
-no vines are enabled yet. Floor materials use stable world-cell choices,
+the owner-painted vines keep their registration. Floor materials use stable world-cell choices,
 with wet patches rare on floor one and more common below. Menu paintings
 move through only two or three supplied frames; they never delay input.
 
@@ -373,9 +373,9 @@ Torches and the Seal retain their dedicated fixture canvases and pulses.
 Inventory icons and the thirteen item definitions remain unchanged.
 
 The view frame is fixed at (0,18,154,156), its picture (3,21,148,150), and the
-compass box (85,294,66,44). The owner's optional 154x342 transparent overlay
-loads from assets/art/ui/owner_vines.png, above picture/chrome/needle, hidden
-while a card, modal or map is open. The draft is not wired or copied.
+compass box (85,294,66,44). The owner's 154x342 transparent overlay loads
+from assets/art/ui/owner_vines.png above picture/chrome/needle. Cards and
+menus cover it; it stays visible around pop-ups. Only the map hides it.
 
 ## M4b painted-kit integration
 
@@ -392,3 +392,33 @@ Map ink, digits, glints, lanes, movement arrows and the instrument needle stay
 intentional code visuals. The viewport frame and compass registration are
 unchanged. Missing required paintings must fail source/export validation;
 code objects and flat chrome are no longer missing-file substitutes.
+
+## M4c: readable hands, honest doors, quiet discoveries
+
+An unlocked door keeps the closed door's physical plane. The wood opens in
+the arch in front of you, rather than retreating into the next cell. Weight
+gates, webs, cord grates and cache faces likewise retain their planes.
+
+The accepted slower hand poses remain. World strikes now hold each of three
+frames for 160ms, burning silk each of two frames for 240ms, a dispelling
+Ghost fades over 360ms, and hurt feedback lasts 640ms. None extends an input
+gate or changes a combat beat. A new action may restart an effect.
+
+The Lower Watch uses its soot/rust walls, flags, vaults, landmarks and props,
+with floor-two fixtures. Travel and Continue select its own music. Approved
+painted pack icons cover every kind/state, including cold/lit reeds and spent
+padding; the alternate club remains unused.
+
+Four skulls occasionally flare one eye, sometimes a pair, for 300ms. Only
+the eight owner-named pixels change. The separate candle flickers slowly at
+its painted registration. Both are presentation only and frozen during pilots;
+the source overlay is never rewritten. Socket positions live in a small data
+file so future owner exports need no code edits.
+
+Before dawn, touching the faint scar gives a puzzled, free slate line. No
+card, secret name, capability verb or target glint reveals the cache. The
+third-floor Seal still reveals it on the return walk. Once revealed, a selected
+or held EDGE can PRY it open; cords keep CUT. Capability use prefers the selected
+tool, then the hand. Only LIGHT searches pockets; throwing always stays explicit.
+Difficulty, floor count, generation and save profiles remain unchanged pending
+the owner's three-floor playtest.

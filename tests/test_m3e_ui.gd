@@ -35,7 +35,7 @@ func _run() -> void:
 			check(app.selected=="","Completed burning restores ordinary world affordances")
 		if action.type=="dispel":
 			check(not app.view._dispel.is_empty() and app.sim._actor(action.target_id).hp==0,"Ghost recoil is presentation after a committed dispel")
-			var before: String=app.sim.state_hash(); app.view._process(0.3)
+			var before: String=app.sim.state_hash(); app.view._process(app.view.Times.DISPEL+0.01)
 			check(app.view._dispel.is_empty() and app.sim.state_hash()==before,"Ghost fade cannot resolve another action")
 		if action.type=="pickup" and action.item_id=="f2_seal": check(app.view.held.kind=="seal","Dawn is held up automatically for the return")
 		if action.type=="cut" and action.target_id=="f1_panel":

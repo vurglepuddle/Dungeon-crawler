@@ -45,8 +45,8 @@ func _run() -> void:
 			check(not target.is_empty(),"Strike has a visible pre-hit target")
 			app._command(action)
 			check(app.view._strike.kind=="edge" and app.view._strike.damage>0,"Wielded EDGE produces slash and actual damage")
-			check(app._busy<=0.13,"Strike never extends input gate to its 240ms lifetime")
-			hash_before=app.sim.state_hash(); app.view._process(0.25)
+			check(app._busy<=0.13,"Strike never extends input gate to its visual lifetime")
+			hash_before=app.sim.state_hash(); app.view._process(preload("res://scripts/view/effect_times.gd").STRIKE_FRAME*3+0.01)
 			check(app.view._strike.is_empty() and app.sim.state_hash()==hash_before,"Effect expires without a simulation action")
 			saw_hit=true
 		else: app._command(action)

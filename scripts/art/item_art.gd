@@ -62,7 +62,9 @@ static func texture(kind: String) -> Texture2D:
 	_cache[kind]=result
 	return result
 
+const ICONS={"knife":"knife","shard":"shard","club":"club","stone":"stone","bone":"bone","bread":"bread","tonic":"tonic","coat":"coat","coat_spent":"coat_spent","key":"key","clapper":"clapper","lamp":"lamp","torch":"torch_unlit","torch_lit":"torch_lit","seal":"seal"}
+static func icon_path(kind: String) -> String:
+	assert(ICONS.has(kind),"No accepted pack icon for "+kind)
+	return "res://assets/art/items/icon_%s_16.png"%ICONS[kind]
 static func inventory(kind: String) -> Texture2D:
-	if kind=="torch": return preload("res://scripts/art/presentation_art.gd").texture("res://assets/art/fixtures/reed_torch_icon_unlit_16.png")
-	if kind=="seal": return preload("res://scripts/art/presentation_art.gd").texture("res://assets/art/fixtures/dawn_seal_icon_16.png")
-	return preload("res://scripts/art/presentation_art.gd").texture("res://assets/art/icons/%s.png"%kind)
+	return preload("res://scripts/art/presentation_art.gd").texture(icon_path(kind))

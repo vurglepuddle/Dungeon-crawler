@@ -1,0 +1,36 @@
+# Authored frozen presentation fixtures, not a gameplay route.
+wait 5
+call sample f3_corridor
+wait 4
+shot f3_corridor
+call sample f3_room
+wait 4
+shot f3_room
+call sample f3_door_closed
+wait 4
+shot f3_door_closed
+call sample f3_door_open
+wait 4
+shot f3_door_open
+call sample card_vines
+wait 4
+shot card_vines
+call sample overlay_idle
+wait 4
+shot overlay_idle
+call sample overlay_flare_0
+wait 4
+shot overlay_flare_0
+call sample overlay_flare_1
+wait 4
+shot overlay_flare_1
+call sample overlay_flare_2
+wait 4
+shot overlay_flare_2
+call sample overlay_flare_3
+wait 4
+shot overlay_flare_3
+call sample candle_frame_1
+wait 4
+shot candle_frame_1
+close

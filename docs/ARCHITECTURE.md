@@ -80,10 +80,10 @@ results. See CONTRACT for exact data and DESIGN for what is playable.
   new warm restoration chord differs from the hostile wind-up bell. Close
   stops voices before quitting; its noise stream never touches gameplay RNG.
 - The B-owned Music autoload streams its original note-data scores. Main
-  selects title/floor/floor2/win/death, stops on close and independently persists
+  selects title/actual floor/win/death, stops on close and independently persists
   MUSIC/SFX preferences outside the run. B owns synthesis and pause/resume.
 - The view loads registered state poses and three-frame strike effects from
-  B's assets/art/anim and fx. It retains a killed target visually for 240ms,
+  B's assets/art/anim and fx. It retains a killed target visually for 480ms,
   never in the sim. Wall levers use a world-fixed hinge and wall-plane depth;
   inset plates draw before their carried weight. Rule snapshots are unchanged.
 - scripts/ui/map_view.gd fits seen bounds and distinguishes known stairs,
@@ -162,8 +162,8 @@ scripts/art/plane_materials.gd implements the supplied stable cell hash and
 weights; the surface cache includes seed and material revision. Paint caches
 accepted full-size wall controls, native UI surfaces, tiny verb stamps and
 story frames. ItemButton draws measured stamps beside full VETKA words.
-Main owns the optional owner_overlay.png layer, below modals and transparent
-to input. Neither vines nor unreviewed authoring proposals enter staged export.
+Main owns the owner_vines.png layer, below modals and transparent to input.
+The accepted owner texture enters export; unreviewed authoring offers do not.
 
 M4a: scripts/gen/deep_watch.gd recombines the established modules on floors
 three onward before the final spawn-reservation/dressing pass. The Sim chooses
@@ -184,7 +184,8 @@ The optional owner vine layer has fixed registration and modal visibility.
 `art/art_family.gd::for_floor` is the single floor-to-family mapping. Its
 record separates walls, fixtures, props and plane prefix/weight family, so a
 Lower Watch environment can retain the existing fixture/prop kits. All current
-deep visuals still borrow family two. There is no simulation family field.
+deep environments use family three; fixtures retain family two. There is no
+simulation family field.
 
 `plane_materials.gd` derives fixed ground cells from the same `WallFaces`
 bindings as travel. Negative binding normal determines the tile interior's
@@ -201,3 +202,16 @@ The export staging helper consumes this same inventory, so a future family
 change automatically includes its required files. Missing raw source files
 fail staging even if stale imported copies exist. The old M1 texture helper remains available to historical tests, unused by
 current world/inventory rendering. Optional owner vines are not required art.
+
+M4c: portal records keep a state-independent world plane, used by both closed
+and opened lock paintings. effect_times.gd centralises longer world feedback;
+the input gate retains its original independent lifetime. ui/overlay_life.gd
+is a mouse-transparent child above the owner texture and below pop-ups, with
+private random timing and JSON-registered sockets/candle. Pilot mode freezes
+it. Only map visibility suppresses the overlay. The approved icon path map
+in item_art.gd also feeds RequiredArt and export staging.
+
+Capability inference remains a pure query: selected tool, then held tool,
+then pocket LIGHT. UI filters unrevealed scar discovery and gives a free
+puzzled message instead. PRY labels the existing panel cut action; no action,
+save profile, generator or simulation RNG change is needed.

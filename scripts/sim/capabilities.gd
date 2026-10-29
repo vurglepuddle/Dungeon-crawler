@@ -53,9 +53,9 @@ static func targets(sim,id: String) -> Array:
 		var verb: String=""
 		if f.type=="brazier" and f.lit and sim._s.items[id].kind=="torch" and not sim._s.items[id].lit: verb="LIGHT"
 		elif f.type=="web" and not f.open and has(sim,id,"FIRE"): verb="BURN"
-		elif f.type in ["cord","panel"] and not f.open and (f.type!="panel" or f.revealed) and has(sim,id,"EDGE"): verb="CUT"
+		elif f.type in ["cord","panel"] and not f.open and (f.type!="panel" or f.revealed) and has(sim,id,"EDGE"): verb="PRY" if f.type=="panel" else "CUT"
 		elif f.type=="panel" and not f.revealed and has(sim,id,"GLOW"): verb="REVEAL"
-		if verb!="": result.append({"target_id":f.id,"pos":f.pos.duplicate(),"verb":verb,"action":{"type":verb.to_lower(),"item_id":id,"target_id":f.id}})
+		if verb!="": result.append({"target_id":f.id,"pos":f.pos.duplicate(),"verb":verb,"action":{"type":"cut" if verb=="PRY" else verb.to_lower(),"item_id":id,"target_id":f.id}})
 	for actor in sim._floor().actors:
 		if not in_reach(sim,actor): continue
 		var verb: String="FEED" if actor.kind=="hound" and actor.state!="peaceful" and has(sim,id,"FOOD") else ("DISPEL" if actor.kind=="ghost" and has(sim,id,"GLOW") else "")

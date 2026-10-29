@@ -152,20 +152,21 @@ func targets(selected: String) -> Array:
 
 func capability_targets(selected: String="") -> Array:
 	var result: Array=Cap.targets(self,selected)
-	# Lighting can reach a pocketed reed bundle. Burning uses the explicit
-	# selection or the torch already in the Finder's hand; never auto-throw.
-	var candidates: Array=[selected,_s.equipment.hand]+_s.pack
+	# Explicit selection first, then the held tool. Only LIGHT reaches pockets.
+	# Inferred tools never offer a throw; TOSS keeps its explicit preview.
+	var candidates: Array=[_s.equipment.hand]+_s.pack
 	for id in candidates:
-		if id=="" or not _s.items.has(id) or _s.items[id].kind!="torch": continue
+		if id=="" or id==selected or not _s.items.has(id): continue
 		for entry in Cap.targets(self,id):
-			if entry.verb!="LIGHT" and not (entry.verb=="BURN" and id in [selected,_s.equipment.hand]): continue
+			if entry.verb=="TOSS" or (id!=_s.equipment.hand and entry.verb!="LIGHT"): continue
 			if not result.any(func(t): return t.target_id==entry.target_id and t.verb==entry.verb): result.append(entry)
 	return result
 func interaction_targets(selected: String="") -> Array:
 	var result: Array=targets(selected)
 	for entry in capability_targets(selected):
 		if not result.any(func(t): return t.target_id==entry.target_id and t.verb==entry.verb): result.append(entry)
-	return result
+	# Hidden scars have no advertised capability until their dawn reveal.
+	return result.filter(func(t): return t.verb!="REVEAL")
 
 func _arrival_clear(number: int,cell: Array) -> bool:
 	if number<1 or number>_s.floor_count or cell[0]<0 or cell[1]<0 or cell[0]>=17 or cell[1]>=17: return false
@@ -238,8 +239,8 @@ func ring_targets(id: String) -> Array:
 func legal_verbs(selected: String = "") -> Array:
 	if _s.status!="playing": return []
 	var front := inspect_front()
-	var matches: Array=capability_targets(selected)
-	if not matches.is_empty(): return _travel_verb([{"label":matches[0].verb,"action":matches[0].action},{"label":"GUARD","action":{"type":"guard"}},{"label":"WAIT","action":{"type":"wait"}}])
+	var matches: Array=capability_targets(selected).filter(func(t): return t.verb!="REVEAL")
+	if not matches.is_empty(): return _travel_verb([{"label":matches[0].verb,"action":matches[0].action},{"label":"GUARD","action":{"type":"guard"}},{"label":"HIT","action":{"type":"hit","target_id":front.monster}} if front.monster!="" else {"label":"WAIT","action":{"type":"wait"}}])
 	if not ring_targets(selected).is_empty():
 		var ringing: Array=[{"label":"RING","action":{"type":"ring","item_id":selected}}, {"label":"GUARD","action":{"type":"guard"}}]
 		ringing.append({"label":"HIT","action":{"type":"hit","target_id":front.monster}} if front.monster!="" else {"label":"WAIT","action":{"type":"wait"}})
