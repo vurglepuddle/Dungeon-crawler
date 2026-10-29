@@ -40,6 +40,7 @@ var _down: Texture2D
 func _ready() -> void:
 	var piloted := Engine.has_meta("pilot") and not OS.get_cmdline_user_args().has("--show-pointer")
 	if OS.has_feature("mobile") or DisplayServer.get_name() == "headless" or piloted:
+		set_process_input(false) # input can still arrive before the deferred free
 		queue_free()
 		return
 	layer = 128
@@ -56,6 +57,8 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
+	if _hand == null:
+		return
 	if event is InputEventMouse or event is InputEventScreenTouch or event is InputEventScreenDrag:
 		_hand.position = event.position.floor()
 		_hand.visible = true
