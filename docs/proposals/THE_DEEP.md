@@ -1,6 +1,10 @@
 # The Deep: the whole game around the tutorial we already have
 
-A proposal for the owner's review, 29 October 2026. Nothing here is built yet.
+A proposal for the owner's review, 29 October 2026. **Status (end of 29
+October):** the M5a scaffold and M5b (the owner's playtest notes) are built and
+on the phone. See `docs/M5A_RESULTS.md`, `docs/M5B_RESULTS.md` and
+`docs/DESIGN.md`. Still to come: traps, unique rooms, puzzle chains, one-way
+drops, dawn locks, two-creature encounters (after a combat proposal), magic.
 It turns the owner's idea into a shape, a feature list, a first scaffold, and
 the questions only the owner can answer. **The owner answered the questions
 the same afternoon; their answers come first and override anything below.**

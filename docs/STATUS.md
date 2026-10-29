@@ -89,7 +89,7 @@ See "Claude, late evening" in the queue below: the Seal's light in
 `dungeon_view.gd`, the held-up mark glow, the room-filling map
 (`dungeon_view.gd` `room_cells`, `map_view.gd`, `main.gd` `_capture_survey`),
 the Fall's held Seal and hidden verbs (`main.gd` `_wake_transition`), and
-`test_m5b.gd`'s light check.
+`test_m5b.gd`'s light check, and `test_m3d.gd`, where the entry room's back wall is now mapped (the owner's room-on-entry rule replaces the M3d no-back-wall rule).
 
 The owner also paints. Their **vine overlay** is wired
 (`assets/art/ui/owner_vines.png`, working template

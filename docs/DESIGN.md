@@ -490,19 +490,35 @@ away from those doors it names the key's original destination. Existing runs
 retain their generic keys and exact simulation snapshots.
 
 Survey uses every camera column's unobstructed ray, including partial room
-cells and side-wall slivers, within lamp range. Entering a room records its
-visible forward area without walking every cell. Looking never manufactures
-footsteps or floods an unseen room: behind-camera cells, closed-door interiors
-and unrevealed secret landmarks stay unknown. Saved seen/walked masks keep the
-same version and dimensions. Even an older mask cannot draw a sleeping panel
-as a secret glyph.
+cells and side-wall slivers, within lamp range. **Standing in a room maps the
+whole room** (the owner, after playing M5b: walking into a room left it "all
+dashed still"). A room cell is an open cell inside some open 2x2 patch, which
+corridors never are. The fill takes up to 64 room cells plus the walls and
+mouths around them. Closed gates, doors, webs and cords stop it. On the map,
+**seen floor is drawn solid like walked floor**; a small tick marks the cells
+actually walked. Looking never manufactures footsteps. Closed-door interiors
+and unrevealed secret landmarks stay unknown, and a sleeping panel is only
+masonry on the map. Saved seen/walked masks keep the same version and
+dimensions.
 
-The carried Seal supplies six hard distance bands with ordered pixel dithering
-at their edges. Its pool is radial in world space: bright flagstones at your
-feet, readable slate within about two cells, darkness farther out. Pale stone
-retains its painted highlights instead of taking the slate exposure boost.
-This also lights the Winding and any older run carrying the Seal; the Abbey
-before the Seal retains its old lamp.
+**The carried Seal's light** follows the owner's own mockup. Light is full,
+and surfaces keep their painted contrast, out to `core`. From there it falls in
+`steps` gentle levels to black at `edge`, and each pixel is ordered-dithered
+(8x8 Bayer, screen-locked) only between its level and the next darker one.
+Near the Finder the dots are barely darker than the wall; farther in, the
+wall darkens and its dots darken a little more, until full dark. The numbers
+live in `data/presentation/seal_light.json`, for the owner to tune: `core`
+1.1, `edge` 3.5, `steps` 8, `curve` 1.0, `gain` 1.0, `slate_gain` 1.1. Walls
+and portals draw each column at the upper level, with a faded dither strip
+over it. Floors and ceilings dither per pixel. Sprites take the blended
+level. This also lights the Winding and any older run carrying the Seal; the
+Abbey before the Seal keeps its old lamp.
+
+**Holding up the Seal** (selecting it on the belt; it is never in hand
+otherwise) shows any dawn mark it faces, revealed or not. The mark pulses
+brighter with the Seal's one-second beat. Put away, an unrevealed mark is
+only faint scratches. **During the Fall** the Finder clutches the Seal, and
+the action row stays empty until the room below fades in.
 
 Each Deep block chooses a seeded wall/floor/ceiling family from f1-f4. The
 default four blocks use all four moods. Changes occur at the existing 16-cell
