@@ -178,6 +178,15 @@ fixes directly.
      - **Small issues:** the floor label already says 4/5 while the Abbey
        crumbles; the flaky `m5a_death` pilot.
      - **Later:** traps and unique rooms; combat revamp (proposal first).
+   - **Claude, right after M5b lands:**
+     - **While falling, hold the Seal.** The owner, after watching the Fall clip
+       (`build/fall_clip.mp4`): "put the seal into the hand ... (so feels like
+       you actually grabbed it)". Set `held` to the Seal for the Fall's crumble
+       and fade, then return to the selected-only rule on waking.
+     - **Keep** the slate's "Dawn Seal / Take it home." during the Fall (the
+       owner).
+     - **Check** the WAKE button that shows in the action row during the
+       crumble, before the waking card.
    - **A's next turn (M5b):** per-block or per-room art families (see
      `THE_DEEP.md`, "Later the same afternoon"), with f4 as one mood, not all.
    - **Combat revamp:** the owner wants more depth and a more interesting
