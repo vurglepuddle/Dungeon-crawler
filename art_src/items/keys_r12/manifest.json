@@ -1,0 +1,301 @@
+{
+  "palette": "art_src/spike/palette.gpl",
+  "colours_union": 25,
+  "files": [
+    {
+      "path": "art_src/items/keys_r12/contact_sheet_4x.png",
+      "size": [
+        2200,
+        1408
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        2200,
+        1408
+      ],
+      "colours": 25,
+      "sha256": "21ac8970d60ea33225fefd7baeff468f7f9da414946ff6dfe68c45e1b0c27c05"
+    },
+    {
+      "path": "art_src/items/keys_r12/contact_sheet_native.png",
+      "size": [
+        550,
+        352
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        550,
+        352
+      ],
+      "colours": 25,
+      "sha256": "774251a4b5eea0a6292e1fd254edd79998516c1f626c65b0f7562a112d03d861"
+    },
+    {
+      "path": "assets/art/items/icon_key_bronze_16.png",
+      "size": [
+        16,
+        16
+      ],
+      "opaque_bounds": [
+        0,
+        1,
+        16,
+        16
+      ],
+      "colours": 4,
+      "sha256": "a0be68051f507e7cf090c4a83fb60f15cf2695c1e70d08629ed7a54377d22b11"
+    },
+    {
+      "path": "assets/art/items/icon_key_gold_16.png",
+      "size": [
+        16,
+        16
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "colours": 4,
+      "sha256": "f5144aef0ad2eb737116fd8a6f7b9c5ae3bf0ed959ac4a84286c037d586ecb27"
+    },
+    {
+      "path": "assets/art/items/icon_key_iron_16.png",
+      "size": [
+        16,
+        16
+      ],
+      "opaque_bounds": [
+        0,
+        1,
+        16,
+        16
+      ],
+      "colours": 4,
+      "sha256": "b8790d35ef403559b8bb80fe5e540abbb2967bf9d37cc41651d6d6c173c3e5e1"
+    },
+    {
+      "path": "assets/art/items/item_key_bronze_d1.png",
+      "size": [
+        64,
+        48
+      ],
+      "opaque_bounds": [
+        18,
+        21,
+        46,
+        47
+      ],
+      "colours": 5,
+      "sha256": "52c0e4d96dcc2c608d114de95daee1020db2e6d919919dc7fc811e4e3f6bda84"
+    },
+    {
+      "path": "assets/art/items/item_key_bronze_d2.png",
+      "size": [
+        40,
+        30
+      ],
+      "opaque_bounds": [
+        11,
+        13,
+        29,
+        29
+      ],
+      "colours": 5,
+      "sha256": "d0f5c9760f1ceca3118b1298271c83f8d8b5c455fc0e9a638a63f54e6bc0b873"
+    },
+    {
+      "path": "assets/art/items/item_key_bronze_d3.png",
+      "size": [
+        24,
+        18
+      ],
+      "opaque_bounds": [
+        7,
+        8,
+        17,
+        17
+      ],
+      "colours": 4,
+      "sha256": "3f542d5a2e9868f518d3e2d5f81d2cdf2efcca9c2a6cc73818890a5a60336e7f"
+    },
+    {
+      "path": "assets/art/items/item_key_gold_d1.png",
+      "size": [
+        64,
+        48
+      ],
+      "opaque_bounds": [
+        17,
+        21,
+        46,
+        47
+      ],
+      "colours": 6,
+      "sha256": "bfdb7fb59a1ad2cf25c7b7f7f67293aca6010ab7c3252d43929ad67e22ccefe1"
+    },
+    {
+      "path": "assets/art/items/item_key_gold_d2.png",
+      "size": [
+        40,
+        30
+      ],
+      "opaque_bounds": [
+        11,
+        13,
+        29,
+        29
+      ],
+      "colours": 5,
+      "sha256": "fec9a217a7bc863394cadccc3c7f524f095daa22b74fa7d2eb726c4d5a14857d"
+    },
+    {
+      "path": "assets/art/items/item_key_gold_d3.png",
+      "size": [
+        24,
+        18
+      ],
+      "opaque_bounds": [
+        6,
+        7,
+        17,
+        17
+      ],
+      "colours": 5,
+      "sha256": "61205f3f73f169a9e7d2bd673b1292a95169da6fc9a164ed87ba16ed1f154cad"
+    },
+    {
+      "path": "assets/art/items/item_key_iron_d1.png",
+      "size": [
+        64,
+        48
+      ],
+      "opaque_bounds": [
+        18,
+        21,
+        46,
+        47
+      ],
+      "colours": 6,
+      "sha256": "379da9751d5162c559bcb778f3406bcf324c11f09d29e77411fd2b1bcb7661cf"
+    },
+    {
+      "path": "assets/art/items/item_key_iron_d2.png",
+      "size": [
+        40,
+        30
+      ],
+      "opaque_bounds": [
+        11,
+        13,
+        29,
+        29
+      ],
+      "colours": 6,
+      "sha256": "f5fa1dcfe73fe66c6cb32b81ce574c89842ceaed1c76a1a5f36dbcf531dbb225"
+    },
+    {
+      "path": "assets/art/items/item_key_iron_d3.png",
+      "size": [
+        24,
+        18
+      ],
+      "opaque_bounds": [
+        7,
+        8,
+        17,
+        17
+      ],
+      "colours": 3,
+      "sha256": "b1d89ec7b48c8af6cb038c22fc690092715caacfb8f631acd7f14503d95292c9"
+    }
+  ],
+  "sources": [
+    {
+      "path": "art_src/items/keys_r12/sources/accepted_key_metal_patch.png",
+      "sha256": "fe06b2c4f3a7832bce8c1108a3d8d41b5af04dfd5e73c811c3c35714f178bbcf"
+    },
+    {
+      "path": "art_src/items/keys_r12/sources/lock_registration_reference.png",
+      "sha256": "492fccaa4c2c98137fac87e37bf0373c12e31aa5a86b3de7762c160bef062246"
+    },
+    {
+      "path": "art_src/items/keys_r12/sources/registration_reference.png",
+      "sha256": "702cbcdb2ec48997e0c7eb60cb4d0c186b6b3629f0ee771f02da8f4d8fe5363c"
+    }
+  ],
+  "runtime_count": 12,
+  "layout": "layout.json",
+  "generation": "None; offline editable silhouettes with accepted painted metal.",
+  "dependency_files": [
+    {
+      "path": "art_src/env/pipeline.py",
+      "sha256": "1599ce9116df2907e930df2f29687fd3b5a7feeb3215a771f5d1b4f29c53293b"
+    },
+    {
+      "path": "art_src/fixtures/locks_r12/build_locks.py",
+      "sha256": "122f880a4aa636a3ab75465997cb57a787dce29b884d7f3c5ece5d941eb907d9"
+    },
+    {
+      "path": "art_src/items/keys_r12/build_keys.py",
+      "sha256": "03fd47592fe02bf0185f7950380d311c0e0615918fcd5a7f5339901c17a8cc61"
+    },
+    {
+      "path": "art_src/items/keys_r12/sources/accepted_key_metal_patch.png",
+      "sha256": "fe06b2c4f3a7832bce8c1108a3d8d41b5af04dfd5e73c811c3c35714f178bbcf"
+    },
+    {
+      "path": "art_src/items/sources/key.png",
+      "sha256": "0497f3356b7e874709aeb11c6e18ef0cd2b628d463cdde5490fe940940501f0b"
+    },
+    {
+      "path": "assets/art/env/painted_f1_door_v2.png",
+      "sha256": "3a4d64149fc6f831bfc3fb09208e506a6d4fb042eaf923b23671509b9cec89cb"
+    },
+    {
+      "path": "assets/art/env/painted_f2_door_v2.png",
+      "sha256": "a7cf5300e83d7a04ba8e653d408aabd2850cc3bcbe60397456d5f71bcd32e38a"
+    },
+    {
+      "path": "assets/art/env/painted_f3_door_v2.png",
+      "sha256": "a5bd229b71db84447c8de65bbca0af179bf89b495f55f33f507e189e59557700"
+    },
+    {
+      "path": "assets/art/env/painted_f4_door_v2.png",
+      "sha256": "b98a87a2970feeb6016355308d41881728bed94b490a56a9513d8f4e418b267a"
+    },
+    {
+      "path": "assets/art/items/icon_bone_16.png",
+      "sha256": "6fa4facbabe885f92f42f4957730253b030bdae82709547b169dbda19b8e2035"
+    },
+    {
+      "path": "assets/art/items/icon_key_16.png",
+      "sha256": "92cdcd7314611eda8018b2db9e1b080de2a4cc7644382482b6632cbe786a21ce"
+    },
+    {
+      "path": "assets/art/items/icon_lamp_16.png",
+      "sha256": "e9e24a0916591e9d6d7f9b1cc8a87d818bf1f359d848a46f418a3d416c682720"
+    },
+    {
+      "path": "assets/art/items/icon_stone_16.png",
+      "sha256": "013861d94ece7ec56d82d63c23c4eee200894541c4508f8a5420ea54ab9c3b0e"
+    },
+    {
+      "path": "assets/art/ui_offer/belt_loops.png",
+      "sha256": "1995351721c956f9eab3b022b7ce5621c51c7d06140580515b99913d6831a2b9"
+    },
+    {
+      "path": "assets/art/ui_offer/message_slate.png",
+      "sha256": "020967574be6447747b34e1cd46689c72215a630361b45500d30912a6d00fbe0"
+    },
+    {
+      "path": "assets/art/ui_offer/pack_leather.png",
+      "sha256": "d206f4e41692d8ff25948e04b7914eb9a3c0bf3f0217ae8e1950cc02f144b41f"
+    }
+  ],
+  "preserved_existing_pngs": 302,
+  "lock_runtime_count": 12
+}

@@ -1,0 +1,233 @@
+{
+  "schema_version": 1,
+  "metal_order": [
+    "iron",
+    "bronze",
+    "gold"
+  ],
+  "registrations": [
+    {
+      "path": "assets/art/items/icon_key_iron_16.png",
+      "kind": "key_iron",
+      "use": "pack, belt, card",
+      "size": [
+        16,
+        16
+      ],
+      "anchor": [
+        8,
+        8
+      ],
+      "metal": "iron"
+    },
+    {
+      "path": "assets/art/items/icon_key_bronze_16.png",
+      "kind": "key_bronze",
+      "use": "pack, belt, card",
+      "size": [
+        16,
+        16
+      ],
+      "anchor": [
+        8,
+        8
+      ],
+      "metal": "bronze"
+    },
+    {
+      "path": "assets/art/items/icon_key_gold_16.png",
+      "kind": "key_gold",
+      "use": "pack, belt, card",
+      "size": [
+        16,
+        16
+      ],
+      "anchor": [
+        8,
+        8
+      ],
+      "metal": "gold"
+    },
+    {
+      "path": "assets/art/items/item_key_iron_d1.png",
+      "kind": "key_iron",
+      "metal": "iron",
+      "depth": 1,
+      "size": [
+        64,
+        48
+      ],
+      "anchor": [
+        32,
+        48
+      ],
+      "shadow": "renderer; no baked shadow",
+      "bottom_margin_px": 1,
+      "use": "floor pickup; static"
+    },
+    {
+      "path": "assets/art/items/item_key_iron_d2.png",
+      "kind": "key_iron",
+      "metal": "iron",
+      "depth": 2,
+      "size": [
+        40,
+        30
+      ],
+      "anchor": [
+        20,
+        30
+      ],
+      "shadow": "renderer; no baked shadow",
+      "bottom_margin_px": 1,
+      "use": "floor pickup; static"
+    },
+    {
+      "path": "assets/art/items/item_key_iron_d3.png",
+      "kind": "key_iron",
+      "metal": "iron",
+      "depth": 3,
+      "size": [
+        24,
+        18
+      ],
+      "anchor": [
+        12,
+        18
+      ],
+      "shadow": "renderer; no baked shadow",
+      "bottom_margin_px": 1,
+      "use": "floor pickup; static"
+    },
+    {
+      "path": "assets/art/items/item_key_bronze_d1.png",
+      "kind": "key_bronze",
+      "metal": "bronze",
+      "depth": 1,
+      "size": [
+        64,
+        48
+      ],
+      "anchor": [
+        32,
+        48
+      ],
+      "shadow": "renderer; no baked shadow",
+      "bottom_margin_px": 1,
+      "use": "floor pickup; static"
+    },
+    {
+      "path": "assets/art/items/item_key_bronze_d2.png",
+      "kind": "key_bronze",
+      "metal": "bronze",
+      "depth": 2,
+      "size": [
+        40,
+        30
+      ],
+      "anchor": [
+        20,
+        30
+      ],
+      "shadow": "renderer; no baked shadow",
+      "bottom_margin_px": 1,
+      "use": "floor pickup; static"
+    },
+    {
+      "path": "assets/art/items/item_key_bronze_d3.png",
+      "kind": "key_bronze",
+      "metal": "bronze",
+      "depth": 3,
+      "size": [
+        24,
+        18
+      ],
+      "anchor": [
+        12,
+        18
+      ],
+      "shadow": "renderer; no baked shadow",
+      "bottom_margin_px": 1,
+      "use": "floor pickup; static"
+    },
+    {
+      "path": "assets/art/items/item_key_gold_d1.png",
+      "kind": "key_gold",
+      "metal": "gold",
+      "depth": 1,
+      "size": [
+        64,
+        48
+      ],
+      "anchor": [
+        32,
+        48
+      ],
+      "shadow": "renderer; no baked shadow",
+      "bottom_margin_px": 1,
+      "use": "floor pickup; static"
+    },
+    {
+      "path": "assets/art/items/item_key_gold_d2.png",
+      "kind": "key_gold",
+      "metal": "gold",
+      "depth": 2,
+      "size": [
+        40,
+        30
+      ],
+      "anchor": [
+        20,
+        30
+      ],
+      "shadow": "renderer; no baked shadow",
+      "bottom_margin_px": 1,
+      "use": "floor pickup; static"
+    },
+    {
+      "path": "assets/art/items/item_key_gold_d3.png",
+      "kind": "key_gold",
+      "metal": "gold",
+      "depth": 3,
+      "size": [
+        24,
+        18
+      ],
+      "anchor": [
+        12,
+        18
+      ],
+      "shadow": "renderer; no baked shadow",
+      "bottom_margin_px": 1,
+      "use": "floor pickup; static"
+    }
+  ],
+  "belt": "Same native16x16 icon as pack/card; no separate belt art or baked count/selection badge.",
+  "key_identity": "A owns key/door IDs and consumption. Metal selects art only; same metal does not imply same key ID.",
+  "source": "Accepted art_src/items/sources/key.png metal patch; original key icons/world files are preserved.",
+  "filter": "nearest",
+  "ramp": {
+    "iron": [
+      2,
+      3,
+      4,
+      5,
+      7
+    ],
+    "bronze": [
+      19,
+      21,
+      28,
+      29,
+      24
+    ],
+    "gold": [
+      20,
+      23,
+      25,
+      26,
+      10
+    ]
+  },
+  "animation": "none"
+}

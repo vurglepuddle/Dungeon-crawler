@@ -1,0 +1,33 @@
+{
+  "result": "passed",
+  "runtime_files": 24,
+  "ui_icons_shared_by_pack_belt_card": 3,
+  "world_frames": 9,
+  "family_plate_overlays": 12,
+  "deterministic_pngs_checked": 38,
+  "native_exact4x_pairs": [
+    "art_src/items/keys_r12/contact_sheet_native.png",
+    "art_src/fixtures/locks_r12/contact_sheet_native.png",
+    "art_src/fixtures/locks_r12/lock_doors_all_native.png",
+    "art_src/fixtures/locks_r12/lock_doors_f1_native.png",
+    "art_src/fixtures/locks_r12/lock_doors_f2_native.png",
+    "art_src/fixtures/locks_r12/lock_doors_f3_native.png",
+    "art_src/fixtures/locks_r12/lock_doors_f4_native.png"
+  ],
+  "preserved_pngs": 302,
+  "checks": [
+    "fixed shared palette and binary alpha",
+    "16x16 UI and64x48/40x30/24x18 world canvases",
+    "three distinct UI silhouettes",
+    "connected shapes and open bows at every distance",
+    "64x64 wall UV overlays, baked family registration, dark keyhole centres",
+    "source/dependency/runtime/review hashes",
+    "deterministic rebuild",
+    "exact nearest4x enlargement"
+  ],
+  "visual_review": "One pass: real pack/belt/slate and world keys, all4 door families, and64/40/24px door composites.",
+  "generation": "None; offline painted material and editable native geometry.",
+  "godot_run": false,
+  "device_validation": "Not run; distant iron on f4 is weakest cue.",
+  "owner_edits": "Fall/hand/f4 PNGs preserved; none of their builders invoked."
+}

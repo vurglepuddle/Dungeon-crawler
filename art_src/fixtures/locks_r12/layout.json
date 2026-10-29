@@ -1,0 +1,351 @@
+{
+  "schema_version": 1,
+  "canvas": [
+    64,
+    64
+  ],
+  "anchor": [
+    0,
+    0
+  ],
+  "keyhole_uv": {
+    "1": [
+      31,
+      41
+    ],
+    "2": [
+      32,
+      40
+    ],
+    "3": [
+      32,
+      40
+    ],
+    "4": [
+      32,
+      40
+    ]
+  },
+  "registrations": [
+    {
+      "path": "assets/art/fixtures/lock_plate_f1_iron_64.png",
+      "family": 1,
+      "metal": "iron",
+      "size": [
+        64,
+        64
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "keyhole_uv": [
+        31,
+        41
+      ],
+      "opaque_bounds": [
+        25,
+        32,
+        38,
+        51
+      ],
+      "closed_door": "assets/art/env/painted_f1_door_v2.png",
+      "state": "closed only; hide on open door",
+      "sampling": "Compose on canonical64x64 door before nearest wall-column projection; no sprite/billboard pass."
+    },
+    {
+      "path": "assets/art/fixtures/lock_plate_f1_bronze_64.png",
+      "family": 1,
+      "metal": "bronze",
+      "size": [
+        64,
+        64
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "keyhole_uv": [
+        31,
+        41
+      ],
+      "opaque_bounds": [
+        24,
+        31,
+        39,
+        52
+      ],
+      "closed_door": "assets/art/env/painted_f1_door_v2.png",
+      "state": "closed only; hide on open door",
+      "sampling": "Compose on canonical64x64 door before nearest wall-column projection; no sprite/billboard pass."
+    },
+    {
+      "path": "assets/art/fixtures/lock_plate_f1_gold_64.png",
+      "family": 1,
+      "metal": "gold",
+      "size": [
+        64,
+        64
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "keyhole_uv": [
+        31,
+        41
+      ],
+      "opaque_bounds": [
+        24,
+        31,
+        39,
+        52
+      ],
+      "closed_door": "assets/art/env/painted_f1_door_v2.png",
+      "state": "closed only; hide on open door",
+      "sampling": "Compose on canonical64x64 door before nearest wall-column projection; no sprite/billboard pass."
+    },
+    {
+      "path": "assets/art/fixtures/lock_plate_f2_iron_64.png",
+      "family": 2,
+      "metal": "iron",
+      "size": [
+        64,
+        64
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "keyhole_uv": [
+        32,
+        40
+      ],
+      "opaque_bounds": [
+        26,
+        31,
+        39,
+        50
+      ],
+      "closed_door": "assets/art/env/painted_f2_door_v2.png",
+      "state": "closed only; hide on open door",
+      "sampling": "Compose on canonical64x64 door before nearest wall-column projection; no sprite/billboard pass."
+    },
+    {
+      "path": "assets/art/fixtures/lock_plate_f2_bronze_64.png",
+      "family": 2,
+      "metal": "bronze",
+      "size": [
+        64,
+        64
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "keyhole_uv": [
+        32,
+        40
+      ],
+      "opaque_bounds": [
+        25,
+        30,
+        40,
+        51
+      ],
+      "closed_door": "assets/art/env/painted_f2_door_v2.png",
+      "state": "closed only; hide on open door",
+      "sampling": "Compose on canonical64x64 door before nearest wall-column projection; no sprite/billboard pass."
+    },
+    {
+      "path": "assets/art/fixtures/lock_plate_f2_gold_64.png",
+      "family": 2,
+      "metal": "gold",
+      "size": [
+        64,
+        64
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "keyhole_uv": [
+        32,
+        40
+      ],
+      "opaque_bounds": [
+        25,
+        30,
+        40,
+        51
+      ],
+      "closed_door": "assets/art/env/painted_f2_door_v2.png",
+      "state": "closed only; hide on open door",
+      "sampling": "Compose on canonical64x64 door before nearest wall-column projection; no sprite/billboard pass."
+    },
+    {
+      "path": "assets/art/fixtures/lock_plate_f3_iron_64.png",
+      "family": 3,
+      "metal": "iron",
+      "size": [
+        64,
+        64
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "keyhole_uv": [
+        32,
+        40
+      ],
+      "opaque_bounds": [
+        26,
+        31,
+        39,
+        50
+      ],
+      "closed_door": "assets/art/env/painted_f3_door_v2.png",
+      "state": "closed only; hide on open door",
+      "sampling": "Compose on canonical64x64 door before nearest wall-column projection; no sprite/billboard pass."
+    },
+    {
+      "path": "assets/art/fixtures/lock_plate_f3_bronze_64.png",
+      "family": 3,
+      "metal": "bronze",
+      "size": [
+        64,
+        64
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "keyhole_uv": [
+        32,
+        40
+      ],
+      "opaque_bounds": [
+        25,
+        30,
+        40,
+        51
+      ],
+      "closed_door": "assets/art/env/painted_f3_door_v2.png",
+      "state": "closed only; hide on open door",
+      "sampling": "Compose on canonical64x64 door before nearest wall-column projection; no sprite/billboard pass."
+    },
+    {
+      "path": "assets/art/fixtures/lock_plate_f3_gold_64.png",
+      "family": 3,
+      "metal": "gold",
+      "size": [
+        64,
+        64
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "keyhole_uv": [
+        32,
+        40
+      ],
+      "opaque_bounds": [
+        25,
+        30,
+        40,
+        51
+      ],
+      "closed_door": "assets/art/env/painted_f3_door_v2.png",
+      "state": "closed only; hide on open door",
+      "sampling": "Compose on canonical64x64 door before nearest wall-column projection; no sprite/billboard pass."
+    },
+    {
+      "path": "assets/art/fixtures/lock_plate_f4_iron_64.png",
+      "family": 4,
+      "metal": "iron",
+      "size": [
+        64,
+        64
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "keyhole_uv": [
+        32,
+        40
+      ],
+      "opaque_bounds": [
+        26,
+        31,
+        39,
+        50
+      ],
+      "closed_door": "assets/art/env/painted_f4_door_v2.png",
+      "state": "closed only; hide on open door",
+      "sampling": "Compose on canonical64x64 door before nearest wall-column projection; no sprite/billboard pass."
+    },
+    {
+      "path": "assets/art/fixtures/lock_plate_f4_bronze_64.png",
+      "family": 4,
+      "metal": "bronze",
+      "size": [
+        64,
+        64
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "keyhole_uv": [
+        32,
+        40
+      ],
+      "opaque_bounds": [
+        25,
+        30,
+        40,
+        51
+      ],
+      "closed_door": "assets/art/env/painted_f4_door_v2.png",
+      "state": "closed only; hide on open door",
+      "sampling": "Compose on canonical64x64 door before nearest wall-column projection; no sprite/billboard pass."
+    },
+    {
+      "path": "assets/art/fixtures/lock_plate_f4_gold_64.png",
+      "family": 4,
+      "metal": "gold",
+      "size": [
+        64,
+        64
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "keyhole_uv": [
+        32,
+        40
+      ],
+      "opaque_bounds": [
+        25,
+        30,
+        40,
+        51
+      ],
+      "closed_door": "assets/art/env/painted_f4_door_v2.png",
+      "state": "closed only; hide on open door",
+      "sampling": "Compose on canonical64x64 door before nearest wall-column projection; no sprite/billboard pass."
+    }
+  ],
+  "offset": "Already baked per family; runtime offset always0,0.",
+  "filter": "nearest",
+  "frames": 1,
+  "timing": "static",
+  "open_state": "Remove overlay when door opens; use existing open portal art.",
+  "lighting": "Apply same distance/light modulation as closed door, not glint emission.",
+  "door_family": "Use the family actually selected for the closed door, including per-block families; never raw floor number. Winding fallback is f4.",
+  "gameplay": "Art supplies metal hint only; A owns exact key ID/door matching."
+}

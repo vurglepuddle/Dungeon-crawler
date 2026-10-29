@@ -1273,3 +1273,113 @@ side frames: d1 **26x36**, d2 **13x18**, d3 **9x12**. Left hinges are
 **(10,19)/(5,9)/(3,6)**; mirrored right hinges are
 **(15,19)/(7,9)/(5,6)**. Do not rerun archived fixture builders over those
 owner paintings. Front-facing lever canvases are a separate unchanged set.
+
+## R12: iron, bronze and gold keys / matching locks
+
+Three new key families use the **accepted key painting's metal** with newly
+authored, editable bow and bit silhouettes. This batch is entirely offline:
+no new generation, Godot run or replacement of accepted art. The UI shapes
+are drawn at16px first, with restrained painted interior tones and clear
+material edges; the world shapes retain the accepted diagonal floor pose.
+
+| Metal token | Key silhouette / finish | Matching lock plate |
+| --- | --- | --- |
+| `iron` | Plain squared open bow, single broad ward; dark slate iron with a grey rim | Rectangular/chamfered iron hasp |
+| `bronze` | Round open bow, three teeth; warm aged brown/bronze | Octagonal bronze plate with three small lower cuts |
+| `gold` | Trefoil open bow, shaft collar and ornate stepped bit; bright gold/cream edges | Lobed gold crest and engraved inner rim |
+
+These are colour **and silhouette** distinctions. Fine teeth/lobes simplify
+at the farthest world depth; the metal ramps and open bows remain the main
+cues there. The pack/belt proofs include monochrome shapes beside the normal
+colours. Gold reads most strongly; distant iron on f4 is the quietest plate,
+as expected of a dark metal on cold stone. Phone acceptance remains the
+owner's human pass; the review composites do not simulate A's new light pool.
+
+### Key paths, native canvases and anchors
+
+All new key PNGs are in **`assets/art/items/`**. Expand `<metal>` as
+`iron`, `bronze`, `gold`. Every file is static, shared-palette indexed PNG,
+binary alpha, nearest filtering. There is no baked count or selection badge.
+
+| Exact runtime pattern | Canvas | Anchor / intended use |
+| --- | --- | --- |
+| `icon_key_<metal>_16.png` | 16x16 | Centre(8,8); **same file for pack, belt and item card** |
+| `item_key_<metal>_d1.png` | 64x48 | Bottom-centre(32,48); near floor pickup |
+| `item_key_<metal>_d2.png` | 40x30 | Bottom-centre(20,30); middle floor pickup |
+| `item_key_<metal>_d3.png` | 24x18 | Bottom-centre(12,18); far floor pickup |
+
+World frames have one transparent bottom row, matching the resting contact
+convention; they contain **no baked cast shadow**. Keep the renderer's floor
+shadow. All three metals retain a connected silhouette and a genuinely open
+bow at every distance, including24px. Do not put a world sprite in a16px slot.
+
+The old `assets/art/icons/key.png`, `assets/art/items/icon_key_16.png` and
+`item_key_d1..3.png` remain unchanged. A can route metal-bearing key items to
+`icon_key_<metal>_16.png` / `item_key_<metal>_d<depth>.png`, whether simulation
+kind remains `key` with a metal field or uses `key_iron`/`key_bronze`/`key_gold`.
+The belt currently uses the generic key icon: route it through the selected
+key's metal too, using the **same icon as the pack**. Keep mixed-key counts,
+selection and the key chooser dynamic. Exact key/door IDs and consumption are
+A's gameplay contract; sharing a metal does not imply sharing a key ID.
+
+### Lock plates: twelve registered wall-UV overlays
+
+Runtime pattern:
+**`assets/art/fixtures/lock_plate_f<1|2|3|4>_<iron|bronze|gold>_64.png`**.
+All twelve are **64x64**, anchor **wall UV(0,0)**, single static frame, binary
+alpha and the same shared palette. The native metal shapes are approximately
+13-15px wide and19-21px high; the rest of each64px canvas is transparent.
+
+| Closed door beneath the overlay | Dark keyhole centre UV | Runtime offset |
+| --- | --- | --- |
+| `assets/art/env/painted_f1_door_v2.png` | (31,41) | (0,0), already registered |
+| `assets/art/env/painted_f2_door_v2.png` | (32,40) | (0,0), already registered |
+| `assets/art/env/painted_f3_door_v2.png` | (32,40) | (0,0), already registered |
+| `assets/art/env/painted_f4_door_v2.png` | (32,40) | (0,0), already registered |
+
+Choose **the material family actually used for that closed door**, including
+A's per-block family selection. Never substitute the simulation floor number.
+The Winding currently defaults to f4; the Deep defaults to f3 and may mix
+families by block. This supersedes the earlier r11 proposed floor>=4 mapping;
+the f4 textures themselves are unchanged.
+
+Composite the overlay over its matching closed64px door **before** projecting
+the normal wall UVs/column sampling. This automatically supplies side views
+and depths1-3; no separate side sprites, extra shadows, UI glint or runtime
+offset is needed. Apply the same light/distance modulation to plate and door.
+The opaque dark keyhole belongs to the plate; it is not a portal aperture.
+Remove the plate when the door opens and retain the existing transparent
+`door_open_overlay_v2` path. Do not apply these plates to barricaded doors,
+gates, lift grilles or fake arches. No collision or door state is supplied by art.
+
+### Review and reproducibility
+
+One visual pass covered the native-authored UI family, all world distances,
+four door families and their64/40/24px reductions. The source key's painted
+texture is remapped to five-tone metal ramps; broad UI clusters subordinate
+the texture to the bow/bit outline. The one small extracted paint patch is
+saved with the editable builder; the accepted source painting is untouched.
+
+| Review | Native and exact4x nearest files |
+| --- | --- |
+| Real pack/belt/slate, monochrome key shapes and all three world depths | `art_src/items/keys_r12/contact_sheet_native.png`, `contact_sheet_4x.png` |
+| All twelve plates over their actual closed doors, plus overlay-only insets | `art_src/fixtures/locks_r12/contact_sheet_native.png`, `contact_sheet_4x.png` |
+| One family with iron/bronze/gold at64/40/24px | `art_src/fixtures/locks_r12/lock_doors_f<1|2|3|4>_native.png`, matching `_4x.png` |
+| Four family/depth proofs combined | `art_src/fixtures/locks_r12/lock_doors_all_native.png`, `lock_doors_all_4x.png` |
+
+These are offline composites of the **real** accepted UI materials and door
+faces, not engine captures or proposed UI changes. The bottom pack tray's
+last key is the accepted old key for comparison. Rebuild only this batch:
+
+```powershell
+python -B art_src/items/keys_r12/build_keys.py
+```
+
+That invokes `art_src/fixtures/locks_r12/build_locks.py` for the registered
+plate family. Both directories contain `layout.json`, source/dependency and
+output hashes in `manifest.json`, and a short README. The build checks native
+sizes, distinct UI silhouettes, connected keys/open bows, plate registration,
+shared palette and binary alpha. Protection hashes cover **302 pre-existing
+PNG files**, including f4, the Fall and every accepted hand frame. No old
+Fall, hand, environment, item or icon builder is run. No game code or data is
+edited; all24 runtime PNGs have new names.
