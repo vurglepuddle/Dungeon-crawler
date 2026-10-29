@@ -356,7 +356,7 @@ func _floor_name(number: int) -> String:
 func _capture_survey() -> void:
 	var picture: Dictionary=sim.view_snapshot()
 	view.update_state(picture)
-	_survey.observe(state.floor,view.visible_cells(),state.pos,view.visible_landmarks())
+	_survey.observe(state.floor,view.visible_cells()+view.room_cells(),state.pos,view.visible_landmarks())
 func _sync() -> void:
 	state=sim.snapshot()
 	if not state.items.has(selected) or state.items[selected].location not in ["pack","belt","equip"]: selected=""

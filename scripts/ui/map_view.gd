@@ -67,13 +67,12 @@ func _draw() -> void:
 			if data.tiles[y*data.width+x]==1:
 				# Surveyed masonry is stippled/hatching ink, never grey fill.
 				for offset in range(1,cell_size-1,3): draw_line(p+Vector2(offset,cell_size-2),p+Vector2(mini(cell_size-2,offset+3),1),FAINT,1)
-			elif _walked([x,y]):
+			else:
+				# Seen floor is mapped floor (the owner: walking into a room left it
+				# "all dashed still"). A small tick marks the cells actually walked.
 				for pair in [[rect.position,Vector2(rect.end.x,rect.position.y)],[Vector2(rect.end.x,rect.position.y),rect.end],[rect.end,Vector2(rect.position.x,rect.end.y)],[Vector2(rect.position.x,rect.end.y),rect.position]]:
 					draw_line(pair[0],pair[1],INK,1)
-				draw_line(p+Vector2(2,cell_size-3),p+Vector2(mini(4,cell_size-2),cell_size-3),FAINT,1)
-			else:
-				_dashed(rect.position,Vector2(rect.end.x,rect.position.y)); _dashed(Vector2(rect.end.x,rect.position.y),rect.end)
-				_dashed(rect.end,Vector2(rect.position.x,rect.end.y)); _dashed(Vector2(rect.position.x,rect.end.y),rect.position)
+				if _walked([x,y]): draw_line(p+Vector2(2,cell_size-3),p+Vector2(mini(4,cell_size-2),cell_size-3),FAINT,1)
 	for cell in frontier_cells():
 		var p:=_center(cell).round()+Vector2(cell_size*0.2,-cell_size*0.15)
 		# A small ink glyph fits even the eight-pixel cartographic pitch.

@@ -74,11 +74,13 @@ func _run() -> void:
 	check(view.visible_landmarks().is_empty(),"No secret landmark is inferred from unknown masonry")
 	check(view._light(0.5)>view._light(1.5) and view._light(2.1)>view._light(3.2) and view._light(3.6)==0,"Seal light has distinct near/far bands and darkness")
 	var band: Array=[]
-	for y in range(4):
-		for x in range(4):
-			var gain: float=view._light(2.3,x,y)
+	for y in range(8):
+		for x in range(8):
+			var levels: Array=view._seal_levels(2.1)
+			var gain: float=levels[1] if view._dithered_down(levels[2],x,y) else levels[0]
 			if not band.has(gain): band.append(gain)
-	check(band.size()==2,"Light edge is ordered dithering between two hard gains")
+	check(band.size()==2 and absf(band[0]-band[1])<=0.2,"Light falls in gentle levels, each 8x8-dithered only into the next darker one")
+	check(view._seal_band(0.5)==0.0 and view._seal_band(3.5)==1.0,"Full, undithered light in the core; black beyond the edge")
 	var dawn: Dictionary=sim.view_snapshot(); view.update_state(dawn)
 	check(not view.visible_landmarks().has("d4_dawn"),"Looking at a sleeping dawn wall never maps its secret")
 	check(Required.issues().is_empty(),"Every required painting including 24 key/lock assets loads")

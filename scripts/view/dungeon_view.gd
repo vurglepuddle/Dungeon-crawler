@@ -134,22 +134,63 @@ func _latch_down(latch: Dictionary) -> bool:
 static func lamp(depth: float) -> float:
 	return clampf((FAR-depth)/2.7,0.0,1.0)
 
-const BAYER=[0,8,2,10,12,4,14,6,3,11,1,9,15,7,13,5]
-func _light(depth: float,x: int=0,y: int=0,family: int=4) -> float:
+## The carried Seal's light, tuned by the owner in data/presentation/seal_light.json.
+## Full light out to `core`; then the light falls in `steps` gentle levels to
+## black at `edge`, and each pixel is ordered-dithered (8x8 Bayer) between its
+## level and the next darker one. The owner: "closest to you ... the darker bayer
+## matrix is barely darker than the wall color ... then further in the wall turns
+## darker and ... the matrix is of a slightly darker color on top ... until we
+## reach full dark."
+const BAYER8=[0,32,8,40,2,34,10,42,48,16,56,24,50,18,58,26,12,44,4,36,14,46,6,38,60,28,52,20,62,30,54,22,3,35,11,43,1,33,9,41,51,19,59,27,49,17,57,25,15,47,7,39,13,45,5,37,63,31,55,23,61,29,53,21]
+const DITHER_LEVELS:=16
+var _seal_light: Dictionary={}
+var _dither_masks: Array=[]
+func _seal_config() -> Dictionary:
+	if _seal_light.is_empty():
+		_seal_light={"core":1.1,"edge":3.5,"steps":8,"curve":1.0,"gain":1.0,"slate_gain":1.1}
+		var data=JSON.parse_string(FileAccess.get_file_as_string("res://data/presentation/seal_light.json")) if FileAccess.file_exists("res://data/presentation/seal_light.json") else null
+		if data is Dictionary: _seal_light.merge(data,true)
+	return _seal_light
+## 0 inside the core, 1 at the edge of the dark.
+func _seal_band(distance: float) -> float:
+	var c: Dictionary=_seal_config()
+	return clampf((distance-float(c.core))/maxf(0.01,float(c.edge)-float(c.core)),0.0,1.0)
+func _seal_gain(family: int) -> float:
+	return float(_seal_config()["slate_gain" if family==4 else "gain"])
+## The two neighbouring levels at this distance: [upper brightness, lower
+## brightness, share of pixels that drop to the lower one].
+func _seal_levels(distance: float) -> Array:
+	var c: Dictionary=_seal_config()
+	var steps: float=maxf(1.0,float(c.steps))
+	var v: float=pow(1.0-_seal_band(distance),float(c.curve))*steps
+	var lower: float=floorf(v)
+	if lower>=steps: return [1.0,1.0,0.0]
+	return [(lower+1.0)/steps,lower/steps,1.0-(v-lower)]
+static func _dithered_down(share: float,x: int,y: int) -> bool:
+	return share>(BAYER8[posmod(y,8)*8+posmod(x,8)]+0.5)/64.0
+## Screen-locked black dither strips, one per share level. Columns fade them so
+## a pixel only drops to the next level, never straight to black.
+func _dither_mask(share: float) -> Texture2D:
+	if _dither_masks.is_empty():
+		for level in range(DITHER_LEVELS+1):
+			var image:=Image.create(8,HEIGHT,false,Image.FORMAT_RGBA8)
+			for y in range(HEIGHT):
+				for x in range(8):
+					if _dithered_down(float(level)/DITHER_LEVELS,x,y): image.set_pixel(x,y,Color(0,0,0,1))
+			_dither_masks.append(ImageTexture.create_from_image(image))
+	return _dither_masks[clampi(roundi(share*DITHER_LEVELS),0,DITHER_LEVELS)]
+## One column strip at the upper level, with the dithered share of its pixels
+## dropped to the lower level.
+func _seal_column(texture: Texture2D,rect: Rect2,source: Rect2,gain: float,levels: Array) -> void:
+	var upper: float=gain*levels[0]
+	if upper<=0.0: draw_rect(rect,Color.BLACK); return
+	draw_texture_rect_region(texture,rect,source,Color(upper,upper,upper))
+	if levels[2]>0.0 and levels[1]<levels[0]:
+		draw_texture_rect_region(_dither_mask(levels[2]),rect,Rect2(posmod(int(rect.position.x),8),rect.position.y,1,rect.size.y),Color(1,1,1,1.0-levels[1]/levels[0]))
+func _light(depth: float,_x: int=0,_y: int=0,family: int=4) -> float:
 	if not state.get("seal_glow",false): return lamp(depth)
-	var gain: float=_seal_gain(depth,x,y)
-	# Slate needs lamp exposure; pale Abbey masonry must retain its painted
-	# highlights rather than clipping to white when it reappears in the Deep.
-	return gain if family==4 else minf(1.0,gain)
-func _seal_gain(depth: float,x: int,y: int) -> float:
-	var edge: float=(BAYER[posmod(y,4)*4+posmod(x,4)]/15.0-0.5)*0.24
-	var d: float=depth+edge
-	if d<0.85: return 1.85
-	if d<1.6: return 1.4
-	if d<2.3: return 0.95
-	if d<2.9: return 0.38
-	if d<3.4: return 0.1
-	return 0.0
+	var levels: Array=_seal_levels(depth)
+	return _seal_gain(family)*lerpf(levels[0],levels[1],levels[2])
 
 func update_state(snapshot: Dictionary) -> void:
 	if not state.is_empty() and (state.floor!=snapshot.floor or state.pos!=snapshot.pos or state.facing!=snapshot.facing):
@@ -249,6 +290,41 @@ func _wall_path(cell: Array,normal: Vector2i) -> String:
 	return "res://assets/art/env/painted_f%d_%s%s.png"%[Family.at(state,[cell[0]+normal.x,cell[1]+normal.y]).walls,suffix,"_v2" if suffix in ["drain","chains","tapestry","crack","damp","sconce_0","sconce_1"] else ""]
 
 func visible_cells() -> Array: return _visible_cells.duplicate(true)
+## The owner: stepping into a room should map it, "closer to how a human would
+## see it", not cell by cell. A room cell is open and inside some open 2x2
+## patch (corridors never are). Closed gates, doors, webs and cords stop the
+## fill; it maps up to 64 room cells plus the walls and mouths around them.
+## Secrets stay hidden: a sleeping panel is only masonry on the map.
+func room_cells() -> Array:
+	if state.is_empty() or not _roomy(state.pos): return []
+	var blocked: Dictionary={}
+	for fixture in state.fixtures:
+		if fixture.type in ["gate","lock","web","cord"] and not fixture.get("open",false): blocked[fixture.pos[1]*state.width+fixture.pos[0]]=true
+	var room: Dictionary={}; var frontier: Array=[state.pos]
+	while not frontier.is_empty() and room.size()<64:
+		var cell: Array=frontier.pop_front()
+		var key: int=cell[1]*state.width+cell[0]
+		if room.has(key): continue
+		room[key]=cell
+		for d in Sim.DIRS:
+			var next: Array=[cell[0]+d[0],cell[1]+d[1]]
+			if not room.has(next[1]*state.width+next[0]) and not blocked.has(next[1]*state.width+next[0]) and _roomy(next): frontier.append(next)
+	var result: Dictionary={}
+	for cell in room.values():
+		for dy in range(-1,2):
+			for dx in range(-1,2):
+				var near: Array=[cell[0]+dx,cell[1]+dy]
+				if near[0]>=0 and near[1]>=0 and near[0]<state.width and near[1]<state.height: result[near[1]*state.width+near[0]]=near
+	return result.values()
+func _roomy(cell: Array) -> bool:
+	for oy in [-1,0]:
+		for ox in [-1,0]:
+			var open:=true
+			for dy in range(2):
+				for dx in range(2):
+					if _solid(Vector2i(cell[0]+ox+dx,cell[1]+oy+dy)): open=false
+			if open: return true
+	return false
 func visible_landmarks() -> Array:
 	var result: Array=[]
 	for fixture in state.fixtures:
@@ -318,7 +394,7 @@ func _build_camera() -> void:
 		var normal:=Vector2i(-sx,0) if side else Vector2i(0,-sy)
 		var face: Dictionary=_faces.get(_face_key([cell.x,cell.y],normal),{})
 		var path: String=face.get("texture_path",_wall_path([cell.x,cell.y],normal))
-		_walls.append({"depth":depth,"height":maxi(1,roundi(FOCAL/depth)),"u":clampi(int(u*64),0,63),"light":_light(origin.distance_to(hit) if state.get("seal_glow",false) else depth,column,0,Family.at(state,[cell.x+normal.x,cell.y+normal.y]).walls)*(0.78 if side else 1.0),"path":path,"cell":[cell.x,cell.y],"id":face.get("id",""),"panel_state":face.get("panel_state","")})
+		_walls.append({"depth":depth,"height":maxi(1,roundi(FOCAL/depth)),"u":clampi(int(u*64),0,63),"light":(_seal_gain(Family.at(state,[cell.x+normal.x,cell.y+normal.y]).walls) if state.get("seal_glow",false) else lamp(depth))*(0.78 if side else 1.0),"seal_distance":origin.distance_to(hit) if state.get("seal_glow",false) else -1.0,"path":path,"cell":[cell.x,cell.y],"id":face.get("id",""),"panel_state":face.get("panel_state","")})
 		if face.has("id"):
 			var h: float=FOCAL/depth
 			if face.get("kind","") in ["stairs_up","stairs_down","lift","exit"]:
@@ -549,7 +625,9 @@ func _build_surfaces(origin: Vector2,forward: Vector2,right: Vector2) -> void:
 			else: path=Planes.path(state.seed,state.floor,"floor" if floor_side else "ceiling",cell.x,cell.y,Family.at(state,[cell.x,cell.y]))
 			if not images.has(path): images[path]=Paint.image(path)
 			var colour: Color=images[path].get_pixel(uv.x,uv.y)
-			if state.get("seal_glow",false): light=_light(origin.distance_to(point),x,y,4 if path.contains("calm_v3_f4") else 1)*(0.86 if floor_side else 0.64)
+			if state.get("seal_glow",false):
+				var levels: Array=_seal_levels(origin.distance_to(point))
+				light=_seal_gain(4 if path.contains("calm_v3_f4") else 1)*(levels[1] if _dithered_down(levels[2],x,y) else levels[0])*(0.86 if floor_side else 0.64)
 			image.set_pixel(x,y,Color(colour.r*light,colour.g*light,colour.b*light,1))
 	_surfaces=ImageTexture.create_from_image(image)
 
@@ -567,10 +645,18 @@ func _draw() -> void:
 		if bottom<=top: continue
 		var path: String=wall.path
 		if path.contains("sconce_"): path=path.left(path.rfind("sconce_"))+"sconce_%d_v2.png"%(int(_presentation_ms/250)%2)
-		draw_texture_rect_region(Paint.strips(path)[wall.u],Rect2(column,top,1,bottom-top),Rect2(0,(top-top_wall)*64.0/wall.height,1,(bottom-top)*64.0/wall.height),Color(light,light,light))
+		var levels: Array=_seal_levels(wall.seal_distance) if wall.get("seal_distance",-1.0)>=0.0 else [1.0,1.0,0.0]
+		var band: float=1.0-lerpf(levels[0],levels[1],levels[2])
+		_seal_column(Paint.strips(path)[wall.u],Rect2(column,top,1,bottom-top),Rect2(0,(top-top_wall)*64.0/wall.height,1,(bottom-top)*64.0/wall.height),light,levels)
 		if wall.panel_state!="":
 			var marks: String="res://assets/art/fixtures/panel_sigil_%s_64.png"%("plain" if wall.panel_state=="plain" else "revealed")
-			draw_texture_rect_region(Paint.strips(marks)[wall.u],Rect2(column,top,1,bottom-top),Rect2(0,(top-top_wall)*64.0/wall.height,1,(bottom-top)*64.0/wall.height),Color.WHITE if wall.panel_state!="plain" else Color(light,light,light))
+			var tint:=Color(light,light,light)*(1.0-band)
+			if wall.panel_state!="plain":
+				# The owner: the dawn mark glows when you hold up the Seal, pulsing with it.
+				var pulse: float=0.5+0.5*sin(_presentation_ms/1000.0*TAU) if held.kind=="seal" else -1.0
+				tint=Color(1.0+0.7*pulse,1.0+0.55*pulse,1.0+0.25*pulse) if pulse>=0.0 else Color.WHITE
+			tint.a=1.0
+			draw_texture_rect_region(Paint.strips(marks)[wall.u],Rect2(column,top,1,bottom-top),Rect2(0,(top-top_wall)*64.0/wall.height,1,(bottom-top)*64.0/wall.height),tint)
 		for layer in _column_layers[column]:
 			if layer.has("sprite"):
 				_draw_sprite(layer.sprite,shift,false,column)
@@ -578,14 +664,16 @@ func _draw() -> void:
 				var p: Dictionary=layer.column
 				var py: float=HORIZON+shift-p.height/2
 				var from_y: float=maxf(0,py); var to_y: float=minf(HEIGHT,py+p.height)
-				var gain: float=_light(p.depth*sqrt(1.0+pow((column+0.5-WIDTH*0.5)/FOCAL,2)) if state.get("seal_glow",false) else p.depth,column,0,layer.portal.get("family",1))
+				var seal: bool=state.get("seal_glow",false)
+				var gain: float=_seal_gain(layer.portal.get("family",1)) if seal else lamp(p.depth)
+				var portal_levels: Array=_seal_levels(p.depth*sqrt(1.0+pow((column+0.5-WIDTH*0.5)/FOCAL,2))) if seal else [1.0,1.0,0.0]
 				var strips: Array=layer.portal.strips
 				if _burning.has(layer.portal.id): strips=Paint.strips("res://assets/art/fixtures/fixture_v2_web_burning_%d_d1.png"%mini(1,int(float(_burning[layer.portal.id])/Times.WEB_FRAME)))
 				if to_y>from_y:
-					draw_texture_rect_region(strips[p.u],Rect2(column,from_y,1,to_y-from_y),Rect2(0,(from_y-py)*64.0/p.height,1,(to_y-from_y)*64.0/p.height),Color(gain,gain,gain))
+					_seal_column(strips[p.u],Rect2(column,from_y,1,to_y-from_y),Rect2(0,(from_y-py)*64.0/p.height,1,(to_y-from_y)*64.0/p.height),gain,portal_levels)
 					if layer.portal.get("metal","")!="":
 						var plate: Array=Paint.strips(Metal.plate_path(layer.portal.family,layer.portal.metal))
-						draw_texture_rect_region(plate[p.u],Rect2(column,from_y,1,to_y-from_y),Rect2(0,(from_y-py)*64.0/p.height,1,(to_y-from_y)*64.0/p.height),Color(gain,gain,gain))
+						_seal_column(plate[p.u],Rect2(column,from_y,1,to_y-from_y),Rect2(0,(from_y-py)*64.0/p.height,1,(to_y-from_y)*64.0/p.height),gain,portal_levels)
 	if not _dispel.is_empty(): _draw_sprite(_dispel.sprite,shift,true)
 	if not _strike.is_empty():
 		if _strike.has("ghost") and not _sprites.any(func(s): return s.id==_strike.id): _draw_sprite(_strike.ghost,shift,true)
