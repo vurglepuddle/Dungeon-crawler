@@ -624,7 +624,7 @@ func _wake_transition(reason: String) -> void:
 		var path: String="res://data/presentation/fall.json"
 		if FileAccess.file_exists(path):
 			var data=JSON.parse_string(FileAccess.get_file_as_string(path))
-			if data is Dictionary: frames=data.get("frames",[]); seconds=clampf(float(data.get("frame_seconds",0.2)),0.15,0.4)
+			if data is Dictionary: frames=data.get("frames",[]); seconds=clampf(float(data.get("frame_seconds",0.2)),0.15,0.8)
 		for i in range(maxi(3,frames.size())):
 			if token!=_transition_token or not is_inside_tree(): return
 			view.position=VIEW_RECT.position+Vector2(2 if i%2==0 else -2,0)
@@ -967,17 +967,10 @@ func _draw_compass() -> void:
 	draw_colored_polygon(PackedVector2Array([(center+needle*16).round(),(center-side).round(),(center+side).round()]),Color("eeb95a"))
 	draw_circle(center,2,Color("bc7433"))
 
+## Painted 16x16 arrow-pad glyphs, centred on the button. They were baked
+## pixel for pixel from the old line drawing so the owner can repaint them.
 func _arrow(center: Vector2,key: String) -> void:
-	if key.begins_with("turn"):
-		var d: int=-1 if key=="turn_l" else 1
-		draw_polyline(PackedVector2Array([center+Vector2(-d*5,6),center+Vector2(-d*5,-4),center+Vector2(d*5,-4)]),GOLD,1)
-		draw_colored_polygon(PackedVector2Array([center+Vector2(d*7,-4),center+Vector2(d*2,-8),center+Vector2(d*2,0)]),GOLD)
-	else:
-		var d:=Vector2(0,-1) if key=="fwd" else (Vector2(0,1) if key=="back" else (Vector2(-1,0) if key=="strafe_l" else Vector2(1,0)))
-		var side:=Vector2(-d.y,d.x)
-		draw_line(center-d*5,center+d*4,GOLD,1)
-		draw_colored_polygon(PackedVector2Array([center+d*7,center+d+side*4,center+d-side*4]),GOLD)
-		if key.begins_with("strafe"): draw_line(center-d*7-side*3,center-d*7+side*3,GOLD,1)
+	draw_texture(Paint.texture("res://assets/art/ui_offer/arrow_%s.png"%key),center-Vector2(8,8))
 func _public_state() -> Dictionary:
 	var audio: Dictionary={"music":_music!=null and _music.enabled,"sfx":sfx.enabled}
 	if sim==null:

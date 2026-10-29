@@ -85,7 +85,7 @@ func _ready() -> void:
 			_sparkles[key]=[]
 			for frame in range(3): _sparkles[key].append(Paint.texture("res://assets/art/fixtures/glint_%s_%d_%d.png"%[family,frame,pixels]))
 	var wall_families: Array=[]
-	for number in range(1,5):
+	for number in range(1,6):
 		var floor_number: int=Family.for_floor(number).walls
 		if not wall_families.has(floor_number): wall_families.append(floor_number)
 	for floor_number in wall_families:

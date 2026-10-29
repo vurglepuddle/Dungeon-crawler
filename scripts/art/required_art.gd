@@ -18,10 +18,11 @@ static func paths() -> Dictionary:
 	add("res://assets/art/finder.png","portrait_preload")
 	for kind in Icons.ICONS: add(Icons.icon_path(kind),"accepted_pack_icon")
 	add("res://assets/art/ui/owner_candle.png","owner_candle")
+	for key in ["turn_l","fwd","turn_r","strafe_l","back","strafe_r"]: add("res://assets/art/ui_offer/arrow_%s.png"%key,"arrow_pad")
 	for kind in ["knife","shard","club","stone","bone","bread","tonic","coat","coat_spent","key","clapper","lamp"]:
 		for d in range(1,4): add("res://assets/art/items/item_%s_d%d.png"%[kind,d],"world_items_working_tree")
 	var families: Array=[]
-	for number in range(1,5):
+	for number in range(1,6):
 		var family: Dictionary=Family.for_floor(number)
 		if not families.has(family): families.append(family)
 	for family in families:
