@@ -155,6 +155,9 @@ fixes directly.
      - the carried Seal was "glued" in the hand over the weapon, and now shows
        only while selected.
      The owner is hand-editing the crumble frames.
+   - **Full run, Abbey to dawn, in 578 turns** on BELL42: "definitely pretty
+     good for engagement - it felt long enough, but not exhausting.
+     Definitely can make it even longer with interesting puzzles".
    - **Notes for M5b** (the owner's words):
      - **Map reveal:** "it currently reveals the tile next to you as a dashed
        line, which means you need to annoyingly sweep the entire room tile by
