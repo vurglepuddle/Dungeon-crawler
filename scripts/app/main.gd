@@ -488,8 +488,9 @@ func _item_icon(id: String) -> Texture2D:
 	return Art.inventory("coat_spent" if item.kind=="coat" and item.get("spent",false) else item.kind)
 func _held_kind(id: String="") -> String:
 	if id=="":
+		# The Seal shows only while selected; otherwise the hand keeps its weapon
+		# (the owner: it was "glued" in the Deep, where you always carry it).
 		id=selected if state.items.has(selected) and state.items[selected].kind in ["torch","lamp","seal"] else ""
-		if id=="" and sim.has_seal(): return "seal"
 		if id=="": id=state.equipment.hand
 	if id=="" or not state.items.has(id): return "fist"
 	var item: Dictionary=state.items[id]
@@ -605,7 +606,10 @@ func _command(command: Dictionary) -> void:
 	var waking: Array=result.events.filter(func(e): return e.type in ["fell","woke"])
 	if not waking.is_empty():
 		_pending_wake="fall" if waking[0].type=="fell" else "death"
-		if _pending_wake=="fall": Profile.mark(_profile_path)
+		if _pending_wake=="fall":
+			Profile.mark(_profile_path)
+			# The crumbling picture is the room you stood in, minus the Seal: it is in your hand now.
+			old_picture.objects=old_picture.objects.filter(func(o): return o.kind!="seal")
 		_sync(); _save(); view.update_state(old_picture); _wake_transition(_pending_wake); return
 	var travel: bool=result.events.any(func(e): return e.type in ["floor_changed","lift_ride"])
 	if travel:
@@ -627,10 +631,15 @@ func _wake_transition(reason: String) -> void:
 			if data is Dictionary: frames=data.get("frames",[]); seconds=clampf(float(data.get("frame_seconds",0.2)),0.15,0.8)
 		for i in range(maxi(3,frames.size())):
 			if token!=_transition_token or not is_inside_tree(): return
-			view.position=VIEW_RECT.position+Vector2(2 if i%2==0 else -2,0)
 			if i<frames.size() and (ResourceLoader.exists(frames[i]) or FileAccess.file_exists(frames[i])): _fall_frame.texture=Paint.texture(frames[i]); _fall_frame.visible=true
-			await get_tree().create_timer(seconds).timeout
-	view.position=VIEW_RECT.position
+			# The owner: the hole must shake with the floor around it, or it
+			# doesn't read as a real hole. A jolt every tenth of a second.
+			var jolts: int=maxi(1,roundi(seconds/0.1))
+			for j in range(jolts):
+				if token!=_transition_token or not is_inside_tree(): return
+				view.position=VIEW_RECT.position+Vector2(2 if (i+j)%2==0 else -2,0); _fall_frame.position=view.position
+				await get_tree().create_timer(seconds/jolts).timeout
+	view.position=VIEW_RECT.position; _fall_frame.position=VIEW_RECT.position
 	_ambience.fade_out(0.45 if reason=="fall" else 0.3)
 	await _ambience.fade_finished
 	if token!=_transition_token or not is_inside_tree(): return
