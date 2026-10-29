@@ -21,7 +21,7 @@ func _run() -> void:
 	var entry: Dictionary=app._survey.floor_data(1)
 	check(entry.walked.count("1")==1 and entry.seen.count("1")>1,"Walked is distinct from glimpsed on entry")
 	var spine: int=app.state.pos[0]
-	check(entry.seen[16*17+spine]=="0","View survey does not reveal the wall behind the camera")
+	check(entry.seen[16*17+spine]=="1","Standing in the entry room maps the whole room, back wall included (the owner, 29 Oct: rooms map on entry)")
 	check(not entry.landmarks.has("f1_up"),"Standing on the exit cell cannot reveal its arch behind the camera")
 	var masks: Dictionary=app._survey.save()
 	var atlas=Survey.new()
