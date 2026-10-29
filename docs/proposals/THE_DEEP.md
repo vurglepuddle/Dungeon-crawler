@@ -2,7 +2,46 @@
 
 A proposal for the owner's review, 29 October 2026. Nothing here is built yet.
 It turns the owner's idea into a shape, a feature list, a first scaffold, and
-the questions only the owner can answer.
+the questions only the owner can answer. **The owner answered the questions
+the same afternoon; their answers come first and override anything below.**
+
+## The owner's answers (29 October)
+
+1. **Size: confusing beats huge.** "Some of the old puzzles in crawlers
+   weren't just that large, but were confusing, for example if you need fire
+   to progress a spiderweb, but the fire only torch is locked behind 2 doors,
+   and you need to go through whatever else and unlock a hidden passage,
+   that's almost the same amount of rooms as the first three layers, but will
+   take way longer to progress. But sprawling is still a good idea (with some
+   more unique rooms inside... Traps?)"
+   - So a Deep floor has **about as many rooms as all three Abbey floors
+     together**, and its length comes from a **nested chain of needs**: the
+     way on is behind a web, the fire is behind two doors, and one of those
+     doors is behind a hidden passage.
+   - Unique rooms and traps come after the scaffold.
+   - The owner's follow-up: "Maybe daggerfall dungeons as the size for now?
+     AVERAGE, and we can obviously scale up/down. I remember daggerfall to be
+     a bit confusing (in a good way)". This is a feel reference only, with no
+     copied layouts:
+     - the floor is built from interlocking blocks, each about one Abbey
+       floor;
+     - blocks have several connections each, so routes loop and cross;
+     - average means about four blocks (2x2, roughly 33x33);
+     - block count is a setting, so the size can go up or down.
+2. **Health on waking: 5 of 6**, after the Fall or a skipped start. "Maybe we
+   can increase HP later on with found objects."
+3. **No permadeath.** "Wake up with the dawn seal and your items dropped
+   besides your weapon on the starting point of the level you currently at?
+   Permadeath sucks!"
+   - Claude's reading: you wake at the current floor's arrival point with the
+     Seal and your wielded weapon. Everything else you carried lies where you
+     fell. The floor keeps its progress.
+   - Claude's assumption, for the owner to confirm: this applies to new runs
+     in the Abbey too.
+4. **Magic: later.** "10000%".
+5. **Your lost things: yes, scattered, "not next to you".**
+6. The names (the Deep, the Winding) are fine.
+7. **Keep the Porter's lift** in the Abbey; where exactly is decided later.
 
 ## The idea, in the owner's words
 
@@ -152,6 +191,11 @@ run, but harsh after an hour in the Deep. There are three options:
 - Both, as a choice at the start.
 
 ## What we would build first: M5a, the scaffold
+
+Updated with the owner's answers: **one sprawling Deep floor built around a
+chain of needs, then the Winding**; waking at 5 of 6; death wakes you at the
+floor's arrival point; your lost things are scattered. The original draft
+follows for reference.
 
 The goal is a playable skeleton, ugly where it has to be:
 
