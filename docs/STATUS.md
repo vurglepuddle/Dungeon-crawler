@@ -132,9 +132,21 @@ fixes directly.
 
 ## Queue for the next session
 
-1. **A is on M5a** (the scaffold; prompt `<scratchpad>/codex_m5a.md`). B's
-   r11 (the f4 Deep family and Fall frames) is committed (`b75e28b`). Its
-   `.import` files arrive with M5a. Verify M5a, then build and install.
+1. **M5a landed** (`3b07816`, A): the Fall, the Deep (one 33x33 floor of
+   four blocks, a chain of needs), the Winding, skip start, no permadeath.
+   See `docs/M5A_RESULTS.md`.
+   - **Claude's follow-ups** (`b41c076`; tell A):
+     - `data/presentation/fall.json` lists B's crumble frames at 0.7 s (the
+       clamp in `main.gd` now allows 0.8);
+     - the Winding uses the f4 slate (`art_family.gd`);
+     - the floor range is `range(1,6)` in `required_art.gd` and
+       `dungeon_view.gd`;
+     - the arrow pad draws `assets/art/ui_offer/arrow_*.png` (16x16).
+   - **The owner's first verb-icon pass** is in (`f109d1a`).
+   - **Flaky pilot (for A):** `m5a_death` once failed with "no control named
+     hot_d4_latch" right after `tapnamed fwd` and `waitidle`. It passed
+     alone. The lever's hotspot seems to lag the step transition.
+   - Next: the owner's phone verdict on `build/Undercroft-M5a.apk`.
    - **A's next turn (M5b):** per-block or per-room art families (see
      `THE_DEEP.md`, "Later the same afternoon"), with f4 as one mood, not all.
    - **Combat revamp:** the owner wants more depth and a more interesting
@@ -148,10 +160,12 @@ fixes directly.
        `hand_torch_lit_{a,b,strip}_56.png` (B's `art_src/hands/`).
      - **Done: the owner painted them** (`e69f907`), plus a better punch. The
        hands README warns against rebuilding over them.
-   - **Button icons:** verb icons are 12x12 PNGs in `assets/art/ui_offer/
-     verb_*.png` (layout in `data/ui/verb_layout.json`). The arrow pad and
-     compass needle are code-drawn (`main.gd`, `_arrow`, `_draw_compass`).
-     After M5a, Claude turns the arrows into PNGs so the owner can paint them.
+   - **Button icons:**
+     - verb icons are 12x12 PNGs in `assets/art/ui_offer/verb_*.png` (layout
+       in `data/ui/verb_layout.json`). The owner paints them on
+       `art_src/ui_offer/verb_sheet/verb_sheet.png`, then `verb_sheet.py split`;
+     - the arrow pad is PNGs now;
+     - the compass needle stays code-drawn, because it swings.
 2. Any new overlay exports or hand fixes from the owner (copy in; check the
    glint sockets still match).
 3. The M4c clean-worktree re-check passed all 18 suites, all 36 pilots and
