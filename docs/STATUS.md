@@ -146,7 +146,8 @@ fixes directly.
      - Files: `assets/art/hands/hand_stone_{rest,blow,strip}_56.png`,
        `hand_torch_unlit_{rest,use,strip}_56.png` and
        `hand_torch_lit_{a,b,strip}_56.png` (B's `art_src/hands/`).
-     - Either B repaints them, or the owner paints them.
+     - **Done: the owner painted them** (`e69f907`), plus a better punch. The
+       hands README warns against rebuilding over them.
    - **Button icons:** verb icons are 12x12 PNGs in `assets/art/ui_offer/
      verb_*.png` (layout in `data/ui/verb_layout.json`). The arrow pad and
      compass needle are code-drawn (`main.gd`, `_arrow`, `_draw_compass`).
