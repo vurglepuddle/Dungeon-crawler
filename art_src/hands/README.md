@@ -1,5 +1,16 @@
 # Finder's held items
 
+**The owner hand-corrected these runtime frames (29 October 2026).** They
+were fixed because the stone and torches reused the punching fist, "but you
+cannot hold objects this way":
+- `hand_fist_punch` (and its strip);
+- `hand_stone_rest` (and its strip);
+- `hand_torch_unlit_rest`, `hand_torch_lit_a`, `hand_torch_lit_b` (and their
+  strips).
+
+`build_hands.py` would overwrite them. Don't rebuild these kinds without
+carrying the owner's pixels over.
+
 Painted source cutouts generated with the built-in image tool. `prompts.json`
 records the canonical glove request; `item_prompts.json` records every prop
 request. The first source is the costume/style reference for all subsequent
