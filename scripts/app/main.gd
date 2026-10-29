@@ -630,6 +630,11 @@ func _wake_transition(reason: String) -> void:
 	view.flash=0
 	_transition_token+=1
 	var token: int=_transition_token
+	# The picture is still the old room, so offer none of the new room's verbs
+	# until it fades in. Falling, you clutch the Seal you just took (the owner:
+	# "so feels like you actually grabbed it"); waking, the hand rule returns.
+	for i in range(3): controls["verb%d"%i].visible=false
+	if reason=="fall": view.held.set_kind("seal")
 	if reason=="fall":
 		var frames: Array=[]; var seconds: float=0.2
 		var path: String="res://data/presentation/fall.json"
