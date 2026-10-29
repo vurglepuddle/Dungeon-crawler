@@ -146,7 +146,35 @@ fixes directly.
    - **Flaky pilot (for A):** `m5a_death` once failed with "no control named
      hot_d4_latch" right after `tapnamed fwd` and `waitidle`. It passed
      alone. The lever's hotspot seems to lag the step transition.
-   - Next: the owner's phone verdict on `build/Undercroft-M5a.apk`.
+   - **The owner's phone verdict (29 Oct evening):** "pretty good, the new
+     icons landed well. The repetitive nature of the Deep is not that bad.
+     Obviously, we'll need to vary it. I like how sprawling and confusing it
+     is." Fixed by Claude the same evening (`3e0d0c2`):
+     - the Seal stayed on its pedestal during the Fall;
+     - the crumble overlay didn't shake with the floor;
+     - the carried Seal was "glued" in the hand over the weapon, and now shows
+       only while selected.
+     The owner is hand-editing the crumble frames.
+   - **Notes for M5b** (the owner's words):
+     - **Map reveal:** "it currently reveals the tile next to you as a dashed
+       line, which means you need to annoyingly sweep the entire room tile by
+       tile. We need a smarter reveal system, where maybe you get more of the
+       room revealed when you step in (closer to how a human would see it)".
+     - **Keys:** "I had 2 keys, but I opened 3 doors. Maybe we need to vary
+       the keys or use up (I kinda like the idea of various keys, instead,
+       gold, bronze, etc)". Each key opens its own door. B paints key and
+       lock variants.
+     - **Light around the player:** f4 is "very very dark (cool effect, but we
+       won't be able to use it for the entire floor - too hard to make things
+       out)". The owner's idea: "a pixelated light source around the player
+       ... That's a whole vibe. That way we can leave the actual Deep this
+       dark color". The carried Seal is the light: a stepped, dithered pool of
+       light near the Finder.
+     - **Art families per block or room** (f1-f4, rare unique rooms), from
+       earlier.
+     - **Small issues:** the floor label already says 4/5 while the Abbey
+       crumbles; the flaky `m5a_death` pilot.
+     - **Later:** traps and unique rooms; combat revamp (proposal first).
    - **A's next turn (M5b):** per-block or per-room art families (see
      `THE_DEEP.md`, "Later the same afternoon"), with f4 as one mood, not all.
    - **Combat revamp:** the owner wants more depth and a more interesting
