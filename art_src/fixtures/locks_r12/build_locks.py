@@ -12,32 +12,30 @@ KEYHOLES = {1:(31,41),2:(32,40),3:(32,40),4:(32,40)}
 
 def plate(b,metal,family):
     cx,cy = KEYHOLES[family]
-    local = Image.new('L',(17,21)); d = ImageDraw.Draw(local)
+    # Half-size revision: the native hasp is7-9px wide,10-11px tall.
+    # Author at its final scale so the round/crested outlines survive40/24px.
+    local = Image.new('L',(9,11)); d = ImageDraw.Draw(local)
     if metal == 'iron':
-        d.polygon([(3,1),(13,1),(14,2),(14,18),(13,19),(3,19),(2,18),(2,2)],fill=255)
+        d.rectangle((1,1,7,10),fill=255)
     elif metal == 'bronze':
-        d.polygon([(5,0),(11,0),(15,4),(15,16),(12,20),(4,20),(1,16),(1,4)],fill=255)
+        d.ellipse((0,0,7,10),fill=255)
     else:
-        d.ellipse((6,0,10,4),fill=255); d.ellipse((1,2,7,8),fill=255); d.ellipse((9,2,15,8),fill=255)
-        d.polygon([(4,5),(12,5),(14,9),(14,16),(10,20),(6,20),(2,16),(2,9)],fill=255)
+        d.ellipse((3,0,5,3),fill=255)
+        d.ellipse((0,1,3,4),fill=255); d.ellipse((5,1,8,4),fill=255)
+        d.polygon([(2,3),(6,3),(7,5),(7,8),(4,10),(1,8),(1,5)],fill=255)
     # Same paint sample and ramps as the keys, no arbitrary RGB or new texture.
     material = b.painted(local,metal)
     d = ImageDraw.Draw(material); ramp = b.RAMPS[metal]
-    # A slightly recessed hasp and one clear, dark keyhole. Bolts are restrained.
-    for x,y in ((5,4),(11,4),(5,16),(11,16)):
+    # Quiet fasteners and a tiny recessed keyhole, not a shield-sized symbol.
+    for x,y in ((2,2),(6,2),(2,8),(6,8)):
         if local.getpixel((x,y)):
             d.point((x,y),fill=ramp[0]); d.point((x,y-1),fill=ramp[3])
-    d.ellipse((6,7,10,11),fill=1)
-    d.rectangle((7,10,9,14),fill=1)
-    d.line([(10,9),(10,11),(9,14)],fill=ramp[3],width=1)
-    if metal == 'bronze':
-        # Three old cuts echo its three-toothed bit without a floating symbol.
-        for x in (5,8,11): d.line((x,18,x,19),fill=ramp[0])
-    if metal == 'gold':
-        d.line([(4,8),(4,15),(8,18),(12,15),(12,8)],fill=ramp[3],width=1)
+    d.rectangle((3,3,4,4),fill=1)
+    d.line((4,4,4,7),fill=1,width=1)
+    d.point((5,6),fill=ramp[3])
     out = b.indexed((64,64))
-    # Local keyhole centre8,10: family offsets are baked into64px overlays.
-    b.composite(out,material,(cx-8,cy-10))
+    # Local keyhole centre4,5: original family registrations are unchanged.
+    b.composite(out,material,(cx-4,cy-5))
     return out
 
 

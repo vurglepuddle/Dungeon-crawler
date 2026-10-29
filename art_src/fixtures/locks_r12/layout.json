@@ -44,10 +44,10 @@
         41
       ],
       "opaque_bounds": [
-        25,
-        32,
-        38,
-        51
+        28,
+        37,
+        35,
+        47
       ],
       "closed_door": "assets/art/env/painted_f1_door_v2.png",
       "state": "closed only; hide on open door",
@@ -70,10 +70,10 @@
         41
       ],
       "opaque_bounds": [
-        24,
-        31,
-        39,
-        52
+        27,
+        36,
+        35,
+        47
       ],
       "closed_door": "assets/art/env/painted_f1_door_v2.png",
       "state": "closed only; hide on open door",
@@ -96,10 +96,10 @@
         41
       ],
       "opaque_bounds": [
-        24,
-        31,
-        39,
-        52
+        27,
+        36,
+        36,
+        47
       ],
       "closed_door": "assets/art/env/painted_f1_door_v2.png",
       "state": "closed only; hide on open door",
@@ -122,10 +122,10 @@
         40
       ],
       "opaque_bounds": [
-        26,
-        31,
-        39,
-        50
+        29,
+        36,
+        36,
+        46
       ],
       "closed_door": "assets/art/env/painted_f2_door_v2.png",
       "state": "closed only; hide on open door",
@@ -148,10 +148,10 @@
         40
       ],
       "opaque_bounds": [
-        25,
-        30,
-        40,
-        51
+        28,
+        35,
+        36,
+        46
       ],
       "closed_door": "assets/art/env/painted_f2_door_v2.png",
       "state": "closed only; hide on open door",
@@ -174,10 +174,10 @@
         40
       ],
       "opaque_bounds": [
-        25,
-        30,
-        40,
-        51
+        28,
+        35,
+        37,
+        46
       ],
       "closed_door": "assets/art/env/painted_f2_door_v2.png",
       "state": "closed only; hide on open door",
@@ -200,10 +200,10 @@
         40
       ],
       "opaque_bounds": [
-        26,
-        31,
-        39,
-        50
+        29,
+        36,
+        36,
+        46
       ],
       "closed_door": "assets/art/env/painted_f3_door_v2.png",
       "state": "closed only; hide on open door",
@@ -226,10 +226,10 @@
         40
       ],
       "opaque_bounds": [
-        25,
-        30,
-        40,
-        51
+        28,
+        35,
+        36,
+        46
       ],
       "closed_door": "assets/art/env/painted_f3_door_v2.png",
       "state": "closed only; hide on open door",
@@ -252,10 +252,10 @@
         40
       ],
       "opaque_bounds": [
-        25,
-        30,
-        40,
-        51
+        28,
+        35,
+        37,
+        46
       ],
       "closed_door": "assets/art/env/painted_f3_door_v2.png",
       "state": "closed only; hide on open door",
@@ -278,10 +278,10 @@
         40
       ],
       "opaque_bounds": [
-        26,
-        31,
-        39,
-        50
+        29,
+        36,
+        36,
+        46
       ],
       "closed_door": "assets/art/env/painted_f4_door_v2.png",
       "state": "closed only; hide on open door",
@@ -304,10 +304,10 @@
         40
       ],
       "opaque_bounds": [
-        25,
-        30,
-        40,
-        51
+        28,
+        35,
+        36,
+        46
       ],
       "closed_door": "assets/art/env/painted_f4_door_v2.png",
       "state": "closed only; hide on open door",
@@ -330,10 +330,10 @@
         40
       ],
       "opaque_bounds": [
-        25,
-        30,
-        40,
-        51
+        28,
+        35,
+        37,
+        46
       ],
       "closed_door": "assets/art/env/painted_f4_door_v2.png",
       "state": "closed only; hide on open door",

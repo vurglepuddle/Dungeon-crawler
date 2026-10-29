@@ -1,0 +1,24 @@
+{
+  "result": "passed",
+  "revision": "Half-size escutcheons; original64px canvas, UV keyhole centres and zero offset retained.",
+  "native_plate_bounds": {
+    "iron": [
+      7,
+      10
+    ],
+    "bronze": [
+      8,
+      11
+    ],
+    "gold": [
+      9,
+      11
+    ]
+  },
+  "runtime_pngs": 12,
+  "exact4x_pairs": 6,
+  "shape_check": "Three distinct alpha silhouettes for every family at64,40,24px.",
+  "visual_review": "One pass over all4 families, all3 metals, all3 door sizes.",
+  "preservation": "Key runtime/review hashes unchanged. Hands, Fall, environment and item runtime files match current HEAD. None of their builders invoked.",
+  "godot_run": false
+}

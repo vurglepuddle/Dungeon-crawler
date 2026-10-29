@@ -1285,7 +1285,7 @@ material edges; the world shapes retain the accepted diagonal floor pose.
 | Metal token | Key silhouette / finish | Matching lock plate |
 | --- | --- | --- |
 | `iron` | Plain squared open bow, single broad ward; dark slate iron with a grey rim | Rectangular/chamfered iron hasp |
-| `bronze` | Round open bow, three teeth; warm aged brown/bronze | Octagonal bronze plate with three small lower cuts |
+| `bronze` | Round open bow, three teeth; warm aged brown/bronze | Small round bronze escutcheon |
 | `gold` | Trefoil open bow, shaft collar and ornate stepped bit; bright gold/cream edges | Lobed gold crest and engraved inner rim |
 
 These are colour **and silhouette** distinctions. Fine teeth/lobes simplify
@@ -1327,8 +1327,12 @@ A's gameplay contract; sharing a metal does not imply sharing a key ID.
 Runtime pattern:
 **`assets/art/fixtures/lock_plate_f<1|2|3|4>_<iron|bronze|gold>_64.png`**.
 All twelve are **64x64**, anchor **wall UV(0,0)**, single static frame, binary
-alpha and the same shared palette. The native metal shapes are approximately
-13-15px wide and19-21px high; the rest of each64px canvas is transparent.
+alpha and the same shared palette. The reduced native metal shapes are
+**iron7x10, bronze8x11, gold9x11px**, about half the original width and height;
+the rest of each64px canvas is transparent. Iron is plain, bronze rounded and
+gold crested. The tiny keyhole stays at the original UV centre below. The
+refreshed comparison sheets include all three shapes at40px and24px; no path,
+64px canvas, UV registration or runtime offset changed in this size revision.
 
 | Closed door beneath the overlay | Dark keyhole centre UV | Runtime offset |
 | --- | --- | --- |

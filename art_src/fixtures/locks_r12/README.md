@@ -3,6 +3,9 @@
 Twelve transparent64x64 wall-UV overlays: four painted door families times
 iron/bronze/gold. The keyhole coordinates are f1(31,41), f2-f4(32,40).
 Offsets are already baked into each face, so A draws every overlay atUV(0,0).
+The half-size revision has native bounds iron7x10, bronze8x11 and gold9x11px:
+plain iron, rounded bronze and a small ornate gold crest. The keyhole stays
+at its original family coordinate; paths and runtime wiring are unchanged.
 
 Build via `python -B art_src/items/keys_r12/build_keys.py` from the repository
 root. This shares the key's accepted painted metal patch and native ramps.

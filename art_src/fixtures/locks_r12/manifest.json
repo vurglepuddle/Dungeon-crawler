@@ -15,7 +15,7 @@
         1936
       ],
       "colours": 30,
-      "sha256": "465bc13b614c4197f4ba5b28253a3a0b71fff4df0de6c34d8e7b297f04713842"
+      "sha256": "7347baa7bd5d0a445b1b4300759e8557b36aa0c696cef4b0015458c075e68327"
     },
     {
       "path": "art_src/fixtures/locks_r12/contact_sheet_native.png",
@@ -30,7 +30,7 @@
         484
       ],
       "colours": 30,
-      "sha256": "66dcdbaa1973800e48dce89ffe4f98117086c99d4455a9b96875f93ba80c56f4"
+      "sha256": "94f517a73b29480addcab07efe0c7fc00fec1ae9ea5d7c2ad76cf97a0eb8597a"
     },
     {
       "path": "art_src/fixtures/locks_r12/lock_doors_all_4x.png",
@@ -45,7 +45,7 @@
         1408
       ],
       "colours": 30,
-      "sha256": "59d84468e17e1e87939b80cd9780f3af348d0fd65898fb07317ae7fa40a8ada6"
+      "sha256": "9a57acc74f182e51b1a11759e4b54c80d6b6aba3e244715b02de2778ff0a5b5b"
     },
     {
       "path": "art_src/fixtures/locks_r12/lock_doors_all_native.png",
@@ -60,7 +60,7 @@
         352
       ],
       "colours": 30,
-      "sha256": "3363821ea1019435ad8f49f7e8faff8772474cbdc557ae021e64147033915335"
+      "sha256": "5492f48e21bb4b2738437e5d9800173c8d2d8aeefe785557c7d656fcd0b30441"
     },
     {
       "path": "art_src/fixtures/locks_r12/lock_doors_f1_4x.png",
@@ -75,7 +75,7 @@
         704
       ],
       "colours": 26,
-      "sha256": "41583760a758219574c08c82bc4e3436c661e52e7e853594e908f256196d59e1"
+      "sha256": "0acb68cc8fd2a0bcc84f4e268f71bf509c7d90609b8a88e57714710ccd1c8eb1"
     },
     {
       "path": "art_src/fixtures/locks_r12/lock_doors_f1_native.png",
@@ -90,7 +90,7 @@
         176
       ],
       "colours": 26,
-      "sha256": "a4ce6c881f0cb22caca2644de21dab1c439c2282e0528aac57dcaa13941b523f"
+      "sha256": "ff02a08eca197e654c605735cadd4c71a8dd0a39b5a129e821c7863fc158a5da"
     },
     {
       "path": "art_src/fixtures/locks_r12/lock_doors_f2_4x.png",
@@ -105,7 +105,7 @@
         704
       ],
       "colours": 29,
-      "sha256": "90836fd93c4c43c9dd86a0a1426dc3c6539f963302c132073b11e320cf6d79bc"
+      "sha256": "fa6a4951d006020fe4e595cd201277b3044b3f19ec3027499b68082e89c9bc4a"
     },
     {
       "path": "art_src/fixtures/locks_r12/lock_doors_f2_native.png",
@@ -120,7 +120,7 @@
         176
       ],
       "colours": 29,
-      "sha256": "39181d9216b365e50de132be4d69f774ef71117926eb22edcf0e6406c9abfe2a"
+      "sha256": "be9d25cb8318512b8afca960759a474c6e858ff486f5fe96766b4a2d1e6bfd0e"
     },
     {
       "path": "art_src/fixtures/locks_r12/lock_doors_f3_4x.png",
@@ -135,7 +135,7 @@
         704
       ],
       "colours": 24,
-      "sha256": "ae11d1713862ec2bd444ee04888306fbc38ffa226ed4a101c997dc41c7c090c6"
+      "sha256": "1d656451e384e5c57a3842b828ff0c5545086bca55127c0bdeb65e5abc6a0f32"
     },
     {
       "path": "art_src/fixtures/locks_r12/lock_doors_f3_native.png",
@@ -150,7 +150,7 @@
         176
       ],
       "colours": 24,
-      "sha256": "370b07197d02bba609e28ca65cd0b44870ea5a36c9442aae60822a3f3f1f6fa6"
+      "sha256": "28afd4cb7241338afe65a1988753c40333cc0201b5b42797deb88c0ca84f8a99"
     },
     {
       "path": "art_src/fixtures/locks_r12/lock_doors_f4_4x.png",
@@ -165,7 +165,7 @@
         704
       ],
       "colours": 19,
-      "sha256": "4176d0fb43decad587487148fd41d36b7cf226390fcb125d560507a91eb6409c"
+      "sha256": "eacc77a21a11cbd9f39558f711183a9d603989efb14fe6d34689c2d7ef93035d"
     },
     {
       "path": "art_src/fixtures/locks_r12/lock_doors_f4_native.png",
@@ -180,7 +180,7 @@
         176
       ],
       "colours": 19,
-      "sha256": "1b2e5f037b36a186d60d537e5e4bb400e3c72fa47855827d06f6b30df9ee220c"
+      "sha256": "ac71e700638f69f3f9907781b734b329dc59ac1efa475a98f42d2ab32eefe366"
     },
     {
       "path": "assets/art/fixtures/lock_plate_f1_bronze_64.png",
@@ -189,13 +189,13 @@
         64
       ],
       "opaque_bounds": [
-        24,
-        31,
-        39,
-        52
+        27,
+        36,
+        35,
+        47
       ],
       "colours": 7,
-      "sha256": "ae1f006c9a82abdc42456bf2ff0c73b5f69d32afaa49c5950d07d4f6932ad210"
+      "sha256": "aeef302082710073ad90bcc33d583a5171e0aae261b5bc756568018a81c1ff4b"
     },
     {
       "path": "assets/art/fixtures/lock_plate_f1_gold_64.png",
@@ -204,13 +204,13 @@
         64
       ],
       "opaque_bounds": [
-        24,
-        31,
-        39,
-        52
+        27,
+        36,
+        36,
+        47
       ],
       "colours": 7,
-      "sha256": "6c7f2577b91435dafc9e3209fc06c61da77d4fb505541fcebf4b984c598f762c"
+      "sha256": "dde6c8e68a55fc4f07e0d9a56d4abce2f4bc237ae05739f7030988a949e2361a"
     },
     {
       "path": "assets/art/fixtures/lock_plate_f1_iron_64.png",
@@ -219,13 +219,13 @@
         64
       ],
       "opaque_bounds": [
-        25,
-        32,
-        38,
-        51
+        28,
+        37,
+        35,
+        47
       ],
       "colours": 7,
-      "sha256": "68ad5b813dfd121974300e81d5e7be1b4f37ad3ee647c2324839ca80bbe51b18"
+      "sha256": "f134c90bf9cc3fb83d9c9bf3b865d3aa386673c375d8927233cd8a68efb14c11"
     },
     {
       "path": "assets/art/fixtures/lock_plate_f2_bronze_64.png",
@@ -234,13 +234,13 @@
         64
       ],
       "opaque_bounds": [
-        25,
-        30,
-        40,
-        51
+        28,
+        35,
+        36,
+        46
       ],
       "colours": 7,
-      "sha256": "131c2d80d6335eed4f21713d62cdc1596b1b802f8dd7f4f50249fc75f2eae359"
+      "sha256": "f2fbf85beff9bc0eaf8348e76a0e0fb52ad504d7dc78ffe39bd2d1dde5298077"
     },
     {
       "path": "assets/art/fixtures/lock_plate_f2_gold_64.png",
@@ -249,13 +249,13 @@
         64
       ],
       "opaque_bounds": [
-        25,
-        30,
-        40,
-        51
+        28,
+        35,
+        37,
+        46
       ],
       "colours": 7,
-      "sha256": "864d6ed504bdac8e7d34884de223a0d9a8ab5ed9a9275c656a2d4234e882ac14"
+      "sha256": "8c0b94042b3dec0fc55d396118a27f29f5b2890682859f9c8163a636267a8401"
     },
     {
       "path": "assets/art/fixtures/lock_plate_f2_iron_64.png",
@@ -264,13 +264,13 @@
         64
       ],
       "opaque_bounds": [
-        26,
-        31,
-        39,
-        50
+        29,
+        36,
+        36,
+        46
       ],
       "colours": 7,
-      "sha256": "951661a860d8e58c58a563ac255e4fea9b1719ac6c45ae7b9ad72140e4db6218"
+      "sha256": "b08d88efd66cc2f3ffc87b7492b182bee5e4dc07582cd3180bb9fa6826da5972"
     },
     {
       "path": "assets/art/fixtures/lock_plate_f3_bronze_64.png",
@@ -279,13 +279,13 @@
         64
       ],
       "opaque_bounds": [
-        25,
-        30,
-        40,
-        51
+        28,
+        35,
+        36,
+        46
       ],
       "colours": 7,
-      "sha256": "131c2d80d6335eed4f21713d62cdc1596b1b802f8dd7f4f50249fc75f2eae359"
+      "sha256": "f2fbf85beff9bc0eaf8348e76a0e0fb52ad504d7dc78ffe39bd2d1dde5298077"
     },
     {
       "path": "assets/art/fixtures/lock_plate_f3_gold_64.png",
@@ -294,13 +294,13 @@
         64
       ],
       "opaque_bounds": [
-        25,
-        30,
-        40,
-        51
+        28,
+        35,
+        37,
+        46
       ],
       "colours": 7,
-      "sha256": "864d6ed504bdac8e7d34884de223a0d9a8ab5ed9a9275c656a2d4234e882ac14"
+      "sha256": "8c0b94042b3dec0fc55d396118a27f29f5b2890682859f9c8163a636267a8401"
     },
     {
       "path": "assets/art/fixtures/lock_plate_f3_iron_64.png",
@@ -309,13 +309,13 @@
         64
       ],
       "opaque_bounds": [
-        26,
-        31,
-        39,
-        50
+        29,
+        36,
+        36,
+        46
       ],
       "colours": 7,
-      "sha256": "951661a860d8e58c58a563ac255e4fea9b1719ac6c45ae7b9ad72140e4db6218"
+      "sha256": "b08d88efd66cc2f3ffc87b7492b182bee5e4dc07582cd3180bb9fa6826da5972"
     },
     {
       "path": "assets/art/fixtures/lock_plate_f4_bronze_64.png",
@@ -324,13 +324,13 @@
         64
       ],
       "opaque_bounds": [
-        25,
-        30,
-        40,
-        51
+        28,
+        35,
+        36,
+        46
       ],
       "colours": 7,
-      "sha256": "131c2d80d6335eed4f21713d62cdc1596b1b802f8dd7f4f50249fc75f2eae359"
+      "sha256": "f2fbf85beff9bc0eaf8348e76a0e0fb52ad504d7dc78ffe39bd2d1dde5298077"
     },
     {
       "path": "assets/art/fixtures/lock_plate_f4_gold_64.png",
@@ -339,13 +339,13 @@
         64
       ],
       "opaque_bounds": [
-        25,
-        30,
-        40,
-        51
+        28,
+        35,
+        37,
+        46
       ],
       "colours": 7,
-      "sha256": "864d6ed504bdac8e7d34884de223a0d9a8ab5ed9a9275c656a2d4234e882ac14"
+      "sha256": "8c0b94042b3dec0fc55d396118a27f29f5b2890682859f9c8163a636267a8401"
     },
     {
       "path": "assets/art/fixtures/lock_plate_f4_iron_64.png",
@@ -354,13 +354,13 @@
         64
       ],
       "opaque_bounds": [
-        26,
-        31,
-        39,
-        50
+        29,
+        36,
+        36,
+        46
       ],
       "colours": 7,
-      "sha256": "951661a860d8e58c58a563ac255e4fea9b1719ac6c45ae7b9ad72140e4db6218"
+      "sha256": "b08d88efd66cc2f3ffc87b7492b182bee5e4dc07582cd3180bb9fa6826da5972"
     }
   ],
   "sources": [],
@@ -369,7 +369,7 @@
   "dependency_files": [
     {
       "path": "art_src/fixtures/locks_r12/build_locks.py",
-      "sha256": "122f880a4aa636a3ab75465997cb57a787dce29b884d7f3c5ece5d941eb907d9"
+      "sha256": "4eb8a9ea2c23a9d457f6037512ef65e6ed2109a9aae89b87c9c3f0f3aae22446"
     },
     {
       "path": "art_src/items/keys_r12/build_keys.py",
@@ -394,34 +394,6 @@
     {
       "path": "assets/art/env/painted_f4_door_v2.png",
       "sha256": "b98a87a2970feeb6016355308d41881728bed94b490a56a9513d8f4e418b267a"
-    },
-    {
-      "path": "assets/art/items/icon_bone_16.png",
-      "sha256": "6fa4facbabe885f92f42f4957730253b030bdae82709547b169dbda19b8e2035"
-    },
-    {
-      "path": "assets/art/items/icon_key_16.png",
-      "sha256": "92cdcd7314611eda8018b2db9e1b080de2a4cc7644382482b6632cbe786a21ce"
-    },
-    {
-      "path": "assets/art/items/icon_lamp_16.png",
-      "sha256": "e9e24a0916591e9d6d7f9b1cc8a87d818bf1f359d848a46f418a3d416c682720"
-    },
-    {
-      "path": "assets/art/items/icon_stone_16.png",
-      "sha256": "013861d94ece7ec56d82d63c23c4eee200894541c4508f8a5420ea54ab9c3b0e"
-    },
-    {
-      "path": "assets/art/ui_offer/belt_loops.png",
-      "sha256": "1995351721c956f9eab3b022b7ce5621c51c7d06140580515b99913d6831a2b9"
-    },
-    {
-      "path": "assets/art/ui_offer/message_slate.png",
-      "sha256": "020967574be6447747b34e1cd46689c72215a630361b45500d30912a6d00fbe0"
-    },
-    {
-      "path": "assets/art/ui_offer/pack_leather.png",
-      "sha256": "d206f4e41692d8ff25948e04b7914eb9a3c0bf3f0217ae8e1950cc02f144b41f"
     }
   ]
 }
