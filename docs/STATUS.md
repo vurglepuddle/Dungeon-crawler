@@ -2,7 +2,8 @@
 
 Where the project stands, who is doing what, and how we work. Claude keeps this
 current so that any session (or a reader catching up) can pick up the thread.
-Last updated 29 October 2026, about 4 a.m., at the end of a 12-hour session.
+Last updated 29 October 2026, afternoon (the owner's verdict and the Deep
+proposal); the rest of this file is from the 4 a.m. handoff.
 
 ## Where we are
 
@@ -71,8 +72,9 @@ The owner's standing verdicts:
 All are persistent Codex threads. Thread IDs and the exact resume command are
 in Claude's memory (`codex-collaboration`). Workers never commit; Claude
 verifies, commits with explicit paths and pushes. **All four are idle and
-handed in** at this update. Codex usage had a full reset available. If a
-worker reports it has run out of usage, tell the owner right away.
+handed in** at this update. Codex usage is limited since 28 October (at most
+two workers at once, see above). If a worker reports it has run out of usage,
+tell the owner right away.
 
 | Worker | Owns | Last delivered |
 | --- | --- | --- |
@@ -99,17 +101,45 @@ into `assets/art/ui/owner_vines.png`. If skulls move, update
 compass needle, below cards, modals and the map; it stays visible under
 cards and menus, and only the map hides it.
 
+## 29 October, afternoon: the owner's verdict and a new direction
+
+The owner played M4c several times: **"VERY FUN, loving it."** They will fix
+some visuals by hand. Their breakthrough: the three floors are the perfect
+**tutorial**. Taking the Seal makes the floor crumble; you fall into **the
+Deep** with nothing but the Seal; it is giant, confusing, hostile, stairs only
+go down, and the way out is a lift at the bottom; the existing dawn ending
+stays. Claude's proposal and the owner's open questions:
+**`docs/proposals/THE_DEEP.md`** (first milestone: M5a, the scaffold).
+
+Fixed directly by Claude the same afternoon (A's file `dungeon_view.gd`; tell
+A at its next turn):
+
+- **Levers are sized with their wall.** Every lever closer than 1.5 cells was
+  drawn at one size, so it looked smaller when you stepped up to it. Height
+  is now world-scaled (`40*FOCAL/64/depth` head-on, `36/depth` side-on), using
+  the nearest painted size, with per-size hinge pixels in `LEVER_HINGES`.
+- **The owner's own side-lever frames** (`art_src/fixtures/lever_front/
+  lever_corridor_f2_native_corrected1/2.png`, up/down, 26x36 native) replace
+  `fixture_v2_lever_{left,right}_{up,down}_d1`; right walls mirror them; d2
+  (13x18) and d3 (9x12) are nearest reductions the owner may retouch. B's
+  `docs/ART.md` table still lists the old 32x40 side canvases.
+- **A lever's wall face gets no grate, banner, chains, sconce or blocked
+  arch**, only bare or damp/cracked stone (`_lever_faces` in `_wall_path`).
+
+**Codex budget:** the promotion ended on 28 October. Run at most two workers
+at once (A and B); D only for a sweep, at medium effort. Claude makes small
+fixes directly.
+
 ## Queue for the next session
 
-1. **Owner feedback first**, from their phone play of M4c (length,
-   difficulty, whether floor three earns its minutes). Depth tuning waits for
-   that. See `docs/proposals/M4_DEPTH.md`, "what I would cut", and D's
-   numbers above.
-2. Any new overlay exports from the owner (copy in; check the glint sockets
-   still match).
-3. Optional, when wanted: D re-sweeps M4c's input changes (selection-then-hand
-   capability verbs, PRY, the puzzled cache tap) adversarially. A's suites
-   cover them, but D's runner had reduced sweep counts in M4c.
+1. **The owner's answers** to the questions at the end of `THE_DEEP.md`, then
+   brief A on M5a (and B on crumble frames, the waking room and a Deep wall
+   family, once the shape is agreed).
+2. Any new overlay exports or hand fixes from the owner (copy in; check the
+   glint sockets still match).
+3. The M4c clean-worktree re-check passed all 18 suites, all 36 pilots and
+   D's first ten phases; it was stopped in D's slow `deep_adversarial` phase,
+   not failed.
 
 ## Ideas parked for later slices
 

@@ -13,6 +13,9 @@ const HEIGHT:=150
 const FOCAL:=74.0
 const HORIZON:=71
 const FAR:=3.6
+## Hinge pixel of each painted lever size, d1 to d3. Side art is the owner's
+## left-wall frames (29 Oct); right walls mirror it.
+const LEVER_HINGES:={"front":[Vector2(16,22),Vector2(10,14),Vector2(6,8)],"side":[Vector2(10,19),Vector2(5,9),Vector2(3,6)]}
 var state: Dictionary={}
 var motion:=0.0
 var flash:=0.0
@@ -36,6 +39,7 @@ var _bindings: Dictionary={}
 var _portals: Array=[]
 var _visible_cells: Array=[]
 var _face_choices: Dictionary={}
+var _lever_faces: Dictionary={}
 var _glint_phases: Dictionary={}
 var _sparkles: Dictionary={}
 var _presentation_ms: float=0
@@ -151,11 +155,14 @@ func _face_key(cell: Array,normal: Vector2i) -> String:
 	return "%d:%d:%d:%d"%[cell[0],cell[1],normal.x,normal.y]
 
 func _architecture() -> void:
-	_faces={}; _portals=[]
+	_faces={}; _portals=[]; _lever_faces={}
 	_bindings=Faces.all(state)
 	var bindings: Dictionary=_bindings
 	for fixture in state.fixtures:
 		var kind: String=fixture.type
+		if kind=="latch" and bindings.has(fixture.id):
+			_lever_faces[Faces.key(bindings[fixture.id].wall,bindings[fixture.id].normal)]=true
+			continue
 		if kind=="panel":
 			var path: String="res://assets/art/fixtures/fixture_v2_f%d_cache_open_64.png"%Family.for_floor(state.floor).fixtures if fixture.open else "res://assets/art/env/painted_f%d_plain_0.png"%Family.for_floor(state.floor).walls
 			_faces[_face_key(fixture.wall,Vector2i(fixture.normal[0],fixture.normal[1]))]={"id":fixture.id,"kind":"panel","texture_path":path,"panel_state":"" if fixture.open else ("revealed" if fixture.revealed else "plain")}
@@ -203,6 +210,9 @@ func _wall_path(cell: Array,normal: Vector2i) -> String:
 	if not _face_choices.has(key):
 		var value: int=Paint.mix_hash(key)
 		var roll: int=value%24
+		# The owner: a grate or banner hid the lever. Its face keeps bare or
+		# dirty stone only (damp, crack).
+		if _lever_faces.has(_face_key(cell,normal)) and roll not in [3,4]: roll=-1
 		var suffix: String="plain_%d"%(value%3)
 		if roll==0: suffix="sconce"
 		elif roll==1: suffix="tapestry"
@@ -362,6 +372,7 @@ func _build_camera() -> void:
 		if depth<near_limit or depth>=FAR: continue
 		var texture: Texture2D
 		var tall: int
+		var hinge_pixel:=Vector2.ZERO
 		var kind: String=sprite.kind
 		var variant: int=0 if depth<1.5 else (1 if depth<2.5 else 2)
 		if kind=="decor":
@@ -381,10 +392,18 @@ func _build_camera() -> void:
 			texture=_fixture_textures["f%d_plate_%s_d%d"%[Family.for_floor(state.floor).fixtures,"down" if _pressed(sprite) else "up",variant+1]]
 			tall=texture.get_height()
 		elif kind=="latch":
+			# Sized with the wall it hangs on, so it grows as you step up (the
+			# owner saw it shrink). Front d1 is drawn on a 64-texel face, the
+			# owner's side d1 at one cell; the nearest painted size is scaled.
 			var head_on: bool=absf(wall_normal.dot(forward))>0.9
-			var lever: String="lever_front_%s_d%d"%["down" if _latch_down(sprite) else "up",variant+1] if head_on else "lever_%s_%s_d%d"%["left" if lateral<0 else "right","down" if _latch_down(sprite) else "up",variant+1]
-			texture=_fixture_textures[lever]
-			tall=texture.get_height()
+			var hand: String="front" if head_on else ("left" if lateral<0 else "right")
+			tall=roundi((40.0*FOCAL/64.0 if head_on else 36.0)/depth)
+			for d in range(1,4):
+				var name: String=("lever_front_%s_d%d" if head_on else "lever_"+hand+"_%s_d%d")%["down" if _latch_down(sprite) else "up",d]
+				var candidate: Texture2D=_fixture_textures[name]
+				if texture==null or absi(candidate.get_height()-tall)<absi(texture.get_height()-tall): texture=candidate; variant=d-1
+			hinge_pixel=LEVER_HINGES["front" if head_on else "side"][variant]
+			if hand=="right": hinge_pixel.x=texture.get_width()-hinge_pixel.x
 		elif not sprite.has("type") and not sprite.has("hp"):
 			var item_kind: String="coat_spent" if kind=="coat" and sprite.get("spent",false) else kind
 			texture=Paint.texture("res://assets/art/items/item_%s_d%d.png"%[item_kind,variant+1])
@@ -405,8 +424,7 @@ func _build_camera() -> void:
 					ground-=2
 		var rect:=Rect2(roundi(WIDTH*0.5+lateral*FOCAL/depth)-wide/2,ground-tall,wide,tall)
 		if kind=="latch":
-			var anchor: Vector2=[Vector2(16,22),Vector2(10,14),Vector2(6,8)][variant]
-			if lateral>=0: anchor.x-=1
+			var anchor: Vector2=(hinge_pixel*rect.size/texture.get_size()).round()
 			rect.position=Vector2(roundi(WIDTH*0.5+lateral*FOCAL/depth),HORIZON-roundi(6.0/depth))-anchor
 		var visible:=false
 		for x in range(maxi(0,int(rect.position.x)),mini(WIDTH,int(rect.end.x))):
