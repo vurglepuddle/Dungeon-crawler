@@ -3,9 +3,9 @@ static var _texture: Texture2D
 static var _surfaces: Dictionary={}
 const Paint=preload("res://scripts/art/presentation_art.gd")
 ## Buttons retain the original painted bronze. Large surfaces never tile it.
-## A framed surface keeps the painted bevel; a full-screen ground drops it, or
-## its yellow/teal edge lines show along the screen's left and top.
-static func surface(kind: String="slate",padding: int=2,framed: bool=true) -> StyleBox:
+## Surfaces drop their sources' painted bevel (outer 4 px): the owner found its
+## yellow/teal edge lines dated on screens, menus and cards alike.
+static func surface(kind: String="slate",padding: int=2) -> StyleBox:
 	if not _surfaces.has(kind):
 		var path: String="res://assets/art/ui/%s.png"%kind
 		# The offer's message strip is drawn at its native 150x34 in Main.
@@ -14,10 +14,7 @@ static func surface(kind: String="slate",padding: int=2,framed: bool=true) -> St
 		if kind=="card": path="res://assets/art/ui/slate.png"
 		_surfaces[kind]=Paint.texture(path)
 	var box:=StyleBoxTexture.new(); box.texture=_surfaces[kind]
-	if framed:
-		for side in [SIDE_LEFT,SIDE_TOP,SIDE_RIGHT,SIDE_BOTTOM]: box.set_texture_margin(side,4)
-	else:
-		box.region_rect=Rect2(Vector2(4,4),box.texture.get_size()-Vector2(8,8))
+	box.region_rect=Rect2(Vector2(4,4),box.texture.get_size()-Vector2(8,8))
 	box.axis_stretch_horizontal=StyleBoxTexture.AXIS_STRETCH_MODE_STRETCH
 	box.axis_stretch_vertical=StyleBoxTexture.AXIS_STRETCH_MODE_STRETCH
 	box.content_margin_left=padding; box.content_margin_right=padding

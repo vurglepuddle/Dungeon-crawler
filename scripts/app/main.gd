@@ -145,7 +145,7 @@ func _build_controls() -> void:
 	_button("hot_husk",Rect2(0,0,18,18),"",_look_husk,null,false)
 func _build_menu() -> void:
 	_menu=Panel.new(); _menu.size=Vector2(154,342)
-	_menu.add_theme_stylebox_override("panel",Chrome.surface("slate",8,false))
+	_menu.add_theme_stylebox_override("panel",Chrome.surface("slate",8))
 	add_child(_menu)
 	_menu_art=TextureRect.new(); _menu_art.position=Vector2(0,20); _menu_art.size=Vector2(154,150)
 	_menu_art.expand_mode=TextureRect.EXPAND_IGNORE_SIZE; _menu_art.mouse_filter=Control.MOUSE_FILTER_IGNORE
@@ -827,7 +827,7 @@ func _process(delta: float) -> void:
 func _text(at: Vector2,value: String,colour: Color=INK) -> void:
 	draw_string(FONT,at+Vector2(0,FONT.get_ascent(16)),value,HORIZONTAL_ALIGNMENT_LEFT,-1,16,colour)
 func _draw() -> void:
-	draw_style_box(Chrome.surface("leather",2,false),Rect2(Vector2.ZERO,size))
+	draw_style_box(Chrome.surface("leather"),Rect2(Vector2.ZERO,size))
 	if _mode!="game" or state.is_empty(): return
 	# C's native upper materials; the pad/verb area keeps its dark ground.
 	draw_rect(Rect2(0,0,154,268),Color("312018"))
