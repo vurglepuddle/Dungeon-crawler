@@ -2,7 +2,7 @@ extends RefCounted
 ## Optional encounters attach below the weight gate, never bypass its cut.
 static func _carve(f: Dictionary,x1: int,y1: int,x2: int,y2: int) -> void:
 	for y in range(y1,y2+1):
-		for x in range(x1,x2+1): f.tiles[y*17+x]=0
+		for x in range(x1,x2+1): f.tiles[y*f.width+x]=0
 static func _item(run: Dictionary,id: String,kind: String,floor_number: int,pos: Array,extra: Dictionary={}) -> void:
 	var item: Dictionary={"id":id,"kind":kind,"location":"floor","floor":floor_number,"pos":pos,"slot":"","spent":false}
 	item.merge(extra); run.items[id]=item

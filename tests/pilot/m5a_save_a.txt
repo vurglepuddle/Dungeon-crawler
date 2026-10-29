@@ -1,0 +1,14 @@
+# Ordinary real taps; isolated run AND profile paths required.
+wait 4
+call new_adventure BELL42 deep
+waitidle
+wait 3
+tapnamed wake_close
+waitidle
+tapnamed map
+wait 3
+tapnamed map_close
+waitidle
+call assert hash 02cd0cbbd0a7aad919652aeed545211cc68c5fb0d01bf83ef912f8fcfefa8057
+call assert hp 5
+close

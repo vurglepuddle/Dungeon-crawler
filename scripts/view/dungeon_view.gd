@@ -164,6 +164,9 @@ func _architecture() -> void:
 			_lever_faces[Faces.key(bindings[fixture.id].wall,bindings[fixture.id].normal)]=true
 			continue
 		if kind=="panel":
+			if fixture.get("passage",false) and fixture.open:
+				_portals.append({"id":fixture.id,"kind":"dawn","pos":fixture.wall,"center":Vector2(fixture.wall[0]+0.5,fixture.wall[1]+0.5)+Vector2(fixture.normal[0],fixture.normal[1])*0.5,"normal":Vector2(fixture.normal[0],fixture.normal[1]),"texture_path":"res://assets/art/env/painted_f%d_door_open_overlay_v2.png"%Family.for_floor(state.floor).walls})
+				continue
 			var path: String="res://assets/art/fixtures/fixture_v2_f%d_cache_open_64.png"%Family.for_floor(state.floor).fixtures if fixture.open else "res://assets/art/env/painted_f%d_plain_0.png"%Family.for_floor(state.floor).walls
 			_faces[_face_key(fixture.wall,Vector2i(fixture.normal[0],fixture.normal[1]))]={"id":fixture.id,"kind":"panel","texture_path":path,"panel_state":"" if fixture.open else ("revealed" if fixture.revealed else "plain")}
 			continue
@@ -199,10 +202,10 @@ func dressing_allowed(cell: Array) -> bool:
 	# Openings between wall ends must not acquire a plausible false continuation.
 	for d in Sim.DIRS:
 		var p: Array=[cell[0]+d[0],cell[1]+d[1]]
-		if p[0]<=0 or p[1]<=0 or p[0]>=16 or p[1]>=16: continue
-		if state.tiles[p[1]*17+p[0]]==0:
+		if p[0]<=0 or p[1]<=0 or p[0]>=state.width-1 or p[1]>=state.height-1: continue
+		if state.tiles[p[1]*state.width+p[0]]==0:
 			var across: Array=[-d[1],d[0]]
-			if state.tiles[(p[1]+across[1])*17+p[0]+across[0]]==0 and state.tiles[(p[1]-across[1])*17+p[0]-across[0]]==0: return false
+			if state.tiles[(p[1]+across[1])*state.width+p[0]+across[0]]==0 and state.tiles[(p[1]-across[1])*state.width+p[0]-across[0]]==0: return false
 	return true
 
 func _wall_path(cell: Array,normal: Vector2i) -> String:
@@ -265,6 +268,7 @@ func _build_camera() -> void:
 	var material_state: Array=[]
 	for fixture in state.fixtures:
 		if fixture.type=="lift": material_state.append([fixture.id,fixture.active])
+		elif fixture.get("passage",false): material_state.append([fixture.id,fixture.open])
 	var key: String="painted_v2/%s/%s/%s/%s/%s"%[state.seed,state.floor,state.pos,state.facing,material_state]
 	if key!=_surface_key:
 		_surface_key=key

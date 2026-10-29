@@ -1,0 +1,585 @@
+wait 4
+tapnamed start
+wait 4
+shot 04_start_choices
+tapnamed seed_deep
+waitidle
+shot 05_skipped_waking
+tapnamed wake_close
+waitidle
+call assert floor 4
+call assert hp 5
+tapnamed map
+wait 4
+shot 06_deep_map_centred
+swipe right 77 145
+wait 4
+shot 07_deep_map_panned
+call assert map_pan [10,0]
+call state
+tapnamed map_close
+waitidle
+shot 08_dawn_mark
+tapnamed hot_d4_dawn
+waitidle
+shot 09_woken_passage
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed pack0
+wait 2
+tapnamed hot_item_d4_stone
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_l
+waitidle
+tapnamed pack1
+wait 2
+tapnamed hot_item_d4_shard
+waitidle
+tapnamed pack1
+wait 2
+tapnamed card_use
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_l
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_l
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed fwd
+waitidle
+tapnamed verb0
+waitidle
+tapnamed verb0
+waitidle
+tapnamed verb1
+waitidle
+tapnamed verb0
+waitidle
+tapnamed verb0
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_l
+waitidle
+tapnamed fwd
+waitidle
+tapnamed pack0
+wait 2
+tapnamed card_drop
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_l
+waitidle
+tapnamed fwd
+waitidle
+tapnamed hot_d4_latch
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_l
+waitidle
+tapnamed pack0
+wait 2
+tapnamed hot_item_d4_key
+waitidle
+tapnamed turn_l
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed pack0
+wait 2
+tapnamed hot_item_d4_fire_key
+waitidle
+tapnamed turn_l
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_l
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed hot_d4_join_1_2_4
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed hot_d4_join_1_2_11
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_l
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed belt_seal
+wait 3
+tapnamed hot_d4_actor_2
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed hot_d4_fire_lock
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed pack0
+wait 2
+tapnamed hot_item_d4_torch
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_l
+waitidle
+tapnamed pack0
+wait 3
+tapnamed hot_d4_brazier
+waitidle
+shot 10_deep_fire
+tapnamed turn_r
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_l
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_l
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_l
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_l
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_l
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed pack0
+wait 3
+tapnamed hot_d4_join_0_3_4
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed pack0
+wait 3
+tapnamed hot_d4_join_0_3_11
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_l
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_l
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed pack0
+wait 3
+tapnamed hot_d4_join_2_3_5
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_l
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_l
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed pack0
+wait 3
+tapnamed hot_d4_join_2_3_12
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_l
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed pack0
+wait 3
+tapnamed hot_d4_last_web
+waitidle
+tapnamed fwd
+waitidle
+tapnamed map
+wait 4
+shot 16_sprawling_map
+swipe left 77 145
+wait 3
+call assert map_pan [-10,0]
+shot 17_sprawling_map_panned
+tapnamed map_close
+waitidle
+tapnamed hot_d4_down
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+shot 13_the_winding
+tapnamed hot_winding_lift
+waitidle
+shot 14_dawn
+call assert status won
+call assert hash 8d51b1866dd5f3cd900e8a100cf87ff1b989e337c4873443682628673bc0f189
+call assert hp 5
+close

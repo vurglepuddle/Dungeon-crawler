@@ -589,3 +589,64 @@ revealed, an EDGE offers PRY, using the existing cut action shape and cost.
 Cords retain CUT. Selection wins over the hand; only LIGHT reaches pockets;
 TOSS is never inferred. Main uses Music.play_floor(actual_floor) on Continue
 and after travel. No save version, simulation rule or witness route changed.
+
+## M5a profile and dimensions
+
+The existing `Sim.new(seed,count)` and Main/pilot `new_run` remain legacy
+entrypoints. New interactive games use `new_adventure(seed,start,options)`.
+The sim constructor's optional third dictionary selects
+`{"profile":"m5.1","start":"abbey"|"deep","deep_floors":1,"columns":2,"rows":2}`.
+Only m5.1 uses snapshot schema 3; all three version strings are m5.1. Existing
+schema-2 profiles and their canonical hashes are not migrated. The staged
+save envelope remains save_version 2, with its existing checksum and backup.
+
+Schema 3 adds `act` (abbey/deep/winding), `fallen` (boolean), `wakes` (integer),
+`deep_count` (1..3), and `deep_blocks` ([columns,rows], each 1..4). Total floors
+are 3 + deep_count + 1. Floors 1..3 keep their m4.1 generation bytes and 17x17
+dimensions. Deep dimensions are columns*16+1 by rows*16+1; Winding is 9x9.
+All tile/visited indexes use the owning floor's width. Rendering, survey,
+codec and room dressing use those dimensions. The historical item-art pixel
+coordinates are artwork, not map indexes, and are retained.
+
+Each Deep floor starts from its own empty-hand solvability contract. Down
+stairs point at the next arrival; up stairs/exits/ordinary lifts are invalid
+there. The Winding lift has `final:true`, no owner and a self destination;
+it wins without a return to floor one. Legacy lift links and win validation
+remain unchanged. Schema-3 fixture capacity scales to 128 for larger blocks.
+
+The new `wake` action takes `target_id`, with no item_id required. It is a
+one-beat, normal-revision action on a local `panel` with `passage:true`, while
+carrying the Seal. It sets open/revealed and changes that panel's wall tile
+to floor, emitting `dawn_opened`. Its portal stays at the old wall's front
+plane. Ordinary panels retain their cache reward link, reveal and PRY rules.
+In m5 Abbey floors, carried GLOW can reveal those old caches. New Deep dawn
+passages do not passively reveal themselves.
+
+Picking up the floor-three Seal emits `fell` and immediately commits floor 4,
+5 HP, Seal-only inventory and the scatter. New item metadata `yours:true`
+marks scattered possessions. No keys scatter. Candidate cells are unoccupied
+and at least twelve terrain-path steps from waking, treating the dawn passage
+as eventually open. The floor's own tools prove recovery need not depend on
+these possessions. At zero HP, m5 emits `woke`, increments wakes, drops pack
+and coat at the death cell, clears living wind-ups and returns to the current
+arrival with 5 HP, belt and hand retained. These transitions are atomic and
+emit no legacy run_ended/lost event. Presentation spends no simulation turns.
+
+ProfileStore owns user://profile.json, just `{"fallen":true}`, independently
+of a run. `--profile-path=user://...json` overrides it. Pilots and custom save
+paths derive an isolated sibling profile if none was specified. No pilot or
+headless fixture writes the owner's profile. Main saves `ui.waking` so an
+interrupted Fall/wake resumes at the appropriate card. New calls:
+`pilot_call("profile_path")`, `pilot_call("new_adventure",[seed,start])`.
+Public state adds act, wakes, profile_fallen and map_pan. wake_close names the
+card button; busy clears when that readable card is ready for a tap. Existing
+pilot new_run stays legacy. Config flags: --deep-floors=N, --deep-blocks=CxR.
+
+Large maps use eight-pixel cells, Finder-centred origin plus drag offset.
+Only presentation pans; no knowledge or simulation state changes. Seen/walked
+bitstrings retain their existing format, sized from the saved floor settings.
+Closed travel obstructions cannot register a farther stair hotspot over the
+nearer BURN/use target. Fall frame paths and hold time are read from
+data/presentation/fall.json; an empty list uses the shake placeholder. Listed
+paintings enter RequiredArt/export validation. Input and held-item timings
+remain the accepted M4c values.

@@ -1,5 +1,6 @@
 extends Control
 const Sim = preload("res://scripts/sim/dungeon_sim.gd")
+const Profile=preload("res://scripts/persistence/profile_store.gd")
 const Witness = preload("res://scripts/gen/witness.gd")
 const Gen = preload("res://scripts/gen/floor_gen.gd")
 const Store = preload("res://scripts/persistence/save_store.gd")
@@ -33,6 +34,11 @@ var _hurt_time: float=0
 var _bob: bool=false
 var _mode: String="title"
 var _save_path: String=Store.DEFAULT_PATH
+var _profile_path: String="user://profile.json"
+var _pending_wake: String=""
+var _fall_frame: TextureRect
+var _map_control
+var _deep_options: Dictionary={"deep_floors":1,"columns":2,"rows":2}
 var _save_ok: bool=true
 var _floor_count: int=3
 var _modal: Control
@@ -77,15 +83,24 @@ func _ready() -> void:
 	for arg in OS.get_cmdline_user_args():
 		if arg.begins_with("--save-path="):
 			_save_path=arg.trim_prefix("--save-path="); explicit_save_path=true
+		if arg.begins_with("--deep-floors="): _deep_options.deep_floors=arg.trim_prefix("--deep-floors=").to_int()
+		if arg.begins_with("--deep-blocks="):
+			var parts: PackedStringArray=arg.trim_prefix("--deep-blocks=").split("x")
+			if parts.size()==2: _deep_options.columns=parts[0].to_int(); _deep_options.rows=parts[1].to_int()
+		if arg.begins_with("--profile-path="): _profile_path=arg.trim_prefix("--profile-path=")
 		if arg.begins_with("--floors="): _floor_count=clampi(arg.trim_prefix("--floors=").to_int(),1,4)
-	if Engine.has_meta("pilot") and not explicit_save_path: _save_path="user://tests/pilot.json"
+	if Engine.has_meta("pilot") and not explicit_save_path and _save_path==Store.DEFAULT_PATH: _save_path="user://tests/pilot.json"
 	# Pilots/tests keep preferences beside their isolated save, never in the
 	# player's settings. Preferences are independent of run-state hashes.
 	if Engine.has_meta("pilot") or _save_path!=Store.DEFAULT_PATH:
 		_settings_path=_save_path.trim_suffix(".json")+"_settings.cfg"
+	if (Engine.has_meta("pilot") or _save_path!=Store.DEFAULT_PATH) and _profile_path=="user://profile.json": _profile_path=_save_path.trim_suffix(".json")+"_profile.json"
+	if not _profile_path.begins_with("user://") or _profile_path.contains("..") or not _profile_path.ends_with(".json"):
+		push_error("Invalid profile path"); get_tree().quit(1); return
 	if not _save_path.begins_with("user://") or _save_path.contains("..") or not _save_path.ends_with(".json"):
 		push_error("Invalid save path"); get_tree().quit(1); return
 	view=View.new(); view.position=VIEW_RECT.position; view.size=VIEW_RECT.size; view.clip_contents=true; add_child(view)
+	_fall_frame=TextureRect.new(); _fall_frame.position=VIEW_RECT.position; _fall_frame.size=VIEW_RECT.size; _fall_frame.expand_mode=TextureRect.EXPAND_IGNORE_SIZE; _fall_frame.mouse_filter=Control.MOUSE_FILTER_IGNORE; _fall_frame.visible=false; add_child(_fall_frame)
 	_ambience=Ambience.new(); _ambience.set_view_rect(VIEW_RECT); add_child(_ambience)
 	sfx=Sfx.new(); add_child(sfx)
 	_music=get_node_or_null("/root/Music")
@@ -158,7 +173,7 @@ func _build_menu() -> void:
 	_menu_receipt=_label("",_menu); _menu_receipt.position=Vector2(3,156); _menu_receipt.size=Vector2(148,18); _menu_receipt.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
 	_button("continue",Rect2(13,244,128,26),"CONTINUE",_continue,_menu)
 	_button("retry",Rect2(13,244,128,26),"RETRY SEED",_retry,_menu)
-	_button("start",Rect2(13,276,128,26),"NEW RUN",_open_seed,_menu)
+	_button("start",Rect2(13,276,128,26),"NEW GAME",_open_seed,_menu)
 	_button("sound",Rect2(3,312,72,24),"SFX ON" if sfx.enabled else "SFX OFF",_toggle_sound,_menu)
 	_button("music",Rect2(79,312,72,24),"MUSIC ON" if _music!=null and _music.enabled else "MUSIC OFF",_toggle_music,_menu)
 	_button("splash_skip",Rect2(0,20,154,150),"",_skip_splash,_menu,false)
@@ -234,7 +249,23 @@ func _save_settings() -> void:
 	if directory!=null and not subfolder.is_empty(): directory.make_dir_recursive(subfolder)
 	settings.save(_settings_path)
 func _retry() -> void:
-	if _busy<=0 and not state.is_empty(): new_run(state.seed,state.floor_count)
+	if _busy<=0 and not state.is_empty():
+		if state.rules_version=="m5.1": new_adventure(state.seed,"deep" if state.fallen else "abbey")
+		else: new_run(state.seed,state.floor_count)
+func new_adventure(raw: String,start: String="abbey",options: Dictionary={}) -> bool:
+	var seed: String=Gen.normalize_seed(raw)
+	if seed=="" or start not in ["abbey","deep"]: return false
+	var settings: Dictionary=_deep_options.duplicate(); settings.merge(options,true); settings.profile="m5.1"; settings.start=start
+	var fresh=Sim.new(seed,3,settings)
+	if fresh.snapshot().get("status")=="error": return false
+	_close_modal(); _close_card(); sim=fresh; selected=""; _busy=0; _hurt_time=0; _hurt_gate_time=0; _mode="game"
+	_survey.reset(sim._s.floor_count,sim._s.floors); _reset_presentation(); view.clear_strike()
+	_pending_wake="fall" if start=="deep" else ""
+	lines=["Find the Dawn Seal.","Three Abbey floors."] if start=="abbey" else ["The Seal is still warm.","Find the way below."]
+	_sync(); _save(true)
+	if _music!=null: _music.play_floor(state.floor)
+	if start=="deep": _waking_card()
+	return true
 func new_run(raw: String,count: int=2) -> bool:
 	var seed:=Gen.normalize_seed(raw)
 	if seed.is_empty(): return false
@@ -242,7 +273,7 @@ func new_run(raw: String,count: int=2) -> bool:
 	if not proof.ok: push_error("Generation failed: "+proof.reason); return false
 	_close_modal(); _close_card()
 	sim=Sim.new(seed,count); selected=""; _busy=0; _hurt_time=0; _hurt_gate_time=0; _mode="game"
-	_survey.reset(count); _reset_presentation()
+	_survey.reset(count,sim.snapshot().floors); _pending_wake=""; _reset_presentation()
 	_compass_swing=0; _compass_velocity=0
 	view.clear_strike()
 	if _music!=null: _music.play_floor(1)
@@ -260,10 +291,13 @@ func _continue() -> void:
 	if _music!=null: _music.play_floor(saved.payload.floor)
 	selected=str(saved.ui.get("selected",""))
 	lines=["Your place is kept.","The abbey is waiting."]
+	_pending_wake=str(saved.ui.get("waking",""))
 	_save_ok=true; _sync()
+	if saved.payload.get("fallen",false): Profile.mark(_profile_path)
+	if _pending_wake!="": _waking_card()
 func _save(fresh: bool=false) -> void:
 	if sim==null: return
-	_save_ok=Store.save_run(sim,{"selected":selected,"survey":_survey.save()},_save_path,fresh)
+	_save_ok=Store.save_run(sim,{"selected":selected,"survey":_survey.save(),"waking":_pending_wake},_save_path,fresh)
 	_refresh_save_indicator()
 func _refresh_save_indicator() -> void:
 	if not controls.has("floor_label"): return
@@ -307,6 +341,9 @@ func _retire_audio() -> void:
 	if had_playback: OS.delay_msec(50)
 func _can_game() -> bool: return _mode=="game" and _busy<=0 and not _transitioning and not is_instance_valid(_modal)
 func _reset_presentation() -> void:
+	view.position=VIEW_RECT.position
+	view.flash=0
+	if is_instance_valid(_fall_frame): _fall_frame.visible=false
 	_tossing=""; view.toss_lane=[]
 	_transition_token+=1; _transitioning=false
 	_ambience.fade_in(0); _ambience.visible=true; _ambience.set_process(true)
@@ -410,6 +447,8 @@ func _sync_markers() -> void:
 	# reach rather than turning into an invisible wall/bump action.
 	for fixture in state.floors[state.floor-1].fixtures:
 		if fixture.type not in ["stairs_up","stairs_down","exit","lift"]: continue
+		# A distant arch behind a closed web must not steal the nearer tap.
+		if not sim._clear_sight(fixture.pos): continue
 		if not markers.any(func(m): return m.id==fixture.id): markers.append({"key":"hot_"+fixture.id,"id":fixture.id,"label":"DOWN" if fixture.type=="stairs_down" else "UP","callback":_travel_tap.bind(fixture.id)})
 		for marker in markers:
 			if marker.id==fixture.id: marker.callback=_travel_tap.bind(fixture.id)
@@ -463,7 +502,11 @@ func _cancel_toss() -> void:
 	_tossing=""; _sync()
 func _inspect_capability(fixture: Dictionary) -> void:
 	if not _can_game(): return
-	if fixture.type=="panel" and not fixture.revealed:
+	if fixture.get("passage",false):
+		if not fixture.open: _command({"type":"wake","target_id":fixture.id})
+		else: lines=["The passage is awake.","Only deeper now."]; queue_redraw()
+		return
+	if fixture.type=="panel" and not fixture.revealed and not fixture.get("passage",false):
 		_close_card(); lines=["Faint scratches.","You can't make them out."]; queue_redraw(); return
 	var column:=_panel({"brazier":"Banked coals","web":"Old web","cord":"Cord-bound grate","panel":"A scored dawn"}[fixture.type],62,242)
 	var note: String={"brazier":"LIGHT a reed torch.\nThe coals keep burning.","web":"Dry silk blocks it.\nA FIRE would clear it.","cord":"A stout knot holds it.\nAn EDGE would cut it.","panel":"Dawn wakes the scar.\nAn EDGE can lift it."}[fixture.type]
@@ -493,6 +536,7 @@ func _command(command: Dictionary) -> void:
 		lines=[result.reason,"Drop or use an item." if result.reason=="Your pack is full." else ""]
 		if result.reason=="The lift is dead.": lines[1]="Its bell has no voice."
 		sfx.play("bump"); queue_redraw(); return
+	if command.type=="wake": view.held.animate("seal","use")
 	if command.type in ["hit","ring","light","burn","cut","toss","dispel","place"]: view.held.animate(hand_kind,command.type)
 	_bob=command.type=="move"
 	match command.type:
@@ -500,7 +544,7 @@ func _command(command: Dictionary) -> void:
 		"turn": _compass_velocity+=float(command.delta)*5.5
 		"pickup":
 			var definition: Dictionary=sim.definition(command.item_id)
-			lines=[definition.name,Flavour.provenance(state.items[command.item_id].kind,definition.provenance)]; sfx.play("pickup")
+			lines=[definition.name,definition.provenance if state.items[command.item_id].get("yours",false) else Flavour.provenance(state.items[command.item_id].kind,definition.provenance)]; sfx.play("pickup")
 			if definition.slot=="belt": lines=[definition.name,"Take it home." if definition.name=="Dawn Seal" else "Kept safe on the belt."]
 			if definition.name=="Dawn Seal": selected=""
 		"drop","place": lines=["You set it down.",""]; sfx.play("pickup")
@@ -540,6 +584,7 @@ func _command(command: Dictionary) -> void:
 				sfx.play("pickup")
 			"panel_revealed":
 				if not result.events.any(func(e): return e.type=="attack_resolved" and e.damage>0): lines=["Dawn finds an old scar.","An EDGE can lift it."]
+			"dawn_opened": lines=["The Seal wakes stone.","A passage remembers."]; sfx.play("gate")
 			"secret_found": lines=["A hidden cache opens.","Something left behind."]; sfx.play("pickup")
 		if event.type=="intent_announced":
 			var creature: String=sim._actor(event.actor_id).kind
@@ -557,6 +602,11 @@ func _command(command: Dictionary) -> void:
 	state=sim.snapshot()
 	if not state.pack.has(selected): selected=""
 	if command.type in ["burn","cut","feed","dispel","reveal"]: selected=""
+	var waking: Array=result.events.filter(func(e): return e.type in ["fell","woke"])
+	if not waking.is_empty():
+		_pending_wake="fall" if waking[0].type=="fell" else "death"
+		if _pending_wake=="fall": Profile.mark(_profile_path)
+		_sync(); _save(); view.update_state(old_picture); _wake_transition(_pending_wake); return
 	var travel: bool=result.events.any(func(e): return e.type in ["floor_changed","lift_ride"])
 	if travel:
 		_capture_survey(); _save()
@@ -564,6 +614,43 @@ func _command(command: Dictionary) -> void:
 		_start_transition()
 	else:
 		_sync(); _save() # Geometry/knowledge capture is synchronous; save still precedes animation.
+func _wake_transition(reason: String) -> void:
+	_transitioning=true; _busy=1; _hurt_time=0; _hurt_gate_time=0
+	view.flash=0
+	_transition_token+=1
+	var token: int=_transition_token
+	if reason=="fall":
+		var frames: Array=[]; var seconds: float=0.2
+		var path: String="res://data/presentation/fall.json"
+		if FileAccess.file_exists(path):
+			var data=JSON.parse_string(FileAccess.get_file_as_string(path))
+			if data is Dictionary: frames=data.get("frames",[]); seconds=clampf(float(data.get("frame_seconds",0.2)),0.15,0.4)
+		for i in range(maxi(3,frames.size())):
+			if token!=_transition_token or not is_inside_tree(): return
+			view.position=VIEW_RECT.position+Vector2(2 if i%2==0 else -2,0)
+			if i<frames.size() and (ResourceLoader.exists(frames[i]) or FileAccess.file_exists(frames[i])): _fall_frame.texture=Paint.texture(frames[i]); _fall_frame.visible=true
+			await get_tree().create_timer(seconds).timeout
+	view.position=VIEW_RECT.position
+	_ambience.fade_out(0.45 if reason=="fall" else 0.3)
+	await _ambience.fade_finished
+	if token!=_transition_token or not is_inside_tree(): return
+	_fall_frame.visible=false
+	lines=["Stone forgets you." if reason=="fall" else "The dark lets go.",""]; queue_redraw()
+	await get_tree().create_timer(0.8 if reason=="fall" else 0.5).timeout
+	if token!=_transition_token or not is_inside_tree(): return
+	_sync()
+	if _music!=null: _music.play_floor(state.floor)
+	_ambience.fade_in(0.45 if reason=="fall" else 0.3)
+	await _ambience.fade_finished
+	if token!=_transition_token or not is_inside_tree(): return
+	_transitioning=false; _busy=0; _waking_card()
+func _waking_card() -> void:
+	var column:=_panel("Below the Abbey" if _pending_wake=="fall" else "Again, breathing",64,220)
+	_label("You remember the Seal's\nwarmth, and the floor\ngiving way.\nThen nothing." if _pending_wake=="fall" else "You wake by cold stone.\nYour things lie where\nyou fell.",column)
+	_modal_button("wake_close","WAKE",_wake_close,column)
+func _wake_close() -> void:
+	_pending_wake=""; _close_modal(); lines=["The Seal warms a mark.","Touch the faint sun."] if state.act=="deep" else ["Again, breathing.","Your things await."]
+	_sync(); _save()
 func _start_transition() -> void:
 	_transitioning=true; _busy=1.0
 	_transition_token+=1
@@ -668,7 +755,7 @@ func _open_card(id: String) -> void:
 	elif definition.slot=="hand": info+=": counter %d"%definition.damage if definition.damage>1 else ": hit 1"
 	elif definition.heal>0: info+=": heal %d"%definition.heal
 	if info.begins_with(": "): info=info.trim_prefix(": ")
-	_label(info,column); _label(Flavour.provenance(state.items[id].kind,definition.provenance),column)
+	_label(info,column); _label(definition.provenance if state.items[id].get("yours",false) else Flavour.provenance(state.items[id].kind,definition.provenance),column)
 	if definition.has("purpose"): _label(definition.purpose,column)
 	if state.items[id].kind=="key": _label(_key_gate(id),column)
 	if state.items[id].kind=="clapper": _label("RING: once per floor." if sim.ring_ready() else "RING: spent here.",column)
@@ -690,7 +777,7 @@ func _open_card(id: String) -> void:
 			row=HBoxContainer.new(); row.add_theme_constant_override("separation",3); column.add_child(row)
 		_card_button("card_ring","RING",{"type":"ring","item_id":id},row)
 		controls.card_ring.disabled=not sim.ring_ready()
-	if state.rules_version in ["m3.3","m4.1"] and state.items[id].location in ["pack","equip"]:
+	if state.rules_version in ["m3.3","m4.1","m5.1"] and state.items[id].location in ["pack","equip"]:
 		if row.get_child_count()>=3:
 			row=HBoxContainer.new(); row.add_theme_constant_override("separation",3); column.add_child(row)
 		_button("card_toss",Rect2(0,0,42,20),"TOSS",_open_toss.bind(id),row); _card_names.append("card_toss")
@@ -749,7 +836,7 @@ func _close_modal() -> void:
 	_overlay_visibility()
 func _open_seed() -> void:
 	if _busy>0 or is_instance_valid(_modal): return
-	var column:=_panel("Start a new run?",64,204)
+	var column:=_panel("Start a new run?",40,264)
 	_label("Replaces this run.",column)
 	_seed_input=LineEdit.new(); _seed_input.text=state.get("seed","BELL42"); _seed_input.max_length=6
 	_seed_input.custom_minimum_size=Vector2(128,27)
@@ -757,18 +844,21 @@ func _open_seed() -> void:
 	_seed_input.add_theme_stylebox_override("normal",_style(Color("0c101c"),Color("59616a"),5))
 	column.add_child(_seed_input); controls.seed_input=_seed_input; _dynamic_names.append("seed_input")
 	_seed_note=_label("No I, O, 0 or 1.",column)
-	_modal_button("seed_start","START",_seed_submit,column)
+	_modal_button("seed_start","THE ABBEY" if Profile.fallen(_profile_path) else "START",_seed_submit,column)
+	if Profile.fallen(_profile_path): _modal_button("seed_deep","THE DEEP",_deep_submit,column)
 	_modal_button("seed_random","RANDOM",_random_submit,column)
 	_modal_button("seed_cancel","CANCEL",_close_modal,column)
 func _seed_submit() -> void:
 	if Gen.normalize_seed(_seed_input.text).is_empty():
 		_seed_note.text="Invalid seed symbols."; return
-	if not new_run(_seed_input.text,_floor_count): _seed_note.text="Floor failed its test."
+	if not new_adventure(_seed_input.text,"abbey"): _seed_note.text="Floor failed its test."
+func _deep_submit() -> void:
+	if not new_adventure(_seed_input.text,"deep"): _seed_note.text="Invalid seed symbols."
 func _random_submit() -> void:
 	var rng:=RandomNumberGenerator.new(); rng.randomize()
 	var seed: String=""
 	for _i in range(6): seed+=Gen.ALPHABET[rng.randi_range(0,31)]
-	if not new_run(seed,_floor_count): _seed_note.text="Floor failed its test."
+	if not new_adventure(seed,"abbey"): _seed_note.text="Floor failed its test."
 func _take() -> void:
 	if not _can_game(): return
 	var loot: Array=sim.reachable_items()
@@ -798,7 +888,7 @@ func _open_map() -> void:
 	var column:=_panel("Visited / floor %d"%state.floor,16,324)
 	var map=preload("res://scripts/ui/map_view.gd").new()
 	map.data=sim.view_snapshot(); map.data.survey=_survey.floor_data(state.floor)
-	map.custom_minimum_size=Vector2(128,231); column.add_child(map)
+	map.custom_minimum_size=Vector2(128,231); column.add_child(map); _map_control=map
 	_modal_button("map_close","CLOSE",_close_modal,column)
 func _process(delta: float) -> void:
 	_hurt_gate_time=maxf(0,_hurt_gate_time-delta)
@@ -902,15 +992,23 @@ func _public_state() -> Dictionary:
 	public.survey_hash=_survey.hash_value()
 	public.message=lines.duplicate()
 	public.travel_pending=_transitioning
+	public.profile_fallen=Profile.fallen(_profile_path)
+	public.act=state.get("act","legacy")
+	public.wakes=state.get("wakes",0)
+	public.map_pan=[_map_control.pan.x,_map_control.pan.y] if is_instance_valid(_map_control) else []
 	public.tossing=_tossing
 	public.toss_preview=sim.toss_preview(_tossing) if _tossing!="" else {}
 	public.secrets_found=state.floors.reduce(func(total,f): return total+f.fixtures.filter(func(v): return v.type=="panel" and v.open).size(),0)
 	return public
 func pilot_call(name_key: String,args: Array) -> String:
 	match name_key:
-		"busy": return "1" if _busy>0 or _transitioning or is_instance_valid(_modal) else "0"
+		"busy": return "1" if _busy>0 or _transitioning or is_instance_valid(_modal) and not controls.has("wake_close") else "0"
 		"state": return JSON.stringify(_public_state())
 		"save_path": return _save_path
+		"profile_path": return _profile_path
+		"new_adventure":
+			if args.is_empty() or not new_adventure(str(args[0]),str(args[1]) if args.size()>1 else "abbey"): return "error"
+			return JSON.stringify(_public_state())
 		"where":
 			if args.is_empty(): return ""
 			var key:=str(args[0])

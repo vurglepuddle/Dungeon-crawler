@@ -422,3 +422,59 @@ or held EDGE can PRY it open; cords keep CUT. Capability use prefers the selecte
 tool, then the hand. Only LIGHT searches pockets; throwing always stays explicit.
 Difficulty, floor count, generation and save profiles remain unchanged pending
 the owner's three-floor playtest.
+
+## M5a: below the tutorial
+
+New games now use m5.1. The three Abbey floors are the tutorial, generated
+exactly as before for the same seed. Old runs keep their own rules: the walk
+home, permanent death, exact snapshots and existing ending still work.
+
+Taking the third-floor Seal breaks the floor. The simulation commits the Fall
+as one transaction; a roughly 2.3-second shake/dark beat introduces a waking
+card. The Finder wakes in the middle of a sealed room below, at 5/6 HP, with
+only the Seal. Up to three carried ordinary possessions scatter at least twelve
+path steps away; keys do not follow. Those things are marked as yours. The
+Deep supplies everything needed, independently of those optional recoveries.
+
+The first Fall unlocks a separate profile flag. Later NEW GAME offers THE ABBEY
+or THE DEEP for the entered seed. Skipping produces the same Deep, at 5/6 HP
+with the same card, but no scattered possessions. Saving during the Fall or
+death beat preserves the committed state and an undismissed waking card.
+
+The first Deep is four interlocking 17-cell blocks sharing their boundary
+walls: 33x33 overall. Each block has a ring, cross-corridors and small rooms;
+each neighbouring pair has two ports. Port positions and extra chambers vary
+with the seed. Rectangular arrangements from 1x1 through 4x4 are parameters;
+the number of Deep floors is separately adjustable from one to three. The
+default scaffold has one Deep followed by the 9x9 Winding.
+
+The dependency chain starts at the exit: the down stair needs FIRE; the torch
+is in a keyed store; its key is in a weight-held store; a stone and blade are
+outside the waking room. The Seal must first WAKE that room's north wall by
+a deliberate tap. The key store's far-side latch prevents trapping oneself.
+On the default four-block floor, another key controls the middle joins, while
+fire joins later reconnect the large loop. Optional corded pockets reward EDGE
+and contain extra encounters. Junk is plentiful; bread, one hidden tonic and
+one coat are the small recovery allowance. No required tool burns out.
+
+Six to eight creatures use the existing tells and counters. One roaming
+encounter occupies each default block; the extras wait in optional corded
+pockets. This keeps the initial route from demanding a two-creature timing
+lesson before we have designed one. Deep blows use the existing two-HP power.
+The Seal is still a GLOW answer to Ghosts. No patrols, traps or new creatures.
+
+Death in either act of m5.1 is a setback: wake at the current floor's arrival
+at 5/6 HP. Keep Seal, keys and the wielded weapon; pack and coat lie where you
+fell. Locks, enemies' HP, opened passages and other progress stay. Living
+creatures leave wind-up before you wake, and an occupied arrival is cleared.
+No extra enemy phase runs during the dark beat or card. The Winding has a
+working lift; RIDE reaches the existing dawn ending. There are no up stairs
+in the Deep. The Porter's Abbey lift remains where it was.
+
+In new Abbey runs, carried GLOW reveals the old cache; the removed return walk
+is no longer its only discovery opportunity. The Deep's first dawn mark is
+deliberate rather than passive. The map retains its ink knowledge states,
+opens centred on the Finder on large floors, uses an eight-pixel pitch and
+pans by drag. View/chrome/compass registration is unchanged. The Deep and
+Winding explicitly borrow Lower Watch art and music; Fall paintings can be
+registered in data/presentation/fall.json when ready.

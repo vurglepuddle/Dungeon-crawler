@@ -3,7 +3,7 @@ extends RefCounted
 static func binding(f: Dictionary,fixture: Dictionary,used: Dictionary={}) -> Dictionary:
 	if fixture.type=="panel": return {"wall":fixture.wall,"normal":fixture.normal}
 	var directions: Array=[[0,-1],[-1,0],[1,0],[0,1]] if fixture.type=="stairs_down" else [[0,1],[1,0],[-1,0],[0,-1]]
-	if fixture.type=="lift": directions=[[1,0],[0,1],[0,-1],[-1,0]]
+	if fixture.type=="lift": directions=[[0,-1],[1,0],[0,1],[-1,0]] if fixture.get("final",false) else [[1,0],[0,1],[0,-1],[-1,0]]
 	if fixture.type=="latch": directions=[[-1,0],[1,0],[0,-1],[0,1]]
 	for d in directions:
 		for distance in range(1,2 if fixture.type=="latch" else 4):

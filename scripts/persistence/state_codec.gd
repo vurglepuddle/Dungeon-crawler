@@ -26,18 +26,27 @@ static func _cell(value, f: Dictionary) -> bool:
 static func validate(s: Dictionary) -> bool:
 	for key in ["schema_version","rules_version","generator_version","content_version","seed","floor_count","floor","pos","facing","turn","revision","hp","max_hp","status","pack","equipment","belt","floors","items"]:
 		if not s.has(key): return false
-	if not s.schema_version is int or s.schema_version!=2: return false
+	if not s.schema_version is int or s.schema_version not in [2,3]: return false
 	for key in ["rules_version","generator_version","content_version","status"]:
 		if not s[key] is String: return false
-	var profiles: Dictionary={"m2.1":"m2.1","m3.1":"m3.1","m3.2":"m3.1","m3.3":"m3.3","m4.1":"m4.1"}
+	var profiles: Dictionary={"m2.1":"m2.1","m3.1":"m3.1","m3.2":"m3.1","m3.3":"m3.3","m4.1":"m4.1","m5.1":"m5.1"}
 	if not profiles.has(s.rules_version) or s.generator_version!=profiles[s.rules_version] or s.content_version!=s.rules_version: return false
+	var modern: bool=s.rules_version=="m5.1"
+	if s.schema_version!=(3 if modern else 2): return false
+	if modern:
+		if not s.get("act") is String or s.act not in ["abbey","deep","winding"] or not s.get("fallen") is bool: return false
+		if not s.get("wakes") is int or s.wakes<0 or not s.get("deep_count") is int or s.deep_count<1 or s.deep_count>3: return false
+		if not s.get("deep_blocks") is Array or s.deep_blocks.size()!=2: return false
+		for value in s.deep_blocks:
+			if not value is int or value<1 or value>4: return false
 	if not s.seed is String or Gen.normalize_seed(s.seed)!=s.seed: return false
 	for key in ["floor_count","floor","facing","turn","revision","hp","max_hp"]:
 		if not s[key] is int: return false
-	if s.floor_count<1 or s.floor_count>4 or s.floor<1 or s.floor>s.floor_count or s.facing<0 or s.facing>3: return false
+	if s.floor_count<1 or s.floor_count>(7 if modern else 4) or s.floor<1 or s.floor>s.floor_count or s.facing<0 or s.facing>3: return false
+	if modern and (s.floor_count!=4+s.deep_count or s.act!=("abbey" if s.floor<=3 else ("winding" if s.floor==s.floor_count else "deep")) or s.fallen!=(s.floor>3)): return false
 	if s.turn<0 or s.revision<s.turn or s.revision>10000000 or s.max_hp!=6 or s.hp<0 or s.hp>6: return false
 	if s.status not in ["playing","won","lost"] or (s.status=="lost")!=(s.hp==0): return false
-	if not s.floors is Array or s.floors.size()!=s.floor_count or not s.items is Dictionary or s.items.size()>128: return false
+	if not s.floors is Array or s.floors.size()!=s.floor_count or not s.items is Dictionary or s.items.size()>(512 if modern else 128): return false
 	if not s.pos is Array or s.pos.size()!=2 or not s.pos[0] is int or not s.pos[1] is int: return false
 	if not s.pack is Array or s.pack.size()>8 or not s.belt is Array or s.belt.size()>s.floor_count+1: return false
 	if not s.equipment is Dictionary or s.equipment.keys().size()!=2 or not s.equipment.has("hand") or not s.equipment.has("body"): return false
@@ -51,12 +60,17 @@ static func validate(s: Dictionary) -> bool:
 		if not f is Dictionary: return false
 		for key in ["width","height","tiles","fixtures","actors","visited","start","landing"]:
 			if not f.has(key): return false
-		if not f.width is int or not f.height is int or f.width!=17 or f.height!=17 or not f.tiles is Array or f.tiles.size()!=289 or not f.visited is Array or f.visited.size()!=289: return false
+		if not f.width is int or not f.height is int or f.width<5 or f.height<5 or f.width>65 or f.height>65 or not f.tiles is Array or f.tiles.size()!=f.width*f.height or not f.visited is Array or f.visited.size()!=f.width*f.height: return false
+		if not modern or floor_number<=3:
+			if f.width!=17 or f.height!=17: return false
+		elif floor_number==s.floor_count:
+			if f.width!=9 or f.height!=9: return false
+		elif f.width!=s.deep_blocks[0]*16+1 or f.height!=s.deep_blocks[1]*16+1: return false
 		for tile in f.tiles:
 			if not tile is int or tile not in [0,1]: return false
 		for seen in f.visited:
 			if not seen is bool: return false
-		if f.has("bell_rung") and (not f.bell_rung is bool or s.rules_version not in ["m3.2","m3.3","m4.1"]): return false
+		if f.has("bell_rung") and (not f.bell_rung is bool or s.rules_version not in ["m3.2","m3.3","m4.1","m5.1"]): return false
 		if f.has("title") and (not f.title is String or f.title.length()>22): return false
 		if not _cell(f.start,f) or not _cell(f.landing,f): return false
 		if f.has("props"):
@@ -64,14 +78,14 @@ static func validate(s: Dictionary) -> bool:
 			for prop in f.props:
 				if not prop is Dictionary or not prop.get("id") is String or not prop.get("kind") is String or prop.kind not in ["rubble","bone_heap","skeleton","pots","statue","candles","crate","pillar"]: return false
 				var p=prop.get("pos")
-				if not p is Array or p.size()!=2 or not p[0] is int or not p[1] is int or p[0]<1 or p[1]<1 or p[0]>15 or p[1]>15: return false
-				if f.tiles[p[1]*17+p[0]]!=(1 if prop.kind=="pillar" else 0): return false
+				if not p is Array or p.size()!=2 or not p[0] is int or not p[1] is int or p[0]<1 or p[1]<1 or p[0]>=f.width-1 or p[1]>=f.height-1: return false
+				if f.tiles[p[1]*f.width+p[0]]!=(1 if prop.kind=="pillar" else 0): return false
 				if prop.has("offset"):
 					var offset=prop.offset
 					if not offset is Array or offset.size()!=2: return false
 					for n in offset:
 						if not n is int or absi(n)>25: return false
-		if not f.fixtures is Array or f.fixtures.size()>32 or not f.actors is Array or f.actors.size()>8: return false
+		if not f.fixtures is Array or f.fixtures.size()>(128 if modern else 32) or not f.actors is Array or f.actors.size()>8: return false
 		var fixture_ids: Dictionary={}
 		for fixture in f.fixtures:
 			if not fixture is Dictionary or not fixture.get("id") is String or not _cell(fixture.get("pos"),f): return false
@@ -79,13 +93,18 @@ static func validate(s: Dictionary) -> bool:
 			all_ids[fixture.id]=true; fixture_ids[fixture.id]=fixture
 			fixtures_all[fixture.id]=fixture; fixture_floors[fixture.id]=floor_number
 			if not fixture.get("type") is String or fixture.type not in ["plate","gate","latch","lock","stairs_up","stairs_down","exit","porter","lift","brazier","web","cord","panel"]: return false
-			if fixture.type in ["brazier","web","cord","panel"] and s.rules_version not in ["m3.3","m4.1"]: return false
+			if fixture.type in ["brazier","web","cord","panel"] and s.rules_version not in ["m3.3","m4.1","m5.1"]: return false
 			if fixture.type=="brazier" and not fixture.get("lit") is bool: return false
 			if fixture.type in ["web","cord","panel"] and not fixture.get("open") is bool: return false
+			if modern and floor_number>=4:
+				if fixture.type in ["stairs_up","exit","porter"] or fixture.type=="lift" and not fixture.get("final",false): return false
+				if floor_number==s.floor_count and fixture.type=="stairs_down": return false
+			if fixture.has("passage") and (not modern or not fixture.passage is bool): return false
+			if fixture.has("final") and (not modern or not fixture.final is bool): return false
 			if fixture.type=="panel":
 				if not fixture.get("revealed") is bool or not fixture.get("item_id") is String: return false
 				if not fixture.get("wall") is Array or fixture.wall.size()!=2 or not fixture.wall[0] is int or not fixture.wall[1] is int: return false
-				if fixture.wall[0]<0 or fixture.wall[1]<0 or fixture.wall[0]>=17 or fixture.wall[1]>=17 or f.tiles[fixture.wall[1]*17+fixture.wall[0]]!=1: return false
+				if fixture.wall[0]<0 or fixture.wall[1]<0 or fixture.wall[0]>=f.width or fixture.wall[1]>=f.height or f.tiles[fixture.wall[1]*f.width+fixture.wall[0]]!=(0 if fixture.get("passage",false) and fixture.open else 1): return false
 				if not fixture.get("normal") is Array or fixture.normal not in [[0,-1],[1,0],[0,1],[-1,0]]: return false
 				if [fixture.wall[0]+fixture.normal[0],fixture.wall[1]+fixture.normal[1]]!=fixture.pos or fixture.open and not fixture.revealed: return false
 			for link in ["gate_id","plate_id","key_id","owner_id","destination_id"]:
@@ -110,9 +129,9 @@ static func validate(s: Dictionary) -> bool:
 				if not actor.has(key): return false
 			if not actor.id is String or not actor.kind is String or not actor.state is String or all_ids.has(actor.id) or not Catalog.CREATURES.has(actor.kind) or not _cell(actor.pos,f): return false
 			all_ids[actor.id]=true
-			if actor.has("damage") and (s.rules_version!="m4.1" or not actor.damage is int or actor.damage<1 or actor.damage>3): return false
+			if actor.has("damage") and (s.rules_version not in ["m4.1","m5.1"] or not actor.damage is int or actor.damage<1 or actor.damage>3): return false
 			if not actor.hp is int or actor.hp<0 or actor.hp>Catalog.CREATURES[actor.kind].hp or actor.state not in ["idle","windup","recovery","dead","peaceful"] or not actor.intent is Dictionary: return false
-			if actor.kind!="husk" and s.rules_version not in ["m3.3","m4.1"] or actor.state=="peaceful" and actor.kind!="hound": return false
+			if actor.kind!="husk" and s.rules_version not in ["m3.3","m4.1","m5.1"] or actor.state=="peaceful" and actor.kind!="hound": return false
 			if (actor.hp==0)!=(actor.state=="dead"): return false
 			if actor.state=="windup":
 				if not _cell(actor.intent.get("cell"),f) or not actor.intent.get("due_in") is int or actor.intent.due_in!=1: return false
@@ -134,7 +153,7 @@ static func validate(s: Dictionary) -> bool:
 					if fixture.pos==actor.pos and (fixture.type=="porter" or fixture.type in ["gate","lock","web","cord"] and not fixture.open): return false
 	# Validate links only after every floor and fixture has been checked.
 	for fixture in fixtures_all.values():
-		if fixture.type=="panel":
+		if fixture.type=="panel" and not fixture.get("passage",false):
 			var reward=s.items.get(fixture.item_id)
 			if not reward is Dictionary or not reward.get("hidden") is bool or reward.hidden==fixture.open: return false
 		if fixture.type=="porter":
@@ -143,6 +162,9 @@ static func validate(s: Dictionary) -> bool:
 			if fixture.restored!=(item.get("location")=="returned"): return false
 			if fixture.restored and (not item.get("owner_id") is String or item.owner_id!=fixture.id): return false
 		if fixture.type=="lift":
+			if fixture.get("final",false):
+				if not modern or fixture_floors[fixture.id]!=s.floor_count or not fixture.active or fixture.owner_id!="" or fixture.destination_id!=fixture.id or fixture.destination_floor!=s.floor_count or not _cell(fixture.get("destination"),s.floors[-1]): return false
+				continue
 			var owner = fixtures_all.get(fixture.owner_id)
 			var dest = fixtures_all.get(fixture.destination_id)
 			if not owner is Dictionary or owner.type!="porter" or fixture.active!=owner.restored: return false
@@ -166,10 +188,11 @@ static func validate(s: Dictionary) -> bool:
 		for key in ["id","kind","location","slot"]:
 			if not item[key] is String: return false
 		if not item.pos is Array or item.id!=id or not Catalog.ITEMS.has(item.kind) or not item.spent is bool or not item.floor is int: return false
+		if item.has("yours") and (not modern or not item.yours is bool): return false
 		if item.has("owner_id") and not item.owner_id is String: return false
 		for key in ["lit","hidden"]:
-			if item.has(key) and (not item[key] is bool or s.rules_version not in ["m3.3","m4.1"]): return false
-		if item.kind=="torch" and (s.rules_version not in ["m3.3","m4.1"] or not item.get("lit") is bool): return false
+			if item.has(key) and (not item[key] is bool or s.rules_version not in ["m3.3","m4.1","m5.1"]): return false
+		if item.kind=="torch" and (s.rules_version not in ["m3.3","m4.1","m5.1"] or not item.get("lit") is bool): return false
 		var definition: Dictionary=Catalog.ITEMS[item.kind]
 		match item.location:
 			"floor":
@@ -198,5 +221,5 @@ static func validate(s: Dictionary) -> bool:
 		var seal:=false
 		for id in s.belt:
 			if s.items[id].kind=="seal": seal=true
-		if not seal or s.floor!=1: return false
+		if not seal or s.floor!=(s.floor_count if modern else 1): return false
 	return true

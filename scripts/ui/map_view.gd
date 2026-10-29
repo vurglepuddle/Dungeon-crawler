@@ -1,5 +1,15 @@
 extends Control
 var data: Dictionary={}
+var pan:=Vector2.ZERO
+var _dragging:=false
+var _touch:=false
+func _ready() -> void:
+	clip_contents=true; mouse_filter=Control.MOUSE_FILTER_STOP
+func _gui_input(event: InputEvent) -> void:
+	if event is InputEventScreenTouch: _touch=event.pressed; accept_event()
+	elif event is InputEventScreenDrag: pan+=event.relative; queue_redraw(); accept_event()
+	elif event is InputEventMouseButton and event.button_index==MOUSE_BUTTON_LEFT and not _touch: _dragging=event.pressed; accept_event()
+	elif event is InputEventMouseMotion and _dragging and not _touch: pan+=event.relative; queue_redraw(); accept_event()
 var cell_size: int=8
 var map_origin:=Vector2.ZERO
 var seen_bounds:=Rect2i()
@@ -21,6 +31,10 @@ func layout_seen() -> void:
 	seen_bounds=Rect2i(lo,hi-lo+Vector2i.ONE)
 	cell_size=clampi(floori(minf((size.x-4)/seen_bounds.size.x,(size.y-8)/seen_bounds.size.y)),4,48)
 	map_origin=(size-Vector2(seen_bounds.size)*cell_size)/2-Vector2(lo)*cell_size
+	if data.width>preload("res://scripts/gen/floor_gen.gd").WIDTH or data.height>preload("res://scripts/gen/floor_gen.gd").HEIGHT:
+		cell_size=8
+		map_origin=size/2-(Vector2(data.pos[0],data.pos[1])+Vector2(0.5,0.5))*cell_size
+	map_origin+=pan
 
 func _center(cell: Array) -> Vector2:
 	return map_origin+(Vector2(cell[0],cell[1])+Vector2(0.5,0.5))*cell_size

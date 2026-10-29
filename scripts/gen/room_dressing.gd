@@ -13,17 +13,17 @@ static func place(run: Dictionary) -> void:
 		for item in run.items.values():
 			if item.location=="floor" and item.floor==i+1: reserved.append(item.pos)
 		var candidates: Array=[]; var pillars: Array=[]
-		for y in range(2,15):
-			for x in range(2,15):
+		for y in range(2,f.height-2):
+			for x in range(2,f.width-2):
 				var p: Array=[x,y]
 				if reserved.any(func(r): return absi(x-r[0])+absi(y-r[1])<=1): continue
 				var walls: Array=[]; var opens:=0
 				for d in DIRS:
-					if f.tiles[(y+d[1])*17+x+d[0]]==1: walls.append(d)
+					if f.tiles[(y+d[1])*f.width+x+d[0]]==1: walls.append(d)
 					else: opens+=1
-				if f.tiles[y*17+x]==0 and walls.size()>0 and opens>=2:
+				if f.tiles[y*f.width+x]==0 and walls.size()>0 and opens>=2:
 					candidates.append({"pos":p,"wall":walls[0],"rank":Paint.mix_hash("%s/%d/prop/%d/%d"%[run.seed,i+1,x,y])})
-				elif f.tiles[y*17+x]==1 and opens>=2: pillars.append(p)
+				elif f.tiles[y*f.width+x]==1 and opens>=2: pillars.append(p)
 		candidates.sort_custom(func(a,b): return a.rank<b.rank)
 		for candidate in candidates:
 			if f.props.size()>=2: break

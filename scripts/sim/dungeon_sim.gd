@@ -4,6 +4,7 @@ const Gen = preload("res://scripts/gen/floor_gen.gd")
 const Catalog = preload("res://scripts/content/catalog.gd")
 const Codec = preload("res://scripts/persistence/state_codec.gd")
 const Cap=preload("res://scripts/sim/capabilities.gd")
+const Adventure=preload("res://scripts/sim/adventure.gd")
 const Faces=preload("res://scripts/sim/wall_faces.gd")
 const DIRS := [[0,-1],[1,0],[0,1],[-1,0]]
 const PACK_SIZE := 8
@@ -14,18 +15,23 @@ func wall_bindings() -> Dictionary:
 	if not _face_cache.has(_s.floor): _face_cache[_s.floor]=Faces.all(_floor())
 	return _face_cache[_s.floor]
 
-func _init(seed: String = "BELL42", floor_count: int = 2) -> void:
-	var generated: Dictionary = Gen.new().generate(seed, floor_count)
+func _init(seed: String = "BELL42", floor_count: int = 2, options: Dictionary={}) -> void:
+	var modern: bool=options.get("profile","")=="m5.1"
+	var generated: Dictionary = Adventure.generate(seed,options) if modern else Gen.new().generate(seed, floor_count)
+	if modern and generated.ok: floor_count=generated.floors.size()
 	if not generated.ok:
 		_s = {"status": "error", "error": generated.error}
 		return
-	var profile: String="m4.1" if floor_count>=3 else "m3.3"
-	_s = {"schema_version": 2, "rules_version": profile, "generator_version": profile,
+	var profile: String="m5.1" if modern else ("m4.1" if floor_count>=3 else "m3.3")
+	_s = {"schema_version": 3 if modern else 2, "rules_version": profile, "generator_version": profile,
 		"content_version": profile, "seed": generated.seed, "floor_count": floor_count,
 		"floor": 1, "pos": generated.floors[0].start.duplicate(), "facing": 0,
 		"turn": 0, "revision": 0, "hp": 6, "max_hp": 6, "status": "playing",
 		"pack": [], "equipment": {"hand": "knife_start", "body": ""}, "belt": [],
 		"floors": generated.floors, "items": generated.items}
+	if modern:
+		_s.merge({"act":"abbey","fallen":false,"wakes":0,"deep_count":options.get("deep_floors",1),"deep_blocks":[options.get("columns",2),options.get("rows",2)]})
+		if options.get("start","")=="deep": Adventure.enter_deep(self,false)
 	_visit()
 
 func snapshot() -> Dictionary: return _s.duplicate(true)
@@ -50,6 +56,7 @@ func definition(id: String) -> Dictionary:
 	if not _s.items.has(id): return {}
 	var result: Dictionary=Catalog.item(_s.items[id].kind)
 	if _s.items[id].kind=="torch" and _s.items[id].get("lit",false): result.tags=["FIRE","GLOW"]; result.purpose="BURN webs. No fuel."
+	if _s.items[id].get("yours",false): result.provenance="Yours. It fell with you."
 	return result
 func toss_preview(id: String) -> Dictionary: return Cap.toss_preview(self,id)
 func _fixture(id: String) -> Dictionary:
@@ -123,6 +130,8 @@ func fixture_actions() -> Array:
 				var arrival: Dictionary=_stair_arrival(fixture)
 				kind="stairs" if _arrival_clear(arrival.floor,arrival.pos) else "squeeze"
 				label=("UP" if fixture.type=="stairs_up" else "DOWN") if kind=="stairs" else "SIDLE"
+			"panel":
+				if Adventure.active(self) and fixture.get("passage",false) and not fixture.open and has_seal(): kind="wake"; label="WAKE"
 			"lift":
 				if fixture.active and _arrival_clear(fixture.destination_floor,fixture.destination): kind="ride"; label="RIDE"
 			"porter":
@@ -166,10 +175,10 @@ func interaction_targets(selected: String="") -> Array:
 	for entry in capability_targets(selected):
 		if not result.any(func(t): return t.target_id==entry.target_id and t.verb==entry.verb): result.append(entry)
 	# Hidden scars have no advertised capability until their dawn reveal.
-	return result.filter(func(t): return t.verb!="REVEAL")
+	return result.filter(func(t): return t.verb!="REVEAL" or Adventure.active(self))
 
 func _arrival_clear(number: int,cell: Array) -> bool:
-	if number<1 or number>_s.floor_count or cell[0]<0 or cell[1]<0 or cell[0]>=17 or cell[1]>=17: return false
+	if number<1 or number>_s.floor_count or cell[0]<0 or cell[1]<0 or cell[0]>=_s.floors[number-1].width or cell[1]>=_s.floors[number-1].height: return false
 	var f: Dictionary=_s.floors[number-1]
 	if f.tiles[cell[1]*f.width+cell[0]]!=0: return false
 	for actor in f.actors:
@@ -211,7 +220,7 @@ func _clear_sight(cell: Array) -> bool:
 	var sx:=signi(dx); var sy:=signi(dy)
 	var at: Array=_s.pos.duplicate()
 	var nx:=1; var ny:=1
-	for _step in range(16):
+	for _step in range(_floor().width+_floor().height):
 		if at==cell: return true
 		var crossing_x: int=nx*ay
 		var crossing_y: int=ny*ax
@@ -224,7 +233,7 @@ func _clear_sight(cell: Array) -> bool:
 	return false
 
 func ring_targets(id: String) -> Array:
-	if _s.status!="playing" or _s.rules_version not in ["m3.1","m3.2","m3.3","m4.1"] or not _s.items.has(id) or _s.items[id].kind!="clapper" or _s.items[id].location not in ["pack","equip"] or not ring_ready(): return []
+	if _s.status!="playing" or _s.rules_version not in ["m3.1","m3.2","m3.3","m4.1","m5.1"] or not _s.items.has(id) or _s.items[id].kind!="clapper" or _s.items[id].location not in ["pack","equip"] or not ring_ready(): return []
 	var result: Array=[]
 	var direction: Array=DIRS[_s.facing]
 	for actor in _floor().actors:
@@ -239,7 +248,7 @@ func ring_targets(id: String) -> Array:
 func legal_verbs(selected: String = "") -> Array:
 	if _s.status!="playing": return []
 	var front := inspect_front()
-	var matches: Array=capability_targets(selected).filter(func(t): return t.verb!="REVEAL")
+	var matches: Array=capability_targets(selected).filter(func(t): return t.verb!="REVEAL" or Adventure.active(self))
 	if not matches.is_empty(): return _travel_verb([{"label":matches[0].verb,"action":matches[0].action},{"label":"GUARD","action":{"type":"guard"}},{"label":"HIT","action":{"type":"hit","target_id":front.monster}} if front.monster!="" else {"label":"WAIT","action":{"type":"wait"}}])
 	if not ring_targets(selected).is_empty():
 		var ringing: Array=[{"label":"RING","action":{"type":"ring","item_id":selected}}, {"label":"GUARD","action":{"type":"guard"}}]
@@ -399,7 +408,7 @@ func apply(action: Dictionary) -> Dictionary:
 		var refusal: String=Cap.validate_action(self,action)
 		if refusal!="": return _reject(refusal)
 	match kind:
-		"light","burn","cut","feed","dispel","reveal","toss": pass
+		"light","burn","cut","feed","dispel","reveal","toss","wake": pass
 		"turn":
 			if action.get("delta",0) not in [-1,1]: return _reject("Bad turn.")
 		"move":
@@ -441,7 +450,7 @@ func apply(action: Dictionary) -> Dictionary:
 			if not _s.items.has(id) or _s.items[id].location not in ["pack","equip"]: return _reject("Bring its clapper.")
 		"ride":
 			if fixture.get("type","")!="lift" or not fixture_near(fixture) or not fixture.active: return _reject("The lift is dead.")
-			if not _arrival_clear(fixture.destination_floor,fixture.destination): return _reject("The landing is blocked.")
+			if not fixture.get("final",false) and not _arrival_clear(fixture.destination_floor,fixture.destination): return _reject("The landing is blocked.")
 		"ring":
 			if ring_targets(id).is_empty(): return _reject("No Husk in sight." if ring_ready() else "The bell rests here.")
 		"hit":
@@ -456,7 +465,7 @@ func apply(action: Dictionary) -> Dictionary:
 	for enemy in _floor().actors: old_states[enemy.id]=enemy.state
 	var transition:=false
 	match kind:
-		"light","burn","cut","feed","dispel","reveal","toss": Cap.commit(self,action,old_states)
+		"light","burn","cut","feed","dispel","reveal","toss","wake": Cap.commit(self,action,old_states)
 		"turn":
 			_s.facing=posmod(_s.facing+action.delta,4)
 			_event("facing_changed","player",{"to":_s.facing})
@@ -513,12 +522,15 @@ func apply(action: Dictionary) -> Dictionary:
 			_event("restored","mechanism",{"owner_id":fixture.id,"item_id":id})
 		"ride":
 			transition=true
-			var old_floor: int=_s.floor
-			_s.floor=fixture.destination_floor; _s.pos=fixture.destination.duplicate(); _s.facing=0
-			_event("lift_ride","transition",{"from":old_floor,"to":_s.floor,"target_id":fixture.destination_id})
+			if Adventure.active(self) and fixture.get("final",false):
+				_s.status="won"
+			else:
+				var old_floor: int=_s.floor
+				_s.floor=fixture.destination_floor; _s.pos=fixture.destination.duplicate(); _s.facing=0
+				_event("lift_ride","transition",{"from":old_floor,"to":_s.floor,"target_id":fixture.destination_id})
 		"ring":
 			var listeners: Array=ring_targets(id)
-			if _s.rules_version not in ["m3.3","m4.1"]: _s.rules_version="m3.2"; _s.content_version="m3.2"
+			if _s.rules_version not in ["m3.3","m4.1","m5.1"]: _s.rules_version="m3.2"; _s.content_version="m3.2"
 			_floor().bell_rung=true
 			for listener in listeners:
 				var husk:=_actor(listener)
@@ -541,10 +553,16 @@ func apply(action: Dictionary) -> Dictionary:
 			_event("floor_changed","transition",{"from":old_floor,"to":_s.floor})
 			if kind=="squeeze": _event("landing_skirted","transition",{"target_id":fixture.id})
 		"leave": _s.status="won"
+	if Adventure.active(self):
+		if kind=="pickup" and _s.items[id].kind=="seal" and _s.floor==3:
+			Adventure.enter_deep(self,true); transition=true
+		_s.act="abbey" if _s.floor<=3 else ("winding" if _s.floor==_s.floor_count else "deep")
 	_mechanisms()
 	if consumed and not transition and _s.status=="playing":
 		_enemies(old_states,kind=="guard")
 		_mechanisms()
+	if Adventure.active(self) and _s.hp==0:
+		Adventure.wake(self); _mechanisms()
 	Cap.glow_reveals(self)
 	_visit()
 	if _s.status!="playing": _event("run_ended","transition",{"status":_s.status})
@@ -554,7 +572,7 @@ func view_snapshot() -> Dictionary:
 	var f:=floor_data()
 	f.merge({"pos":_s.pos.duplicate(),"facing":_s.facing,"floor":_s.floor,"seed":_s.seed,
 		"hp":_s.hp,"max_hp":_s.max_hp,"status":_s.status,"objects":[],
-		"seal_site":f.landing.duplicate() if _s.floor==_s.floor_count else [],"seal_glow":has_seal()})
+		"seal_site":f.landing.duplicate() if _s.floor==(3 if Adventure.active(self) else _s.floor_count) else [],"seal_glow":has_seal()})
 	for id in _s.items:
 		var item: Dictionary=_s.items[id]
 		if item.location=="floor" and item.floor==_s.floor and not item.get("hidden",false):

@@ -120,10 +120,10 @@ static func _clear_spawn_cells(run: Dictionary) -> void:
 		for item in run.items.values():
 			if item.location!="floor" or item.floor!=index+1 or item.kind=="seal" or not reserved.has(item.pos): continue
 			var best: Array=[]; var distance:=10000
-			for y in range(1,16):
-				for x in range(1,16):
+			for y in range(1,f.height-1):
+				for x in range(1,f.width-1):
 					var p: Array=[x,y]
-					if f.tiles[y*17+x]!=0 or reserved.has(p): continue
+					if f.tiles[y*f.width+x]!=0 or reserved.has(p): continue
 					var d: int=absi(x-item.pos[0])+absi(y-item.pos[1])
 					if d<distance: best=p; distance=d
 			assert(not best.is_empty(),"Every module reserves an empty loot cell")

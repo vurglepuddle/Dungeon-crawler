@@ -1,0 +1,8 @@
+wait 4
+tapnamed continue
+waitidle
+call assert act deep
+call assert hp 5
+call assert hash 02cd0cbbd0a7aad919652aeed545211cc68c5fb0d01bf83ef912f8fcfefa8057
+shot 15_deep_continue
+close

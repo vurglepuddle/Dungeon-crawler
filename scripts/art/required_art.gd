@@ -10,6 +10,11 @@ static var _paths: Dictionary={}
 static func add(path: String,family: String) -> void: _paths[path]=family
 static func paths() -> Dictionary:
 	_paths={}
+	var fall_path: String="res://data/presentation/fall.json"
+	if FileAccess.file_exists(fall_path):
+		var fall=JSON.parse_string(FileAccess.get_file_as_string(fall_path))
+		if fall is Dictionary:
+			for path in fall.get("frames",[]): add(path,"fall_frames")
 	add("res://assets/art/finder.png","portrait_preload")
 	for kind in Icons.ICONS: add(Icons.icon_path(kind),"accepted_pack_icon")
 	add("res://assets/art/ui/owner_candle.png","owner_candle")

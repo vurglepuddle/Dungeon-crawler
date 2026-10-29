@@ -1,7 +1,7 @@
 extends RefCounted
 ## Explicit, deterministic capability actions. No view/audio or wall-clock state.
-const ACTIONS=["light","burn","cut","feed","dispel","reveal","toss"]
-static func enabled(sim) -> bool: return sim._s.rules_version in ["m3.3","m4.1"]
+const ACTIONS=["light","burn","cut","feed","dispel","reveal","toss","wake"]
+static func enabled(sim) -> bool: return sim._s.rules_version in ["m3.3","m4.1","m5.1"]
 static func owned(sim,id: String) -> bool:
 	return sim._s.items.has(id) and sim._s.items[id].location in ["pack","equip","belt"]
 static func has(sim,id: String,tag: String) -> bool:
@@ -51,7 +51,8 @@ static func targets(sim,id: String) -> Array:
 	if not enabled(sim) or not owned(sim,id): return result
 	for f in sim.local_fixtures():
 		var verb: String=""
-		if f.type=="brazier" and f.lit and sim._s.items[id].kind=="torch" and not sim._s.items[id].lit: verb="LIGHT"
+		if f.type=="panel" and f.get("passage",false) and not f.open and sim._s.items[id].kind=="seal": verb="WAKE"
+		elif f.type=="brazier" and f.lit and sim._s.items[id].kind=="torch" and not sim._s.items[id].lit: verb="LIGHT"
 		elif f.type=="web" and not f.open and has(sim,id,"FIRE"): verb="BURN"
 		elif f.type in ["cord","panel"] and not f.open and (f.type!="panel" or f.revealed) and has(sim,id,"EDGE"): verb="PRY" if f.type=="panel" else "CUT"
 		elif f.type=="panel" and not f.revealed and has(sim,id,"GLOW"): verb="REVEAL"
@@ -67,6 +68,9 @@ static func targets(sim,id: String) -> Array:
 	return result
 static func validate_action(sim,action: Dictionary) -> String:
 	if not enabled(sim): return "That art is unknown."
+	if action.type=="wake":
+		var f: Dictionary=sim._fixture(action.get("target_id",""))
+		return "" if sim._s.rules_version=="m5.1" and f.get("passage",false) and not f.open and sim.has_seal() and sim._near(f.pos) else "No dawn mark in reach."
 	var id: String=action.get("item_id","")
 	if action.type=="toss":
 		return "No safe toss lane." if toss_preview(sim,id).landing.is_empty() else ""
@@ -78,6 +82,9 @@ static func commit(sim,action: Dictionary,old_states: Dictionary) -> void:
 	var target: String=action.get("target_id","")
 	var f: Dictionary=sim._fixture(target)
 	match action.type:
+		"wake":
+			f.open=true; f.revealed=true; sim._floor().tiles[f.wall[1]*sim._floor().width+f.wall[0]]=0
+			sim._event("dawn_opened","player",{"target_id":f.id})
 		"light":
 			sim._s.items[id].lit=true; sim._event("torch_lit","player",{"item_id":id,"target_id":target})
 		"burn","cut":
@@ -115,7 +122,15 @@ static func commit(sim,action: Dictionary,old_states: Dictionary) -> void:
 					if actor.hp==0: actor.state="dead"; actor.intent={}; sim._event("monster_defeated","player",{"actor_id":actor.id})
 			sim._event("item_tossed","player",{"item_id":id,"cells":lane.cells,"pos":lane.landing})
 static func glow_reveals(sim) -> void:
-	if not enabled(sim) or not sim.has_seal(): return
+	if not enabled(sim): return
+	var modern: bool=sim._s.rules_version=="m5.1"
+	if modern:
+		if sim._s.floor>3: return
+		var light: bool=false
+		for id in sim._s.pack+sim._s.belt+[sim._s.equipment.hand]:
+			if id!="" and has(sim,id,"GLOW"): light=true
+		if not light: return
+	elif not sim.has_seal(): return
 	var d: Array=sim.DIRS[sim._s.facing]
 	for f in sim._floor().fixtures:
 		if f.type!="panel" or f.revealed: continue

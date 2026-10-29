@@ -1,0 +1,215 @@
+# Ordinary real taps; isolated run AND profile paths required.
+wait 4
+call new_adventure BELL42 abbey
+waitidle
+tapnamed pack0
+wait 2
+tapnamed hot_item_f1_stone
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed pack0
+wait 2
+tapnamed card_drop
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed verb1
+waitidle
+tapnamed hot_f1_latch
+waitidle
+tapnamed verb1
+waitidle
+tapnamed verb0
+waitidle
+tapnamed verb0
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_l
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed fwd
+waitidle
+tapnamed pack0
+wait 2
+tapnamed hot_item_f1_key
+wait 3
+tapnamed loot_f1_key
+waitidle
+tapnamed pack0
+wait 2
+tapnamed hot_item_bell_clapper
+waitidle
+tapnamed turn_l
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_l
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed hot_f1_lock
+waitidle
+tapnamed pack0
+wait 2
+tapnamed card_use
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed hot_f1_down
+waitidle
+tapnamed pack1
+wait 2
+tapnamed hot_item_f2_stone
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed pack1
+wait 2
+tapnamed card_drop
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed verb1
+waitidle
+tapnamed hot_f2_latch
+waitidle
+tapnamed verb1
+waitidle
+tapnamed verb0
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed hot_f2_down
+waitidle
+tapnamed pack1
+wait 2
+tapnamed hot_item_f3_stone
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed pack1
+wait 2
+tapnamed card_drop
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed verb1
+waitidle
+tapnamed hot_f3_latch
+waitidle
+tapnamed verb1
+waitidle
+tapnamed verb0
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_l
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed verb1
+waitidle
+tapnamed pack1
+wait 2
+tapnamed hot_item_f3_key
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed turn_r
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+tapnamed turn_l
+waitidle
+tapnamed fwd
+waitidle
+tapnamed hot_f3_lock
+waitidle
+tapnamed verb0
+waitidle
+tapnamed fwd
+waitidle
+tapnamed fwd
+waitidle
+shot 01_abbey_seal
+tapnamed hot_item_f3_seal
+wait 12
+shot 02_the_fall
+waitidle
+shot 03_waking_card
+call assert profile_fallen true
+tapnamed wake_close
+waitidle
+call assert act deep
+call assert hash 62ccbd6538c7a0a9a8fb1aaf44e1f97ef860e19a19c1021fe3b6e6e902ca5887
+call assert hp 5
+close

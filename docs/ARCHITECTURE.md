@@ -215,3 +215,37 @@ Capability inference remains a pure query: selected tool, then held tool,
 then pocket LIGHT. UI filters unrevealed scar discovery and gives a free
 puzzled message instead. PRY labels the existing panel cut action; no action,
 save profile, generator or simulation RNG change is needed.
+
+## M5a scaffold
+
+`sim/adventure.gd` is the m5-only generation/transition seam. It calls the
+unchanged Abbey generation with count three, appends `gen/the_deep.gd`
+blocks and Winding, and owns Fall/scatter and death/wake mutations. It performs
+no I/O, waits or presentation randomness. DungeonSim's existing actions still
+commit everything; old constructors/profiles do not enter this seam.
+
+The Deep generator joins rectangular blocks through paired ports and then
+places the dependency cuts: dawn wall, weight store, keys, torch store, fire
+joins and final web. Optional corded pockets hold the extra creatures. All
+tool IDs are local to their floor. `gen/deep_witness.gd` reuses ordinary
+navigation/combat actions and demonstrates each chain from empty hands and a
+Seal; it neither reads a generated route nor requires scattered possessions.
+
+StateCodec branches on profile/schema, retaining the legacy bounds while
+validating variable Deep dimensions and m5 metadata. SaveStore's transactional
+envelope is unchanged. `persistence/profile_store.gd` separately stages the
+small tutorial-unlock file. Main handles an isolated profile override, writes
+the unlock after the atomic Fall, and persists a pending waking card in UI data.
+
+Main's shake/fade/card coroutine is cancellable by its existing transition
+token. It cannot advance the sim. The optional fall TextureRect sits within
+the registered picture, with paths from data/presentation/fall.json. All new
+depths explicitly use the Lower Watch branch in ArtFamily.for_floor; changing
+that branch later selects f4 without touching the sim.
+
+Survey keeps a separate dimension table derived from the saved floors; its
+legacy bitstrings/hashes are unchanged. MapView owns a local drag offset and
+clips a Finder-centred, eight-pixel map on large floors. DungeonView and shared
+room helpers address tiles by floor width; the accepted lever scaling/hinges
+and bare lever walls are unchanged. New dawn wall opening invalidates the
+surface cache, and final lift binding faces the Winding's north wall.
