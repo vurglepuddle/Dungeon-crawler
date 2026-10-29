@@ -232,3 +232,49 @@ see is a bug.
 After about twelve hours, the session closed with every worker handed in,
 everything pushed, the M4c build on the phone, and the owner's verdict:
 "THANK YOU SO MUCH, this is SOOOOO gooood".
+
+## 29 October 2026, afternoon and evening: the tutorial becomes a prologue
+
+After a night's sleep and several more runs, the owner had a breakthrough:
+the three floors weren't the game, they were "the perfect tutorial". Taking
+the Dawn Seal should make the floor crumble ("mwahaha"), dropping the Finder
+into a much older, larger dungeon with nothing but the Seal. The way out is
+down, to a lift at the very bottom, and from there to the dawn ending that
+already existed. Claude wrote the idea up as `docs/proposals/THE_DEEP.md`,
+and the owner answered its questions in a few lines each:
+- a confusing chain of needs matters more than sheer size;
+- "Daggerfall dungeons as the size for now? AVERAGE";
+- wake at 5 of 6 health;
+- "Permadeath sucks!";
+- magic "later!! 10000%".
+
+The Codex usage promotion had just ended, so only two workers ran: A on code
+and B on art, while C and D rested. A built the scaffold in one turn (M5a),
+and a second turn worked through the owner's playtest notes (M5b):
+- the Fall and the skippable tutorial;
+- a 33x33 Deep of four blocks, built backwards from its stairs;
+- death that wakes you at the floor's start;
+- iron, bronze and gold keys;
+- a map that charts what you see;
+- the Seal's light.
+
+B painted the Deep's cold slate, the crumble frames and three metals of key
+and lock.
+
+The owner painted more than ever:
+- new side-lever frames;
+- proper grips for the stone and torches, which had been held "between
+  your pointer and middle finger";
+- a first pass on every button icon, on a sheet Claude cut up for them;
+- crumble frames redrawn to "feel more 3d".
+
+They played a full run, Abbey to dawn, in 578 turns: "long enough, but not
+exhausting". Then they steered the details from the phone, ending with a
+pixel mockup of how the Seal's light should fall off. Claude rebuilt the
+light that way: gentle bands, each dithering only into the next darker one.
+
+One lesson worth keeping: never screenshot the owner's phone without
+asking. They chat with clients on it.
+
+The day closed with everything pushed, M5b on the phone, and the owner
+"very satisfied", off to think about the game and paint.

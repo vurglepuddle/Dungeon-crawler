@@ -2,7 +2,7 @@
 
 Where the project stands, who is doing what, and how we work. Claude keeps this
 current so that any session (or a reader catching up) can pick up the thread.
-Last updated 29 October 2026, evening (M5a and M5b on the phone). The "Where
+Last updated 29 October 2026, end of the evening session (M5b and the new light on the phone). The "Where
 we are" section below is from the 4 a.m. handoff; the queue is current.
 
 ## Where we are
@@ -78,17 +78,18 @@ tell the owner right away.
 
 | Worker | Owns | Last delivered |
 | --- | --- | --- |
-| **A**: game code | `scripts/` (except dev, fx, audio/music), `scenes/`, `data/` (except music/text), tests except `tests/qa/`, DESIGN/CONTRACT/ARCHITECTURE, `M*_RESULTS.md` | M4c (`docs/M4C_RESULTS.md`) |
-| **B**: creatures, fixtures, music | `art_src/{anim,fx,creatures,fixtures,hands,items,music}`, matching `assets/art/` folders, `data/music/`, `scripts/audio/music.gd`, `docs/ART.md`, `docs/MUSIC.md` | Painted fixtures v2, floor-three music, r10 pack icons (the club alternate `icon_club_16_alt.png` is unused) |
+| **A**: game code | `scripts/` (except dev, fx, audio/music), `scenes/`, `data/` (except music/text), tests except `tests/qa/`, DESIGN/CONTRACT/ARCHITECTURE, `M*_RESULTS.md` | M5b (`docs/M5B_RESULTS.md`), after M5a |
+| **B**: creatures, fixtures, music | `art_src/{anim,fx,creatures,fixtures,hands,items,music}`, matching `assets/art/` folders, `data/music/`, `scripts/audio/music.gd`, `docs/ART.md`, `docs/MUSIC.md` | r11 (the f4 Deep family, crumble frames), r12 (iron/bronze/gold keys and lock plates, halved in r12b). For this stretch B also covered environment art, while C rested |
 | **C**: environment, screens, UI art, manual | `art_src/{env,icons,screens,portrait,props,ui_offer}`, matching `assets/art/` folders, `scripts/fx/`, `data/text/`, `docs/MANUAL.md`, `POLISH.md`, `ENV_ART.md` | The Lower Watch family, the manual for M4a, the owner's candle as its own sprite |
 | **D**: QA | `tests/qa/`, `docs/QA_REPORT.md`, `docs/ART_AUDIT.md` | Deep-profile sweep, 18 runner phases. Worked in a clean worktree (`<scratchpad>/qa`) so A's edits couldn't disturb it |
 | **Claude** | `project.godot`, `export_presets.cfg`, `assets/icon/`, `scripts/dev/` (autopilot, pointer), `docs/BRIEF.md`, `COLLAB_LOG.md`, this file, Git, builds, phone | Orchestrating |
 
-**Tell A at the start of its next turn:** Claude edited A's files after M4c:
-- `scripts/ui/chrome.gd` and `main.gd`: `Chrome.surface()` always crops the
-  sources' 4-px bevel. Buttons and the bronze frame (`Chrome.style`) keep
-  their chrome.
-- `scripts/view/held_item.gd`: the hand timings above.
+**Tell A at the start of its next turn:** Claude edited A's files after M5b.
+See "Claude, late evening" in the queue below: the Seal's light in
+`dungeon_view.gd`, the held-up mark glow, the room-filling map
+(`dungeon_view.gd` `room_cells`, `map_view.gd`, `main.gd` `_capture_survey`),
+the Fall's held Seal and hidden verbs (`main.gd` `_wake_transition`), and
+`test_m5b.gd`'s light check.
 
 The owner also paints. Their **vine overlay** is wired
 (`assets/art/ui/owner_vines.png`, working template
@@ -165,12 +166,25 @@ fixes directly.
 - **The owner's verdict on M5a:** a full run in 578 turns, "long enough, but
   not exhausting"; "I like how sprawling and confusing it is".
 
+- **Claude, late evening, from the owner's phone notes** (`112d1d4`,
+  `1cde2bc`; tell A, all in A's files):
+  - **The Seal's light** follows the owner's mockup (gentle levels, each
+    8x8-Bayer-dithered only into the next darker one, no overexposure), with
+    numbers in `data/presentation/seal_light.json`;
+  - **held up**, the Seal shows and pulses any mark it faces;
+  - **the map** draws seen floor solid, not dashed, and standing in a room
+    maps all of it (`dungeon_view.gd`, `room_cells`).
+  - The owner: "I think it looks great ... excellent work, I'm very
+    satisfied."
+
 **Next:**
 
-1. **The owner's phone verdict on M5b** (`build/Undercroft-M5b.apk`).
-   - Watch the map reveal in dark rooms. It still follows the light, so pitch
-     black rooms map only what the pool shows.
-   - Watch the key flow.
+1. **The owner is thinking about the game and painting.** Start the next
+   session from their words.
+   - Light tuning (`seal_light.json`): an optional warm-near, cool-far tint,
+     as in the owner's mockup.
+   - The dawn mark art is thin (`panel_sigil_revealed_64.png`); the owner may
+     repaint it.
 2. **Combat revamp:** the owner wants "more depth there and a more
    interesting loop". Write a proposal before the Deep fills with enemies.
 3. **Later Deep vocabulary:**
