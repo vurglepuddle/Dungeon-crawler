@@ -1,0 +1,130 @@
+{
+  "palette": "art_src/spike/palette.gpl",
+  "colours_union": 15,
+  "files": [
+    {
+      "path": "art_src/fx/fall/contact_sheet_4x.png",
+      "size": [
+        1904,
+        800
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        1904,
+        800
+      ],
+      "colours": 14,
+      "sha256": "8abeff5c598e1e47c8982065bf861ca45dca12f72f0c95ec652e270aa8c40441"
+    },
+    {
+      "path": "art_src/fx/fall/contact_sheet_native.png",
+      "size": [
+        476,
+        200
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        476,
+        200
+      ],
+      "colours": 14,
+      "sha256": "b676dd7467adb38f9237c9be5d1c0b64ef7533fb65a6237d6734ea78b48f178c"
+    },
+    {
+      "path": "assets/art/fx/fall_crumble_0.png",
+      "size": [
+        148,
+        150
+      ],
+      "opaque_bounds": [
+        29,
+        96,
+        140,
+        150
+      ],
+      "colours": 3,
+      "sha256": "0040311f9c80c7b247a312f3bf168acfe06d2c098031e8426ddac44aac532032"
+    },
+    {
+      "path": "assets/art/fx/fall_crumble_1.png",
+      "size": [
+        148,
+        150
+      ],
+      "opaque_bounds": [
+        28,
+        96,
+        140,
+        150
+      ],
+      "colours": 13,
+      "sha256": "e403f2fb563ff25e028cc39e5ee84fbb31c1b1d2a1da8e21830783e704ab67e8"
+    },
+    {
+      "path": "assets/art/fx/fall_crumble_2.png",
+      "size": [
+        148,
+        150
+      ],
+      "opaque_bounds": [
+        0,
+        90,
+        148,
+        150
+      ],
+      "colours": 11,
+      "sha256": "b9cdf744dc7ed6a0037184907f44911203aaa1f6109baef4e19d2c4289f2939a"
+    }
+  ],
+  "sources": [
+    {
+      "path": "art_src/fx/fall/sources/lower_watch_corridor.png",
+      "sha256": "1e67b303d6eb282fe29d3c778fd805a738085e921529e2a2c112057284b4811e"
+    },
+    {
+      "path": "art_src/fx/fall/sources/lower_watch_floor.png",
+      "sha256": "87fb32d71c8d0e19aacb56a11c41675640e46a2439cfabef313bbda8335b0fb8"
+    }
+  ],
+  "runtime_count": 3,
+  "canvas": [
+    148,
+    150
+  ],
+  "anchor": [
+    0,
+    0
+  ],
+  "frame_ms": [
+    700,
+    700,
+    700
+  ],
+  "placement": "View-local top-left, exact148x150; clip to view. White unlit modulation. Above scene/held items, below HUD.",
+  "alpha": "Binary; upper90rows always transparent. Opaque blue-black void intentional in frames1/2.",
+  "provenance": "Native cracks, coarse dust and three fragment poses using the accepted painted Lower Watch floor. Offline proxy corridor supplied by deep/build_deep.py.",
+  "preview_files": [
+    {
+      "path": "art_src/fx/fall/mockup_frame_0_native.png",
+      "sha256": "4978b427cac5c510b0fe16f72c90b1902c2fe604dbc9e23120db92674c8114b8"
+    },
+    {
+      "path": "art_src/fx/fall/mockup_frame_1_native.png",
+      "sha256": "cf83de8308f8717b466266e2240ff2d9e230dbd2594111fd5ca4963067cecf2f"
+    },
+    {
+      "path": "art_src/fx/fall/mockup_frame_2_native.png",
+      "sha256": "0c9d01ce4115d4a21a142eec00eb8d517d29097518d3d8c99f3f408aa77902cf"
+    },
+    {
+      "path": "art_src/fx/fall/mockup_strip_4x.png",
+      "sha256": "78ce974a4969db590a3c381dacc1fb111a9c7c7d9128d344725f7661fd545716"
+    },
+    {
+      "path": "art_src/fx/fall/mockup_strip_native.png",
+      "sha256": "94e5dc8b161139ec291f1884c89b145c1d58e76d387e2793f047ca67f7435c91"
+    }
+  ]
+}

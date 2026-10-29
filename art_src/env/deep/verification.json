@@ -1,0 +1,46 @@
+{
+  "result": "passed",
+  "runtime_pngs": 40,
+  "existing_pngs_preserved": 207,
+  "deterministic_pngs_checked": 63,
+  "exact_nearest_4x_pairs": [
+    "art_src/env/deep/contact_sheet_native.png",
+    "art_src/env/deep/mockup_comparison_native.png",
+    "art_src/env/deep/mockup_f3_corridor_native.png",
+    "art_src/env/deep/mockup_f3_near_room_native.png",
+    "art_src/env/deep/mockup_f3_room_native.png",
+    "art_src/env/deep/mockup_f4_corridor_native.png",
+    "art_src/env/deep/mockup_f4_near_room_native.png",
+    "art_src/env/deep/mockup_f4_room_native.png",
+    "art_src/fx/fall/contact_sheet_native.png",
+    "art_src/fx/fall/mockup_strip_native.png"
+  ],
+  "owner_lever_canvases_verified": [
+    "assets/art/fixtures/fixture_v2_lever_left_up_d1.png",
+    "assets/art/fixtures/fixture_v2_lever_left_up_d2.png",
+    "assets/art/fixtures/fixture_v2_lever_left_up_d3.png",
+    "assets/art/fixtures/fixture_v2_lever_left_down_d1.png",
+    "assets/art/fixtures/fixture_v2_lever_left_down_d2.png",
+    "assets/art/fixtures/fixture_v2_lever_left_down_d3.png",
+    "assets/art/fixtures/fixture_v2_lever_right_up_d1.png",
+    "assets/art/fixtures/fixture_v2_lever_right_up_d2.png",
+    "assets/art/fixtures/fixture_v2_lever_right_up_d3.png",
+    "assets/art/fixtures/fixture_v2_lever_right_down_d1.png",
+    "assets/art/fixtures/fixture_v2_lever_right_down_d2.png",
+    "assets/art/fixtures/fixture_v2_lever_right_down_d3.png"
+  ],
+  "checks": [
+    "37 F3/F4 suffix parity",
+    "64px environment and148x150 overlays",
+    "shared indexed palette and binary alpha",
+    "2px wall and floor/ceiling seam contracts",
+    "door/fire change masks and transparent aperture",
+    "11 distinct floor slots",
+    "upper90 overlay rows clear",
+    "source/dependency/runtime/review hashes",
+    "deterministic rebuild of runtime/contact/mockup PNGs"
+  ],
+  "visual_review": "One pass over complete contact, identical-camera f3/f4 corridor/room/near-room comparison and three-frame Fall strip.",
+  "godot_run": false,
+  "device_acceptance": "Not run; offline art review only"
+}

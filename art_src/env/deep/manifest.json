@@ -1,0 +1,801 @@
+{
+  "palette": "art_src/spike/palette.gpl",
+  "colours_union": 25,
+  "files": [
+    {
+      "path": "art_src/env/deep/contact_sheet_4x.png",
+      "size": [
+        3384,
+        3368
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        3384,
+        3368
+      ],
+      "colours": 24,
+      "sha256": "ee093755c3bb7de84befe36cc695c912c0c847a87358c7b15e762261e406a02c"
+    },
+    {
+      "path": "art_src/env/deep/contact_sheet_native.png",
+      "size": [
+        846,
+        842
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        846,
+        842
+      ],
+      "colours": 24,
+      "sha256": "693aa91b5ac27710767de4dc04d9c8218ebf24fbbf7de7a56ae900ce4bb670c9"
+    },
+    {
+      "path": "assets/art/env/calm_v3_f4_ceiling_drip.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 11,
+      "sha256": "47756e1a489da7ff1fb83820682e25bc84648ee225085c062a8b1720ee1cf6ff"
+    },
+    {
+      "path": "assets/art/env/calm_v3_f4_ceiling_plain.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 10,
+      "sha256": "046c9aa665a1b1a737d6c09301e1a7c82d7db2647332665e6f5b527abe043978"
+    },
+    {
+      "path": "assets/art/env/calm_v3_f4_ceiling_root.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 11,
+      "sha256": "7b589266b104c63dbbdf4720b27372f14b4616f2b7ba1eb62c0aca47f1fa2e48"
+    },
+    {
+      "path": "assets/art/env/calm_v3_f4_floor_chip.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 7,
+      "sha256": "0ae2966fba80505569e1b6fc1c6a71189c51d75743ede14878444088c4c385e1"
+    },
+    {
+      "path": "assets/art/env/calm_v3_f4_floor_crack.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 7,
+      "sha256": "fb2120d1ca2b56a2da49b02d1dcce2112d4f25b606d986e3da15da8af3230327"
+    },
+    {
+      "path": "assets/art/env/calm_v3_f4_floor_dry_a.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 7,
+      "sha256": "267fc027a49832fa4eb125595bb0d4a221f828ad38369c1a99a071169fce47d6"
+    },
+    {
+      "path": "assets/art/env/calm_v3_f4_floor_dry_b.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 7,
+      "sha256": "6258b66fe7cb6111ef10aa4e841b9ffc9e45d86a0c48cfcc83da1e05bd5f3772"
+    },
+    {
+      "path": "assets/art/env/calm_v3_f4_floor_dry_c.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 7,
+      "sha256": "f4ae1c1b9f4cf4af5ed05db64bce80c4431438ad7faf5a467a6a7492cea7cd62"
+    },
+    {
+      "path": "assets/art/env/calm_v3_f4_floor_stain.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 7,
+      "sha256": "d05d1477e07dae896aaac96bd158c4e062830b8b94549abc0046a5eec7482255"
+    },
+    {
+      "path": "assets/art/env/calm_v3_f4_floor_wet_corner.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 7,
+      "sha256": "8568826b3d03a2d040585664738bc46c433de96ef8c0c401968ed57710ec397e"
+    },
+    {
+      "path": "assets/art/env/calm_v3_f4_floor_wet_hook.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 7,
+      "sha256": "726d8b193aa43c5baca532fb20ad3bc8a30f498db2fc984955b587de08eb70a7"
+    },
+    {
+      "path": "assets/art/env/calm_v3_f4_floor_wet_small.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 7,
+      "sha256": "47218c24f84b976ca9693699863337a469f2ac1c2cd93923e415e5908396d800"
+    },
+    {
+      "path": "assets/art/env/calm_v3_f4_floor_wet_split.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 7,
+      "sha256": "1951f48046e4847e9d4c08c189d8a1d16c370343636f7f868a243970d673f99b"
+    },
+    {
+      "path": "assets/art/env/calm_v3_f4_floor_wet_wide.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 7,
+      "sha256": "20ada3e395bca0c96d97a923282caa201df28e8af156552699685499065b8451"
+    },
+    {
+      "path": "assets/art/env/calm_v3_f4_room_ceiling_boss.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 11,
+      "sha256": "f08947da8544602567acd79f5c1c0538e5daa5732cca380a4899bc44477e9d27"
+    },
+    {
+      "path": "assets/art/env/calm_v3_f4_room_ceiling_chain.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 11,
+      "sha256": "57e24218c25c80e5c1900c97377fd8ea06a8ca829e181ff2d5546412f70facc0"
+    },
+    {
+      "path": "assets/art/env/calm_v3_f4_room_ceiling_roots.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 11,
+      "sha256": "7b589266b104c63dbbdf4720b27372f14b4616f2b7ba1eb62c0aca47f1fa2e48"
+    },
+    {
+      "path": "assets/art/env/calm_v3_f4_room_floor_compass.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 8,
+      "sha256": "f340b043084087b11520c3bf9567e81d80504369fe4cb5f70dbb1c62b859fc6d"
+    },
+    {
+      "path": "assets/art/env/calm_v3_f4_room_floor_cracked.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 7,
+      "sha256": "fb2120d1ca2b56a2da49b02d1dcce2112d4f25b606d986e3da15da8af3230327"
+    },
+    {
+      "path": "assets/art/env/calm_v3_f4_room_floor_drain.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 8,
+      "sha256": "9fa0d3ce29592b35963bedabfd95a77b0b2710bf481998670d2118abe2ec615f"
+    },
+    {
+      "path": "assets/art/env/painted_f4_arch_blocked.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 9,
+      "sha256": "caa3b0e9f9d1c88db9dff8527c257973c5eda15ceb1f92ce61948e8e13724d43"
+    },
+    {
+      "path": "assets/art/env/painted_f4_ceiling.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 10,
+      "sha256": "046c9aa665a1b1a737d6c09301e1a7c82d7db2647332665e6f5b527abe043978"
+    },
+    {
+      "path": "assets/art/env/painted_f4_chains_v2.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 9,
+      "sha256": "93d9aa7a489a2cf4d7dbfc680523deb63b27c2b50b678b91eadb81166cc05679"
+    },
+    {
+      "path": "assets/art/env/painted_f4_crack_v2.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 9,
+      "sha256": "cf25900359bf06d578b31865a7974412e92076f6f16f89b2f1825f8c65aa3bf0"
+    },
+    {
+      "path": "assets/art/env/painted_f4_damp_v2.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 9,
+      "sha256": "b09f1901d8672b4a79307facf9932159192e07c5d42890a65db819f4b73dee1f"
+    },
+    {
+      "path": "assets/art/env/painted_f4_door_barricaded.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 9,
+      "sha256": "51c03e3089162c3eb7424ed9971043904e48f27a4b4e551ba271f2f175147502"
+    },
+    {
+      "path": "assets/art/env/painted_f4_door_open_overlay_v2.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 10,
+      "sha256": "855f7cb8b94138a897857e1c5b77f4f028cca26f47db30e40f846fb2f30322ce"
+    },
+    {
+      "path": "assets/art/env/painted_f4_door_open_v2.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 9,
+      "sha256": "efbd5913235056e1ed4287097fbaaf49684ee94669dcea82975ff3ee2a064606"
+    },
+    {
+      "path": "assets/art/env/painted_f4_door_v2.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 9,
+      "sha256": "b98a87a2970feeb6016355308d41881728bed94b490a56a9513d8f4e418b267a"
+    },
+    {
+      "path": "assets/art/env/painted_f4_drain_v2.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 9,
+      "sha256": "d21fd2e112a4cecbc515d51f0245e90ab817725cc6cbe48e5b4e81ffd471d7fa"
+    },
+    {
+      "path": "assets/art/env/painted_f4_floor.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 7,
+      "sha256": "267fc027a49832fa4eb125595bb0d4a221f828ad38369c1a99a071169fce47d6"
+    },
+    {
+      "path": "assets/art/env/painted_f4_plain_0.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 8,
+      "sha256": "c7b632be8269f5478e1010deabeb96d4e63cfd009c8f2e626c1bb4674d76b782"
+    },
+    {
+      "path": "assets/art/env/painted_f4_plain_1.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 8,
+      "sha256": "4a9af19e73a0c29b09790fc402e3403213e1e8aafe7da38a0491019a858cb2c0"
+    },
+    {
+      "path": "assets/art/env/painted_f4_plain_2.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 8,
+      "sha256": "01c822433e85eaf6af97594bf260166fb3c6daec209f6d1e1ee7a37275939de2"
+    },
+    {
+      "path": "assets/art/env/painted_f4_sconce_0_v2.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 24,
+      "sha256": "06f03a7f3cafb5e3b784d87758ef34576b86ef1eca216da705a3c21ca2420c9b"
+    },
+    {
+      "path": "assets/art/env/painted_f4_sconce_1_v2.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 24,
+      "sha256": "e50ab99bf33b04935361e8754a98eb34ba3e1a91930253ca64f7e5d06869af8c"
+    },
+    {
+      "path": "assets/art/env/painted_f4_tapestry_v2.png",
+      "size": [
+        64,
+        64
+      ],
+      "opaque_bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "colours": 8,
+      "sha256": "f393c6f0be471c32a07d037e37eae99d93e217437c2dd3143e6ef3ecd8fc8645"
+    }
+  ],
+  "sources": [
+    {
+      "path": "art_src/env/deep/sources/ceiling.png",
+      "sha256": "a0452ac3e0f9764636aae114e4a3467924d0a928014cac52166de37c54d6080e"
+    },
+    {
+      "path": "art_src/env/deep/sources/floor.png",
+      "sha256": "10f23934e53d297b97a3226d5402022739156d3e7064386ee1cd8bf831af3f5a"
+    },
+    {
+      "path": "art_src/env/deep/sources/wall.png",
+      "sha256": "1bf180176e7d07d43dd4d6fadb2caf5f3cf6453613db74b2bba6ff6cc70a9786"
+    }
+  ],
+  "runtime_count": 37,
+  "layout": "layout.json",
+  "provenance": "Three new saved paintings; C Lower Watch saved paintings supply clipped registered dressing details. Native minor carving/root/wear registration; deterministic cold palette reduction.",
+  "dependency_files": [
+    {
+      "path": "art_src/env/deep/build_deep.py",
+      "sha256": "78936e7acc75779433051b50861c9f43352ea880f4b609a50ba6771038b0a0c6"
+    },
+    {
+      "path": "art_src/env/deep/prompts.json",
+      "sha256": "2f039d2b28d5dcb658404fc23cb724886c16f923b9e973b88f0498d504afef5f"
+    },
+    {
+      "path": "art_src/env/lower_watch/build_views.py",
+      "sha256": "d271cd41356ea5124123fd589c28d4b10590ef7f8253bcf535435d2183d62cb4"
+    },
+    {
+      "path": "art_src/env/lower_watch/selection.py",
+      "sha256": "4343624768c9570b989f99020e5d08531ecfc7ed0a39f21004e5c538d5337ecd"
+    },
+    {
+      "path": "art_src/env/lower_watch/sources/ceiling_base.png",
+      "sha256": "53e9b44b4c5a55de0507105efdf53518be72a6bbae901f58718e707ca49e3f34"
+    },
+    {
+      "path": "art_src/env/lower_watch/sources/ceiling_boss.png",
+      "sha256": "4c989b75198429291c58609d0b927fc7925b573a4b3d66d5fce3b721fcfef92b"
+    },
+    {
+      "path": "art_src/env/lower_watch/sources/ceiling_chain.png",
+      "sha256": "fa6a2cb0d9a1c17ea599a8adb0406d34e4cd5c7799e0fcdd38fa3aa9ed509413"
+    },
+    {
+      "path": "art_src/env/lower_watch/sources/ceiling_drip.png",
+      "sha256": "9c8020b50c28023e976031a3d2d48e93398dd2518ecdbd1628523f2bdd7f6734"
+    },
+    {
+      "path": "art_src/env/lower_watch/sources/ceiling_root.png",
+      "sha256": "84df992ffb9c1bada0b341a955057bb0c59f61bf0069882863eedbee896d5a2d"
+    },
+    {
+      "path": "art_src/env/lower_watch/sources/floor_ash.png",
+      "sha256": "b65e726ef9aad5cfa97042b5bedb2651de7af85cbdea0da2d9a4973fb2f5ffb6"
+    },
+    {
+      "path": "art_src/env/lower_watch/sources/floor_base.png",
+      "sha256": "f1352435e09f2f06b7d03d2e25edf808084de6c61c4ec23b6dabf3920c567580"
+    },
+    {
+      "path": "art_src/env/lower_watch/sources/floor_compass.png",
+      "sha256": "8041f60ede27b5b4d461e0a1287b1c31ef972c36706d6240e7149f77bc473caf"
+    },
+    {
+      "path": "art_src/env/lower_watch/sources/floor_drain.png",
+      "sha256": "60bfe9635ce1bd6b0770f1899df963b49b76f8a0f4828820272e14aab6fccbef"
+    },
+    {
+      "path": "art_src/env/lower_watch/sources/floor_wear.png",
+      "sha256": "20054ce52c8dcf122cda01383bee55ae6038cc83a6899ac6d4ce57e0dd0d8924"
+    },
+    {
+      "path": "art_src/env/lower_watch/sources/wall_arch_blocked.png",
+      "sha256": "a7f6329224ec5e16aac8f695103ba80bcf1a3283c5e19e24dcff570c5fc17dd9"
+    },
+    {
+      "path": "art_src/env/lower_watch/sources/wall_chains.png",
+      "sha256": "eb6f6d82470ba61676933154a631b57d3d406b34348141a3b8427a4db8cad70e"
+    },
+    {
+      "path": "art_src/env/lower_watch/sources/wall_crack.png",
+      "sha256": "e1ed6421dc79f26bb6c20670ab958ccadcca05644a500f4a30e1fdbd77f6bcfd"
+    },
+    {
+      "path": "art_src/env/lower_watch/sources/wall_damp.png",
+      "sha256": "ba385a943cae2193d4428405071e9ac6e07d3c9b676c024e9941bbd3422d8e80"
+    },
+    {
+      "path": "art_src/env/lower_watch/sources/wall_door.png",
+      "sha256": "d1e2c7cd0c0b65bc55e5ba0182901f92774e2a2fe769f5cff9318a3730a6eb75"
+    },
+    {
+      "path": "art_src/env/lower_watch/sources/wall_door_barricaded.png",
+      "sha256": "909df1b503cc473a3c605c2ff7eddb39dea4a428b6882ef18d5b7b3f434f0de2"
+    },
+    {
+      "path": "art_src/env/lower_watch/sources/wall_door_open.png",
+      "sha256": "b11c916b4da7bb671e8a2b0f4331c6a8110a402d5720333746640bf19ed00f4a"
+    },
+    {
+      "path": "art_src/env/lower_watch/sources/wall_drain.png",
+      "sha256": "445df8ad9a040e8d685a83bee31b18ded01320c7b5c576a598abdf5ded5df3a4"
+    },
+    {
+      "path": "art_src/env/lower_watch/sources/wall_plain_0.png",
+      "sha256": "c81ab28fa3d7d1c682e76cb5df9b079b5ed4750eeb484e094f71517acd6a2574"
+    },
+    {
+      "path": "art_src/env/lower_watch/sources/wall_plain_1.png",
+      "sha256": "d495dd3a17fa3b0a9abaea529fbd1ef725b4bda58eb7403591c6a43908c94672"
+    },
+    {
+      "path": "art_src/env/lower_watch/sources/wall_plain_2.png",
+      "sha256": "6613d5adc01347fc6522157cdd7e566844b063913c22fd48f6e9bdbfa9ab2652"
+    },
+    {
+      "path": "art_src/env/lower_watch/sources/wall_sconce_0.png",
+      "sha256": "06cef5cfdad0957eac7a225d2f5a82c6c1232d9e7160a0eb4a7b1b22331e884c"
+    },
+    {
+      "path": "art_src/env/lower_watch/sources/wall_sconce_1.png",
+      "sha256": "d1f5234ec398893eba219df678d398e7505f4e9c4056e08aaaef522b385c6cb7"
+    },
+    {
+      "path": "art_src/env/lower_watch/sources/wall_tapestry.png",
+      "sha256": "f65f27c7608aad471f7ba9970fe6fa9ef45a3a01da358d739e67243c5b0e200f"
+    },
+    {
+      "path": "art_src/env/pipeline.py",
+      "sha256": "1599ce9116df2907e930df2f29687fd3b5a7feeb3215a771f5d1b4f29c53293b"
+    },
+    {
+      "path": "art_src/spike/palette.gpl",
+      "sha256": "79df62d1ea0a775dae73249a1bdd37e4d3bc50fc16a831f29b2660a5a8397275"
+    },
+    {
+      "path": "assets/art/env/calm_v3_ceiling_plain.png",
+      "sha256": "720981aa54514888300a1dadd5c48373908afdb9d8ae65cd347e80e14e71855d"
+    },
+    {
+      "path": "assets/art/env/calm_v3_floor_dry_a.png",
+      "sha256": "1fdafa055f7a6feefa3c55676533f6222b5cb8f950af35673b78c927eb1ef696"
+    },
+    {
+      "path": "assets/font/vetka.ttf",
+      "sha256": "c4a2d8dadb7140755327e37d288ed7b790854018d364efabfa69d54b2a14e306"
+    }
+  ],
+  "preview_files": [
+    {
+      "path": "art_src/env/deep/mockup_f3_corridor_native.png",
+      "sha256": "59dcd977c2807f8d12aedf853fd4a48e34ee4a9f55da357e5c22c0bf347c26be"
+    },
+    {
+      "path": "art_src/env/deep/mockup_f3_corridor_4x.png",
+      "sha256": "72f8f8f7aea2f20823777fffda5b3786ecb1d7518a7eaa990d154fc21689c4a6"
+    },
+    {
+      "path": "art_src/env/deep/mockup_f4_corridor_native.png",
+      "sha256": "cb5dd5b3f9fea855ff2a90d5d9fdea5094ab203c72514a745392a7991ee06e53"
+    },
+    {
+      "path": "art_src/env/deep/mockup_f4_corridor_4x.png",
+      "sha256": "b2f5240bc1ca7c3bd76f94d618feee4443504ab63b76132dc4dc748960f399db"
+    },
+    {
+      "path": "art_src/env/deep/mockup_f3_room_native.png",
+      "sha256": "c02cd55306b78735eb8c6d1971e2ad7e334dbd68fa54d1078d389d1c9db02618"
+    },
+    {
+      "path": "art_src/env/deep/mockup_f3_room_4x.png",
+      "sha256": "1a1075108adf7a83275faa4a896b711c68c3d50ae6a17f6a648bc2c943dcf23c"
+    },
+    {
+      "path": "art_src/env/deep/mockup_f4_room_native.png",
+      "sha256": "975883c03cc2000a76ee11a6c7697fdcffd333594bc404768f8312be616a7470"
+    },
+    {
+      "path": "art_src/env/deep/mockup_f4_room_4x.png",
+      "sha256": "73273f130e031b1f11fd7a6b78fa351882392e5ba4d497585d04363308cf8a82"
+    },
+    {
+      "path": "art_src/env/deep/mockup_f3_near_room_native.png",
+      "sha256": "1e00eae96857dd1b68d1ed96738d01261cca555aa6194d24288c5036fbb622a2"
+    },
+    {
+      "path": "art_src/env/deep/mockup_f3_near_room_4x.png",
+      "sha256": "25fe80c178d76360ae8c8f8681fc32e38a2320e9c7c55c4200b75638e6c3c37c"
+    },
+    {
+      "path": "art_src/env/deep/mockup_f4_near_room_native.png",
+      "sha256": "472891c390a94a2b9ce188ff5fea3104f496d69f6fbc43ecb5d3d0cbc2c522c3"
+    },
+    {
+      "path": "art_src/env/deep/mockup_f4_near_room_4x.png",
+      "sha256": "9d359714ba54fe0a67880d7bfc753674ef1fd04905e6704cc6c83cf5997b9364"
+    },
+    {
+      "path": "art_src/env/deep/mockup_comparison_native.png",
+      "sha256": "2780fbd6d18935d983f7b21bfac0aef23bf56ed706624bffbb9e4ae09ca5d302"
+    },
+    {
+      "path": "art_src/env/deep/mockup_comparison_4x.png",
+      "sha256": "eb4b21fbb257d65152bc91ca2aafad340b6edd522ee25c50188effee301b69f3"
+    }
+  ],
+  "preserved_existing_pngs": 207
+}

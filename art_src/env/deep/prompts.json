@@ -1,0 +1,26 @@
+{
+  "method": "Three new base paintings; existing painted dressing details reused offline.",
+  "entries": {
+    "wall": {
+      "prompt": "Original UNDERCROFT game texture: THE DEEP, a pre-Abbey undercroft thousands of years older than the reference. Reference only the tactile dirty painted retro stone style; completely CHANGE the wall construction and colour. Full-bleed square orthographic wall face, seamless repeatable texture. HUGE rough-hewn megalithic BASALT slabs, only TWO heavy irregular courses and at most THREE blocks per course, massive uneven joints. Not neat small bricks. Blue-black slate and cold ash-grey highlights, almost no warm ochre/rust and absolutely no teal or green. Old abstract shallow geometric carving worn almost smooth across ONE large block; black roots force apart two joints and a few bleached tiny bone fragments are embedded in the mortar. Busy battered chipped painted stone faces, old dirty dungeon, handmade chunky gouache brush texture, irregular erosion. Broad readable forms after reduction to64x64 pixels. Cold darkness with modest lamp-lit top ridges; stone surface still legible, not uniformly black. NO doors, no windows, no room view, no floor, no furniture, no lettering, no skull emblem or repeated motif. Square texture fills image to every edge. Moody blue-charcoal masses and pale salt/bone flecks distinguish this from the brown reference.",
+      "referenced_image_paths": [
+        "E:/SD/GODOT/Dungeon-crawler/art_src/env/lower_watch/sources/wall_plain_0.png"
+      ],
+      "transparent_background": false
+    },
+    "floor": {
+      "prompt": "Original UNDERCROFT THE DEEP dungeon FLOOR texture. Use reference only for painterly pixel-reduction material, but make a visibly older blue-black BASALT crypt. Full-bleed square strictly orthographic BIRD'S-EYE floor tile; no perspective, horizon, room walls, UI or text. Three or four HUGE irregular flagstones, much more massive than Abbey paving, rough eroded/chipped dark slate faces. Deep cold blue-charcoal crevices, ash-grey stone lips. A thick dead black root cracks one joint; two or three old pale bone splinters partly embedded in it, not a big skeleton or skull. One almost-erased arc of ancient carving, shallow and unobtrusive. Cold slate grey and navy-black, no teal/green, no orange/rust, no golden light, no shiny wet blue water. Plenty of aged painted grime and pitting, but large calm stone masses dominate so the floor reads when reduced to64x64. No black pit/hazard, raised objects or standing props. The outside texture edges should tile. Painted dirty retro1993 dungeon, coarse tactile brush clusters, not vector outlines or clean geometric boxes.",
+      "referenced_image_paths": [
+        "E:/SD/GODOT/Dungeon-crawler/art_src/env/lower_watch/sources/floor_base.png"
+      ],
+      "transparent_background": false
+    },
+    "ceiling": {
+      "prompt": "Original UNDERCROFT THE DEEP dungeon CEILING texture. Reference supplies painted grungy material only. Build a MUCH OLDER roof: HUGE rough corbelled basalt slabs meeting at a low heavy vault, a few irregular structural joints, raw chisel scars, one worn old carved groove, dark roots breaking through a couple of crevices. Absolutely NO fine Gothic X ribs, neat brick grid or decorative Abbey tracery. Strict orthographic upward-looking square horizontal ceiling plane, full bleed, tileable outside edges, not a corridor or room perspective. Blue-black slate and cold charcoal stone, ash-grey grazing edges, darkest recesses, no teal moss, no rusty/ochre wash, no lamp or glowing object. Surface legible but darker/quieter than the wall. Dirty ancient hand-painted fantasy-dungeon texture with coarse brush clusters, enough broad stone shape to survive64x64 reduction; irregular busy pitting in small areas, not random checkerboard noise. No writing, UI, characters, skull emblem, hanging props or standing objects.",
+      "referenced_image_paths": [
+        "E:/SD/GODOT/Dungeon-crawler/art_src/env/lower_watch/sources/ceiling_base.png"
+      ],
+      "transparent_background": false
+    }
+  }
+}

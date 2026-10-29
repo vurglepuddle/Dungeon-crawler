@@ -1,0 +1,197 @@
+{
+  "schema_version": 1,
+  "floor_family": 4,
+  "canvas": [
+    64,
+    64
+  ],
+  "anchor": [
+    0,
+    0
+  ],
+  "files": [
+    "painted_f4_plain_0",
+    "painted_f4_plain_1",
+    "painted_f4_plain_2",
+    "painted_f4_door_v2",
+    "painted_f4_door_open_v2",
+    "painted_f4_drain_v2",
+    "painted_f4_sconce_0_v2",
+    "painted_f4_sconce_1_v2",
+    "painted_f4_chains_v2",
+    "painted_f4_tapestry_v2",
+    "painted_f4_crack_v2",
+    "painted_f4_damp_v2",
+    "painted_f4_door_open_overlay_v2",
+    "painted_f4_arch_blocked",
+    "painted_f4_door_barricaded",
+    "calm_v3_f4_floor_dry_a",
+    "calm_v3_f4_floor_dry_b",
+    "calm_v3_f4_floor_dry_c",
+    "calm_v3_f4_floor_stain",
+    "calm_v3_f4_floor_chip",
+    "calm_v3_f4_floor_crack",
+    "calm_v3_f4_floor_wet_small",
+    "calm_v3_f4_floor_wet_hook",
+    "calm_v3_f4_floor_wet_corner",
+    "calm_v3_f4_floor_wet_split",
+    "calm_v3_f4_floor_wet_wide",
+    "calm_v3_f4_ceiling_plain",
+    "calm_v3_f4_ceiling_root",
+    "calm_v3_f4_ceiling_drip",
+    "calm_v3_f4_room_floor_compass",
+    "calm_v3_f4_room_floor_cracked",
+    "calm_v3_f4_room_floor_drain",
+    "calm_v3_f4_room_ceiling_boss",
+    "calm_v3_f4_room_ceiling_chain",
+    "calm_v3_f4_room_ceiling_roots",
+    "painted_f4_floor",
+    "painted_f4_ceiling"
+  ],
+  "art_family_mapping": {
+    "walls": 4,
+    "fixtures": 2,
+    "props": 3,
+    "planes": "calm_v3_f4",
+    "weights": 2
+  },
+  "family_rule": "Use F4 material family for Deep floor numbers >=4; retain actual floor number in world-cell hash. F1-F3 unchanged.",
+  "wall_path": "res://assets/art/env/painted_f4_{existing_suffix}.png",
+  "plane_path": "res://assets/art/env/calm_v3_f4_{plane}_{existing_kind}.png",
+  "room_path": "res://assets/art/env/calm_v3_f4_room_{existing_kind}.png",
+  "uv": "One 64px tile per world cell; U east, V south; no view-relative rotation. Restore seam ring after quarter-turns.",
+  "floor_slots": [
+    "dry_a",
+    "dry_b",
+    "dry_c",
+    "stain",
+    "chip",
+    "crack",
+    "wet_small",
+    "wet_hook",
+    "wet_corner",
+    "wet_split",
+    "wet_wide"
+  ],
+  "wet_slots": "Cold mineral wear/root grime; no water or new gameplay.",
+  "wall_ring": "Own plain_0 exact2px; opposite outer edges match.",
+  "plane_ring": "Exact existing calm_v3 floor_dry_a / ceiling_plain 2px, including room landmarks and aliases.",
+  "door_interior": [
+    [
+      14,
+      57
+    ],
+    [
+      14,
+      21
+    ],
+    [
+      16,
+      16
+    ],
+    [
+      20,
+      12
+    ],
+    [
+      25,
+      10
+    ],
+    [
+      31,
+      9
+    ],
+    [
+      37,
+      10
+    ],
+    [
+      43,
+      13
+    ],
+    [
+      47,
+      18
+    ],
+    [
+      49,
+      24
+    ],
+    [
+      49,
+      57
+    ]
+  ],
+  "door_aperture": [
+    [
+      27,
+      56
+    ],
+    [
+      27,
+      15
+    ],
+    [
+      31,
+      11
+    ],
+    [
+      36,
+      12
+    ],
+    [
+      42,
+      15
+    ],
+    [
+      46,
+      20
+    ],
+    [
+      47,
+      25
+    ],
+    [
+      47,
+      56
+    ]
+  ],
+  "fire_mask": [
+    [
+      22,
+      5
+    ],
+    [
+      40,
+      5
+    ],
+    [
+      40,
+      19
+    ],
+    [
+      37,
+      20
+    ],
+    [
+      28,
+      20
+    ],
+    [
+      28,
+      24
+    ],
+    [
+      22,
+      24
+    ]
+  ],
+  "sconce_ms": [
+    250,
+    250
+  ],
+  "portal": "Use transparent door_open_overlay_v2 for actual open portal; opaque door_open_v2 reference only.",
+  "prop_family": 3,
+  "fixture_family": 2,
+  "filter": "nearest"
+}

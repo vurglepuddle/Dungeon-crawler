@@ -98,16 +98,19 @@ as examples; the production burst has no baked-in text.
 
 ## Wall lever and floor plate
 
-Lever files: `assets/art/fx/lever_{left|right}_{up|down}_d{1|2|3}.png`.
+Current side-lever files:
+`assets/art/fixtures/fixture_v2_lever_{left|right}_{up|down}_d{1|2|3}.png`.
+The owner painted the replacement d1 frames; d2/d3 are nearest reductions.
+The old `assets/art/fx/lever_*` files are archived alternatives.
 The perspective is already skewed for a side wall. Use left files on the
 viewer's left wall, mirrored right files on the right. These use a **wall
 hinge anchor**, the intentional exception to the floor/feet convention:
 
 | Depth | Canvas | Left hinge anchor | Right hinge anchor |
 | --- | --- | --- | --- |
-| 1 | 32x40 | (16,22) | (15,22) |
-| 2 | 20x26 | (10,14) | (9,14) |
-| 3 | 12x16 | (6,8) | (5,8) |
+| 1 | 26x36 | (10,19) | (15,19) |
+| 2 | 13x18 | (5,9) | (7,9) |
+| 3 | 9x12 | (3,6) | (5,6) |
 
 Place the hinge on the wall face about hand height, using wall projection and
 occlusion. Do not draw it at the ordinary floor-object ground coordinate.
@@ -686,11 +689,14 @@ accepted floor-one or darker wet floor-two painted masonry.
 For a wall-material implementation, map the canonical 64x64 wall face onto the
 latch's fixed physical wall and let the renderer project it at any angle. The
 hinge UV gives almost exactly the current `HORIZON - 6/depth` hand height.
-For the existing sprite implementation, the optional transparent front files
-have the **same canvas sizes and hinge anchors as the old side sprites**. Select
-front versus side from the fixed wall normal relative to camera facing; continue
-using the existing `assets/art/fx/lever_<left|right>_<up|down>_d<1|2|3>.png` for
-side-on views. Draw one representation per latch. Keep used/down levers visible
+For the sprite implementation, the optional transparent front files retain
+the **legacy** 32x40 / 20x26 / 12x16 canvases and their anchors above. Current
+owner-painted side views use a separate contract: `assets/art/fixtures/`
+`fixture_v2_lever_<left|right>_<up|down>_d<1|2|3>.png`, 26x36 / 13x18 / 9x12,
+with left hinges `(10,19)/(5,9)/(3,6)` and right hinges
+`(15,19)/(7,9)/(5,6)`. Select front versus side from the fixed wall normal
+relative to camera facing; size side views with their wall (`4ecc650`).
+Draw one representation per latch. Keep used/down levers visible
 after their active interaction target is removed. No renderer code is changed
 in this art batch.
 
@@ -860,7 +866,7 @@ In this table, `F` is floor 1 or 2, `D` is depth 1/2/3, `S` is `up|down`,
 | Current path / drawing | New filename | Canvas at D1 / D2 / D3 |
 | --- | --- | --- |
 | `assets/art/fx/plate_S_dD.png` | `fixture_v2_fF_plate_S_dD.png` | 64x20 / 40x12 / 24x8 |
-| `assets/art/fx/lever_LR_S_dD.png` | `fixture_v2_lever_LR_S_dD.png` | 32x40 / 20x26 / 12x16 |
+| `assets/art/fx/lever_LR_S_dD.png` | `fixture_v2_lever_LR_S_dD.png` (owner replacement) | 26x36 / 13x18 / 9x12 |
 | `assets/art/fixtures/web_W_dD.png` | `fixture_v2_web_W_dD.png` | 64x64 / 40x40 / 24x24 |
 | `assets/art/fixtures/cord_grate_C_dD.png` | `fixture_v2_cord_grate_C_dD.png` | 64x64 / 40x40 / 24x24 |
 | `assets/art/fixtures/cord_grate_LR_C_dD.png` | `fixture_v2_cord_grate_LR_C_dD.png` | 32x48 / 20x30 / 12x18 |
@@ -871,8 +877,12 @@ In this table, `F` is floor 1 or 2, `D` is depth 1/2/3, `S` is `up|down`,
 
 Plate, web and **front** cord sprite anchors remain exclusive bottom-centre:
 plate `(32,20)/(20,12)/(12,8)`; web/cord `(32,64)/(20,40)/(12,24)`.
-Side lever hinge anchors are left `(16,22)/(10,14)/(6,8)`, right
-`(15,22)/(9,14)/(5,8)`. Side cord anchors are wall centres: left
+Current owner-painted side lever hinge anchors are left `(10,19)/(5,9)/(3,6)`,
+right `(15,19)/(7,9)/(5,6)`, mirrored with `x_right = width-1-x_left`.
+Size the lever with its physical wall, as in renderer revision `4ecc650`.
+The older B side-lever dimensions/manifest/build entries are historical:
+do not regenerate the owner's replacements with `painted_v2/build.py`.
+Side cord anchors are wall centres: left
 `(16,24)/(10,15)/(6,9)`, right `(15,24)/(9,15)/(5,9)`.
 Floor and cache textures have top-left UV origin `(0,0)`; the icon is centred
 at `(8,8)`. `manifest.json` enumerates every literal old/new path, exact size,
@@ -886,8 +896,10 @@ means **pressed**, as in the old files; change state immediately, with no
 additional animation. The seam supplies its contact darkness: do not add a
 floating object shadow ellipse beneath the whole plate. F2 is cooler/darker.
 
-Side lever art derives from the accepted **painted front hardware source**,
-projected onto the old side canvases. Retain the existing head-on
+The original B side lever art derived from the accepted **painted front
+hardware source**. The owner has since replaced those runtime side frames
+with hand paintings and smaller wall-sized canvases (`4ecc650`); the current
+sizes/hinges above supersede the archived B builder and manifest. Retain the existing head-on
 `lever_front_*`/`lever_wall_fF_*` assets; choose one representation from the
 fixed wall normal. Up/down flip instantly around the same physical hinge.
 Neutral metal/cord/web assets serve both floors with normal scene lighting.
@@ -1149,3 +1161,115 @@ canvas/palette/alpha/anchors, one continuous shape per revision, matching coat
 coverage, registered reeds, simpler colour groups and five exact 4x pairs.
 Shape/ink measurements document the change without replacing the owner's
 visual judgement. No Godot run was needed.
+
+## R11: the Deep and the Fall
+
+The Deep is a separate **f4 environment family**, built from three new saved
+paintings of enormous rough slate blocks, worn flags and a massive slab
+ceiling. Blue-black stone, cold grey salt/bone edges, roots in the joints and
+almost-erased carving replace the Lower Watch's small ochre/rust masonry.
+Existing C paintings supply clipped registered door/dressing details, graded
+onto the new stone; native minor wear/cuts keep their masks and UVs exact.
+The sconce flame alone retains its warm emissive ramp. No new props or
+fixtures are required; the Deep reuses f3 props and f2 fixture faces.
+
+### Environment paths and registration
+
+All **37** runtime files are in `assets/art/env/`, all **64x64**, wall/plane
+UV origin **(0,0)**, nearest filtering, shared `art_src/spike/palette.gpl`
+(31 opaque colours plus transparent index 0), binary alpha. These are the
+complete Lower Watch suffix set with `_f3_` replaced by `_f4_`.
+
+| Exact names / expansions (append `.png`) | Count | Intended use / anchor |
+| --- | --- | --- |
+| `painted_f4_plain_0`, `painted_f4_plain_1`, `painted_f4_plain_2` | 3 | Opaque wall UV (0,0), any rendered depth/side |
+| `painted_f4_arch_blocked`, `painted_f4_door_barricaded` | 2 | Opaque false passage faces; same wall UV |
+| `painted_f4_door_v2`, `painted_f4_door_open_v2`, `painted_f4_door_open_overlay_v2` | 3 | Registered shut/open arch; actual open portal uses **overlay**, with transparent aperture |
+| `painted_f4_drain_v2`, `painted_f4_chains_v2`, `painted_f4_tapestry_v2`, `painted_f4_crack_v2`, `painted_f4_damp_v2` | 5 | Static painted wall dressing; same UV/depth projection |
+| `painted_f4_sconce_0_v2`, `painted_f4_sconce_1_v2` | 2 | 250ms each, looping; only fire-mask pixels change |
+| `painted_f4_floor`, `painted_f4_ceiling` | 2 | Base-plane aliases of the dry_a / plain variants below |
+| `calm_v3_f4_floor_{dry_a,dry_b,dry_c,stain,chip,crack,wet_small,wet_hook,wet_corner,wet_split,wet_wide}` | 11 | World-cell ground planes; U east, V south, one tile per cell |
+| `calm_v3_f4_ceiling_{plain,root,drip}` | 3 | World-cell ceiling planes; same fixed UV convention |
+| `calm_v3_f4_room_floor_{compass,cracked,drain}` | 3 | Room landmark floors; world-cell UV (0,0) |
+| `calm_v3_f4_room_ceiling_{boss,chain,roots}` | 3 | Room landmark ceilings; world-cell UV (0,0) |
+
+The eleven floor slots include all five `wet_*` compatibility names. Here
+they contain cold mineral deposits and root grime, not pools or new hazards.
+All floor/ceiling/landmark/alias faces retain the **exact accepted calm_v3
+2px outer ring**. Restore that ring after any existing quarter-turn sampling;
+do not rotate the underfoot seam ring with the camera. Walls share their own
+f4 plain_0 ring with identical opposing outer edges. Door interior/aperture
+and two-frame fire masks are unchanged from f3; coordinates are recorded in
+`art_src/env/deep/layout.json`. Open opaque faces are reference alternatives,
+not replacements for a transparent portal.
+
+**For A:** the floor >=4 branch of `ArtFamily.for_floor()` can now return
+`{"walls":4,"fixtures":2,"props":3,"planes":"calm_v3_f4","weights":2}`.
+Keep the actual floor number in the world-cell texture hash. Preserve the
+f1/f2/f3 mappings. Map room landmarks to `calm_v3_f4_room_*` through the same
+family selection. There is no `props/f4_*` or new f4 fixture family. These
+are material swaps; this batch changes no collision, generator or game code.
+
+### The Fall overlays
+
+| Exact runtime path | Canvas / anchor | Pose / suggested duration |
+| --- | --- | --- |
+| `assets/art/fx/fall_crumble_0.png` | 148x150, view-local top-left (0,0) | Hairline cracks from the Finder's feet; 700ms |
+| `assets/art/fx/fall_crumble_1.png` | 148x150, view-local top-left (0,0) | Split floor, three tilted painted fragments and rising dust; 700ms |
+| `assets/art/fx/fall_crumble_2.png` | 148x150, view-local top-left (0,0) | Open dark floor wedge with smaller falling fragments; 700ms |
+
+These are crisp screen overlays using the shared palette and binary alpha,
+with the **upper 90 rows transparent**. The dark void in frames 1/2 is
+intentionally opaque. Native cracks/dust are drawn around chunks of the
+accepted painted Lower Watch floor. Draw one frame at a time over the
+dungeon and held items, below the HUD, with white/unlit modulation and the
+same 148x150 view clip; no distance tint or feet/bottom-centre anchor.
+If shaking the view, move the overlay with it. A 600-800ms hold per frame
+(700ms suggested, 2.1s total), then A's transition to the Deep, supplies the
+whole event. Do not loop or add interpolated poses. Transition/input/save
+logic belongs to A.
+
+### Review, sources and offline checks
+
+One visual pass checked the complete contact sheet, three same-camera f3/f4
+comparisons and the Fall strip. The Deep is distinctly colder and darker
+under the same lamp; warm reused props remain easy to separate from it.
+The near-room proof shows the larger block construction. Fine worn carving
+is intentionally secondary to the large stone masses; phone acceptance is
+still the owner's review.
+
+| Review | Native and exact 4x nearest files |
+| --- | --- |
+| Every f4 wall, floor and ceiling face | `art_src/env/deep/contact_sheet_native.png`, `contact_sheet_4x.png` |
+| f3 beside f4: corridor, room and near-room | `art_src/env/deep/mockup_comparison_native.png`, `mockup_comparison_4x.png` |
+| Individual exact 148x150 views | `art_src/env/deep/mockup_f{3,4}_{corridor,room,near_room}_native.png`, matching `_4x.png` |
+| Raw transparent crumble poses on slate | `art_src/fx/fall/contact_sheet_native.png`, `contact_sheet_4x.png` |
+| Three crumble poses over a Lower Watch corridor | `art_src/fx/fall/mockup_strip_native.png`, `mockup_strip_4x.png` |
+
+The comparisons reuse C's offline ray-sampling camera with identical lamp,
+F3 hash slots and F3 props on each side to isolate the materials. They are
+not engine screenshots; each individual view is exactly 148x150. The Fall
+strip uses the same corridor with props disabled for a clear floor read.
+
+Saved source paintings and exact generation prompts are in
+`art_src/env/deep/sources/` and `prompts.json`. The builder reads C's saved
+Lower Watch paintings without rebuilding or changing them. Fall source
+copies, builder and receipts are under `art_src/fx/fall/`. Rebuild offline:
+
+```powershell
+python -B art_src/env/deep/build_deep.py
+python -B art_src/fx/fall/build_fall.py
+```
+
+The Deep builder checks exact 37-name suffix parity, 64px canvases, palette,
+binary alpha, common/opposing wall seams, original plane rings, registered
+door/fire masks, eleven distinct floor slots and hashes of **207 existing
+PNG files**, including the owner's twelve lever frames. The Fall builder
+checks native canvas, palette, binary alpha and upper-view clearance.
+Manifests record sources, runtime hashes and review files. No Godot was run.
+
+The lever tables earlier in this document now reflect the owner's current
+side frames: d1 **26x36**, d2 **13x18**, d3 **9x12**. Left hinges are
+**(10,19)/(5,9)/(3,6)**; mirrored right hinges are
+**(15,19)/(7,9)/(5,6)**. Do not rerun archived fixture builders over those
+owner paintings. Front-facing lever canvases are a separate unchanged set.
