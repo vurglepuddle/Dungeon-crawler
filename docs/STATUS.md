@@ -199,7 +199,10 @@ fixes directly.
   `adb -s 55141JEBF03084 install -r` when the phone is connected; launch it
   with `adb shell monkey -p io.github.vurglepuddle.dungeoncrawler -c
   android.intent.category.LAUNCHER 1`.
-- Owner feedback goes first in the next turn, in the owner's words, with
-  screenshots taken from the phone (`adb exec-out screencap -p`).
+- Owner feedback goes first in the next turn, in the owner's words, with any
+  screenshots the owner shares.
+- **Never capture the owner's phone screen** (`adb exec-out screencap`) unless
+  they ask or agree first: they chat with clients on it. To check a launch,
+  use `adb shell pidof io.github.vurglepuddle.dungeoncrawler` instead.
 - A worker turn that ends with "Selected model is at capacity" is a transient
   Codex bug: wait about 30 seconds and resume the same thread.
