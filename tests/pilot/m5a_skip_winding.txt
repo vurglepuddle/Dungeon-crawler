@@ -139,6 +139,7 @@ tapnamed turn_l
 waitidle
 tapnamed fwd
 waitidle
+wait 2
 tapnamed hot_d4_latch
 waitidle
 tapnamed fwd
@@ -189,6 +190,7 @@ tapnamed fwd
 waitidle
 tapnamed fwd
 waitidle
+wait 2
 tapnamed hot_d4_join_1_2_4
 waitidle
 tapnamed turn_r
@@ -221,6 +223,7 @@ tapnamed fwd
 waitidle
 tapnamed fwd
 waitidle
+wait 2
 tapnamed hot_d4_join_1_2_11
 waitidle
 tapnamed fwd
@@ -275,6 +278,7 @@ tapnamed fwd
 waitidle
 tapnamed turn_r
 waitidle
+wait 2
 tapnamed hot_d4_fire_lock
 waitidle
 tapnamed fwd
@@ -567,6 +571,7 @@ call assert map_pan [-10,0]
 shot 17_sprawling_map_panned
 tapnamed map_close
 waitidle
+wait 2
 tapnamed hot_d4_down
 waitidle
 tapnamed fwd
@@ -576,10 +581,11 @@ waitidle
 tapnamed fwd
 waitidle
 shot 13_the_winding
+wait 2
 tapnamed hot_winding_lift
 waitidle
 shot 14_dawn
 call assert status won
-call assert hash 8d51b1866dd5f3cd900e8a100cf87ff1b989e337c4873443682628673bc0f189
+call assert hash e349a18c09dccd2eb9e9aef4e2ce1dea1d99424d9cd5b6d39af4d5519a1efe68
 call assert hp 5
 close

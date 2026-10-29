@@ -22,6 +22,7 @@ tapnamed fwd
 waitidle
 tapnamed verb1
 waitidle
+wait 2
 tapnamed hot_f1_latch
 waitidle
 tapnamed verb1
@@ -72,6 +73,7 @@ tapnamed fwd
 waitidle
 tapnamed turn_r
 waitidle
+wait 2
 tapnamed hot_f1_lock
 waitidle
 tapnamed pack0
@@ -82,6 +84,7 @@ tapnamed fwd
 waitidle
 tapnamed fwd
 waitidle
+wait 2
 tapnamed hot_f1_down
 waitidle
 tapnamed pack1
@@ -104,6 +107,7 @@ tapnamed fwd
 waitidle
 tapnamed verb1
 waitidle
+wait 2
 tapnamed hot_f2_latch
 waitidle
 tapnamed verb1
@@ -126,6 +130,7 @@ tapnamed fwd
 waitidle
 tapnamed fwd
 waitidle
+wait 2
 tapnamed hot_f2_down
 waitidle
 tapnamed pack1
@@ -148,6 +153,7 @@ tapnamed fwd
 waitidle
 tapnamed verb1
 waitidle
+wait 2
 tapnamed hot_f3_latch
 waitidle
 tapnamed verb1
@@ -192,6 +198,7 @@ tapnamed turn_l
 waitidle
 tapnamed fwd
 waitidle
+wait 2
 tapnamed hot_f3_lock
 waitidle
 tapnamed verb0

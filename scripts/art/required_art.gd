@@ -10,6 +10,7 @@ static var _paths: Dictionary={}
 static func add(path: String,family: String) -> void: _paths[path]=family
 static func paths() -> Dictionary:
 	_paths={}
+	for path in preload("res://scripts/art/key_art.gd").required(): add(path,"metal_keys_and_plates")
 	var fall_path: String="res://data/presentation/fall.json"
 	if FileAccess.file_exists(fall_path):
 		var fall=JSON.parse_string(FileAccess.get_file_as_string(fall_path))

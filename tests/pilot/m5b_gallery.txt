@@ -1,0 +1,45 @@
+# Authored frozen visual fixtures, not gameplay proofs.
+wait 5
+call sample 01_room_entry
+wait 4
+shot 01_room_entry
+call sample 02_room_map
+wait 4
+shot 02_room_map
+call sample 03_one_belt_icon
+wait 4
+shot 03_one_belt_icon
+call sample 04_key_list
+wait 4
+shot 04_key_list
+call sample 05_iron_lock_key
+wait 4
+shot 05_iron_lock_key
+call sample 06_iron_card
+wait 4
+shot 06_iron_card
+call sample 05_bronze_lock_key
+wait 4
+shot 05_bronze_lock_key
+call sample 06_bronze_card
+wait 4
+shot 06_bronze_card
+call sample 05_gold_lock_key
+wait 4
+shot 05_gold_lock_key
+call sample 06_gold_card
+wait 4
+shot 06_gold_card
+call sample 07_f4_near
+wait 4
+shot 07_f4_near
+call sample 08_f4_far
+wait 4
+shot 08_f4_far
+call sample 09_block_seam
+wait 4
+shot 09_block_seam
+call sample 10_next_block
+wait 4
+shot 10_next_block
+close

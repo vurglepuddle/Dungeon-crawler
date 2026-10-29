@@ -33,6 +33,7 @@ static func validate(s: Dictionary) -> bool:
 	if not profiles.has(s.rules_version) or s.generator_version!=profiles[s.rules_version] or s.content_version!=s.rules_version: return false
 	var modern: bool=s.rules_version=="m5.1"
 	if s.schema_version!=(3 if modern else 2): return false
+	if s.has("key_metals") and (not modern or not s.key_metals is bool): return false
 	if modern:
 		if not s.get("act") is String or s.act not in ["abbey","deep","winding"] or not s.get("fallen") is bool: return false
 		if not s.get("wakes") is int or s.wakes<0 or not s.get("deep_count") is int or s.deep_count<1 or s.deep_count>3: return false
@@ -48,7 +49,7 @@ static func validate(s: Dictionary) -> bool:
 	if s.status not in ["playing","won","lost"] or (s.status=="lost")!=(s.hp==0): return false
 	if not s.floors is Array or s.floors.size()!=s.floor_count or not s.items is Dictionary or s.items.size()>(512 if modern else 128): return false
 	if not s.pos is Array or s.pos.size()!=2 or not s.pos[0] is int or not s.pos[1] is int: return false
-	if not s.pack is Array or s.pack.size()>8 or not s.belt is Array or s.belt.size()>s.floor_count+1: return false
+	if not s.pack is Array or s.pack.size()>8 or not s.belt is Array or s.belt.size()>(16 if modern else s.floor_count+1): return false
 	if not s.equipment is Dictionary or s.equipment.keys().size()!=2 or not s.equipment.has("hand") or not s.equipment.has("body"): return false
 	if not s.equipment.hand is String or not s.equipment.body is String: return false
 	var all_ids: Dictionary={}
@@ -122,6 +123,7 @@ static func validate(s: Dictionary) -> bool:
 			if fixture.type=="lock":
 				if not fixture.get("key_id") is String or not s.items.has(fixture.key_id) or not s.items[fixture.key_id] is Dictionary: return false
 				if not s.items[fixture.key_id].get("kind") is String or s.items[fixture.key_id].kind!="key": return false
+				if s.get("key_metals",false) and (not fixture.get("metal") is String or fixture.metal not in ["iron","bronze","gold"] or not s.items[fixture.key_id].get("metal") is String or fixture.metal!=s.items[fixture.key_id].metal): return false
 		var occupied: Array=[]
 		for actor in f.actors:
 			if not actor is Dictionary: return false
@@ -188,6 +190,8 @@ static func validate(s: Dictionary) -> bool:
 		for key in ["id","kind","location","slot"]:
 			if not item[key] is String: return false
 		if not item.pos is Array or item.id!=id or not Catalog.ITEMS.has(item.kind) or not item.spent is bool or not item.floor is int: return false
+		if item.has("metal") and (not s.get("key_metals",false) or item.kind!="key" or not item.metal is String or item.metal not in ["iron","bronze","gold"]): return false
+		if s.get("key_metals",false) and item.kind=="key" and not item.has("metal"): return false
 		if item.has("yours") and (not modern or not item.yours is bool): return false
 		if item.has("owner_id") and not item.owner_id is String: return false
 		for key in ["lit","hidden"]:

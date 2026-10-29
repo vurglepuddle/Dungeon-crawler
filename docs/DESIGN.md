@@ -478,3 +478,35 @@ opens centred on the Finder on large floors, uses an eight-pixel pitch and
 pans by drag. View/chrome/compass registration is unchanged. The Deep and
 Winding explicitly borrow Lower Watch art and music; Fall paintings can be
 registered in data/presentation/fall.json when ready.
+
+## M5b: reading the Deep
+
+Fresh interactive adventures add iron, bronze and gold keys. A key opens every
+lock of its metal, remains on the belt and cannot be spent, dropped or thrown.
+The belt stays **one generic key icon**, with x2/x3 etc. Tap it for the list:
+painted metal icons, destination and open/shut state. Tap a row for the key's
+card. The card explains that keys are reusable and lists matching local doors;
+away from those doors it names the key's original destination. Existing runs
+retain their generic keys and exact simulation snapshots.
+
+Survey uses every camera column's unobstructed ray, including partial room
+cells and side-wall slivers, within lamp range. Entering a room records its
+visible forward area without walking every cell. Looking never manufactures
+footsteps or floods an unseen room: behind-camera cells, closed-door interiors
+and unrevealed secret landmarks stay unknown. Saved seen/walked masks keep the
+same version and dimensions. Even an older mask cannot draw a sleeping panel
+as a secret glyph.
+
+The carried Seal supplies six hard distance bands with ordered pixel dithering
+at their edges. Its pool is radial in world space: bright flagstones at your
+feet, readable slate within about two cells, darkness farther out. Pale stone
+retains its painted highlights instead of taking the slate exposure boost.
+This also lights the Winding and any older run carrying the Seal; the Abbey
+before the Seal retains its old lamp.
+
+Each Deep block chooses a seeded wall/floor/ceiling family from f1-f4. The
+default four blocks use all four moods. Changes occur at the existing 16-cell
+block seams, never at arbitrary tiles within a block. Fixtures retain their
+accepted floor-two art; the Winding remains f4. Geometry, creatures, difficulty,
+run length, frame registration and accepted hand/Fall timings are unchanged.
+During the Fall, the top counter stays on the Abbey until the waking card.

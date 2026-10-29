@@ -237,7 +237,7 @@
     },
     {
       "path": "art_src/fixtures/locks_r12/build_locks.py",
-      "sha256": "122f880a4aa636a3ab75465997cb57a787dce29b884d7f3c5ece5d941eb907d9"
+      "sha256": "4eb8a9ea2c23a9d457f6037512ef65e6ed2109a9aae89b87c9c3f0f3aae22446"
     },
     {
       "path": "art_src/items/keys_r12/build_keys.py",

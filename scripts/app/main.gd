@@ -4,6 +4,7 @@ const Profile=preload("res://scripts/persistence/profile_store.gd")
 const Witness = preload("res://scripts/gen/witness.gd")
 const Gen = preload("res://scripts/gen/floor_gen.gd")
 const Store = preload("res://scripts/persistence/save_store.gd")
+const Metal=preload("res://scripts/art/key_art.gd")
 const Art = preload("res://scripts/art/item_art.gd")
 const View = preload("res://scripts/view/dungeon_view.gd")
 const Times=preload("res://scripts/view/effect_times.gd")
@@ -28,6 +29,8 @@ var controls: Dictionary={}
 var verbs: Array=[]
 var view
 var sfx
+var _hotspot_frame: int=0
+var _fall_hud_floor: int=0
 var _busy: float=0
 var _hurt_gate_time: float=0
 var _hurt_time: float=0
@@ -250,12 +253,12 @@ func _save_settings() -> void:
 	settings.save(_settings_path)
 func _retry() -> void:
 	if _busy<=0 and not state.is_empty():
-		if state.rules_version=="m5.1": new_adventure(state.seed,"deep" if state.fallen else "abbey")
+		if state.rules_version=="m5.1": new_adventure(state.seed,"deep" if state.fallen else "abbey",{"metals":state.get("key_metals",false)})
 		else: new_run(state.seed,state.floor_count)
 func new_adventure(raw: String,start: String="abbey",options: Dictionary={}) -> bool:
 	var seed: String=Gen.normalize_seed(raw)
 	if seed=="" or start not in ["abbey","deep"]: return false
-	var settings: Dictionary=_deep_options.duplicate(); settings.merge(options,true); settings.profile="m5.1"; settings.start=start
+	var settings: Dictionary=_deep_options.duplicate(); settings.merge(options,true); settings.profile="m5.1"; settings.start=start; settings.metals=options.get("metals",false)
 	var fresh=Sim.new(seed,3,settings)
 	if fresh.snapshot().get("status")=="error": return false
 	_close_modal(); _close_card(); sim=fresh; selected=""; _busy=0; _hurt_time=0; _hurt_gate_time=0; _mode="game"
@@ -301,7 +304,7 @@ func _save(fresh: bool=false) -> void:
 	_refresh_save_indicator()
 func _refresh_save_indicator() -> void:
 	if not controls.has("floor_label"): return
-	controls.floor_label.text=("%d/%d"%[state.floor,state.floor_count]) if _save_ok and state.has("floor") else "!"
+	controls.floor_label.text=("%d/%d"%[_fall_hud_floor if _fall_hud_floor>0 else state.floor,state.floor_count]) if _save_ok and state.has("floor") else "!"
 	controls.floor_label.add_theme_color_override("font_color",INK if _save_ok else Color("eeb95a"))
 	if not _save_ok:
 		controls.floor_label.visible=true; controls.floor_label.move_to_front()
@@ -341,6 +344,7 @@ func _retire_audio() -> void:
 	if had_playback: OS.delay_msec(50)
 func _can_game() -> bool: return _mode=="game" and _busy<=0 and not _transitioning and not is_instance_valid(_modal)
 func _reset_presentation() -> void:
+	_fall_hud_floor=0
 	view.position=VIEW_RECT.position
 	view.flash=0
 	if is_instance_valid(_fall_frame): _fall_frame.visible=false
@@ -391,6 +395,7 @@ func _sync() -> void:
 	queue_redraw()
 
 func _sync_markers() -> void:
+	_hotspot_frame=Engine.get_process_frames()+1
 	for key in _marker_names:
 		if controls.has(key): controls[key].queue_free(); controls.erase(key)
 	_marker_names=[]; _item_markers={}; _world_markers={}
@@ -484,6 +489,7 @@ func _selection_colour() -> Color:
 	return Art.accent(state.items[selected].kind) if state.items.has(selected) else GOLD
 func _item_icon(id: String) -> Texture2D:
 	var item: Dictionary=state.items[id]
+	if item.kind=="key" and item.has("metal"): return Metal.icon(item.metal)
 	if item.kind=="torch": return Art.inventory("torch_lit" if item.lit else "torch")
 	return Art.inventory("coat_spent" if item.kind=="coat" and item.get("spent",false) else item.kind)
 func _held_kind(id: String="") -> String:
@@ -607,6 +613,7 @@ func _command(command: Dictionary) -> void:
 	if not waking.is_empty():
 		_pending_wake="fall" if waking[0].type=="fell" else "death"
 		if _pending_wake=="fall":
+			_fall_hud_floor=old_picture.floor
 			Profile.mark(_profile_path)
 			# The crumbling picture is the room you stood in, minus the Seal: it is in your hand now.
 			old_picture.objects=old_picture.objects.filter(func(o): return o.kind!="seal")
@@ -654,6 +661,7 @@ func _wake_transition(reason: String) -> void:
 	if token!=_transition_token or not is_inside_tree(): return
 	_transitioning=false; _busy=0; _waking_card()
 func _waking_card() -> void:
+	_fall_hud_floor=0; _refresh_save_indicator()
 	var column:=_panel("Below the Abbey" if _pending_wake=="fall" else "Again, breathing",64,220)
 	_label("You remember the Seal's\nwarmth, and the floor\ngiving way.\nThen nothing." if _pending_wake=="fall" else "You wake by cold stone.\nYour things lie where\nyou fell.",column)
 	_modal_button("wake_close","WAKE",_wake_close,column)
@@ -739,7 +747,18 @@ func _equipment_card(slot: String) -> void:
 func _belt_card(kind: String) -> void:
 	if not _can_game(): return
 	var ids: Array=state.belt.filter(func(id): return state.items[id].kind==kind)
-	if ids.size()==1:
+	if kind=="key" and not ids.is_empty():
+		var column:=_panel("Keys / %d"%ids.size(),60,260)
+		var list: Node=column
+		if ids.size()>5:
+			var scroll:=ScrollContainer.new(); scroll.custom_minimum_size=Vector2(0,182); scroll.horizontal_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED; column.add_child(scroll)
+			var rows:=VBoxContainer.new(); rows.size_flags_horizontal=Control.SIZE_EXPAND_FILL; scroll.add_child(rows); list=rows
+		for id in ids:
+			var row:=HBoxContainer.new(); list.add_child(row)
+			var icon:=TextureRect.new(); icon.texture=_item_icon(id); icon.custom_minimum_size=Vector2(16,16); icon.stretch_mode=TextureRect.STRETCH_KEEP_CENTERED; row.add_child(icon)
+			_button("belt_"+id,Rect2(0,0,108,36),_key_gate(id),_choose_belt.bind(id),row); _dynamic_names.append("belt_"+id)
+		_modal_button("keys_close","CLOSE",_close_modal,column)
+	elif ids.size()==1:
 		selected=ids[0]; _save(); _sync(); _open_card(selected)
 	elif ids.size()>1:
 		var column:=_panel("Keys / %d"%ids.size(),80,230)
@@ -747,18 +766,41 @@ func _belt_card(kind: String) -> void:
 		_modal_button("keys_close","CLOSE",_close_modal,column)
 func _choose_belt(id: String) -> void:
 	_close_modal(); selected=id; _save(); _sync(); _open_card(id)
-func _key_gate(id: String) -> String:
+func _key_doors(id: String) -> Array:
+	var metal: String=state.items[id].get("metal","")
+	var result: Array=[]
 	for i in range(state.floors.size()):
-		for fixture in state.floors[i].fixtures:
-			if fixture.type=="lock" and fixture.key_id==id: return "Floor %d gate%s"%[i+1," / open" if fixture.open else ""]
-	return "An old gate key"
+		var index:=0
+		for lock in state.floors[i].fixtures:
+			if lock.type!="lock": continue
+			index+=1
+			if (metal!="" and i+1==state.floor and lock.get("metal","")==metal) or (metal=="" and lock.key_id==id):
+				result.append({"floor":i+1,"name":"fire store" if lock.id.ends_with("fire_lock") else "gate %d"%index,"open":lock.open})
+	# Away from a matching local lock, name the key's original destination.
+	if result.is_empty():
+		for i in range(state.floors.size()):
+			for lock in state.floors[i].fixtures:
+				if lock.type=="lock" and lock.key_id==id: result.append({"floor":i+1,"name":"fire store" if lock.id.ends_with("fire_lock") else "gate","open":lock.open})
+	return result
+func _key_gate(id: String) -> String:
+	var metal: String=state.items[id].get("metal","")
+	var gates: Array=_key_doors(id)
+	var destination: String="No matching gate."
+	if gates.size()==1:
+		destination="F%d %s: %s"%[gates[0].floor,gates[0].name,"open" if gates[0].open else "shut"]
+	elif not gates.is_empty(): destination="F%d gates: %d/%d open"%[gates[0].floor,gates.filter(func(g): return g.open).size(),gates.size()]
+	return metal.capitalize()+" key\n"+destination if metal!="" else destination
 func _open_card(id: String) -> void:
 	_close_card()
 	var panel:=PanelContainer.new(); panel.position=Vector2(4,208); panel.size=Vector2(146,132)
 	panel.add_theme_stylebox_override("panel",Chrome.surface("card",4))
 	var column:=VBoxContainer.new(); column.add_theme_constant_override("separation",0); panel.add_child(column)
 	var definition: Dictionary=sim.definition(id)
-	_label(definition.name,column)
+	if state.items[id].kind=="key" and state.items[id].has("metal"):
+		var title:=HBoxContainer.new(); column.add_child(title)
+		var icon:=TextureRect.new(); icon.texture=_item_icon(id); icon.custom_minimum_size=Vector2(16,16); title.add_child(icon)
+		_label(definition.name,title)
+	else: _label(definition.name,column)
 	var info: String=" ".join(definition.tags)
 	if definition.slot=="body": info="Padding spent." if state.items[id].spent else "Blocks 1 hit, once."
 	elif definition.slot=="hand": info+=": counter %d"%definition.damage if definition.damage>1 else ": hit 1"
@@ -766,7 +808,9 @@ func _open_card(id: String) -> void:
 	if info.begins_with(": "): info=info.trim_prefix(": ")
 	_label(info,column); _label(definition.provenance if state.items[id].get("yours",false) else Flavour.provenance(state.items[id].kind,definition.provenance),column)
 	if definition.has("purpose"): _label(definition.purpose,column)
-	if state.items[id].kind=="key": _label(_key_gate(id),column)
+	if state.items[id].kind=="key":
+		if state.items[id].has("metal"): _label("Fits all %s locks."%state.items[id].metal,column)
+		for gate in _key_doors(id): _label("F%d %s / %s"%[gate.floor,gate.name,"open" if gate.open else "shut"],column)
 	if state.items[id].kind=="clapper": _label("RING: once per floor." if sim.ring_ready() else "RING: spent here.",column)
 	var row:=HBoxContainer.new(); row.add_theme_constant_override("separation",3); column.add_child(row)
 	if state.items[id].location=="pack":
@@ -860,14 +904,14 @@ func _open_seed() -> void:
 func _seed_submit() -> void:
 	if Gen.normalize_seed(_seed_input.text).is_empty():
 		_seed_note.text="Invalid seed symbols."; return
-	if not new_adventure(_seed_input.text,"abbey"): _seed_note.text="Floor failed its test."
+	if not new_adventure(_seed_input.text,"abbey",{"metals":true}): _seed_note.text="Floor failed its test."
 func _deep_submit() -> void:
-	if not new_adventure(_seed_input.text,"deep"): _seed_note.text="Invalid seed symbols."
+	if not new_adventure(_seed_input.text,"deep",{"metals":true}): _seed_note.text="Invalid seed symbols."
 func _random_submit() -> void:
 	var rng:=RandomNumberGenerator.new(); rng.randomize()
 	var seed: String=""
 	for _i in range(6): seed+=Gen.ALPHABET[rng.randi_range(0,31)]
-	if not new_adventure(seed,"abbey"): _seed_note.text="Floor failed its test."
+	if not new_adventure(seed,"abbey",{"metals":true}): _seed_note.text="Floor failed its test."
 func _take() -> void:
 	if not _can_game(): return
 	var loot: Array=sim.reachable_items()
@@ -916,6 +960,7 @@ func _process(delta: float) -> void:
 		view.motion=sin(_busy/0.13*PI)*1.4 if _bob else 0
 		if _busy<=0:
 			view.motion=0
+			if _mode=="game" and not state.is_empty(): _sync_markers()
 			if not state.is_empty() and state.status!="playing": _show_menu("end")
 	if _hurt_time>0:
 		_hurt_time=maxf(0,_hurt_time-delta)
@@ -1004,12 +1049,12 @@ func _public_state() -> Dictionary:
 	return public
 func pilot_call(name_key: String,args: Array) -> String:
 	match name_key:
-		"busy": return "1" if _busy>0 or _transitioning or is_instance_valid(_modal) and not controls.has("wake_close") else "0"
+		"busy": return "1" if Engine.get_process_frames()<_hotspot_frame or _busy>0 or _transitioning or is_instance_valid(_modal) and not controls.has("wake_close") else "0"
 		"state": return JSON.stringify(_public_state())
 		"save_path": return _save_path
 		"profile_path": return _profile_path
 		"new_adventure":
-			if args.is_empty() or not new_adventure(str(args[0]),str(args[1]) if args.size()>1 else "abbey"): return "error"
+			if args.is_empty() or not new_adventure(str(args[0]),str(args[1]) if args.size()>1 else "abbey",{"metals":args.size()>2 and str(args[2])=="metals"}): return "error"
 			return JSON.stringify(_public_state())
 		"where":
 			if args.is_empty(): return ""

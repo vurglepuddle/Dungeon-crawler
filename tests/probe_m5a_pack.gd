@@ -37,7 +37,7 @@ func _run() -> void:
 		app._busy=0; app._command(action)
 		check(app._save_ok,"Packaged content/action saves: "+action.type)
 	check(app.state.status=="won" and app.state.hp==6 and app.state.floor_count==3 and app.state.rules_version=="m4.1" and app._public_state().secrets_found==1,"Packaged full tour wins with all capability branches and secret")
-	var deep: Dictionary=preload("res://scripts/gen/deep_witness.gd").new().prove("BELL42")
+	var deep: Dictionary=preload("res://scripts/gen/deep_witness.gd").new().prove("BELL42",{"metals":true})
 	check(deep.ok,"Packaged empty-hand Deep reaches dawn")
 	check(preload("res://scripts/persistence/state_codec.gd").validate(deep.snapshot),"Packaged schema-3 win validates")
 	app.queue_free(); await process_frame; await create_timer(0.3).timeout

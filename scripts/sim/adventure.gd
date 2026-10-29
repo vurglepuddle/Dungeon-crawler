@@ -63,3 +63,16 @@ static func wake(sim) -> void:
 			for x in range(1,sim._floor().width-1):
 				if not moved and absi(x-s.pos[0])+absi(y-s.pos[1])>=3 and sim.can_walk([x,y]): actor.pos=[x,y]; moved=true
 	sim._event("woke","transition",{"dropped_at":old,"arrival":s.pos.duplicate()})
+
+static func metals(s: Dictionary) -> void:
+	# No simulation RNG draws. A floor's two dependency keys differ in metal.
+	var names: Array=["iron","bronze","gold"]
+	for id in s.items:
+		var item: Dictionary=s.items[id]
+		if item.kind!="key": continue
+		var index: int=posmod(item.floor-1,3)
+		if id.ends_with("fire_key"): index=(index+1)%3
+		item.metal=names[index]
+	for f in s.floors:
+		for lock in f.fixtures:
+			if lock.type=="lock": lock.metal=s.items[lock.key_id].metal

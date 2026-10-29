@@ -10,6 +10,7 @@ func emit(action: Dictionary) -> void:
 		add("tapnamed pack%d"%replay._s.pack.size()); add("wait 2")
 	if action.type=="wake": tap_action(action,"hot_"+action.target_id); return
 	if action.type in ["unlock","latch","stairs","ride"]:
+		add("wait 2")
 		tap_action(action,"hot_"+action.target_id); return
 	super.emit(action)
 func _initialize() -> void:
@@ -24,13 +25,13 @@ func _initialize() -> void:
 	add("shot 03_waking_card"); add("call assert profile_fallen true")
 	add("tapnamed wake_close"); add("waitidle"); add("call assert act deep"); finish("m5a_fall")
 	# Fresh-process UI skip uses the profile unlocked by the Fall pilot.
-	replay=Sim.new("BELL42",3,{"profile":"m5.1","start":"deep"})
+	replay=Sim.new("BELL42",3,{"profile":"m5.1","start":"deep","metals":true})
 	lines=["wait 4","tapnamed start","wait 4","shot 04_start_choices","tapnamed seed_deep","waitidle","shot 05_skipped_waking","tapnamed wake_close","waitidle"]
 	add("call assert floor 4"); add("call assert hp 5")
 	add("tapnamed map"); add("wait 4"); add("shot 06_deep_map_centred")
 	add("swipe right 77 145"); add("wait 4"); add("shot 07_deep_map_panned"); add("call assert map_pan [10,0]"); add("call state")
 	add("tapnamed map_close"); add("waitidle")
-	var deep: Dictionary=DeepBot.new().prove("BELL42"); assert(deep.ok,deep.reason)
+	var deep: Dictionary=DeepBot.new().prove("BELL42",{"metals":true}); assert(deep.ok,deep.reason)
 	for action in deep.actions:
 		if action.type=="wake": add("shot 08_dawn_mark")
 		if action.type=="stairs":

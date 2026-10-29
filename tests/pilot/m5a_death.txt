@@ -123,6 +123,7 @@ tapnamed turn_l
 waitidle
 tapnamed fwd
 waitidle
+wait 2
 tapnamed hot_d4_latch
 waitidle
 tapnamed fwd
@@ -173,6 +174,7 @@ tapnamed fwd
 waitidle
 tapnamed fwd
 waitidle
+wait 2
 tapnamed hot_d4_join_1_2_4
 waitidle
 tapnamed turn_r
@@ -205,6 +207,7 @@ tapnamed fwd
 waitidle
 tapnamed fwd
 waitidle
+wait 2
 tapnamed hot_d4_join_1_2_11
 waitidle
 tapnamed fwd
@@ -259,6 +262,7 @@ tapnamed fwd
 waitidle
 tapnamed turn_r
 waitidle
+wait 2
 tapnamed hot_d4_fire_lock
 waitidle
 tapnamed fwd

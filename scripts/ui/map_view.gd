@@ -90,6 +90,7 @@ func _draw() -> void:
 			"brazier":
 				draw_arc(c,r,0,PI,6,INK,1); draw_line(c+Vector2(0,-r),c,INK,1)
 			"panel":
+				if not fixture.revealed: continue
 				draw_line(c-Vector2(0,r),c+Vector2(0,r),INK if fixture.revealed else FAINT,1)
 				if fixture.revealed: draw_line(c-Vector2(r,0),c+Vector2(r,0),INK,1)
 			"gate","lock":

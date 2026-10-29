@@ -30,6 +30,9 @@ func _init(seed: String = "BELL42", floor_count: int = 2, options: Dictionary={}
 		"pack": [], "equipment": {"hand": "knife_start", "body": ""}, "belt": [],
 		"floors": generated.floors, "items": generated.items}
 	if modern:
+		if options.get("metals",false):
+			_s.key_metals=true
+			Adventure.metals(_s)
 		_s.merge({"act":"abbey","fallen":false,"wakes":0,"deep_count":options.get("deep_floors",1),"deep_blocks":[options.get("columns",2),options.get("rows",2)]})
 		if options.get("start","")=="deep": Adventure.enter_deep(self,false)
 	_visit()
@@ -56,6 +59,7 @@ func definition(id: String) -> Dictionary:
 	if not _s.items.has(id): return {}
 	var result: Dictionary=Catalog.item(_s.items[id].kind)
 	if _s.items[id].kind=="torch" and _s.items[id].get("lit",false): result.tags=["FIRE","GLOW"]; result.purpose="BURN webs. No fuel."
+	if _s.items[id].get("metal","")!="": result.name=_s.items[id].metal.capitalize()+" key"
 	if _s.items[id].get("yours",false): result.provenance="Yours. It fell with you."
 	return result
 func toss_preview(id: String) -> Dictionary: return Cap.toss_preview(self,id)
@@ -115,6 +119,11 @@ func has_seal() -> bool:
 	for id in _s.belt:
 		if _s.items[id].kind == "seal": return true
 	return false
+func key_fits(lock: Dictionary,id: String) -> bool:
+	if not _s.get("key_metals",false): return lock.key_id==id
+	return _s.items.has(id) and _s.items[id].kind=="key" and _s.items[id].get("metal","")==lock.get("metal","missing")
+func has_key(lock: Dictionary) -> bool:
+	return _s.belt.any(func(id): return key_fits(lock,id))
 func fixture_actions() -> Array:
 	var result: Array=[]
 	if _s.status!="playing": return result
@@ -125,7 +134,7 @@ func fixture_actions() -> Array:
 			"latch":
 				if not _fixture(fixture.gate_id).latched: kind="latch"; label="PULL"
 			"lock":
-				if not fixture.open and _s.belt.has(fixture.key_id): kind="unlock"; label="UNLOCK"
+				if not fixture.open and has_key(fixture): kind="unlock"; label="UNLOCK"
 			"stairs_up","stairs_down":
 				var arrival: Dictionary=_stair_arrival(fixture)
 				kind="stairs" if _arrival_clear(arrival.floor,arrival.pos) else "squeeze"
@@ -148,7 +157,7 @@ func targets(selected: String) -> Array:
 	for fixture in local_fixtures():
 		if fixture.type=="porter" and not fixture.restored and fixture.item_id==selected:
 			result.append({"target_id":fixture.id,"pos":fixture.pos.duplicate(),"verb":"RETURN","action":{"type":"return_item","item_id":selected,"target_id":fixture.id}})
-		elif fixture.type=="lock" and not fixture.open and fixture.key_id==selected and _s.belt.has(selected):
+		elif fixture.type=="lock" and not fixture.open and key_fits(fixture,selected) and _s.belt.has(selected):
 			result.append({"target_id":fixture.id,"pos":fixture.pos.duplicate(),"verb":"UNLOCK","action":{"type":"unlock","target_id":fixture.id}})
 		elif fixture.type=="exit" and definition(selected).slot=="belt" and _s.items[selected].kind=="seal":
 			result.append({"target_id":fixture.id,"pos":fixture.pos.duplicate(),"verb":"LEAVE","action":{"type":"leave","target_id":fixture.id}})
@@ -433,7 +442,7 @@ func apply(action: Dictionary) -> Dictionary:
 		"latch","unlock","stairs","squeeze","leave":
 			if fixture.is_empty() or not fixture_near(fixture): return _reject("Get closer first.")
 			if kind=="latch" and (fixture.type!="latch" or _fixture(fixture.gate_id).latched): return _reject("Already latched.")
-			if kind=="unlock" and (fixture.type!="lock" or fixture.open or not _s.belt.has(fixture.key_id)): return _reject("Find the matching key.")
+			if kind=="unlock" and (fixture.type!="lock" or fixture.open or not has_key(fixture)): return _reject("Find the matching key.")
 			if kind in ["stairs","squeeze"] and fixture.type not in ["stairs_up","stairs_down"]: return _reject("No stair here.")
 			if kind in ["stairs","squeeze"]:
 				var number: int=_s.floor+(1 if fixture.type=="stairs_down" else -1)
@@ -572,9 +581,10 @@ func view_snapshot() -> Dictionary:
 	var f:=floor_data()
 	f.merge({"pos":_s.pos.duplicate(),"facing":_s.facing,"floor":_s.floor,"seed":_s.seed,
 		"hp":_s.hp,"max_hp":_s.max_hp,"status":_s.status,"objects":[],
+		"key_metals":_s.get("key_metals",false),"deep_materials":Adventure.active(self) and _s.get("act","")=="deep",
 		"seal_site":f.landing.duplicate() if _s.floor==(3 if Adventure.active(self) else _s.floor_count) else [],"seal_glow":has_seal()})
 	for id in _s.items:
 		var item: Dictionary=_s.items[id]
 		if item.location=="floor" and item.floor==_s.floor and not item.get("hidden",false):
-			f.objects.append({"id":id,"kind":item.kind,"pos":item.pos.duplicate(),"lit":item.get("lit",false),"spent":item.spent})
+			f.objects.append({"id":id,"kind":item.kind,"pos":item.pos.duplicate(),"lit":item.get("lit",false),"spent":item.spent,"metal":item.get("metal","")})
 	return f

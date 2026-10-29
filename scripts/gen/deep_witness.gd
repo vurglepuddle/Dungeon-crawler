@@ -17,7 +17,7 @@ func _open(kind: String) -> bool:
 		var changed:=false
 		for f in sim.floor_data().fixtures:
 			if f.type!=kind or f.open: continue
-			if kind=="lock" and not sim._s.belt.has(f.key_id): continue
+			if kind=="lock" and not sim.has_key(f): continue
 			if not sim._near(f.pos) and _path(f.pos,true).is_empty(): continue
 			if not go(f.pos): return false
 			if not _commit({"type":"unlock","target_id":f.id} if kind=="lock" else {"type":"burn","target_id":f.id,"item_id":"d%d_torch"%sim._s.floor}): return false

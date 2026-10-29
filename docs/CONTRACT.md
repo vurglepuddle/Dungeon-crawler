@@ -650,3 +650,34 @@ nearer BURN/use target. Fall frame paths and hold time are read from
 data/presentation/fall.json; an empty list uses the shake placeholder. Listed
 paintings enter RequiredArt/export validation. Input and held-item timings
 remain the accepted M4c values.
+
+## M5b compatibility and presentation
+
+Schema remains 3 and profile remains m5.1. Fresh interactive starts opt into
+`key_metals:true`; unflagged saves/constructors preserve M5a generic-key rules
+and hashes. Explicit simulation construction uses options `metals:true`.
+The historical two-argument pilot new_adventure stays reproducible; append
+`metals` as its third argument to create a current-rule fixture. Interactive
+NEW GAME always enables metals; Continue never upgrades a run implicitly.
+
+Flagged key items and lock fixtures require metal iron/bronze/gold. Each lock's
+`key_id` remains its generation/provenance link and has matching metal. Unlock
+accepts any belt key of that metal. Selected-key targeting applies the same
+predicate. Generic runs still match the exact key_id. Metadata is type-checked
+before comparison, including referenced key dictionaries. The expanded schema-3
+belt bound accommodates keys on parameterized multiple-Deep-floor runs.
+
+`belt_key` remains the only key control. It opens the list even for one key;
+`belt_ITEM_ID` opens that row's illustrated card. Counts stay on belt_key.
+Keys remain slot=belt, reusable and immune to drop/toss. Card destinations list
+matching local locks (with open/shut state), or original destinations when away.
+No automatic unlock, consumption or throwing is introduced.
+
+View snapshots expose deep_materials, key_metals and each floor object's metal.
+ArtFamily.at(state,world_cell) owns block materials; for_floor remains the
+Abbey/legacy mapping. Survey keeps version-1 hashed masks. Hidden panel IDs
+are filtered from both discovery and map drawing, including old masks. No
+survey operation changes sim revisions/RNG. Seal lighting and material choice
+are presentation-only. The Fall HUD can show the previous floor while the
+saved/public sim has already atomically entered the Deep; it switches at the
+waking card. Pilot busy includes one frame of hotspot layout settlement.

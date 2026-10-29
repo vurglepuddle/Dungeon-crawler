@@ -249,3 +249,25 @@ clips a Finder-centred, eight-pixel map on large floors. DungeonView and shared
 room helpers address tiles by floor width; the accepted lever scaling/hinges
 and bare lever walls are unchanged. New dawn wall opening invalidates the
 surface cache, and final lift binding faces the Winding's north wall.
+
+## M5b seams
+
+Adventure.metals annotates fresh opted-in runs after generation, without RNG
+calls or geometry changes. DungeonSim.key_fits/has_key are the shared predicates
+for unlock validation, targeting and witnesses. StateCodec accepts the optional
+schema-3 marker and validates all referenced metal types before use. Existing
+unflagged snapshots are not rewritten.
+
+art/key_art.gd centralizes B's 24 required key/lock paintings; RequiredArt feeds
+them to source and isolated packaged checks. The belt bypasses metal routing
+on purpose, while list/card/world/closed-lock overlays use it. Main owns the
+chooser and derives door status live from simulation fixtures.
+
+ArtFamily.at derives/caches one material per seeded block; surface caches include
+family and Seal presence. PlaneMaterials uses the world cell's family for floors,
+ceilings and room landmarks. Wall faces use the open side's block, and door
+plates use their door's family. The radial Seal pool uses hard gains and a 4x4
+ordered edge, without changing source paintings. DungeonView's complete DDA
+visibility report feeds the unchanged Survey masks; MapView also refuses old
+unrevealed-panel landmark entries. Main's Fall counter is presentation-only,
+and pilot idle waits for named hotspot geometry to settle.
