@@ -649,12 +649,16 @@ func _draw() -> void:
 		var band: float=1.0-lerpf(levels[0],levels[1],levels[2])
 		_seal_column(Paint.strips(path)[wall.u],Rect2(column,top,1,bottom-top),Rect2(0,(top-top_wall)*64.0/wall.height,1,(bottom-top)*64.0/wall.height),light,levels)
 		if wall.panel_state!="":
-			var marks: String="res://assets/art/fixtures/panel_sigil_%s_64.png"%("plain" if wall.panel_state=="plain" else "revealed")
+			# The owner: "The picture on the wall should glow when you hold up the
+			# seal." Held up, the Seal shows any mark it faces, revealed or not,
+			# pulsing with it; put away, an unrevealed mark is faint scratches.
+			var held_up: bool=held.kind=="seal"
+			var marks: String="res://assets/art/fixtures/panel_sigil_%s_64.png"%("plain" if wall.panel_state=="plain" and not held_up else "revealed")
 			var tint:=Color(light,light,light)*(1.0-band)
-			if wall.panel_state!="plain":
-				# The owner: the dawn mark glows when you hold up the Seal, pulsing with it.
-				var pulse: float=0.5+0.5*sin(_presentation_ms/1000.0*TAU) if held.kind=="seal" else -1.0
-				tint=Color(1.0+0.7*pulse,1.0+0.55*pulse,1.0+0.25*pulse) if pulse>=0.0 else Color.WHITE
+			if held_up:
+				var pulse: float=0.5+0.5*sin(_presentation_ms/1000.0*TAU)
+				tint=Color(1.0+0.7*pulse,1.0+0.55*pulse,1.0+0.25*pulse)
+			elif wall.panel_state!="plain": tint=Color.WHITE
 			tint.a=1.0
 			draw_texture_rect_region(Paint.strips(marks)[wall.u],Rect2(column,top,1,bottom-top),Rect2(0,(top-top_wall)*64.0/wall.height,1,(bottom-top)*64.0/wall.height),tint)
 		for layer in _column_layers[column]:
