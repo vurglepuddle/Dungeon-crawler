@@ -43,6 +43,23 @@ the same afternoon; their answers come first and override anything below.**
 6. The names (the Deep, the Winding) are fine.
 7. **Keep the Porter's lift** in the Abbey; where exactly is decided later.
 
+### Later the same afternoon
+
+- **Mix and match the art families by room.** The owner: "have a unique room
+  in the generator be in wall/floor/ceiling design 1, then another one in 2,
+  that way we don't have to make a billion textures (and some of them can be
+  super unique, too)".
+  - The Deep should choose a wall/floor/ceiling family **per block or room**,
+    not per floor, from f1-f4.
+  - A few rare unique rooms can get their own one-off sets.
+- **The Deep's dark slate (B's f4)** is one mood among several: "Deep is very
+  dark, but we can have some rooms in that style - just not all. It's a bit
+  of a vibe tbh."
+- **Combat needs a revamp.** "The current one is fine for now, but we truly
+  need more depth there and a more interesting loop." This needs its own
+  proposal before the Deep grows past the scaffold, because two-creature
+  encounters and "full of enemies" depend on it.
+
 ## The idea, in the owner's words
 
 > The entire first three levels can be used as a tutorial (first time

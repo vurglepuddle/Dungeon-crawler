@@ -132,9 +132,21 @@ fixes directly.
 
 ## Queue for the next session
 
-1. **The owner's answers** to the questions at the end of `THE_DEEP.md`, then
-   brief A on M5a (and B on crumble frames, the waking room and a Deep wall
-   family, once the shape is agreed).
+1. **A is on M5a** (the scaffold; prompt `<scratchpad>/codex_m5a.md`). B's
+   r11 (the f4 Deep family and Fall frames) is committed (`b75e28b`). Its
+   `.import` files arrive with M5a. Verify M5a, then build and install.
+   - **A's next turn (M5b):** per-block or per-room art families (see
+     `THE_DEEP.md`, "Later the same afternoon"), with f4 as one mood, not all.
+   - **Combat revamp:** the owner wants more depth and a more interesting
+     loop. Write a proposal before the Deep grows.
+   - **The held-item grip is wrong.** Torch, club, bone and clapper read as
+     held between index and middle finger: the shaft leaves the fist through
+     the knuckles, not through the thumb ring. Either B repaints it, or the
+     owner paints it.
+   - **Button icons:** verb icons are 12x12 PNGs in `assets/art/ui_offer/
+     verb_*.png` (layout in `data/ui/verb_layout.json`). The arrow pad and
+     compass needle are code-drawn (`main.gd`, `_arrow`, `_draw_compass`).
+     After M5a, Claude turns the arrows into PNGs so the owner can paint them.
 2. Any new overlay exports or hand fixes from the owner (copy in; check the
    glint sockets still match).
 3. The M4c clean-worktree re-check passed all 18 suites, all 36 pilots and
