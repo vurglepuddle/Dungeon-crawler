@@ -2,8 +2,8 @@
 
 Where the project stands, who is doing what, and how we work. Claude keeps this
 current so that any session (or a reader catching up) can pick up the thread.
-Last updated 29 October 2026, afternoon (the owner's verdict and the Deep
-proposal); the rest of this file is from the 4 a.m. handoff.
+Last updated 29 October 2026, evening (M5a and M5b on the phone). The "Where
+we are" section below is from the 4 a.m. handoff; the queue is current.
 
 ## Where we are
 
@@ -132,85 +132,61 @@ fixes directly.
 
 ## Queue for the next session
 
-1. **M5a landed** (`3b07816`, A): the Fall, the Deep (one 33x33 floor of
-   four blocks, a chain of needs), the Winding, skip start, no permadeath.
-   See `docs/M5A_RESULTS.md`.
-   - **Claude's follow-ups** (`b41c076`; tell A):
-     - `data/presentation/fall.json` lists B's crumble frames at 0.7 s (the
-       clamp in `main.gd` now allows 0.8);
-     - the Winding uses the f4 slate (`art_family.gd`);
-     - the floor range is `range(1,6)` in `required_art.gd` and
-       `dungeon_view.gd`;
-     - the arrow pad draws `assets/art/ui_offer/arrow_*.png` (16x16).
-   - **The owner's first verb-icon pass** is in (`f109d1a`).
-   - **Flaky pilot (for A):** `m5a_death` once failed with "no control named
-     hot_d4_latch" right after `tapnamed fwd` and `waitidle`. It passed
-     alone. The lever's hotspot seems to lag the step transition.
-   - **The owner's phone verdict (29 Oct evening):** "pretty good, the new
-     icons landed well. The repetitive nature of the Deep is not that bad.
-     Obviously, we'll need to vary it. I like how sprawling and confusing it
-     is." Fixed by Claude the same evening (`3e0d0c2`):
-     - the Seal stayed on its pedestal during the Fall;
-     - the crumble overlay didn't shake with the floor;
-     - the carried Seal was "glued" in the hand over the weapon, and now shows
-       only while selected.
-     The owner is hand-editing the crumble frames.
-   - **Full run, Abbey to dawn, in 578 turns** on BELL42: "definitely pretty
-     good for engagement - it felt long enough, but not exhausting.
-     Definitely can make it even longer with interesting puzzles".
-   - **Notes for M5b** (the owner's words):
-     - **Map reveal:** "it currently reveals the tile next to you as a dashed
-       line, which means you need to annoyingly sweep the entire room tile by
-       tile. We need a smarter reveal system, where maybe you get more of the
-       room revealed when you step in (closer to how a human would see it)".
-     - **Keys:** "I had 2 keys, but I opened 3 doors. Maybe we need to vary
-       the keys or use up (I kinda like the idea of various keys, instead,
-       gold, bronze, etc)". Each key opens its own door. B paints key and
-       lock variants.
-     - **Light around the player:** f4 is "very very dark (cool effect, but we
-       won't be able to use it for the entire floor - too hard to make things
-       out)". The owner's idea: "a pixelated light source around the player
-       ... That's a whole vibe. That way we can leave the actual Deep this
-       dark color". The carried Seal is the light: a stepped, dithered pool of
-       light near the Finder.
-     - **Art families per block or room** (f1-f4, rare unique rooms), from
-       earlier.
-     - **Small issues:** the floor label already says 4/5 while the Abbey
-       crumbles; the flaky `m5a_death` pilot.
-     - **Later:** traps and unique rooms; combat revamp (proposal first).
-   - **Claude, right after M5b lands:**
-     - **While falling, hold the Seal.** The owner, after watching the Fall clip
-       (`build/fall_clip.mp4`): "put the seal into the hand ... (so feels like
-       you actually grabbed it)". Set `held` to the Seal for the Fall's crumble
-       and fade, then return to the selected-only rule on waking.
-     - **Keep** the slate's "Dawn Seal / Take it home." during the Fall (the
-       owner).
-     - **Check** the WAKE button that shows in the action row during the
-       crumble, before the waking card.
-   - **A's next turn (M5b):** per-block or per-room art families (see
-     `THE_DEEP.md`, "Later the same afternoon"), with f4 as one mood, not all.
-   - **Combat revamp:** the owner wants more depth and a more interesting
-     loop. Write a proposal before the Deep grows.
-   - **The held-item grip is wrong for the stone and both torches.** The
-     owner: they reuse "the 'fist' (great as a fist), but you cannot hold
-     objects this way". The torch shaft should pass through the curled hand
-     (the thumb ring), and the stone should sit in curled fingers.
-     - Files: `assets/art/hands/hand_stone_{rest,blow,strip}_56.png`,
-       `hand_torch_unlit_{rest,use,strip}_56.png` and
-       `hand_torch_lit_{a,b,strip}_56.png` (B's `art_src/hands/`).
-     - **Done: the owner painted them** (`e69f907`), plus a better punch. The
-       hands README warns against rebuilding over them.
-   - **Button icons:**
-     - verb icons are 12x12 PNGs in `assets/art/ui_offer/verb_*.png` (layout
-       in `data/ui/verb_layout.json`). The owner paints them on
-       `art_src/ui_offer/verb_sheet/verb_sheet.png`, then `verb_sheet.py split`;
-     - the arrow pad is PNGs now;
-     - the compass needle stays code-drawn, because it swings.
-2. Any new overlay exports or hand fixes from the owner (copy in; check the
-   glint sockets still match).
-3. The M4c clean-worktree re-check passed all 18 suites, all 36 pilots and
-   D's first ten phases; it was stopped in D's slow `deep_adversarial` phase,
-   not failed.
+**Landed on 29 October, evening (all verified and pushed):**
+
+- **M5a** (`3b07816`, A): the Fall, the Deep (one 33x33 floor of four
+  blocks, a chain of needs), the Winding, skip start, no permadeath. See
+  `docs/M5A_RESULTS.md`.
+- **M5b** (`189f521`, A): the owner's M5a notes.
+  - The map surveys everything visible in light and line of sight.
+  - Iron, bronze and gold keys: one belt icon, with a key list.
+  - The Seal's stepped, dithered light pool.
+  - Seeded f1-f4 art families per Deep block.
+  - The Fall's counter stays on the Abbey.
+  - See `docs/M5B_RESULTS.md`.
+- **B r11-r12:** the f4 Deep family, the crumble frames, the keys and lock
+  plates (halved at the owner's request: "we don't need to make it look like
+  the entire door is the keyhole").
+- **The owner's own art:**
+  - side-lever frames;
+  - hand grips (stone, torches, punch);
+  - the crumble frames, made "more 3d";
+  - the first verb-icon pass, with BURN.
+- **Claude's fixes and follow-ups** (tell A; all in A's files):
+  - **Levers:** sized with their wall; no dressing on a lever's face.
+  - **The Fall:**
+    - B's frames at 0.7 s, shaking with the view;
+    - the Seal leaves its pedestal;
+    - you clutch the Seal while falling;
+    - no verbs from the room below until it fades in.
+  - **The hand:** the Seal shows only while selected (it was "glued").
+  - **Art:** the Winding wears f4.
+  - **The arrow pad** is PNGs (`assets/art/ui_offer/arrow_*.png`).
+- **The owner's verdict on M5a:** a full run in 578 turns, "long enough, but
+  not exhausting"; "I like how sprawling and confusing it is".
+
+**Next:**
+
+1. **The owner's phone verdict on M5b** (`build/Undercroft-M5b.apk`).
+   - Watch the map reveal in dark rooms. It still follows the light, so pitch
+     black rooms map only what the pool shows.
+   - Watch the key flow.
+2. **Combat revamp:** the owner wants "more depth there and a more
+   interesting loop". Write a proposal before the Deep fills with enemies.
+3. **Later Deep vocabulary:**
+   - traps, unique rooms and puzzle chains that make the run "even longer
+     with interesting puzzles";
+   - one-way drops and dawn locks;
+   - two-creature encounters (after combat).
+4. **Owner art in progress:** more verb icons (`verb_sheet.py split` after
+   each pass), and the arrow pad if they want. Two working files are
+   uncommitted and still the owner's: `assets/art/ui_offer/sleepy_skull_v3.png`
+   and the overlay template `.ase`.
+5. **Tools:**
+   - `build/fall_clip.mp4` and `.gif` were recorded with Godot's
+     `--write-movie <dir>/f.png --fixed-fps 30` and a pilot (`wait` counts
+     frames), from the clean worktree, then encoded with ffmpeg;
+   - for QA, D runs only for sweeps, at medium effort.
 
 ## Ideas parked for later slices
 
